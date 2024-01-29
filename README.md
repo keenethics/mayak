@@ -35,4 +35,4 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Deploy on Vercel
 
-TBD
+Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
