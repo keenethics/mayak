@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import style from './style.module.scss'
 
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
+          <code className={styles.code} style={{ color: testStyle.primaryColor }}>src/app/page.js</code>
         </p>
         <div>
           <a
