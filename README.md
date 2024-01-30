@@ -14,7 +14,7 @@ Note: installing new packages require image re-build with `docker compose up --b
 
 ### Local
 
-1. Start `postgres` database somewhere and populate your `.env.local` with `DATABASE_URL`
+1. Start `postgres` database somewhere and populate your `.env` with relevant environment variables.
 2. Install dependencies with `npm install`
 3. Run `npm run dev`
 
