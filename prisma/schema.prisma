@@ -6,18 +6,19 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_DIRECT_URL")
 }
 
 model Specialist {
-  id   String @id @default(uuid())
-  gender String
+  id        String @id @default(uuid())
+  gender    String
   firstName String
-  lastName String
+  lastName  String
 }
 
 model Therapy {
-  id   String @id @default(uuid())
+  id    String @id @default(uuid())
   price Int
 }
