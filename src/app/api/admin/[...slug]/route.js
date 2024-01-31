@@ -4,6 +4,11 @@ import { prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
 
 const handler = auth(async (req, res) => {
+  if (!req.auth) {
+    return NextResponse.json({message: "unauthorized"},{
+      status: 401,
+    });
+  }
   const json = await req.json();
   try {
     const result = await defaultHandler(json, prisma, {
