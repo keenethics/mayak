@@ -20,6 +20,7 @@
     "react": "^18",
     "react-admin": "^4.16.7",
     "react-dom": "^18",
+    "styled-components": "^6.1.8",
     "typesync": "^0.12.1",
     "zod": "^3.22.4"
   },

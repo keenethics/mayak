@@ -1,10 +1,9 @@
-import { Inter } from "next/font/google";
-import Header from "@/app/_components/Header"
+import Header from "@/app/_components/Header";
 import Footer from "@/app/_components/Footer";
-import "./globals.css";
 import { QueryContext } from "./queryContext";
-
-const inter = Inter({ subsets: ["latin"] });
+import StyleProvider from "@/app/styleProvider";
+import GlobalStyles from "@/app/styles/globalStyles";
+import montserrat from "@/app/styles/font";
 
 export const metadata = {
   title: "Mayak!",
@@ -14,10 +13,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <QueryContext>{children}</QueryContext>
-        <Footer />
+      <body className={montserrat.className}>
+        <StyleProvider>
+          <GlobalStyles />
+          <Header />
+          <QueryContext>{children}</QueryContext>
+          <Footer />
+        </StyleProvider>
       </body>
     </html>
   );
