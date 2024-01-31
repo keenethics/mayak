@@ -2,6 +2,8 @@
 import StyledComponentsRegistry from '../lib/registry'
 import GlobalStyles from '../app/styles/GlobalStyles';
 import { QueryContext } from "./queryContext";
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/theme';
 
 export default function RootLayout({ children }) {
   return (
@@ -9,7 +11,9 @@ export default function RootLayout({ children }) {
       <body >
         <StyledComponentsRegistry>
           <GlobalStyles />
-          <QueryContext>{children}</QueryContext>
+          <ThemeProvider theme={theme}>
+            <QueryContext>{children}</QueryContext>
+          </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

@@ -1,8 +1,13 @@
+'use client';
+import { styled } from 'styled-components';
 
+export const MyDiv = styled.div`
+  background-color: ${({ theme }) => theme.colors.colorName1};
+`;
 export default function Home() {
   return (
     <main >
-      <div>Hello world</div>
+      <MyDiv>Hello world</MyDiv>
     </main>
   );
 }
