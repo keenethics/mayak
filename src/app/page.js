@@ -5,6 +5,7 @@ import styles from "./styles.module.scss";
 export default function Home() {
   return (
     <main className={styles.main}>
+      Test CI deploy
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
