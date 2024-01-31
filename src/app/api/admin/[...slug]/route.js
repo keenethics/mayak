@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
 
-const handler = auth(async (req, res) => {
+const handler = auth(async (req) => {
   const json = await req.json();
   try {
     const result = await defaultHandler(json, prisma, {

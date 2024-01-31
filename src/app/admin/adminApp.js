@@ -10,16 +10,14 @@ import {
 } from "react-admin";
 import { dataProvider } from "ra-data-simple-prisma";
 
-const authProvider = ({ signIn, signOut }) => ({
+const authProvider = {
   login: async (credentials) => {
-    console.log("login", credentials);
     return signIn(credentials);
   },
   logout: () => {
-    console.log("logout");
     return signOut();
   },
-  checkError: ({ status }) => Promise.resolve(),
+  checkError: () => Promise.resolve(),
   // checkError: ({ status }) => {
   // if (status === 401 || status === 403) {
   //   localStorage.removeItem("username");
@@ -37,20 +35,14 @@ const authProvider = ({ signIn, signOut }) => ({
   //   : Promise.reject();
   // },
   getPermissions: () => Promise.resolve(),
-});
+};
 
 export default function AdminPage() {
   // const { data: session } = useSession()
   // console.log("session", session);
   const data = dataProvider("/api/admin");
-  const auth = authProvider({
-    signIn: (credentials) =>
-      signIn("credentials", credentials, { redirect: false }),
-    signOut: () => signOut(),
-    // signOut: () => Promise.resolve(),
-  });
   return (
-    <Admin dataProvider={data} authProvider={auth}>
+    <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
         name="Therapy"
         list={ListGuesser}

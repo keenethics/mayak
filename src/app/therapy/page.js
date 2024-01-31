@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import {
   useListTherapies,
@@ -12,8 +13,8 @@ export default function Therapies() {
   const { mutate: createTherapy } = useCreateTherapy();
   const { mutate: deleteTherapy } = useDeleteTherapy();
 
-  const onAdd = (price) => {
-    createTherapy({ price }, { onSuccess: () => setPrice("") });
+  const onAdd = () => {
+    createTherapy({ price: Number(price) }, { onSuccess: () => setPrice("") });
   };
 
   const onDelete = (id) => {
@@ -21,23 +22,25 @@ export default function Therapies() {
   };
 
   return (
-    <>
-      <div style={{ margin: "10rem" }}>
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <button onClick={() => onAdd(Number(price))}>Add</button>
-        <div>
-          {therapies?.map(({ id, price }) => (
-            <div key={id} style={{ display: "flex", gap: "2rem" }}>
-              <div>{`${id}:${price}`}</div>
-              <button onClick={() => onDelete(id)}> Delete</button>
-            </div>
-          ))}
-        </div>
+    <div style={{ margin: "10rem" }}>
+      <input
+        type="number"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+      />
+      <button type="button" onClick={() => onAdd()}>
+        Add
+      </button>
+      <div>
+        {therapies?.map((it) => (
+          <div key={it.id} style={{ display: "flex", gap: "2rem" }}>
+            <div>{`${it.id}:${it.price}`}</div>
+            <button type="button" onClick={() => onDelete(it.id)}>
+              Delete
+            </button>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
