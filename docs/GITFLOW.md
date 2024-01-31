@@ -14,26 +14,26 @@
 - branch name should start with ticket id, separated by underscore with short description in kebab-case
 ```
 wrong
-TC-12_add_cool_feature
+MID-12_add_cool_feature
 
 wrong
-TC-12-add-cool-feature
+MID-12-add-cool-feature
 
 correct
-TC-12_add-cool-feature
+MID-12_add-cool-feature
 ```
 
 - commit should include ticket id in square brackets, following by space and meaningful description what was done
 ```
 wrong
-TC-12 add new linter rules for react
+MID-12 add new linter rules for react
 
 wrong
-(TC-12) add new linter rules for react
+(MID-12) add new linter rules for react
 
 wrong
-TC-12-add-new-linter-rules-for-react
+MID-12-add-new-linter-rules-for-react
 
 correct
-[TC-12] add linter rules for react hooks
+[MID-12] add linter rules for react hooks
 ```
