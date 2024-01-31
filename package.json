@@ -7,8 +7,9 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare": "husky && husky install"
+    "lint": "prettier --check . && next lint",
+    "lint:fix": "prettier --write . && next lint --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@prisma/client": "5.8.1",
@@ -28,6 +29,8 @@
     "@tanstack/eslint-plugin-query": "^5.17.20",
     "@types/bcryptjs": "~2.4.6",
     "@types/eslint": "~8.56.2",
+    "@types/eslint-config-prettier": "~6.11.3",
+    "@types/lint-staged": "~13.3.0",
     "@types/pg": "~8.11.0",
     "@types/react": "~18.2.48",
     "@types/react-dom": "~18.2.18",

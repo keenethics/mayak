@@ -1,5 +1,5 @@
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -9,7 +9,7 @@ const nextConfig = {
     includePaths: [join(__dirname, "styles")],
   },
   experimental: {
-    serverComponentsExternalPackages: ['sequelize'],
+    serverComponentsExternalPackages: ["sequelize"],
   },
 };
 

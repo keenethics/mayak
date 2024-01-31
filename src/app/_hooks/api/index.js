@@ -1,1 +1,1 @@
-export * from "./useTherapy"
+export * from "./useTherapy";

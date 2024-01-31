@@ -1,4 +1,4 @@
 {
-  "*.js": "eslint",
-  "*.{js,scss,md,json,prisma}": "prettier --write"
+  "*.{js}": "next lint",
+  "*.{js,scss,md,json,prisma}": "prettier --check"
 }
