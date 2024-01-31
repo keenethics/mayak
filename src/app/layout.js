@@ -4,16 +4,17 @@ import GlobalStyles from '../app/styles/GlobalStyles';
 import { QueryContext } from "./queryContext";
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
+import Providers from './Providers';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body >
         <StyledComponentsRegistry>
-          <GlobalStyles />
-          <ThemeProvider theme={theme}>
+          <Providers>
+            <GlobalStyles />
             <QueryContext>{children}</QueryContext>
-          </ThemeProvider>
+          </Providers>
         </StyledComponentsRegistry>
       </body>
     </html>
