@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 import { env } from "@/lib/env";
-
+import { LOGIN_URL } from "./consts";
 export const { auth, handlers } = NextAuth({
   logger: {
     error(error) {
@@ -41,7 +41,7 @@ export const { auth, handlers } = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/admin#/login",
+    signIn: LOGIN_URL,
   },
   callbacks: {
     async jwt({user, token}) {

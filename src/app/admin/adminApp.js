@@ -1,5 +1,6 @@
 "use client";
 
+import { LOGIN_URL } from "@/lib/consts";
 import { getSession, signIn, signOut, } from "next-auth/react";
 import {
   Admin,
@@ -42,7 +43,7 @@ export default function AdminPage() {
     signIn: (credentials) => 
       signIn("credentials", credentials, { redirect: false }),
     signOut: () => 
-      signOut({callbackUrl: "/admin#/login"}),
+      signOut({callbackUrl: LOGIN_URL}),
   })
   return (
     <Admin dataProvider={data} authProvider={auth}>
