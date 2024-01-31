@@ -5,7 +5,7 @@ env:
 on:
   push:
     branches:
-      - MID-31_dev-deploy
+      - dev
 jobs:
   Dev-Deploy:
     runs-on: ubuntu-latest
