@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, signOut } from "next-auth/react";
+import { getSession, signIn, signOut, } from "next-auth/react";
 import {
   Admin,
   ListGuesser,
@@ -11,44 +11,39 @@ import {
 import { dataProvider } from "ra-data-simple-prisma";
 
 const authProvider = ({ signIn, signOut }) => ({
-  login: async (credentials) => {
-    console.log("login", credentials);
-    return signIn(credentials);
-  },
-  logout: () => {
-    console.log("logout");
-    return signOut();
-  },
-  checkError: ({ status }) => Promise.resolve(),
-  // checkError: ({ status }) => {
-  // if (status === 401 || status === 403) {
-  //   localStorage.removeItem("username");
-  //   return Promise.reject();
-  // }
-  // return Promise.resolve();
-  // },
-  // called when the user navigates to a new location, to check for authentication
-  checkAuth: () => Promise.resolve(),
-  // checkAuth: () => {
-  // return Promise.resolve();
-  // console.log("checkAuth");
-  // return localStorage.getItem("username")
-  //   ? Promise.resolve()
-  //   : Promise.reject();
-  // },
-  getPermissions: () => Promise.resolve(),
+    login: async (credentials) => {
+      await signIn(credentials);
+      return Promise.resolve();
+    },
+    logout: async () => {
+      await signOut();
+      return Promise.resolve();
+    },
+    checkAuth: async () => {
+      const session = await getSession();
+      if (session === null) {
+        return Promise.reject();
+      }
+      return Promise.resolve();
+    },
+    checkError:  (error) => Promise.resolve(),
+    getIdentity: async () => {
+      const session = await getSession();
+      return Promise.resolve({
+        id: session.user.id,
+        fullName: session.user.name,
+    })},
+    getPermissions: () => Promise.resolve(''),
 });
 
 export default function AdminPage() {
-  // const { data: session } = useSession()
-  // console.log("session", session);
   const data = dataProvider("/api/admin");
   const auth = authProvider({
-    signIn: (credentials) =>
+    signIn: (credentials) => 
       signIn("credentials", credentials, { redirect: false }),
-    signOut: () => signOut(),
-    // signOut: () => Promise.resolve(),
-  });
+    signOut: () => 
+      signOut({callbackUrl: "/admin#/login"}),
+  })
   return (
     <Admin dataProvider={data} authProvider={auth}>
       <Resource

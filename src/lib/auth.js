@@ -4,23 +4,42 @@ import { z } from "zod";
 import { env } from "@/lib/env";
 
 export const { auth, handlers } = NextAuth({
+  secret: process.env.AUTH_SECRET,
+  session: {
+    strategy: "jwt",
+    maxAge: 3600 // 1 hour
+  },
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        const { success, username, password } = z
+        const {success, data} = z
           .object({
             username: z.string().refine((val) => val === env.ADMIN_USERNAME),
             password: z.string().refine((val) => val === env.ADMIN_PASSWORD),
           })
           .safeParse(credentials);
-        console.log({ server: true, credentials, success, username, password });
 
         if (!success) {
           return null;
         }
-
-        return { username, password };
+        
+        return { name: data.username };
       },
     }),
   ],
+  pages: {
+    signIn: "/admin#/login",
+  },
+  callbacks: {
+    async jwt({user, token}) {
+      if (user) {
+        token.user = {...token.user, ...user};
+      }
+      return token; 
+    },
+    async session({session, token}) {
+      session.user = token.user;
+      return session;
+    },
+  },
 });
