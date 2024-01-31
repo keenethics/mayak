@@ -24,7 +24,7 @@ export default function Therapies() {
     <>
       <div style={{ margin: "10rem" }}>
         <input
-          type="text"
+          type="number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />

@@ -1,5 +1,6 @@
+import Link from "next/link";
 import Image from "next/image";
-import style from './style.module.scss'
+import styles from "./styles.module.scss";
 
 export default function Home() {
   return (
@@ -7,7 +8,9 @@ export default function Home() {
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
-          <code className={styles.code} style={{ color: testStyle.primaryColor }}>src/app/page.js</code>
+          <code className={styles.code} style={{ color: styles.primaryColor }}>
+            src/app/page.js
+          </code>
         </p>
         <div>
           <a
@@ -40,6 +43,16 @@ export default function Home() {
       </div>
 
       <div className={styles.grid}>
+        <Link href="/therapy" className={styles.card}>
+          <h2>
+            Demo <span>-&gt;</span>
+          </h2>
+          <p>
+            Check out only existing endpoint to see how react-query-api-prisma
+            works
+          </p>
+        </Link>
+
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
@@ -62,18 +75,6 @@ export default function Home() {
             Learn <span>-&gt;</span>
           </h2>
           <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
         </a>
 
         <a
