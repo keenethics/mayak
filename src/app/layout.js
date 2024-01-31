@@ -1,23 +1,22 @@
 'use client';
 import StyledComponentsRegistry from '../lib/registry'
 import GlobalStyles from '../app/styles/GlobalStyles';
-import Header from "@/app/_components/Header"
-import Footer from "@/app/_components/Footer";
+import Header from "../app/_components/Header"
+import Footer from "../app/_components/Footer";
 import { QueryContext } from "./queryContext";
-
-import Providers from './Providers';
+import ThemeProvider from './ThemeProvider';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body >
         <StyledComponentsRegistry>
-          <Providers>
+          <ThemeProvider>
             <GlobalStyles />
             <Header />
             <QueryContext>{children}</QueryContext>
             <Footer />
-          </Providers>
+          </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

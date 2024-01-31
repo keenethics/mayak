@@ -1,16 +1,16 @@
 'use client';
 import StyledComponentsRegistry from '../lib/registry'
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as Provider } from 'styled-components';
 import theme from './styles/theme';
 
-const Providers = (props) => {
+const ThemeProvider = (props) => {
     return (
         <StyledComponentsRegistry>
-            <ThemeProvider theme={theme}>
+            <Provider theme={theme}>
                 {props.children}
-            </ThemeProvider>
+            </Provider>
         </StyledComponentsRegistry>
     );
 };
 
-export default Providers
+export default ThemeProvider
