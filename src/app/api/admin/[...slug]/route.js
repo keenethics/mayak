@@ -9,8 +9,8 @@ const handler = auth(async (req, res) => {
       status: 401,
     });
   }
-  const json = await req.json();
   try {
+    const json = await req.json();
     const result = await defaultHandler(json, prisma, {
       getList: { debug: false },
       audit: {
@@ -19,7 +19,8 @@ const handler = auth(async (req, res) => {
     });
     return NextResponse.json(result);
   } catch (err) {
-    return NextResponse.error(err);
+    console.log(err);
+    return NextResponse.json({error: err}, {status: 500});
   }
 });
 
