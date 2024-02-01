@@ -23,6 +23,7 @@ Vercel CLI 33.3.0
 ✅  Preview: https://mayak-2-gl0htomud-alex-popov-tech.vercel.app [1s]
 📝  To deploy to production (mayak-2.vercel.app), run `vercel --prod`
 ```
+
 `Preview` is the url of deployed app which already can be shared with others ( but might require login to Vercel ).
 
 You can use dev toolbar at the bottom of the page to make truly public link with `share` button.

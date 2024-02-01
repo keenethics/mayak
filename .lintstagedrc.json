@@ -1,0 +1,4 @@
+{
+  "*.{js}": "next lint",
+  "*.{js,scss,md,json,prisma}": "prettier --check"
+}
