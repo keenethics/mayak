@@ -1,4 +1,4 @@
-import { breakpoints, colors, fontStyle } from "./ui";
+import { breakpoints, colors, fontStyle } from './ui';
 
 const theme = {
   fontStyle,

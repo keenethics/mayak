@@ -1,8 +1,7 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
-import mayakLogo from "/public/mayak_logo.svg";
-import Image from "next/image";
+import React from 'react';
+import styled from 'styled-components';
 
 const AppHeader = styled.header`
   padding: 25px;
@@ -11,9 +10,5 @@ const AppHeader = styled.header`
 `;
 
 export default function Header() {
-  return (
-    <AppHeader>
-      <Image src={mayakLogo} alt="Mayak logo" width="129" height="74" />
-    </AppHeader>
-  );
+  return <AppHeader>Header</AppHeader>;
 }

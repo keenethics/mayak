@@ -1,26 +1,18 @@
-import ky from "ky";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import ky from 'ky';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-const therapyKey = "therapy";
+const therapyKey = 'therapy';
 
-export const listTherapies = async () => {
-  return await ky("/api/therapy").json();
-};
+export const listTherapies = async () => ky('/api/therapy').json();
 
-export const createTherapy = async ({ price }) => {
-  return await ky.post("/api/therapy", { json: { price } }).json();
-};
+export const createTherapy = async ({ price }) => ky.post('/api/therapy', { json: { price } }).json();
 
-export const deleteTherapy = async ({ id }) => {
-  return await ky.delete(`/api/therapy/${id}`).json();
-};
+export const deleteTherapy = async ({ id }) => ky.delete(`/api/therapy/${id}`).json();
 
-export const useListTherapies = () => {
-  return useQuery({
-    queryKey: [therapyKey],
-    queryFn: listTherapies,
-  });
-};
+export const useListTherapies = () => useQuery({
+  queryKey: [therapyKey],
+  queryFn: listTherapies,
+});
 
 export const useCreateTherapy = () => {
   const queryClient = useQueryClient();

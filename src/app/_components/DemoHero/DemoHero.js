@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
-import device from "@/app/styles/device";
+import React from 'react';
+import styled from 'styled-components';
+import device from '@/app/styles/device';
 
 const Title = styled.h1`
   ${({ theme }) => theme.fontStyle.h1};

@@ -1,4 +1,4 @@
-import { breakpoints } from "./theme/ui/index";
+import { breakpoints } from './theme/ui/index';
 
 const device = {
   mobileS: `(min-width: ${breakpoints.xs})`,

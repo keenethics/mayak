@@ -1,8 +1,10 @@
-"use client";
+'use client';
 
-import StyledComponentsRegistry from "../lib/registry";
-import { ThemeProvider } from "styled-components";
-import theme from "@/app/styles/theme";
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import P from 'prop-types';
+import StyledComponentsRegistry from '../lib/registry';
+import theme from '@/app/styles/theme';
 
 export default function StyleProvider({ children }) {
   return (
@@ -11,3 +13,7 @@ export default function StyleProvider({ children }) {
     </StyledComponentsRegistry>
   );
 }
+
+StyleProvider.propTypes = {
+  children: P.node.isRequired,
+};

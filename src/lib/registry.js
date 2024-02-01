@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { useServerInsertedHTML } from "next/navigation";
-import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import React, { useState } from 'react';
+import { useServerInsertedHTML } from 'next/navigation';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
+import P from 'prop-types';
 
 export default function StyledComponentsRegistry({ children }) {
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
@@ -13,7 +14,7 @@ export default function StyledComponentsRegistry({ children }) {
     return <>{styles}</>;
   });
 
-  if (typeof window !== "undefined") return <>{children}</>;
+  if (typeof window !== 'undefined') return <>{children}</>;
 
   return (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
@@ -21,3 +22,7 @@ export default function StyledComponentsRegistry({ children }) {
     </StyleSheetManager>
   );
 }
+
+StyledComponentsRegistry.propTypes = {
+  children: P.node.isRequired,
+};
