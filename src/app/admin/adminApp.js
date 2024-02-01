@@ -1,25 +1,20 @@
-"use client";
+'use client';
 
-import { signIn, signOut } from "next-auth/react";
+import React from 'react';
+import { signIn, signOut } from 'next-auth/react';
 import {
   Admin,
   ListGuesser,
   Resource,
   ShowGuesser,
   EditGuesser,
-} from "react-admin";
-import { dataProvider } from "ra-data-simple-prisma";
+} from 'react-admin';
+import { dataProvider } from 'ra-data-simple-prisma';
 
-const authProvider = ({ signIn, signOut }) => ({
-  login: async (credentials) => {
-    console.log("login", credentials);
-    return signIn(credentials);
-  },
-  logout: () => {
-    console.log("logout");
-    return signOut();
-  },
-  checkError: ({ status }) => Promise.resolve(),
+const authProvider = {
+  login: async credentials => signIn(credentials),
+  logout: () => signOut(),
+  checkError: () => Promise.resolve(),
   // checkError: ({ status }) => {
   // if (status === 401 || status === 403) {
   //   localStorage.removeItem("username");
@@ -37,20 +32,14 @@ const authProvider = ({ signIn, signOut }) => ({
   //   : Promise.reject();
   // },
   getPermissions: () => Promise.resolve(),
-});
+};
 
 export default function AdminPage() {
   // const { data: session } = useSession()
   // console.log("session", session);
-  const data = dataProvider("/api/admin");
-  const auth = authProvider({
-    signIn: (credentials) =>
-      signIn("credentials", credentials, { redirect: false }),
-    signOut: () => signOut(),
-    // signOut: () => Promise.resolve(),
-  });
+  const data = dataProvider('/api/admin');
   return (
-    <Admin dataProvider={data} authProvider={auth}>
+    <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
         name="Therapy"
         list={ListGuesser}
