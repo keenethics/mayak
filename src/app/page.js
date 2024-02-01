@@ -1,13 +1,15 @@
-'use client';
-import { styled } from 'styled-components';
+import ButtonUseClient from "./ButtonAsTest";
+import { prisma } from "@/lib/db";
 
-export const MyDiv = styled.div`
-  background-color: ${({ theme }) => theme.colors.colorName1};
-`;
-export default function Home() {
+//example: division into client and server components 
+export default async function Home() {
+  // const therapies = await prisma.therapy.findMany();
+
   return (
     <main >
-      <MyDiv>Hello world</MyDiv>
+      {/* {therapies.map(item => <div>{item.id}</div>)} */}
+
+      <ButtonUseClient />
     </main>
   );
 }
