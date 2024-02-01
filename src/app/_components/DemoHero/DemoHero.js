@@ -1,25 +1,18 @@
-'use client';
-
 import React from 'react';
-import styled from 'styled-components';
-import device from '@/app/styles/device';
-
-const Title = styled.h1`
-  ${({ theme }) => theme.fontStyle.h1};
-
-  @media ${device.md} {
-    ${({ theme }) => theme.fontStyle.h3};
-  }
-`;
-
-const Span = styled.span`
-  color: ${({ theme }) => theme.colors.secondary[400]};
-`;
 
 export default function DemoHero() {
   return (
-    <Title>
-      Шукай пункти психологічної підтримки у місті <Span>Львові</Span>
-    </Title>
+    <section className="bg-secondary-100 p-5">
+      <h1 className="text-h1 font-bold text-primary-600">
+        Шукай пункти психологічної підтримки у місті{' '}
+        <span className="text-secondary-500">Львові</span>
+      </h1>
+      <p className="text-p1 mt-5">
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the standard dummy text ever since the
+        1500s, when an unknown printer took a galley of type and scrambled it to
+        make a type specimen book.
+      </p>
+    </section>
   );
 }

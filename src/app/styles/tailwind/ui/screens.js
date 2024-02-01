@@ -1,4 +1,4 @@
-const breakpoints = {
+const screens = {
   xs: '320px',
   sm: '360px',
   md: '768px',
@@ -7,4 +7,4 @@ const breakpoints = {
   xxl: '1920px',
 };
 
-export default breakpoints;
+export default screens;

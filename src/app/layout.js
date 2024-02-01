@@ -3,9 +3,9 @@ import P from 'prop-types';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
 import { QueryContext } from './queryContext';
-import StyleProvider from '@/app/styleProvider';
-import GlobalStyles from '@/app/styles/globalStyles';
 import montserrat from '@/app/styles/font';
+
+import './globals.css';
 
 export const metadata = {
   title: 'Mayak!',
@@ -16,12 +16,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <StyleProvider>
-          <GlobalStyles />
-          <Header />
-          <QueryContext>{children}</QueryContext>
-          <Footer />
-        </StyleProvider>
+        <Header />
+        <QueryContext>{children}</QueryContext>
+        <Footer />
       </body>
     </html>
   );
