@@ -7,7 +7,7 @@ import device from '@/app/styles/device';
 const Title = styled.h1`
   ${({ theme }) => theme.fontStyle.h1};
 
-  @media ${device.tablet} {
+  @media ${device.md} {
     ${({ theme }) => theme.fontStyle.h3};
   }
 `;
