@@ -1,11 +1,11 @@
-import { defaultHandler } from "ra-data-simple-prisma";
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { defaultHandler } from 'ra-data-simple-prisma';
+import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/db';
+import { auth } from '@/lib/auth';
 
-const handler = auth(async (req, res) => {
+const handler = auth(async (req) => {
   if (!req.auth) {
-    return NextResponse.json({message: "unauthorized"},{
+    return NextResponse.json({ message: 'unauthorized' }, {
       status: 401,
     });
   }
@@ -19,8 +19,7 @@ const handler = auth(async (req, res) => {
     });
     return NextResponse.json(result);
   } catch (err) {
-    console.log(err);
-    return NextResponse.json({error: err}, {status: 500});
+    return NextResponse.json({ error: err }, { status: 500 });
   }
 });
 

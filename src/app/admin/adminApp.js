@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { LOGIN_URL } from "@/lib/consts";
-import { getSession, signIn, signOut, } from "next-auth/react";
+import React from 'react';
+import { getSession, signIn, signOut } from 'next-auth/react';
 import {
   Admin,
   ListGuesser,
   Resource,
   ShowGuesser,
   EditGuesser,
-} from "react-admin";
-import { dataProvider } from "ra-data-simple-prisma";
+} from 'react-admin';
+import { dataProvider } from 'ra-data-simple-prisma';
+import { LOGIN_URL } from '@/lib/consts';
 
 const authProvider = {
-  login: async (credentials) => signIn('credentials', credentials, { redirect: false }),
+  login: async credentials => signIn('credentials', credentials, { redirect: false }),
   logout: async () => signOut({ callbackUrl: LOGIN_URL }),
   checkAuth: async () => {
     const session = await getSession();
     return session ? Promise.resolve() : Promise.reject();
   },
-  checkError: async (error) => {
-    // till we have a better way to handle errors in this place
-    throw error;
+  checkError: async () => {
+    Promise.resolve();
   },
   getIdentity: async () => {
     const session = await getSession();
@@ -34,17 +34,17 @@ const authProvider = {
 };
 
 export default function AdminPage() {
-  const data = dataProvider("/api/admin");
+  const data = dataProvider('/api/admin');
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
-        name="Therapy"
+        name='Therapy'
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="Specialist"
+        name='Specialist'
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
