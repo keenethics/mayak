@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { signIn, signOut } from 'next-auth/react';
+import { getSession, signIn, signOut } from 'next-auth/react';
 import {
   Admin,
   ListGuesser,
@@ -10,44 +10,41 @@ import {
   EditGuesser,
 } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
+import { LOGIN_URL } from '@/lib/consts';
 
 const authProvider = {
-  login: async credentials => signIn(credentials),
-  logout: () => signOut(),
-  checkError: () => Promise.resolve(),
-  // checkError: ({ status }) => {
-  // if (status === 401 || status === 403) {
-  //   localStorage.removeItem("username");
-  //   return Promise.reject();
-  // }
-  // return Promise.resolve();
-  // },
-  // called when the user navigates to a new location, to check for authentication
-  checkAuth: () => Promise.resolve(),
-  // checkAuth: () => {
-  // return Promise.resolve();
-  // console.log("checkAuth");
-  // return localStorage.getItem("username")
-  //   ? Promise.resolve()
-  //   : Promise.reject();
-  // },
+  login: async credentials => signIn('credentials', credentials, { redirect: false }),
+  logout: async () => signOut({ callbackUrl: LOGIN_URL }),
+  checkAuth: async () => {
+    const session = await getSession();
+    return session ? Promise.resolve() : Promise.reject();
+  },
+  checkError: async () => {
+    Promise.resolve();
+  },
+  getIdentity: async () => {
+    const session = await getSession();
+
+    return {
+      id: session.user.id,
+      fullName: session.user.name,
+    };
+  },
   getPermissions: () => Promise.resolve(),
 };
 
 export default function AdminPage() {
-  // const { data: session } = useSession()
-  // console.log("session", session);
   const data = dataProvider('/api/admin');
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
-        name="Therapy"
+        name='Therapy'
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="Specialist"
+        name='Specialist'
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
