@@ -1,15 +1,8 @@
-import ButtonUseClient from "./ButtonAsTest";
-import { prisma } from "@/lib/db";
-
-//example: division into client and server components 
-export default async function Home() {
-  // const therapies = await prisma.therapy.findMany();
+export default function Home() {
 
   return (
     <main >
-      {/* {therapies.map(item => <div>{item.id}</div>)} */}
-
-      <ButtonUseClient />
+      Home
     </main>
   );
 }
