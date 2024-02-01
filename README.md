@@ -14,10 +14,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Note: installing new packages require image re-build with `docker compose up --build`
 
-#### Migrations
-
-For applying migrations run `docker compose run app npm run migrations`.
-
 ### Local
 
 #### Requirements
@@ -30,22 +26,9 @@ For applying migrations run `docker compose run app npm run migrations`.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-#### Migrations
+## How-To's
 
-For applying migrations to database pointed in `.env` run `npm run migrations`.
-
-## Linting & Formatting
-
-Linting is enabled on pre-commit hook, and manually you can run it with `npm run lint` or
-`npm run lint:fix` to automatically apply fixes.
-
-## Git conventions & guides
-
-Check out [separate](./docs/GITFLOW.md) doc.
-
-## Deploy on Vercel
-
-Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
+To see additional useful information about project check separate [howto](./docs/HOWTO.md) doc.
 
 ## Learn More
 
@@ -55,10 +38,3 @@ Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
 - [react-query](https://tanstack.com/query/latest)
 - [react-admin](https://marmelab.com/react-admin/Tutorial.html) - open-source admin panel for react.
 - [zod](https://zod.dev/) - validation library.
-
-## Deployment
-
-We are using Vercel for all the deployments.
-
-You can setup your own deployment. Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
-All merged pull-requests to the `dev` branch automatically deploy to [dev-server](https://mayak-dev.vercel.app/). <br />
