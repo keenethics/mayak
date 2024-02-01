@@ -45,3 +45,10 @@ Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
 - [react-query](https://tanstack.com/query/latest)
 - [react-admin](https://marmelab.com/react-admin/Tutorial.html) - open-source admin panel for react.
 - [zod](https://zod.dev/) - validation library.
+
+## Deployment
+
+We are using Vercel for all the deployments.
+
+You can setup your own deployment. Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
+All merged pull-requests to the `dev` branch automatically deploy to [dev-server](https://mayak-dev.vercel.app/). <br />
