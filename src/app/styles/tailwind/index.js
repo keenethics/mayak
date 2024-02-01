@@ -1,10 +1,13 @@
-import { colors, screens, typography } from './ui';
+import {
+  colors, fontWeight, screens, typography,
+} from './ui';
 
 const presets = {
   theme: {
     colors,
     screens,
     fontSize: typography,
+    fontWeight,
   },
 };
 
