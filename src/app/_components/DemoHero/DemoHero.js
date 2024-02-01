@@ -1,9 +1,14 @@
 "use client";
 
 import styled from "styled-components";
+import device from "@/app/styles/device";
 
 const Title = styled.h1`
-  ${({ theme }) => theme.fontStyle.h1}
+  ${({ theme }) => theme.fontStyle.h1};
+
+  @media ${device.tablet} {
+    ${({ theme }) => theme.fontStyle.h3};
+  }
 `;
 
 const Span = styled.span`
