@@ -6,11 +6,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   sassOptions: {
-    includePaths: [join(__dirname, 'styles')]
+    includePaths: [join(__dirname, 'styles')],
   },
   compiler: {
-    styledComponents: true
-  }
+    styledComponents: true,
+  },
 };
 
 export default nextConfig;
