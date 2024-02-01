@@ -3,16 +3,17 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 import { env } from "@/lib/env";
 import { LOGIN_URL } from "./consts";
+
+const adminSessionLifetime = 60 * 60; // 1 hour in seconds
+
 export const { auth, handlers } = NextAuth({
   logger: {
-    error(error) {
-      console.log(error);
-    }
+    error: console.error
   },
   secret: process.env.AUTH_SECRET,
   session: {
     strategy: "jwt",
-    maxAge: 3600 // 1 hour
+    maxAge: adminSessionLifetime
   },
   events: {
     signOut ({token}) {
@@ -25,18 +26,18 @@ export const { auth, handlers } = NextAuth({
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-          const {success, data} = z
+          const adminCheckResult = z
           .object({
             username: z.string().refine((val) => val === env.ADMIN_USERNAME),
             password: z.string().refine((val) => val === env.ADMIN_PASSWORD),
           })
           .safeParse(credentials);
         
-        if (!success) {
-          return null;
+        if (!adminCheckResult.success) {
+          return null; // returning null throws CredentialSignin error which is logged and then handled internally.
         }
         
-        return { name: data.username };
+        return { name: adminCheckResult.data.username };
       },
     }),
   ],
