@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Populate your `.env.local` with `cp .env.example .env.local`
+Copy `.env.example` to `.env` and populate it with missing/relevant environment variables.
 
 ### Docker
 
@@ -10,21 +10,31 @@ Populate your `.env.local` with `cp .env.example .env.local`
 docker compose up
 ```
 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 Note: installing new packages require image re-build with `docker compose up --build`
+
+#### Migrations
+
+For applying migrations run `docker compose run app npm run migrations`.
 
 ### Local
 
-1. Start `postgres` database somewhere and populate your `.env` with relevant environment variables.
-2. Install dependencies with `npm install`
-3. Run `npm run dev`
+#### Requirements
+
+- Node.js 20+
+- Postgres 16+ running somewhere, and `.env` database variables populated
+
+1. `npm install`
+2. `npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+#### Migrations
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+For applying migrations to database pointed in `.env` run `npm run migrations`.
 
-#### Linting & Formatting
+## Linting & Formatting
 
 Linting is enabled on pre-commit hook, and manually you can run it with `npm run lint` or
 `npm run lint:fix` to automatically apply fixes.
