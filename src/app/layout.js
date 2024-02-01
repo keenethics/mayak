@@ -7,7 +7,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
 import { QueryContext } from './queryContext';
-import ThemeProvider from './ThemeProvider';
+import ThemeProvider from './themeProvider';
 
 export default function RootLayout({ children }) {
   return (
