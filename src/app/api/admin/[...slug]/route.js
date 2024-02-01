@@ -1,7 +1,7 @@
-import { defaultHandler } from "ra-data-simple-prisma";
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { defaultHandler } from 'ra-data-simple-prisma';
+import { NextResponse } from 'next/server';
+import { prisma } from '../../../../lib/db';
+import { auth } from '../../../../lib/auth';
 
 const handler = auth(async (req) => {
   const json = await req.json();

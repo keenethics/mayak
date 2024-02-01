@@ -1,6 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import styles from "./styles.module.scss";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './styles.module.scss';
 
 export default function Home() {
   return (
@@ -18,7 +19,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{" "}
+            By{' '}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"

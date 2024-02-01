@@ -1,22 +1,19 @@
-"use client";
+'use client';
 
-import { signIn, signOut } from "next-auth/react";
+import React from 'react';
+import { signIn, signOut } from 'next-auth/react';
 import {
   Admin,
   ListGuesser,
   Resource,
   ShowGuesser,
   EditGuesser,
-} from "react-admin";
-import { dataProvider } from "ra-data-simple-prisma";
+} from 'react-admin';
+import { dataProvider } from 'ra-data-simple-prisma';
 
 const authProvider = {
-  login: async (credentials) => {
-    return signIn(credentials);
-  },
-  logout: () => {
-    return signOut();
-  },
+  login: async credentials => signIn(credentials),
+  logout: () => signOut(),
   checkError: () => Promise.resolve(),
   // checkError: ({ status }) => {
   // if (status === 401 || status === 403) {
@@ -40,7 +37,7 @@ const authProvider = {
 export default function AdminPage() {
   // const { data: session } = useSession()
   // console.log("session", session);
-  const data = dataProvider("/api/admin");
+  const data = dataProvider('/api/admin');
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
