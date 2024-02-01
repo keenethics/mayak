@@ -1,8 +1,5 @@
-export default function Home() {
+import React from 'react';
 
-  return (
-    <main >
-      Home
-    </main>
-  );
+export default function Home() {
+  return <main>Home</main>;
 }

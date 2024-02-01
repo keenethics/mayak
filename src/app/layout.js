@@ -1,18 +1,18 @@
 'use client';
-import StyledComponentsRegistry from '../lib/registry'
-import GlobalStyles from '../app/styles/GlobalStyles';
-import Header from "../app/_components/Header"
-import Footer from "../app/_components/Footer";
-import { QueryContext } from "./queryContext";
-import ThemeProvider from './ThemeProvider';
-import React from 'react';
-import P from 'prop-types'
 
+import React from 'react';
+import P from 'prop-types';
+import StyledComponentsRegistry from '../lib/registry';
+import GlobalStyles from './styles/GlobalStyles';
+import Header from './_components/Header';
+import Footer from './_components/Footer';
+import { QueryContext } from './queryContext';
+import ThemeProvider from './ThemeProvider';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body >
+      <body>
         <StyledComponentsRegistry>
           <ThemeProvider>
             <GlobalStyles />
@@ -25,7 +25,6 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
 
 RootLayout.propTypes = {
   children: P.node.isRequired,

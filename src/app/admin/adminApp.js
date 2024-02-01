@@ -38,13 +38,13 @@ export default function AdminPage() {
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
-        name='Therapy'
+        name="Therapy"
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name='Specialist'
+        name="Specialist"
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
