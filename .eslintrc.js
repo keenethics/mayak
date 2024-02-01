@@ -24,5 +24,6 @@ module.exports = {
     'import/extensions': 0,
     'import/prefer-default-export': 0,
     'no-restricted-exports': 0,
+    'import/no-unresolved': 'off',
   },
 };
