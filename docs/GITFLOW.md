@@ -8,10 +8,10 @@
 
 `Note: make sure to pull dev frequent, to detect compatibility issues early`
 
-
 ## Git naming conventions:
 
 - branch name should start with ticket id, separated by underscore with short description in kebab-case
+
 ```
 wrong
 MID-12_add_cool_feature
@@ -24,6 +24,7 @@ MID-12_add-cool-feature
 ```
 
 - commit should include ticket id in square brackets, following by space and meaningful description what was done
+
 ```
 wrong
 MID-12 add new linter rules for react
