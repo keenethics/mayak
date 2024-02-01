@@ -1,0 +1,2 @@
+fullName String @db.VarChar(128)
+specializations Specialization[]

@@ -1,0 +1,11 @@
+model PlaceOfWork {
+  ...tableBase
+  name String @db.VarChar(128) // name of clinic
+  fullAddress String @db.VarChar(128) // street,building number,floor,room number
+  district District @relation(fields: [districtId], references: [id])
+  districtId String @db.Uuid 
+  geo Float[] @default([]) // longitude, latitude ??? field for future (requirements not defined yet)
+  specialistId String @db.Uuid
+  specialist Specialist @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+  @@map("places_of_work")
+}

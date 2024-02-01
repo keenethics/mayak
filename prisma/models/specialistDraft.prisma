@@ -1,0 +1,5 @@
+model SpecialistDraft {
+  ...tableBase
+  ...specialistBase
+  @@map("specialist_drafts")
+}

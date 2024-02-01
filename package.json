@@ -24,6 +24,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@prisma-utils/prismerge": "^1.7.0",
     "@tanstack/eslint-plugin-query": "^5.17.20",
     "@types/bcryptjs": "~2.4.6",
     "@types/eslint": "~8.56.2",

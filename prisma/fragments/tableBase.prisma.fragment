@@ -1,0 +1,2 @@
+id String @id @default(uuid()) @db.Uuid
+createdAt DateTime @default(now())
