@@ -51,8 +51,8 @@ export async function POST(request) {
         { status: 400 },
       );
     }
-    const feedback = await prisma.feedback.create({ data: feedbackData });
-    return NextResponse.json(feedback);
+    await prisma.feedback.create({ data: feedbackData });
+    return NextResponse.json(feedbackData);
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 500 });
   }
