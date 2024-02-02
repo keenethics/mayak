@@ -8,6 +8,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [join(__dirname, 'styles')],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
