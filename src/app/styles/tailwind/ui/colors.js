@@ -1,4 +1,4 @@
-const colors = {
+const colorsHex = {
   primary: {
     100: '#f2f9ff',
     200: '#dff0ff',
@@ -55,4 +55,4 @@ const colors = {
   },
 };
 
-export default colors;
+export default colorsHex;
