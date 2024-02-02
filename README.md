@@ -24,9 +24,18 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+#### Linting & Formatting
+
+Linting is enabled on pre-commit hook, and manually you can run it with `npm run lint` or
+`npm run lint:fix` to automatically apply fixes.
+
 ## Git conventions & guides
 
 Check out [separate](./docs/GITFLOW.md) doc.
+
+## Deploy on Vercel
+
+Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
 
 ## Learn More
 
@@ -37,6 +46,9 @@ Check out [separate](./docs/GITFLOW.md) doc.
 - [react-admin](https://marmelab.com/react-admin/Tutorial.html) - open-source admin panel for react.
 - [zod](https://zod.dev/) - validation library.
 
-## Deploy on Vercel
+## Deployment
 
-Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
+We are using Vercel for all the deployments.
+
+You can setup your own deployment. Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.
+All merged pull-requests to the `dev` branch automatically deploy to [dev-server](https://mayak-dev.vercel.app/). <br />
