@@ -7,7 +7,7 @@ Copy `.env.example` to `.env` and populate it with missing/relevant environment 
 ### Docker
 
 1. `docker compose up`
-2. (in separate shell) `docker compose run app npm run migrations`
+2. (in separate shell) `docker compose run app npm exec migrations`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -21,8 +21,8 @@ Note: installing new packages require image re-build with `docker compose up --b
 - Postgres 16+ running somewhere, and `.env` database variables populated
 
 1. `npm install`
-2. `npm run dev`
-3. (in separate shell) `npm run migrations`
+2. `npm run migrations`
+3. `npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
