@@ -14,6 +14,12 @@ Consider following when creating migration:
 - using meaningful name
 - separate dropping/creating tables and columns
 
+### How to seed the database
+
+To populate database with some data(seed it) run `npm run seed`.
+
+**⚠ Keep in mind that before seeding all data in db will be wiped out.**
+
 ### How to wipe out database
 
 Thats could be useful if you ran some wrong migration, or messed up things manually.

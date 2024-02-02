@@ -9,7 +9,8 @@
     "lint": "eslint ./ --ext .js,.mjs",
     "lint:fix": "prettier --write . && eslint --ext .js,.mjs --fix ./",
     "migrations": "prisma migrate dev",
-    "migrations:reset": "prisma migrate reset"
+    "seed": "node prisma/seed.js",
+    "migrations:reset": "prisma migrate reset --force"
   },
   "dependencies": {
     "@prisma/client": "5.8.1",
@@ -48,8 +49,5 @@
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.8.1",
     "sass": "^1.70.0"
-  },
-  "prisma": {
-    "seed": "node prisma/seed.js"
   }
 }
