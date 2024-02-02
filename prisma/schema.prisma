@@ -32,5 +32,6 @@ model Feedback {
   callMe     Boolean
   message    String   @db.VarChar(320)
   adminNotes String?  @db.VarChar(350)
+  isRead     Boolean  @default(false)
   @@map("feedback")
 }
