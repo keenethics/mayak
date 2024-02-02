@@ -24,6 +24,7 @@ enum FormatOfWork {
   ONLINE
   BOTH
 }
+
 model Specialist {
   id                String           @id @default(uuid()) @db.Uuid
   createdAt         DateTime         @default(now())
@@ -65,13 +66,14 @@ model PlaceOfWork {
 }
 
 model District {
-  id           String        @id @default(uuid()) @db.Uuid
-  createdAt    DateTime      @default(now())
-  name         String        @unique @db.VarChar(64)
-  Address      Address[]
+  id        String    @id @default(uuid()) @db.Uuid
+  createdAt DateTime  @default(now())
+  name      String    @unique @db.VarChar(64)
+  Address   Address[]
 
   @@map("district")
 }
+
 model Therapy {
   id          String       @id @default(uuid()) @db.Uuid
   createdAt   DateTime     @default(now())
