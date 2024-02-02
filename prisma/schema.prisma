@@ -24,12 +24,13 @@ model Therapy {
 }
 
 model Feedback {
-    id          String   @id @default(uuid()) @db.Uuid
-    createdAt   DateTime @default(now())
-    name        String   @db.VarChar(128)
-    phone       String   @db.VarChar(13)
-    email       String?  @db.VarChar(254)
-    callAgain   Boolean
-    message     String   @db.VarChar(320)
-    @@map("feedback")
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  name      String   @db.VarChar(128)
+  phone     String   @db.VarChar(13)
+  email     String?  @db.VarChar(254)
+  callAgain Boolean
+  message   String   @db.VarChar(320)
+
+  @@map("feedback")
 }
