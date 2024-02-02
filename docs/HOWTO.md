@@ -7,12 +7,19 @@
 
 ### How to create a migration
 
-Change database schema and run `npm run migrations`.
+Change database schema and run `npm run migrations` - this will create migrations file if needed AND run newly created migrations on database.
 
 Consider following when creating migration:
 
 - using meaningful name
 - separate dropping/creating tables and columns
+
+### How to wipe out database
+
+Thats could be useful if you ran some wrong migration, or messed up things manually.
+
+- for `docker` local setup - run `docker compose exec app npm run migrations:reset`
+- for other database locations - run `npm run migrations:reset`
 
 ## Linting & Formatting
 

@@ -6,9 +6,8 @@ Copy `.env.example` to `.env` and populate it with missing/relevant environment 
 
 ### Docker
 
-```sh
-docker compose up
-```
+1. `docker compose up`
+2. (in separate shell) `docker compose run app npm run migrations`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -23,6 +22,7 @@ Note: installing new packages require image re-build with `docker compose up --b
 
 1. `npm install`
 2. `npm run dev`
+3. (in separate shell) `npm run migrations`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

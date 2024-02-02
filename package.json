@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint ./ --ext .js,.mjs",
     "lint:fix": "prettier --write . && eslint --ext .js,.mjs --fix ./",
-    "migrations": "prisma migrate dev"
+    "migrations": "prisma migrate dev",
+    "migrations:reset": "prisma migrate reset"
   },
   "dependencies": {
     "@prisma/client": "5.8.1",
