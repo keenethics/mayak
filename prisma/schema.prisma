@@ -28,8 +28,8 @@ model Feedback {
   createdAt DateTime @default(now())
   name      String   @db.VarChar(128)
   phone     String   @db.VarChar(13)
-  email     String?  @db.VarChar(254)
-  callAgain Boolean
+  email     String?  @db.VarChar(320)
+  callMe    Boolean
   message   String   @db.VarChar(320)
 
   @@map("feedback")

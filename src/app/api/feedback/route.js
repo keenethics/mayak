@@ -23,13 +23,13 @@ const Feedback = z
       .refine(val => phoneRegex.test(val), {
         message: 'Please, enter phone number in format +380XXXXXXXXX',
       }),
-    callAgain: z.boolean({
-      required_error: 'callAgain is required',
-      invalid_type_error: 'callAgain must be a boolean',
+    callMe: z.boolean({
+      required_error: 'callMe is required',
+      invalid_type_error: 'callMe must be a boolean',
     }),
     email: z
       .string()
-      .refine(val => emailRegex.test(val) && val.length <= 254, {
+      .refine(val => emailRegex.test(val) && val.length <= 320, {
         message: 'Please, enter valid email',
       }),
     message: z
