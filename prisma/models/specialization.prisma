@@ -1,7 +1,0 @@
-model Specialization {
-  ...tableBase
-  name String @unique @db.VarChar(128) 
-  specialists Specialist[]
-  specialstDrafts SpecialistDraft[]
-  @@map("specializations")
-}

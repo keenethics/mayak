@@ -1,6 +1,0 @@
-model Therapy {
-  ...tableBase
-  name String @unique @db.VarChar(64)
-  specialists Specialist[]
-  @@map("therapies")
-}

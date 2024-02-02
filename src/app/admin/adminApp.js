@@ -49,6 +49,31 @@ export default function AdminPage() {
         edit={EditGuesser}
         show={ShowGuesser}
       />
+      <Resource
+        name='District'
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+      />
+      <Resource
+        name='Specialization'
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+      />
+      <Resource
+        name='Address'
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+      />
+      <Resource
+        name='PlaceOfWork'
+        options={{ label: 'Place of work' }}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+      />
     </Admin>
   );
 }

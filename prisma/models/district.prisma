@@ -1,6 +1,0 @@
-model District {
-  ...tableBase
-  name String @unique @db.VarChar(64)
-  placesOfWork PlaceOfWork[]
-  @@map("districts")
-}
