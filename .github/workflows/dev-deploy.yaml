@@ -7,7 +7,7 @@ env:
 on:
   push:
     branches:
-      - MID-17_add-migration-docs
+      - dev
 jobs:
   Dev-Deploy:
     runs-on: ubuntu-latest
