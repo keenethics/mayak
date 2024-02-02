@@ -27,6 +27,8 @@ Thats could be useful if you ran some wrong migration, or messed up things manua
 - for `docker` local setup - run `docker compose exec app npm run migrations:reset`
 - for other database locations - run `npm run migrations:reset`
 
+**⚠ Seeding is not automaticaly running after db reset**
+
 ## Linting & Formatting
 
 Linting is enabled on pre-commit hook, and manually you can run it with `npm run lint` or
