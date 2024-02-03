@@ -17,7 +17,7 @@ function uniqueObjectsWithId(instances) {
   return faker.helpers
     .uniqueArray(
       instances.map(s => s.id),
-      faker.number.int({ min: 1, max: instances.length}),
+      faker.number.int({ min: 1, max: instances.length }),
     )
     .map(id => ({ id }));
 }
