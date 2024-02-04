@@ -5,14 +5,18 @@ const prisma = new PrismaClient();
 const { faker } = require('@faker-js/faker');
 
 function getFullAddress() {
-  return `вул. ${faker.location.streetAddress()} ${faker.number.int({ min: 1, max: 100 })}, \
-  поверх ${faker.number.int({ min: 1, max: 100 })}, кабінет ${faker.number.int({ min: 1, max: 100 })}`;
+  const street = faker.location.streetAddress();
+  const streetNumber = faker.number.int({ min: 1, max: 100 });
+  const floor = faker.number.int({ min: 1, max: 100 });
+  const room = faker.number.int({ min: 1, max: 100 });
+  return `вул. ${street} ${streetNumber}, поверх ${floor}, кабінет ${room}`;
 }
 
 function valueOrNull(chance, callback) {
   return faker.number.int({ min: 0, max: chance }) ? callback() : null;
 }
 
+// returns array of unique objects with id field
 function uniqueObjectsWithId(instances) {
   return faker.helpers
     .uniqueArray(
@@ -23,45 +27,58 @@ function uniqueObjectsWithId(instances) {
 }
 
 function randomAddress(districts) {
+  const randomNameOfClinic = `Клініка ${faker.company.name()}`;
+  const randomDistricts = faker.helpers.arrayElement(districts).id; // returns randowm object from districts array
   return {
-    nameOfClinic: `Клініка ${faker.company.name()}`,
+    nameOfClinic: randomNameOfClinic,
     fullAddress: getFullAddress(),
     district: {
       connect: {
-        id: faker.helpers.arrayElement(districts).id,
+        id: randomDistricts,
       },
     },
   };
 }
 
 function randomPlaceOfWork(districts) {
+  const randomAddresses = Array.from(
+    { length: faker.number.int({ min: 1, max: 3 }) },
+    () => randomAddress(districts),
+  );
   return {
     addresses: {
-      create: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, () => randomAddress(districts)),
+      create: randomAddresses,
     },
   };
 }
 
 function randomSpecialist(districts, specializations, therapies) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
+  const randomPlacesOfWork = Array.from(
+    { length: faker.number.int({ min: 1, max: 3 }) },
+    () => randomPlaceOfWork(districts),
+  );
+  const phoneRegexp = '+380[0-9]{9}';
   return {
     specializations: {
       connect: uniqueObjectsWithId(specializations),
     },
+    // take name of corresponding gender
     firstName: faker.person.firstName(gender.toLowerCase()),
     lastName: faker.person.lastName(),
     surname: valueOrNull(1, () => faker.person.lastName()),
     gender,
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
+    // take one of these
     formatOfWork: faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']),
     placesOfWork: {
-      create: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, () => randomPlaceOfWork(districts)),
+      create: randomPlacesOfWork,
     },
     therapies: {
       connect: uniqueObjectsWithId(therapies),
     },
     isFreeReception: faker.datatype.boolean(),
-    phone: valueOrNull(1, () => faker.helpers.fromRegExp('+380[0-9]{9}')),
+    phone: valueOrNull(1, () => faker.helpers.fromRegExp(phoneRegexp)),
     email: valueOrNull(1, () => faker.internet.email()),
     website: valueOrNull(1, () => faker.internet.url()),
     description: faker.lorem.paragraph(),
