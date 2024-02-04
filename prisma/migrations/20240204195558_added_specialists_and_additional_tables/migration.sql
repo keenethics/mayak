@@ -89,6 +89,9 @@ CREATE TABLE "_AddressToPlaceOfWork" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "specialist_email_key" ON "specialist"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "specialization_name_key" ON "specialization"("name");
 
 -- CreateIndex
