@@ -33,5 +33,6 @@ model Feedback {
   message    String   @db.VarChar(320)
   adminNotes String?  @db.VarChar(350)
   isRead     Boolean  @default(false)
+
   @@map("feedback")
 }
