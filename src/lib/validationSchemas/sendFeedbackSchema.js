@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { EMAIL_REGEX, PHONE_REGEX } from './consts';
+import { EMAIL_REGEX, PHONE_REGEX } from '../consts';
 
-export const Feedback = z
+const SendFeedback = z
   .object({
     name: z
       .string({
@@ -48,3 +48,5 @@ export const Feedback = z
       }),
   })
   .partial({ email: true });
+
+export default SendFeedback;

@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { Feedback } from '@/lib/validationSchemas';
+import SendFeedback from '@/lib/validationSchemas/sendFeedbackSchema';
 
 export async function POST(request) {
   try {
     const feedbackData = await request.json();
-    const validatedFeedback = Feedback.safeParse(feedbackData);
+    const validatedFeedback = SendFeedback.safeParse(feedbackData);
     if (!validatedFeedback.success) {
       return NextResponse.json(
         { errors: validatedFeedback.error.flatten().fieldErrors },
