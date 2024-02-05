@@ -5,9 +5,12 @@ import { auth } from '@/lib/auth';
 
 const handler = auth(async (req) => {
   if (!req.auth) {
-    return NextResponse.json({ message: 'unauthorized' }, {
-      status: 401,
-    });
+    return NextResponse.json(
+      { message: 'unauthorized' },
+      {
+        status: 401,
+      },
+    );
   }
   try {
     const json = await req.json();
