@@ -9,10 +9,6 @@ export default function Header() {
       <OutlineButton type={buttonCoreStyles.type.outlined.blue}>
         {"Зворотній зв'язок"}
       </OutlineButton>
-      {/* <BoldFilledButton type={buttonCoreStyles.type.filled.blue}>
-          Надіслати
-        </BoldFilledButton>
-        <CloseButton /> */}
     </header>
   );
 }

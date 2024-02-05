@@ -3,23 +3,23 @@ export const buttonCoreStyles = {
   type: {
     filled: {
       blue: {
-        regular: 'bg-[#006ED6] text-[#FFFFFF]',
-        hover: 'hover:bg-[#4FAAFF]',
-        focused: 'focus:outline-none focus:bg-[#00529E]',
-        active: 'active:bg-[#003A71]',
-        disabled: 'disabled:text-[#C0BFCE] disabled:bg-[#EDEDF4]',
+        regular: 'bg-primary-500 text-gray-0',
+        hover: 'hover:bg-primary-400',
+        focused: 'focus:outline-none focus:bg-primary-600',
+        active: 'active:bg-primary-700',
+        disabled: 'disabled:text-gray-400 disabled:bg-gray-200',
       },
     },
     outlined: {
       blue: {
         regular:
-          'bg-transparent border-[1px] border-solid border-[#504F53] text-[#006ED6]',
-        hover: 'hover:bg-[#DFF0FF]',
+          'bg-transparent border-[1px] border-solid border-gray-700 text-primary-500',
+        hover: 'hover:bg-primary-200',
         focused:
-          'focus:outline-none focus:bg-[#DFF0FF] focus:text-[#00529E] focus:border-[#00529E]',
+          'focus:outline-none focus:bg-primary-200 focus:text-primary-600 focus:border-primary-600',
         active:
-          'active:bg-[#DFF0FF] active:text-[#00529E] active:border-[#504F53]',
-        disabled: 'disabled:text-[#C0BFCE] disabled:border-[#EDEDF4]',
+          'active:bg-primary-200 active:text-primary-600 active:border-gray-700',
+        disabled: 'disabled:text-gray-400 disabled:border-gray-200',
       },
     },
     // text: {},

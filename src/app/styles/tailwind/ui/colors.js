@@ -33,6 +33,7 @@ const colorsHex = {
     900: '#06032a',
   },
   gray: {
+    0: '#FFFFFF',
     100: '#f9f9fd',
     200: '#ededf4',
     300: '#deddec',
