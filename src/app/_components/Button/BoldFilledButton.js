@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { stylesCore } from '@/app/styles/constants/coreStyles';
-import Paragraph4 from '../Typeography/Paragraph4';
 import { buttonCoreStyles } from '@/app/styles/constants/buttonCoreStyles';
+import { Paragraph3 } from '../Typeography';
 
 export default function BoldFilledButton({
   children,
@@ -29,7 +29,7 @@ export default function BoldFilledButton({
     >
       <div className={layoutStyle}>
         {icon}
-        <Paragraph4 styles={'text-inherit font-bold'}>{children}</Paragraph4>
+        <Paragraph3 styles={'text-inherit font-bold'}>{children}</Paragraph3>
       </div>
     </button>
   );

@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Paragraph4({ children, styles }) {
+export default function Paragraph3({ children, styles }) {
   return (
     <p
-      className={`font-montserrat text-center text-[0.875rem] leading-[1.25rem] ${styles}`}
+      className={`font-montserrat text-center text-[1rem] leading-[1.5rem] ${styles}`}
     >
       {children}
     </p>
   );
 }
-Paragraph4.propTypes = {
+Paragraph3.propTypes = {
   children: PropTypes.node,
   styles: PropTypes.string,
 };
