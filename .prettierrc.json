@@ -1,3 +1,5 @@
 {
-  "plugins": ["prettier-plugin-prisma"]
+  "plugins": ["prettier-plugin-prisma"],
+  "singleQuote": true,
+  "arrowParens": "avoid"
 }

@@ -3,14 +3,12 @@
 import React from 'react';
 import { getSession, signIn, signOut } from 'next-auth/react';
 import {
-  Admin,
-  ListGuesser,
-  Resource,
-  ShowGuesser,
-  EditGuesser,
+  Admin, ListGuesser, Resource, ShowGuesser,
 } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { LOGIN_URL } from '@/lib/consts';
+import AdminSpecialistList from '@/app/_components/AdminSpecialistsList';
+import AdminSpecialistShow from '@/app/_components/AdminSpecialistShow';
 
 const authProvider = {
   login: async credentials => signIn('credentials', credentials, { redirect: false }),
@@ -37,17 +35,11 @@ export default function AdminPage() {
   const data = dataProvider('/api/admin');
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
+      <Resource name="Therapy" list={ListGuesser} show={ShowGuesser} />
       <Resource
-        name='Therapy'
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-      />
-      <Resource
-        name='Specialist'
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
+        name="Specialist"
+        list={AdminSpecialistList}
+        show={AdminSpecialistShow}
       />
     </Admin>
   );
