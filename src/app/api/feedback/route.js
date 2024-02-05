@@ -14,7 +14,7 @@ export async function POST(request) {
     }
     const validatedFeedbackData = validatedFeedback.data;
     await prisma.feedback.create({ data: validatedFeedbackData });
-    return NextResponse.json(validatedFeedbackData);
+    return NextResponse.json({ feedbackSent: true });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
