@@ -1,8 +1,8 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { z } from "zod";
-import { env } from "@/lib/env";
-import { LOGIN_URL } from "@/lib/consts";
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { z } from 'zod';
+import { env } from '@/lib/env';
+import { LOGIN_URL } from '@/lib/consts';
 
 const adminSessionLifetime = 60 * 60; // 1 hour in seconds
 
@@ -12,7 +12,7 @@ export const { auth, handlers } = NextAuth({
   },
   secret: process.env.AUTH_SECRET,
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: adminSessionLifetime,
   },
   providers: [
@@ -20,8 +20,8 @@ export const { auth, handlers } = NextAuth({
       async authorize(credentials) {
         const adminCheckResult = z
           .object({
-            username: z.string().refine((val) => val === env.ADMIN_USERNAME),
-            password: z.string().refine((val) => val === env.ADMIN_PASSWORD),
+            username: z.string().refine(val => val === env.ADMIN_USERNAME),
+            password: z.string().refine(val => val === env.ADMIN_PASSWORD),
           })
           .safeParse(credentials);
 

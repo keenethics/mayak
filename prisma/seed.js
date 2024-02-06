@@ -1,8 +1,8 @@
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-const { faker } = require("@faker-js/faker");
+const { faker } = require('@faker-js/faker');
 
 function getFullAddress() {
   const street = faker.location.streetAddress();
@@ -20,10 +20,10 @@ function valueOrNull(chance, callback) {
 function uniqueObjectsWithId(instances) {
   return faker.helpers
     .uniqueArray(
-      instances.map((s) => s.id),
+      instances.map(s => s.id),
       faker.number.int({ min: 1, max: instances.length }),
     )
-    .map((id) => ({ id }));
+    .map(id => ({ id }));
 }
 
 function randomAddress(districts) {
@@ -53,12 +53,12 @@ function randomPlaceOfWork(districts) {
 }
 
 function randomSpecialist(districts, specializations, therapies) {
-  const gender = faker.helpers.arrayElement(["FEMALE", "MALE"]);
+  const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   const randomPlacesOfWork = Array.from(
     { length: faker.number.int({ min: 1, max: 3 }) },
     () => randomPlaceOfWork(districts),
   );
-  const phoneRegexp = "+380[0-9]{9}";
+  const phoneRegexp = '+380[0-9]{9}';
   return {
     specializations: {
       connect: uniqueObjectsWithId(specializations),
@@ -70,7 +70,7 @@ function randomSpecialist(districts, specializations, therapies) {
     gender,
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
     // take one of these
-    formatOfWork: faker.helpers.arrayElement(["BOTH", "ONLINE", "OFFLINE"]),
+    formatOfWork: faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']),
     placesOfWork: {
       create: randomPlacesOfWork,
     },
@@ -97,39 +97,39 @@ async function main() {
   ]);
 
   const districtNames = [
-    "Личаківський",
-    "Шевченківський",
-    "Франківський",
-    "Залізничний",
-    "Галицький",
-    "Сихівський",
+    'Личаківський',
+    'Шевченківський',
+    'Франківський',
+    'Залізничний',
+    'Галицький',
+    'Сихівський',
   ];
   const specializationNames = [
-    "Психологічний консультант",
-    "Психотерапевт",
-    "Психіатр",
-    "Сексолог",
-    "Соціальний працівник",
+    'Психологічний консультант',
+    'Психотерапевт',
+    'Психіатр',
+    'Сексолог',
+    'Соціальний працівник',
   ];
   const therapyNames = [
-    "Індивідуальна",
-    "Для дітей і підлітків",
-    "Сімейна",
-    "Групова",
-    "Для пар",
-    "Для бізнесу",
+    'Індивідуальна',
+    'Для дітей і підлітків',
+    'Сімейна',
+    'Групова',
+    'Для пар',
+    'Для бізнесу',
   ];
 
   await prisma.district.createMany({
-    data: districtNames.map((name) => ({ name })),
+    data: districtNames.map(name => ({ name })),
   });
 
   await prisma.specialization.createMany({
-    data: specializationNames.map((name) => ({ name })),
+    data: specializationNames.map(name => ({ name })),
   });
 
   await prisma.therapy.createMany({
-    data: therapyNames.map((name) => ({ name })),
+    data: therapyNames.map(name => ({ name })),
   });
 
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
@@ -142,10 +142,9 @@ async function main() {
   await Promise.all(
     Array.from({ length: 10 }).map(
       // eslint-disable-next-line no-unused-vars
-      (_) =>
-        prisma.specialist.create({
-          data: randomSpecialist(districts, specializations, therapies),
-        }),
+      _ => prisma.specialist.create({
+        data: randomSpecialist(districts, specializations, therapies),
+      }),
     ),
   );
 }

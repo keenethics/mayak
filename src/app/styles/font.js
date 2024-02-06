@@ -1,9 +1,9 @@
-import { Montserrat } from "next/font/google";
+import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({
-  weight: ["400", "700"],
-  subsets: ["latin", "cyrillic"],
-  fallback: ["Arial", "sans-serif"],
+  weight: ['400', '700'],
+  subsets: ['latin', 'cyrillic'],
+  fallback: ['Arial', 'sans-serif'],
 });
 
 export default montserrat;
