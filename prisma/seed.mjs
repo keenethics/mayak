@@ -1,8 +1,5 @@
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
-
-const { faker } = require('@faker-js/faker');
+import { faker } from '@faker-js/faker';
+import { PrismaClient } from '@prisma/client';
 
 function getFullAddress() {
   const street = faker.location.streetAddress();
@@ -12,8 +9,8 @@ function getFullAddress() {
   return `вул. ${street} ${streetNumber}, поверх ${floor}, кабінет ${room}`;
 }
 
-function valueOrNull(chance, callback) {
-  return faker.number.int({ min: 0, max: chance }) ? callback() : null;
+function nullable(value) {
+  return Date.now() % 2 === 0 ? value : null;
 }
 
 // returns array of unique objects with id field
@@ -41,10 +38,9 @@ function randomAddress(districts) {
 }
 
 function randomPlaceOfWork(districts) {
-  const randomAddresses = Array.from(
-    { length: faker.number.int({ min: 1, max: 3 }) },
-    () => randomAddress(districts),
-  );
+  const randomAddresses = Array(faker.number.int({ min: 1, max: 3 }))
+    .fill('')
+    .map(() => randomAddress(districts));
   return {
     addresses: {
       create: randomAddresses,
@@ -52,12 +48,12 @@ function randomPlaceOfWork(districts) {
   };
 }
 
-function randomSpecialist(districts, specializations, therapies) {
+function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
-  const randomPlacesOfWork = Array.from(
-    { length: faker.number.int({ min: 1, max: 3 }) },
-    () => randomPlaceOfWork(districts),
-  );
+  const randomPlacesOfWork = Array(faker.number.int({ min: 1, max: 3 }))
+    .fill('')
+    .map(() => randomPlaceOfWork(districts));
+
   const phoneRegexp = '+380[0-9]{9}';
   return {
     specializations: {
@@ -66,7 +62,7 @@ function randomSpecialist(districts, specializations, therapies) {
     // take name of corresponding gender
     firstName: faker.person.firstName(gender.toLowerCase()),
     lastName: faker.person.lastName(),
-    surname: valueOrNull(1, () => faker.person.lastName()),
+    surname: nullable(faker.person.lastName()),
     gender,
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
     // take one of these
@@ -78,12 +74,14 @@ function randomSpecialist(districts, specializations, therapies) {
       connect: uniqueObjectsWithId(therapies),
     },
     isFreeReception: faker.datatype.boolean(),
-    phone: valueOrNull(1, () => faker.helpers.fromRegExp(phoneRegexp)),
-    email: valueOrNull(1, () => faker.internet.email()),
-    website: valueOrNull(1, () => faker.internet.url()),
+    phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
+    email: nullable(faker.internet.email()),
+    website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
   };
 }
+
+const prisma = new PrismaClient();
 
 async function main() {
   // Clear the database to make sure we can run seed
@@ -140,21 +138,24 @@ async function main() {
 
   // createMany does not support records with relations
   await Promise.all(
-    Array.from({ length: 10 }).map(
-      // eslint-disable-next-line no-unused-vars
-      _ => prisma.specialist.create({
-        data: randomSpecialist(districts, specializations, therapies),
-      }),
-    ),
+    Array(10)
+      .fill('')
+      .map(
+        // eslint-disable-next-line no-unused-vars
+        _ => prisma.specialist.create({
+          data: randomSpecialist({ districts, specializations, therapies }),
+        }),
+      ),
   );
 }
 
-main()
-  .then(async () => {
+main().then(
+  async () => {
     await prisma.$disconnect();
-  })
-  .catch(async (e) => {
+  },
+  async (e) => {
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);
-  });
+  },
+);
