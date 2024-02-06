@@ -1,23 +1,24 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import OutlinedBtn from '../OutlinedBtn';
-import * as FooterImg from '../../../../public/assets/icons/white-logo.svg';
-import InstagramComponent from '../Icons/Instagram';
-import FacebookComponent from '../Icons/Facebook';
-import XComponent from '../Icons/XSocial';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import OutlinedBtn from "../OutlinedBtn";
+import * as FooterImg from "../../../../public/assets/icons/white-logo.svg";
+import InstagramComponent from "../Icons/Instagram";
+import FacebookComponent from "../Icons/Facebook";
+import XComponent from "../Icons/XSocial";
 
 export default function Footer() {
   // Basic styles
-  const flexBetween = 'flex flex-row items-center justify-between';
-  const flexCenter = 'flex flex-row items-center justify-center';
-  const basicLink = 'no-underline list-none cursor-pointer';
-  const iconSizes = 'w-[24px] h-[24px]';
-  const iconColors = 'text-other-white hover:text-primary-400';
-  const transition = 'transition duration-200 ease-in-out';
-  const footerBtnHoverFocus = 'hover:bg-gray-100 hover:text-primary-500 focus:bg-gray-100 focus:text-primary-600 focus:border-gray-100 active:bg-other-white active:text-primary-600 active:border-other-white';
+  const flexBetween = "flex flex-row items-center justify-between";
+  const flexCenter = "flex flex-row items-center justify-center";
+  const basicLink = "no-underline list-none cursor-pointer";
+  const iconSizes = "w-[24px] h-[24px]";
+  const iconColors = "text-other-white hover:text-primary-400";
+  const transition = "transition duration-200 ease-in-out";
+  const footerBtnHoverFocus =
+    "hover:bg-gray-100 hover:text-primary-500 focus:bg-gray-100 focus:text-primary-600 focus:border-gray-100 active:bg-other-white active:text-primary-600 active:border-other-white";
 
   return (
     <footer className="text-white flex w-full flex-col bg-primary-800 px-20 py-12">
