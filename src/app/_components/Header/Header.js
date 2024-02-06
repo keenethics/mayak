@@ -26,7 +26,11 @@ export const Header = () => {
         Зворотній зв`язок
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={toggleModal}>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+        isBlurBackground={false}
+      >
         {Example}
       </Modal>
     </header>
