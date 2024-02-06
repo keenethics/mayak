@@ -4,7 +4,7 @@ import SendFeedback from '@/lib/validationSchemas/sendFeedbackSchema';
 import { BadRequestException } from '@/lib/errors/BadRequestException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 
-export const POST = withErrorHandler(async request => {
+export const POST = withErrorHandler(async (request) => {
   const feedbackData = await request.json();
   const validatedFeedback = SendFeedback.safeParse(feedbackData);
   if (!validatedFeedback.success) {
