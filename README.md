@@ -2,31 +2,33 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Populate your `.env.local` with `cp .env.example .env.local`
+Copy `.env.example` to `.env` and populate it with missing/relevant environment variables.
 
 ### Docker
 
-```sh
-docker compose up
-```
+1. `docker compose up`
+2. (in separate shell) `docker compose run app npm exec migrations`
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 Note: installing new packages require image re-build with `docker compose up --build`
 
 ### Local
 
-1. Start `postgres` database somewhere and populate your `.env` with relevant environment variables.
-2. Install dependencies with `npm install`
-3. Run `npm run dev`
+#### Requirements
+
+- Node.js 20+
+- Postgres 16+ running somewhere, and `.env` database variables populated
+
+1. `npm install`
+2. `npm run migrations`
+3. `npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## How-To's
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Git conventions & guides
-
-Check out [separate](./docs/GITFLOW.md) doc.
+To see additional useful information about project check separate [howto](./docs/HOWTO.md) doc.
 
 ## Learn More
 
@@ -36,7 +38,3 @@ Check out [separate](./docs/GITFLOW.md) doc.
 - [react-query](https://tanstack.com/query/latest)
 - [react-admin](https://marmelab.com/react-admin/Tutorial.html) - open-source admin panel for react.
 - [zod](https://zod.dev/) - validation library.
-
-## Deploy on Vercel
-
-Check out [separate](./docs/DEPLOY.md) doc for deploy instructions.

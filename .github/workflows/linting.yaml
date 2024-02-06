@@ -1,0 +1,19 @@
+name: linting
+
+# github action which ran linter on each commit to any branch
+
+on:
+  push:
+    branches:
+      - "*"
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - run: npm install
+      - run: npm run lint
