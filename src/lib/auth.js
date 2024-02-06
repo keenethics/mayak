@@ -45,7 +45,7 @@ export const { auth, handlers } = NextAuth({
       return newToken;
     },
     async session({ session, token }) {
-      const newSession = (session);
+      const newSession = session;
       newSession.user = token.user;
       return newSession;
     },
