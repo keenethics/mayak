@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClientPortal from './ClientPortal';
+import { ClientPortal } from './ClientPortal';
 
-const Modal = ({ isOpen, onClose, children }) => (
+export const Modal = ({ isOpen, onClose, children }) => (
   <ClientPortal selector="modal-root" show={isOpen}>
     {isOpen && (
       <>
@@ -43,5 +43,3 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
-
-export default Modal;

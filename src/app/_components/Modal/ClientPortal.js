@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
-const ClientPortal = ({ children, selector, show }) => {
+export const ClientPortal = ({ children, selector, show }) => {
   const ref = useRef(null);
   useEffect(() => {
     ref.current = document.getElementById(selector);
@@ -18,5 +18,3 @@ ClientPortal.propTypes = {
   selector: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
 };
-
-export default ClientPortal;
