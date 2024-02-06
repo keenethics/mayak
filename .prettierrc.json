@@ -1,5 +1,3 @@
 {
-  "plugins": ["prettier-plugin-prisma"],
-  "singleQuote": true,
-  "arrowParens": "avoid"
+  "plugins": ["prettier-plugin-prisma", "prettier-plugin-tailwindcss"]
 }
