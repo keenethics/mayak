@@ -6,13 +6,11 @@ import {
 
 // const searchFilter = [<SearchInput source="q" alwaysOn />];
 
-export default function AdminSpecialistsList() {
+export default function AdminOrganizationsList() {
   return (
     <List>
       <Datagrid rowClick="show">
-        <TextField source="firstName" />
-        <TextField source="lastName" />
-        <TextField source="surname" />
+        <TextField source="name" />
         <TextField source="createdAt" />
         <TextField source="formatOfWork" />
         <BooleanField source="isActive" />

@@ -9,6 +9,8 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { LOGIN_URL } from '@/lib/consts';
 import AdminSpecialistList from '@/app/_components/AdminSpecialistsList';
 import AdminSpecialistShow from '@/app/_components/AdminSpecialistShow';
+import AdminOrganizationsList from '@/app/_components/AdminOrganizationsList';
+import AdminOrganizationShow from '@/app/_components/AdminOrganizationShow';
 
 const authProvider = {
   login: async credentials => signIn('credentials', credentials, { redirect: false }),
@@ -40,6 +42,11 @@ export default function AdminPage() {
         name="Specialist"
         list={AdminSpecialistList}
         show={AdminSpecialistShow}
+      />
+      <Resource
+        name="Organizations"
+        list={AdminOrganizationsList}
+        show={AdminOrganizationShow}
       />
     </Admin>
   );
