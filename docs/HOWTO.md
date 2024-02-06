@@ -14,12 +14,20 @@ Consider following when creating migration:
 - using meaningful name
 - separate dropping/creating tables and columns
 
+### How to seed the database
+
+To populate database with some data(seed it) run `npm run seed`.
+
+**⚠ Keep in mind that before seeding all data in db will be wiped out.**
+
 ### How to wipe out database
 
 Thats could be useful if you ran some wrong migration, or messed up things manually.
 
 - for `docker` local setup - run `docker compose exec app npm run migrations:reset`
 - for other database locations - run `npm run migrations:reset`
+
+**⚠ Seeding is not automaticaly running after db reset**
 
 ## Linting & Formatting
 
