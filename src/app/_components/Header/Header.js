@@ -1,23 +1,24 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import OutlinedBtn from '../OutlinedBtn';
-import * as logo from '../../../../public/assets/icons/logo.svg';
-import InstagramComponent from '../Icons/Instagram';
-import FacebookComponent from '../Icons/Facebook';
-import XComponent from '../Icons/XSocial';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import OutlinedBtn from "../OutlinedBtn";
+import * as logo from "../../../../public/assets/icons/logo.svg";
+import InstagramComponent from "../Icons/Instagram";
+import FacebookComponent from "../Icons/Facebook";
+import XComponent from "../Icons/XSocial";
 
 export default function Header() {
   //  Basic styles
-  const flexBetween = 'flex flex-row items-center justify-between';
-  const flexCenter = 'flex flex-row items-center justify-center';
-  const basicLink = 'no-underline list-none cursor-pointer';
-  const listItemText = 'text-primary-700 text-p2 font-bold hover:text-primary-500';
-  const iconSizes = 'w-[24px] h-[24px]';
-  const iconColors = 'text-primary-700 hover:text-primary-500';
-  const transition = 'transition duration-200 ease-in-out';
+  const flexBetween = "flex flex-row items-center justify-between";
+  const flexCenter = "flex flex-row items-center justify-center";
+  const basicLink = "no-underline list-none cursor-pointer";
+  const listItemText =
+    "text-primary-700 text-p2 font-bold hover:text-primary-500";
+  const iconSizes = "w-[24px] h-[24px]";
+  const iconColors = "text-primary-700 hover:text-primary-500";
+  const transition = "transition duration-200 ease-in-out";
 
   return (
     <nav
