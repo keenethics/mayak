@@ -1,20 +1,37 @@
 import React from 'react';
 import p from 'prop-types';
+import cn from '@/app/utils/cn';
 
 export default function OutlinedBtn({ children, className }) {
   // Basic styles
   const flexCenter = 'inline-flex flex-row items-center justify-center';
+  const basicBtnSize = 'w-[185px] h-[40px] py-2.5';
+  const basicBtn = 'rounded-full outline-none border cursor-pointer';
+  const basicBtnText = 'text-sm font-bold text-center';
+  const basicBtnBg = 'bg-transparent';
+  const basicBtnDisabled = 'disabled:text-gray-400 disabled:bg-transparent';
+  const basicBtnBorder = 'active:border-gray-700 disabled:border-gray-200';
   const transition = 'transition duration-200 ease-in-out';
-  const basicBtn = 'w-[185px] h-[40px] py-2.5 px-6 rounded-full bg-transparent outline-none border cursor-pointer text-p4 font-bold text-center';
-  const btnHoverFocus = 'hover:bg-primary-200 focus:text-primary-600  focus:bg-primary-200 focus:border-primary-600 active:bg-primary-200 active:text-primary-600 active:border-gray-700 disabled:text-gray-400 disabled:bg-transparent disabled:border-gray-200';
 
   return (
     <button
       type="button"
-      className={`${className} ${flexCenter} ${basicBtn} ${btnHoverFocus} ${transition}`}
+      className={cn(
+        flexCenter,
+        basicBtn,
+        basicBtnSize,
+        basicBtnText,
+        // basicBtnActive,
+        basicBtnBg,
+        basicBtnBorder,
+        basicBtnDisabled,
+        // basicBtnFocus,
+        // basicBtnHover,
+        transition,
+        className,
+      )}
     >
-      {' '}
-      {children}{' '}
+      {children}
     </button>
   );
 }

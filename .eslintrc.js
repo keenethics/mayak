@@ -10,10 +10,7 @@ module.exports = {
   ],
   rules: {
     'max-len': ['error', { code: 120, ignoreStrings: true }],
-    'react/function-component-definition': [
-      2,
-      { namedComponents: ['arrow-function', 'function-declaration'] },
-    ],
+    'react/function-component-definition': [2, { namedComponents: ['arrow-function', 'function-declaration'] }],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
     indent: ['error', 2],

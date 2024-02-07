@@ -2,13 +2,7 @@ import React from 'react';
 import p from 'prop-types';
 
 const InstagramComponent = ({ className }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={24}
-    height={24}
-    viewBox="0 0 24 24"
-    className={className}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className={className}>
     <path
       d="M17.5034 0H6.49657C2.9143 0 0 2.9143 0 6.49657V17.5036C0 21.0857 2.9143 24 6.49657 24H17.5036C21.0857 24 24 21.0857 24 17.5036V6.49657C24 2.9143 21.0857 0 17.5034 0ZM22.593 17.5036C22.593 20.3098 20.3098 22.593 17.5034 22.593H6.49657C3.69012 22.593 1.40698 20.3098 1.40698 17.5036V6.49657C1.40698 3.69012 3.69012 1.40698 6.49657 1.40698H17.5036C20.3098 1.40698 22.593 3.69012 22.593 6.49657V17.5036Z"
       fill="currentColor"

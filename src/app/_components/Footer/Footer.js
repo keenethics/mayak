@@ -1,59 +1,63 @@
-"use client";
-
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import OutlinedBtn from "../OutlinedBtn";
-import * as FooterImg from "../../../../public/assets/icons/white-logo.svg";
-import InstagramComponent from "../Icons/Instagram";
-import FacebookComponent from "../Icons/Facebook";
-import XComponent from "../Icons/XSocial";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import InstagramComponent from '@icons/Instagram';
+import FacebookComponent from '@icons/Facebook';
+import XComponent from '@icons/XSocial';
+import * as FooterImg from '@logo/white-logo.svg';
+import OutlinedBtn from '../OutlinedBtn/OutlinedBtn';
+import cn from '@/app/utils/cn';
 
 export default function Footer() {
   // Basic styles
-  const flexBetween = "flex flex-row items-center justify-between";
-  const flexCenter = "flex flex-row items-center justify-center";
-  const basicLink = "no-underline list-none cursor-pointer";
-  const iconSizes = "w-[24px] h-[24px]";
-  const iconColors = "text-other-white hover:text-primary-400";
-  const transition = "transition duration-200 ease-in-out";
-  const footerBtnHoverFocus =
-    "hover:bg-gray-100 hover:text-primary-500 focus:bg-gray-100 focus:text-primary-600 focus:border-gray-100 active:bg-other-white active:text-primary-600 active:border-other-white";
+  const flexBetween = 'inline-flex flex-row items-center justify-between';
+  const flexCenter = 'inline-flex flex-row items-center justify-center';
+  const basicLink = 'no-underline list-none cursor-pointer';
+  const iconSizes = 'w-[24px] h-[24px]';
+  const iconColors = 'text-other-white hover:text-primary-400';
+  const transition = 'transition duration-200 ease-in-out';
+  const footerBtnHover = 'hover:bg-gray-100 hover:text-primary-500  ';
+  const footerBtnFocus = 'focus:bg-gray-100 focus:text-primary-600 ';
+  const footerBtnActive = 'active:bg-other-white active:text-primary-600';
+  const footerBtnBorder = 'focus:border-gray-100 active:border-other-white';
+  const outlinedColors = 'border-other-white text-other-white';
+  const outlinedText = 'text-sm';
 
   return (
-    <footer className="text-white flex w-full flex-col bg-primary-800 px-20 py-12">
-      <div className={`${flexBetween}`}>
-        <Link
-          href="/"
-          aria-label="Reload main page on logo click"
-          className={`${basicLink}`}
-        >
+    <footer className={cn('text-white flex w-full flex-col bg-primary-800 px-20 py-12')}>
+      <div className={cn(flexBetween)}>
+        <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
           <Image
             src={FooterImg}
             alt="Footer logo image"
             aria-label="Footer logo image"
-            className="h-[74px] w-[129px]"
+            className={cn('h-[74px] w-[129px]')}
           />
         </Link>
-        <div className={`${flexCenter} gap-6`}>
-          <p className="text-p1 font-bold text-other-white">
-            Ставай нашим партнером
-          </p>
+        <div className={cn(flexCenter, 'gap-6')}>
+          <p className={cn('text-p1 font-bold text-other-white')}>Ставай нашим партнером</p>
           <OutlinedBtn
-            className={`border-other-white text-other-white ${footerBtnHoverFocus}`}
+            className={cn(
+              footerBtnHover,
+              footerBtnFocus,
+              footerBtnActive,
+              footerBtnBorder,
+              outlinedColors,
+              outlinedText,
+              // 'text-sm',
+              // 'text-sm text-other-white',
+            )}
             aria-label="Click to fill application form"
           >
             Залишити заявку
           </OutlinedBtn>
         </div>
       </div>
-      <div className="my-12 h-[1px] w-full bg-gray-300"></div>
-      <div className={`${flexBetween}`}>
-        <p className="text-p4 font-normal text-other-white">Маяк @ 2024</p>
-        <div className={`${flexCenter}`}>
-          <p className="mr-4 text-p2 font-medium text-other-white">
-            Слідкуй за нами в соцмережах
-          </p>
+      <div className={cn('my-12 h-[1px] w-full bg-gray-300')}></div>
+      <div className={cn(flexBetween)}>
+        <p className={cn('text-p4 font-normal text-other-white')}>Маяк @ 2024</p>
+        <div className={cn(flexCenter)}>
+          <p className={cn('mr-4 text-p2 font-medium text-other-white')}>Слідкуй за нами в соцмережах</p>
 
           <Link
             href="/our-fb"
@@ -61,12 +65,9 @@ export default function Footer() {
             noopener="true"
             noreferrer="true"
             aria-label="Open Mayak facebook page on this link click"
-            className={`${basicLink} ${transition} mr-4`}
+            className={cn(basicLink, transition, 'mr-4')}
           >
-            <FacebookComponent
-              className={`${iconColors} ${iconSizes}`}
-              aria-label="Facebook social media icon"
-            />
+            <FacebookComponent className={cn(iconColors, iconSizes)} aria-label="Facebook social media icon" />
           </Link>
           <Link
             href="/our-insta"
@@ -74,12 +75,9 @@ export default function Footer() {
             noopener="true"
             noreferrer="true"
             aria-label="Open Mayak instagram page on this link click"
-            className={`${basicLink} ${transition} mr-4`}
+            className={cn(basicLink, transition, 'mr-4')}
           >
-            <InstagramComponent
-              className={`${iconColors} ${iconSizes}`}
-              aria-label="Instagram social media icon"
-            />
+            <InstagramComponent className={cn(iconColors, iconSizes)} aria-label="Instagram social media icon" />
           </Link>
           <Link
             href="/our-insta"
@@ -87,12 +85,9 @@ export default function Footer() {
             noopener="true"
             noreferrer="true"
             aria-label="Open Mayak x page on this link click"
-            className={`${basicLink} ${transition}`}
+            className={cn(basicLink, transition)}
           >
-            <XComponent
-              className={`${iconColors} ${iconSizes}`}
-              aria-label="X social media icon"
-            />
+            <XComponent className={cn(iconColors, iconSizes)} aria-label="X social media icon" />
           </Link>
         </div>
       </div>

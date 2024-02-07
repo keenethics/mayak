@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@icons/*": ["./src/app/_components/Icons/*"],
+      "@logo/*": ["./public/assets/icons/*"],
+      "@outlinedBtn/*": ["./src/app/_components/OutlinedBtn/*"],
+      "@utils/*": ["./src/app/utils/*"],
+      "@siteNav/*": ["./src/app/config/*"],
+      "@socialLink/*": ["./src/app/_components/SocialLink/*"]
     }
   }
 }
