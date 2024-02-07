@@ -1,4 +1,4 @@
-import { stylesCore } from './stylesCore';
+import { stylesCore } from '@/app/styles/constants/stylesCore';
 
 export const buttonColorVariant = {
   filled: {

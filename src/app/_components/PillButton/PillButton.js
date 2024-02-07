@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from '@/app/utils/cn';
+import { cn } from '@/app/utils/cn';
 import { Paragraph } from '../Typography';
 
-export default function PillButton({
+export function PillButton({
   children,
   className,
   type,
@@ -20,6 +20,7 @@ export default function PillButton({
     active,
     disabled: disabledState,
   } = colorVariant || {};
+
   const { buttonStyle, layoutStyle } = buttonType || {};
 
   const styles = cn(

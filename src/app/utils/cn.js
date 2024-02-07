@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { configuredTwMerge } from './configuredTwMerge';
 
-export default function cn(...inputs) {
-  return configuredTwMerge(clsx(...inputs));
+export function cn(...classes) {
+  return configuredTwMerge(clsx(...classes));
 }

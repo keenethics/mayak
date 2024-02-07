@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from '@/app/utils/cn';
+import { cn } from '@/app/utils/cn';
 
-export default function Heading({ children, type, className }) {
+export function Heading({ children, type, className }) {
   return React.createElement(
     type,
     {
