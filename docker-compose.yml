@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 services:
   postgres:
     image: postgres
@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: dev_pass
       POSTGRES_DB: mayak
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - postgres-data:/var/lib/postgresql/data
   app:
@@ -16,7 +16,7 @@ services:
       - .:/usr/src/app # Mount the local app directory
       - /usr/src/app/node_modules # Use the node_modules from the container
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://developer:dev_pass@postgres:5432/mayak?schema=public
