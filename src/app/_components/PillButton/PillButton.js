@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Paragraph } from "../Typography";
-import cn from "@/app/utils/cn";
+import React from 'react';
+import PropTypes from 'prop-types';
+import cn from '@/app/utils/cn';
+import { Paragraph } from '../Typography';
 
 export default function PillButton({
   children,
@@ -12,18 +12,18 @@ export default function PillButton({
   disabled = false,
   onClick,
 }) {
-  const buttonType = icon ? type.icon : type.regular;
+  const buttonType = icon ? type?.icon : type?.regular;
   const {
     regular,
     hover,
     focused,
     active,
     disabled: disabledState,
-  } = colorVariant;
-  const { buttonStyle, layoutStyle } = buttonType;
+  } = colorVariant || {};
+  const { buttonStyle, layoutStyle } = buttonType || {};
 
   const styles = cn(
-    "gap-[8px] rounded-[100px]",
+    'gap-[8px] rounded-[100px] font-bold',
     buttonStyle,
     regular,
     hover,
@@ -35,9 +35,9 @@ export default function PillButton({
 
   return (
     <button className={styles} disabled={disabled} onClick={onClick}>
-      <div className={layoutStyle || ""}>
+      <div className={layoutStyle || ''}>
         {icon}
-        <Paragraph className={type.paragraphStyle}>{children}</Paragraph>
+        <Paragraph className={'text-inherit'}>{children}</Paragraph>
       </div>
     </button>
   );
@@ -55,7 +55,6 @@ PillButton.propTypes = {
       buttonStyle: PropTypes.string.isRequired,
       layoutStyle: PropTypes.string,
     }),
-    paragraphStyle: PropTypes.string,
   }),
   colorVariant: PropTypes.shape({
     regular: PropTypes.string.isRequired,

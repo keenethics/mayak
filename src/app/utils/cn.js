@@ -1,7 +1,6 @@
-import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { configuredTwMerge } from "./configuredTwMerge";
+import { clsx } from 'clsx';
+import { configuredTwMerge } from './configuredTwMerge';
 
-export default function (...inputs) {
+export default function cn(...inputs) {
   return configuredTwMerge(clsx(...inputs));
 }
