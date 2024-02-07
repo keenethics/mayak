@@ -14,12 +14,7 @@ const handler = auth(async (req) => {
   }
   try {
     const json = await req.json();
-    const result = await defaultHandler(json, prisma, {
-      getList: { debug: false },
-      audit: {
-        model: prisma.audit,
-      },
-    });
+    const result = await defaultHandler(json, prisma);
     return NextResponse.json(result);
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 500 });
