@@ -15,17 +15,17 @@ export default function AdminPage() {
   return (
     <Admin dataProvider={dataProvider} authProvider={authProvider}>
       <Resource
-        name="Therapy"
+        name="therapy"
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+      />
+      <Resource
+        name="specialist"
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
         create={SpecialistCreate}
-      />
-      <Resource
-        name="Specialist"
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
       />
       <Resource
         name="District"
