@@ -8,7 +8,7 @@ const colorsHex = {
     600: '#00529e',
     700: '#003a71',
     800: '#002547',
-    900: '#03172a',
+    900: '#03162a',
   },
   secondary: {
     100: '#fff6f2',
@@ -33,7 +33,6 @@ const colorsHex = {
     900: '#06032a',
   },
   gray: {
-    0: '#FFFFFF',
     100: '#f9f9fd',
     200: '#ededf4',
     300: '#deddec',
