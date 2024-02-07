@@ -7,7 +7,8 @@
       "@outlinedBtn/*": ["./src/app/_components/OutlinedBtn/*"],
       "@utils/*": ["./src/app/utils/*"],
       "@siteNav/*": ["./src/app/config/*"],
-      "@socialLink/*": ["./src/app/_components/SocialLink/*"]
+      "@socialLink/*": ["./src/app/_components/SocialLink/*"],
+      "@innerLink/*": ["./src/app/_components/InnerLink/*"]
     }
   }
 }

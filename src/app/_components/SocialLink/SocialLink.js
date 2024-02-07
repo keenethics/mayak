@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import p from 'prop-types';
 import Link from 'next/link';
@@ -8,7 +6,7 @@ import cn from '@/app/utils/cn';
 export default function SocialLink({ items, className, status }) {
   const { links } = items;
   return status === 'footerSocials' ? (
-    <div className="flex gap-6">
+    <div className="flex gap-4">
       {links
         ?.sort((a, b) => {
           if (a.title < b.title) {

@@ -21,12 +21,9 @@ export default function OutlinedBtn({ children, className }) {
         basicBtn,
         basicBtnSize,
         basicBtnText,
-        // basicBtnActive,
         basicBtnBg,
         basicBtnBorder,
         basicBtnDisabled,
-        // basicBtnFocus,
-        // basicBtnHover,
         transition,
         className,
       )}

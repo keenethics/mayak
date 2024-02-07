@@ -2,9 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import Logo from '@logo/logo.svg';
 import OutlinedBtn from '@outlinedBtn/OutlinedBtn';
-import cn from '@/app/utils/cn';
+import InnerLink from '@innerLink/InnerLink';
 import SocialLink from '../SocialLink/SocialLink';
 import siteNav from '@/app/config/siteNav';
+import cn from '@/app/utils/cn';
 
 export default function Header() {
   //  Basic styles
@@ -24,28 +25,15 @@ export default function Header() {
       <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
         <Logo alt="Mayak logo" aria-label="Mayak logo" priority="true" className={cn('h-[74px] w-[129px]')} />
       </Link>
-      <div className={cn(flexCenter, ' gap-6')}>
-        <ul role="list" className={cn(flexCenter, 'list-none gap-4')}>
-          <li className="px-3 py-1 ">
-            <Link
-              href="/specialists"
-              aria-label="Open specialists page on this link click"
-              className={cn(basicLink, transition, listItemTextHover)}
-            >
-              <p className={cn(listItemText, transition)}>Спеціалісти</p>
-            </Link>
-          </li>
-          <li className="px-3 py-1">
-            <Link
-              href="/events"
-              aria-label="Open events page on this link click"
-              className={cn(basicLink, transition, listItemTextHover)}
-            >
-              <p className={cn(listItemText, transition)}>Події</p>
-            </Link>
-          </li>
-        </ul>
+      <div className={cn(flexCenter, 'gap-6')}>
+        <InnerLink
+          items={siteNav}
+          href="/specialists"
+          aria-label="Open specialists page on this link click"
+          className={cn(basicLink, transition, listItemTextHover, listItemText)}
+        ></InnerLink>
         <SocialLink
+          role="list"
           items={siteNav}
           status="headerSocials"
           className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 hover:text-primary-500')}

@@ -6,9 +6,13 @@ import XSocial from '@logo/xsocial.svg';
 const siteNav = {
   mainNav: [
     {
-      title: 'Home',
+      title: 'Mayak home',
       href: '/',
     },
+  ],
+  innerLinks: [
+    { title: 'Спеціалісти', href: '/specialists' },
+    { title: 'Події', href: '/events' },
   ],
   links: [
     {

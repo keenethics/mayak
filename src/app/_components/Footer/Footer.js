@@ -1,8 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-// import InstagramComponent from '@icons/Instagram';
-// import FacebookComponent from '@icons/Facebook';
-// import XComponent from '@icons/XSocial';
 import FooterImg from '@logo/white-logo.svg';
 import OutlinedBtn from '../OutlinedBtn/OutlinedBtn';
 import cn from '@/app/utils/cn';
@@ -10,12 +7,10 @@ import siteNav from '@/app/config/siteNav';
 import SocialLink from '../SocialLink/SocialLink';
 
 export default function Footer() {
-  // const [isFooter, setIsFooter] = useState(true);
   // Basic styles
   const flexBetween = 'inline-flex flex-row items-center justify-between';
   const flexCenter = 'inline-flex flex-row items-center justify-center';
   const basicLink = 'no-underline list-none cursor-pointer';
-  // const iconSizes = 'w-[24px] h-[24px]';
   const iconColors = 'text-other-white hover:text-primary-400';
   const transition = 'transition duration-200 ease-in-out';
   const footerBtnHover = 'hover:bg-gray-100 hover:text-primary-500  ';
@@ -64,38 +59,6 @@ export default function Footer() {
             className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 hover:text-primary-500')}
           ></SocialLink>
         </div>
-        {/* <div className={cn(flexCenter)}>
-          <Link
-            href="/our-fb"
-            target="_blank"
-            noopener="true"
-            noreferrer="true"
-            aria-label="Open Mayak facebook page on this link click"
-            className={cn(basicLink, transition, 'mr-4')}
-          >
-            <FacebookComponent className={cn(iconColors, iconSizes)} aria-label="Facebook social media icon" />
-          </Link>
-          <Link
-            href="/our-insta"
-            target="_blank"
-            noopener="true"
-            noreferrer="true"
-            aria-label="Open Mayak instagram page on this link click"
-            className={cn(basicLink, transition, 'mr-4')}
-          >
-            <InstagramComponent className={cn(iconColors, iconSizes)} aria-label="Instagram social media icon" />
-          </Link>
-          <Link
-            href="/our-insta"
-            target="_blank"
-            noopener="true"
-            noreferrer="true"
-            aria-label="Open Mayak x page on this link click"
-            className={cn(basicLink, transition)}
-          >
-            <XComponent className={cn(iconColors, iconSizes)} aria-label="X social media icon" />
-          </Link>
-        </div> */}
       </div>
     </footer>
   );
