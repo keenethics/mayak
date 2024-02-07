@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import {
+  BooleanInput,
   Create,
   NumberInput,
-  required,
   SelectArrayInput,
   SelectInput,
   SimpleForm,
@@ -12,54 +12,87 @@ import {
   useGetList,
 } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormatOfWork, Gender } from '@/app/admin/_lib/consts';
+import {
+  FormatOfWork,
+  FormMode,
+  Gender,
+  SPECIALIZATION,
+  THERAPY,
+} from '@/app/admin/_lib/consts';
 import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import {
   SpecialistCreateDraftSchema as draftSchema,
-  SpecialistCreateSchema as schema,
-} from '@/app/admin/_components/SpecialistCreate/schema';
+  SpecialistCreateSchema as baseSchema,
+} from '@/lib/validationSchemas/specialistCreateSchema';
+import { transformIdList } from '@/app/admin/_utils/transformIdList';
+
+// const BooleanInputCustom = (props) => {
+//   const { formState } = useFormContext();
+//
+//   return <BooleanInput {...props} disabled={!formState.isValid} />;
+// };
 
 const SpecialistCreate = () => {
   const [draft, setDraft] = useState(false);
-  const formMode = draft ? 'Чорнетка' : 'Повна анкета';
-  const validationSchema = draft ? draftSchema : schema;
+  // const [isActive, setIsActive] = useState(false);
+  const formMode = draft ? FormMode.draft : FormMode.base;
+  const validationSchema = draft ? draftSchema : baseSchema;
+
+  const toggleState = previousState => !previousState;
 
   function toggleFormMode() {
-    setDraft(prevMode => !prevMode);
+    setDraft(toggleState);
   }
 
-  const { data: therapies } = useGetList('therapy');
-  const { data: specializations } = useGetList('specialization');
+  // function toggleIsActive() {
+  //   setIsActive(toggleState);
+  // }
+
+  const { data: therapies } = useGetList(THERAPY);
+  const { data: specializations } = useGetList(SPECIALIZATION);
   const therapiesList = getChoicesList(therapies);
   const specializationsList = getChoicesList(specializations);
   const genderChoicesList = getChoicesList(Object.values(Gender));
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork));
 
   const transform = (data) => {
-    // console.log({
-    //   ...init,
-    //   ...data,
-    // });
-
-    const { firstName, lastName } = data;
+    if (draft) {
+      return {
+        ...data,
+        specializations: {
+          connect: transformIdList(data.specializations),
+        },
+      };
+    }
 
     return {
-      firstName,
-      lastName,
+      ...data,
       specializations: {
-        connect: {
-          id: '0f86eb23-a39d-4f69-8801-3a4588a81772',
-        },
+        connect: transformIdList(data.specializations),
       },
       placesOfWork: {
-        connect: {
-          id: '01e8cb96-9871-4d9d-8483-fa830b6206fc',
-        },
+        create: [
+          {
+            addresses: {
+              createMany: {
+                data: [
+                  {
+                    nameOfClinic: 'Clinic 1',
+                    fullAddress: '123 Street, Building 1, Floor 2, Room 3',
+                    district: {
+                      connect: {
+                        id: '3769b729-91b4-4b64-97d4-ad5c2e4f7bc1',
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
       },
       therapies: {
-        connect: {
-          id: '1461b40b-046d-431c-84bd-94a98b016cc0',
-        },
+        connect: transformIdList(data.therapies),
       },
     };
   };
@@ -82,9 +115,10 @@ const SpecialistCreate = () => {
 
       <SimpleForm
         mode="onBlur"
-        reValidateMode="onBlur"
-        className="w-full bg-primary-200"
+        reValidateMode="onChange"
         resolver={zodResolver(validationSchema)}
+        sanitizeEmptyValues={true}
+        className="w-full"
       >
         <div>
           <p className="text-p1 font-bold text-primary-700">Основні данні:</p>
@@ -98,8 +132,6 @@ const SpecialistCreate = () => {
               name="specializations"
               source="Спеціалізація"
               choices={specializationsList}
-              resettable
-              className="w-full"
             />
           </div>
         </div>
@@ -113,7 +145,6 @@ const SpecialistCreate = () => {
                   name="gender"
                   source="Стать"
                   choices={genderChoicesList}
-                  validate={required()}
                 />
                 <NumberInput
                   name="yearsOfExperience"
@@ -124,7 +155,6 @@ const SpecialistCreate = () => {
                   name="formatOfWork"
                   source="Формат послуг"
                   choices={formatOfWorkChoicesList}
-                  validate={required()}
                 />
               </div>
             </div>
@@ -140,10 +170,38 @@ const SpecialistCreate = () => {
                 name="therapies"
                 source="Тип терапії"
                 choices={therapiesList}
-                resettable
                 className="w-full"
               />
+              <BooleanInput
+                name="isFreeReception"
+                label="Безкоштовний прийом"
+                source="isFreeReception"
+              />
+              <TextInput
+                name="description"
+                source="description"
+                fullWidth
+                multiline
+              />
             </div>
+            <div className="mt-5">
+              <p className="text-p1 font-bold text-primary-700">
+                Контактна інформація:
+              </p>
+              <div className="mt-4 flex gap-2">
+                <div className="flex gap-4">
+                  <TextInput name="phone" type="tel" source="Телефон" />
+                  <TextInput name="email" type="email" source="Пошта" />
+                  <TextInput name="surname" type="url" source="Веб сторінка" />
+                </div>
+              </div>
+            </div>
+            {/* <BooleanInputCustom */}
+            {/*  name="isActive" */}
+            {/*  label="Активувати" */}
+            {/*  source="isActive" */}
+            {/*  onChange={toggleIsActive} */}
+            {/* /> */}
           </>
         )}
       </SimpleForm>

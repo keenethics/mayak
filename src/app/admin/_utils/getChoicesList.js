@@ -1,6 +1,6 @@
 const mapChoices = item => ({
-  id: item?.id ?? item.toLowerCase(),
-  name: item?.name ?? item,
+  id: item?.id ?? item,
+  name: item?.name ?? item.toLowerCase(),
 });
 
 const getChoicesList = (list, callback = mapChoices) => list?.map(callback);

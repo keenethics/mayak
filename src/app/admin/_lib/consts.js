@@ -1,3 +1,6 @@
+const THERAPY = 'therapy';
+const SPECIALIZATION = 'specialization';
+
 const Gender = {
   male: 'MALE',
   female: 'FEMALE',
@@ -9,4 +12,11 @@ const FormatOfWork = {
   both: 'BOTH',
 };
 
-export { Gender, FormatOfWork };
+const FormMode = {
+  draft: 'Чорнетка',
+  base: 'Повна анкета',
+};
+
+export {
+  Gender, FormatOfWork, THERAPY, SPECIALIZATION, FormMode,
+};
