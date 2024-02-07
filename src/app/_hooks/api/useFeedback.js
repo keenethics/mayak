@@ -6,7 +6,11 @@ export const createFeedback = async ({
 }) => ky
   .post('/api/feedback', {
     json: {
-      name, phone, callMe, email, message,
+      name,
+      phone,
+      callMe,
+      email,
+      message,
     },
   })
   .json();
@@ -15,6 +19,10 @@ export const useCreateFeedback = () => useMutation({
   mutationFn: ({
     name, phone, callMe, email, message,
   }) => createFeedback({
-    name, phone, callMe, email, message,
+    name,
+    phone,
+    callMe,
+    email,
+    message,
   }),
 });

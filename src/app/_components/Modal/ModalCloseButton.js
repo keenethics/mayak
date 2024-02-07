@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const DefaultModalCloseButton = ({ children, onClose }) => (
+export const ModalCloseButton = ({ children, onClose }) => (
   <div
     className="relative"
     onClick={(e) => {
@@ -25,7 +25,7 @@ export const DefaultModalCloseButton = ({ children, onClose }) => (
   </div>
 );
 
-DefaultModalCloseButton.propTypes = {
+ModalCloseButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
 };

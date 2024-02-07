@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ClientPortal } from './ClientPortal';
-import { DefaultModalCloseButton } from './DefaultModalCloseButton';
+import { ModalCloseButton } from './ModalCloseButton';
 
 export const Modal = ({
   isOpen,
@@ -24,9 +24,7 @@ export const Modal = ({
             onClick={onClose}
           >
             {isCloseButton ? (
-              <DefaultModalCloseButton onClose={onClose}>
-                {children}
-              </DefaultModalCloseButton>
+              <ModalCloseButton onClose={onClose}>{children}</ModalCloseButton>
             ) : (
               <div
                 onClick={(e) => {
