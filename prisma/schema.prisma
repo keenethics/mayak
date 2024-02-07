@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,14 +8,83 @@ datasource db {
   directUrl = env("DATABASE_DIRECT_URL")
 }
 
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum FormatOfWork {
+  OFFLINE
+  ONLINE
+  BOTH
+}
+
 model Specialist {
-  id        String @id @default(uuid())
-  gender    String
-  firstName String
-  lastName  String
+  id                String           @id @default(uuid()) @db.Uuid
+  createdAt         DateTime         @default(now())
+  firstName         String           @db.VarChar(64)
+  lastName          String           @db.VarChar(64)
+  surname           String?          @db.VarChar(64)
+  specializations   Specialization[]
+  gender            Gender
+  yearsOfExperience Int?             @db.SmallInt
+  formatOfWork      FormatOfWork
+  placesOfWork      PlaceOfWork[]
+  therapies         Therapy[]
+  isFreeReception   Boolean
+  description       String           @db.Text
+  phone             String?          @db.VarChar(15)
+  email             String?          @unique @db.VarChar(320)
+  website           String?          @db.Text
+
+  @@map("specialist")
+}
+
+model Specialization {
+  id          String       @id @default(uuid()) @db.Uuid
+  createdAt   DateTime     @default(now())
+  name        String       @unique @db.VarChar(128)
+  specialists Specialist[]
+
+  @@map("specialization")
+}
+
+model PlaceOfWork {
+  id           String     @id @default(uuid()) @db.Uuid
+  createdAt    DateTime   @default(now())
+  addresses    Address[]
+  specialistId String     @db.Uuid
+  specialist   Specialist @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+
+  @@map("place_of_work")
+}
+
+model District {
+  id        String    @id @default(uuid()) @db.Uuid
+  createdAt DateTime  @default(now())
+  name      String    @unique @db.VarChar(64)
+  Address   Address[]
+
+  @@map("district")
 }
 
 model Therapy {
-  id    String @id @default(uuid())
-  price Int
+  id          String       @id @default(uuid()) @db.Uuid
+  createdAt   DateTime     @default(now())
+  name        String       @unique @db.VarChar(64)
+  specialists Specialist[]
+
+  @@map("therapy")
+}
+
+model Address {
+  id           String        @id @default(uuid()) @db.Uuid
+  createdAt    DateTime      @default(now())
+  nameOfClinic String?       @db.VarChar(255)
+  fullAddress  String        @db.VarChar(128) // street,building number,floor,room number
+  district     District      @relation(fields: [districtId], references: [id])
+  districtId   String        @db.Uuid
+  placesOfWork PlaceOfWork[]
+
+  @@map("address")
 }
