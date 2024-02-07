@@ -5,6 +5,5 @@ export class UnprocessableException extends BaseError {
   constructor(data = null) {
     const { 422: errorMessage } = BASE_ERROR_MESSAGES;
     super(errorMessage, 422, data);
-    this.name = errorMessage;
   }
 }

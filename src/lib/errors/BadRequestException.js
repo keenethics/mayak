@@ -5,6 +5,5 @@ export class BadRequestException extends BaseError {
   constructor(data = null) {
     const { 400: errorMessage } = BASE_ERROR_MESSAGES;
     super(errorMessage, 400, data);
-    this.name = errorMessage;
   }
 }

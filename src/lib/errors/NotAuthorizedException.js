@@ -5,6 +5,5 @@ export class NotAuthorizedException extends BaseError {
   constructor(data = null) {
     const { 401: errorMessage } = BASE_ERROR_MESSAGES;
     super(errorMessage, 401, data);
-    this.name = errorMessage;
   }
 }
