@@ -1,31 +1,31 @@
-import { stylesCore } from './stylesCore';
+import { stylesCore } from "./stylesCore";
 
 export const buttonColorVariant = {
   filled: {
     blue: {
-      regular: 'bg-primary-500 text-other-white',
-      hover: 'hover:bg-primary-400',
-      focused: 'focus:outline-none focus:bg-primary-600',
-      active: 'active:bg-primary-700',
-      disabled: 'disabled:text-gray-400 disabled:bg-gray-200',
+      regular: "bg-primary-500 text-other-white",
+      hover: "hover:bg-primary-400",
+      focused: "focus:outline-none focus:bg-primary-600",
+      active: "active:bg-primary-700",
+      disabled: "disabled:text-gray-400 disabled:bg-gray-200",
     },
   },
   outlined: {
     blue: {
       regular:
-        'bg-transparent border-[1px] border-solid border-gray-700 text-primary-500',
-      hover: 'hover:bg-primary-200',
+        "bg-transparent border-[1px] border-solid border-gray-700 text-primary-500",
+      hover: "hover:bg-primary-200",
       focused:
-        'focus:outline-none focus:bg-primary-200 focus:text-primary-600 focus:border-primary-600',
+        "focus:outline-none focus:bg-primary-200 focus:text-primary-600 focus:border-primary-600",
       active:
-        'active:bg-primary-200 active:text-primary-600 active:border-gray-700',
-      disabled: 'disabled:text-gray-400 disabled:border-gray-200',
+        "active:bg-primary-200 active:text-primary-600 active:border-gray-700",
+      disabled: "disabled:text-gray-400 disabled:border-gray-200",
     },
   },
   close: {
     grey: {
-      regular: 'text-[transparent]',
-      hover: 'hover:text-other-white',
+      regular: "text-[transparent]",
+      hover: "hover:text-other-white",
     },
   },
   // text: {},
@@ -44,7 +44,7 @@ export const buttonType = {
       layoutStyle: `${stylesCore.flex.fullCenteredFlex} /
       gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[10px] px-[24px]`,
     },
-    paragraphStyle: 'text-p4 font-bold text-primary-500',
+    paragraphStyle: "text-p4 font-bold text-inherit",
   },
   filledBold: {
     icon: {
@@ -55,7 +55,7 @@ export const buttonType = {
       buttonStyle: `${stylesCore.flex.fullCenteredInlineFlex} py-[12px] px-[0px]`,
       layoutStyle: `${stylesCore.flex.fullCenteredFlex} gap-[8px] py-[0px] px-[24px] self-stretch`,
     },
-    paragraphStyle: 'text-p3 font-bold text-inherit',
+    paragraphStyle: "text-p3 font-bold text-inherit",
   },
   close: {
     icon: {

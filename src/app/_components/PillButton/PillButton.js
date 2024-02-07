@@ -1,6 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Paragraph } from '../Typography';
+import React from "react";
+import PropTypes from "prop-types";
+import { Paragraph } from "../Typography";
+import cn from "@/app/utils/cn";
 
 export default function PillButton({
   children,
@@ -21,12 +22,20 @@ export default function PillButton({
   } = colorVariant;
   const { buttonStyle, layoutStyle } = buttonType;
 
-  const styles = `gap-[8px] rounded-[100px] ${buttonStyle} ${regular || ''} /
-   ${hover || ''} ${focused || ''} ${active || ''} ${disabledState || ''} ${className} `;
+  const styles = cn(
+    "gap-[8px] rounded-[100px]",
+    buttonStyle,
+    regular,
+    hover,
+    focused,
+    active,
+    disabledState,
+    className,
+  );
 
   return (
     <button className={styles} disabled={disabled} onClick={onClick}>
-      <div className={layoutStyle || ''}>
+      <div className={layoutStyle || ""}>
         {icon}
         <Paragraph className={type.paragraphStyle}>{children}</Paragraph>
       </div>
