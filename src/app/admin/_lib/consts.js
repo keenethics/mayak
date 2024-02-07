@@ -17,6 +17,22 @@ const FormMode = {
   base: 'Повна анкета',
 };
 
+const SuccessNotifications = {
+  created: 'Created successfully',
+  updated: 'Updated successfully',
+  deleted: 'Deleted successfully',
+};
+
+const Titles = {
+  specialistCreate: 'Додавання нового спеціаліста',
+};
+
 export {
-  Gender, FormatOfWork, THERAPY, SPECIALIZATION, FormMode,
+  Gender,
+  FormatOfWork,
+  THERAPY,
+  SPECIALIZATION,
+  FormMode,
+  SuccessNotifications,
+  Titles,
 };

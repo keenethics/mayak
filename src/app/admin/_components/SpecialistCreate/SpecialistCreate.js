@@ -10,6 +10,8 @@ import {
   SimpleForm,
   TextInput,
   useGetList,
+  useNotify,
+  useRedirect,
 } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -17,7 +19,9 @@ import {
   FormMode,
   Gender,
   SPECIALIZATION,
+  SuccessNotifications,
   THERAPY,
+  Titles,
 } from '@/app/admin/_lib/consts';
 import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import {
@@ -25,16 +29,19 @@ import {
   SpecialistCreateSchema as baseSchema,
 } from '@/lib/validationSchemas/specialistCreateSchema';
 import { transformIdList } from '@/app/admin/_utils/transformIdList';
-
-// const BooleanInputCustom = (props) => {
-//   const { formState } = useFormContext();
-//
-//   return <BooleanInput {...props} disabled={!formState.isValid} />;
-// };
+import Toggle from '@/app/admin/_components/Toggle';
+import FieldWrapper from '@/app/admin/_components/FieldWrapper';
 
 const SpecialistCreate = () => {
   const [draft, setDraft] = useState(false);
-  // const [isActive, setIsActive] = useState(false);
+
+  const notify = useNotify();
+  const redirect = useRedirect();
+  const onSuccess = () => {
+    notify(SuccessNotifications.created);
+    redirect('/Specialist');
+  };
+
   const formMode = draft ? FormMode.draft : FormMode.base;
   const validationSchema = draft ? draftSchema : baseSchema;
 
@@ -43,10 +50,6 @@ const SpecialistCreate = () => {
   function toggleFormMode() {
     setDraft(toggleState);
   }
-
-  // function toggleIsActive() {
-  //   setIsActive(toggleState);
-  // }
 
   const { data: therapies } = useGetList(THERAPY);
   const { data: specializations } = useGetList(SPECIALIZATION);
@@ -98,49 +101,37 @@ const SpecialistCreate = () => {
   };
 
   return (
-    <Create title="Adding new specialist/organization" transform={transform}>
-      <div className="m-4">
-        <label className="relative inline-flex cursor-pointer items-center">
-          <input
-            type="checkbox"
-            onChange={toggleFormMode}
-            className="peer sr-only"
-          />
-          <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-other-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-other-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-400 rtl:peer-checked:after:-translate-x-full dark:border-gray-800 dark:bg-gray-900 dark:peer-focus:ring-primary-800"></div>
-          <span className="text-sm ms-3 font-medium text-gray-900 dark:text-gray-300">
-            <p className="font-bold text-primary-700">{formMode}</p>
-          </span>
-        </label>
-      </div>
-
+    <Create
+      title={Titles.specialistCreate}
+      transform={transform}
+      mutationOptions={{ onSuccess }}
+    >
+      <Toggle onChange={toggleFormMode} formMode={formMode} />
       <SimpleForm
         mode="onBlur"
         reValidateMode="onChange"
         resolver={zodResolver(validationSchema)}
         sanitizeEmptyValues={true}
-        className="w-full"
+        className="w-[800px]"
       >
-        <div>
-          <p className="text-p1 font-bold text-primary-700">Основні данні:</p>
-          <div className="mt-2">
-            <div className="flex gap-4">
-              <TextInput name="lastName" source="Прізвище" />
-              <TextInput name="firstName" source="Ім'я" />
-              <TextInput name="surname" source="По-батькові" />
-            </div>
-            <SelectArrayInput
-              name="specializations"
-              source="Спеціалізація"
-              choices={specializationsList}
-            />
+        <FieldWrapper title="Основні данні:" className="mt-5">
+          <div className="flex w-full gap-4 [&>*]:flex-grow">
+            <TextInput name="lastName" source="Прізвище" />
+            <TextInput name="firstName" source="Ім'я" />
+            <TextInput name="surname" source="По-батькові" />
           </div>
-        </div>
+          <SelectArrayInput
+            name="specializations"
+            source="Спеціалізація"
+            choices={specializationsList}
+            fullWidth
+          />
+        </FieldWrapper>
 
         {!draft && (
           <>
-            <div className="mt-5">
-              <p className="text-p1 font-bold text-primary-700">Деталі:</p>
-              <div className="mt-4 flex gap-2">
+            <FieldWrapper title="Деталі:" className="mt-5">
+              <div className="flex w-full gap-8 [&>*]:flex-grow">
                 <SelectInput
                   name="gender"
                   source="Стать"
@@ -157,15 +148,11 @@ const SpecialistCreate = () => {
                   choices={formatOfWorkChoicesList}
                 />
               </div>
-            </div>
-            <div className="mt-5">
-              <p className="text-p1 font-bold text-primary-700">
-                Місце надання послуг:
-              </p>
+            </FieldWrapper>
+            <FieldWrapper title="Місце надання послуг:">
               <div className="mt-4 flex gap-2"></div>
-            </div>
-            <div className="mt-5 w-full">
-              <p className="text-p1 font-bold text-primary-700">Послуги:</p>
+            </FieldWrapper>
+            <FieldWrapper title="Послуги:">
               <SelectArrayInput
                 name="therapies"
                 source="Тип терапії"
@@ -183,25 +170,14 @@ const SpecialistCreate = () => {
                 fullWidth
                 multiline
               />
-            </div>
-            <div className="mt-5">
-              <p className="text-p1 font-bold text-primary-700">
-                Контактна інформація:
-              </p>
-              <div className="mt-4 flex gap-2">
-                <div className="flex gap-4">
-                  <TextInput name="phone" type="tel" source="Телефон" />
-                  <TextInput name="email" type="email" source="Пошта" />
-                  <TextInput name="surname" type="url" source="Веб сторінка" />
-                </div>
+            </FieldWrapper>
+            <FieldWrapper title="Послуги:">
+              <div className="flex gap-4 [&>*]:flex-grow">
+                <TextInput name="phone" type="tel" source="Телефон" />
+                <TextInput name="email" type="email" source="Пошта" />
+                <TextInput name="surname" type="url" source="Веб сторінка" />
               </div>
-            </div>
-            {/* <BooleanInputCustom */}
-            {/*  name="isActive" */}
-            {/*  label="Активувати" */}
-            {/*  source="isActive" */}
-            {/*  onChange={toggleIsActive} */}
-            {/* /> */}
+            </FieldWrapper>
           </>
         )}
       </SimpleForm>

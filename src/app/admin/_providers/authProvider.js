@@ -2,7 +2,14 @@ import { getSession, signIn, signOut } from 'next-auth/react';
 import { LOGIN_URL } from '@/lib/consts';
 
 const authProvider = {
-  login: async credentials => signIn('credentials', credentials, { redirect: false }),
+  login: async credentials => signIn(
+    'credentials',
+    {
+      redirect: false,
+      ...credentials,
+    },
+    credentials,
+  ),
   logout: async () => signOut({ callbackUrl: LOGIN_URL }),
   checkAuth: async () => {
     const session = await getSession();

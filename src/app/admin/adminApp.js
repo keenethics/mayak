@@ -15,13 +15,15 @@ export default function AdminPage() {
   return (
     <Admin dataProvider={dataProvider} authProvider={authProvider}>
       <Resource
-        name="therapy"
+        name="Therapy"
+        options={{ label: 'Therapy' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="specialist"
+        name="Specialist"
+        options={{ label: 'Specialist' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
@@ -51,6 +53,13 @@ export default function AdminPage() {
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
+      />
+      <Resource
+        name="Feedback"
+        options={{ label: 'Feedback' }}
+        list={ListGuesser}
+        show={ShowGuesser}
+        edit={EditGuesser}
       />
     </Admin>
   );

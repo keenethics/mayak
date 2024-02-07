@@ -5,6 +5,6 @@ const AdminApp = dynamic(() => import('./adminApp'), {
   ssr: false,
 });
 
-export default function Admin() {
+export default function Page() {
   return <AdminApp />;
 }
