@@ -34,7 +34,7 @@ export default function Page() {
         subText="Controlled element"
         checked={remember}
         extraClasses={{
-          disabledSubText: 'text-primary-600',
+          disabledSubText: 'text-p4 text-primary-600',
         }}
         disabled={isDisabled}
       />

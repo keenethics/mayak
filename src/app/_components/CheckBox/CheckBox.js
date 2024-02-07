@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from '@/utils/cn';
 
 export default function CheckBox({
   value,
@@ -28,7 +29,7 @@ export default function CheckBox({
     checkBox: {
       base: 'peer h-[20px] w-[20px] rounded-[4px] border-gray-500 bg-other-white p-[2px]',
       disabled:
-        'disabled:border-gray-300 disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:hover:border-gray-300',
+        'disabled:border-gray-300 disabled:bg-gray-100 disabled:hover:bg-gray-100 disabled:hover:border-gray-300',
       hover: 'hover:border-primary-500 hover:bg-primary-100',
       focus:
         'focus:border-primary-400 focus:bg-other-white focus:hover:border-primary-500 focus:ring-[4px] focus:ring-primary-300 focus:ring-offset-0',
@@ -42,8 +43,8 @@ export default function CheckBox({
         'before:border-spacing-[1px] before:rounded-[4px] before:bg-other-white',
       beforeChecked: `peer-checked:before:border-primary-400 peer-checked:before::bg-primary-100
         peer-checked:before:hover:border-primary-500 peer-checked:before:hover:border-primary-500`,
-      other: `peer-focus:before:bg-other-white peer-disabled:before:bg-gray-200 
-        peer-disabled:before:hover:border-gray-300`,
+      other:
+        'peer-focus:before:bg-other-white peer-disabled:before:bg-gray-200',
     },
   };
   /* eslint-enable */
@@ -52,14 +53,14 @@ export default function CheckBox({
       <input
         id={id}
         name={name}
-        className={`
-          ${styles.checkBox.base}
-          ${styles.checkBox.disabled}
-          ${styles.checkBox.hover}
-          ${styles.checkBox.focus}
-          ${styles.checkBox.checked}
-          ${extraClasses.checkBox}
-        `}
+        className={cn(
+          styles.checkBox.base,
+          styles.checkBox.disabled,
+          styles.checkBox.hover,
+          styles.checkBox.focus,
+          styles.checkBox.checked,
+          extraClasses.checkBox,
+        )}
         value={value}
         onChange={onChange}
         type="checkbox"
@@ -67,19 +68,23 @@ export default function CheckBox({
         disabled={disabled}
       />
       <label
-        className={`
-          ${styles.label.base}
-          ${styles.label.beforeLayout}
-          ${styles.label.beforeBase}
-          ${styles.label.beforeChecked}
-          ${extraClasses.label}
-        `}
+        className={cn(
+          styles.label.base,
+          styles.label.beforeLayout,
+          styles.label.beforeBase,
+          styles.label.beforeChecked,
+          extraClasses.label,
+        )}
         htmlFor={id}
       >
         {checked && (
           <Tick
-            styles={`absolute left-[7px] top-[9px] stroke-primary-500 ${extraClasses.tick} 
-            ${disabled && 'stroke-gray-300'} ${disabled && extraClasses.disabledTick}`}
+            styles={cn(
+              'absolute left-[7px] top-[9px] stroke-primary-500',
+              extraClasses.tick,
+              disabled && 'stroke-gray-300',
+              disabled && extraClasses.disabledTick,
+            )}
           />
         )}
         {text && (
@@ -88,16 +93,24 @@ export default function CheckBox({
               <>
                 {text && (
                   <p
-                    className={`text-p3 ${extraClasses.text}
-                    ${disabled && 'text-gray-400'} ${disabled && extraClasses.disabledText}`}
+                    className={cn(
+                      'text-p3',
+                      extraClasses.text,
+                      disabled && 'text-gray-400',
+                      disabled && extraClasses.disabledText,
+                    )}
                   >
                     {text}
                   </p>
                 )}
                 {subText && (
                   <p
-                    className={`text-p4 ${extraClasses.subText} 
-                    ${disabled && 'text-gray-400'} ${disabled && extraClasses.disabledSubText}`}
+                    className={cn(
+                      'text-p4',
+                      extraClasses.subText,
+                      disabled && 'text-gray-400',
+                      disabled && extraClasses.disabledSubText,
+                    )}
                   >
                     {subText}
                   </p>
