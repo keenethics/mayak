@@ -4,21 +4,11 @@ import { cn } from '@/app/utils/cn';
 import { Paragraph } from '../Typography';
 
 export function PillButton({
-  children,
-  className,
-  type,
-  colorVariant,
-  icon,
-  disabled = false,
-  onClick,
+  children, className, type, colorVariant, icon, disabled = false, onClick,
 }) {
   const buttonType = icon ? type?.icon : type?.regular;
   const {
-    regular,
-    hover,
-    focused,
-    active,
-    disabled: disabledState,
+    regular, hover, focused, active, disabled: disabledState,
   } = colorVariant || {};
 
   const { buttonStyle, layoutStyle } = buttonType || {};
