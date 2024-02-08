@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 import { checkBoxVariants } from './styles';
 
-export default function CheckBox({
+export function CheckBox({
   value,
   onChange,
   name,
