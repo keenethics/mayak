@@ -37,14 +37,13 @@ const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
   formatOfWork: z.string(),
   therapies: zArray,
   isFreeReception: z.boolean(),
-  description: z.string().trim().optional(),
+  description: z.string().trim().nullish(),
   phone: zString('Phone number').refine(val => PHONE_REGEX.test(val), {
     message: 'Please, enter phone number in format +380XXXXXXXXX',
   }),
-  email: z.string().trim().email().optional(),
-  website: z.string().trim().url().optional(),
+  email: z.string().trim().email().nullish(),
+  website: z.string().trim().url().nullish(),
   placesOfWork: z.array(placesOfWorkSchema),
-  isActive: z.boolean().optional(),
 });
 
 export { SpecialistCreateDraftSchema, SpecialistCreateSchema };

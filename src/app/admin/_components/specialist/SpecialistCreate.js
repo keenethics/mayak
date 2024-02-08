@@ -36,6 +36,10 @@ import {
 import { Toggle } from '@/app/admin/_components/shared/Toggle';
 import { FormFieldWrapper } from '@/app/admin/_components/shared/FormFieldWrapper';
 import { transformIdList } from '@/app/admin/_utils/transformIdList';
+import {
+  SpecialistCreateFormBlocks,
+  SpecialistFormFields,
+} from '@/app/admin/_lib/specialistData';
 
 export const SpecialistCreate = () => {
   const [draft, setDraft] = useState(false);
@@ -113,6 +117,22 @@ export const SpecialistCreate = () => {
     };
   };
 
+  const generateTextInputList = (inputList, ...props) => inputList.map(({
+    name, type, label, validate,
+  }) => (
+    <TextInput
+      key={name}
+      name={name}
+      source={name}
+      type={type}
+      label={label}
+      validate={validate && required()}
+      {...props}
+    />
+  ));
+
+  const isOnline = format => format === FormatOfWork.online;
+
   return (
     <Create
       title={Titles.specialistCreate}
@@ -126,26 +146,17 @@ export const SpecialistCreate = () => {
         resolver={zodResolver(validationSchema)}
         className="w-[800px]"
       >
-        <FormFieldWrapper title="Основні данні:" className="mt-5">
+        <FormFieldWrapper
+          title={SpecialistCreateFormBlocks.general}
+          className="mt-5"
+        >
           <div className="flex w-full gap-6 [&>*]:flex-grow">
-            <TextInput
-              name="lastName"
-              source="lastName"
-              label="Прізвище"
-              validate={required()}
-            />
-            <TextInput
-              name="firstName"
-              source="firstName"
-              label="Ім'я"
-              validate={required()}
-            />
-            <TextInput name="surname" source="surname" label="По-батькові" />
+            {generateTextInputList(SpecialistFormFields.general)}
           </div>
           <SelectArrayInput
-            name="specializations"
-            source="specializations"
-            label="Спеціалізація"
+            name={SpecialistFormFields.specializations.name}
+            source={SpecialistFormFields.specializations.name}
+            label={SpecialistFormFields.specializations.label}
             isLoading={specializationsLoading}
             choices={specializationsList}
             validate={required()}
@@ -154,121 +165,100 @@ export const SpecialistCreate = () => {
         </FormFieldWrapper>
         {!draft && (
           <>
-            <FormFieldWrapper title="Деталі:" className="mt-5">
+            <FormFieldWrapper
+              title={SpecialistCreateFormBlocks.details}
+              className="mt-5"
+            >
               <div className="flex w-full gap-6">
                 <SelectInput
-                  name="gender"
-                  source="gender"
-                  label="Стать"
+                  name={SpecialistFormFields.gender.name}
+                  source={SpecialistFormFields.gender.name}
+                  label={SpecialistFormFields.gender.label}
                   choices={genderChoicesList}
                   validate={required()}
                 />
                 <NumberInput
-                  name="yearsOfExperience"
-                  source="yearsOfExperience"
-                  label="Роки стажу"
+                  name={SpecialistFormFields.yearsOfExperience.name}
+                  source={SpecialistFormFields.yearsOfExperience.name}
+                  label={SpecialistFormFields.yearsOfExperience.label}
                   min="0"
                   validate={required()}
                 />
                 <SelectInput
-                  name="formatOfWork"
-                  source="formatOfWork"
-                  label="Формат послуг"
+                  name={SpecialistFormFields.formatOfWork.name}
+                  source={SpecialistFormFields.formatOfWork.name}
+                  label={SpecialistFormFields.formatOfWork.label}
                   choices={formatOfWorkChoicesList}
                   className="flex-1"
                   validate={required()}
                 />
               </div>
             </FormFieldWrapper>
-            <FormFieldWrapper title="Місце надання послуг:">
+            <FormFieldWrapper title={SpecialistCreateFormBlocks.placesOfWOrk}>
               <FormDataConsumer>
-                {({ formData }) => {
-                  const isOnlineFormatOfWork = formData.formatOfWork !== 'ONLINE';
-                  const label = isOnlineFormatOfWork
-                    ? 'Адреса'
-                    : 'Спеціаліст працює онлайн';
-
-                  return (
-                    <ArrayInput
-                      name="placesOfWork"
-                      source="placesOfWork"
-                      label={label}
-                      fullWidth
-                    >
-                      <>
-                        {isOnlineFormatOfWork && (
-                          <SimpleFormIterator inline>
-                            <TextInput
-                              fullWidth
-                              source="fullAddress"
-                              label="Повна адреса"
-                              helperText="Вулиця, номер будинку, поверх, кабінет"
-                              validate={required()}
-                            />
-                            <TextInput
-                              source="nameOfClinic"
-                              label="Назва клініки"
-                              fullWidth
-                            />
-                            <SelectInput
-                              source="district"
-                              label="Район"
-                              isLoading={districtsLoading}
-                              choices={districtsList}
-                              validate={required()}
-                            />
-                          </SimpleFormIterator>
-                        )}
-                      </>
-                    </ArrayInput>
-                  );
-                }}
+                {({ formData }) => (isOnline(formData.formatOfWork) ? (
+                  <p className="text-caption text-gray-600">
+                      Спеціаліст працює онлайн
+                  </p>
+                ) : (
+                  <ArrayInput
+                    name={SpecialistFormFields.placesOfWork.name}
+                    source={SpecialistFormFields.placesOfWork.name}
+                    label={SpecialistFormFields.placesOfWork.label}
+                    fullWidth
+                  >
+                    <SimpleFormIterator inline>
+                      <TextInput
+                        fullWidth
+                        source={SpecialistFormFields.fullAddress.name}
+                        label={SpecialistFormFields.fullAddress.label}
+                        helperText="Вулиця, номер будинку, поверх, кабінет"
+                        validate={!isOnline && required()}
+                      />
+                      <TextInput
+                        source={SpecialistFormFields.nameOfClinic.name}
+                        label={SpecialistFormFields.nameOfClinic.label}
+                        fullWidth
+                      />
+                      <SelectInput
+                        source={SpecialistFormFields.district.name}
+                        label={SpecialistFormFields.district.label}
+                        isLoading={districtsLoading}
+                        choices={districtsList}
+                        validate={required()}
+                      />
+                    </SimpleFormIterator>
+                  </ArrayInput>
+                ))
+                }
               </FormDataConsumer>
             </FormFieldWrapper>
-            <FormFieldWrapper title="Послуги:">
+            <FormFieldWrapper title={SpecialistCreateFormBlocks.services}>
               <SelectArrayInput
-                name="therapies"
-                source="therapies"
-                label="Тип терапії"
+                name={SpecialistFormFields.therapies.name}
+                source={SpecialistFormFields.therapies.name}
+                label={SpecialistFormFields.therapies.label}
                 isLoading={therapiesLoading}
                 choices={therapiesList}
                 className="w-full"
                 validate={required()}
               />
               <BooleanInput
-                name="isFreeReception"
-                label="Безкоштовний прийом"
-                source="isFreeReception"
+                name={SpecialistFormFields.isFreeReception.name}
+                source={SpecialistFormFields.isFreeReception.name}
+                label={SpecialistFormFields.isFreeReception.label}
               />
               <TextInput
-                name="description"
-                source="description"
-                label="Опис"
+                name={SpecialistFormFields.description.name}
+                source={SpecialistFormFields.description.name}
+                label={SpecialistFormFields.isFreeReception.label}
                 fullWidth
                 multiline
               />
             </FormFieldWrapper>
-            <FormFieldWrapper title="Контактні данні:">
+            <FormFieldWrapper title={SpecialistCreateFormBlocks.contacts}>
               <div className="flex gap-4 [&>*]:flex-grow">
-                <TextInput
-                  name="phone"
-                  type="tel"
-                  source="tel"
-                  label="Телефон"
-                  validate={required()}
-                />
-                <TextInput
-                  name="email"
-                  type="email"
-                  source="email"
-                  label="Пошта"
-                />
-                <TextInput
-                  name="surname"
-                  type="url"
-                  source="website"
-                  label="Веб сторінка"
-                />
+                {generateTextInputList(SpecialistFormFields.contacts)}
               </div>
             </FormFieldWrapper>
           </>
