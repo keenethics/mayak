@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { cn } from '@/app/utils/cn';
 
-export default function Paragraph({ children, className }) {
+export function Paragraph({ children, className }) {
   return (
-    <p className={`font-montserrat text-primary-900 ${className}`}>
+    <p className={cn('font-montserrat text-primary-900', className)}>
       {children}
     </p>
   );
