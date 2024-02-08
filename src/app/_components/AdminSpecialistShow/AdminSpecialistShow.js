@@ -5,9 +5,6 @@ import {
   SimpleShowLayout,
   BooleanField,
   TextField,
-  ArrayField,
-  Datagrid,
-  ReferenceOneField,
   NumberField,
 } from 'react-admin';
 
@@ -25,27 +22,32 @@ export default function AdminSpecialistShow() {
         <BooleanField source="isFreeReception" />
         <BooleanField source="isActive" />
         <NumberField source="yearsOfExperience" />
-        <ArrayField source="specializations">
+        {/* <ArrayField source="therapies">
+          <TextField source="name"></TextField>
+        </ArrayField> */}
+        {/* <ReferenceManyField
+          label="Places of work"
+          target="specialists"
+          reference="Specialization"
+        >
           <Datagrid>
-            <TextField source="name" />
+            <TextField source="id" />
+            <TextField source="createdAt" />
           </Datagrid>
-        </ArrayField>
-        <ArrayField source="placesOfWork">
-          <ArrayField source="addresses">
-            <TextField source="nameOfClinic" />
-            <TextField source="fullAddress" />
-            <ReferenceOneField
-              label="District"
-              reference="district"
-              target="district_id"
-            >
-              <TextField source="name" />
-            </ReferenceOneField>
-          </ArrayField>
-        </ArrayField>
-        <ArrayField source="therapies">
+        </ReferenceManyField> */}
+        {/* <ReferenceManyField
+          label="Places of work"
+          target="specialistId"
+          reference="PlaceOfWork"
+        >
+          <Datagrid>
+            <TextField source="id" />
+            <TextField source="createdAt" />
+          </Datagrid>
+        </ReferenceManyField> */}
+        {/* <ArrayField source="therapies">
           <TextField source="name" />
-        </ArrayField>
+        </ArrayField> */}
         <TextField source="description" />
         <TextField source="phone" />
         <TextField source="email" />
