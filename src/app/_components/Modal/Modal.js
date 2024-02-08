@@ -8,6 +8,8 @@ export const Modal = ({
   onClose,
   isBlurBackground = true,
   isCloseButton = true,
+  bgColor,
+  title,
   children,
 }) => {
   const blurBackground = (
@@ -23,17 +25,20 @@ export const Modal = ({
             className="fixed left-0 top-0 flex h-full w-full items-center justify-center"
             onClick={onClose}
           >
-            {isCloseButton ? (
-              <ModalCloseButton onClose={onClose}>{children}</ModalCloseButton>
-            ) : (
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              >
-                {children}
+            <div className={`rounded-xl shadow-[0_0_32px_0px_rgba(0,58,113,0.25)] ${bgColor} px-4 py-[18px] md:p-6`}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}>
+
+              <div className='flex justify-center items-center text-center'>
+                <p className='text-p2  w-full pl-2 pr-2 md:pl-6 md:pr-6'>{title}</p>
+
+                {isCloseButton && <ModalCloseButton onClose={onClose} />}
               </div>
-            )}
+
+              {children}
+
+            </div>
           </div>
         </>
       )}
@@ -47,4 +52,6 @@ Modal.propTypes = {
   isBlurBackground: PropTypes.bool,
   isCloseButton: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+  bgColor: PropTypes.string,
 };
