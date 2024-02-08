@@ -38,7 +38,7 @@ export function PillButton({
     <button className={styles} disabled={disabled} onClick={onClick}>
       <div className={layoutStyle || ''}>
         {icon}
-        <Paragraph className={'text-inherit'}>{children}</Paragraph>
+        <Paragraph className="text-inherit">{children}</Paragraph>
       </div>
     </button>
   );

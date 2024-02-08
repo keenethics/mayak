@@ -1,5 +1,3 @@
-import { stylesCore } from '@/app/styles/constants/stylesCore';
-
 export const buttonColorVariant = {
   filled: {
     blue: {
@@ -35,29 +33,29 @@ export const buttonColorVariant = {
 export const buttonType = {
   outlined: {
     icon: {
-      buttonStyle: `${stylesCore.flex.fullCenteredInlineFlex} flex-col text-p4`,
-      layoutStyle: `${stylesCore.flex.fullCenteredFlex} /
+      buttonStyle: 'inline-flex justify-center align-middle flex-col text-p4',
+      layoutStyle: `flex justify-center align-middle /
       gap-[8px] self-stretch h-[2.5rem] pt-[10px] pr-[24px] pb-[10px] pl-[16px]`,
     },
     regular: {
-      buttonStyle: `${stylesCore.flex.fullCenteredInlineFlex} flex-col h-[2.5rem] flex-shrink-0 text-p4`,
-      layoutStyle: `${stylesCore.flex.fullCenteredFlex} /
+      buttonStyle: 'inline-flex justify-center align-middle flex-col h-[2.5rem] flex-shrink-0 text-p4',
+      layoutStyle: `flex justify-center align-middle /
       gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[10px] px-[24px]`,
     },
   },
   filledBold: {
     icon: {
-      buttonStyle: `${stylesCore.flex.fullCenteredInlineFlex} text-p3`,
-      layoutStyle: `${stylesCore.flex.fullCenteredFlex} gap-[8px] pt-[12px] pr-[24px] pb-[12px] pl-[16px]`,
+      buttonStyle: 'inline-flex justify-center align-middle text-p3',
+      layoutStyle: 'flex justify-center align-middle gap-[8px] pt-[12px] pr-[24px] pb-[12px] pl-[16px]',
     },
     regular: {
-      buttonStyle: `${stylesCore.flex.fullCenteredInlineFlex} py-[12px] px-[0px] text-p3`,
-      layoutStyle: `${stylesCore.flex.fullCenteredFlex} gap-[8px] py-[0px] px-[24px] self-stretch`,
+      buttonStyle: 'inline-flex justify-center align-middle py-[12px] px-[0px] text-p3',
+      layoutStyle: 'flex justify-center align-middle gap-[8px] py-[0px] px-[24px] self-stretch',
     },
   },
   close: {
     icon: {
-      buttonStyle: `${stylesCore.flex.fullCenteredFlex} w-[1rem] h-[1rem] / 
+      buttonStyle: `flex justify-center align-middle w-[1rem] h-[1rem] / 
       flex-shrink-0`,
     },
   },
