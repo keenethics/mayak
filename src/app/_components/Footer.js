@@ -8,13 +8,6 @@ import SocialLink from '@components/Links/SocialLink';
 
 export default function Footer() {
   const { links } = siteNav;
-  // Sort social link icons array according to figma
-  const sortedSocials = [...links].sort((a, b) => {
-    if (a.title < b.title) {
-      return -1;
-    }
-    return 1;
-  });
 
   // Basic styles
   const flexBetween = 'inline-flex flex-row items-center justify-between';
@@ -57,7 +50,7 @@ export default function Footer() {
           <SocialLink
             role="list"
             status="footerSocials"
-            links={sortedSocials}
+            links={links}
             className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-4 hover:text-primary-500')}
           ></SocialLink>
         </div>

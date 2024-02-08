@@ -1,7 +1,6 @@
 import React from 'react';
 import Instagram from '@icons/instagram.svg';
 import Facebook from '@icons/facebook.svg';
-import XSocial from '@icons/xsocial.svg';
 
 const siteNav = {
   mainNav: [
@@ -21,7 +20,6 @@ const siteNav = {
       svg: <Instagram />,
     },
     { title: 'Facebook', href: 'https://www.facebook.com/', svg: <Facebook /> },
-    { title: 'XTwitter', href: 'https://twitter.com/', svg: <XSocial /> },
   ],
 };
 
