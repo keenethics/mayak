@@ -24,16 +24,8 @@ export default function AdminPage() {
         edit={EditGuesser}
         show={ShowGuesser}
       />
-      <Resource
-        name="Specialist"
-        list={SpecialistsList}
-        show={SpecialistShow}
-      />
-      <Resource
-        name="Organization"
-        list={OrganizationsList}
-        show={OrganizationShow}
-      />
+      <Resource name="Specialist" list={SpecialistsList} show={SpecialistShow} />
+      <Resource name="Organization" list={OrganizationsList} show={OrganizationShow} />
       <Resource name="District" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name="Specialization" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name="Address" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />

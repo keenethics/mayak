@@ -1,8 +1,5 @@
 import {
-  SearchInput,
-  DateTimeInput,
-  SelectInput,
-  BooleanInput,
+  SearchInput, DateTimeInput, SelectInput, BooleanInput,
 } from 'react-admin';
 
 export const specialistsFilters = [
