@@ -4,7 +4,7 @@ import { typography } from '@/app/styles/tailwind/ui';
 export const configuredTwMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      'font-size': Object.keys(typography).map((key) => `text-${key}`),
+      'font-size': Object.keys(typography).map(key => `text-${key}`),
     },
   },
 });
