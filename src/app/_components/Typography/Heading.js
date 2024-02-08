@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { cn } from '@/app/utils/cn';
 
-export default function Heading({ children, type, className }) {
+export function Heading({ children, type, className }) {
   return React.createElement(
     type,
     {
-      className: `font-montserrat text-primary-900 ${className}`,
+      className: cn('font-montserrat text-primary-900', className),
     },
     children,
   );
