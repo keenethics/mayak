@@ -1,19 +1,25 @@
 import React from 'react';
 
 import {
-  Datagrid, List, TextField, BooleanField,
+  Datagrid,
+  List,
+  TextField,
+  BooleanField,
+  DateField,
 } from 'react-admin';
+import { specialistsFilters } from '../Filters';
 
-// const searchFilter = [<SearchInput source="q" alwaysOn />];
-
-export default function AdminSpecialistsList() {
+export function SpecialistsList() {
   return (
-    <List>
+    <List
+      sort={{ field: 'createdAt', order: 'DESC' }}
+      filters={specialistsFilters}
+    >
       <Datagrid rowClick="show">
         <TextField source="firstName" />
         <TextField source="lastName" />
         <TextField source="surname" />
-        <TextField source="createdAt" />
+        <DateField showTime source="createdAt" />
         <TextField source="formatOfWork" />
         <BooleanField source="isActive" />
       </Datagrid>

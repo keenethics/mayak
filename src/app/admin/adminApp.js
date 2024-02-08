@@ -9,31 +9,11 @@ import {
   EditGuesser,
 } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
-import { LOGIN_URL } from '@/lib/consts';
-import AdminSpecialistsList from '@/app/_components/AdminSpecialistsList';
-import AdminSpecialistShow from '@/app/_components/AdminSpecialistShow';
-
-const authProvider = {
-  login: async (credentials) =>
-    signIn('credentials', credentials, { redirect: false }),
-  logout: async () => signOut({ callbackUrl: LOGIN_URL }),
-  checkAuth: async () => {
-    const session = await getSession();
-    return session ? Promise.resolve() : Promise.reject();
-  },
-  checkError: async () => {
-    Promise.resolve();
-  },
-  getIdentity: async () => {
-    const session = await getSession();
-
-    return {
-      id: session.user.id,
-      fullName: session.user.name,
-    };
-  },
-  getPermissions: () => Promise.resolve(),
-};
+import { authProvider } from './authProvider';
+import { SpecialistsList } from '@/app/_components/AdminPage/SpecialistsList';
+import { SpecialistShow } from '@/app/_components/AdminPage/SpecialistShow';
+import { OrganizationsList } from '@/app/_components/AdminPage/OrganizationsList';
+import { OrganizationShow } from '@/app/_components/AdminPage/OrganizationShow';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -49,8 +29,13 @@ export default function AdminPage() {
       />
       <Resource
         name="Specialist"
-        list={AdminSpecialistsList}
-        show={AdminSpecialistShow}
+        list={SpecialistsList}
+        show={SpecialistShow}
+      />
+      <Resource
+        name="Organization"
+        list={OrganizationsList}
+        show={OrganizationShow}
       />
       <Resource
         name="District"

@@ -32,6 +32,7 @@ model Specialist {
   placesOfWork      PlaceOfWork[]
   therapies         Therapy[]
   isFreeReception   Boolean
+  isActive          Boolean
   description       String           @db.Text
   phone             String?          @db.VarChar(15)
   email             String?          @unique @db.VarChar(320)

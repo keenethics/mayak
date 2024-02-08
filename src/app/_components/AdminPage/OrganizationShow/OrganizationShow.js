@@ -7,41 +7,39 @@ import {
   TextField,
   ArrayField,
   Datagrid,
-  ReferenceOneField,
   NumberField,
+  DateField,
+  ChipField,
+  SingleFieldList,
 } from 'react-admin';
 
-export default function AdminOrganizationShow() {
+export function OrganizationShow() {
   return (
     <Show>
       <SimpleShowLayout>
         <TextField source="id" />
         <TextField source="name" />
-        <TextField source="createdAt" />
+        <DateField showTime source="createdAt" />
         <TextField source="formatOfWork" />
         <BooleanField source="isFreeReception" />
         <BooleanField source="isActive" />
         <NumberField source="yearsOfExperience" />
-        <ArrayField source="organizationType">
-          <Datagrid>
-            <TextField source="name" />
+        <ArrayField source="therapies">
+          <SingleFieldList linkType={false}>
+            <ChipField source="name" size="small" />
+          </SingleFieldList>
+        </ArrayField>
+        <ArrayField source="addresses">
+          <Datagrid bulkActionButtons={false}>
+            <TextField source="fullAddress" />
+            <TextField source="nameOfClinic" />
+            <TextField source="district.name" label="District" />
           </Datagrid>
         </ArrayField>
-        <ArrayField source="placesOfWork">
-          <ArrayField source="addresses">
-            <TextField source="nameOfClinic" />
-            <TextField source="fullAddress" />
-            <ReferenceOneField
-              label="District"
-              reference="district"
-              target="district_id"
-            >
-              <TextField source="name" />
-            </ReferenceOneField>
-          </ArrayField>
-        </ArrayField>
-        <ArrayField source="therapies">
-          <TextField source="name" />
+        <ArrayField source="types">
+          <SingleFieldList linkType={false}>
+            <ChipField source="name" size="small" />
+          </SingleFieldList>
         </ArrayField>
         <TextField source="description" />
         <TextField source="phone" />
