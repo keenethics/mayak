@@ -7,34 +7,8 @@ import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { MODEL_INCLUDES } from '@/lib/consts';
 import { searchInputFilters } from '@/lib/searchInputFilters';
 
-// const handler = auth(async (req) => {
-//   if (!req.auth) {
-//     return NextResponse.json(
-//       { message: 'unauthorized' },
-//       {
-//         status: 401,
-//       },
-//     );
-//   }
-//   try {
-//     const json = await req.json();
-//     const { resource: modelName } = json;
-//     const includeFields = calculateInclude(modelName);
-//     const result = await defaultHandler(json, prisma, {
-//       getList: { debug: false },
-//       getOne: { debug: false, include: includeFields },
-//       audit: {
-//         model: prisma.audit,
-//       },
-//     });
-//     return NextResponse.json(result);
-//   } catch (err) {
-//     return NextResponse.json({ error: err }, { status: 500 });
-//   }
-// });
-
 const handler = auth(
-  withErrorHandler(async (req) => {
+  withErrorHandler(async req => {
     if (!req.auth) throw new NotAuthorizedException();
     const json = await req.json();
     const { resource: modelName } = json;
