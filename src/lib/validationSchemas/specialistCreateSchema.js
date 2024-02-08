@@ -31,7 +31,7 @@ const SpecialistCreateDraftSchema = z.object({
 });
 
 const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
-  surname: zStringWithMinMax('Surname').optional(),
+  surname: zStringWithMinMax('Surname').nullish(),
   gender: z.string(),
   yearsOfExperience: z.number().nonnegative(),
   formatOfWork: z.string(),

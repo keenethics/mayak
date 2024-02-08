@@ -37,7 +37,7 @@ import { Toggle } from '@/app/admin/_components/shared/Toggle';
 import { FormFieldWrapper } from '@/app/admin/_components/shared/FormFieldWrapper';
 import { transformIdList } from '@/app/admin/_utils/transformIdList';
 
-const SpecialistCreate = () => {
+export const SpecialistCreate = () => {
   const [draft, setDraft] = useState(false);
   const notify = useNotify();
   const redirect = useRedirect();
@@ -180,44 +180,49 @@ const SpecialistCreate = () => {
                 />
               </div>
             </FormFieldWrapper>
-
             <FormFieldWrapper title="Місце надання послуг:">
               <FormDataConsumer>
-                {({ formData }) => (
-                  <ArrayInput
-                    name="placesOfWork"
-                    source="placesOfWork"
-                    label={
-                      formData.formatOfWork === 'ONLINE'
-                        ? 'Спеціаліст працює онлайн'
-                        : 'Адреса'
-                    }
-                    fullWidth
-                    disabled={formData.formatOfWork === 'ONLINE'}
-                  >
-                    <SimpleFormIterator inline>
-                      <TextInput
-                        fullWidth
-                        source="fullAddress"
-                        label="Повна адреса"
-                        helperText="Вулиця, номер будинку, поверх, кабінет"
-                        validate={required()}
-                      />
-                      <TextInput
-                        source="nameOfClinic"
-                        label="Назва клініки"
-                        fullWidth
-                      />
-                      <SelectInput
-                        source="district"
-                        label="Район"
-                        isLoading={districtsLoading}
-                        choices={districtsList}
-                        validate={required()}
-                      />
-                    </SimpleFormIterator>
-                  </ArrayInput>
-                )}
+                {({ formData }) => {
+                  const isOnlineFormatOfWork = formData.formatOfWork !== 'ONLINE';
+                  const label = isOnlineFormatOfWork
+                    ? 'Адреса'
+                    : 'Спеціаліст працює онлайн';
+
+                  return (
+                    <ArrayInput
+                      name="placesOfWork"
+                      source="placesOfWork"
+                      label={label}
+                      fullWidth
+                    >
+                      <>
+                        {isOnlineFormatOfWork && (
+                          <SimpleFormIterator inline>
+                            <TextInput
+                              fullWidth
+                              source="fullAddress"
+                              label="Повна адреса"
+                              helperText="Вулиця, номер будинку, поверх, кабінет"
+                              validate={required()}
+                            />
+                            <TextInput
+                              source="nameOfClinic"
+                              label="Назва клініки"
+                              fullWidth
+                            />
+                            <SelectInput
+                              source="district"
+                              label="Район"
+                              isLoading={districtsLoading}
+                              choices={districtsList}
+                              validate={required()}
+                            />
+                          </SimpleFormIterator>
+                        )}
+                      </>
+                    </ArrayInput>
+                  );
+                }}
               </FormDataConsumer>
             </FormFieldWrapper>
             <FormFieldWrapper title="Послуги:">
@@ -272,5 +277,3 @@ const SpecialistCreate = () => {
     </Create>
   );
 };
-
-export default SpecialistCreate;

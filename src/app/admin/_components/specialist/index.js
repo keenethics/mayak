@@ -1,4 +1,4 @@
-import SpecialistCreate from './SpecialistCreate';
-import SpecialistList from './SpecialistList';
+import { SpecialistCreate } from '@/app/admin/_components/specialist/SpecialistCreate';
+import { SpecialistList } from './SpecialistList';
 
-export { SpecialistCreate, SpecialistList };
+export { SpecialistList, SpecialistCreate };
