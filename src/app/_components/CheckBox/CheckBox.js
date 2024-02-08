@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from '@/utils/cn';
+import { checkBoxVariants } from './styles';
 
 export default function CheckBox({
   value,
@@ -13,53 +14,23 @@ export default function CheckBox({
   disabled = false,
   checked = false,
   children = null,
-  extraClasses = {
-    text: '',
-    subText: '',
-    disabledText: '',
-    disabledSubText: '',
-    tick: '',
-    label: '',
-    checkBox: '',
-  },
+  variant = checkBoxVariants.default,
 }) {
   const id = `checkbox_id_${name}_|_${value}__`;
-  /* eslint-disable max-len */
-  const styles = {
-    checkBox: {
-      base: 'peer h-[20px] w-[20px] rounded-[4px] border-gray-500 bg-other-white p-[2px]',
-      disabled:
-        'disabled:border-gray-300 disabled:bg-gray-100 disabled:hover:bg-gray-100 disabled:hover:border-gray-300',
-      hover: 'hover:border-primary-500 hover:bg-primary-100',
-      focus:
-        'focus:border-primary-400 focus:bg-other-white focus:hover:border-primary-500 focus:ring-[4px] focus:ring-primary-300 focus:ring-offset-0',
-      checked:
-        'checked:bg-primary-100 checked:border-primary-400 checked:focus:bg-primary-100 checked:focus:border-primary-400 checked:hover:bg-primary-100 checked:hover:border-primary-500',
-    },
-    label: {
-      beforeLayout:
-        'before:absolute before:left-[4px] before:top-[4px] before:block before:h-[18px]  before:w-[18px]',
-      beforeBase:
-        'before:border-spacing-[1px] before:rounded-[4px] before:bg-other-white',
-      beforeChecked: `peer-checked:before:border-primary-400 peer-checked:before::bg-primary-100
-        peer-checked:before:hover:border-primary-500 peer-checked:before:hover:border-primary-500`,
-      other:
-        'peer-focus:before:bg-other-white peer-disabled:before:bg-gray-200',
-    },
-  };
-  /* eslint-enable */
   return (
-    <div className="relative flex gap-[12px] p-[3px]">
+    <div className={cn(variant.container.base)}>
       <input
         id={id}
         name={name}
         className={cn(
-          styles.checkBox.base,
-          styles.checkBox.disabled,
-          styles.checkBox.hover,
-          styles.checkBox.focus,
-          styles.checkBox.checked,
-          extraClasses.checkBox,
+          variant.checkBox.base,
+          variant.checkBox.hover,
+          variant.checkBox.focus,
+          variant.checkBox.focusRing,
+          variant.checkBox.checked,
+          variant.checkBox.checkedFocus,
+          variant.checkBox.checkedHover,
+          variant.checkBox.disabled,
         )}
         value={value}
         onChange={onChange}
@@ -69,35 +40,37 @@ export default function CheckBox({
       />
       <label
         className={cn(
-          styles.label.base,
-          styles.label.beforeLayout,
-          styles.label.beforeBase,
-          styles.label.beforeChecked,
-          extraClasses.label,
+          variant.labelBefore.base,
+          variant.labelBefore.layout,
+          variant.labelBefore.peerFocus,
+          variant.labelBefore.peerChecked,
+          variant.labelBefore.peerDisabled,
         )}
         htmlFor={id}
       >
         {checked && (
           <Tick
             styles={cn(
-              'absolute left-[7px] top-[9px] stroke-primary-500',
-              extraClasses.tick,
-              disabled && 'stroke-gray-300',
-              disabled && extraClasses.disabledTick,
+              variant.tick.position,
+              variant.tick.base,
+              disabled && variant.tick.disabled,
             )}
           />
         )}
         {text && (
-          <div className="mt-[-2px] flex flex-col content-between">
+          <div
+            className={cn(
+              variant.textContainer.base,
+              variant.textContainer.position,
+            )}
+          >
             {text ? (
               <>
                 {text && (
                   <p
                     className={cn(
-                      'text-p3',
-                      extraClasses.text,
-                      disabled && 'text-gray-400',
-                      disabled && extraClasses.disabledText,
+                      variant.text.base,
+                      disabled && variant.text.disabled,
                     )}
                   >
                     {text}
@@ -106,10 +79,8 @@ export default function CheckBox({
                 {subText && (
                   <p
                     className={cn(
-                      'text-p4',
-                      extraClasses.subText,
-                      disabled && 'text-gray-400',
-                      disabled && extraClasses.disabledSubText,
+                      variant.subText.base,
+                      disabled && variant.subText.disabled,
                     )}
                   >
                     {subText}
@@ -159,14 +130,43 @@ CheckBox.propTypes = {
   checked: PropTypes.bool,
   isMultiChoice: PropTypes.bool,
   children: PropTypes.node,
-  extraClasses: PropTypes.shape({
-    text: PropTypes.string,
-    subText: PropTypes.string,
-    disabledText: PropTypes.string,
-    disabledSubText: PropTypes.string,
-    tick: PropTypes.string,
-    disabledTick: PropTypes.string,
-    label: PropTypes.string,
-    checkBox: PropTypes.string,
+  variant: PropTypes.shape({
+    container: PropTypes.shape({
+      base: PropTypes.string.isRequired,
+    }),
+    checkBox: PropTypes.shape({
+      base: PropTypes.string.isRequired,
+      disabled: PropTypes.string.isRequired,
+      hover: PropTypes.string.isRequired,
+      focus: PropTypes.string.isRequired,
+      focusRing: PropTypes.string.isRequired,
+      checked: PropTypes.string.isRequired,
+      checkedFocus: PropTypes.string.isRequired,
+      checkedHover: PropTypes.string.isRequired,
+    }),
+    labelBefore: PropTypes.shape({
+      layout: PropTypes.string.isRequired,
+      base: PropTypes.string.isRequired,
+      peerChecked: PropTypes.string.isRequired,
+      peerFocus: PropTypes.string.isRequired,
+      peerDisabled: PropTypes.string.isRequired,
+    }),
+    textContainer: PropTypes.shape({
+      base: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+    }),
+    text: PropTypes.shape({
+      base: PropTypes.string.isRequired,
+      disabled: PropTypes.string.isRequired,
+    }),
+    subText: PropTypes.shape({
+      base: PropTypes.string.isRequired,
+      disabled: PropTypes.string.isRequired,
+    }),
+    tick: PropTypes.shape({
+      position: PropTypes.string.isRequired,
+      base: PropTypes.string.isRequired,
+      disabled: PropTypes.string.isRequired,
+    }),
   }),
 };
