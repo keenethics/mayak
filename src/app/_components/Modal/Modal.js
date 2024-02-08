@@ -40,7 +40,7 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   isBlurBackground: PropTypes.bool,
   isCloseButton: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   title: PropTypes.string,
   bgColor: PropTypes.string,
 };
