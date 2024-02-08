@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from '@/utils/cn';
+import { cn } from '@/utils/cn';
 import { checkBoxVariants } from './styles';
 
 export default function CheckBox({
