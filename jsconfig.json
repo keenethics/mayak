@@ -3,11 +3,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@icons/*": ["./public/assets/icons/*"],
-      "@outlinedBtn/*": ["./src/app/_components/OutlinedBtn/*"],
+      "@components/*": ["./src/app/_components/*"],
       "@utils/*": ["./src/app/utils/*"],
-      "@config/*": ["./src/app/config/*"],
-      "@socialLink/*": ["./src/app/_components/SocialLink/*"],
-      "@innerLink/*": ["./src/app/_components/InnerLink/*"]
+      "@config/*": ["./src/app/config/*"]
     }
   }
 }

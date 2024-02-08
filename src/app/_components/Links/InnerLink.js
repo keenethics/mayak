@@ -4,10 +4,9 @@ import p from 'prop-types';
 import cn from '@utils/cn';
 
 export default function InnerLink({ items, className }) {
-  const { innerLinks } = items;
   return (
-    <div className="flex list-none gap-4 text-primary-700  ">
-      {innerLinks?.map((link, idx) => (
+    <div className="flex list-none gap-4 text-primary-700">
+      {items?.map((link, idx) => (
         <Link
           key={idx}
           role="listitem"
@@ -26,6 +25,6 @@ export default function InnerLink({ items, className }) {
 }
 
 InnerLink.propTypes = {
-  items: p.object,
+  items: p.array,
   className: p.string,
 };

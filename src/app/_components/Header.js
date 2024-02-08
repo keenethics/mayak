@@ -1,13 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import Logo from '@icons/logo.svg';
-import OutlinedBtn from '@outlinedBtn/OutlinedBtn';
-import InnerLink from '@innerLink/InnerLink';
-import SocialLink from '@socialLink/SocialLink';
 import siteNav from '@config/siteNav';
 import cn from '@utils/cn';
+import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
+import InnerLink from '@components/Links/InnerLink';
+import SocialLink from '@components/Links/SocialLink';
 
 export default function Header() {
+  const { links, innerLinks } = siteNav;
+
   //  Basic styles
   const flexBetween = 'flex flex-row items-center justify-between';
   const flexCenter = 'flex flex-row items-center justify-center';
@@ -28,15 +30,15 @@ export default function Header() {
       <div className={cn(flexCenter, 'gap-6')}>
         <InnerLink
           role="list"
-          items={siteNav}
+          items={innerLinks}
           href="/specialists"
           className={cn(basicLink, transition, listItemTextHover, listItemText, 'gap-4 px-3 py-1')}
         ></InnerLink>
         <SocialLink
           role="list"
-          items={siteNav}
+          links={links}
           status="headerSocials"
-          className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 hover:text-primary-500')}
+          className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
         ></SocialLink>
         <OutlinedBtn
           className={cn(basicBtnActive, basicBtnFocus, basicBtnHover, 'border-gray-700 text-primary-500')}

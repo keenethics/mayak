@@ -1,12 +1,21 @@
 import React from 'react';
 import Link from 'next/link';
 import FooterImg from '@icons/white-logo.svg';
-import OutlinedBtn from '@outlinedBtn/OutlinedBtn';
 import cn from '@utils/cn';
 import siteNav from '@config/siteNav';
-import SocialLink from '@socialLink/SocialLink';
+import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
+import SocialLink from '@/app/_components/Links/SocialLink';
 
 export default function Footer() {
+  const { links } = siteNav;
+  // Sort social link icons array according to figma
+  const sortedSocials = [...links].sort((a, b) => {
+    if (a.title < b.title) {
+      return -1;
+    }
+    return 1;
+  });
+
   // Basic styles
   const flexBetween = 'inline-flex flex-row items-center justify-between';
   const flexCenter = 'inline-flex flex-row items-center justify-center';
@@ -48,8 +57,8 @@ export default function Footer() {
           <SocialLink
             role="list"
             status="footerSocials"
-            items={siteNav}
-            className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 hover:text-primary-500')}
+            links={sortedSocials}
+            className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-4 hover:text-primary-500')}
           ></SocialLink>
         </div>
       </div>
