@@ -18,6 +18,12 @@ const zStringWithMinMax = fieldName => zString(fieldName)
 
 const zArray = z.string().array().min(1);
 
+const placesOfWorkSchema = z.object({
+  fullAddress: zString('Full address'),
+  nameOfClinic: z.string().nullish(),
+  district: zString('District'),
+});
+
 const SpecialistCreateDraftSchema = z.object({
   lastName: zStringWithMinMax('Last name'),
   firstName: zStringWithMinMax('First name'),
@@ -37,7 +43,8 @@ const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
   }),
   email: z.string().trim().email().optional(),
   website: z.string().trim().url().optional(),
-  // isActive: z.boolean().optional(),
+  placesOfWork: z.array(placesOfWorkSchema),
+  isActive: z.boolean().optional(),
 });
 
 export { SpecialistCreateDraftSchema, SpecialistCreateSchema };

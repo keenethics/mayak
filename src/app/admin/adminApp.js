@@ -8,8 +8,8 @@ import {
   Resource,
   ShowGuesser,
 } from 'react-admin';
+import { SpecialistCreate } from '@/app/admin/_components/specialist';
 import { authProvider, dataProvider } from '@/app/admin/_providers';
-import SpecialistCreate from '@/app/admin/_components/SpecialistCreate';
 
 export default function AdminPage() {
   return (

@@ -1,5 +1,6 @@
 const THERAPY = 'therapy';
 const SPECIALIZATION = 'specialization';
+const DISTRICT = 'district';
 
 const Gender = {
   male: 'MALE',
@@ -35,4 +36,5 @@ export {
   FormMode,
   SuccessNotifications,
   Titles,
+  DISTRICT,
 };
