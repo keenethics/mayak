@@ -1,7 +1,7 @@
 import React from 'react';
-import Instagram from '@logo/instagram.svg';
-import Facebook from '@logo/facebook.svg';
-import XSocial from '@logo/xsocial.svg';
+import Instagram from '@icons/instagram.svg';
+import Facebook from '@icons/facebook.svg';
+import XSocial from '@icons/xsocial.svg';
 
 const siteNav = {
   mainNav: [

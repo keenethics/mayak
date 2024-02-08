@@ -1,7 +1,7 @@
 import React from 'react';
 import p from 'prop-types';
 import Link from 'next/link';
-import cn from '@/app/utils/cn';
+import cn from '@utils/cn';
 
 export default function SocialLink({ items, className, status }) {
   const { links } = items;
@@ -20,6 +20,7 @@ export default function SocialLink({ items, className, status }) {
         .map((link, idx) => (
           <Link
             key={idx}
+            role="listitem"
             href={link.href}
             aria-label={`Open ${link.title} on click`}
             target="_blank"
@@ -37,6 +38,7 @@ export default function SocialLink({ items, className, status }) {
       {links?.map((link, idx) => (
         <Link
           key={idx}
+          role="listitem"
           href={link.href}
           aria-label={`Open ${link.title} on click`}
           target="_blank"

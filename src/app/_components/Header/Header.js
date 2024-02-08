@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import Logo from '@logo/logo.svg';
+import Logo from '@icons/logo.svg';
 import OutlinedBtn from '@outlinedBtn/OutlinedBtn';
 import InnerLink from '@innerLink/InnerLink';
-import SocialLink from '../SocialLink/SocialLink';
-import siteNav from '@/app/config/siteNav';
-import cn from '@/app/utils/cn';
+import SocialLink from '@socialLink/SocialLink';
+import siteNav from '@config/siteNav';
+import cn from '@utils/cn';
 
 export default function Header() {
   //  Basic styles
@@ -27,10 +27,10 @@ export default function Header() {
       </Link>
       <div className={cn(flexCenter, 'gap-6')}>
         <InnerLink
+          role="list"
           items={siteNav}
           href="/specialists"
-          aria-label="Open specialists page on this link click"
-          className={cn(basicLink, transition, listItemTextHover, listItemText)}
+          className={cn(basicLink, transition, listItemTextHover, listItemText, 'gap-4 px-3 py-1')}
         ></InnerLink>
         <SocialLink
           role="list"

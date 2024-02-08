@@ -1,6 +1,6 @@
 import React from 'react';
 import p from 'prop-types';
-import cn from '@/app/utils/cn';
+import cn from '@utils/cn';
 
 export default function OutlinedBtn({ children, className }) {
   // Basic styles

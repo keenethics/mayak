@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import FooterImg from '@logo/white-logo.svg';
-import OutlinedBtn from '../OutlinedBtn/OutlinedBtn';
-import cn from '@/app/utils/cn';
-import siteNav from '@/app/config/siteNav';
-import SocialLink from '../SocialLink/SocialLink';
+import FooterImg from '@icons/white-logo.svg';
+import OutlinedBtn from '@outlinedBtn/OutlinedBtn';
+import cn from '@utils/cn';
+import siteNav from '@config/siteNav';
+import SocialLink from '@socialLink/SocialLink';
 
 export default function Footer() {
   // Basic styles
@@ -18,7 +18,6 @@ export default function Footer() {
   const footerBtnActive = 'active:bg-other-white active:text-primary-600';
   const footerBtnBorder = 'focus:border-gray-100 active:border-other-white';
   const outlinedColors = 'border-other-white text-other-white';
-  const outlinedText = 'text-sm';
 
   return (
     <footer className={cn('text-white flex w-full flex-col bg-primary-800 px-20 py-12')}>
@@ -31,17 +30,10 @@ export default function Footer() {
             className={cn('h-[74px] w-[129px]')}
           />
         </Link>
-        <div className={cn(flexCenter, 'gap-6')}>
-          <p className={cn('text-p1 font-bold text-other-white')}>Ставай нашим партнером</p>
+        <div className={cn(flexCenter, 'gap-6 text-other-white')}>
+          <p className={cn('text-p1 font-bold')}>Ставай нашим партнером</p>
           <OutlinedBtn
-            className={cn(
-              footerBtnHover,
-              footerBtnFocus,
-              footerBtnActive,
-              footerBtnBorder,
-              outlinedColors,
-              outlinedText,
-            )}
+            className={cn(footerBtnHover, footerBtnFocus, footerBtnActive, footerBtnBorder, outlinedColors, 'text-p4')}
             aria-label="Click to fill application form"
           >
             Залишити заявку
@@ -49,11 +41,12 @@ export default function Footer() {
         </div>
       </div>
       <div className={cn('my-12 h-[1px] w-full bg-gray-300')}></div>
-      <div className={cn(flexBetween)}>
-        <p className={cn('text-p4 font-normal text-other-white')}>Маяк @ 2024</p>
+      <div className={cn(flexBetween, 'text-other-white')}>
+        <p className={cn('text-p4 font-normal ')}>Маяк @ 2024</p>
         <div className={cn(flexCenter, 'gap-4')}>
-          <p className={cn('text-p2 font-medium text-other-white')}>Слідкуй за нами в соцмережах</p>
+          <p className={cn('text-p2 font-medium ')}>Слідкуй за нами в соцмережах</p>
           <SocialLink
+            role="list"
             status="footerSocials"
             items={siteNav}
             className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 hover:text-primary-500')}

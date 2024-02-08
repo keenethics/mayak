@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import p from 'prop-types';
-import cn from '@/app/utils/cn';
+import cn from '@utils/cn';
 
 export default function InnerLink({ items, className }) {
   const { innerLinks } = items;
@@ -10,6 +10,7 @@ export default function InnerLink({ items, className }) {
       {innerLinks?.map((link, idx) => (
         <Link
           key={idx}
+          role="listitem"
           href={link.href}
           aria-label={`Open ${link.title} on click`}
           target="_blank"
@@ -25,6 +26,6 @@ export default function InnerLink({ items, className }) {
 }
 
 InnerLink.propTypes = {
-  items: p.array,
+  items: p.object,
   className: p.string,
 };
