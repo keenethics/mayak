@@ -6,7 +6,7 @@ export const checkBoxVariants = {
     checkBox: {
       base: 'peer h-[20px] w-[20px] rounded-[4px] border-gray-500 bg-other-white p-[2px]',
       disabled:
-        'disabled:border-gray-300 disabled:bg-gray-100 disabled:hover:bg-gray-100 disabled:hover:border-gray-300',
+        'disabled:border-gray-300 disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:hover:border-gray-300',
       hover: 'hover:border-primary-500 hover:bg-primary-100',
       focus:
         'focus:border-primary-400 focus:bg-other-white focus:hover:border-primary-500',
