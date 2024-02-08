@@ -142,9 +142,10 @@ async function main() {
       .fill('')
       .map(
         // eslint-disable-next-line no-unused-vars
-        _ => prisma.specialist.create({
-          data: randomSpecialist({ districts, specializations, therapies }),
-        }),
+        _ =>
+          prisma.specialist.create({
+            data: randomSpecialist({ districts, specializations, therapies }),
+          }),
       ),
   );
 }
@@ -153,7 +154,7 @@ main().then(
   async () => {
     await prisma.$disconnect();
   },
-  async (e) => {
+  async e => {
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);

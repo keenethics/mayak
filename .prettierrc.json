@@ -1,4 +1,7 @@
 {
   "singleQuote": true,
-  "plugins": ["prettier-plugin-prisma", "prettier-plugin-tailwindcss"]
+  "arrowParens": "avoid",
+  "tabWidth": 2,
+  "plugins": ["prettier-plugin-prisma", "prettier-plugin-tailwindcss"],
+  "tailwindConfig": "./tailwind.config.mjs"
 }

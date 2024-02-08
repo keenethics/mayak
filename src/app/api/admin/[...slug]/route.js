@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { auth } from '@/lib/auth';
 
-const handler = auth(async (req) => {
+const handler = auth(async req => {
   if (!req.auth) {
     return NextResponse.json(
       { message: 'unauthorized' },
