@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputErrorIcon from '../Icons/InpurErrorIcon';
 import { cn } from '@/utils/cn';
-import { textInputFieldVariants } from './styles';
+import { variants } from './styles';
 
 export function TextInputField({
   value,
@@ -12,7 +12,7 @@ export function TextInputField({
   placeholder = '',
   error = '',
   required = false,
-  variant = textInputFieldVariants.default,
+  variant = variants.default,
 }) {
   const id = `textinput_${name}`;
   return (

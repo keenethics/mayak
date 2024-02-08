@@ -1,4 +1,4 @@
-export const textInputFieldVariants = {
+export const variants = {
   default: {
     mainContainer: {
       base: 'flex flex-col-reverse',
