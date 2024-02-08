@@ -6,11 +6,11 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "eslint ./ --ext .js,.mjs",
-    "lint:fix": "prettier --write . && eslint --ext .js,.mjs --fix ./",
     "migrations": "prisma migrate dev",
+    "migrations:reset": "prisma migrate reset",
     "seed": "node prisma/seed.mjs",
-    "migrations:reset": "prisma migrate reset"
+    "lint": "eslint --ext .js,.mjs .",
+    "lint:fix": "prettier --write . && eslint --ext .js,.mjs --fix ."
   },
   "dependencies": {
     "@prisma/client": "5.8.1",

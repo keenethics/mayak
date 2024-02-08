@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { getSession, signIn, signOut } from 'next-auth/react';
 import {
   Admin,
   ListGuesser,
@@ -15,7 +14,8 @@ import AdminSpecialistsList from '@/app/_components/AdminSpecialistsList';
 import AdminSpecialistShow from '@/app/_components/AdminSpecialistShow';
 
 const authProvider = {
-  login: async credentials => signIn('credentials', credentials, { redirect: false }),
+  login: async (credentials) =>
+    signIn('credentials', credentials, { redirect: false }),
   logout: async () => signOut({ callbackUrl: LOGIN_URL }),
   checkAuth: async () => {
     const session = await getSession();
@@ -42,6 +42,7 @@ export default function AdminPage() {
       <Resource name="Therapy" list={ListGuesser} show={ShowGuesser} />
       <Resource
         name="Therapy"
+        options={{ label: 'Therapy' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
@@ -75,6 +76,13 @@ export default function AdminPage() {
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
+      />
+      <Resource
+        name="Feedback"
+        options={{ label: 'Feedback' }}
+        list={ListGuesser}
+        show={ShowGuesser}
+        edit={EditGuesser}
       />
     </Admin>
   );
