@@ -1,4 +1,4 @@
-export const checkBoxVariants = {
+export const variants = {
   default: {
     container: {
       base: 'relative flex gap-[12px] p-[3px]',

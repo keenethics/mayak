@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
-import { checkBoxVariants } from './styles';
+import { variants } from './styles';
 
 export function CheckBox({
   value,
@@ -14,7 +14,7 @@ export function CheckBox({
   disabled = false,
   checked = false,
   children = null,
-  variant = checkBoxVariants.default,
+  variant = variants.default,
 }) {
   const id = `checkbox_${name}_${value}`;
   return (
