@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Logo from '@icons/logo.svg';
 import siteNav from '@config/siteNav';
-import cn from '@utils/cn';
+import { cn } from '@utils/cn';
 import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
 import InnerLink from '@components/Links/InnerLink';
 import SocialLink from '@components/Links/SocialLink';

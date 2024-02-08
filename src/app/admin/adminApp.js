@@ -9,6 +9,7 @@ import { authProvider } from './authProvider';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
+
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource

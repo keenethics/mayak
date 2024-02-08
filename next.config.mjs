@@ -11,6 +11,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Render SVG icons with @svgr/webpack
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import FooterImg from '@icons/white-logo.svg';
-import cn from '@utils/cn';
+import { cn } from '@utils/cn';
 import siteNav from '@config/siteNav';
 import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
 import SocialLink from '@components/Links/SocialLink';

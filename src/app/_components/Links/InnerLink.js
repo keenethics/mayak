@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import p from 'prop-types';
-import cn from '@utils/cn';
+import { cn } from '@utils/cn';
 
 export default function InnerLink({ items, className }) {
   return (
