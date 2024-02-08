@@ -39,22 +39,11 @@ import { transformIdList } from '@/app/admin/_utils/transformIdList';
 
 const SpecialistCreate = () => {
   const [draft, setDraft] = useState(false);
-
   const notify = useNotify();
   const redirect = useRedirect();
-  const onSuccess = () => {
-    notify(SuccessNotifications.created);
-    redirect('/Specialist');
-  };
 
   const formMode = draft ? FormMode.draft : FormMode.base;
   const validationSchema = draft ? draftSchema : baseSchema;
-
-  const toggleState = previousState => !previousState;
-
-  function toggleFormMode() {
-    setDraft(toggleState);
-  }
 
   const { data: therapies, isLoading: therapiesLoading } = useGetList(THERAPY);
   const { data: specializations, isLoading: specializationsLoading } = useGetList(SPECIALIZATION);
@@ -67,8 +56,23 @@ const SpecialistCreate = () => {
   const genderChoicesList = getChoicesList(Object.values(Gender));
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork));
 
+  const handleSuccess = () => {
+    notify(SuccessNotifications.created);
+    redirect('/Specialist');
+  };
+
+  const handleError = (error) => {
+    notify(error.message);
+  };
+
+  const toggleState = previousState => !previousState;
+
+  function toggleFormMode() {
+    setDraft(toggleState);
+  }
+
   const transformPlacesOfWork = (placesArray) => {
-    const mappedPlaced = placesArray.map((place) => {
+    const mappedPlaces = placesArray.map((place) => {
       // eslint-disable-next-line no-param-reassign
       place.district = {
         connect: { id: place.district },
@@ -79,7 +83,7 @@ const SpecialistCreate = () => {
     return [
       {
         addresses: {
-          create: mappedPlaced.slice(),
+          create: mappedPlaces.slice(),
         },
       },
     ];
@@ -113,7 +117,7 @@ const SpecialistCreate = () => {
     <Create
       title={Titles.specialistCreate}
       transform={transformFormData}
-      mutationOptions={{ onSuccess }}
+      mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
     >
       <Toggle onChange={toggleFormMode} formMode={formMode} />
       <SimpleForm
@@ -148,7 +152,6 @@ const SpecialistCreate = () => {
             fullWidth
           />
         </FormFieldWrapper>
-
         {!draft && (
           <>
             <FormFieldWrapper title="Деталі:" className="mt-5">
@@ -217,7 +220,6 @@ const SpecialistCreate = () => {
                 )}
               </FormDataConsumer>
             </FormFieldWrapper>
-
             <FormFieldWrapper title="Послуги:">
               <SelectArrayInput
                 name="therapies"
