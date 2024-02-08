@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import СloseIcon from '../../../../public/assets/icons/СloseIcon.svg';
 
 export const ModalCloseButton = ({ onClose }) => (
-
-  <button
-    onClick={onClose}
-    className='p-[9.3px]'
-  >
+  <button onClick={onClose} className="p-[9.3px]">
     <СloseIcon
       alt="Сlose Icon"
       aria-label="Сlose Icon"
@@ -15,7 +11,6 @@ export const ModalCloseButton = ({ onClose }) => (
       className={'text-gray-700 hover:text-primary-400'}
     />
   </button>
-
 );
 
 ModalCloseButton.propTypes = {

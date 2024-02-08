@@ -9,10 +9,12 @@ export const Header = () => {
     setIsModalOpen(prevState => !prevState);
   };
 
-  const Example = (<div >
-    <h2>This is a Modal</h2>
-    <p>Modal content goes here.</p>
-  </div>)
+  const Example = (
+    <div>
+      <h2>This is a Modal</h2>
+      <p>Modal content goes here.</p>
+    </div>
+  );
 
   return (
     <header className="flex justify-between bg-primary-100">
@@ -24,7 +26,12 @@ export const Header = () => {
         Зворотній зв`язок
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={toggleModal} title='Title of modal' bgColor='bg-primary-200'>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+        title="Title of modal"
+        bgColor="bg-primary-200"
+      >
         {Example}
         {/* //TODO ticket MID-** add "Feedback form" */}
       </Modal>
