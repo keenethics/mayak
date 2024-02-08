@@ -16,7 +16,7 @@ export default function CheckBox({
   children = null,
   variant = checkBoxVariants.default,
 }) {
-  const id = `checkbox_id_${name}_|_${value}__`;
+  const id = `checkbox_${name}_${value}`;
   return (
     <div className={cn(variant.container.base)}>
       <input
