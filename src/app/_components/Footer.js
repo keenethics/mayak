@@ -4,7 +4,7 @@ import FooterImg from '@icons/white-logo.svg';
 import cn from '@utils/cn';
 import siteNav from '@config/siteNav';
 import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
-import SocialLink from '@/app/_components/Links/SocialLink';
+import SocialLink from '@components/Links/SocialLink';
 
 export default function Footer() {
   const { links } = siteNav;
