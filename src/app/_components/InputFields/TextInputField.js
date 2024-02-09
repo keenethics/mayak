@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputErrorIcon from '../Icons/InpurErrorIcon';
+import { InputErrorIcon } from '../Icons/InputErrorIcon';
 import { cn } from '@/utils/cn';
 import { variants } from './styles';
 
@@ -8,6 +8,7 @@ export function TextInputField({
   value,
   name,
   onChange,
+  type = 'text',
   disabled = false,
   placeholder = '',
   error = '',
@@ -27,14 +28,9 @@ export function TextInputField({
         )}
       >
         <input
-          className={cn(
-            variant.input.base,
-            variant.input.focus,
-            variant.input.style,
-            error && variant.input.error,
-          )}
+          className={cn(variant.input.base, variant.input.focus, variant.input.style, error && variant.input.error)}
           id={id}
-          type="text"
+          type={type}
           name={name}
           value={value}
           onChange={onChange}
@@ -45,14 +41,7 @@ export function TextInputField({
         {error && <InputErrorIcon className={cn(variant.errorIcon.base)} />}
       </div>
 
-      <label
-        className={cn(
-          variant.label.base,
-          variant.label.stateful,
-          error && variant.label.error,
-        )}
-        htmlFor={id}
-      >
+      <label className={cn(variant.label.base, variant.label.stateful, error && variant.label.error)} htmlFor={id}>
         {placeholder}
       </label>
     </div>
@@ -63,6 +52,7 @@ TextInputField.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['text', 'email', 'url', 'password', 'search', 'tel']),
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
   error: PropTypes.string,

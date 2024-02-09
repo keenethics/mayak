@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function InputErrorIcon({ className }) {
+export function InputErrorIcon({ className }) {
   return (
     <svg
       className={className}
