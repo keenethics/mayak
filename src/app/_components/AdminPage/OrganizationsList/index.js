@@ -1,1 +1,1 @@
-export * from './OrganizationsList';
+export { OrganizationsList } from './OrganizationsList';

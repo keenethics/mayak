@@ -1,1 +1,1 @@
-export * from './SpecialistList';
+export { SpecialistsList } from './SpecialistList';
