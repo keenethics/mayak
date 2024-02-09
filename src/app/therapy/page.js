@@ -9,7 +9,9 @@ export const metadata = {
 export default function Page() {
   // to use metadata, the components should be server components
   // so, move client components into a separate component
-  return <div>
-    <Therapies/>
-  </div>;
+  return (
+    <div>
+      <Therapies />
+    </div>
+  );
 }

@@ -1,4 +1,9 @@
 {
   "singleQuote": true,
+  "printWidth": 120,
+  "bracketSpacing": true,
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "semi": true,
   "plugins": ["prettier-plugin-prisma", "prettier-plugin-tailwindcss"]
 }
