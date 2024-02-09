@@ -8,7 +8,7 @@ export const ModalCloseButton = ({ onClose }) => (
       alt="Сlose Icon"
       aria-label="Сlose Icon"
       priority="true"
-      className={'text-gray-700 hover:text-primary-400'}
+      className="text-gray-700 hover:text-primary-400"
     />
   </button>
 );
