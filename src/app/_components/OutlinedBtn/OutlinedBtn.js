@@ -5,7 +5,7 @@ import { cn } from '@utils/cn';
 export default function OutlinedBtn({ children, className }) {
   // Basic styles
   const flexCenter = 'inline-flex flex-row items-center justify-center';
-  const basicBtnSize = 'w-[185px] h-[40px] py-2.5';
+  const basicBtnSize = 'px-6 py-[0.625rem]';
   const basicBtn = 'rounded-full outline-none border cursor-pointer';
   const basicBtnText = 'text-sm font-bold text-center';
   const basicBtnBg = 'bg-transparent';

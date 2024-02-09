@@ -22,31 +22,37 @@ export default function Header() {
   const basicBtnFocus = 'focus:text-primary-600 focus:bg-primary-200';
   const basicBtnActive = 'active:bg-primary-200 active:text-primary-600';
 
-  return (
-    <nav className={cn(flexBetween, 'w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-20 py-4')}>
-      <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
-        <Logo alt="Mayak logo" aria-label="Mayak logo" priority="true" className={cn('h-[74px] w-[129px]')} />
-      </Link>
-      <div className={cn(flexCenter, 'gap-6')}>
-        <InnerLink
-          role="list"
-          items={innerLinks}
-          href="/specialists"
-          className={cn(basicLink, transition, listItemTextHover, listItemText, 'gap-4 px-3 py-1')}
-        ></InnerLink>
-        <SocialLink
-          role="list"
-          links={links}
-          status="headerSocials"
-          className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
-        ></SocialLink>
-        <OutlinedBtn
-          className={cn(basicBtnActive, basicBtnFocus, basicBtnHover, 'border-gray-700 text-primary-500')}
-          aria-label="Click to fill feedback form"
-        >
-          Зворотній звʼязок
-        </OutlinedBtn>
-      </div>
-    </nav>
-  );
+  // return (
+  //   <nav className={cn(flexBetween, 'w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-20 py-4')}>
+  //     <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
+  //       <Logo alt="Mayak logo" aria-label="Mayak logo" priority="true" className={cn('h-[74px] w-[129px]')} />
+  //     </Link>
+  //     <div className={cn(flexCenter, 'gap-6')}>
+  //       <InnerLink
+  //         role="list"
+  //         items={innerLinks}
+  //         href="/specialists"
+  //         className={cn(basicLink, transition, listItemTextHover, listItemText, 'gap-4 px-3 py-1')}
+  //       />
+  //       <SocialLink
+  //         role="list"
+  //         links={links}
+  //         status="headerSocials"
+  //         className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
+  //       />
+  //       <OutlinedBtn
+  //         className={cn(
+  //           basicBtnActive,
+  //           basicBtnFocus,
+  //           basicBtnHover,
+  //           'border-gray-700 text-p4 font-bold text-primary-500',
+  //         )}
+  //         aria-label="Click to fill feedback form"
+  //       >
+  //         Зворотній звʼязок
+  //       </OutlinedBtn>
+  //     </div>
+  //   </nav>
+  // );
+  return <div>sdf</div>;
 }
