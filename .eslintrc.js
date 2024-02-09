@@ -13,10 +13,7 @@ module.exports = {
     'max-len': ['error', { code: 120, ignoreStrings: true }],
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'react/function-component-definition': [
-      2,
-      { namedComponents: ['arrow-function', 'function-declaration'] },
-    ],
+    'react/function-component-definition': [2, { namedComponents: ['arrow-function', 'function-declaration'] }],
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
     indent: ['error', 2],
     'no-multiple-empty-lines': ['error', { max: 3, maxBOF: 0, maxEOF: 0 }],

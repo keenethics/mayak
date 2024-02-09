@@ -1,11 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  useListTherapies,
-  useCreateTherapy,
-  useDeleteTherapy,
-} from '../../_hooks';
+import { useListTherapies, useCreateTherapy, useDeleteTherapy } from '../../_hooks';
 
 export default function Therapies() {
   const [price, setPrice] = useState('');
@@ -23,11 +19,7 @@ export default function Therapies() {
 
   return (
     <div style={{ margin: '10rem' }}>
-      <input
-        type="number"
-        value={price}
-        onChange={e => setPrice(e.target.value)}
-      />
+      <input type="number" value={price} onChange={e => setPrice(e.target.value)} />
       <button type="button" onClick={() => onAdd()}>
         Add
       </button>
