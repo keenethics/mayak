@@ -139,7 +139,7 @@ export const SpecialistCreate = () => {
       transform={transformFormData}
       mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
     >
-      <Toggle onChange={toggleFormMode} formMode={formMode} />
+      <Toggle onChange={toggleFormMode} caption={formMode} />
       <SimpleForm
         mode="onBlur"
         reValidateMode="onChange"
