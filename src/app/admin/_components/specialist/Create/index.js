@@ -2,11 +2,7 @@
 
 import React, { useState } from 'react';
 import {
-  BooleanInput,
-  Create,
-  SimpleForm,
-  useNotify,
-  useRedirect,
+  Create, SimpleForm, useNotify, useRedirect,
 } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SuccessNotifications, Titles } from '@/app/admin/_lib/consts';
@@ -20,6 +16,7 @@ import { PlacesOfWork } from '@/app/admin/_components/specialist/Create/PlacesOf
 import { Services } from '@/app/admin/_components/specialist/Create/Services';
 import { Contacts } from '@/app/admin/_components/specialist/Create/Contacts';
 import { transformIdList } from '@/app/admin/_utils/transformIdList';
+import { IsActive } from '@/app/admin/_components/isActive';
 
 const SpecialistCreate = () => {
   const [draft, setDraft] = useState(true);
@@ -101,9 +98,7 @@ const SpecialistCreate = () => {
           <PlacesOfWork />
           <Services />
           <Contacts />
-          <BooleanInput
-            name="isActive"
-            source="isActive"
+          <IsActive
             label="Активувати спеціаліста"
             className="mt-8"
             onChange={toggleFormMode}
