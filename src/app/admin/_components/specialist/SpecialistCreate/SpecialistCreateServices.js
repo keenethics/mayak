@@ -40,7 +40,7 @@ const SpecialistCreateServices = () => {
       <TextInput
         name={SpecialistFormFields.description.name}
         source={SpecialistFormFields.description.name}
-        label={SpecialistFormFields.isFreeReception.label}
+        label={SpecialistFormFields.description.label}
         fullWidth
         multiline
       />

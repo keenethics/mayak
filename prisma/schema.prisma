@@ -35,7 +35,7 @@ model Specialist {
   description       String?          @db.Text
   phone             String?          @db.VarChar(15)
   email             String?          @db.VarChar(320)
-  website           String?          @db.Text
+  website           String?          @unique @db.Text
   isActive          Boolean          @default(false)
 
   @@map("specialist")
