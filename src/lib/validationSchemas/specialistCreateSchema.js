@@ -44,6 +44,7 @@ const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
   email: z.string().trim().email().nullish(),
   website: z.string().trim().url().nullish(),
   placesOfWork: z.array(placesOfWorkSchema),
+  isActive: z.boolean().optional(),
 });
 
 export { SpecialistCreateDraftSchema, SpecialistCreateSchema };

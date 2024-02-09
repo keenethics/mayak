@@ -3,25 +3,27 @@
 import React from 'react';
 import {
   BooleanInput,
-  required,
   SelectArrayInput,
   TextInput,
   useGetList,
 } from 'react-admin';
 import { THERAPY } from '@/app/admin/_lib/consts';
 import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
-import { FormFieldWrapper } from '@/app/admin/_components/shared/FormFieldWrapper';
+import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import {
   SpecialistCreateFormBlocks,
   SpecialistFormFields,
 } from '@/app/admin/_lib/specialistData';
 
-const SpecialistCreateServices = () => {
+const Services = () => {
   const { data: therapies, isLoading: therapiesLoading } = useGetList(THERAPY);
   const therapiesList = getChoicesList(therapies);
 
   return (
-    <FormFieldWrapper title={SpecialistCreateFormBlocks.services}>
+    <FormFieldWrapper
+      title={SpecialistCreateFormBlocks.services}
+      className="mt-7"
+    >
       <SelectArrayInput
         name={SpecialistFormFields.therapies.name}
         source={SpecialistFormFields.therapies.name}
@@ -29,7 +31,6 @@ const SpecialistCreateServices = () => {
         isLoading={therapiesLoading}
         choices={therapiesList}
         className="w-full"
-        validate={required()}
       />
       <BooleanInput
         name={SpecialistFormFields.isFreeReception.name}
@@ -48,4 +49,4 @@ const SpecialistCreateServices = () => {
   );
 };
 
-export { SpecialistCreateServices };
+export { Services };

@@ -1,23 +1,23 @@
 'use client';
 
 import React from 'react';
-import { NumberInput, required, SelectInput } from 'react-admin';
-import { FormatOfWork, Gender } from '@/app/admin/_lib/consts';
+import { NumberInput, SelectInput } from 'react-admin';
+import { FormatOfWork, Gender } from '@prisma/client';
 import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
-import { FormFieldWrapper } from '@/app/admin/_components/shared/FormFieldWrapper';
+import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import {
   SpecialistCreateFormBlocks,
   SpecialistFormFields,
 } from '@/app/admin/_lib/specialistData';
 
-const SpecialistCreateDetails = () => {
+const Details = () => {
   const genderChoicesList = getChoicesList(Object.values(Gender));
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork));
 
   return (
     <FormFieldWrapper
       title={SpecialistCreateFormBlocks.details}
-      className="mt-5"
+      className="mt-3"
     >
       <div className="flex w-full gap-6">
         <SelectInput
@@ -25,14 +25,12 @@ const SpecialistCreateDetails = () => {
           source={SpecialistFormFields.gender.name}
           label={SpecialistFormFields.gender.label}
           choices={genderChoicesList}
-          validate={required()}
         />
         <NumberInput
           name={SpecialistFormFields.yearsOfExperience.name}
           source={SpecialistFormFields.yearsOfExperience.name}
           label={SpecialistFormFields.yearsOfExperience.label}
           min="0"
-          validate={required()}
         />
         <SelectInput
           name={SpecialistFormFields.formatOfWork.name}
@@ -40,11 +38,10 @@ const SpecialistCreateDetails = () => {
           label={SpecialistFormFields.formatOfWork.label}
           choices={formatOfWorkChoicesList}
           className="flex-1"
-          validate={required()}
         />
       </div>
     </FormFieldWrapper>
   );
 };
 
-export { SpecialistCreateDetails };
+export { Details };

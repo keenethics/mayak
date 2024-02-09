@@ -2,17 +2,6 @@ const THERAPY = 'therapy';
 const SPECIALIZATION = 'specialization';
 const DISTRICT = 'district';
 
-const Gender = {
-  male: 'MALE',
-  female: 'FEMALE',
-};
-
-const FormatOfWork = {
-  online: 'ONLINE',
-  offline: 'OFFLINE',
-  both: 'BOTH',
-};
-
 const FormMode = {
   draft: 'Чорнетка',
   base: 'Повна анкета',
@@ -29,8 +18,6 @@ const Titles = {
 };
 
 export {
-  Gender,
-  FormatOfWork,
   THERAPY,
   SPECIALIZATION,
   FormMode,
