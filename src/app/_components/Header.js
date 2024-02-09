@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Logo from '@icons/logo.svg';
 import siteNav from '@config/siteNav';
@@ -8,15 +6,9 @@ import { cn } from '@utils/cn';
 import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
 import InnerLink from '@components/Links/InnerLink';
 import SocialLink from '@components/Links/SocialLink';
-import { Modal } from './Modal';
 
 export default function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { links, innerLinks } = siteNav;
-
-  const toggleModal = () => {
-    setIsModalOpen(prevState => !prevState);
-  };
 
   //  Basic styles
   const flexBetween = 'flex flex-row items-center justify-between';
@@ -50,17 +42,12 @@ export default function Header() {
           className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
         ></SocialLink>
         <OutlinedBtn
-          onClick={toggleModal}
           className={cn(basicBtnActive, basicBtnFocus, basicBtnHover, 'border-gray-700 text-primary-500')}
           aria-label="Click to fill feedback form"
         >
           Зворотній звʼязок
         </OutlinedBtn>
       </div>
-
-      <Modal isOpen={isModalOpen} onClose={toggleModal} title="Title of modal" bgColor="bg-primary-200">
-        {/* //TODO ticket MID-** add "Feedback form" */}
-      </Modal>
     </nav>
   );
 }
