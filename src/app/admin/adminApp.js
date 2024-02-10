@@ -2,11 +2,7 @@
 
 import React from 'react';
 import {
-  Admin,
-  EditGuesser,
-  ListGuesser,
-  Resource,
-  ShowGuesser,
+  Admin, EditGuesser, ListGuesser, Resource, ShowGuesser,
 } from 'react-admin';
 import { SpecialistCreate } from '@/app/admin/_components/specialist';
 import { authProvider, dataProvider } from '@/app/admin/_providers';
@@ -30,24 +26,9 @@ export default function AdminPage() {
         show={ShowGuesser}
         create={SpecialistCreate}
       />
-      <Resource
-        name={Resources.district}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-      />
-      <Resource
-        name={Resources.specialization}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-      />
-      <Resource
-        name={Resources.address}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-      />
+      <Resource name={Resources.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource name={Resources.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource name="Address" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource
         name={Resources.placeOfWork}
         options={{ label: 'Place of work' }}
