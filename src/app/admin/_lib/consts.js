@@ -1,10 +1,11 @@
-const THERAPY = 'therapy';
-const SPECIALIZATION = 'specialization';
-const DISTRICT = 'district';
-
-const FormMode = {
-  draft: 'Чорнетка',
-  base: 'Повна анкета',
+const Resources = {
+  therapy: 'therapy',
+  specialist: 'specialist',
+  district: 'district',
+  specialization: 'specialization',
+  address: 'address',
+  placeOfWork: 'placeOfWork',
+  feedback: 'feedback',
 };
 
 const SuccessNotifications = {
@@ -17,11 +18,4 @@ const Titles = {
   specialistCreate: 'Додавання нового спеціаліста',
 };
 
-export {
-  THERAPY,
-  SPECIALIZATION,
-  FormMode,
-  SuccessNotifications,
-  Titles,
-  DISTRICT,
-};
+export { SuccessNotifications, Titles, Resources };

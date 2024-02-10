@@ -10,19 +10,20 @@ import {
 } from 'react-admin';
 import { SpecialistCreate } from '@/app/admin/_components/specialist';
 import { authProvider, dataProvider } from '@/app/admin/_providers';
+import { Resources } from '@/app/admin/_lib/consts';
 
 export default function AdminPage() {
   return (
     <Admin dataProvider={dataProvider} authProvider={authProvider}>
       <Resource
-        name="Therapy"
+        name={Resources.therapy}
         options={{ label: 'Therapy' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="Specialist"
+        name={Resources.specialist}
         options={{ label: 'Specialist' }}
         list={ListGuesser}
         edit={EditGuesser}
@@ -30,32 +31,32 @@ export default function AdminPage() {
         create={SpecialistCreate}
       />
       <Resource
-        name="District"
+        name={Resources.district}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="Specialization"
+        name={Resources.specialization}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="Address"
+        name={Resources.address}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="PlaceOfWork"
+        name={Resources.placeOfWork}
         options={{ label: 'Place of work' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="Feedback"
+        name={Resources.feedback}
         options={{ label: 'Feedback' }}
         list={ListGuesser}
         show={ShowGuesser}

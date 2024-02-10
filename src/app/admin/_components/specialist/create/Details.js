@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { NumberInput, SelectInput } from 'react-admin';
+import { NumberInput, required, SelectInput } from 'react-admin';
 import { FormatOfWork, Gender } from '@prisma/client';
 import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
@@ -14,6 +14,8 @@ const Details = () => {
   const genderChoicesList = getChoicesList(Object.values(Gender));
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork));
 
+  const { gender, yearsOfExperience, formatOfWork } = SpecialistFormFields;
+
   return (
     <FormFieldWrapper
       title={SpecialistCreateFormBlocks.details}
@@ -21,22 +23,25 @@ const Details = () => {
     >
       <div className="flex w-full gap-6">
         <SelectInput
-          name={SpecialistFormFields.gender.name}
-          source={SpecialistFormFields.gender.name}
-          label={SpecialistFormFields.gender.label}
+          name={gender.name}
+          source={gender.name}
+          label={gender.label}
+          validate={gender.validate && required()}
           choices={genderChoicesList}
         />
         <NumberInput
-          name={SpecialistFormFields.yearsOfExperience.name}
-          source={SpecialistFormFields.yearsOfExperience.name}
-          label={SpecialistFormFields.yearsOfExperience.label}
+          name={yearsOfExperience.name}
+          source={yearsOfExperience.name}
+          label={yearsOfExperience.label}
+          validate={yearsOfExperience.validate && required()}
           min="0"
         />
         <SelectInput
-          name={SpecialistFormFields.formatOfWork.name}
-          source={SpecialistFormFields.formatOfWork.name}
-          label={SpecialistFormFields.formatOfWork.label}
+          name={formatOfWork.name}
+          source={formatOfWork.name}
+          label={formatOfWork.label}
           choices={formatOfWorkChoicesList}
+          validate={formatOfWork.validate && required()}
           className="flex-1"
         />
       </div>

@@ -1,3 +1,3 @@
-import { SpecialistCreate } from '@/app/admin/_components/specialist/Create';
+import { SpecialistCreate } from './create';
 
 export { SpecialistCreate };

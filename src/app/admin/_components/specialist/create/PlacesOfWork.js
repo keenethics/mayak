@@ -4,13 +4,14 @@ import React from 'react';
 import {
   ArrayInput,
   FormDataConsumer,
+  required,
   SelectInput,
   SimpleFormIterator,
   TextInput,
   useGetList,
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
-import { DISTRICT } from '@/app/admin/_lib/consts';
+import { Resources } from '@/app/admin/_lib/consts';
 import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import {
@@ -19,9 +20,15 @@ import {
 } from '@/app/admin/_lib/specialistData';
 
 const PlacesOfWork = () => {
-  const { data: districts, isLoading: districtsLoading } = useGetList(DISTRICT);
+  const { data: districts, isLoading: districtsLoading } = useGetList(
+    Resources.district,
+  );
 
   const districtsList = getChoicesList(districts);
+
+  const {
+    placesOfWork, fullAddress, nameOfClinic, district,
+  } = SpecialistFormFields;
 
   const isOnline = format => format === FormatOfWork.ONLINE;
 
@@ -37,28 +44,32 @@ const PlacesOfWork = () => {
           </span>
         ) : (
           <ArrayInput
-            name={SpecialistFormFields.placesOfWork.name}
-            source={SpecialistFormFields.placesOfWork.name}
-            label={SpecialistFormFields.placesOfWork.label}
+            name={placesOfWork.name}
+            source={placesOfWork.name}
+            label={placesOfWork.label}
+            validate={placesOfWork.validate && required()}
             fullWidth
           >
             <SimpleFormIterator inline>
               <TextInput
                 fullWidth
-                source={SpecialistFormFields.fullAddress.name}
-                label={SpecialistFormFields.fullAddress.label}
+                source={fullAddress.name}
+                label={fullAddress.label}
+                validate={fullAddress.validate && required()}
                 helperText="Вулиця, номер будинку, поверх, кабінет"
               />
               <TextInput
-                source={SpecialistFormFields.nameOfClinic.name}
-                label={SpecialistFormFields.nameOfClinic.label}
+                source={nameOfClinic.name}
+                label={nameOfClinic.label}
+                validate={nameOfClinic.validate && required()}
                 fullWidth
               />
               <SelectInput
-                source={SpecialistFormFields.district.name}
-                label={SpecialistFormFields.district.label}
+                source={district.name}
+                label={district.label}
                 isLoading={districtsLoading}
                 choices={districtsList}
+                validate={district.validate && required()}
               />
             </SimpleFormIterator>
           </ArrayInput>

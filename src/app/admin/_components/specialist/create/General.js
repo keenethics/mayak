@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { SelectArrayInput, useGetList } from 'react-admin';
-import { SPECIALIZATION } from '@/app/admin/_lib/consts';
+import { required, SelectArrayInput, useGetList } from 'react-admin';
+import { Resources } from '@/app/admin/_lib/consts';
 import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import {
@@ -12,9 +12,11 @@ import {
 import { generateTextInputList } from '@/app/admin/_utils/generateTextInputList';
 
 export const General = () => {
-  const { data: specializations, isLoading: specializationsLoading } = useGetList(SPECIALIZATION);
+  const { data: specializationsData, isLoading: specializationsLoading } = useGetList(Resources.specialization);
 
-  const specializationsList = getChoicesList(specializations);
+  const specializationsList = getChoicesList(specializationsData);
+
+  const { name, label, validate } = SpecialistFormFields.specializations;
 
   return (
     <FormFieldWrapper title={SpecialistCreateFormBlocks.general}>
@@ -22,11 +24,12 @@ export const General = () => {
         {generateTextInputList(SpecialistFormFields.general)}
       </div>
       <SelectArrayInput
-        name={SpecialistFormFields.specializations.name}
-        source={SpecialistFormFields.specializations.name}
-        label={SpecialistFormFields.specializations.label}
+        name={name}
+        source={name}
+        label={label}
         isLoading={specializationsLoading}
         choices={specializationsList}
+        validate={validate && required()}
         fullWidth
       />
     </FormFieldWrapper>

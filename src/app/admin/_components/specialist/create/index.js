@@ -10,13 +10,16 @@ import {
   SpecialistCreateDraftSchema as draftSchema,
   SpecialistCreateSchema as fullSchema,
 } from '@/lib/validationSchemas/specialistCreateSchema';
-import { General } from '@/app/admin/_components/specialist/Create/General';
-import { Details } from '@/app/admin/_components/specialist/Create/Details';
-import { PlacesOfWork } from '@/app/admin/_components/specialist/Create/PlacesOfWork';
-import { Services } from '@/app/admin/_components/specialist/Create/Services';
-import { Contacts } from '@/app/admin/_components/specialist/Create/Contacts';
-import { transformIdList } from '@/app/admin/_utils/transformIdList';
+import { General } from '@/app/admin/_components/specialist/create/General';
+import { Details } from '@/app/admin/_components/specialist/create/Details';
+import { PlacesOfWork } from '@/app/admin/_components/specialist/create/PlacesOfWork';
+import { Services } from '@/app/admin/_components/specialist/create/Services';
+import { Contacts } from '@/app/admin/_components/specialist/create/Contacts';
 import { IsActive } from '@/app/admin/_components/isActive';
+import {
+  tranformDraftData,
+  transformFullData,
+} from '@/app/admin/_utils/transformSpecialistFormData';
 
 const SpecialistCreate = () => {
   const [draft, setDraft] = useState(true);
@@ -28,7 +31,7 @@ const SpecialistCreate = () => {
 
   const handleSuccess = () => {
     notify(SuccessNotifications.created);
-    redirect('/Specialist');
+    redirect('/specialist');
   };
 
   const handleError = (error) => {
@@ -41,43 +44,12 @@ const SpecialistCreate = () => {
     setDraft(toggleState);
   }
 
-  const transformPlacesOfWork = (placesArray) => {
-    const mappedPlaces = placesArray.map(place => ({
-      ...place,
-      district: { connect: { id: place.district } },
-    }));
-
-    return [
-      {
-        addresses: {
-          create: mappedPlaces,
-        },
-      },
-    ];
-  };
-
   const transformFormData = (data) => {
     if (draft) {
-      return {
-        ...data,
-        specializations: {
-          connect: transformIdList(data.specializations),
-        },
-      };
+      return tranformDraftData(data);
     }
 
-    return {
-      ...data,
-      specializations: {
-        connect: transformIdList(data.specializations),
-      },
-      placesOfWork: {
-        create: transformPlacesOfWork(data.placesOfWork),
-      },
-      therapies: {
-        connect: transformIdList(data.therapies),
-      },
-    };
+    return transformFullData(data);
   };
 
   return (

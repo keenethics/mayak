@@ -1,6 +1,8 @@
-import { TextInput } from 'react-admin';
+import { required, TextInput } from 'react-admin';
 
-const generateTextInputList = (inputList, className, ...props) => inputList.map(({ name, type, label }) => (
+const generateTextInputList = (inputList, className, ...props) => inputList.map(({
+  name, type, label, validate,
+}) => (
   <TextInput
     key={name}
     name={name}
@@ -8,6 +10,7 @@ const generateTextInputList = (inputList, className, ...props) => inputList.map(
     type={type}
     label={label}
     className={className}
+    validate={validate && required()}
     {...props}
   />
 ));

@@ -7,7 +7,7 @@ import {
   TextInput,
   useGetList,
 } from 'react-admin';
-import { THERAPY } from '@/app/admin/_lib/consts';
+import { Resources } from '@/app/admin/_lib/consts';
 import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import {
@@ -16,7 +16,9 @@ import {
 } from '@/app/admin/_lib/specialistData';
 
 const Services = () => {
-  const { data: therapies, isLoading: therapiesLoading } = useGetList(THERAPY);
+  const { data: therapies, isLoading: therapiesLoading } = useGetList(
+    Resources.therapy,
+  );
   const therapiesList = getChoicesList(therapies);
 
   return (
