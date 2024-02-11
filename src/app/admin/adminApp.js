@@ -1,15 +1,11 @@
 'use client';
 
 import React from 'react';
-import {
-  Admin, ListGuesser, Resource, ShowGuesser, EditGuesser,
-} from 'react-admin';
+import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from './authProvider';
-import { SpecialistsList } from '@/app/_components/AdminPage/SpecialistsList';
-import { SpecialistShow } from '@/app/_components/AdminPage/SpecialistShow';
-import { OrganizationsList } from '@/app/_components/AdminPage/OrganizationsList';
-import { OrganizationShow } from '@/app/_components/AdminPage/OrganizationShow';
+import { SpecialistsList, SpecialistShow } from './_components/specialist';
+import { OrganizationsList, OrganizationShow } from './_components/organization';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');

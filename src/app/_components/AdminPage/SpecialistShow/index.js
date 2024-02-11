@@ -1,1 +1,0 @@
-export { SpecialistShow } from './SpecialistShow';

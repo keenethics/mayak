@@ -1,1 +1,0 @@
-export { OrganizationShow } from './OrganizationShow';

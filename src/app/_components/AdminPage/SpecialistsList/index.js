@@ -1,1 +1,0 @@
-export { SpecialistsList } from './SpecialistList';

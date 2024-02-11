@@ -1,1 +1,0 @@
-export { OrganizationsList } from './OrganizationsList';
