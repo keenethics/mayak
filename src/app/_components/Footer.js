@@ -6,7 +6,7 @@ import siteNav from '@config/siteNav';
 import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
 import SocialLink from '@components/Links/SocialLink';
 
-export default function Footer() {
+export function Footer() {
   const { links } = siteNav;
 
   // Basic styles
