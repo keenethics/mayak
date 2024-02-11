@@ -1,6 +1,4 @@
-import {
-  SearchInput, DateTimeInput, SelectInput, BooleanInput,
-} from 'react-admin';
+import { SearchInput, DateTimeInput, SelectInput } from 'react-admin';
 
 export const specialistsFilters = [
   <SearchInput key="search" source="q" alwaysOn />,
@@ -17,7 +15,16 @@ export const specialistsFilters = [
     ]}
     alwaysOn
   />,
-  <BooleanInput key="active" label="Active" source={'isActive'} resettable={true} />,
+  <SelectInput
+    key="active"
+    label="Active"
+    source={'isActive'}
+    choices={[
+      { id: true, name: 'Active' },
+      { id: false, name: 'Not active' },
+    ]}
+    alwaysOn
+  />,
 ];
 
 export const organizationFilters = specialistsFilters;
