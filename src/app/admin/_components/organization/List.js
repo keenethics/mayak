@@ -1,5 +1,7 @@
 import React from 'react';
-import { Datagrid, List, TextField, BooleanField, DateField } from 'react-admin';
+import {
+  Datagrid, List, TextField, BooleanField, DateField,
+} from 'react-admin';
 import { organizationFilters } from '../../filters';
 
 export function OrganizationsList() {

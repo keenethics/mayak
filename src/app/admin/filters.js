@@ -1,4 +1,6 @@
-import { SearchInput, DateTimeInput, SelectInput, BooleanInput } from 'react-admin';
+import {
+  SearchInput, DateTimeInput, SelectInput, BooleanInput,
+} from 'react-admin';
 
 export const specialistsFilters = [
   <SearchInput key="search" source="q" alwaysOn />,

@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Datagrid, List, TextField, BooleanField, DateField } from 'react-admin';
+import {
+  Datagrid, List, TextField, BooleanField, DateField,
+} from 'react-admin';
 import { specialistsFilters } from '../../filters';
 
 export function SpecialistsList() {

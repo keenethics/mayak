@@ -13,7 +13,7 @@ export function searchInputFilters(modelName, filter) {
 }
 
 const handler = auth(
-  withErrorHandler(async req => {
+  withErrorHandler(async (req) => {
     if (!req.auth) throw new NotAuthorizedException();
     const json = await req.json();
     const { resource: modelName } = json;

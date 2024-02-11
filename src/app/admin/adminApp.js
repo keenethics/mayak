@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
+import {
+  Admin, ListGuesser, Resource, ShowGuesser, EditGuesser,
+} from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from './authProvider';
 import { SpecialistsList, SpecialistShow } from './_components/specialist';
