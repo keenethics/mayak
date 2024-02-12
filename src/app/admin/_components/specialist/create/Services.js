@@ -2,30 +2,17 @@
 
 import React from 'react';
 import {
-  BooleanInput,
-  SelectArrayInput,
-  TextInput,
-  useGetList,
+  BooleanInput, SelectArrayInput, TextInput, useGetList,
 } from 'react-admin';
 import { Resources } from '@/app/admin/_lib/consts';
-import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import {
-  SpecialistCreateFormBlocks,
-  SpecialistFormFields,
-} from '@/app/admin/_lib/specialistData';
+import { SpecialistCreateFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
 const Services = () => {
-  const { data: therapies, isLoading: therapiesLoading } = useGetList(
-    Resources.therapy,
-  );
-  const therapiesList = getChoicesList(therapies);
+  const { data: therapiesList, isLoading: therapiesLoading } = useGetList(Resources.therapy);
 
   return (
-    <FormFieldWrapper
-      title={SpecialistCreateFormBlocks.services}
-      className="mt-7"
-    >
+    <FormFieldWrapper title={SpecialistCreateFormBlocks.services}>
       <SelectArrayInput
         name={SpecialistFormFields.therapies.name}
         source={SpecialistFormFields.therapies.name}

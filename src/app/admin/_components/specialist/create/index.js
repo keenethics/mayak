@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import {
-  Create, SimpleForm, useNotify, useRedirect,
+  BooleanInput, Create, SimpleForm, useNotify, useRedirect,
 } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SuccessNotifications, Titles } from '@/app/admin/_lib/consts';
@@ -15,11 +15,7 @@ import { Details } from '@/app/admin/_components/specialist/create/Details';
 import { PlacesOfWork } from '@/app/admin/_components/specialist/create/PlacesOfWork';
 import { Services } from '@/app/admin/_components/specialist/create/Services';
 import { Contacts } from '@/app/admin/_components/specialist/create/Contacts';
-import { IsActive } from '@/app/admin/_components/isActive';
-import {
-  tranformDraftData,
-  transformFullData,
-} from '@/app/admin/_utils/transformSpecialistFormData';
+import { tranformDraftData, transformFullData } from '@/app/admin/_utils/transformSpecialistFormData';
 
 const SpecialistCreate = () => {
   const [draft, setDraft] = useState(true);
@@ -63,17 +59,19 @@ const SpecialistCreate = () => {
           mode="onBlur"
           reValidateMode="onChange"
           resolver={zodResolver(validationSchema)}
-          className="w-[800px]"
+          className="max-w-[800px]"
         >
           <General />
           <Details />
           <PlacesOfWork />
           <Services />
           <Contacts />
-          <IsActive
+          <BooleanInput
+            name="isActive"
+            source="isActive"
             label="Активувати спеціаліста"
-            className="mt-8"
             onChange={toggleFormMode}
+            className="mt-8"
           />
         </SimpleForm>
       </Create>

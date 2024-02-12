@@ -3,25 +3,23 @@
 import React from 'react';
 import { NumberInput, required, SelectInput } from 'react-admin';
 import { FormatOfWork, Gender } from '@prisma/client';
-import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import {
-  SpecialistCreateFormBlocks,
-  SpecialistFormFields,
-} from '@/app/admin/_lib/specialistData';
+import { SpecialistCreateFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
 const Details = () => {
+  const getChoicesList = list => list.map(item => ({
+    id: item,
+    name: item.toLowerCase(),
+  }));
+
   const genderChoicesList = getChoicesList(Object.values(Gender));
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork));
 
   const { gender, yearsOfExperience, formatOfWork } = SpecialistFormFields;
 
   return (
-    <FormFieldWrapper
-      title={SpecialistCreateFormBlocks.details}
-      className="mt-3"
-    >
-      <div className="flex w-full gap-6">
+    <FormFieldWrapper title={SpecialistCreateFormBlocks.details} className="mt-3">
+      <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
         <SelectInput
           name={gender.name}
           source={gender.name}

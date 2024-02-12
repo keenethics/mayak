@@ -12,19 +12,11 @@ import {
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
 import { Resources } from '@/app/admin/_lib/consts';
-import { getChoicesList } from '@/app/admin/_utils/getChoicesList';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import {
-  SpecialistCreateFormBlocks,
-  SpecialistFormFields,
-} from '@/app/admin/_lib/specialistData';
+import { SpecialistCreateFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
 const PlacesOfWork = () => {
-  const { data: districts, isLoading: districtsLoading } = useGetList(
-    Resources.district,
-  );
-
-  const districtsList = getChoicesList(districts);
+  const { data: districtsList, isLoading: districtsLoading } = useGetList(Resources.district);
 
   const {
     placesOfWork, fullAddress, nameOfClinic, district,
@@ -33,15 +25,10 @@ const PlacesOfWork = () => {
   const isOnline = format => format === FormatOfWork.ONLINE;
 
   return (
-    <FormFieldWrapper
-      title={SpecialistCreateFormBlocks.placesOfWOrk}
-      className="mt-3"
-    >
+    <FormFieldWrapper title={SpecialistCreateFormBlocks.placesOfWOrk} className="mt-3">
       <FormDataConsumer>
         {({ formData }) => (isOnline(formData.formatOfWork) ? (
-          <span className="text-caption text-gray-600">
-              Спеціаліст працює онлайн
-          </span>
+          <span className="text-caption text-gray-600">Спеціаліст працює онлайн</span>
         ) : (
           <ArrayInput
             name={placesOfWork.name}
