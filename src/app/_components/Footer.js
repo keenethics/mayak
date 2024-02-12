@@ -3,10 +3,9 @@ import Link from 'next/link';
 import FooterImg from '@icons/white-logo.svg';
 import { cn } from '@utils/cn';
 import siteNav from '@config/siteNav';
-import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
-import SocialLink from '@components/Links/SocialLink';
+import { OutlinedButton, SocialLink } from '@components';
 
-export default function Footer() {
+export function Footer() {
   const { links } = siteNav;
 
   // Basic styles
@@ -34,12 +33,12 @@ export default function Footer() {
         </Link>
         <div className={cn(flexCenter, 'gap-6 text-other-white')}>
           <p className={cn('text-p1 font-bold')}>Ставай нашим партнером</p>
-          <OutlinedBtn
+          <OutlinedButton
             className={cn(footerBtnHover, footerBtnFocus, footerBtnActive, footerBtnBorder, outlinedColors, 'text-p4')}
             aria-label="Click to fill application form"
           >
             Залишити заявку
-          </OutlinedBtn>
+          </OutlinedButton>
         </div>
       </div>
       <div className={cn('my-12 h-[1px] w-full bg-gray-300')}></div>
