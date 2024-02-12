@@ -27,6 +27,7 @@ export default function Header() {
       <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
         <Logo alt="Mayak logo" aria-label="Mayak logo" priority="true" className={cn('h-[74px] w-[129px]')} />
       </Link>
+
       <div className={cn(flexCenter, 'gap-6')}>
         <InnerLink
           role="list"
