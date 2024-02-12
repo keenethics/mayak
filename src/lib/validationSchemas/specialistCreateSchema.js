@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { FormatOfWork, Gender } from '@prisma/client';
 import { PHONE_REGEX } from '@/lib/consts';
 
 const zString = fieldName => z
@@ -32,15 +33,21 @@ const SpecialistCreateDraftSchema = z.object({
 
 const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
   surname: zStringWithMinMax('Surname').nullish(),
-  gender: z.string(),
+  gender: z.string().refine(val => Object.values(Gender).includes(val), {
+    message: 'Unacceptable value',
+  }),
   yearsOfExperience: z.number().nonnegative(),
-  formatOfWork: z.string(),
+  formatOfWork: z.string().refine(val => Object.values(FormatOfWork).includes(val), {
+    message: 'Unacceptable value',
+  }),
   therapies: zArray,
   isFreeReception: z.boolean(),
   description: z.string().trim().nullish(),
-  phone: zString('Phone number').refine(val => PHONE_REGEX.test(val), {
-    message: 'Please, enter phone number in format +380XXXXXXXXX',
-  }),
+  phone: zString('Phone number')
+    .refine(val => PHONE_REGEX.test(val), {
+      message: 'Please, enter phone number in format +380XXXXXXXXX',
+    })
+    .nullish(),
   email: z.string().trim().email().nullish(),
   website: z.string().trim().url().nullish(),
   placesOfWork: z.array(placesOfWorkSchema),

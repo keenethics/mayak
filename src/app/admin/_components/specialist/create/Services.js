@@ -11,29 +11,25 @@ import { SpecialistCreateFormBlocks, SpecialistFormFields } from '@/app/admin/_l
 const Services = () => {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(Resources.therapy);
 
+  const { therapies, isFreeReception, description } = SpecialistFormFields;
+
   return (
     <FormFieldWrapper title={SpecialistCreateFormBlocks.services}>
       <SelectArrayInput
-        name={SpecialistFormFields.therapies.name}
-        source={SpecialistFormFields.therapies.name}
-        label={SpecialistFormFields.therapies.label}
+        name={therapies.name}
+        source={therapies.name}
+        label={therapies.label}
         isLoading={therapiesLoading}
         choices={therapiesList}
         className="w-full"
       />
       <BooleanInput
-        name={SpecialistFormFields.isFreeReception.name}
-        source={SpecialistFormFields.isFreeReception.name}
-        label={SpecialistFormFields.isFreeReception.label}
+        name={isFreeReception.name}
+        source={isFreeReception.name}
+        label={isFreeReception.label}
         className="w-max"
       />
-      <TextInput
-        name={SpecialistFormFields.description.name}
-        source={SpecialistFormFields.description.name}
-        label={SpecialistFormFields.description.label}
-        fullWidth
-        multiline
-      />
+      <TextInput name={description.name} source={description.name} label={description.label} fullWidth multiline />
     </FormFieldWrapper>
   );
 };

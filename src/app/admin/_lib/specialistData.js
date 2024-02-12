@@ -3,7 +3,7 @@ const contacts = [
     name: 'phone',
     type: 'tel',
     label: 'Телефон',
-    validate: true,
+    validate: false,
   },
   {
     name: 'email',
