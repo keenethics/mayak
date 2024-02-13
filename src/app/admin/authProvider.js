@@ -1,7 +1,7 @@
 import { getSession, signIn, signOut } from 'next-auth/react';
 import { LOGIN_URL } from '@/lib/consts';
 
-const authProvider = {
+export const authProvider = {
   login: async credentials => signIn(
     'credentials',
     {
@@ -28,5 +28,3 @@ const authProvider = {
   },
   getPermissions: () => Promise.resolve(),
 };
-
-export default authProvider;

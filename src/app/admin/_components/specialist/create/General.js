@@ -7,7 +7,7 @@ import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 import { generateTextInputList } from '@/app/admin/_utils/generateTextInputList';
 
-export const General = () => {
+export function General() {
   const { data: specializationsList, isLoading: specializationsLoading } = useGetList(RESOURCES.specialization);
 
   const { name, label, validate } = SpecialistFormFields.specializations;
@@ -28,4 +28,4 @@ export const General = () => {
       />
     </FormFieldWrapper>
   );
-};
+}

@@ -14,10 +14,10 @@ import { Details } from '@/app/admin/_components/specialist/create/Details';
 import { PlacesOfWork } from '@/app/admin/_components/specialist/create/PlacesOfWork';
 import { Services } from '@/app/admin/_components/specialist/create/Services';
 import { Contacts } from '@/app/admin/_components/specialist/create/Contacts';
-import { tranformDraftData, transformFullData } from '@/app/admin/_utils/transformSpecialistFormData';
+import { transformDraftData, transformFullData } from '@/app/admin/_utils/transformSpecialistFormData';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
 
-const SpecialistCreate = () => {
+export function SpecialistCreate() {
   const [draft, setDraft] = useState(true);
 
   const notify = useNotify();
@@ -42,7 +42,7 @@ const SpecialistCreate = () => {
 
   const transformFormData = (data) => {
     if (draft) {
-      return tranformDraftData(data);
+      return transformDraftData(data);
     }
 
     return transformFullData(data);
@@ -77,6 +77,4 @@ const SpecialistCreate = () => {
       </Create>
     </>
   );
-};
-
-export { SpecialistCreate };
+}

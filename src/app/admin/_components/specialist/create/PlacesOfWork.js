@@ -15,7 +15,7 @@ import { RESOURCES } from '@/app/admin/_lib/consts';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
-const PlacesOfWork = () => {
+export function PlacesOfWork() {
   const { data: districtsList, isLoading: districtsLoading } = useGetList(RESOURCES.district);
 
   const {
@@ -28,7 +28,7 @@ const PlacesOfWork = () => {
     <FormFieldWrapper title={SpecialistFormBlocks.placesOfWOrk} className="mt-3">
       <FormDataConsumer>
         {({ formData }) => (isOnline(formData.formatOfWork) ? (
-          <span className="text-caption text-gray-600">Спеціаліст працює онлайн</span>
+          <p className="mb-5 text-caption text-gray-600">Спеціаліст працює онлайн</p>
         ) : (
           <ArrayInput
             name={placesOfWork.name}
@@ -65,6 +65,4 @@ const PlacesOfWork = () => {
       </FormDataConsumer>
     </FormFieldWrapper>
   );
-};
-
-export { PlacesOfWork };
+}

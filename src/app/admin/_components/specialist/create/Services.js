@@ -8,7 +8,7 @@ import { RESOURCES } from '@/app/admin/_lib/consts';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
-const Services = () => {
+export function Services() {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
 
   const { therapies, isFreeReception, description } = SpecialistFormFields;
@@ -32,6 +32,4 @@ const Services = () => {
       <TextInput name={description.name} source={description.name} label={description.label} fullWidth multiline />
     </FormFieldWrapper>
   );
-};
-
-export { Services };
+}

@@ -6,7 +6,7 @@ import { FormatOfWork, Gender } from '@prisma/client';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
-const Details = () => {
+export function Details() {
   const getChoicesList = list => list.map(item => ({
     id: item,
     name: item.toLowerCase(),
@@ -45,6 +45,4 @@ const Details = () => {
       </div>
     </FormFieldWrapper>
   );
-};
-
-export { Details };
+}

@@ -1,6 +1,6 @@
 import { mapIdArrayToIdObjects } from '@/app/admin/_utils/mapIdArrayToIdObjects';
 
-const transformPlacesOfWork = (placesArray) => {
+function transformPlacesOfWork(placesArray) {
   const mappedPlaces = placesArray.map(place => ({
     ...place,
     district: { connect: { id: place.district } },
@@ -13,26 +13,30 @@ const transformPlacesOfWork = (placesArray) => {
       },
     },
   ];
-};
+}
 
-const tranformDraftData = data => ({
-  ...data,
-  specializations: {
-    connect: mapIdArrayToIdObjects(data.specializations),
-  },
-});
+function transformDraftData(data) {
+  return {
+    ...data,
+    specializations: {
+      connect: mapIdArrayToIdObjects(data.specializations),
+    },
+  };
+}
 
-const transformFullData = data => ({
-  ...data,
-  specializations: {
-    connect: mapIdArrayToIdObjects(data.specializations),
-  },
-  placesOfWork: {
-    create: transformPlacesOfWork(data.placesOfWork),
-  },
-  therapies: {
-    connect: mapIdArrayToIdObjects(data.therapies),
-  },
-});
+function transformFullData(data) {
+  return {
+    ...data,
+    specializations: {
+      connect: mapIdArrayToIdObjects(data.specializations),
+    },
+    placesOfWork: {
+      create: transformPlacesOfWork(data.placesOfWork),
+    },
+    therapies: {
+      connect: mapIdArrayToIdObjects(data.therapies),
+    },
+  };
+}
 
-export { tranformDraftData, transformFullData };
+export { transformDraftData, transformFullData };
