@@ -1,8 +1,6 @@
-function mapIdArrayToIdObjects(IdList) {
-  return IdList.map(id => ({ id }));
-}
+const mapIdArrayToIdObjects = IdList => IdList.map(id => ({ id }));
 
-function transformPlacesOfWork(placesArray) {
+const transformPlacesOfWork = (placesArray) => {
   const mappedPlaces = placesArray.map(place => ({
     ...place,
     district: { connect: { id: place.district } },
@@ -15,30 +13,24 @@ function transformPlacesOfWork(placesArray) {
       },
     },
   ];
-}
+};
 
-function transformDraftData(data) {
-  return {
-    ...data,
-    specializations: {
-      connect: mapIdArrayToIdObjects(data.specializations),
-    },
-  };
-}
+export const transformDraftData = data => ({
+  ...data,
+  specializations: {
+    connect: mapIdArrayToIdObjects(data.specializations),
+  },
+});
 
-function transformFullData(data) {
-  return {
-    ...data,
-    specializations: {
-      connect: mapIdArrayToIdObjects(data.specializations),
-    },
-    placesOfWork: {
-      create: transformPlacesOfWork(data.placesOfWork),
-    },
-    therapies: {
-      connect: mapIdArrayToIdObjects(data.therapies),
-    },
-  };
-}
-
-export { transformDraftData, transformFullData };
+export const transformFullData = data => ({
+  ...data,
+  specializations: {
+    connect: mapIdArrayToIdObjects(data.specializations),
+  },
+  placesOfWork: {
+    create: transformPlacesOfWork(data.placesOfWork),
+  },
+  therapies: {
+    connect: mapIdArrayToIdObjects(data.therapies),
+  },
+});

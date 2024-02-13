@@ -40,7 +40,7 @@ const general = [
   },
 ];
 
-const SpecialistFormFields = {
+export const SpecialistFormFields = {
   general,
   contacts,
   specializations: {
@@ -111,12 +111,10 @@ const SpecialistFormFields = {
   },
 };
 
-const SpecialistFormBlocks = {
+export const SpecialistFormBlocks = {
   general: 'Основні данні',
   details: 'Деталі',
   placesOfWOrk: 'Місце надання послуг',
   services: 'Послуги',
   contacts: 'Контактні данні',
 };
-
-export { SpecialistFormFields, SpecialistFormBlocks };
