@@ -1,4 +1,4 @@
 {
-  "*.{js}": "next lint",
-  "*.{js,scss,md,json,prisma}": "prettier --check"
+  "*.{js}": "eslint --ext .js,.mjs",
+  "*.{scss,md,json,prisma}": "prettier --check"
 }
