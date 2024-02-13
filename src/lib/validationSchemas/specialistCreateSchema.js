@@ -2,20 +2,22 @@ import { z } from 'zod';
 import { FormatOfWork, Gender } from '@prisma/client';
 import { PHONE_REGEX } from '@/lib/consts';
 
-const zString = fieldName => z
-  .string({
-    required_error: `${fieldName} is required`,
-    invalid_type_error: 'Must be a string',
-  })
-  .trim();
+const zString = fieldName =>
+  z
+    .string({
+      required_error: `${fieldName} is required`,
+      invalid_type_error: 'Must be a string',
+    })
+    .trim();
 
-const zStringWithMinMax = fieldName => zString(fieldName)
-  .min(2, {
-    message: 'Must have at least 2 characters',
-  })
-  .max(128, {
-    message: 'Must not be longer than 128 characters',
-  });
+const zStringWithMinMax = fieldName =>
+  zString(fieldName)
+    .min(2, {
+      message: 'Must have at least 2 characters',
+    })
+    .max(128, {
+      message: 'Must not be longer than 128 characters',
+    });
 
 const zStringArray = z.string().array().min(1);
 

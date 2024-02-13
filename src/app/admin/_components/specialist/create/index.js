@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  BooleanInput, Create, SimpleForm, useNotify, useRedirect,
-} from 'react-admin';
+import { BooleanInput, Create, SimpleForm, useNotify, useRedirect } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   SpecialistCreateDraftSchema as draftSchema,
@@ -30,7 +28,7 @@ export function SpecialistCreate() {
     redirect(`/${RESOURCES.specialist}`);
   };
 
-  const handleError = (error) => {
+  const handleError = error => {
     notify(error.message);
   };
 
@@ -40,7 +38,7 @@ export function SpecialistCreate() {
     setDraft(toggleState);
   }
 
-  const transformFormData = (data) => {
+  const transformFormData = data => {
     if (draft) {
       return transformDraftData(data);
     }

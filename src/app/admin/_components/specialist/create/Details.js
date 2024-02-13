@@ -5,10 +5,11 @@ import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
 export function Details() {
-  const getChoicesList = list => list.map(item => ({
-    id: item,
-    name: item.toLowerCase(),
-  }));
+  const getChoicesList = list =>
+    list.map(item => ({
+      id: item,
+      name: item.toLowerCase(),
+    }));
 
   const genderChoicesList = getChoicesList(Object.values(Gender));
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork));

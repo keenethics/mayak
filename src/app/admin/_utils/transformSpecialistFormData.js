@@ -1,6 +1,6 @@
 const mapIdArrayToIdObjects = IdList => IdList.map(id => ({ id }));
 
-const transformPlacesOfWork = (placesArray) => {
+const transformPlacesOfWork = placesArray => {
   const mappedPlaces = placesArray.map(place => ({
     ...place,
     district: { connect: { id: place.district } },
