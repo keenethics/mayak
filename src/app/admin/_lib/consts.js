@@ -1,4 +1,4 @@
-const Resources = {
+const RESOURCES = {
   therapy: 'therapy',
   specialist: 'specialist',
   district: 'district',
@@ -8,14 +8,10 @@ const Resources = {
   feedback: 'feedback',
 };
 
-const SuccessNotifications = {
+const SUCCESS_NOTIFICATIONS = {
   created: 'Created successfully',
   updated: 'Updated successfully',
   deleted: 'Deleted successfully',
 };
 
-const Titles = {
-  specialistCreate: 'Додавання нового спеціаліста',
-};
-
-export { SuccessNotifications, Titles, Resources };
+export { SUCCESS_NOTIFICATIONS, RESOURCES };

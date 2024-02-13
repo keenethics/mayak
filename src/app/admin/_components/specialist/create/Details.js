@@ -4,7 +4,7 @@ import React from 'react';
 import { NumberInput, required, SelectInput } from 'react-admin';
 import { FormatOfWork, Gender } from '@prisma/client';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistCreateFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
+import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
 const Details = () => {
   const getChoicesList = list => list.map(item => ({
@@ -18,7 +18,7 @@ const Details = () => {
   const { gender, yearsOfExperience, formatOfWork } = SpecialistFormFields;
 
   return (
-    <FormFieldWrapper title={SpecialistCreateFormBlocks.details} className="mt-3">
+    <FormFieldWrapper title={SpecialistFormBlocks.details} className="mt-3">
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
         <SelectInput
           name={gender.name}

@@ -11,12 +11,12 @@ import {
   useGetList,
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
-import { Resources } from '@/app/admin/_lib/consts';
+import { RESOURCES } from '@/app/admin/_lib/consts';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistCreateFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
+import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
 const PlacesOfWork = () => {
-  const { data: districtsList, isLoading: districtsLoading } = useGetList(Resources.district);
+  const { data: districtsList, isLoading: districtsLoading } = useGetList(RESOURCES.district);
 
   const {
     placesOfWork, fullAddress, nameOfClinic, district,
@@ -25,7 +25,7 @@ const PlacesOfWork = () => {
   const isOnline = format => format === FormatOfWork.ONLINE;
 
   return (
-    <FormFieldWrapper title={SpecialistCreateFormBlocks.placesOfWOrk} className="mt-3">
+    <FormFieldWrapper title={SpecialistFormBlocks.placesOfWOrk} className="mt-3">
       <FormDataConsumer>
         {({ formData }) => (isOnline(formData.formatOfWork) ? (
           <span className="text-caption text-gray-600">Спеціаліст працює онлайн</span>

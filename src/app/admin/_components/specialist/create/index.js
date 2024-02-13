@@ -5,7 +5,6 @@ import {
   BooleanInput, Create, SimpleForm, useNotify, useRedirect,
 } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SuccessNotifications, Titles } from '@/app/admin/_lib/consts';
 import {
   SpecialistCreateDraftSchema as draftSchema,
   SpecialistCreateSchema as fullSchema,
@@ -16,6 +15,7 @@ import { PlacesOfWork } from '@/app/admin/_components/specialist/create/PlacesOf
 import { Services } from '@/app/admin/_components/specialist/create/Services';
 import { Contacts } from '@/app/admin/_components/specialist/create/Contacts';
 import { tranformDraftData, transformFullData } from '@/app/admin/_utils/transformSpecialistFormData';
+import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
 
 const SpecialistCreate = () => {
   const [draft, setDraft] = useState(true);
@@ -26,8 +26,8 @@ const SpecialistCreate = () => {
   const validationSchema = draft ? draftSchema : fullSchema;
 
   const handleSuccess = () => {
-    notify(SuccessNotifications.created);
-    redirect('/specialist');
+    notify(SUCCESS_NOTIFICATIONS.created);
+    redirect(`/${RESOURCES.specialist}`);
   };
 
   const handleError = (error) => {
@@ -51,7 +51,7 @@ const SpecialistCreate = () => {
   return (
     <>
       <Create
-        title={Titles.specialistCreate}
+        title="Додавання нового спеціаліста"
         transform={transformFormData}
         mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
       >

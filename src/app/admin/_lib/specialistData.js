@@ -111,7 +111,7 @@ const SpecialistFormFields = {
   },
 };
 
-const SpecialistCreateFormBlocks = {
+const SpecialistFormBlocks = {
   general: 'Основні данні',
   details: 'Деталі',
   placesOfWOrk: 'Місце надання послуг',
@@ -119,4 +119,4 @@ const SpecialistCreateFormBlocks = {
   contacts: 'Контактні данні',
 };
 
-export { SpecialistFormFields, SpecialistCreateFormBlocks };
+export { SpecialistFormFields, SpecialistFormBlocks };

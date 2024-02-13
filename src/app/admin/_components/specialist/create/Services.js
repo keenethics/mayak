@@ -4,17 +4,17 @@ import React from 'react';
 import {
   BooleanInput, SelectArrayInput, TextInput, useGetList,
 } from 'react-admin';
-import { Resources } from '@/app/admin/_lib/consts';
+import { RESOURCES } from '@/app/admin/_lib/consts';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistCreateFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
+import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 
 const Services = () => {
-  const { data: therapiesList, isLoading: therapiesLoading } = useGetList(Resources.therapy);
+  const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
 
   const { therapies, isFreeReception, description } = SpecialistFormFields;
 
   return (
-    <FormFieldWrapper title={SpecialistCreateFormBlocks.services}>
+    <FormFieldWrapper title={SpecialistFormBlocks.services}>
       <SelectArrayInput
         name={therapies.name}
         source={therapies.name}
