@@ -6,7 +6,7 @@ import { withErrorHandler } from '@/lib/errors/errorHandler';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 
 const handler = withErrorHandler(
-  auth(async (req) => {
+  auth(async req => {
     if (!req.auth) {
       throw new NotAuthorizedException();
     }

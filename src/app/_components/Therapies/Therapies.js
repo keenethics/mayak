@@ -13,7 +13,7 @@ export default function Therapies() {
     createTherapy({ price: Number(price) }, { onSuccess: () => setPrice('') });
   };
 
-  const onDelete = (id) => {
+  const onDelete = id => {
     deleteTherapy({ id });
   };
 

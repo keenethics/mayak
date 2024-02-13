@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { ClientPortal } from './ClientPortal';
 import { ModalCloseButton } from './ModalCloseButton';
 
-export const Modal = ({
-  isOpen, onClose, isBlurBackground = true, isCloseButton = true, bgColor, title, children,
-}) => {
+export const Modal = ({ isOpen, onClose, isBlurBackground = true, isCloseButton = true, bgColor, title, children }) => {
   const blurBackground = <div className="fixed left-0 top-0 h-full w-full backdrop-blur-sm"></div>;
 
   return (
@@ -16,7 +14,7 @@ export const Modal = ({
           <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center" onClick={onClose}>
             <div
               className={`rounded-xl shadow-[0_0_32px_0px_rgba(0,58,113,0.25)] ${bgColor} px-4 py-[18px] md:p-6`}
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
               }}
             >

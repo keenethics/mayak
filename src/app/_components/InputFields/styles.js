@@ -11,8 +11,7 @@ export const variants = {
     },
     inputContainer: {
       base: 'peer flex w-full items-center',
-      style:
-        'gap-3 rounded-full border-[1px] border-gray-600 px-4 py-3 text-p3',
+      style: 'gap-3 rounded-full border-[1px] border-gray-600 px-4 py-3 text-p3',
       focusWithin: 'focus-within:border-primary-500',
       error: 'border-system-error focus-within:border-system-error',
     },
