@@ -1,2 +1,2 @@
-export { InputErrorIcon } from './InputErrorIcon';
-export { TickIcon } from './TickIcon';
+export * from './InputErrorIcon';
+export * from './TickIcon';

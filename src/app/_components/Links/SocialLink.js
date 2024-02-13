@@ -3,7 +3,7 @@ import p from 'prop-types';
 import Link from 'next/link';
 import { cn } from '@utils/cn';
 
-export default function SocialLink({ links, className }) {
+export function SocialLink({ links, className }) {
   return (
     <>
       {links?.map((link, idx) => (
