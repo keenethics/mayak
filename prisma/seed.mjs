@@ -84,8 +84,9 @@ function randomSpecialist({ districts, specializations, therapies }) {
 function randomEvent({ tags, links }) {
   const priceType = faker.helpers.arrayElement(['FREE', 'FIXED_PRICE', 'MIN_PRICE']);
   const format = faker.helpers.arrayElement(['ONLINE', 'OFFLINE']);
-  let address; let price; let
-    locationLink;
+  let address;
+  let price;
+  let locationLink;
   if (format === 'OFFLINE') {
     address = getFullAddress();
     locationLink = faker.helpers.arrayElement([
