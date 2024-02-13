@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';

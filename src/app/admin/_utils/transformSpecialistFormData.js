@@ -1,4 +1,6 @@
-import { mapIdArrayToIdObjects } from '@/app/admin/_utils/mapIdArrayToIdObjects';
+function mapIdArrayToIdObjects(IdList) {
+  return IdList.map(id => ({ id }));
+}
 
 function transformPlacesOfWork(placesArray) {
   const mappedPlaces = placesArray.map(place => ({

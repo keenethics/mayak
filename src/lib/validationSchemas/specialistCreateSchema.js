@@ -11,13 +11,13 @@ const zString = fieldName => z
 
 const zStringWithMinMax = fieldName => zString(fieldName)
   .min(2, {
-    message: 'Can not be empty',
+    message: 'Must have at least 2 characters',
   })
   .max(128, {
     message: 'Must not be longer than 128 characters',
   });
 
-const zArray = z.string().array().min(1);
+const zStringArray = z.string().array().min(1);
 
 const placesOfWorkSchema = z.object({
   fullAddress: zString('Full address'),
@@ -28,7 +28,7 @@ const placesOfWorkSchema = z.object({
 const SpecialistCreateDraftSchema = z.object({
   lastName: zStringWithMinMax('Last name'),
   firstName: zStringWithMinMax('First name'),
-  specializations: zArray,
+  specializations: zStringArray,
 });
 
 const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
@@ -40,7 +40,7 @@ const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
   formatOfWork: z.string().refine(val => Object.values(FormatOfWork).includes(val), {
     message: 'Unacceptable value',
   }),
-  therapies: zArray,
+  therapies: zStringArray,
   isFreeReception: z.boolean(),
   description: z.string().trim().nullish(),
   phone: zString('Phone number')

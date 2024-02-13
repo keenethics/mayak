@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { NumberInput, required, SelectInput } from 'react-admin';
 import { FormatOfWork, Gender } from '@prisma/client';
