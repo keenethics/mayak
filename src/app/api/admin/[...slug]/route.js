@@ -5,7 +5,17 @@ import { auth } from '@/lib/auth';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { MODEL_INCLUDES } from '@/lib/consts';
-import { searchInputFilters } from './inputFilters';
+
+export const MODEL_SEARCH_FIELDS = {
+  Specialist: ['firstName', 'lastName', 'surname'],
+  Organization: ['name'],
+};
+
+export function searchInputFilters(modelName, filter) {
+  if (!filter) return {};
+  const filters = MODEL_SEARCH_FIELDS[modelName].map(field => ({ [field]: { contains: filter, mode: 'insensitive' } }));
+  return { OR: filters };
+}
 
 const handler = auth(
   withErrorHandler(async (req) => {

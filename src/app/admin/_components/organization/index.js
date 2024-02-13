@@ -1,2 +1,2 @@
-export { OrganizationsList } from './List';
-export { OrganizationShow } from './Show';
+export * from './List';
+export * from './Show';

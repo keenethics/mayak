@@ -5,9 +5,9 @@ import {
   Admin, ListGuesser, Resource, ShowGuesser, EditGuesser,
 } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
+import { SpecialistsList, SpecialistShow } from '@admin/components/specialist';
+import { OrganizationsList, OrganizationShow } from '@admin/components/organization';
 import { authProvider } from './authProvider';
-import { SpecialistsList, SpecialistShow } from './_components/specialist';
-import { OrganizationsList, OrganizationShow } from './_components/organization';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');

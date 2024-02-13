@@ -1,2 +1,2 @@
-export { SpecialistsList } from './List';
-export { SpecialistShow } from './Show';
+export * from './List';
+export * from './Show';

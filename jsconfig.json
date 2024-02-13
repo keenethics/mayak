@@ -4,6 +4,7 @@
       "@/*": ["./src/*"],
       "@icons/*": ["./public/assets/icons/*"],
       "@components/*": ["./src/app/_components/*"],
+      "@admin/components/*": ["./src/app/admin/_components/*"],
       "@utils/*": ["./src/app/utils/*"],
       "@config/*": ["./src/app/config/*"]
     }
