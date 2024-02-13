@@ -1,0 +1,5 @@
+. "$(dirname "$0")/_/husky.sh"
+
+branch=$(git symbolic-ref --short HEAD)
+
+node .husky/pre-push.js "$branch"
