@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export function TextArea({
   value, onChange, maxLength, placeholder,
 }) {
+  const valueLength = String(value).length;
   return (
     <div className="flex h-full flex-col gap-0.5">
       <textarea
@@ -17,7 +18,7 @@ export function TextArea({
       {maxLength && (
         <div className="flex flex-row-reverse">
           <span className="text-primary-500">
-            {String(value).length} / {maxLength}
+            {valueLength ? `${valueLength} / ${maxLength}` : `${maxLength} символів`}
           </span>
         </div>
       )}
