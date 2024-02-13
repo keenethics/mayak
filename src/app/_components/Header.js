@@ -35,13 +35,13 @@ export function Header() {
   return (
     <>
       {/* this element is used to fill the space under navbar on mobile screens */}
-      <div className={'border-t-[1px] p-4 md:hidden'}>
+      <div className={'border-t-[1px] p-4 lg:hidden'}>
         <div className={logoHeight}></div>
       </div>
       <nav
         className={cn(
           flexBetween,
-          'fixed top-0 z-10 w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 md:static md:px-20',
+          'fixed top-0 z-10 w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 lg:static lg:px-20',
         )}
       >
         <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
@@ -49,10 +49,10 @@ export function Header() {
             alt="Mayak logo"
             aria-label="Mayak logo"
             priority="true"
-            className={cn(logoHeight, 'w-[66px] md:h-[74px] md:w-[129px]')}
+            className={cn(logoHeight, 'w-[66px] lg:h-[74px] lg:w-[129px]')}
           />
         </Link>
-        <div className={cn(flexCenter, 'hidden gap-6 md:flex')}>
+        <div className={cn(flexCenter, 'hidden gap-6 lg:flex')}>
           <div className="flex list-none gap-4 text-primary-700">
             <InnerLink
               role="list"
@@ -79,10 +79,10 @@ export function Header() {
             Зворотній звʼязок
           </OutlinedBtn>
         </div>
-        <BurgerIcon className={'block md:hidden'} onClick={toggleMenu} />
+        <BurgerIcon className={'block lg:hidden'} onClick={toggleMenu} />
         <div
           className={cn(
-            'absolute left-[100dvw] top-0 flex h-dvh w-dvw flex-col bg-other-black transition-all duration-300 md:hidden',
+            'absolute left-[100dvw] top-0 flex h-dvh w-dvw flex-col bg-other-black transition-all duration-300 lg:hidden',
             isMenuOpen && 'left-0',
           )}
         >
@@ -92,7 +92,7 @@ export function Header() {
                 alt="Mayak logo"
                 aria-label="Mayak logo"
                 priority="true"
-                className={cn('h-[36px] w-[66px] md:h-[74px] md:w-[129px]')}
+                className={cn('h-[36px] w-[66px] lg:h-[74px] lg:w-[129px]')}
               />
             </Link>
             <CloseIcon onClick={toggleMenu} />
@@ -124,7 +124,7 @@ export function Header() {
               Зворотній звʼязок
             </OutlinedBtn>
             <div className={cn(flexBetween, 'items-center')}>
-              <p className={cn('inline md:hidden', 'text-p4')}>Наші соціальні мережі:</p>
+              <p className={cn('inline lg:hidden', 'text-p4')}>Наші соціальні мережі:</p>
               <SocialLink
                 role="list"
                 status="footerSocials"

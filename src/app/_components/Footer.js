@@ -10,9 +10,9 @@ export function Footer() {
   const { links } = siteNav;
 
   // Basic styles
-  const flexBetweenMd = 'md:inline-flex md:flex-row md:items-center md:justify-between';
+  const flexBetweenMd = 'lg:inline-flex lg:flex-row lg:items-center lg:justify-between';
   const flexCenter = 'inline-flex flex-row items-center justify-center';
-  const flexCenterMd = 'md:inline-flex md:flex-row md:items-center md:justify-center';
+  const flexCenterMd = 'lg:inline-flex lg:flex-row lg:items-center lg:justify-center';
   const flexColCenter = 'flex flex-col items-center';
   const flexColRevCenter = 'flex flex-col-reverse items-center';
   const basicLink = 'no-underline list-none cursor-pointer';
@@ -26,7 +26,7 @@ export function Footer() {
 
   return (
     <footer
-      className={cn('text-white relative flex w-full flex-col overflow-hidden bg-primary-800 p-4 md:px-20 md:py-12')}
+      className={cn('text-white relative flex w-full flex-col overflow-hidden bg-primary-800 p-4 lg:px-20 lg:py-12')}
     >
       <div className={cn(flexColCenter, flexBetweenMd, 'gap-4')}>
         <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
@@ -34,11 +34,11 @@ export function Footer() {
             alt="Footer logo image"
             aria-label="Footer logo image"
             priority="true"
-            className={cn('flex-no-shrink fill-current h-[36px] w-[66px] md:h-[74px] md:w-[129px]')}
+            className={cn('flex-no-shrink fill-current h-[36px] w-[66px] lg:h-[74px] lg:w-[129px]')}
           />
         </Link>
-        <div className={cn(flexColCenter, flexCenterMd, 'gap-2 py-3 text-other-white md:gap-6')}>
-          <p className={cn('text-p4 font-bold md:text-p1')}>Ставай нашим партнером</p>
+        <div className={cn(flexColCenter, flexCenterMd, 'gap-2 py-3 text-other-white lg:gap-6')}>
+          <p className={cn('text-p4 font-bold lg:text-p1')}>Ставай нашим партнером</p>
           <OutlinedBtn
             className={cn(footerBtnHover, footerBtnFocus, footerBtnActive, footerBtnBorder, outlinedColors, 'text-p4')}
             aria-label="Click to fill application form"
@@ -47,12 +47,12 @@ export function Footer() {
           </OutlinedBtn>
         </div>
       </div>
-      <div className={cn('relative left-[-10%] my-3 h-[1px] w-[120%] bg-gray-300 md:static md:my-12 md:w-full')}></div>
+      <div className={cn('relative left-[-10%] my-3 h-[1px] w-[120%] bg-gray-300 lg:static lg:my-12 lg:w-full')}></div>
       <div className={cn(flexColRevCenter, flexBetweenMd, 'gap-4 text-other-white')}>
-        <p className={cn('text-[0.75rem] font-normal leading-5 md:text-p4 ')}>Маяк @ 2024</p>
-        <div className={cn(flexCenter, 'gap-5 md:gap-4')}>
-          <p className={cn('hidden md:inline', 'text-p2 font-medium')}>Слідкуй за нами в соцмережах</p>
-          <p className={cn('inline md:hidden', 'text-p4')}>Наші соціальні мережі:</p>
+        <p className={cn('text-[0.75rem] font-normal leading-5 lg:text-p4 ')}>Маяк @ 2024</p>
+        <div className={cn(flexCenter, 'gap-5 lg:gap-4')}>
+          <p className={cn('hidden lg:inline', 'text-p2 font-medium')}>Слідкуй за нами в соцмережах</p>
+          <p className={cn('inline lg:hidden', 'text-p4')}>Наші соціальні мережі:</p>
           <SocialLink
             role="list"
             status="footerSocials"
