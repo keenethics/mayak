@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
         </QueryContext>
         <Footer />
+        <div id="modal-root" />
       </body>
     </html>
   );

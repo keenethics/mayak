@@ -53,7 +53,7 @@ export function Header() {
           />
         </Link>
         <div className={cn(flexCenter, 'hidden gap-6 md:flex')}>
-          <div className="flex list-none gap-4 text-primary-700" onTouchEnd={toggleMenu}>
+          <div className="flex list-none gap-4 text-primary-700">
             <InnerLink
               role="list"
               items={innerLinks}
