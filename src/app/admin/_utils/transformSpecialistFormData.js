@@ -15,22 +15,15 @@ const transformPlacesOfWork = placesArray => {
   ];
 };
 
-export const transformDraftData = data => ({
+export const transformData = data => ({
   ...data,
   specializations: {
-    connect: mapIdArrayToIdObjects(data.specializations),
-  },
-});
-
-export const transformFullData = data => ({
-  ...data,
-  specializations: {
-    connect: mapIdArrayToIdObjects(data.specializations),
+    connect: data.specializations?.length ? mapIdArrayToIdObjects(data.specializations) : undefined,
   },
   placesOfWork: {
-    create: transformPlacesOfWork(data.placesOfWork),
+    create: data.placesOfWork?.length ? transformPlacesOfWork(data.placesOfWork) : undefined,
   },
   therapies: {
-    connect: mapIdArrayToIdObjects(data.therapies),
+    connect: data.therapies?.length ? mapIdArrayToIdObjects(data.therapies) : undefined,
   },
 });

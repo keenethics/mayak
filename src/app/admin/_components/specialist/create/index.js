@@ -12,8 +12,8 @@ import { Details } from '@/app/admin/_components/specialist/create/Details';
 import { PlacesOfWork } from '@/app/admin/_components/specialist/create/PlacesOfWork';
 import { Services } from '@/app/admin/_components/specialist/create/Services';
 import { Contacts } from '@/app/admin/_components/specialist/create/Contacts';
-import { transformDraftData, transformFullData } from '@/app/admin/_utils/transformSpecialistFormData';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
+import { transformData } from '@/app/admin/_utils/transformSpecialistFormData';
 
 export function SpecialistCreate() {
   const [draft, setDraft] = useState(true);
@@ -38,19 +38,11 @@ export function SpecialistCreate() {
     setDraft(toggleState);
   }
 
-  const transformFormData = data => {
-    if (draft) {
-      return transformDraftData(data);
-    }
-
-    return transformFullData(data);
-  };
-
   return (
     <>
       <Create
         title="Додавання нового спеціаліста"
-        transform={transformFormData}
+        transform={transformData}
         mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
       >
         <SimpleForm
@@ -58,6 +50,7 @@ export function SpecialistCreate() {
           reValidateMode="onChange"
           resolver={zodResolver(validationSchema)}
           className="max-w-[800px]"
+          // sanitizeEmptyValues={true}
         >
           <General />
           <Details />

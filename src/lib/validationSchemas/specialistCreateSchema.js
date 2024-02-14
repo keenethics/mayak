@@ -27,18 +27,25 @@ const placesOfWorkSchema = z.object({
   district: zString('District'),
 });
 
-const SpecialistCreateDraftSchema = z.object({
+const yearsOfExperience = z
+  .number({
+    required_error: 'Field is required',
+    invalid_type_error: 'Years must be greater then or equal to 0',
+  })
+  .nonnegative();
+
+const specialistSharedFields = {
   lastName: zStringWithMinMax('Last name'),
   firstName: zStringWithMinMax('First name'),
   specializations: zStringArray,
-});
+};
 
-const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
+const specialistFields = z.object({
   surname: zStringWithMinMax('Surname').nullish(),
   gender: z.string().refine(val => Object.values(Gender).includes(val), {
     message: 'Unacceptable value',
   }),
-  yearsOfExperience: z.number().nonnegative(),
+  yearsOfExperience,
   formatOfWork: z.string().refine(val => Object.values(FormatOfWork).includes(val), {
     message: 'Unacceptable value',
   }),
@@ -54,6 +61,13 @@ const SpecialistCreateSchema = SpecialistCreateDraftSchema.extend({
   website: z.string().trim().url().nullish(),
   placesOfWork: z.array(placesOfWorkSchema),
   isActive: z.boolean().optional(),
+});
+
+const SpecialistCreateSchema = specialistFields.extend(specialistSharedFields);
+
+const SpecialistCreateDraftSchema = specialistFields.partial().extend({
+  ...specialistSharedFields,
+  yearsOfExperience: yearsOfExperience.nullish(),
 });
 
 export { SpecialistCreateDraftSchema, SpecialistCreateSchema };
