@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   ArrayInput,
   FormDataConsumer,
@@ -8,12 +8,12 @@ import {
   SelectInput,
   SimpleFormIterator,
   TextInput,
-  useGetList,
-} from 'react-admin';
-import { FormatOfWork } from '@prisma/client';
-import { RESOURCES } from '@/app/admin/_lib/consts';
-import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
+  useGetList
+} from "react-admin";
+import { FormatOfWork } from "@prisma/client";
+import { RESOURCES } from "@/app/admin/_lib/consts";
+import { FormFieldWrapper } from "@/app/admin/_components/FormFieldWrapper";
+import { SpecialistFormFields, SpecialistFormSections } from "@/app/admin/_lib/specialistData";
 
 export function PlacesOfWork() {
   const { data: districtsList, isLoading: districtsLoading } = useGetList(RESOURCES.district);
@@ -23,7 +23,7 @@ export function PlacesOfWork() {
   const isOnline = format => format === FormatOfWork.ONLINE;
 
   return (
-    <FormFieldWrapper title={SpecialistFormBlocks.placesOfWOrk} className="mt-3">
+    <FormFieldWrapper title={SpecialistFormSections.placesOfWOrk} className="mt-3">
       <FormDataConsumer>
         {({ formData }) =>
           isOnline(formData.formatOfWork) ? (
@@ -33,21 +33,21 @@ export function PlacesOfWork() {
               name={placesOfWork.name}
               source={placesOfWork.name}
               label={placesOfWork.label}
-              validate={placesOfWork.validate && required()}
+              validate={placesOfWork.isRequired && required()}
               fullWidth
             >
-              <SimpleFormIterator inline>
+              <SimpleFormIterator inline fullWidth>
                 <TextInput
                   fullWidth
                   source={fullAddress.name}
                   label={fullAddress.label}
-                  validate={fullAddress.validate && required()}
+                  validate={fullAddress.isRequired && required()}
                   helperText="Вулиця, номер будинку, поверх, кабінет"
                 />
                 <TextInput
                   source={nameOfClinic.name}
                   label={nameOfClinic.label}
-                  validate={nameOfClinic.validate && required()}
+                  validate={nameOfClinic.isRequired && required()}
                   fullWidth
                 />
                 <SelectInput
@@ -55,7 +55,7 @@ export function PlacesOfWork() {
                   label={district.label}
                   isLoading={districtsLoading}
                   choices={districtsList}
-                  validate={district.validate && required()}
+                  validate={district.isRequired && required()}
                 />
               </SimpleFormIterator>
             </ArrayInput>

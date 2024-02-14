@@ -1,36 +1,38 @@
-import React from 'react';
-import { NumberInput, required, SelectInput } from 'react-admin';
-import { FormatOfWork, Gender } from '@prisma/client';
-import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistFormBlocks, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
+import React from "react";
+import { NumberInput, required, SelectInput } from "react-admin";
+import { FormatOfWork, Gender } from "@prisma/client";
+import { FormFieldWrapper } from "@/app/admin/_components/FormFieldWrapper";
+import { SpecialistFormFields, SpecialistFormSections } from "@/app/admin/_lib/specialistData";
+import { FormTranslations } from "@/app/admin/_lib/translations";
+import { capitalizeFirstLetter } from "@/app/admin/_utils/common";
 
 export function Details() {
-  const getChoicesList = list =>
+  const getChoicesList = (list, translations) =>
     list.map(item => ({
       id: item,
-      name: item.toLowerCase(),
+      name: capitalizeFirstLetter(translations[item.toLowerCase()])
     }));
 
-  const genderChoicesList = getChoicesList(Object.values(Gender));
-  const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork));
+  const genderChoicesList = getChoicesList(Object.values(Gender), FormTranslations.gender);
+  const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork), FormTranslations.formatOfWork);
 
   const { gender, yearsOfExperience, formatOfWork } = SpecialistFormFields;
 
   return (
-    <FormFieldWrapper title={SpecialistFormBlocks.details} className="mt-3">
+    <FormFieldWrapper title={SpecialistFormSections.details} className="mt-3">
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
         <SelectInput
           name={gender.name}
           source={gender.name}
           label={gender.label}
-          validate={gender.validate && required()}
+          validate={gender.isRequired && required()}
           choices={genderChoicesList}
         />
         <NumberInput
           name={yearsOfExperience.name}
           source={yearsOfExperience.name}
           label={yearsOfExperience.label}
-          validate={yearsOfExperience.validate && required()}
+          validate={yearsOfExperience.isRequired && required()}
           min="0"
         />
         <SelectInput
@@ -38,7 +40,7 @@ export function Details() {
           source={formatOfWork.name}
           label={formatOfWork.label}
           choices={formatOfWorkChoicesList}
-          validate={formatOfWork.validate && required()}
+          validate={formatOfWork.isRequired && required()}
           className="flex-1"
         />
       </div>

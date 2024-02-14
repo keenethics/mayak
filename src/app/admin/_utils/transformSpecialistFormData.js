@@ -1,29 +1,29 @@
-const mapIdArrayToIdObjects = IdList => IdList.map(id => ({ id }));
+const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
 
 const transformPlacesOfWork = placesArray => {
   const mappedPlaces = placesArray.map(place => ({
     ...place,
-    district: { connect: { id: place.district } },
+    district: { connect: { id: place.district } }
   }));
 
   return [
     {
       addresses: {
-        create: mappedPlaces,
-      },
-    },
+        create: mappedPlaces
+      }
+    }
   ];
 };
 
 export const transformData = data => ({
   ...data,
   specializations: {
-    connect: data.specializations?.length ? mapIdArrayToIdObjects(data.specializations) : undefined,
+    connect: data.specializations?.length ? mapIdArrayToIdObjects(data.specializations) : undefined
   },
   placesOfWork: {
-    create: data.placesOfWork?.length ? transformPlacesOfWork(data.placesOfWork) : undefined,
+    create: data.placesOfWork?.length ? transformPlacesOfWork(data.placesOfWork) : undefined
   },
   therapies: {
-    connect: data.therapies?.length ? mapIdArrayToIdObjects(data.therapies) : undefined,
-  },
+    connect: data.therapies?.length ? mapIdArrayToIdObjects(data.therapies) : undefined
+  }
 });
