@@ -116,5 +116,5 @@ export const SpecialistFormBlocks = {
   details: 'Деталі',
   placesOfWOrk: 'Місце надання послуг',
   services: 'Послуги',
-  contacts: 'Контактні данні',
+  contacts: 'Контактні дані',
 };
