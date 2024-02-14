@@ -1,7 +1,6 @@
 import React from 'react';
 import P from 'prop-types';
-import Header from '@components/Header';
-import Footer from '@components/Footer';
+import { Footer, Header } from '@components';
 import { QueryContext } from './queryContext';
 import montserrat from '@/app/styles/font';
 
