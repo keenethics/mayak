@@ -1,21 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import NotFound from '@icons/notFound.png';
-import Image from 'next/image';
+import NotFound from '@icons/notFound.svg';
+import { cn } from '@/utils/cn';
 
 const NotFoundPage = () => (
   <div className="mb-10 flex justify-center lg:mb-20 xl:mb-28">
     <div className="flex-col text-center">
-      <Image
-        src={NotFound}
-        alt="Not Found image"
-        aria-label="Not Found image"
-        width="430px"
-        height="376px"
-        className="my-0 lg:my-[16px] xl:my-[30px]"
-      />
+      <NotFound alt="Not Found image" aria-label="Not Found image"
+        priority="true" className={cn('h-auto w-full md:h-[430px] md:w-[376px]')} />
 
-      <div className="my-[26px] whitespace-pre-line text-[18px] text-primary-700 lg:my-[30px] lg:text-[28px] xl:my-[45px]">
+      <div className="whitespace-pre-line text-primary-700 text-[18px] lg:text-[28px] mb-[26px] mt-[10px] md:mt-0 lg:mb-[30px]  xl:mb-[45px]">
         Error
         <div className="text-h4 font-bold lg:text-h2">404</div>
         Not found
