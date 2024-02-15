@@ -81,7 +81,7 @@ const draftSpecialistSchema = restProps.partial().extend({
         district: zString,
       }),
     )
-    .nullish(),
+    .optional(),
 });
 
 const schemaCond = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
