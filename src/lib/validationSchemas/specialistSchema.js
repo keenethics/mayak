@@ -22,7 +22,9 @@ const zStringWithMinMax = zString
     message: 'Поле не повинно перевищувати 128 символів',
   });
 
-const zStringArray = zString.array().min(1);
+const zStringArray = zString.array().min(1, {
+  message: MESSAGES.requiredField,
+});
 
 const yearsOfExperience = z
   .number({
