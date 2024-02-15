@@ -27,9 +27,10 @@ const zStringArray = zString.array().min(1);
 const yearsOfExperience = z
   .number({
     required_error: MESSAGES.requiredField,
-    invalid_type_error: MESSAGES.requiredField,
+    invalid_type_error: MESSAGES.unacceptableValue,
   })
-  .nonnegative();
+  .min(0)
+  .positive();
 
 const placesOfWork = z.array(
   z.object({
