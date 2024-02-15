@@ -70,15 +70,16 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
-  placesOfWork: zPlacesOfWork,
 });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
+  placesOfWork: zPlacesOfWork,
 });
 
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
+  placesOfWork: zPlacesOfWork.optional(),
   yearsOfExperience: yearsOfExperience.nullish(),
 });
 
@@ -91,7 +92,7 @@ export const specialistValidationSchema = z
 
     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !placesOfWork.length) {
       ctx.addIssue({
-        code: 'min-1',
+        code: 'custom',
         message: 'Необхідно вказати мінімум одне місце надання послуг',
         path: ['placesOfWork'],
       });
