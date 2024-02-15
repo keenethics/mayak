@@ -31,19 +31,19 @@ const yearsOfExperience = z
   })
   .nonnegative();
 
+const placesOfWork = z.array(
+  z.object({
+    fullAddress: zStringWithMinMax,
+    nameOfClinic: z.string().nullish(),
+    district: zString,
+  }),
+);
+
 const defaultProps = z.object({
   lastName: zStringWithMinMax,
   firstName: zStringWithMinMax,
   specializations: zStringArray,
 });
-
-const placesOfWork = z
-  .object({
-    fullAddress: zStringWithMinMax,
-    nameOfClinic: z.string().nullish(),
-    district: zString,
-  })
-  .array();
 
 const restProps = z.object({
   isActive: z.boolean().optional(),
@@ -65,19 +65,32 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
-  placesOfWork,
 });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
+  placesOfWork: placesOfWork.min(1, {
+    message: MESSAGES.requiredField,
+  }),
 });
 
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
   yearsOfExperience: yearsOfExperience.nullish(),
-  placesOfWork: placesOfWork.default([]),
+  placesOfWork,
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
 
-export const specialistValidationSchema = z.intersection(specialistSchemaUnion, defaultProps);
+export const specialistValidationSchema = z.intersection(specialistSchemaUnion, defaultProps).refine(schema => {
+  const { formatOfWork } = schema;
+
+  if (formatOfWork === FormatOfWork.ONLINE) {
+    return {
+      ...schema,
+      placesOfWork: [],
+    };
+  }
+
+  return true;
+});
