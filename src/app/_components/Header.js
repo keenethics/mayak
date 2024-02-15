@@ -8,7 +8,7 @@ import CloseIcon from '@icons/close-cross.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
 import { SocialLink, InnerLink, OutlinedButton } from '@components';
-import { useBodyScrollLock } from '@/app/_hooks';
+import { useBodyScrollLock } from '@hooks';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
