@@ -83,6 +83,6 @@ const draftSpecialistSchema = restProps.partial().extend({
     .array(),
 });
 
-const schemaCond = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
+const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
 
-export const specialistValidationSchema = z.intersection(schemaCond, defaultProps);
+export const specialistValidationSchema = z.intersection(specialistSchemaUnion, defaultProps);

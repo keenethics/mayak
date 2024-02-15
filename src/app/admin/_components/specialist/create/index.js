@@ -13,12 +13,8 @@ import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
 import { transformData } from '@/app/admin/_utils/transformSpecialistFormData';
 
 export function SpecialistCreate() {
-  // const [draft, setDraft] = useState(true);
-
   const notify = useNotify();
   const redirect = useRedirect();
-
-  // const validationSchema = draft ? draftSchema : fullSchema;
 
   const handleSuccess = () => {
     notify(SUCCESS_NOTIFICATIONS.created);
@@ -28,12 +24,6 @@ export function SpecialistCreate() {
   const handleError = error => {
     notify(error.message);
   };
-
-  // const toggleState = previousState => !previousState;
-
-  // function toggleFormMode() {
-  //   setDraft(toggleState);
-  // }
 
   return (
     <>
@@ -48,13 +38,7 @@ export function SpecialistCreate() {
           <PlacesOfWork />
           <Services />
           <Contacts />
-          <BooleanInput
-            name="isActive"
-            source="isActive"
-            label="Активувати спеціаліста"
-            // onChange={toggleFormMode}
-            className="mt-8"
-          />
+          <BooleanInput name="isActive" source="isActive" label="Активувати спеціаліста" className="mt-8" />
         </SimpleForm>
       </Create>
     </>
