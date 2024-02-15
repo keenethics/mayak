@@ -2,7 +2,7 @@ import React from 'react';
 import p from 'prop-types';
 import { cn } from '@utils/cn';
 
-export default function OutlinedBtn({ onClick, children, className }) {
+export function OutlinedButton({ onClick, children, className }) {
   // Basic styles
   const flexCenter = 'inline-flex flex-row items-center justify-center';
   const basicBtnSize = 'px-6 py-[0.625rem]';
@@ -34,7 +34,7 @@ export default function OutlinedBtn({ onClick, children, className }) {
   );
 }
 
-OutlinedBtn.propTypes = {
+OutlinedButton.propTypes = {
   onClick: p.func,
   children: p.string,
   className: p.string,

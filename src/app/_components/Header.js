@@ -7,10 +7,8 @@ import BurgerIcon from '@icons/burger.svg';
 import CloseIcon from '@icons/close-cross.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
-import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
-import InnerLink from '@components/Links/InnerLink';
-import SocialLink from '@components/Links/SocialLink';
-import { useBodyScrollLock } from '../_hooks/useBodyScrollLock';
+import { SocialLink, InnerLink, OutlinedButton } from '@components';
+import { useBodyScrollLock } from '@/app/_hooks';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
@@ -55,19 +53,15 @@ export function Header() {
         <div className={cn(flexCenter, 'hidden gap-6 lg:flex')}>
           <div className="flex list-none gap-4 text-primary-700">
             <InnerLink
-              role="list"
               items={innerLinks}
-              href="/specialists"
               className={cn(basicLink, transition, listItemTextHover, listItemText, 'gap-4 px-3 py-1')}
             />
           </div>
           <SocialLink
-            role="list"
             links={links}
-            status="headerSocials"
             className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
           />
-          <OutlinedBtn
+          <OutlinedButton
             className={cn(
               basicBtnActive,
               basicBtnFocus,
@@ -77,7 +71,7 @@ export function Header() {
             aria-label="Click to fill feedback form"
           >
             Зворотній звʼязок
-          </OutlinedBtn>
+          </OutlinedButton>
         </div>
         <BurgerIcon className={'block lg:hidden'} onClick={toggleMenu} />
         <div
@@ -100,9 +94,7 @@ export function Header() {
           <div className="flex grow flex-col bg-other-white p-4">
             <div className={cn('flex flex-col items-center')}>
               <InnerLink
-                role="list"
                 items={innerLinks}
-                href="/specialists"
                 className={cn(
                   basicLink,
                   transition,
@@ -112,7 +104,7 @@ export function Header() {
                 )}
               />
             </div>
-            <OutlinedBtn
+            <OutlinedButton
               className={cn(
                 basicBtnActive,
                 basicBtnFocus,
@@ -122,12 +114,10 @@ export function Header() {
               aria-label="Click to fill feedback form"
             >
               Зворотній звʼязок
-            </OutlinedBtn>
+            </OutlinedButton>
             <div className={cn(flexBetween, 'items-center')}>
-              <p className={cn('inline lg:hidden', 'text-p4')}>Наші соціальні мережі:</p>
+              <p className={cn('inline lg:hidden', 'text-p4 text-primary-700')}>Наші соціальні мережі:</p>
               <SocialLink
-                role="list"
-                status="footerSocials"
                 links={links}
                 className={cn(
                   basicLink,
@@ -139,7 +129,7 @@ export function Header() {
             </div>
           </div>
           {/* Part of the Donation task */}
-          <div className="h-[100px] bg-secondary-100">Donation stub</div>
+          <div className="h-[100px] bg-secondary-100 text-primary-700">Donation stub</div>
         </div>
       </nav>
     </>
