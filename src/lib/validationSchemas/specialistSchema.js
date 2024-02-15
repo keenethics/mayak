@@ -78,7 +78,7 @@ const activeSpecialistSchema = restProps.extend({
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
   yearsOfExperience: yearsOfExperience.nullish(),
-  placesOfWork,
+  placesOfWork: placesOfWork.default([]),
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
