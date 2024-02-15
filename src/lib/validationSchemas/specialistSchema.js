@@ -37,6 +37,15 @@ const defaultProps = z.object({
   specializations: zStringArray,
 });
 
+const placesOfWork = z
+  .object({
+    fullAddress: zStringWithMinMax,
+    nameOfClinic: z.string().nullish(),
+    district: zString,
+  })
+  .array()
+  .default([]);
+
 const restProps = z.object({
   isActive: z.boolean().optional(),
   surname: zStringWithMinMax.nullish(),
@@ -57,31 +66,16 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
+  placesOfWork,
 });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
-  placesOfWork: z
-    .object({
-      fullAddress: zStringWithMinMax,
-      nameOfClinic: z.string().nullish(),
-      district: zString,
-    })
-    .array()
-    .default([]),
 });
 
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
   yearsOfExperience: yearsOfExperience.nullish(),
-  placesOfWork: z
-    .object({
-      fullAddress: zStringWithMinMax.nullish(),
-      nameOfClinic: z.string().nullish(),
-      district: zString.nullish(),
-    })
-    .array()
-    .default([]),
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
