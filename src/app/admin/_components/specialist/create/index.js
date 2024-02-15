@@ -1,12 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BooleanInput, Create, SimpleForm, useNotify, useRedirect } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  SpecialistCreateDraftSchema as draftSchema,
-  SpecialistSchema as fullSchema,
-} from '@/lib/validationSchemas/specialistSchema';
+import { specialistValidationSchema } from '@/lib/validationSchemas/specialistSchema';
 import { General } from '@/app/admin/_components/specialist/create/General';
 import { Details } from '@/app/admin/_components/specialist/create/Details';
 import { PlacesOfWork } from '@/app/admin/_components/specialist/create/PlacesOfWork';
@@ -16,12 +13,12 @@ import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
 import { transformData } from '@/app/admin/_utils/transformSpecialistFormData';
 
 export function SpecialistCreate() {
-  const [draft, setDraft] = useState(true);
+  // const [draft, setDraft] = useState(true);
 
   const notify = useNotify();
   const redirect = useRedirect();
 
-  const validationSchema = draft ? draftSchema : fullSchema;
+  // const validationSchema = draft ? draftSchema : fullSchema;
 
   const handleSuccess = () => {
     notify(SUCCESS_NOTIFICATIONS.created);
@@ -32,11 +29,11 @@ export function SpecialistCreate() {
     notify(error.message);
   };
 
-  const toggleState = previousState => !previousState;
+  // const toggleState = previousState => !previousState;
 
-  function toggleFormMode() {
-    setDraft(toggleState);
-  }
+  // function toggleFormMode() {
+  //   setDraft(toggleState);
+  // }
 
   return (
     <>
@@ -45,7 +42,7 @@ export function SpecialistCreate() {
         transform={transformData}
         mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
       >
-        <SimpleForm mode="onBlur" reValidateMode="onChange" resolver={zodResolver(validationSchema)}>
+        <SimpleForm mode="onBlur" reValidateMode="onChange" resolver={zodResolver(specialistValidationSchema)}>
           <General />
           <Details />
           <PlacesOfWork />
@@ -55,7 +52,7 @@ export function SpecialistCreate() {
             name="isActive"
             source="isActive"
             label="Активувати спеціаліста"
-            onChange={toggleFormMode}
+            // onChange={toggleFormMode}
             className="mt-8"
           />
         </SimpleForm>

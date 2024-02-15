@@ -31,13 +31,14 @@ const yearsOfExperience = z
   })
   .nonnegative();
 
-const specialistSharedFields = {
+const defaultProps = z.object({
   lastName: zStringWithMinMax,
   firstName: zStringWithMinMax,
   specializations: zStringArray,
-};
+});
 
-const specialistFields = z.object({
+const restProps = z.object({
+  isActive: z.boolean().optional(),
   surname: zStringWithMinMax.nullish(),
   gender: zString.refine(val => Object.values(Gender).includes(val), {
     message: MESSAGES.unacceptableValue,
@@ -63,12 +64,24 @@ const specialistFields = z.object({
       district: zString,
     }),
   ),
-  isActive: z.boolean().optional(),
 });
 
-export const SpecialistSchema = specialistFields.extend(specialistSharedFields);
+const activeSpecialistSchema = restProps.extend({
+  isActive: z.literal(true),
+});
 
-export const SpecialistCreateDraftSchema = specialistFields.partial().extend({
-  ...specialistSharedFields,
+const draftSpecialistSchema = restProps.partial().extend({
+  isActive: z.literal(false),
   yearsOfExperience: yearsOfExperience.nullish(),
+  // placesOfWork: z.array(
+  //   z.object({
+  //     fullAddress: zStringWithMinMax,
+  //     nameOfClinic: z.string().nullable(),
+  //     district: zString,
+  //   }),
+  // ),
 });
+
+const schemaCond = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
+
+export const specialistValidationSchema = z.intersection(schemaCond, defaultProps);
