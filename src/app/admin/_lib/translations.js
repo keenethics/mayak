@@ -6,6 +6,6 @@ export const FormTranslations = {
   formatOfWork: {
     online: 'онлайн',
     offline: 'офлайн',
-    both: 'гібридний',
+    both: 'офлайн + онлайн',
   },
 };
