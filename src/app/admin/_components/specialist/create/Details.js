@@ -10,9 +10,9 @@ export function Details() {
   const getChoicesList = (list, translations) =>
     list.map(item => ({
       id: item,
-      name: capitalizeFirstLetter(translations[item.toLowerCase()])
+      name: capitalizeFirstLetter(translations[item.toLowerCase()]) ?? item
     }));
-
+  
   const genderChoicesList = getChoicesList(Object.values(Gender), FormTranslations.gender);
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork), FormTranslations.formatOfWork);
 
