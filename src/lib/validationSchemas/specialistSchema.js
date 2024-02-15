@@ -80,7 +80,8 @@ const draftSpecialistSchema = restProps.partial().extend({
       nameOfClinic: z.string().nullish(),
       district: zString.nullish(),
     })
-    .array(),
+    .array()
+    .default([]),
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
