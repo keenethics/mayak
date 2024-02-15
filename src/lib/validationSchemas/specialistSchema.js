@@ -31,7 +31,8 @@ const yearsOfExperience = z
     required_error: MESSAGES.requiredField,
     invalid_type_error: MESSAGES.unacceptableValue,
   })
-  .nonnegative();
+  .nonnegative()
+  .nullish();
 
 const zPlacesOfWork = z.array(
   z

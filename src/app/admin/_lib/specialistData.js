@@ -33,7 +33,7 @@ export const SpecialistFormFields = {
     name: 'yearsOfExperience',
     type: 'text',
     label: 'Роки стажу',
-    isRequired: true,
+    isRequired: false,
   },
   formatOfWork: {
     name: 'formatOfWork',
