@@ -31,15 +31,16 @@ const yearsOfExperience = z
     required_error: MESSAGES.requiredField,
     invalid_type_error: MESSAGES.unacceptableValue,
   })
-  .min(0)
-  .positive();
+  .nonnegative();
 
-const placesOfWork = z.array(
-  z.object({
-    fullAddress: zStringWithMinMax,
-    nameOfClinic: z.string().nullish(),
-    district: zString,
-  }),
+const zPlacesOfWork = z.array(
+  z
+    .object({
+      fullAddress: zStringWithMinMax,
+      nameOfClinic: z.string().nullish(),
+      district: zString,
+    })
+    .default([]),
 );
 
 const defaultProps = z.object({
@@ -68,32 +69,39 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
+  placesOfWork: zPlacesOfWork,
 });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
-  placesOfWork: placesOfWork.min(1, {
-    message: MESSAGES.requiredField,
-  }),
 });
 
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
   yearsOfExperience: yearsOfExperience.nullish(),
-  placesOfWork: placesOfWork.default([]),
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
 
-export const specialistValidationSchema = z.intersection(specialistSchemaUnion, defaultProps).refine(schema => {
-  const { formatOfWork } = schema;
+export const specialistValidationSchema = z
+  .intersection(specialistSchemaUnion, defaultProps)
+  .superRefine((schema, ctx) => {
+    const { formatOfWork, isActive, placesOfWork } = schema;
 
-  if (formatOfWork === FormatOfWork.ONLINE) {
-    return {
-      ...schema,
-      placesOfWork: [],
-    };
-  }
+    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !placesOfWork.length) {
+      ctx.addIssue({
+        code: 'min-1',
+        message: 'Необхідно вказати мінімум одне місце надання послуг',
+        path: ['placesOfWork'],
+      });
+    }
 
-  return true;
-});
+    if (formatOfWork === FormatOfWork.ONLINE) {
+      return {
+        ...schema,
+        placesOfWork: [],
+      };
+    }
+
+    return true;
+  });
