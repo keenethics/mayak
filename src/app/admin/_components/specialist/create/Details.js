@@ -1,18 +1,18 @@
-import React from "react";
-import { NumberInput, required, SelectInput } from "react-admin";
-import { FormatOfWork, Gender } from "@prisma/client";
-import { FormFieldWrapper } from "@/app/admin/_components/FormFieldWrapper";
-import { SpecialistFormFields, SpecialistFormSections } from "@/app/admin/_lib/specialistData";
-import { FormTranslations } from "@/app/admin/_lib/translations";
-import { capitalizeFirstLetter } from "@/app/admin/_utils/common";
+import React from 'react';
+import { NumberInput, required, SelectInput } from 'react-admin';
+import { FormatOfWork, Gender } from '@prisma/client';
+import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
+import { SpecialistFormFields, SpecialistFormSections } from '@/app/admin/_lib/specialistData';
+import { FormTranslations } from '@/app/admin/_lib/translations';
+import { capitalizeFirstLetter } from '@/app/admin/_utils/common';
 
 export function Details() {
   const getChoicesList = (list, translations) =>
     list.map(item => ({
       id: item,
-      name: capitalizeFirstLetter(translations[item.toLowerCase()]) ?? item
+      name: capitalizeFirstLetter(translations[item.toLowerCase()]) ?? item,
     }));
-  
+
   const genderChoicesList = getChoicesList(Object.values(Gender), FormTranslations.gender);
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork), FormTranslations.formatOfWork);
 

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 import {
   ArrayInput,
   FormDataConsumer,
@@ -8,12 +8,12 @@ import {
   SelectInput,
   SimpleFormIterator,
   TextInput,
-  useGetList
-} from "react-admin";
-import { FormatOfWork } from "@prisma/client";
-import { RESOURCES } from "@/app/admin/_lib/consts";
-import { FormFieldWrapper } from "@/app/admin/_components/FormFieldWrapper";
-import { SpecialistFormFields, SpecialistFormSections } from "@/app/admin/_lib/specialistData";
+  useGetList,
+} from 'react-admin';
+import { FormatOfWork } from '@prisma/client';
+import { RESOURCES } from '@/app/admin/_lib/consts';
+import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
+import { SpecialistFormFields, SpecialistFormSections } from '@/app/admin/_lib/specialistData';
 
 export function PlacesOfWork() {
   const { data: districtsList, isLoading: districtsLoading } = useGetList(RESOURCES.district);

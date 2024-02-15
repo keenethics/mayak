@@ -1,6 +1,6 @@
-import React from "react";
-import { required, TextInput } from "react-admin";
-import PropTypes from "prop-types";
+import React from 'react';
+import { required, TextInput } from 'react-admin';
+import PropTypes from 'prop-types';
 
 export const TextInputList = ({ textInputList, className }) => (
   <>
@@ -24,8 +24,8 @@ TextInputList.propTypes = {
       name: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-      isRequired: PropTypes.bool.isRequired
-    })
+      isRequired: PropTypes.bool.isRequired,
+    }),
   ).isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 };

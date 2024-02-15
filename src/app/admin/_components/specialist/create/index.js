@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { BooleanInput, Create, SimpleForm, useNotify, useRedirect } from "react-admin";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from 'react';
+import { BooleanInput, Create, SimpleForm, useNotify, useRedirect } from 'react-admin';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   SpecialistCreateDraftSchema as draftSchema,
-  SpecialistSchema as fullSchema
-} from "@/lib/validationSchemas/specialistSchema";
-import { General } from "@/app/admin/_components/specialist/create/General";
-import { Details } from "@/app/admin/_components/specialist/create/Details";
-import { PlacesOfWork } from "@/app/admin/_components/specialist/create/PlacesOfWork";
-import { Services } from "@/app/admin/_components/specialist/create/Services";
-import { Contacts } from "@/app/admin/_components/specialist/create/Contacts";
-import { RESOURCES, SUCCESS_NOTIFICATIONS } from "@/app/admin/_lib/consts";
-import { transformData } from "@/app/admin/_utils/transformSpecialistFormData";
+  SpecialistSchema as fullSchema,
+} from '@/lib/validationSchemas/specialistSchema';
+import { General } from '@/app/admin/_components/specialist/create/General';
+import { Details } from '@/app/admin/_components/specialist/create/Details';
+import { PlacesOfWork } from '@/app/admin/_components/specialist/create/PlacesOfWork';
+import { Services } from '@/app/admin/_components/specialist/create/Services';
+import { Contacts } from '@/app/admin/_components/specialist/create/Contacts';
+import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
+import { transformData } from '@/app/admin/_utils/transformSpecialistFormData';
 
 export function SpecialistCreate() {
   const [draft, setDraft] = useState(true);
@@ -45,11 +45,7 @@ export function SpecialistCreate() {
         transform={transformData}
         mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
       >
-        <SimpleForm
-          mode="onBlur"
-          reValidateMode="onChange"
-          resolver={zodResolver(validationSchema)}
-        >
+        <SimpleForm mode="onBlur" reValidateMode="onChange" resolver={zodResolver(validationSchema)}>
           <General />
           <Details />
           <PlacesOfWork />
