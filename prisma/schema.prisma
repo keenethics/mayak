@@ -115,19 +115,21 @@ model Feedback {
 }
 
 model Event {
-  id            String           @id @default(uuid()) @db.Uuid
-  createdAt     DateTime         @default(now())
-  eventName     String           @db.VarChar(128)
-  organizerName String           @db.VarChar(128)
-  notes         String?          @db.VarChar(350)
-  address       String?          @db.VarChar(64)
-  locationLink  String?          @db.Text
-  price         Int?             @db.Integer
-  eventDate     DateTime
-  format        EventFormat
-  priceType     EventPriceFormat
-  links         EventLink[]
-  tags          EventTag[]
+  id             String           @id @default(uuid()) @db.Uuid
+  createdAt      DateTime         @default(now())
+  eventName      String           @db.VarChar(128)
+  organizerName  String           @db.VarChar(128)
+  notes          String?          @db.VarChar(350)
+  address        String?          @db.VarChar(128)
+  locationLink   String?          @db.Text
+  price          Int?             @db.Integer
+  isActive       Boolean          @default(false)
+  additionalLink EventLink?       @relation(fields: [linkId], references: [id])
+  linkId         String?          @db.Uuid
+  eventDate      DateTime
+  format         EventFormat
+  priceType      EventPriceFormat
+  tags           EventTag[]
 
   @@map("event")
 }
@@ -139,6 +141,7 @@ model EventLink {
   link      String   @db.Text
   events    Event[]
 
+  @@unique([label, link])
   @@map("event_link")
 }
 

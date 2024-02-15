@@ -81,7 +81,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
   };
 }
 
-function randomEvent({ tags, links }) {
+function randomEvent({ tags, link }) {
   const priceType = faker.helpers.arrayElement(['FREE', 'FIXED_PRICE', 'MIN_PRICE']);
   const format = faker.helpers.arrayElement(['ONLINE', 'OFFLINE']);
   let address;
@@ -107,8 +107,9 @@ function randomEvent({ tags, links }) {
     price,
     format,
     eventDate: faker.date.future(),
-    links: {
-      connect: uniqueObjectsWithId(links),
+    isActive: faker.datatype.boolean(),
+    additionalLink: {
+      connect: link,
     },
     tags: {
       connect: uniqueObjectsWithId(tags),
@@ -156,21 +157,13 @@ async function main() {
 
   const eventTags = ['EventTag1', 'EventTag2', 'EventTag3'];
 
-  const eventLinks = [
-    { label: 'Telegram', link: 't.me/KyivCityOfficial' },
-    { label: 'Some site', link: 'https://keenethics.com/' },
-  ];
+  const eventLink = { label: 'Some site', link: 'https://keenethics.com/' };
 
   await prisma.eventTag.createMany({
     data: eventTags.map(name => ({ name })),
   });
 
-  await prisma.eventLink.createMany({
-    data: eventLinks.map(item => ({
-      label: item.label,
-      link: item.link,
-    })),
-  });
+  await prisma.eventLink.create({ data: eventLink });
 
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
   const specializations = await prisma.specialization.findMany({
@@ -179,7 +172,7 @@ async function main() {
   const districts = await prisma.district.findMany({ select: { id: true } });
 
   const tags = await prisma.eventTag.findMany({ select: { id: true } });
-  const links = await prisma.eventLink.findMany({ select: { id: true } });
+  const link = await prisma.eventLink.findFirst({ select: { id: true } });
 
   // createMany does not support records with relations
   await Promise.all(
@@ -192,7 +185,7 @@ async function main() {
             data: randomSpecialist({ districts, specializations, therapies }),
           }),
           prisma.event.create({
-            data: randomEvent({ tags, links }),
+            data: randomEvent({ tags, link }),
           }),
         ]),
       ),

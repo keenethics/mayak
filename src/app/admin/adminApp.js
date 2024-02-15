@@ -6,6 +6,7 @@ import {
 } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from './authProvider';
+import { CreateEvent } from './_components/event/CreateEvent';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -26,6 +27,7 @@ export default function AdminPage() {
         edit={EditGuesser}
         show={ShowGuesser}
       />
+      <Resource name="Event" list={ListGuesser} create={CreateEvent} />
       <Resource name="District" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name="Specialization" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name="Address" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
