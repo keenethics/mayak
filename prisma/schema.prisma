@@ -102,3 +102,15 @@ model Feedback {
 
   @@map("feedback")
 }
+
+model QA {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  isActive  Boolean
+  question  String
+  answer    String   @default("")
+  priority  Int?     @db.SmallInt
+
+  @@map("qa")
+}

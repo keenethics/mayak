@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
-import {
-  Admin, ListGuesser, Resource, ShowGuesser, EditGuesser,
-} from 'react-admin';
+import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from './authProvider';
+import { CreateQa } from './_components/qa';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -35,6 +34,14 @@ export default function AdminPage() {
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
+      />
+      <Resource
+        name="QA"
+        options={{ label: 'Q&A' }}
+        list={ListGuesser}
+        show={ShowGuesser}
+        edit={EditGuesser}
+        create={CreateQa}
       />
       <Resource
         name="Feedback"
