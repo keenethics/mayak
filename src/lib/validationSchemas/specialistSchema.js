@@ -57,11 +57,23 @@ const specialistFields = z.object({
   email: zString.email().nullish(),
   website: zString.url().nullish(),
   placesOfWork: z.array(
-    z.object({
-      fullAddress: zStringWithMinMax,
-      nameOfClinic: z.string().nullish(),
-      district: zString,
-    }),
+    z
+      .object({
+        fullAddress: zStringWithMinMax,
+        nameOfClinic: z.string().nullish(),
+        district: zString,
+      })
+      .refine(
+        (placesOfWork, data) => {
+          if (data.formatOfWork === FormatOfWork.ONLINE) {
+            return true;
+          }
+          return placesOfWork?.length > 0;
+        },
+        {
+          message: MESSAGES.requiredField,
+        },
+      ),
   ),
   isActive: z.boolean().optional(),
 });
