@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export function useBodyScrollLock(locked, axis) {
+export function useBodyScrollLock(locked, axis = 'xy') {
   const axises = {
     x: 'overflow-x-hidden',
     y: 'overflow-y-hidden',
@@ -18,5 +18,5 @@ export function useBodyScrollLock(locked, axis) {
     return () => {
       document.body.classList.remove(axises[axis]);
     };
-  });
+  }, [locked, axis]);
 }

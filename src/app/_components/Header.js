@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 import Logo from '@icons/logo.svg';
 import BurgerIcon from '@icons/burger.svg';
@@ -26,9 +26,11 @@ export function Header() {
   const basicBtnActive = 'active:bg-primary-200 active:text-primary-600';
   const logoHeight = 'h-[36px]';
   const [isMenuOpen, setMenuOpen] = useState(false);
-  function toggleMenu() {
+
+  const toggleMenu = useCallback(() => {
     setMenuOpen(state => !state);
-  }
+  }, [setMenuOpen]);
+
   useBodyScrollLock(isMenuOpen, 'y');
   return (
     <>
