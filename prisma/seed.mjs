@@ -103,6 +103,11 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
+  const faqs = Array.from({ length: 10 }).map(() => ({
+    isActive: faker.datatype.boolean(),
+    question: faker.lorem.sentence(),
+    answer: faker.lorem.paragraph(),
+  }));
 
   await prisma.district.createMany({
     data: districtNames.map(name => ({ name })),
@@ -114,6 +119,10 @@ async function main() {
 
   await prisma.therapy.createMany({
     data: therapyNames.map(name => ({ name })),
+  });
+
+  await prisma.faq.createMany({
+    data: faqs
   });
 
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
@@ -128,9 +137,10 @@ async function main() {
       .fill('')
       .map(
         // eslint-disable-next-line no-unused-vars
-        _ => prisma.specialist.create({
-          data: randomSpecialist({ districts, specializations, therapies }),
-        }),
+        _ =>
+          prisma.specialist.create({
+            data: randomSpecialist({ districts, specializations, therapies }),
+          }),
       ),
   );
 }
@@ -139,7 +149,7 @@ main().then(
   async () => {
     await prisma.$disconnect();
   },
-  async (e) => {
+  async e => {
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);

@@ -7,9 +7,7 @@ import BurgerIcon from '@icons/burger.svg';
 import CloseIcon from '@icons/close-cross.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
-import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
-import InnerLink from '@components/Links/InnerLink';
-import SocialLink from '@components/Links/SocialLink';
+import { SocialLink, InnerLink, OutlinedButton } from '@components';
 import { useBodyScrollLock } from '../_hooks/useBodyScrollLock';
 
 export function Header() {
@@ -67,7 +65,7 @@ export function Header() {
             status="headerSocials"
             className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
           />
-          <OutlinedBtn
+          <OutlinedButton
             className={cn(
               basicBtnActive,
               basicBtnFocus,
@@ -77,7 +75,7 @@ export function Header() {
             aria-label="Click to fill feedback form"
           >
             Зворотній звʼязок
-          </OutlinedBtn>
+          </OutlinedButton>
         </div>
         <BurgerIcon className={'block lg:hidden'} onClick={toggleMenu} />
         <div
@@ -112,7 +110,7 @@ export function Header() {
                 )}
               />
             </div>
-            <OutlinedBtn
+            <OutlinedButton
               className={cn(
                 basicBtnActive,
                 basicBtnFocus,
@@ -122,9 +120,9 @@ export function Header() {
               aria-label="Click to fill feedback form"
             >
               Зворотній звʼязок
-            </OutlinedBtn>
+            </OutlinedButton>
             <div className={cn(flexBetween, 'items-center')}>
-              <p className={cn('inline lg:hidden', 'text-p4')}>Наші соціальні мережі:</p>
+              <p className={cn('inline lg:hidden', 'text-p4 text-primary-700')}>Наші соціальні мережі:</p>
               <SocialLink
                 role="list"
                 status="footerSocials"
@@ -139,7 +137,7 @@ export function Header() {
             </div>
           </div>
           {/* Part of the Donation task */}
-          <div className="h-[100px] bg-secondary-100">Donation stub</div>
+          <div className="h-[100px] bg-secondary-100 text-primary-700">Donation stub</div>
         </div>
       </nav>
     </>

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import p from 'prop-types';
 import { cn } from '@utils/cn';
 
-export default function InnerLink({ items, className }) {
+export function InnerLink({ items, className }) {
   return (
     <>
       {items?.map((link, idx) => (

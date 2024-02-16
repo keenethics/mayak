@@ -3,8 +3,7 @@ import Link from 'next/link';
 import FooterImg from '@icons/white-logo.svg';
 import { cn } from '@utils/cn';
 import siteNav from '@config/siteNav';
-import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
-import SocialLink from '@components/Links/SocialLink';
+import { OutlinedButton, SocialLink } from '@components';
 
 export function Footer() {
   const { links } = siteNav;
@@ -38,21 +37,23 @@ export function Footer() {
           />
         </Link>
         <div className={cn(flexColCenter, flexCenterMd, 'gap-2 py-3 text-other-white lg:gap-6')}>
-          <p className={cn('text-p4 font-bold lg:text-p1')}>Ставай нашим партнером</p>
-          <OutlinedBtn
+          <p className={cn('text-p4 font-bold text-other-white lg:text-p1')}>Ставай нашим партнером</p>
+          <OutlinedButton
             className={cn(footerBtnHover, footerBtnFocus, footerBtnActive, footerBtnBorder, outlinedColors, 'text-p4')}
             aria-label="Click to fill application form"
           >
             Залишити заявку
-          </OutlinedBtn>
+          </OutlinedButton>
         </div>
       </div>
       <div className={cn('relative left-[-10%] my-3 h-[1px] w-[120%] bg-gray-300 lg:static lg:my-12 lg:w-full')}></div>
       <div className={cn(flexColRevCenter, flexBetweenMd, 'gap-4 text-other-white')}>
         <p className={cn('text-[0.75rem] font-normal leading-5 lg:text-p4 ')}>Маяк @ 2024</p>
         <div className={cn(flexCenter, 'gap-5 lg:gap-4')}>
-          <p className={cn('hidden lg:inline', 'text-p2 font-medium')}>Слідкуй за нами в соцмережах</p>
-          <p className={cn('inline lg:hidden', 'text-p4')}>Наші соціальні мережі:</p>
+          <p className={cn('hidden lg:inline', 'text-p2 font-medium text-other-white ')}>
+            Слідкуй за нами в соцмережах
+          </p>
+          <p className={cn('inline lg:hidden', 'text-p4 text-other-white')}>Наші соціальні мережі:</p>
           <SocialLink
             role="list"
             status="footerSocials"
