@@ -86,7 +86,6 @@ const prisma = new PrismaClient();
 async function main() {
   // Clear the database to make sure we can run seed
   await prisma.$transaction([
-    prisma.qa.deleteMany(),
     prisma.address.deleteMany(),
     prisma.specialist.deleteMany(),
     prisma.placeOfWork.deleteMany(),
@@ -104,6 +103,12 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
+  const faqs = Array.from({ length: 10 }).map(() => ({
+    isActive: faker.datatype.boolean(),
+    isDraft: faker.datatype.boolean(),
+    question: faker.lorem.sentence(),
+    answer: faker.lorem.paragraph(),
+  }));
 
   await prisma.district.createMany({
     data: districtNames.map(name => ({ name })),
@@ -117,22 +122,14 @@ async function main() {
     data: therapyNames.map(name => ({ name })),
   });
 
+  await prisma.faq.createMany({
+    data: faqs,
+  });
+
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });
-
-  await prisma.qa.createMany({
-    data: Array(10)
-      .fill('')
-      .map((_, i) => ({
-        isActive: false,
-        weight: i + 1,
-        question: faker.lorem.sentence(),
-        answer: faker.lorem.paragraph(),
-      })),
-  });
-
   const districts = await prisma.district.findMany({ select: { id: true } });
 
   // createMany does not support records with relations
