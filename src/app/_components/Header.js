@@ -8,7 +8,7 @@ import CloseIcon from '@icons/close-cross.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
 import { SocialLink, InnerLink, OutlinedButton } from '@components';
-import { useBodyScrollLock } from '../_hooks/useBodyScrollLock';
+import { useBodyScrollLock } from '@hooks';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
@@ -55,16 +55,12 @@ export function Header() {
         <div className={cn(flexCenter, 'hidden gap-6 lg:flex')}>
           <div className="flex list-none gap-4 text-primary-700">
             <InnerLink
-              role="list"
               items={innerLinks}
-              href="/specialists"
               className={cn(basicLink, transition, listItemTextHover, listItemText, 'gap-4 px-3 py-1')}
             />
           </div>
           <SocialLink
-            role="list"
             links={links}
-            status="headerSocials"
             className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
           />
           <OutlinedButton
@@ -100,9 +96,7 @@ export function Header() {
           <div className="flex grow flex-col bg-other-white p-4">
             <div className={cn('flex flex-col items-center')}>
               <InnerLink
-                role="list"
                 items={innerLinks}
-                href="/specialists"
                 className={cn(
                   basicLink,
                   transition,
@@ -126,8 +120,6 @@ export function Header() {
             <div className={cn(flexBetween, 'items-center')}>
               <p className={cn('inline lg:hidden', 'text-p4 text-primary-700')}>Наші соціальні мережі:</p>
               <SocialLink
-                role="list"
-                status="footerSocials"
                 links={links}
                 className={cn(
                   basicLink,
