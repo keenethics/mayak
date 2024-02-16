@@ -70,12 +70,12 @@ const restProps = z.object({
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
-  placesOfWork: zPlacesOfWorkSchema.nullish(),
+  placesOfWork: zPlacesOfWorkSchema.default([]),
 });
 
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
-  placesOfWork: zPlacesOfWorkSchema.nullish(),
+  placesOfWork: zPlacesOfWorkSchema.default([]),
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
@@ -93,8 +93,12 @@ export const specialistValidationSchema = z
       });
     }
 
-    return {
-      ...schema,
-      placesOfWork: [],
-    };
+    if (formatOfWork === FormatOfWork.ONLINE) {
+      return {
+        ...schema,
+        placesOfWork: [],
+      };
+    }
+
+    return schema;
   });
