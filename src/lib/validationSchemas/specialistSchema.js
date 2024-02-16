@@ -100,5 +100,5 @@ export const specialistValidationSchema = z
       };
     }
 
-    return schema;
+    return true;
   });
