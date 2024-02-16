@@ -4,7 +4,7 @@ import React from 'react';
 import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from './authProvider';
-import { CreateQa, ListQa } from './_components/qa';
+import { CreateFaq, EditFaq } from './_components/faq';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -42,6 +42,14 @@ export default function AdminPage() {
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
+      />
+      <Resource
+        name="faq"
+        options={{ label: 'FAQ' }}
+        list={ListGuesser}
+        show={ShowGuesser}
+        edit={EditFaq}
+        create={CreateFaq}
       />
       <Resource
         name="Feedback"
