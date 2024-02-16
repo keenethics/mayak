@@ -70,7 +70,7 @@ const restProps = z.object({
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
-  placesOfWork: zPlacesOfWorkSchema,
+  placesOfWork: zPlacesOfWorkSchema.nullish(),
 });
 
 const draftSpecialistSchema = restProps.partial().extend({

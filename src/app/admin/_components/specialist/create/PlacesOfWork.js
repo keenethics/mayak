@@ -29,7 +29,13 @@ export function PlacesOfWork() {
           isOnline(formData.formatOfWork) ? (
             <p className="mb-6 text-gray-700">Спеціаліст працює онлайн</p>
           ) : (
-            <ArrayInput name={placesOfWork.name} source={placesOfWork.name} label={placesOfWork.label} fullWidth>
+            <ArrayInput
+              name={placesOfWork.name}
+              source={placesOfWork.name}
+              label={placesOfWork.label}
+              validate={!isOnline(formData.formatOfWork) && placesOfWork.isRequired && required('Hello world')}
+              fullWidth
+            >
               <SimpleFormIterator inline fullWidth>
                 <TextInput
                   fullWidth
