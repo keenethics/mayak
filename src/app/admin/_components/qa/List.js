@@ -8,49 +8,50 @@ import {
   List,
   Datagrid,
   TextField,
-  BooleanField,
-  BooleanInput,
+  useRefresh,
 } from 'react-admin';
-import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
-import { Switch } from '@mui/material';
 
-function ChangeWeightButtons({ source }) {
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Switch } from '@mui/material';
+import { UpDownArrowMenu } from '../UpDownArrowMenu';
+import { QA_PRIORITY_CHANGE_STEP } from '@/lib/consts';
+
+function ChangePriorityButtons() {
   const notify = useNotify();
   const record = useRecordContext();
   const [update, { isLoading, error }] = useUpdate('qa');
+  const refresh = useRefresh();
+  const handleError = queryError => {
+    notify(`Неможливо оновити дані\nПомилка: ${queryError.message}`, { type: 'error' });
+  };
+
   const handleChangeWeightClick = diff => () => {
     const isDiffPositive = diff > 0;
     update(
       'Qa',
-      { id: record.id, data: { weight: record.weight + diff }, previousData: record },
+      { id: record.id, data: { priority: record.priority + diff }, previousData: record },
       {
         onSuccess: () => {
-          notify(`Weight ${isDiffPositive ? 'increased' : 'decreased'}`, { type: 'success' });
+          notify(`Приорітет ${isDiffPositive ? 'підвищено' : 'знижено'}`);
+          refresh();
         },
-        onError: queryError => {
-          notify(`Could not update weight\nError message: ${queryError.message}`, { type: 'error' });
-        },
+        onError: handleError,
       },
     );
   };
 
   if (error) {
-    return notify(`Could not update weight\nError message: ${error.message}`, { type: 'error' });
+    return handleError(error);
   }
 
   return (
-    <WrapperField source="weight" label="Weight">
-      <div className="grid h-full w-full grid-cols-[min-content_min-content_min-content] place-items-center gap-2">
-        <button className="h-full" onClick={handleChangeWeightClick(1)} disabled={isLoading}>
-          <FaAngleUp />
-        </button>
-        <TextField source="weight" />
-        {record[source]}
-        <button className="h-full" onClick={handleChangeWeightClick(-1)} disabled={isLoading}>
-          <FaAngleDown />
-        </button>
-      </div>
-    </WrapperField>
+    <UpDownArrowMenu
+      onIncrease={handleChangeWeightClick(QA_PRIORITY_CHANGE_STEP)}
+      onDecrease={handleChangeWeightClick(-QA_PRIORITY_CHANGE_STEP)}
+      disabled={isLoading}
+    >
+      <TextField source="priority" />
+    </UpDownArrowMenu>
   );
 }
 
@@ -60,23 +61,25 @@ function IsActiveSwitch() {
   const record = useRecordContext();
   const [update, { isLoading, error }] = useUpdate('qa');
 
+  const handleError = queryError => {
+    notify(`Неможливо оновити дані\nПомилка: ${queryError.message}`, { type: 'error' });
+  };
+
   const handleSwitch = () => {
     update(
       'Qa',
       { id: record.id, data: { isActive: !record.isActive }, previousData: record },
       {
         onSuccess: () => {
-          notify(`Спеціаліста успішно оновленно`);
+          notify(`Дані успішно оновлено`);
         },
-        onError: queryError => {
-          notify(`Оновити неможливо\nПомилка: ${queryError.message}`, { type: 'error' });
-        },
+        onError: handleError,
       },
     );
   };
 
   if (error) {
-    return notify(`Could not update weight\nError message: ${error.message}`, { type: 'error' });
+    return handleError(error);
   }
 
   return <Switch disabled={isLoading} checked={record.isActive} onChange={handleSwitch} />;
@@ -87,12 +90,14 @@ export function ListQa() {
     <List>
       <Datagrid>
         <TextField source="id" />
-        <ChangeWeightButtons source="weight" />
+        <WrapperField source="priority" label="Приорітет">
+          <ChangePriorityButtons />
+        </WrapperField>
         <WrapperField source="isActive" label="Активний">
           <IsActiveSwitch />
         </WrapperField>
-        <TextField source="question" />
-        <TextField source="answer" />
+        <TextField source="question" label="Питання" />
+        <TextField source="answer" label="Відповідь" />
       </Datagrid>
     </List>
   );

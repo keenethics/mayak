@@ -103,11 +103,12 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
-  const faqs = Array.from({ length: 10 }).map(() => ({
+
+  const faqs = Array.from({ length: 10 }).map((_, i) => ({
     isActive: faker.datatype.boolean(),
-    isDraft: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
+    priority: i + 1,
   }));
 
   await prisma.district.createMany({
@@ -122,7 +123,7 @@ async function main() {
     data: therapyNames.map(name => ({ name })),
   });
 
-  await prisma.faq.createMany({
+  await prisma.qa.createMany({
     data: faqs,
   });
 

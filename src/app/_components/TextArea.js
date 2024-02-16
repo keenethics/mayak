@@ -2,9 +2,7 @@
 
 import PropTypes from 'prop-types';
 
-export function TextArea({
-  value, onChange, maxLength, placeholder,
-}) {
+export function TextArea({ value, onChange, maxLength, placeholder }) {
   const valueLength = String(value).length;
   return (
     <div className="flex h-full flex-col gap-0.5">
