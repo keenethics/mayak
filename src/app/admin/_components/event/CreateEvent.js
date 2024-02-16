@@ -1,9 +1,14 @@
 import {
-  Create, TextInput, SimpleForm, DateTimeInput, SelectInput, NumberInput, Labeled, required,
+  Create, TextInput, SimpleForm, DateTimeInput, SelectInput, NumberInput, required,
 } from 'react-admin';
 import { useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { CreateEventSchema } from '@/lib/validationSchemas/createEventSchema';
+import { Tag } from './Tag';
+import { transformEventData } from '@/app/admin/_utils/transformEventData';
+
+const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
 function PriceInput() {
   const priceType = useWatch({ name: 'priceType' });
@@ -12,33 +17,26 @@ function PriceInput() {
 
 function AddressInput() {
   const format = useWatch({ name: 'format' });
-  return <TextInput disabled={format !== 'OFFLINE'} source="address" />;
-}
-
-function transformLink(data) {
-  if (!data.additionalLink) return data;
-
-  const linkObject = { label: data.additionalLink.label, link: data.additionalLink.link };
-
-  return {
-    ...data,
-    additionalLink: {
-      connectOrCreate: {
-        where: { label_link: linkObject },
-        create: linkObject,
-      },
-    },
-  };
+  return (
+    <>
+      <TextInput disabled={format !== 'OFFLINE'} source="address" label="Address or place name" className="w-96" />
+      <TextInput disabled={format !== 'OFFLINE'} source="locationLink" className="w-96" />
+    </>
+  );
 }
 
 export function CreateEvent() {
+  const [selectedTags, setSelectedTags] = useState(null);
+
   return (
-    <Create transform={transformLink}>
+    <Create transform={data => transformEventData(data, selectedTags)}>
       <SimpleForm resolver={zodResolver(CreateEventSchema)}>
-        <TextInput source="eventName" validate={required()} />
-        <TextInput source="organizerName" validate={required()} />
+        <p>Main info</p>
+        <TextInput source="eventName" validate={required()} className="w-72" />
+        <TextInput source="organizerName" validate={required()} className="w-72" />
         <DateTimeInput source="eventDate" validate={required()} />
-        <div className="flex flex-col md:flex-row md:gap-6">
+        <p>Format and location</p>
+        <div className={fieldGroupClass}>
           <SelectInput
             source="format"
             choices={[
@@ -49,7 +47,8 @@ export function CreateEvent() {
           />
           <AddressInput />
         </div>
-        <div className="flex flex-col md:flex-row md:gap-6">
+        <p>Pricing</p>
+        <div className={fieldGroupClass}>
           <SelectInput
             source="priceType"
             choices={[
@@ -61,14 +60,15 @@ export function CreateEvent() {
           />
           <PriceInput />
         </div>
-        <Labeled label="Additional link">
-          <Create resource="EventLink" title="Additional link">
-            <div className="m-3 flex flex-col">
-              <TextInput source="additionalLink.label" label="Label" />
-              <TextInput source="additionalLink.link" label="Link" />
-            </div>
-          </Create>
-        </Labeled>
+        <p>Notes for admin</p>
+        <TextInput className="!focus:shadow-none mt-32 w-96" source="notes" multiline />
+        <p>Event tags</p>
+        <Tag setSelectedTags={setSelectedTags} />
+        <p className="mt-6">Additional link(Label is for link type(Telegram, Website, etc.))</p>
+        <div className={fieldGroupClass}>
+          <TextInput source="additionalLink.label" label="Label" />
+          <TextInput source="additionalLink.link" label="Link" fullWidth />
+        </div>
       </SimpleForm>
     </Create>
   );
