@@ -99,6 +99,4 @@ export const specialistValidationSchema = z
         placesOfWork: [],
       };
     }
-
-    // return true;
   });
