@@ -4,21 +4,13 @@ import React from 'react';
 import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from './authProvider';
-import { CreateFaq, EditFaq } from './_components/faq';
+import { CreateFaq, EditFaq, ListFaq } from './_components/faq';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
 
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
-      <Resource
-        name="Qa"
-        options={{ label: 'Q&A' }}
-        create={CreateQa}
-        list={ListQa}
-        edit={EditGuesser}
-        show={ShowGuesser}
-      />
       <Resource
         name="Therapy"
         options={{ label: 'Therapy' }}
@@ -44,9 +36,9 @@ export default function AdminPage() {
         show={ShowGuesser}
       />
       <Resource
-        name="faq"
+        name="Faq"
         options={{ label: 'FAQ' }}
-        list={ListGuesser}
+        list={ListFaq}
         show={ShowGuesser}
         edit={EditFaq}
         create={CreateFaq}

@@ -14,11 +14,11 @@ export function EditFaq() {
     const errors = {};
 
     if (isTryingToActivate && activeFaqsCount >= MAX_ACTIVE_FAQS) {
-      errors.isActive = 'Too many active FAQs. Please deactivate some first.';
+      errors.isActive = `Too many active FAQs(max ${MAX_ACTIVE_FAQS}). Please deactivate some first.`;
     }
 
     if (isTryingToDeactivate && activeFaqsCount <= MIN_ACTIVE_FAQS) {
-      errors.isActive = 'At least five FAQ must be active.';
+      errors.isActive = `At least ${MIN_ACTIVE_FAQS} FAQ must be active.`;
     }
 
     return errors;

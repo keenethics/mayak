@@ -8,7 +8,7 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "migrations": "prisma migrate dev",
-    "migrations:reset": "prisma migrate reset",
+    "migrations:reset": "prisma migrate reset --force",
     "seed": "node prisma/seed.mjs",
     "lint": "eslint --ext .js,.mjs .",
     "lint:fix": "prettier --write . && eslint --ext .js,.mjs --fix .",
@@ -33,11 +33,8 @@
     "react": "^18",
     "react-admin": "^4.16.7",
     "react-dom": "^18",
-<<<<<<< HEAD
-    "react-icons": "^5.0.1",
-=======
     "react-hook-form": "^7.50.1",
->>>>>>> origin/MID-43_add-create-and-edit-pages-for-admin-faq
+    "react-icons": "^5.0.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1",
     "zod": "^3.22.4"

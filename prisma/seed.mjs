@@ -104,11 +104,10 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
-  const faqs = Array.from({ length: 5 }).map(() => ({
+  const faqs = Array.from({ length: 15 }).map(() => ({
     isActive: true,
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
-    priority: i + 1,
   }));
 
   await prisma.district.createMany({

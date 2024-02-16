@@ -1,26 +1,30 @@
 'use client';
 
 import {
-  useNotify,
-  WrapperField,
-  useUpdate,
-  useRecordContext,
-  List,
   Datagrid,
+  List,
   TextField,
+  WrapperField,
+  useNotify,
+  useRecordContext,
   useRefresh,
+  useUpdate,
 } from 'react-admin';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Switch } from '@mui/material';
-import { UpDownArrowMenu } from '../UpDownArrowMenu';
 import { QA_PRIORITY_CHANGE_STEP } from '@/lib/consts';
+import { MAX_ACTIVE_FAQS, MIN_ACTIVE_FAQS } from './consts';
+import { LinkTextField } from '../LinkTextField';
+import { UpDownArrowMenu } from '../UpDownArrowMenu';
+import { useActiveFaqs } from './hooks';
 
 function ChangePriorityButtons() {
   const notify = useNotify();
   const record = useRecordContext();
-  const [update, { isLoading, error }] = useUpdate('qa');
+  const [update, { isLoading, error }] = useUpdate('faq');
   const refresh = useRefresh();
+
   const handleError = queryError => {
     notify(`Неможливо оновити дані\nПомилка: ${queryError.message}`, { type: 'error' });
   };
@@ -28,7 +32,7 @@ function ChangePriorityButtons() {
   const handleChangeWeightClick = diff => () => {
     const isDiffPositive = diff > 0;
     update(
-      'Qa',
+      'Faq',
       { id: record.id, data: { priority: record.priority + diff }, previousData: record },
       {
         onSuccess: () => {
@@ -55,28 +59,47 @@ function ChangePriorityButtons() {
   );
 }
 
-// create a custom switch component to update the isActive field in qa
 function IsActiveSwitch() {
   const notify = useNotify();
   const record = useRecordContext();
-  const [update, { isLoading, error }] = useUpdate('qa');
+  const [update, { isLoading, error }] = useUpdate('faq');
+  const activeFaqs = useActiveFaqs();
+  const refresh = useRefresh();
+
+  if (!activeFaqs) {
+    return null;
+  }
+
+  const { total: activeFaqsCount } = activeFaqs;
 
   const handleError = queryError => {
     notify(`Неможливо оновити дані\nПомилка: ${queryError.message}`, { type: 'error' });
   };
 
-  const handleSwitch = () => {
-    update(
-      'Qa',
+  function handleSwitch() {
+    const isTryingToActivate = !record.isActive;
+    const isTryingToDeactivate = record.isActive;
+
+    if (isTryingToActivate && activeFaqsCount >= MAX_ACTIVE_FAQS) {
+      return notify(`Занадто багато активних питань (максимум ${MAX_ACTIVE_FAQS}). Спочатку деактивуйте деякі.`);
+    }
+
+    if (isTryingToDeactivate && activeFaqsCount <= MIN_ACTIVE_FAQS) {
+      return notify(`Принаймні ${MIN_ACTIVE_FAQS} питань повинні бути активними.`);
+    }
+
+    return update(
+      'Faq',
       { id: record.id, data: { isActive: !record.isActive }, previousData: record },
       {
         onSuccess: () => {
+          refresh();
           notify(`Дані успішно оновлено`);
         },
         onError: handleError,
       },
     );
-  };
+  }
 
   if (error) {
     return handleError(error);
@@ -85,19 +108,24 @@ function IsActiveSwitch() {
   return <Switch disabled={isLoading} checked={record.isActive} onChange={handleSwitch} />;
 }
 
-export function ListQa() {
+export function ListFaq() {
+  function redirectTo(id) {
+    return `/Faq/${id}/edit`;
+  }
+
+  // rowClick is not set in DataGrid(to prevent redirect on toggle, etc...), so we need to redirect manually
   return (
     <List>
       <Datagrid>
-        <TextField source="id" />
+        <LinkTextField source="id" label="Id" pathFn={redirectTo} />
         <WrapperField source="priority" label="Приорітет">
           <ChangePriorityButtons />
         </WrapperField>
-        <WrapperField source="isActive" label="Активний">
+        <WrapperField source="isActive" label="Активний" pathFn={redirectTo}>
           <IsActiveSwitch />
         </WrapperField>
-        <TextField source="question" label="Питання" />
-        <TextField source="answer" label="Відповідь" />
+        <LinkTextField source="question" label="Питання" pathFn={redirectTo} />
+        <LinkTextField source="answer" label="Відповідь" pathFn={redirectTo} />
       </Datagrid>
     </List>
   );
