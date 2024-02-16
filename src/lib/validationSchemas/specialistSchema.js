@@ -31,12 +31,13 @@ const zYearsOfExperience = z
   .nullish();
 
 const zPlacesOfWorkSchema = z.array(
-  z.object({
-    fullAddress: zStringWithMax,
-    nameOfClinic: z.string().nullish(),
-    district: zString,
-  }),
-  // .default([]),
+  z
+    .object({
+      fullAddress: zStringWithMax,
+      nameOfClinic: z.string().nullish(),
+      district: zString,
+    })
+    .default([]),
 );
 
 const defaultProps = z.object({
@@ -65,7 +66,6 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
-  placesOfWork: zPlacesOfWorkSchema.nullish(),
 });
 
 const activeSpecialistSchema = restProps.extend({
