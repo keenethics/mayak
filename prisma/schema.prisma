@@ -106,9 +106,8 @@ model Feedback {
 model Faq {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   isActive  Boolean  @default(false)
-  isDraft   Boolean  @default(true)
   question  String
   answer    String   @default("")
   priority  Int?     @db.SmallInt

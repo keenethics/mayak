@@ -105,7 +105,6 @@ async function main() {
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
   const faqs = Array.from({ length: 10 }).map(() => ({
     isActive: faker.datatype.boolean(),
-    isDraft: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
   }));
