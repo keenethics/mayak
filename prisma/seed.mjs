@@ -123,7 +123,7 @@ async function main() {
     data: therapyNames.map(name => ({ name })),
   });
 
-  await prisma.qa.createMany({
+  await prisma.faq.createMany({
     data: faqs,
   });
 
