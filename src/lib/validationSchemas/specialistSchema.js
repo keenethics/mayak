@@ -93,10 +93,8 @@ export const specialistValidationSchema = z
       });
     }
 
-    if (formatOfWork === FormatOfWork.ONLINE) {
-      return {
-        ...schema,
-        placesOfWork: [],
-      };
-    }
+    return {
+      ...schema,
+      placesOfWork: [],
+    };
   });
