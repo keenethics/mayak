@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { BooleanInput, SelectArrayInput, TextInput, useGetList } from 'react-admin';
+import { BooleanInput, required, SelectArrayInput, TextInput, useGetList } from 'react-admin';
 import { RESOURCES } from '@/app/admin/_lib/consts';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormFields, SpecialistFormSections } from '@/app/admin/_lib/specialistData';
@@ -19,7 +19,7 @@ export function Services() {
         label={therapies.label}
         isLoading={therapiesLoading}
         choices={therapiesList}
-        // validate={therapies.isRequired && required()}
+        validate={therapies.isRequired && required()}
         className="w-full"
       />
       <BooleanInput

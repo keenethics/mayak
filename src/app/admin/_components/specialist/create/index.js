@@ -33,7 +33,7 @@ export function SpecialistCreate() {
         mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
       >
         <SimpleForm
-          mode="onBlur"
+          // mode="onBlur"
           // reValidateMode="onChange"
           resolver={zodResolver(specialistValidationSchema)}
         >

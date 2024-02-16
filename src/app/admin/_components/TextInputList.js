@@ -1,16 +1,16 @@
 import React from 'react';
-import { TextInput } from 'react-admin';
+import { required, TextInput } from 'react-admin';
 import PropTypes from 'prop-types';
 
 export const TextInputList = ({ textInputList, className }) => (
   <>
-    {textInputList.map(({ name, type, label, ...inputProps }) => (
+    {textInputList.map(({ name, type, label, isRequired, ...inputProps }) => (
       <TextInput
         key={name}
         name={name}
         type={type}
         label={label}
-        // validate={isRequired && required()}
+        validate={isRequired && required()}
         className={className}
         {...inputProps}
       />

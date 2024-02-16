@@ -1,5 +1,5 @@
 import React from 'react';
-import { NumberInput, SelectInput } from 'react-admin';
+import { NumberInput, required, SelectInput } from 'react-admin';
 import { FormatOfWork, Gender } from '@prisma/client';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormFields, SpecialistFormSections } from '@/app/admin/_lib/specialistData';
@@ -25,14 +25,14 @@ export function Details() {
           name={gender.name}
           source={gender.name}
           label={gender.label}
-          // validate={gender.isRequired && required()}
+          validate={gender.isRequired && required()}
           choices={genderChoicesList}
         />
         <NumberInput
           name={yearsOfExperience.name}
           source={yearsOfExperience.name}
           label={yearsOfExperience.label}
-          // validate={yearsOfExperience.isRequired && required()}
+          validate={yearsOfExperience.isRequired && required()}
           min="0"
         />
         <SelectInput
@@ -40,7 +40,7 @@ export function Details() {
           source={formatOfWork.name}
           label={formatOfWork.label}
           choices={formatOfWorkChoicesList}
-          // validate={formatOfWork.isRequired && required()}
+          validate={formatOfWork.isRequired && required()}
           className="flex-1"
         />
       </div>

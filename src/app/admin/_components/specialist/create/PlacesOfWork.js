@@ -1,7 +1,15 @@
 'use client';
 
 import React from 'react';
-import { ArrayInput, FormDataConsumer, SelectInput, SimpleFormIterator, TextInput, useGetList } from 'react-admin';
+import {
+  ArrayInput,
+  FormDataConsumer,
+  required,
+  SelectInput,
+  SimpleFormIterator,
+  TextInput,
+  useGetList,
+} from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
 import { RESOURCES } from '@/app/admin/_lib/consts';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
@@ -27,13 +35,13 @@ export function PlacesOfWork() {
                   fullWidth
                   source={fullAddress.name}
                   label={fullAddress.label}
-                  // validate={fullAddress.isRequired && required()}
+                  validate={fullAddress.isRequired && required()}
                   helperText="Вулиця, номер будинку, поверх, кабінет"
                 />
                 <TextInput
                   source={nameOfClinic.name}
                   label={nameOfClinic.label}
-                  // validate={nameOfClinic.isRequired && required()}
+                  validate={nameOfClinic.isRequired && required()}
                   fullWidth
                 />
                 <SelectInput
@@ -41,7 +49,7 @@ export function PlacesOfWork() {
                   label={district.label}
                   isLoading={districtsLoading}
                   choices={districtsList}
-                  // validate={district.isRequired && required()}
+                  validate={district.isRequired && required()}
                 />
               </SimpleFormIterator>
             </ArrayInput>
