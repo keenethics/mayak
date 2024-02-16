@@ -148,7 +148,7 @@ model EventLink {
 model EventTag {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
-  name      String   @db.VarChar(64)
+  name      String   @unique @db.VarChar(64)
   events    Event[]
 
   @@map("event_tag")

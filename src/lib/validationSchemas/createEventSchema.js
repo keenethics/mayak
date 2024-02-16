@@ -9,14 +9,26 @@ export const CreateEventSchema = z
       required_error: 'Date is required',
       invalid_type_error: 'Please, input correct type of date',
     }),
-    notes: minMaxString(1, 350, 'Notes').optional(),
-    locationLink: z.string({ invalid_type_error: 'Location link must be string' }).trim().optional(),
+    notes: minMaxString(1, 350, 'Notes').nullish(),
+    locationLink: z.string({ invalid_type_error: 'Location link must be string' }).trim().nullish(),
     additionalLink: z
       .object({
-        label: minMaxString(1, 30, 'Label'),
-        link: z.string({ required_error: 'Link is required', invalid_type_error: 'Link must be string' }).trim(),
+        label: minMaxString(1, 30, 'Label').nullish(),
+        link: z.string({ invalid_type_error: 'Link must be string' }).min(1, 'Link cannot be empty').trim().nullish(),
       })
-      .optional(),
+      .superRefine((data, ctx) => {
+        const { label, link } = data;
+        if (label && !link) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.invalid_type,
+            path: ['link'],
+            message: 'Link is required',
+          });
+        }
+        if (link && !label) {
+          ctx.addIssue({ code: z.ZodIssueCode.invalid_type, path: ['label'], message: 'Label is required' });
+        }
+      }),
     format: z.enum(['ONLINE', 'OFFLINE'], {
       required_error: 'Format is required',
       invalid_type_error: 'Format must be OFFLINE/ONLINE',
@@ -25,8 +37,8 @@ export const CreateEventSchema = z
       required_error: 'Price type is required',
       invalid_type_error: 'Price type must be FREE/FIXED_PRICE/MIN_PRICE',
     }),
-    price: z.number().optional(),
-    address: minMaxString(1, 128, 'address').optional(),
+    price: z.number().nullish(),
+    address: minMaxString(1, 128, 'Address').nullish(),
   })
   .superRefine((data, ctx) => {
     const {
@@ -41,13 +53,14 @@ export const CreateEventSchema = z
     }
     if (format === 'OFFLINE' && !address) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: z.ZodIssueCode.invalid_type,
         path: ['address'],
-        message: 'Address is required',
+        message: 'Address or place name is required for offline event',
       });
     }
     if (priceType === 'FREE' && price) {
       ctx.addIssue({
+        code: z.ZodIssueCode.invalid_type,
         path: ['price'],
         message: 'There must not be price for free event',
       });

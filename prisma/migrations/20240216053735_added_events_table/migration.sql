@@ -52,6 +52,9 @@ CREATE TABLE "_EventToEventTag" (
 CREATE UNIQUE INDEX "event_link_label_link_key" ON "event_link"("label", "link");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "event_tag_name_key" ON "event_tag"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_EventToEventTag_AB_unique" ON "_EventToEventTag"("A", "B");
 
 -- CreateIndex
