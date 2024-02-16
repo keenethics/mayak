@@ -1,6 +1,6 @@
 const branchName = process.argv[2];
 
-const testRegExp = /^MID-[0-9]+_([a-zA-Z0-9]+-?)+[^-]$/g;
+const testRegExp = /^MID-[0-9]+_([a-zA-Z0-9&]+-?)+[^-]$/g;
 
 const result = testRegExp.exec(branchName);
 if (result === null) {

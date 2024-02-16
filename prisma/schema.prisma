@@ -110,7 +110,7 @@ model Qa {
   isActive  Boolean
   question  String
   answer    String   @default("")
-  weight    Int?     @db.SmallInt
+  priority  Int?     @db.SmallInt
 
   @@map("qa")
 }
