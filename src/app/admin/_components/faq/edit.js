@@ -42,7 +42,7 @@ function DeleteButton() {
 
   return (
     <>
-      <Button label="Delete" onClick={handleClick} />
+      <Button label="Delete" onClick={handleClick} color="error" />
       <Confirm
         isOpen={open}
         loading={isLoading}
