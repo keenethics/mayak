@@ -10,7 +10,7 @@ const MESSAGES = {
 const zString = z
   .string({
     required_error: MESSAGES.requiredField,
-    invalid_type_error: MESSAGES.unacceptableValue,
+    invalid_type_error: MESSAGES.requiredField,
   })
   .trim();
 
@@ -66,16 +66,15 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
+  placesOfWork: zPlacesOfWorkSchema.default([]),
 });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
-  placesOfWork: zPlacesOfWorkSchema.default([]),
 });
 
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
-  placesOfWork: zPlacesOfWorkSchema.default([]),
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
