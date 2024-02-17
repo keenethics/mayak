@@ -106,7 +106,7 @@ function randomEvent({ tags, link }) {
     priceType,
     price,
     format,
-    eventDate: faker.date.future(),
+    eventDate: Math.random() > 0.5 ? faker.date.future() : faker.date.past(),
     isActive: faker.datatype.boolean(),
     additionalLink: {
       connect: link,

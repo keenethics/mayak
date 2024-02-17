@@ -10,3 +10,37 @@ export const BASE_ERROR_MESSAGES = {
   429: 'Too Many Requests',
   500: 'Internal Server Error',
 };
+
+export const MODEL_INCLUDES = {
+  Specialist: {
+    therapies: { select: { name: true } },
+    specializations: { select: { name: true } },
+    placesOfWork: {
+      select: {
+        addresses: {
+          select: {
+            nameOfClinic: true,
+            fullAddress: true,
+            district: { select: { name: true } },
+          },
+        },
+      },
+    },
+  },
+  Organization: {
+    therapies: { select: { name: true } },
+    types: { select: { name: true } },
+    addresses: {
+      select: {
+        nameOfClinic: true,
+        fullAddress: true,
+        district: { select: { name: true } },
+      },
+    },
+  },
+  Event: {
+    additionalLink: { select: { label: true, link: true } },
+    eventTags: { select: { name: true } },
+    formatOfWork: { select: true },
+  },
+};
