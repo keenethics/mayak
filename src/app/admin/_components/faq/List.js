@@ -63,14 +63,12 @@ function IsActiveSwitch() {
   const notify = useNotify();
   const record = useRecordContext();
   const [update, { isLoading, error }] = useUpdate('faq');
-  const activeFaqs = useActiveFaqs();
+  const { total: activeFaqsCount, isLoading: isLoadingActiveFaqs, error: faqsLoadingError } = useActiveFaqs();
   const refresh = useRefresh();
 
-  if (!activeFaqs) {
+  if (isLoadingActiveFaqs || faqsLoadingError) {
     return null;
   }
-
-  const { total: activeFaqsCount } = activeFaqs;
 
   const handleError = queryError => {
     notify(`Неможливо оновити дані\nПомилка: ${queryError.message}`, { type: 'error' });
