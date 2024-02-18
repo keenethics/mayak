@@ -4,11 +4,11 @@ import React from 'react';
 import { BooleanInput, Create, SimpleForm, useNotify, useRedirect } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { specialistValidationSchema } from '@/lib/validationSchemas/specialistSchema';
-import { General } from '@/app/admin/_components/specialist/create/General';
-import { Details } from '@/app/admin/_components/specialist/create/Details';
-import { PlacesOfWork } from '@/app/admin/_components/specialist/create/PlacesOfWork';
-import { Services } from '@/app/admin/_components/specialist/create/Services';
-import { Contacts } from '@/app/admin/_components/specialist/create/Contacts';
+import { General } from '@/app/admin/_components/Specialist/Create/General';
+import { Details } from '@/app/admin/_components/Specialist/Create/Details';
+import { PlacesOfWork } from '@/app/admin/_components/Specialist/Create/PlacesOfWork';
+import { Services } from '@/app/admin/_components/Specialist/Create/Services';
+import { Contacts } from '@/app/admin/_components/Specialist/Create/Contacts';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
 import { transformData } from '@/app/admin/_utils/transformSpecialistFormData';
 
