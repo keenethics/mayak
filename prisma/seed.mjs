@@ -103,7 +103,7 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
-  const faqs = Array.from({ length: 10 }).map(() => ({
+  const faqs = Array.from({ length: 15 }).map(() => ({
     isActive: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
@@ -122,7 +122,7 @@ async function main() {
   });
 
   await prisma.faq.createMany({
-    data: faqs
+    data: faqs,
   });
 
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
