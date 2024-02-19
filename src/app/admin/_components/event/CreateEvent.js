@@ -19,7 +19,7 @@ function AddressInput() {
   const format = useWatch({ name: 'format' });
   return (
     <>
-      <TextInput disabled={format !== 'OFFLINE'} source="address" label="Address or place name" className="w-96" />
+      <TextInput disabled={format !== 'OFFLINE'} source="address" className="w-96" />
       <TextInput disabled={format !== 'OFFLINE'} source="locationLink" className="w-96" />
     </>
   );
@@ -61,7 +61,7 @@ export function CreateEvent() {
           <PriceInput />
         </div>
         <p>Notes for admin</p>
-        <TextInput className="!focus:shadow-none mt-32 w-96" source="notes" multiline />
+        <TextInput className="mt-32 w-96" source="notes" multiline />
         <p>Event tags</p>
         <Tag setSelectedTags={setSelectedTags} />
         <p className="mt-6">Additional link(Label is for link type(Telegram, Website, etc.))</p>
