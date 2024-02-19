@@ -1,5 +1,6 @@
 'use client';
 
+import { Switch } from '@mui/material';
 import {
   Datagrid,
   List,
@@ -11,9 +12,7 @@ import {
   useUpdate,
 } from 'react-admin';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Switch } from '@mui/material';
-import { QA_PRIORITY_CHANGE_STEP } from '@/lib/consts';
+import { FAQ_PRIORITY_CHANGE_STEP } from '@/lib/consts';
 import { MAX_ACTIVE_FAQS, MIN_ACTIVE_FAQS } from './consts';
 import { LinkTextField } from '../LinkTextField';
 import { UpDownArrowMenu } from '../UpDownArrowMenu';
@@ -29,7 +28,7 @@ function ChangePriorityButtons() {
     notify(`Неможливо оновити дані\nПомилка: ${queryError.message}`, { type: 'error' });
   };
 
-  const handleChangeWeightClick = diff => () => {
+  const handleChange = diff => () => {
     const isDiffPositive = diff > 0;
     update(
       'Faq',
@@ -50,11 +49,11 @@ function ChangePriorityButtons() {
 
   return (
     <UpDownArrowMenu
-      onIncrease={handleChangeWeightClick(QA_PRIORITY_CHANGE_STEP)}
-      onDecrease={handleChangeWeightClick(-QA_PRIORITY_CHANGE_STEP)}
+      onIncrease={handleChange(FAQ_PRIORITY_CHANGE_STEP)}
+      onDecrease={handleChange(-FAQ_PRIORITY_CHANGE_STEP)}
       disabled={isLoading}
     >
-      <TextField source="priority" />
+      {record.priority ? <TextField source="priority" /> : '-'}
     </UpDownArrowMenu>
   );
 }
@@ -116,8 +115,9 @@ export function ListFaq() {
   // rowClick is not set in DataGrid(to prevent redirect on toggle, etc...), so we need to redirect manually
   return (
     <List>
-      <Datagrid>
-        <LinkTextField source="id" label="Id" pathFn={redirectTo} />
+      <Datagrid rowClick="edit">
+        <TextField source="id" label="Id" />
+        {/* <LinkTextField source="id" label="Id" pathFn={redirectTo} /> */}
         <WrapperField source="priority" label="Приорітет">
           <ChangePriorityButtons />
         </WrapperField>

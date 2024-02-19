@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-console
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
