@@ -15,8 +15,25 @@ const transformPlacesOfWork = placesArray => {
   ];
 };
 
+export const transformDaysOfWork = daysOfWork => {
+  const daysOfWorkTransformed = [];
+  daysOfWork.forEach(dayOfWork => {
+    if (dayOfWork.daysOfWeek) {
+      daysOfWorkTransformed.push(
+        ...dayOfWork.daysOfWeek.map(dayOfWeek => ({
+          dayOfWeek,
+          timeRanges: dayOfWork.timeRanges.map(el => el.timeRange),
+        })),
+      );
+    }
+  });
+  return daysOfWorkTransformed;
+};
 export const transformData = data => ({
   ...data,
+  daysOfWork: {
+    create: data.daysOfWork?.length ? transformDaysOfWork(data.daysOfWork) : undefined,
+  },
   specializations: {
     connect: data.specializations?.length ? mapIdArrayToIdObjects(data.specializations) : undefined,
   },

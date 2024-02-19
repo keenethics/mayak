@@ -101,6 +101,30 @@ export const SpecialistFormFields = {
     label: 'Веб сторінка',
     isRequired: false,
   },
+  daysOfWork: {
+    name: 'daysOfWork',
+    type: null,
+    label: 'Робочі дні',
+    validate: true,
+  },
+  daysOfWeek: {
+    name: 'daysOfWeek',
+    type: null,
+    label: 'Дні тижня',
+    validate: true,
+  },
+  timeRanges: {
+    name: 'timeRanges',
+    type: null,
+    label: 'Робочі години',
+    validate: true,
+  },
+  timeRange: {
+    name: 'timeRange',
+    type: null,
+    label: 'Проміжок часу',
+    validate: true,
+  },
 };
 
 export const SpecialistFormSections = {
@@ -109,4 +133,5 @@ export const SpecialistFormSections = {
   placesOfWOrk: 'Місце надання послуг',
   services: 'Послуги',
   contacts: 'Контактні дані',
+  daysOfWork: 'Графік роботи',
 };

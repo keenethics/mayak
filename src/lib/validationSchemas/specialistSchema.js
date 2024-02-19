@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { FormatOfWork, Gender } from '@prisma/client';
-import { PHONE_REGEX } from '@/lib/consts';
+import { DaysOfWeek, FormatOfWork, Gender } from '@prisma/client';
+import { PHONE_REGEX, TIME_RANGE_REGEX } from '@/lib/consts';
 
 const MESSAGES = {
   requiredField: `Обов'язкове поле`,
@@ -10,7 +10,7 @@ const MESSAGES = {
 const zString = z
   .string({
     required_error: MESSAGES.requiredField,
-    invalid_type_error: MESSAGES.unacceptableValue,
+    invalid_type_error: MESSAGES.requiredField,
   })
   .trim();
 
@@ -21,6 +21,9 @@ const zStringWithMax = zString.max(128, {
 const zStringArray = zString.array().min(1, {
   message: MESSAGES.requiredField,
 });
+
+const zStringInEnum = prismaEnum =>
+  z.string().refine(val => Object.values(prismaEnum).includes(val), { message: MESSAGES.unacceptableValue });
 
 const zYearsOfExperience = z
   .number({
@@ -39,6 +42,22 @@ const zPlacesOfWorkSchema = z.array(
     })
     .default([]),
 );
+const zDaysOfWorkSchema = z
+  .array(
+    z.object({
+      daysOfWeek: z.array(zStringInEnum(DaysOfWeek)).min(1),
+      timeRanges: z
+        .array(
+          z.object({
+            timeRange: z.string().refine(val => TIME_RANGE_REGEX.test(val), {
+              message: 'Введіть проміжок часу у форматі: hh:mm-hh:mm',
+            }),
+          }),
+        )
+        .min(1),
+    }),
+  )
+  .min(1);
 
 const defaultProps = z.object({
   lastName: zStringWithMax,
@@ -49,13 +68,9 @@ const defaultProps = z.object({
 const restProps = z.object({
   isActive: z.boolean().optional(),
   surname: zStringWithMax.nullish(),
-  gender: zString.refine(val => Object.values(Gender).includes(val), {
-    message: MESSAGES.unacceptableValue,
-  }),
+  gender: zStringInEnum(Gender),
   yearsOfExperience: zYearsOfExperience,
-  formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
-    message: MESSAGES.unacceptableValue,
-  }),
+  formatOfWork: zStringInEnum(FormatOfWork),
   therapies: zStringArray,
   isFreeReception: z.boolean(),
   description: zString.nullish(),
@@ -66,16 +81,16 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
+  placesOfWork: zPlacesOfWorkSchema.default([]),
+  daysOfWork: zDaysOfWorkSchema,
 });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
-  placesOfWork: zPlacesOfWorkSchema.default([]),
 });
 
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
-  placesOfWork: zPlacesOfWorkSchema.default([]),
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
