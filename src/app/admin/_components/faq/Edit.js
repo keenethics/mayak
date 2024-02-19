@@ -46,7 +46,7 @@ function DeleteButton() {
       <Confirm
         isOpen={open}
         loading={isLoading}
-        title={`Delete post #${record && record.id}`}
+        title={`Delete post #${record?.id}`}
         content="Are you sure you want to delete this item?"
         onConfirm={handleConfirm}
         onClose={handleDialogClose}
