@@ -116,8 +116,7 @@ export function ListFaq() {
   return (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source="id" label="Id" />
-        {/* <LinkTextField source="id" label="Id" pathFn={redirectTo} /> */}
+        <LinkTextField source="id" label="Id" pathFn={redirectTo} />
         <WrapperField source="priority" label="Приорітет">
           <ChangePriorityButtons />
         </WrapperField>
