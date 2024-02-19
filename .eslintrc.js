@@ -7,6 +7,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:@tanstack/eslint-plugin-query/recommended',
+    'prettier',
   ],
   rules: {
     'max-len': ['error', { code: 120, ignoreStrings: true }],
@@ -17,7 +18,7 @@ module.exports = {
     indent: ['error', 2],
     'no-multiple-empty-lines': ['error', { max: 3, maxBOF: 0, maxEOF: 0 }],
     'no-underscore-dangle': 0,
-    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
+    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: false }],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/extensions': 0,
     'import/prefer-default-export': 0,

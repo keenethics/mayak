@@ -3,11 +3,9 @@ import Link from 'next/link';
 import Logo from '@icons/logo.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
-import OutlinedBtn from '@components/OutlinedBtn/OutlinedBtn';
-import InnerLink from '@components/Links/InnerLink';
-import SocialLink from '@components/Links/SocialLink';
+import { SocialLink, InnerLink, OutlinedButton } from '@components';
 
-export default function Header() {
+export function Header() {
   const { links, innerLinks } = siteNav;
 
   //  Basic styles
@@ -27,6 +25,7 @@ export default function Header() {
       <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
         <Logo alt="Mayak logo" aria-label="Mayak logo" priority="true" className={cn('h-[74px] w-[129px]')} />
       </Link>
+
       <div className={cn(flexCenter, 'gap-6')}>
         <InnerLink
           role="list"
@@ -40,12 +39,12 @@ export default function Header() {
           status="headerSocials"
           className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
         ></SocialLink>
-        <OutlinedBtn
+        <OutlinedButton
           className={cn(basicBtnActive, basicBtnFocus, basicBtnHover, 'border-gray-700 text-primary-500')}
           aria-label="Click to fill feedback form"
         >
           Зворотній звʼязок
-        </OutlinedBtn>
+        </OutlinedButton>
       </div>
     </nav>
   );
