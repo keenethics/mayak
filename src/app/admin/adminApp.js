@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import {
-  Admin, ListGuesser, Resource, ShowGuesser, EditGuesser,
-} from 'react-admin';
+import { Admin, EditGuesser, ListGuesser, Resource, ShowGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
-import { authProvider } from './authProvider';
+import { authProvider } from '@/app/admin/authProvider';
+import { RESOURCES } from '@/app/admin/_lib/consts';
+import { SpecialistCreate } from '@/app/admin/_components/Specialist';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -13,31 +13,32 @@ export default function AdminPage() {
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
-        name="Therapy"
+        name={RESOURCES.therapy}
         options={{ label: 'Therapy' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="Specialist"
+        name={RESOURCES.specialist}
         options={{ label: 'Specialist' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
+        create={SpecialistCreate}
       />
-      <Resource name="District" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-      <Resource name="Specialization" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name="Address" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource
-        name="PlaceOfWork"
+        name={RESOURCES.placeOfWork}
         options={{ label: 'Place of work' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
       />
       <Resource
-        name="Feedback"
+        name={RESOURCES.feedback}
         options={{ label: 'Feedback' }}
         list={ListGuesser}
         show={ShowGuesser}
