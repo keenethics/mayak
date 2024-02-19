@@ -8,7 +8,7 @@ export function minMaxString(min, max, fieldName) {
     })
     .trim()
     .min(min, {
-      message: `${fieldName} can not be empty`,
+      message: `${fieldName} must be at least ${min} characters long`,
     })
     .max(max, {
       message: `${fieldName} must not be longer than ${max} characters`,

@@ -37,16 +37,17 @@ model Specialist {
   lastName          String           @db.VarChar(64)
   surname           String?          @db.VarChar(64)
   specializations   Specialization[]
-  gender            Gender
+  gender            Gender?
   yearsOfExperience Int?             @db.SmallInt
-  formatOfWork      FormatOfWork
+  formatOfWork      FormatOfWork?
   placesOfWork      PlaceOfWork[]
   therapies         Therapy[]
-  isFreeReception   Boolean
-  description       String           @db.Text
+  isFreeReception   Boolean?
+  description       String?          @db.Text
   phone             String?          @db.VarChar(15)
   email             String?          @unique @db.VarChar(320)
   website           String?          @db.Text
+  isActive          Boolean          @default(false)
 
   @@map("specialist")
 }
