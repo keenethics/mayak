@@ -12,7 +12,6 @@ export const useActiveFaqs = ({ page, perPage } = { page: 1, perPage: 50 }) => {
     return { total: 0, data: [], isLoading, error };
   }
 
-  const sorted = faqs.map(({ id, isActive }) => ({ id, isActive })).sort(a => a.isActive);
-  const filtered = sorted.filter(({ isActive }) => isActive);
+  const filtered = faqs.filter(({ isActive }) => isActive).map(({ id, isActive }) => ({ id, isActive }));
   return { total: filtered.length, data: filtered };
 };
