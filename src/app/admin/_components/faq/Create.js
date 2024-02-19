@@ -1,7 +1,6 @@
 import { Create, SimpleForm, TextInput, NumberInput, required } from 'react-admin';
 import { AnswerTextInput } from './AnswerTextInput';
 
-
 export function CreateFaq() {
   return (
     <Create>

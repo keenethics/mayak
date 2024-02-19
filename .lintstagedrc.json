@@ -1,4 +1,4 @@
 {
-  "*.{js}": "eslint --ext .js,.mjs",
+  "*.js": "eslint --ext .js,.mjs",
   "*.{scss,md,json,prisma}": "prettier --check"
 }

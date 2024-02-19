@@ -123,7 +123,7 @@ async function main() {
   });
 
   await prisma.faq.createMany({
-    data: faqs
+    data: faqs,
   });
 
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
