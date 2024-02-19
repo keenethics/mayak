@@ -8,7 +8,7 @@ CREATE TYPE "EventPriceFormat" AS ENUM ('FREE', 'FIXED_PRICE', 'MIN_PRICE');
 CREATE TABLE "event" (
     "id" UUID NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "eventName" VARCHAR(128) NOT NULL,
+    "title" VARCHAR(128) NOT NULL,
     "organizerName" VARCHAR(128) NOT NULL,
     "notes" VARCHAR(350),
     "address" VARCHAR(128),

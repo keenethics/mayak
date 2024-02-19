@@ -3,16 +3,16 @@ import React from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { Loading, useGetList, useCreate } from 'react-admin';
 import PropTypes from 'prop-types';
-import { RESOURCES } from '../../_lib/consts';
+import { RESOURCES } from '@admin/_lib/consts';
 
-export function Tag({ setSelectedTags }) {
+export function TagSelect({ setSelectedTags }) {
   const [create] = useCreate();
   const { data: tags, isLoading } = useGetList(RESOURCES.eventTag);
   if (isLoading) return <Loading />;
   const defaultOptions = tags.map(tag => ({ label: tag.name, value: tag.name }));
   return (
     <CreatableSelect
-      placeholder="Choose tags..."
+      placeholder="Оберіть теги..."
       styles={{ menu: base => ({ ...base, zIndex: 9999 }) }}
       isMulti
       onChange={setSelectedTags}
@@ -22,6 +22,6 @@ export function Tag({ setSelectedTags }) {
   );
 }
 
-Tag.propTypes = {
+TagSelect.propTypes = {
   setSelectedTags: PropTypes.func,
 };

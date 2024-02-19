@@ -99,7 +99,7 @@ function randomEvent({ tags, link }) {
     price = faker.number.int({ min: 1000, max: 5000 });
   }
   return {
-    eventName: faker.word.noun(),
+    title: faker.word.noun(),
     organizerName: faker.company.name(),
     address,
     locationLink,

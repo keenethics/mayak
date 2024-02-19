@@ -118,7 +118,7 @@ model Feedback {
 model Event {
   id             String           @id @default(uuid()) @db.Uuid
   createdAt      DateTime         @default(now())
-  eventName      String           @db.VarChar(128)
+  title          String           @db.VarChar(128)
   organizerName  String           @db.VarChar(128)
   notes          String?          @db.VarChar(350)
   address        String?          @db.VarChar(128)

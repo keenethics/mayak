@@ -3,14 +3,14 @@ import { z } from 'zod';
 export function minMaxString(min, max, fieldName) {
   return z
     .string({
-      required_error: `${fieldName} is required`,
-      invalid_type_error: `${fieldName} must be a string`,
+      required_error: `${fieldName} - обов'язкове поле`,
+      invalid_type_error: `${fieldName} має бути рядком`,
     })
     .trim()
     .min(min, {
-      message: `${fieldName} must be at least ${min} characters long`,
+      message: `${fieldName} має містити не менше ніж ${min} символів`,
     })
     .max(max, {
-      message: `${fieldName} must not be longer than ${max} characters`,
+      message: `${fieldName} має містити не більше ніж ${max} символів`,
     });
 }

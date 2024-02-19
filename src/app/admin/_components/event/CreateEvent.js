@@ -3,22 +3,24 @@ import { useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { CreateEventSchema } from '@admin/_lib/validationSchemas/createEventSchema';
-import { Tag } from './Tag';
 import { transformEventData } from '@admin/_utils/transformEventData';
+import { TagSelect } from './TagSelect';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
 function PriceInput() {
   const priceType = useWatch({ name: 'priceType' });
-  return <NumberInput disabled={priceType !== 'FIXED_PRICE' && priceType !== 'MIN_PRICE'} source="price" />;
+  return (
+    <NumberInput disabled={priceType !== 'FIXED_PRICE' && priceType !== 'MIN_PRICE'} label="Ціна" source="price" />
+  );
 }
 
 function AddressInput() {
   const format = useWatch({ name: 'format' });
   return (
     <>
-      <TextInput disabled={format !== 'OFFLINE'} source="address" className="w-96" />
-      <TextInput disabled={format !== 'OFFLINE'} source="locationLink" className="w-96" />
+      <TextInput disabled={format !== 'OFFLINE'} source="address" label="Адреса чи назва приміщення" className="w-96" />
+      <TextInput disabled={format !== 'OFFLINE'} source="locationLink" label="Посилання на локацію" className="w-96" />
     </>
   );
 }
@@ -29,43 +31,47 @@ export function CreateEvent() {
   return (
     <Create transform={data => transformEventData(data, selectedTags)}>
       <SimpleForm resolver={zodResolver(CreateEventSchema)}>
-        <p>Main info</p>
-        <TextInput source="eventName" validate={required()} className="w-72" />
-        <TextInput source="organizerName" validate={required()} className="w-72" />
-        <DateTimeInput source="eventDate" validate={required()} />
-        <p>Format and location</p>
+        <p className="font-bold">Основна інформація</p>
+        <TextInput source="title" label="Назва події" validate={required()} className="w-72" />
+        <TextInput source="organizerName" label="Ім'я організатора" validate={required()} className="w-72" />
+        <DateTimeInput source="eventDate" label="Дата події" validate={required()} />
+        <p className="font-bold">Формат та локація</p>
         <div className={fieldGroupClass}>
           <SelectInput
             source="format"
             choices={[
-              { id: 'OFFLINE', name: 'Offline' },
-              { id: 'ONLINE', name: 'Online' },
+              { id: 'OFFLINE', name: 'Офлайн' },
+              { id: 'ONLINE', name: 'Онлайн' },
             ]}
+            label="Формат події"
             validate={required()}
           />
           <AddressInput />
         </div>
-        <p>Pricing</p>
+        <p className="font-bold">Ціна</p>
         <div className={fieldGroupClass}>
           <SelectInput
             source="priceType"
             choices={[
-              { id: 'FREE', name: 'Free' },
-              { id: 'FIXED_PRICE', name: 'Fixed price' },
-              { id: 'MIN_PRICE', name: 'Minimum price' },
+              { id: 'FREE', name: 'Безкоштовно' },
+              { id: 'FIXED_PRICE', name: 'Фіксована ціна' },
+              { id: 'MIN_PRICE', name: 'Мінімальна ціна' },
             ]}
+            label="Вид ціни"
             validate={required()}
           />
           <PriceInput />
         </div>
-        <p>Notes for admin</p>
-        <TextInput className="mt-32 w-96" source="notes" multiline />
-        <p>Event tags</p>
-        <Tag setSelectedTags={setSelectedTags} />
-        <p className="mt-6">Additional link(Label is for link type(Telegram, Website, etc.))</p>
+        <p className="font-bold">Нотатки для адміна</p>
+        <TextInput className="mt-32 w-96" source="notes" label="Коментарі" multiline />
+        <p className="font-bold">Теги події</p>
+        <TagSelect setSelectedTags={setSelectedTags} />
+        <p className="mt-6 font-bold">
+          Додаткове посилання(У поле тип введіть що це за посилання: телеграм, вебсайт тощо)
+        </p>
         <div className={fieldGroupClass}>
-          <TextInput source="additionalLink.label" label="Label" />
-          <TextInput source="additionalLink.link" label="Link" fullWidth />
+          <TextInput source="additionalLink.label" label="Тип" />
+          <TextInput source="additionalLink.link" label="Посилання" fullWidth />
         </div>
       </SimpleForm>
     </Create>
