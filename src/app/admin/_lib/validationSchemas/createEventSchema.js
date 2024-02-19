@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { minMaxString } from './utils';
+import { minMaxString } from '@/lib/validationSchemas/utils';
 
 export const CreateEventSchema = z
   .object({
@@ -41,9 +41,7 @@ export const CreateEventSchema = z
     address: minMaxString(1, 128, 'Address').nullish(),
   })
   .superRefine((data, ctx) => {
-    const {
-      price, format, address, priceType,
-    } = data;
+    const { price, format, address, priceType } = data;
     if (format === 'ONLINE' && address) {
       ctx.addIssue({
         code: z.ZodIssueCode.invalid_type,

@@ -1,12 +1,10 @@
-import {
-  Create, TextInput, SimpleForm, DateTimeInput, SelectInput, NumberInput, required,
-} from 'react-admin';
+import { Create, TextInput, SimpleForm, DateTimeInput, SelectInput, NumberInput, required } from 'react-admin';
 import { useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { CreateEventSchema } from '@/lib/validationSchemas/createEventSchema';
+import { CreateEventSchema } from '@admin/_lib/validationSchemas/createEventSchema';
 import { Tag } from './Tag';
-import { transformEventData } from '@/app/admin/_utils/transformEventData';
+import { transformEventData } from '@admin/_utils/transformEventData';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
