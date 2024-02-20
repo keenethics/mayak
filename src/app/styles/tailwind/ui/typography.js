@@ -8,7 +8,8 @@ const typography = {
   p3: ['1rem', '1.5rem'],
   p4: ['0.875rem', '1.25rem'],
   link: ['1rem', '1.5rem'],
-  caption: ['1rem', '1.5rem'],
+  c1: ['1rem', '1.5rem'],
+  c2: ['0.875rem', '1.25rem'],
 };
 
 export default typography;

@@ -16,6 +16,13 @@ export const buttonColorVariant = {
       active: 'active:bg-primary-200 active:text-primary-600 active:border-gray-700',
       disabled: 'disabled:text-gray-400 disabled:border-gray-200',
     },
+    orange: {
+      regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-secondary-400',
+      hover: 'hover:bg-secondary-300',
+      focused: 'focus:outline-none focus:bg-secondary-300 focus:text-secondary-500 focus:border-secondary-500',
+      active: 'active:bg-secondary-300 active:text-secondary-500 active:border-gray-700',
+      disabled: 'disabled:text-gray-400 disabled:border-gray-200',
+    },
   },
   close: {
     grey: {
