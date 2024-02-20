@@ -81,6 +81,34 @@ function randomSpecialist({ districts, specializations, therapies }) {
   };
 }
 
+function randomOrganization({ therapies, districts }) {
+  let addresses;
+  const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
+  if (formatOfWork !== 'ONLINE') {
+    addresses = {
+      create: Array(faker.number.int({ min: 1, max: 3 }))
+        .fill('')
+        .map(() => randomAddress(districts)),
+    };
+  }
+  const phoneRegexp = '+380[0-9]{9}';
+  return {
+    name: faker.company.name(),
+    yearsOnMarket: nullable(faker.number.int({ min: 1, max: 30 })),
+    formatOfWork,
+    type: faker.helpers.arrayElement(['HOSPITAL', 'SOCIAL_SERVICE', 'PSY_CENTER']),
+    addresses,
+    therapies: {
+      connect: uniqueObjectsWithId(therapies),
+    },
+    isFreeReception: faker.datatype.boolean(),
+    phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
+    email: nullable(faker.internet.email()),
+    website: nullable(faker.internet.url()),
+    description: faker.lorem.paragraph(),
+  };
+}
+
 const prisma = new PrismaClient();
 
 async function main() {
@@ -92,6 +120,7 @@ async function main() {
     prisma.specialization.deleteMany(),
     prisma.district.deleteMany(),
     prisma.therapy.deleteMany(),
+    prisma.organization.deleteMany(),
   ]);
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
@@ -122,7 +151,7 @@ async function main() {
   });
 
   await prisma.faq.createMany({
-    data: faqs
+    data: faqs,
   });
 
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
@@ -138,9 +167,14 @@ async function main() {
       .map(
         // eslint-disable-next-line no-unused-vars
         _ =>
-          prisma.specialist.create({
-            data: randomSpecialist({ districts, specializations, therapies }),
-          }),
+          prisma.$transaction([
+            prisma.specialist.create({
+              data: randomSpecialist({ districts, specializations, therapies }),
+            }),
+            prisma.organization.create({
+              data: randomOrganization({ therapies, districts }),
+            }),
+          ]),
       ),
   );
 }
