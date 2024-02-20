@@ -30,9 +30,6 @@ const handler = auth(
         where: searchInputFilters(modelName, json.params?.filter?.q),
       },
       getOne: { debug: false, include: MODEL_INCLUDES[modelName] },
-      audit: {
-        model: prisma.audit,
-      },
     });
     return NextResponse.json(result);
   }),
