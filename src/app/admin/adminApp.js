@@ -38,7 +38,7 @@ export default function AdminPage() {
         edit={EditGuesser}
         show={ShowGuesser}
       />
-      <Resource name="Faq" options={{ label: 'FAQ' }} list={ListFaq} show={ShowGuesser} edit={EditGuesser} />
+      <Resource name={RESOURCES.faq} options={{ label: 'FAQ' }} list={ListFaq} show={ShowGuesser} edit={EditGuesser} />
       <Resource
         name={RESOURCES.feedback}
         options={{ label: 'Feedback' }}

@@ -8,21 +8,23 @@ import {
   WrapperField,
   useNotify,
   useRecordContext,
+  useRedirect,
   useRefresh,
   useUpdate,
 } from 'react-admin';
 
+import { useCallback } from 'react';
 import { FAQ_PRIORITY_CHANGE_STEP } from '@/lib/consts';
 import { MAX_ACTIVE_FAQS, MIN_ACTIVE_FAQS } from './consts';
 import { LinkTextField } from '../LinkTextField';
 import { UpDownArrowMenu } from '../UpDownArrowMenu';
 import { useActiveFaqs } from './hooks';
 
-function ChangePriorityButtons() {
-  const notify = useNotify();
+function PriorityModifier() {
   const record = useRecordContext();
   const [update, { isLoading, error }] = useUpdate('faq');
   const refresh = useRefresh();
+  const notify = useNotify();
 
   const handleError = queryError => {
     notify(`Неможливо оновити дані\nПомилка: ${queryError.message}`, { type: 'error' });
@@ -58,20 +60,20 @@ function ChangePriorityButtons() {
   );
 }
 
-function IsActiveSwitch() {
+function ActiveStatusToggle() {
   const notify = useNotify();
   const record = useRecordContext();
   const [update, { isLoading, error }] = useUpdate('faq');
   const { total: activeFaqsCount, isLoading: isLoadingActiveFaqs, error: faqsLoadingError } = useActiveFaqs();
   const refresh = useRefresh();
 
-  if (isLoadingActiveFaqs || faqsLoadingError) {
-    return null;
-  }
-
   const handleError = queryError => {
     notify(`Неможливо оновити дані\nПомилка: ${queryError.message}`, { type: 'error' });
   };
+
+  if (isLoadingActiveFaqs || faqsLoadingError) {
+    return null;
+  }
 
   function handleSwitch() {
     const isTryingToActivate = !record.isActive;
@@ -108,23 +110,28 @@ function IsActiveSwitch() {
 }
 
 export function ListFaq() {
-  function redirectTo(id) {
-    return `/Faq/${id}/edit`;
-  }
+  const redirect = useRedirect();
+
+  const redirectToEdit = useCallback(
+    id => {
+      redirect(`/Faq/${id}/edit`);
+    },
+    [redirect],
+  );
 
   // rowClick is not set in DataGrid(to prevent redirect on toggle, etc...), so we need to redirect manually
   return (
     <List>
-      <Datagrid rowClick="edit">
-        <LinkTextField source="id" label="Id" pathFn={redirectTo} />
-        <WrapperField source="priority" label="Приорітет">
-          <ChangePriorityButtons />
+      <Datagrid>
+        <LinkTextField source="id" label="Id" onClick={redirectToEdit} />
+        <WrapperField source="priority" label="Пріоритет">
+          <PriorityModifier />
         </WrapperField>
-        <WrapperField source="isActive" label="Активний" pathFn={redirectTo}>
-          <IsActiveSwitch />
+        <WrapperField source="isActive" label="Активний">
+          <ActiveStatusToggle />
         </WrapperField>
-        <LinkTextField source="question" label="Питання" pathFn={redirectTo} />
-        <LinkTextField source="answer" label="Відповідь" pathFn={redirectTo} />
+        <LinkTextField source="question" label="Питання" onClick={redirectToEdit} />
+        <LinkTextField source="answer" label="Відповідь" onClick={redirectToEdit} />
       </Datagrid>
     </List>
   );

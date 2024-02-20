@@ -1,8 +1,7 @@
-import { TextField, useRecordContext, useRedirect } from 'react-admin';
+import { TextField, useRecordContext } from 'react-admin';
 import PropTypes from 'prop-types';
 
-export const LinkTextField = ({ source, label, pathFn }) => {
-  const redirect = useRedirect();
+export const LinkTextField = ({ source, label, onClick }) => {
   const record = useRecordContext();
 
   if (!record) return null;
@@ -13,7 +12,7 @@ export const LinkTextField = ({ source, label, pathFn }) => {
       label={label}
       source={source}
       record={record}
-      onClick={() => redirect(pathFn(record.id))}
+      onClick={() => onClick(record.id)}
     />
   );
 };
@@ -21,5 +20,5 @@ export const LinkTextField = ({ source, label, pathFn }) => {
 LinkTextField.propTypes = {
   source: PropTypes.string,
   label: PropTypes.string,
-  pathFn: PropTypes.func,
+  onClick: PropTypes.func,
 };
