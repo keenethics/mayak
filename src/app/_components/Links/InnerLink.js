@@ -5,7 +5,7 @@ import { cn } from '@utils/cn';
 
 export function InnerLink({ items, className }) {
   return (
-    <div className="flex list-none gap-4 text-primary-700">
+    <>
       {items?.map((link, idx) => (
         <Link
           key={idx}
@@ -20,7 +20,7 @@ export function InnerLink({ items, className }) {
           {link?.title}
         </Link>
       ))}
-    </div>
+    </>
   );
 }
 
