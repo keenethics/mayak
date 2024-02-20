@@ -18,8 +18,8 @@ import { useActiveFaqs } from './hooks';
 import { AnswerTextInput } from './AnswerTextInput';
 import { MAX_ACTIVE_FAQS, MIN_ACTIVE_FAQS } from './consts';
 
-const TOO_MANY_ACTIVE_FAQS = `Too many active FAQs. Please deactivate some first.`;
-const TOO_FEW_ACTIVE_FAQS = `At least five FAQ must be active. Pleace activate some first.`;
+const TOO_MANY_ACTIVE_FAQS = 'Too many active FAQs. Please deactivate some first.';
+const TOO_FEW_ACTIVE_FAQS = 'Too few active FAQs. Please activate some first.';
 
 function DeleteButton() {
   const record = useRecordContext();

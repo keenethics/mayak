@@ -11,14 +11,9 @@ const handler = withErrorHandler(
       throw new NotAuthorizedException();
     }
 
-    try {
-      const json = await req.json();
-      const result = await defaultHandler(json, prisma);
-      return NextResponse.json(result);
-    } catch (err) {
-      const {message} = err;
-      return NextResponse.json({ error: { message } }, { status: 500 });
-    }
+    const json = await req.json();
+    const result = await defaultHandler(json, prisma);
+    return NextResponse.json(result);
   }),
 );
 
