@@ -4,7 +4,16 @@ import PropTypes from 'prop-types';
 import { prisma } from '@/lib/db';
 
 export async function SpecialistItem({ id }) {
-  const specialist = await prisma.specialist.findUnique({ where: { id } });
+  const specialist = await prisma.specialist.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      specializations: true,
+      therapies: true,
+      placesOfWork: true,
+    },
+  });
   return (
     <div className="m-5">
       <Link href={'/specialist'} className="bg-gray-500 p-2">

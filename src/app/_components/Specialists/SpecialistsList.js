@@ -3,7 +3,13 @@ import Link from 'next/link';
 import { prisma } from '@/lib/db';
 
 export async function SpecialistsList() {
-  const specialists = await prisma.specialist.findMany();
+  const specialists = await prisma.specialist.findMany({
+    include: {
+      specializations: true,
+      therapies: true,
+      placesOfWork: true,
+    },
+  });
   return (
     <ul className="m-5">
       {specialists?.map(({ id }) => (
