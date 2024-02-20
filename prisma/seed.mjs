@@ -142,6 +142,11 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
+  const faqs = Array.from({ length: 10 }).map(() => ({
+    isActive: faker.datatype.boolean(),
+    question: faker.lorem.sentence(),
+    answer: faker.lorem.paragraph(),
+  }));
 
   await prisma.district.createMany({
     data: districtNames.map(name => ({ name })),
@@ -153,6 +158,10 @@ async function main() {
 
   await prisma.therapy.createMany({
     data: therapyNames.map(name => ({ name })),
+  });
+
+  await prisma.faq.createMany({
+    data: faqs
   });
 
   const eventTags = ['EventTag1', 'EventTag2', 'EventTag3'];

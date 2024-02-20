@@ -16,6 +16,7 @@ export function withErrorHandler(fn) {
           { status: 400 },
         );
       }
+
       return NextResponse.json(
         {
           message: error.message || 'Something went wrong',

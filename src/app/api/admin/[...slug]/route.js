@@ -5,11 +5,12 @@ import { auth } from '@/lib/auth';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { MODEL_INCLUDES } from '@/lib/consts';
+import { RESOURCES } from '@/app/admin/_lib/consts';
 
 export const MODEL_SEARCH_FIELDS = {
-  Specialist: ['firstName', 'lastName', 'surname'],
-  Organization: ['name'],
-  Event: ['eventName', 'organizerName'],
+  [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
+  [RESOURCES.organisation]: ['name'],
+  [RESOURCES.event]: ['eventName', 'organizerName'],
 };
 
 export function searchInputFilters(modelName, filter) {
