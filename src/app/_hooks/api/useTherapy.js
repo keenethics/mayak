@@ -5,11 +5,9 @@ const therapyKey = 'therapy';
 
 export const listTherapies = async () => ky('/api/therapy').json();
 
-export const createTherapy = async ({ price }) =>
-  ky.post('/api/therapy', { json: { price } }).json();
+export const createTherapy = async ({ price }) => ky.post('/api/therapy', { json: { price } }).json();
 
-export const deleteTherapy = async ({ id }) =>
-  ky.delete(`/api/therapy/${id}`).json();
+export const deleteTherapy = async ({ id }) => ky.delete(`/api/therapy/${id}`).json();
 
 export const useListTherapies = () =>
   useQuery({
