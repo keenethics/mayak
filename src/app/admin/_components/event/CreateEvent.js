@@ -11,7 +11,7 @@ const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 function PriceInput() {
   const priceType = useWatch({ name: 'priceType' });
   return (
-    <NumberInput disabled={priceType !== 'FIXED_PRICE' && priceType !== 'MIN_PRICE'} label="Ціна" source="price" />
+    <NumberInput disabled={priceType !== 'FIXED_PRICE' && priceType !== 'MIN_PRICE'} label="Вартість" source="price" />
   );
 }
 
@@ -34,6 +34,7 @@ export function CreateEvent() {
         <p className="font-bold">Основна інформація</p>
         <TextInput source="title" label="Назва події" validate={required()} className="w-72" />
         <TextInput source="organizerName" label="Ім'я організатора" validate={required()} className="w-72" />
+        <TextInput className="mt-32 w-96" source="notes" label="Коментарі" multiline />
         <DateTimeInput source="eventDate" label="Дата події" validate={required()} />
         <p className="font-bold">Формат та локація</p>
         <div className={fieldGroupClass}>
@@ -48,7 +49,7 @@ export function CreateEvent() {
           />
           <AddressInput />
         </div>
-        <p className="font-bold">Ціна</p>
+        <p className="font-bold">Вартість</p>
         <div className={fieldGroupClass}>
           <SelectInput
             source="priceType"
@@ -57,13 +58,11 @@ export function CreateEvent() {
               { id: 'FIXED_PRICE', name: 'Фіксована ціна' },
               { id: 'MIN_PRICE', name: 'Мінімальна ціна' },
             ]}
-            label="Вид ціни"
+            label="Варіанти"
             validate={required()}
           />
           <PriceInput />
         </div>
-        <p className="font-bold">Нотатки для адміна</p>
-        <TextInput className="mt-32 w-96" source="notes" label="Коментарі" multiline />
         <p className="font-bold">Теги події</p>
         <TagSelect setSelectedTags={setSelectedTags} />
         <p className="mt-6 font-bold">
