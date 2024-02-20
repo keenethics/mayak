@@ -6,6 +6,7 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from '@/app/admin/authProvider';
 import { RESOURCES } from '@/app/admin/_lib/consts';
 import { SpecialistCreate } from '@/app/admin/_components/Specialist';
+import { CreateOrganization } from './_components/Organization/Create';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -13,23 +14,23 @@ export default function AdminPage() {
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
-        name={RESOURCES.therapy}
-        options={{ label: 'Therapy' }}
+        name={RESOURCES.organization}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
+        create={CreateOrganization}
       />
       <Resource
         name={RESOURCES.specialist}
-        options={{ label: 'Specialist' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
         create={SpecialistCreate}
       />
+      <Resource name={RESOURCES.therapy} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-      <Resource name="Address" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource
         name={RESOURCES.placeOfWork}
         options={{ label: 'Place of work' }}

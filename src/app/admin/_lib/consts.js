@@ -6,6 +6,7 @@ export const RESOURCES = {
   address: 'address',
   placeOfWork: 'placeOfWork',
   feedback: 'feedback',
+  organization: 'organization',
 };
 
 export const SUCCESS_NOTIFICATIONS = {
