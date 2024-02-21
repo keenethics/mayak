@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 import Logo from '@icons/logo.svg';
 import BurgerIcon from '@icons/burger.svg';
-import CloseIcon from '@icons/close-cross.svg';
+import CloseIcon from '@icons/headerCloseIcon.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
 import { SocialLink, InnerLink, OutlinedButton } from '@components';
