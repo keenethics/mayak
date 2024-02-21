@@ -1,4 +1,3 @@
-export * from './Icons';
 export * from './InputFields';
 export * from './Links';
 export * from './Modal';
