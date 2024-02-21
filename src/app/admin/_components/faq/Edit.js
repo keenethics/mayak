@@ -27,7 +27,7 @@ function DeleteButton() {
   const { total: activeFaqsCount } = useActiveFaqs();
   const [open, setOpen] = useState(false);
 
-  const [remove, { isLoading }] = useDelete('faq', { id: record && record.id });
+  const [remove, { isLoading }] = useDelete('faq', { id: record?.id });
 
   const handleClick = () => setOpen(true);
   const handleDialogClose = () => setOpen(false);
