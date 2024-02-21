@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { prisma } from '@/lib/db';
 import { ShortCardMain } from '@/app/_components/Cards/ShortCard/ShortCardMain';
 import { CardSpecialistPreview } from '@/app/_components/Cards/ShortCard/CardSpecialistPreview';
@@ -20,15 +19,15 @@ export default async function Page() {
 
   return (
     <>
-      <CardSpecialistPreview />
       <ShortCardMain />
-      <ul className="m-5">
-        {data?.map(({ id }) => (
-          <li key={id}>
-            <Link href={`specialist/${id}`} className="text-primary-700 hover:text-primary-400">
-              {id}
-            </Link>
-          </li>
+      <ul>
+        {data?.map(specialist => (
+          <CardSpecialistPreview
+            key={specialist.id}
+            firstName={specialist.firstName}
+            lastName={specialist.lastName}
+            gender={specialist.gender}
+          />
         ))}
       </ul>
     </>

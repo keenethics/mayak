@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, Calendar, Clock } from '@icons/index';
+import { Calendar, Clock, Mail, Phone } from '@icons/index';
 import { Specialist } from '@prisma/client';
 import { ContactSection } from './ContactSection';
 import { ContactText } from './ContactText';

@@ -5,9 +5,9 @@ import { Female, Male } from '@icons/index';
 import { Gender } from '@prisma/client';
 import { cn } from '@/utils/cn';
 
-export function SpecialistProfileImage({ className }) {
+export function SpecialistProfileImage({ className, gender }) {
   const { MALE } = Gender;
-  const source = MALE ? Male : Female;
+  const source = gender === MALE ? Male : Female;
 
   return (
     <div
@@ -27,4 +27,5 @@ export function SpecialistProfileImage({ className }) {
 
 SpecialistProfileImage.propTypes = {
   className: P.string,
+  gender: P.string,
 };

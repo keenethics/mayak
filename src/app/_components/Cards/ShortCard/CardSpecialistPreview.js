@@ -3,12 +3,13 @@ import { Calendar, Clock, Mail, MedAttention, MedCare, OnlineMeeting, Phone } fr
 import { cn } from '@utils/cn';
 import { PillButton } from '@components';
 import Link from 'next/link';
+import PropType from 'prop-types';
 import { SpecialistProfileImage } from '@/app/_components/Cards/ShortCard/Specialist/SpecialistProfileImage';
 import { SpecializationTextIcon } from '@/app/_components/Cards/SpecializationTextIcon';
 import { buttonColorVariant, buttonType } from '@/app/_components/PillButton/style';
 import { ContactText } from '@/app/_components/Cards/ContactText';
 
-export function CardSpecialistPreview() {
+export function CardSpecialistPreview({ firstName, lastName, gender }) {
   const tags = ['психодинамічний', 'когнітивний', 'біхевіоральний', 'військові', 'супровід у психіатрії'];
   const labels = [
     {
@@ -31,7 +32,7 @@ export function CardSpecialistPreview() {
   const contacts = [
     {
       icon: <Phone />,
-      content: '+38 (099) 123 45 67',
+      content: '+38 099 123 4567',
       href: 'tel:+380991234567',
     },
     {
@@ -54,7 +55,7 @@ export function CardSpecialistPreview() {
   return (
     <div className="m-[16px] max-w-[906px] rounded-[24px]  border-2 border-gray-200 px-[15px] py-[20px] md:flex md:p-[40px] lg:mx-auto">
       <div className="hidden md:block">
-        <SpecialistProfileImage />
+        <SpecialistProfileImage gender={gender} />
         <ul className="mt-[16px] flex flex-col gap-[8px]">
           {contacts.map(({ icon, content, href }) => (
             <li className="flex gap-[8px]" key={content}>
@@ -74,10 +75,10 @@ export function CardSpecialistPreview() {
       </div>
       <div className="md:ml-[16px]">
         <header className="flex gap-[10px]">
-          <SpecialistProfileImage className="md:hidden" />
+          <SpecialistProfileImage gender={gender} className="md:hidden" />
           <div>
             <h2 className="text-[12px] font-bold uppercase leading-[20px] text-gray-600 md:text-p4">Психотерапевт</h2>
-            <span className="text-p3 font-bold text-gray-700 md:text-p1">Володимир Підгородецький</span>
+            <span className="text-p3 font-bold text-gray-700 md:text-p1">{`${firstName} ${lastName}`}</span>
           </div>
         </header>
         <div className="mt-[16px] flex gap-[10px] md:flex-initial md:gap-[24px]">
@@ -108,7 +109,7 @@ export function CardSpecialistPreview() {
         <PillButton
           type={buttonType.outlined}
           colorVariant={buttonColorVariant.outlined.orange}
-          className="ml-auto mt-[16px] block"
+          className="ml-auto mt-[16px] hidden md:block"
         >
           Детальніше
         </PillButton>
@@ -116,3 +117,9 @@ export function CardSpecialistPreview() {
     </div>
   );
 }
+
+CardSpecialistPreview.propTypes = {
+  firstName: PropType.string,
+  lastName: PropType.string,
+  gender: PropType.bool,
+};
