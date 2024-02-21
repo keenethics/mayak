@@ -76,29 +76,34 @@ function Toolbar() {
   );
 }
 
-export function EditFaq() {
+// needed due to weird behavior of react-admin
+// when using useRecordContext in a child component of Edit
+// eslint-disable-next-line max-len
+// https://stackoverflow.com/questions/70098250/how-to-access-record-inside-edit-function-without-having-to-use-simpleform
+function ActiveStateSwitch() {
+  const record = useRecordContext();
   const { total: activeFaqsCount } = useActiveFaqs();
-
-  const validate = updatedValues => {
-    const isTryingToActivate = updatedValues.isActive;
-    const isTryingToDeactivate = !updatedValues.isActive;
-    const errors = {};
-
+  const validate = updatedIsActive => {
+    const isTryingToActivate = !record.isActive && updatedIsActive;
+    const isTryingToDeactivate = record.isActive && !updatedIsActive;
     if (isTryingToActivate && activeFaqsCount >= MAX_ACTIVE_FAQS) {
-      errors.isActive = TOO_MANY_ACTIVE_FAQS;
+      return TOO_MANY_ACTIVE_FAQS;
     }
 
     if (isTryingToDeactivate && activeFaqsCount <= MIN_ACTIVE_FAQS) {
-      errors.isActive = TOO_FEW_ACTIVE_FAQS;
+      return TOO_FEW_ACTIVE_FAQS;
     }
-
-    return errors;
+    return undefined;
   };
 
+  return <BooleanInput validate={[validate]} label="Is Active" source="isActive" />;
+}
+
+export function EditFaq() {
   return (
     <Edit>
-      <SimpleForm validate={validate} toolbar={<Toolbar />}>
-        <BooleanInput label="Is Active" source="isActive" />
+      <SimpleForm toolbar={<Toolbar />}>
+        <ActiveStateSwitch />
         <NumberInput label="Priority" source="priority" />
         <TextInput label="Question" source="question" validate={[required()]} multiline={true} fullWidth />
         <AnswerTextInput />
