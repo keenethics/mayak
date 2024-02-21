@@ -3,13 +3,7 @@ import Link from 'next/link';
 import Logo from '@icons/logo.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
-// import { configuredTwMerge } from '@utils/configuredTwMerge';
-import {
-  SocialLink,
-  InnerLink,
-  // OutlinedButton,
-  PillButton,
-} from '@components';
+import { SocialLink, InnerLink, PillButton } from '@components';
 import { buttonColorVariant, buttonType } from '@components/PillButton/style';
 
 export function Header() {
@@ -23,9 +17,6 @@ export function Header() {
   const listItemTextHover = 'text-primary-700 hover:text-primary-500';
   const iconColors = 'text-primary-700 hover:text-primary-500';
   const transition = 'transition duration-200 ease-in-out';
-  // const basicBtnHover = 'hover:bg-primary-200 focus:border-primary-600';
-  // const basicBtnFocus = 'focus:text-primary-600 focus:bg-primary-200';
-  // const basicBtnActive = 'active:bg-primary-200 active:text-primary-600';
 
   return (
     <nav className={cn(flexBetween, 'w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-20 py-4')}>
@@ -37,7 +28,7 @@ export function Header() {
         <InnerLink
           role="list"
           items={innerLinks}
-          href="/specialists"
+          href="/specialist"
           className={cn(basicLink, transition, listItemTextHover, listItemText, 'gap-4 px-3 py-1')}
         ></InnerLink>
         <SocialLink
