@@ -9,7 +9,7 @@ CREATE TABLE "organization" (
     "type" "OrganizationType" NOT NULL,
     "yearsOnMarket" SMALLINT,
     "formatOfWork" "FormatOfWork" NOT NULL,
-    "isFreeReception" BOOLEAN,
+    "isFreeReception" BOOLEAN NOT NULL,
     "description" TEXT NOT NULL,
     "phone" VARCHAR(15),
     "email" VARCHAR(320),

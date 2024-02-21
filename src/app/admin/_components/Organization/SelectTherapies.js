@@ -2,14 +2,14 @@ import { Loading, SelectArrayInput, required, useGetList } from 'react-admin';
 import { RESOURCES } from '@admin/_lib/consts';
 
 export function SelectTherapies() {
-  const { data: districts, isLoading } = useGetList(RESOURCES.therapy);
+  const { data: therapies, isLoading } = useGetList(RESOURCES.therapy);
   if (isLoading) return <Loading />;
   return (
     <SelectArrayInput
-      label="Види терапії"
-      source="district"
+      label="Типи"
+      source="therapies"
       validate={required()}
-      choices={districts.map(therapy => ({ id: therapy.name, name: therapy.name }))}
+      choices={therapies.map(therapy => ({ id: therapy.name, name: therapy.name }))}
     />
   );
 }

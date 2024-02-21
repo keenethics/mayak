@@ -6,7 +6,7 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from '@/app/admin/authProvider';
 import { RESOURCES } from '@/app/admin/_lib/consts';
 import { SpecialistCreate } from '@/app/admin/_components/Specialist';
-import { CreateOrganization } from './_components/Organization/Create';
+import { CreateOrganization } from '@admin/components/Organization';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
