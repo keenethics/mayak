@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { getAll } from '@/app/specialist/specialistService';
+import { prisma } from '@/lib/db';
 
 export const metadata = {
   title: 'Спеціалісти',
@@ -8,15 +8,17 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const { data, error } = await getAll();
-
-  if (error) {
-    throw new Error(error);
-  }
+  const data = await prisma.specialist.findMany({
+    include: {
+      specializations: true,
+      therapies: true,
+      placesOfWork: true,
+    },
+  });
 
   return (
     <ul className="m-5">
-      {data.map(({ id }) => (
+      {data?.map(({ id }) => (
         <li key={id}>
           <Link href={`specialist/${id}`} className="text-primary-700 hover:text-primary-400">
             {id}

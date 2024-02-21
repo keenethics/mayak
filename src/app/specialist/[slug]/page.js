@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { getById } from '@/app/specialist/specialistService';
+import { prisma } from '@/lib/db';
 
 export const metadata = {
   title: 'Спеціаліст',
@@ -9,11 +9,16 @@ export const metadata = {
 
 export default async function Page({ params }) {
   const { slug: id } = params;
-  const { data, error } = await getById({ id });
-
-  if (error) {
-    throw new Error(error);
-  }
+  const data = await prisma.specialist.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      specializations: true,
+      therapies: true,
+      placesOfWork: true,
+    },
+  });
 
   return (
     <div className="m-5">
