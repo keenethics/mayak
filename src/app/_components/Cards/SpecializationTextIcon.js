@@ -4,9 +4,9 @@ import { cn } from '@/utils/cn';
 
 function SpecializationTextIcon({ icon, text, className }) {
   return (
-    <div className={cn('flex items-center gap-[11px]', className)}>
-      {icon}
-      <span className={cn('text-inherit text-center text-p4 font-semibold')}>{text}</span>
+    <div className={cn('flex flex-col gap-[10px] md:flex-row', className)}>
+      <span className="self-center ">{icon}</span>
+      <p className={cn('text-center text-c2 font-semibold md:self-center md:text-left')}>{text}</p>
     </div>
   );
 }

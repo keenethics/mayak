@@ -1,11 +1,11 @@
 import React from 'react';
 import P from 'prop-types';
-import { Footer, Header } from '@components';
+import { Footer, Header, Hint } from '@components';
 import { QueryContext } from './queryContext';
 import montserrat from '@/app/styles/font';
-import { Hint } from './_components/Hint';
-import './globals.css';
 import { cn } from '@/utils/cn';
+
+import './globals.css';
 
 export const metadata = {
   title: {
@@ -19,11 +19,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={cn(montserrat.className, 'relative')}>
         <Hint>
-          <Header />
-          <QueryContext>
-            <main>{children}</main>
-          </QueryContext>
-          <Footer />
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <QueryContext>
+              <main className="flex-1">{children}</main>
+            </QueryContext>
+            <Footer />
+          </div>
           <div id="modal-root" />
         </Hint>
       </body>

@@ -5,15 +5,25 @@ import { Female, Male } from '@icons/index';
 import { Gender } from '@prisma/client';
 import { cn } from '@/utils/cn';
 
-function SpecialistProfileImage({ className }) {
+export function SpecialistProfileImage({ className }) {
   const { MALE } = Gender;
+  const source = MALE ? Male : Female;
+
   return (
-    <div className={cn('flex items-start gap-[10px] rounded-[16px] bg-gray-100 p-[56px] lg:hidden', className)}>
-      <Image src={MALE ? Male : Female} alt="Specialist default image" />
+    <div
+      className={cn(
+        'flex min-h-[70px] min-w-[70px] items-center justify-center rounded-[16px] bg-gray-100 md:p-[56px]',
+        className,
+      )}
+    >
+      <Image
+        src={source}
+        alt="Specialist default image"
+        className="h-[24px] w-[24px] md:min-h-[88px] md:min-w-[88px]"
+      />
     </div>
   );
 }
-export { SpecialistProfileImage };
 
 SpecialistProfileImage.propTypes = {
   className: P.string,
