@@ -46,9 +46,9 @@ export const utility = () => {
 
 ## Admin component folders/files conventions
 
-- Start folder names with capital letters. For ex: `Organiation` instead of `organizations`.
+- Start folder names with capital letters. For ex: `Organiation` instead of `organization`.
 - Filenames for files with feature components for specific model are `Create.js`, `Edit.js`, `List.js`, `Show.js`.
-- These files should contain components with name consisting of the **model name** and **feature name**, for ex: `FaqList` or `EventCreate`. Here is example of using them in `adminApp.js` in a resource.
+- These files should contain components with name consisting of the **model name** and **feature name**, for ex: `FaqList` or `EventCreate`. Here is example of using them in `AdminApp.js` in a resource.
 
 ```jsx
 <Resource
@@ -72,7 +72,7 @@ _components
     └───index.js
 ```
 
-`Specialist/index.js` exports feature components so they can be imported to adminApp.js
+`Specialist/index.js` exports feature components so they can be imported to `AdminApp.js`
 
 ```js
 export * from './Create';
