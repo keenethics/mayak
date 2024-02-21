@@ -11,9 +11,11 @@ import {
   useNotify,
   useRecordContext,
   useDelete,
+  useRedirect,
   Confirm,
   Button,
 } from 'react-admin';
+import { RESOURCES } from '@/app/admin/_lib/consts';
 import { useActiveFaqs } from './hooks';
 import { AnswerTextInput } from './AnswerTextInput';
 import { MAX_ACTIVE_FAQS, MIN_ACTIVE_FAQS } from './consts';
@@ -22,12 +24,22 @@ const TOO_MANY_ACTIVE_FAQS = 'Too many active FAQs. Please deactivate some first
 const TOO_FEW_ACTIVE_FAQS = 'Too few active FAQs. Please activate some first.';
 
 function DeleteButton() {
+  const redirect = useRedirect();
   const record = useRecordContext();
   const notify = useNotify();
   const { total: activeFaqsCount } = useActiveFaqs();
   const [open, setOpen] = useState(false);
 
-  const [remove, { isLoading }] = useDelete('faq', { id: record?.id });
+  const [remove, { isLoading }] = useDelete(
+    'faq',
+    { id: record?.id },
+    {
+      onSuccess: () => {
+        setOpen(false);
+        redirect(`/${RESOURCES.faq}`);
+      },
+    },
+  );
 
   const handleClick = () => setOpen(true);
   const handleDialogClose = () => setOpen(false);
