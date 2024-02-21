@@ -6,5 +6,4 @@ export * from './PillButton';
 export * from './Typography';
 export * from './Footer';
 export * from './Header';
-export * from './OutlinedButton';
 export * from './TextArea';

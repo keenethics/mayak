@@ -29,7 +29,7 @@ function SpecializationsPanel({ specializations }) {
   );
 }
 
-export  {SpecializationsPanel};
+export { SpecializationsPanel };
 
 SpecializationsPanel.propTypes = {
   specializations: P.arrayOf(P.string).isRequired,

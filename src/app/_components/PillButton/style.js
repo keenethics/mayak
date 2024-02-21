@@ -1,3 +1,5 @@
+const disabled = 'disabled:text-gray-400 disabled:border-gray-200';
+
 export const buttonColorVariant = {
   filled: {
     blue: {
@@ -5,7 +7,7 @@ export const buttonColorVariant = {
       hover: 'hover:bg-primary-400',
       focused: 'focus:outline-none focus:bg-primary-600',
       active: 'active:bg-primary-700',
-      disabled: 'disabled:text-gray-400 disabled:bg-gray-200',
+      disabled,
     },
   },
   outlined: {
@@ -14,14 +16,21 @@ export const buttonColorVariant = {
       hover: 'hover:bg-primary-200',
       focused: 'focus:outline-none focus:bg-primary-200 focus:text-primary-600 focus:border-primary-600',
       active: 'active:bg-primary-200 active:text-primary-600 active:border-gray-700',
-      disabled: 'disabled:text-gray-400 disabled:border-gray-200',
+      disabled,
     },
     orange: {
       regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-secondary-400',
       hover: 'hover:bg-secondary-300',
       focused: 'focus:outline-none focus:bg-secondary-300 focus:text-secondary-500 focus:border-secondary-500',
       active: 'active:bg-secondary-300 active:text-secondary-500 active:border-gray-700',
-      disabled: 'disabled:text-gray-400 disabled:border-gray-200',
+      disabled,
+    },
+    white: {
+      regular: 'bg-transparent border-[1px] border-solid border-other-white text-other-white',
+      hover: 'hover:bg-gray-100 hover:text-primary-500',
+      focused: 'focus:bg-gray-100 focus:text-primary-600 focus:border-gray-100',
+      active: 'active:bg-other-white active:text-primary-600 active:border-other-white',
+      disabled,
     },
   },
   close: {
