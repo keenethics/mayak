@@ -11,7 +11,14 @@ const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 function PriceInput() {
   const priceType = useWatch({ name: 'priceType' });
   return (
-    <NumberInput disabled={priceType !== 'FIXED_PRICE' && priceType !== 'MIN_PRICE'} label="Вартість" source="price" />
+    <>
+      <span className="self-center">{priceType === 'MIN_PRICE' && 'від'}</span>
+      <NumberInput
+        disabled={priceType !== 'FIXED_PRICE' && priceType !== 'MIN_PRICE'}
+        label="Вартість"
+        source="price"
+      />
+    </>
   );
 }
 
@@ -36,19 +43,6 @@ export function CreateEvent() {
         <TextInput source="organizerName" label="Ім'я організатора" validate={required()} className="w-72" />
         <TextInput className="mt-32 w-96" source="notes" label="Коментарі" multiline />
         <DateTimeInput source="eventDate" label="Дата події" validate={required()} />
-        <p className="font-bold">Формат та локація</p>
-        <div className={fieldGroupClass}>
-          <SelectInput
-            source="format"
-            choices={[
-              { id: 'OFFLINE', name: 'Офлайн' },
-              { id: 'ONLINE', name: 'Онлайн' },
-            ]}
-            label="Формат події"
-            validate={required()}
-          />
-          <AddressInput />
-        </div>
         <p className="font-bold">Вартість</p>
         <div className={fieldGroupClass}>
           <SelectInput
@@ -62,6 +56,19 @@ export function CreateEvent() {
             validate={required()}
           />
           <PriceInput />
+        </div>
+        <p className="font-bold">Формат та локація</p>
+        <div className={fieldGroupClass}>
+          <SelectInput
+            source="format"
+            choices={[
+              { id: 'OFFLINE', name: 'Офлайн' },
+              { id: 'ONLINE', name: 'Онлайн' },
+            ]}
+            label="Формат події"
+            validate={required()}
+          />
+          <AddressInput />
         </div>
         <p className="font-bold">Теги події</p>
         <TagSelect setSelectedTags={setSelectedTags} />
