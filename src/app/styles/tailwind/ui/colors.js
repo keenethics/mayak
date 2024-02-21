@@ -46,6 +46,9 @@ const colorsHex = {
   other: {
     black: '#080809',
     white: '#fff',
+    green: '#007112',
+    orange: '#DD6F09',
+    blue: '#00529E',
   },
   system: {
     success: '#0ce5b9',

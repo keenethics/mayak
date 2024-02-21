@@ -3,8 +3,9 @@ import P from 'prop-types';
 import { Footer, Header } from '@components';
 import { QueryContext } from './queryContext';
 import montserrat from '@/app/styles/font';
-
+import { Hint } from './_components/Hint';
 import './globals.css';
+import { cn } from '@/utils/cn';
 
 export const metadata = {
   title: {
@@ -16,13 +17,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={[montserrat.className, 'relative']}>
-        <Header />
-        <QueryContext>
-          <main>{children}</main>
-        </QueryContext>
-        <Footer />
-        <div id="modal-root" />
+      <body className={cn(montserrat.className, 'relative')}>
+        <Hint>
+          <Header />
+          <QueryContext>
+            <main>{children}</main>
+          </QueryContext>
+          <Footer />
+          <div id="modal-root" />
+        </Hint>
       </body>
     </html>
   );

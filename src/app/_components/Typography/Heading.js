@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@/app/utils/cn';
+import Montserrat from '@/app/styles/font';
 
 export function Heading({ children, type, className }) {
   return React.createElement(
     type,
     {
-      className: cn('font-montserrat text-primary-900', className),
+      className: cn('font-montserrat text-primary-900', className, Montserrat.className),
     },
     children,
   );

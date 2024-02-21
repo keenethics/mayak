@@ -16,6 +16,13 @@ export const buttonColorVariant = {
       active: 'active:bg-primary-200 active:text-primary-600 active:border-gray-700',
       disabled: 'disabled:text-gray-400 disabled:border-gray-200',
     },
+    orange: {
+      regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-secondary-400',
+      hover: 'hover:bg-secondary-300',
+      focused: 'focus:outline-none focus:bg-secondary-300 focus:text-secondary-500 focus:border-secondary-500',
+      active: 'active:bg-secondary-300 active:text-secondary-500 active:border-gray-700',
+      disabled: 'disabled:text-gray-400 disabled:border-gray-200',
+    },
   },
   close: {
     grey: {
@@ -30,12 +37,13 @@ export const buttonColorVariant = {
 export const buttonType = {
   outlined: {
     icon: {
-      buttonStyle: 'inline-flex justify-center align-middle flex-col text-p4',
+      buttonStyle: 'transition duration-200 ease-in-out inline-flex justify-center align-middle flex-col text-p4',
       layoutStyle: `flex justify-center align-middle /
       gap-[8px] self-stretch h-[2.5rem] pt-[10px] pr-[24px] pb-[10px] pl-[16px]`,
     },
     regular: {
-      buttonStyle: 'inline-flex justify-center align-middle flex-col h-[2.5rem] flex-shrink-0 text-p4',
+      buttonStyle:
+        'transition duration-200 ease-in-out inline-flex justify-center align-middle flex-col h-[2.5rem] flex-shrink-0 text-p4',
       layoutStyle: `flex justify-center align-middle /
       gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[10px] px-[24px]`,
     },

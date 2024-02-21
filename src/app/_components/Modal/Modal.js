@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ClientPortal } from './ClientPortal';
+import { ClientPortal } from '../ClientPortal';
 import { ModalCloseButton } from './ModalCloseButton';
 
 export const Modal = ({ isOpen, onClose, isBlurBackground = true, isCloseButton = true, bgColor, title, children }) => {
