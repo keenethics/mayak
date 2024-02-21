@@ -1,20 +1,19 @@
 import {
   ArrayInput,
-  BooleanField,
   BooleanInput,
   Create,
   NumberInput,
   SelectArrayInput,
   SelectInput,
   SimpleForm,
-  SimpleFormIterator,
   TextInput,
   required,
 } from 'react-admin';
-import { SelectDistrict } from './SelectDistrict';
 import { SelectTherapies } from './SelectTherapies';
 import { useWatch } from 'react-hook-form';
 import { AddressInput } from './CreateAdresses';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { OrganizationSchema } from '@admin/_utils/validationSchemas/createOrganizationSchema';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
@@ -34,7 +33,7 @@ const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 export function CreateOrganization() {
   return (
     <Create>
-      <SimpleForm>
+      <SimpleForm resolver={zodResolver(OrganizationSchema)}>
         <p className="font-bold">Основна інформація</p>
         <SelectArrayInput
           source="type"
@@ -44,7 +43,7 @@ export function CreateOrganization() {
             { id: 'SOCIAL_SERVICE', name: 'Соціальна служба' },
           ]}
           label="Тип організації"
-          validate={required()}
+          validate={required("Тип організації - обов'язкове поле")}
         />
         <TextInput source="name" label="Назва організації" validate={required()} />
         <NumberInput source="yearsOnMarket" label="Роки на ринку" />
@@ -73,6 +72,7 @@ export function CreateOrganization() {
         </div>
         <p className="font-bold">Опис</p>
         <TextInput source="description" className="w-96" label="Опис" validate={required()} multiline />
+        <BooleanInput source="IsActive" label="Активний" />
       </SimpleForm>
     </Create>
   );

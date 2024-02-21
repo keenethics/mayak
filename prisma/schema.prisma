@@ -48,20 +48,20 @@ model Specialist {
 }
 
 model Organization {
-  id              String           @id @default(uuid()) @db.Uuid
-  createdAt       DateTime         @default(now())
-  name            String           @db.VarChar(128)
-  type            OrganizationType
-  yearsOnMarket   Int?             @db.SmallInt
-  formatOfWork    FormatOfWork
+  id              String            @id @default(uuid()) @db.Uuid
+  createdAt       DateTime          @default(now())
+  name            String            @db.VarChar(128)
+  type            OrganizationType?
+  yearsOnMarket   Int?              @db.SmallInt
+  formatOfWork    FormatOfWork?
   addresses       Address[]
   therapies       Therapy[]
-  isFreeReception Boolean
-  description     String           @db.Text
-  phone           String?          @db.VarChar(15)
-  email           String?          @db.VarChar(320)
-  website         String?          @db.Text
-  isActive        Boolean          @default(false)
+  isFreeReception Boolean?
+  description     String?           @db.Text
+  phone           String?           @db.VarChar(15)
+  email           String?           @db.VarChar(320)
+  website         String?           @db.Text
+  isActive        Boolean           @default(false)
 
   @@map("organization")
 }

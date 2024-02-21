@@ -12,9 +12,6 @@ const handler = withErrorHandler(
     }
     const json = await req.json();
     console.log(json.params.data);
-    // console.log(json.params.data.addresses);
-    // console.log(json.params.data.type);
-    // console.log(json.params.data.therapies);
     const result = await defaultHandler(json, prisma);
     return NextResponse.json(result);
   }),
