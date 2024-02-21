@@ -49,8 +49,8 @@ export function CreateEvent() {
             source="priceType"
             choices={[
               { id: 'FREE', name: 'Безкоштовно' },
-              { id: 'FIXED_PRICE', name: 'Фіксована ціна' },
-              { id: 'MIN_PRICE', name: 'Мінімальна ціна' },
+              { id: 'FIXED_PRICE', name: 'Фіксована вартість' },
+              { id: 'MIN_PRICE', name: 'Мінімальна вартість' },
             ]}
             label="Варіанти"
             validate={required()}

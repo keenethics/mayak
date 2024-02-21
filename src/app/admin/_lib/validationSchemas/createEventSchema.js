@@ -38,8 +38,8 @@ export const CreateEventSchema = z
       invalid_type_error: 'Формат має бути OFFLINE/ONLINE',
     }),
     priceType: z.enum(['FREE', 'FIXED_PRICE', 'MIN_PRICE'], {
-      required_error: "Вид ціни - обов'язкове поле",
-      invalid_type_error: 'Вид ціни має бути FREE/FIXED_PRICE/MIN_PRICE',
+      required_error: "Варіант вартості - обов'язкове поле",
+      invalid_type_error: 'Варіант має бути FREE/FIXED_PRICE/MIN_PRICE',
     }),
     price: z.number().nullish(),
     address: minMaxString(1, 128, 'Address').nullish(),
