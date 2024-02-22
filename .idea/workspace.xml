@@ -5,10 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialistExtended.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardWrapper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsListItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsWrapper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/InfoHeader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/InfoWrapper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/PlacesOfWorkList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImageOrganization.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImageSpecialist.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/TherapiesList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/error.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ContactsSectionWrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Cards/ContactsSectionWrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/CardSpecialistPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/CardSpecialistPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/Specialist/SpecialistProfileImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/Specialist/SpecialistProfileImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ContactSection.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ContactText.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactText.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ContactsSectionWrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/InfoSection.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/CardSpecialistPreview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/Organization/OrganizationProfileImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/ShortCardMain.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/Specialist/SpecialistProfileImage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/SpecializationTextIcon.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationListItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/SpecializationsPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationsPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_hooks/useBodyScrollLock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_hooks/useBodyScrollLock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/specialist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/specialist/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,33 +74,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.useTherapy.js.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;MID-61__add-short-specialist-card&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.10.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.10.8&quot;,
-    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/bob/IT/mayak/src/app/_components/Cards/ShortCard&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;/home/bob/IT/mayak/node_modules/eslint&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/bob/.nvm/versions/node/v20.10.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettier.import.notification.dismissed&quot;: &quot;true&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/bob/IT/mayak/node_modules/prettier&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/bob/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.useTherapy.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "Merging MID-61__add-short-specialist-card",
+    "javascript.nodejs.core.library.configured.version": "20.10.0",
+    "javascript.nodejs.core.library.typings.version": "20.10.8",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/home/bob/IT/mayak/src/app/_components/Cards/ShortCard",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "/home/bob/IT/mayak/node_modules/eslint",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/bob/.nvm/versions/node/v20.10.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "prettier.import.notification.dismissed": "true",
+    "prettierjs.PrettierConfiguration.Package": "/home/bob/IT/mayak/node_modules/prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/bob/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>

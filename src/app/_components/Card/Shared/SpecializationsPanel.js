@@ -1,6 +1,6 @@
 import React from 'react';
 import P from 'prop-types';
-import { Caption } from '../Typography';
+import { Caption } from '../../Typography';
 import { Show as ShowHint, Window as HintWindow } from '@/app/_components/Hint';
 
 function SpecializationsPanel({ specializations }) {

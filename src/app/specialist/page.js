@@ -1,7 +1,6 @@
 import React from 'react';
 import { prisma } from '@/lib/db';
-import { ShortCardMain } from '@/app/_components/Cards/ShortCard/ShortCardMain';
-import { CardSpecialistPreview } from '@/app/_components/Cards/ShortCard/CardSpecialistPreview';
+import { CardSpecialist } from '@/app/_components/Card/CardSpecialist';
 
 export const metadata = {
   title: 'Спеціалісти',
@@ -19,10 +18,9 @@ export default async function Page() {
 
   return (
     <>
-      <ShortCardMain />
       <ul>
         {data?.map(specialist => (
-          <CardSpecialistPreview
+          <CardSpecialist
             key={specialist.id}
             firstName={specialist.firstName}
             lastName={specialist.lastName}

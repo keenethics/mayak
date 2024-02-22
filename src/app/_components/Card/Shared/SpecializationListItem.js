@@ -2,7 +2,7 @@ import React from 'react';
 import P from 'prop-types';
 import { cn } from '@/utils/cn';
 
-function SpecializationTextIcon({ icon, text, className }) {
+function SpecializationListItem({ icon, text, className }) {
   return (
     <div className={cn('flex flex-col gap-[10px] md:flex-row', className)}>
       <span className="self-center ">{icon}</span>
@@ -11,9 +11,9 @@ function SpecializationTextIcon({ icon, text, className }) {
   );
 }
 
-export { SpecializationTextIcon };
+export { SpecializationListItem };
 
-SpecializationTextIcon.propTypes = {
+SpecializationListItem.propTypes = {
   icon: P.node,
   text: P.string,
   className: P.string,
