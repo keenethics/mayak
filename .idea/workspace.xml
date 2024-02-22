@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/docs/HOWTO.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/HOWTO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vercel.json" beforeDir="false" afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2bcyw90C0tO1T7Feiee7JvV30fj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.useTherapy.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "MID-56__add__vercel__db__guide",
+    "javascript.nodejs.core.library.configured.version": "20.10.0",
+    "javascript.nodejs.core.library.typings.version": "20.10.8",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/home/bob/IT/mayak/src/app/admin/_utils",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "/home/bob/IT/mayak/node_modules/eslint",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/bob/.nvm/versions/node/v20.10.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "prettier.import.notification.dismissed": "true",
+    "prettierjs.PrettierConfiguration.Package": "/home/bob/IT/mayak/node_modules/prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/bob/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/admin/_utils" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_components/specialist/Create" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_components/specialist/SpecialistCreate" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_components/specialist" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_components/Specialist" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/admin" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_components" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_components/specialist/SpecialistCreate" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_components/shared" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_providers" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="" />
+      <created>1706528897647</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706528897647</updated>
+      <workItem from="1706528898674" duration="3641000" />
+      <workItem from="1706537663395" duration="21816000" />
+      <workItem from="1706610757334" duration="199000" />
+      <workItem from="1706611244264" duration="9000" />
+      <workItem from="1706698803129" duration="1600000" />
+      <workItem from="1706710325690" duration="8924000" />
+      <workItem from="1706730281271" duration="6579000" />
+      <workItem from="1706769103501" duration="4188000" />
+      <workItem from="1706787241687" duration="2490000" />
+      <workItem from="1706790926177" duration="12460000" />
+      <workItem from="1706817178768" duration="594000" />
+      <workItem from="1706817777857" duration="321000" />
+      <workItem from="1706818267400" duration="2664000" />
+      <workItem from="1706824211616" duration="4786000" />
+      <workItem from="1706874347983" duration="3406000" />
+      <workItem from="1706879346259" duration="186000" />
+      <workItem from="1706879562617" duration="5237000" />
+      <workItem from="1706884811038" duration="743000" />
+      <workItem from="1706887368083" duration="1153000" />
+      <workItem from="1706889302436" duration="347000" />
+      <workItem from="1706892606817" duration="2820000" />
+      <workItem from="1706952767365" duration="10705000" />
+      <workItem from="1706974582775" duration="7205000" />
+      <workItem from="1707045467922" duration="22000" />
+      <workItem from="1707047858491" duration="99000" />
+      <workItem from="1707082624700" duration="7602000" />
+      <workItem from="1707152076163" duration="472000" />
+      <workItem from="1707152558127" duration="5441000" />
+      <workItem from="1707158407492" duration="5315000" />
+      <workItem from="1707165844331" duration="703000" />
+      <workItem from="1707206239815" duration="33790000" />
+      <workItem from="1707292608530" duration="15115000" />
+      <workItem from="1707314964250" duration="1570000" />
+      <workItem from="1707318673277" duration="24444000" />
+      <workItem from="1707393832290" duration="20762000" />
+      <workItem from="1707468702574" duration="16717000" />
+      <workItem from="1707557924226" duration="6754000" />
+      <workItem from="1707573554821" duration="347000" />
+      <workItem from="1707736342388" duration="21761000" />
+      <workItem from="1707815224656" duration="3371000" />
+      <workItem from="1707818629529" duration="17967000" />
+      <workItem from="1707855534848" duration="5043000" />
+      <workItem from="1707902638587" duration="2238000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
+  </component>
+</project>

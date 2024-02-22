@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useListTherapies, useCreateTherapy, useDeleteTherapy } from '../../_hooks';
+import { useListTherapies, useCreateTherapy, useDeleteTherapy } from '@hooks';
 
 export default function Therapies() {
   const [price, setPrice] = useState('');
