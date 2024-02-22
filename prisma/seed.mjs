@@ -131,6 +131,7 @@ async function main() {
     prisma.event.deleteMany(),
     prisma.eventLink.deleteMany(),
     prisma.eventTag.deleteMany(),
+    prisma.faq.deleteMany(),
   ]);
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
@@ -142,8 +143,8 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
-  const faqs = Array.from({ length: 10 }).map(() => ({
-    isActive: faker.datatype.boolean(),
+  const faqs = Array.from({ length: 5 }).map(() => ({
+    isActive: true,
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
   }));

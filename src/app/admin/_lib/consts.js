@@ -8,6 +8,7 @@ export const RESOURCES = {
   feedback: 'feedback',
   event: 'event',
   eventTag: 'eventTag',
+  faq: 'faq',
 };
 
 export const SUCCESS_NOTIFICATIONS = {
