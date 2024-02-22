@@ -6,6 +6,8 @@ export const RESOURCES = {
   address: 'address',
   placeOfWork: 'placeOfWork',
   feedback: 'feedback',
+  event: 'event',
+  eventTag: 'eventTag',
   faq: 'faq',
 };
 
