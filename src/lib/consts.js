@@ -1,3 +1,5 @@
+import { RESOURCES } from '@/app/admin/_lib/consts';
+
 export const LOGIN_URL = '/admin#/login';
 export const PHONE_REGEX = /^\+380\d{9}$/;
 export const BASE_ERROR_MESSAGES = {
@@ -12,7 +14,7 @@ export const BASE_ERROR_MESSAGES = {
 };
 
 export const MODEL_INCLUDES = {
-  Specialist: {
+  [RESOURCES.specialist]: {
     therapies: { select: { name: true } },
     specializations: { select: { name: true } },
     placesOfWork: {
@@ -27,7 +29,7 @@ export const MODEL_INCLUDES = {
       },
     },
   },
-  Organization: {
+  [RESOURCES.organization]: {
     therapies: { select: { name: true } },
     types: { select: { name: true } },
     addresses: {
@@ -38,9 +40,8 @@ export const MODEL_INCLUDES = {
       },
     },
   },
-  Event: {
+  [RESOURCES.event]: {
     additionalLink: { select: { label: true, link: true } },
-    eventTags: { select: { name: true } },
-    formatOfWork: { select: true },
+    tags: { select: { name: true } },
   },
 };
