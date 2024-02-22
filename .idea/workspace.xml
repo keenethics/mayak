@@ -5,36 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialistExtended.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardWrapper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsListItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsWrapper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/InfoHeader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/InfoWrapper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/PlacesOfWorkList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImageOrganization.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImageSpecialist.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/TherapiesList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/error.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardSectionWrapper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ExperienceList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ContactSection.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ContactText.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactText.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ContactsSectionWrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/InfoSection.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/CardSpecialistPreview.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/Organization/OrganizationProfileImage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/ShortCardMain.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/ShortCard/Specialist/SpecialistProfileImage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/SpecializationTextIcon.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationListItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Cards/SpecializationsPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationsPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_hooks/useBodyScrollLock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_hooks/useBodyScrollLock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardWrapper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactText.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsListItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsWrapper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/InfoHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/InfoWrapper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/PlacesOfWorkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/PlacesOfWorkList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationList.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ExperienceListItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationsPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationsPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/TherapiesList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/TherapiesList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/specialist/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/specialist/[slug]/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/specialist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/specialist/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,11 +68,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "Merging MID-61__add-short-specialist-card",
+    "git-widget-placeholder": "MID-61__add-short-specialist-card",
     "javascript.nodejs.core.library.configured.version": "20.10.0",
     "javascript.nodejs.core.library.typings.version": "20.10.8",
     "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "/home/bob/IT/mayak/src/app/_components/Cards/ShortCard",
+    "last_opened_file_path": "/home/bob/IT/mayak/src/app/_components/Card/Shared",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -112,18 +100,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/_components/Card/Shared" />
       <recent name="$PROJECT_DIR$/src/app/_components/Cards/ShortCard" />
       <recent name="$PROJECT_DIR$/src/app/_components/Specialists" />
       <recent name="$PROJECT_DIR$/src/app/admin/_utils" />
       <recent name="$PROJECT_DIR$/src/app/admin/_components/specialist/Create" />
-      <recent name="$PROJECT_DIR$/src/app/admin/_components/specialist/SpecialistCreate" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/_components/Card/Shared" />
+      <recent name="$PROJECT_DIR$/src/app/_components/Card" />
       <recent name="$PROJECT_DIR$/src/app/specialist" />
       <recent name="$PROJECT_DIR$/src/app/admin" />
       <recent name="$PROJECT_DIR$/src/app/admin/_components" />
-      <recent name="$PROJECT_DIR$/src/app/admin/_components/specialist/SpecialistCreate" />
-      <recent name="$PROJECT_DIR$/src/app/admin/_components/shared" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -179,6 +167,7 @@
       <workItem from="1707902638587" duration="2238000" />
       <workItem from="1708499843942" duration="10539000" />
       <workItem from="1708553172092" duration="1011000" />
+      <workItem from="1708628311937" duration="7631000" />
     </task>
     <servers />
   </component>

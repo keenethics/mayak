@@ -3,7 +3,7 @@ import P from 'prop-types';
 import { Caption } from '../../Typography';
 import { Show as ShowHint, Window as HintWindow } from '@/app/_components/Hint';
 
-function SpecializationsPanel({ specializations }) {
+export function SpecializationsPanel({ specializations }) {
   return (
     <div className="flex items-center gap-[8px]">
       {specializations.map((specialization, index) => (
@@ -28,8 +28,6 @@ function SpecializationsPanel({ specializations }) {
     </div>
   );
 }
-
-export { SpecializationsPanel };
 
 SpecializationsPanel.propTypes = {
   specializations: P.arrayOf(P.string).isRequired,

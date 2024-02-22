@@ -1,6 +1,7 @@
 import React from 'react';
+import { SpecialistList } from '@components';
 import { prisma } from '@/lib/db';
-import { CardSpecialist } from '@/app/_components/Card/CardSpecialist';
+import { include } from '@/app/specialist/consts';
 
 export const metadata = {
   title: 'Спеціалісти',
@@ -9,25 +10,8 @@ export const metadata = {
 
 export default async function Page() {
   const data = await prisma.specialist.findMany({
-    include: {
-      specializations: true,
-      therapies: true,
-      placesOfWork: true,
-    },
+    include,
   });
 
-  return (
-    <>
-      <ul>
-        {data?.map(specialist => (
-          <CardSpecialist
-            key={specialist.id}
-            firstName={specialist.firstName}
-            lastName={specialist.lastName}
-            gender={specialist.gender}
-          />
-        ))}
-      </ul>
-    </>
-  );
+  return <SpecialistList specialists={data} />;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import P from 'prop-types';
 import { cn } from '@/utils/cn';
 
-function SpecializationListItem({ icon, text, className }) {
+function ExperienceListItem({ icon, text, className }) {
   return (
     <div className={cn('flex flex-col gap-[10px] md:flex-row', className)}>
       <span className="self-center ">{icon}</span>
@@ -11,9 +11,9 @@ function SpecializationListItem({ icon, text, className }) {
   );
 }
 
-export { SpecializationListItem };
+export { ExperienceListItem };
 
-SpecializationListItem.propTypes = {
+ExperienceListItem.propTypes = {
   icon: P.node,
   text: P.string,
   className: P.string,

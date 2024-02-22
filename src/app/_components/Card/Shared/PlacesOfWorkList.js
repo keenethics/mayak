@@ -1,18 +1,21 @@
 import React from 'react';
 import PropType from 'prop-types';
 
-export function PlacesOfWorkList({ className }) {
+export function PlacesOfWorkList({ places, className }) {
   return (
     <ul className={className}>
-      <li>
-        <h3 className="mt-[12px] text-p2 font-bold text-gray-700">Назва клініки</h3>
-        <p>Місто/село</p>
-        <p>Вулиця, номер будинку, поверх, кабінет</p>
-      </li>
+      {places.map(({ id, nameOfClinic, fullAddress, district }) => (
+        <li key={id}>
+          <h3 className="mt-[12px] text-p2 font-bold text-gray-700">{nameOfClinic || 'Місце надання послуг'}</h3>
+          <p>{fullAddress}</p>
+          <p>{district.name} район</p>
+        </li>
+      ))}
     </ul>
   );
 }
 
 PlacesOfWorkList.propTypes = {
+  places: PropType.array,
   className: PropType.node,
 };
