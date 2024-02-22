@@ -2,9 +2,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import TickIcon from '@icons/tickIcon.svg';
 import { cn } from '@/utils/cn';
 import { variants } from './styles';
-import { TickIcon } from '../Icons';
 
 export function CheckBox({
   value,

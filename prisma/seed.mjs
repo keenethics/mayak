@@ -111,20 +111,60 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
   };
 }
 
+function randomEvent({ tags, link }) {
+  const priceType = faker.helpers.arrayElement(['FREE', 'FIXED_PRICE', 'MIN_PRICE']);
+  const format = faker.helpers.arrayElement(['ONLINE', 'OFFLINE']);
+  let address;
+  let price;
+  let locationLink;
+  if (format === 'OFFLINE') {
+    address = getFullAddress();
+    locationLink = faker.helpers.arrayElement([
+      'https://maps.app.goo.gl/3YXkdzJnoLwHsXNb7',
+      'https://maps.app.goo.gl/coSnsiqkAmGuMgvY9',
+      'https://maps.app.goo.gl/AuuirMDJobE7WWKN6',
+    ]);
+  }
+  if (priceType !== 'FREE') {
+    price = faker.number.int({ min: 1000, max: 5000 });
+  }
+  return {
+    title: faker.word.noun(),
+    organizerName: faker.company.name(),
+    address,
+    locationLink,
+    priceType,
+    price,
+    format,
+    eventDate: faker.date.future(),
+    isActive: faker.datatype.boolean(),
+    additionalLink: {
+      connect: link,
+    },
+    tags: {
+      connect: uniqueObjectsWithId(tags),
+    },
+  };
+}
+
 const prisma = new PrismaClient();
 
 async function main() {
   // Clear the database to make sure we can run seed
-  await prisma.$transaction([
-    prisma.address.deleteMany(),
-    prisma.specialist.deleteMany(),
-    prisma.placeOfWork.deleteMany(),
-    prisma.specialization.deleteMany(),
-    prisma.district.deleteMany(),
-    prisma.therapy.deleteMany(),
-    prisma.organization.deleteMany(),
-    prisma.organizationType.deleteMany(),
-  ]);
+  await prisma.$transaction(async trx => {
+    await trx.address.deleteMany();
+    await trx.specialist.deleteMany();
+    await trx.placeOfWork.deleteMany();
+    await trx.specialization.deleteMany();
+    await trx.district.deleteMany();
+    await trx.therapy.deleteMany();
+    await trx.event.deleteMany();
+    await trx.eventLink.deleteMany();
+    await trx.eventTag.deleteMany();
+    await trx.faq.deleteMany();
+    await trx.organization.deleteMany();
+    await trx.organizationType.deleteMany();
+  });
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
   const specializationNames = [
@@ -136,8 +176,8 @@ async function main() {
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
   const organizationTypeNames = ['Психологічний центр', 'Соціальна служба', 'Лікарня'];
-  const faqs = Array.from({ length: 10 }).map(() => ({
-    isActive: faker.datatype.boolean(),
+  const faqs = Array.from({ length: 5 }).map(() => ({
+    isActive: true,
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
   }));
@@ -154,6 +194,16 @@ async function main() {
     data: therapyNames.map(name => ({ name })),
   });
 
+  const eventTags = ['EventTag1', 'EventTag2', 'EventTag3'];
+
+  const eventLink = { label: 'Some site', link: 'https://keenethics.com/' };
+
+  await prisma.eventTag.createMany({
+    data: eventTags.map(name => ({ name })),
+  });
+
+  await prisma.eventLink.create({ data: eventLink });
+
   await prisma.faq.createMany({
     data: faqs,
   });
@@ -167,25 +217,31 @@ async function main() {
     select: { id: true },
   });
   const districts = await prisma.district.findMany({ select: { id: true } });
+
+  const tags = await prisma.eventTag.findMany({ select: { id: true } });
+  const link = await prisma.eventLink.findFirst({ select: { id: true } });
   const organizationTypes = await prisma.organizationType.findMany({ select: { id: true } });
 
   // createMany does not support records with relations
-  await Promise.all(
-    Array(10)
-      .fill('')
-      .map(
-        // eslint-disable-next-line no-unused-vars
-        _ =>
-          prisma.$transaction([
-            prisma.specialist.create({
-              data: randomSpecialist({ districts, specializations, therapies }),
-            }),
-            prisma.organization.create({
-              data: randomOrganization({ therapies, districts, organizationTypes }),
-            }),
-          ]),
-      ),
-  );
+  for (let i = 0; i < 10; i += 1) {
+    // for instead of Promise.all to avoid overloading the database pool
+    // eslint-disable-next-line no-await-in-loop
+    await prisma.specialist.create({
+      data: randomSpecialist({ districts, specializations, therapies }),
+    });
+  }
+  for (let i = 0; i < 10; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await prisma.event.create({
+      data: randomEvent({ tags, link }),
+    });
+  }
+  for (let i = 0; i < 10; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await prisma.organization.create({
+      data: randomOrganization({ therapies, districts, organizationTypes }),
+    });
+  }
 }
 
 main().then(
