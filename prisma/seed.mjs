@@ -81,7 +81,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
   };
 }
 
-function randomOrganization({ therapies, districts }) {
+function randomOrganization({ therapies, districts, organizationTypes }) {
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
   if (formatOfWork !== 'ONLINE') {
@@ -96,7 +96,9 @@ function randomOrganization({ therapies, districts }) {
     name: faker.company.name(),
     yearsOnMarket: nullable(faker.number.int({ min: 1, max: 30 })),
     formatOfWork,
-    type: faker.helpers.arrayElement(['HOSPITAL', 'SOCIAL_SERVICE', 'PSY_CENTER']),
+    type: {
+      connect: uniqueObjectsWithId(organizationTypes),
+    },
     addresses,
     therapies: {
       connect: uniqueObjectsWithId(therapies),
@@ -121,6 +123,7 @@ async function main() {
     prisma.district.deleteMany(),
     prisma.therapy.deleteMany(),
     prisma.organization.deleteMany(),
+    prisma.organizationType.deleteMany(),
   ]);
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
@@ -132,6 +135,7 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
+  const organizationTypeNames = ['Психологічний центр', 'Соціальна служба', 'Лікарня'];
   const faqs = Array.from({ length: 10 }).map(() => ({
     isActive: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
@@ -154,11 +158,16 @@ async function main() {
     data: faqs,
   });
 
+  await prisma.organizationType.createMany({
+    data: organizationTypeNames.map(name => ({ name })),
+  });
+
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });
   const districts = await prisma.district.findMany({ select: { id: true } });
+  const organizationTypes = await prisma.organizationType.findMany({ select: { id: true } });
 
   // createMany does not support records with relations
   await Promise.all(
@@ -172,7 +181,7 @@ async function main() {
               data: randomSpecialist({ districts, specializations, therapies }),
             }),
             prisma.organization.create({
-              data: randomOrganization({ therapies, districts }),
+              data: randomOrganization({ therapies, districts, organizationTypes }),
             }),
           ]),
       ),

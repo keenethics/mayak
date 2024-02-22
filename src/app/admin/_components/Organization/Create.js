@@ -10,16 +10,18 @@ import {
   TextInput,
   required,
 } from 'react-admin';
-import { SelectTherapies } from './SelectTherapies';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { OrganizationSchema } from '@admin/_lib/validationSchemas/createOrganizationSchema';
+import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
+import { ORGANIZATION_TYPES } from '@admin/_lib/consts';
 import { AddressInput } from './CreateAdresses';
-import { zodResolver } from '@hookform/resolvers/zod/src/zod';
-import { OrganizationSchema } from '@admin/_utils/validationSchemas/createOrganizationSchema';
+import { SelectTherapies } from './SelectTherapies';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
-export function CreateOrganization() {
+export function OrganizationCreate() {
   return (
-    <Create>
+    <Create transform={transformOrganizationData}>
       <SimpleForm resolver={zodResolver(OrganizationSchema)}>
         <FormDataConsumer>
           {({ formData }) => (
@@ -27,11 +29,7 @@ export function CreateOrganization() {
               <p className="font-bold">Основна інформація</p>
               <SelectArrayInput
                 source="type"
-                choices={[
-                  { id: 'PSY_CENTER', name: 'Психологічний центр' },
-                  { id: 'HOSPITAL', name: 'Лікарня' },
-                  { id: 'SOCIAL_SERVICE', name: 'Соціальна служба' },
-                ]}
+                choices={ORGANIZATION_TYPES.map(type => ({ id: type, name: type }))}
                 validate={formData.isActive && required()}
                 label="Тип організації"
               />
@@ -52,7 +50,7 @@ export function CreateOrganization() {
               </div>
               <AddressInput isActive={formData.isActive} />
               <p className="font-bold">Типи терапії</p>
-              <SelectTherapies validate={formData.isActive && required()} />
+              <SelectTherapies isActive={formData.isActive} />
               <p className="font-bold">Безкоштовна консультація</p>
               <NullableBooleanInput
                 source="isFreeReception"

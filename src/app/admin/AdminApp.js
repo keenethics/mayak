@@ -3,23 +3,17 @@
 import React from 'react';
 import { Admin, EditGuesser, ListGuesser, Resource, ShowGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
+import { OrganizationCreate } from '@admin/components/Organization';
 import { authProvider } from '@/app/admin/authProvider';
 import { RESOURCES } from '@/app/admin/_lib/consts';
 import { SpecialistCreate } from '@/app/admin/_components/Specialist';
-import { CreateOrganization } from '@admin/components/Organization';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
 
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
-      <Resource
-        name={RESOURCES.organization}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-        create={CreateOrganization}
-      />
+      <Resource name={RESOURCES.organization} list={ListGuesser} create={OrganizationCreate} />
       <Resource
         name={RESOURCES.specialist}
         list={ListGuesser}

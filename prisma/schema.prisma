@@ -19,12 +19,6 @@ enum FormatOfWork {
   BOTH
 }
 
-enum OrganizationType {
-  PSY_CENTER
-  HOSPITAL
-  SOCIAL_SERVICE
-}
-
 model Specialist {
   id                String           @id @default(uuid()) @db.Uuid
   createdAt         DateTime         @default(now())
@@ -48,20 +42,20 @@ model Specialist {
 }
 
 model Organization {
-  id              String            @id @default(uuid()) @db.Uuid
-  createdAt       DateTime          @default(now())
-  name            String            @db.VarChar(128)
-  type            OrganizationType?
-  yearsOnMarket   Int?              @db.SmallInt
+  id              String             @id @default(uuid()) @db.Uuid
+  createdAt       DateTime           @default(now())
+  name            String             @db.VarChar(128)
+  type            OrganizationType[]
+  yearsOnMarket   Int?               @db.SmallInt
   formatOfWork    FormatOfWork?
   addresses       Address[]
   therapies       Therapy[]
   isFreeReception Boolean?
-  description     String?           @db.Text
-  phone           String?           @db.VarChar(15)
-  email           String?           @db.VarChar(320)
-  website         String?           @db.Text
-  isActive        Boolean           @default(false)
+  description     String?            @db.Text
+  phone           String?            @db.VarChar(15)
+  email           String?            @db.VarChar(320)
+  website         String?            @db.Text
+  isActive        Boolean            @default(false)
 
   @@map("organization")
 }
@@ -92,6 +86,15 @@ model District {
   Address   Address[]
 
   @@map("district")
+}
+
+model OrganizationType {
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  name          String         @unique @db.VarChar(64)
+  organizations Organization[]
+
+  @@map("organization_type")
 }
 
 model Therapy {
