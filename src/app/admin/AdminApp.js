@@ -5,9 +5,9 @@ import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-ad
 import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate } from '@admin/components/Event';
-import { authProvider } from './authProvider';
 import { FaqCreate, FaqEdit } from '@admin/components/Faq';
 import { SpecialistCreate } from '@admin/components/Specialist';
+import { authProvider } from './authProvider';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
