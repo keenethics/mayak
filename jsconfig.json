@@ -6,6 +6,8 @@
       "@images/*": ["./public/assets/images/*"],
       "@components": ["./src/app/_components/index"],
       "@hooks": ["./src/app/_hooks/index"],
+      "@admin/*": ["./src/app/admin/*"],
+      "@admin/components/*": ["./src/app/admin/_components/*"],
       "@utils/*": ["./src/app/utils/*"],
       "@config/*": ["./src/app/config/*"]
     }
