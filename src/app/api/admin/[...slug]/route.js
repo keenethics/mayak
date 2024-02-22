@@ -11,7 +11,6 @@ const handler = withErrorHandler(
       throw new NotAuthorizedException();
     }
     const json = await req.json();
-    console.log(json.params.data);
     const result = await defaultHandler(json, prisma);
     return NextResponse.json(result);
   }),
