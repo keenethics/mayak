@@ -5,10 +5,12 @@ export const CreateEventSchema = z
   .object({
     title: minMaxString(1, 128, 'Назва події'),
     organizerName: minMaxString(1, 128, 'Організатор'),
-    eventDate: z.date({
-      required_error: "Дата події - обов'язкове поле",
-      invalid_type_error: 'Невірний формат дати',
-    }),
+    eventDate: z
+      .date({
+        required_error: "Дата події - обов'язкове поле",
+        invalid_type_error: 'Невірний формат дати',
+      })
+      .min(new Date(), { message: 'Дата не може бути ранішою за поточну' }),
     notes: minMaxString(1, 350, 'Коментарі').nullish(),
     locationLink: z.string({ invalid_type_error: 'Коментарі мають бути рядком' }).trim().nullish(),
     additionalLink: z

@@ -6,7 +6,7 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { authProvider } from '@admin/authProvider';
 import { RESOURCES } from '@admin/_lib/consts';
 import { SpecialistCreate } from '@admin/components/Specialist';
-import { CreateEvent } from '@admin/components/Event';
+import { EventCreate } from '@admin/components/Event';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -28,7 +28,7 @@ export default function AdminPage() {
         show={ShowGuesser}
         create={SpecialistCreate}
       />
-      <Resource name={RESOURCES.event} list={ListGuesser} create={CreateEvent} />
+      <Resource name={RESOURCES.event} list={ListGuesser} create={EventCreate} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
