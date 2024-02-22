@@ -18,14 +18,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={cn(montserrat.className, 'relative')}>
-        <Hint>
-          <Header />
-          <QueryContext>
-            <main>{children}</main>
-          </QueryContext>
-          <Footer />
-          <div id="modal-root" />
-        </Hint>
+        <div className="flex min-h-screen flex-col">
+          <Hint>
+            <Header />
+            <QueryContext>
+              <main className="flex-1">{children}</main>
+            </QueryContext>
+            <Footer />
+            <div id="modal-root" />
+          </Hint>
+        </div>
       </body>
     </html>
   );

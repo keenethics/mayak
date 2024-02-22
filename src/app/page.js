@@ -1,5 +1,4 @@
 import React from 'react';
-import { ShortCardMain } from '@/app/_components/Cards/ShortCard/ShortCardMain';
 
 // Page metadata should contain
 // title - gets formatted into "%s | Маяк", %s is replaced by title,
@@ -11,10 +10,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return (
-    <div>
-      Main
-      {<ShortCardMain />}
-    </div>
-  );
+  return <div>Main</div>;
 }
