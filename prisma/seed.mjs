@@ -185,12 +185,16 @@ async function main() {
   const link = await prisma.eventLink.findFirst({ select: { id: true } });
 
   // createMany does not support records with relations
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i += 1) {
+    // for instead of Promise.all to avoid overloading the database pool
+    // eslint-disable-next-line no-await-in-loop
     await prisma.specialist.create({
       data: randomSpecialist({ districts, specializations, therapies }),
     });
   }
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i += 1) {
+    // for instead of Promise.all to avoid overloading the database pool
+    // eslint-disable-next-line no-await-in-loop
     await prisma.event.create({
       data: randomEvent({ tags, link }),
     });
