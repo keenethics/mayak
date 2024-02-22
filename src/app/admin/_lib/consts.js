@@ -6,7 +6,9 @@ export const RESOURCES = {
   address: 'address',
   placeOfWork: 'placeOfWork',
   feedback: 'feedback',
-  faq: 'Faq',
+  event: 'event',
+  eventTag: 'eventTag',
+  faq: 'faq',
 };
 
 export const SUCCESS_NOTIFICATIONS = {

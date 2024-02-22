@@ -81,6 +81,42 @@ function randomSpecialist({ districts, specializations, therapies }) {
   };
 }
 
+function randomEvent({ tags, link }) {
+  const priceType = faker.helpers.arrayElement(['FREE', 'FIXED_PRICE', 'MIN_PRICE']);
+  const format = faker.helpers.arrayElement(['ONLINE', 'OFFLINE']);
+  let address;
+  let price;
+  let locationLink;
+  if (format === 'OFFLINE') {
+    address = getFullAddress();
+    locationLink = faker.helpers.arrayElement([
+      'https://maps.app.goo.gl/3YXkdzJnoLwHsXNb7',
+      'https://maps.app.goo.gl/coSnsiqkAmGuMgvY9',
+      'https://maps.app.goo.gl/AuuirMDJobE7WWKN6',
+    ]);
+  }
+  if (priceType !== 'FREE') {
+    price = faker.number.int({ min: 1000, max: 5000 });
+  }
+  return {
+    title: faker.word.noun(),
+    organizerName: faker.company.name(),
+    address,
+    locationLink,
+    priceType,
+    price,
+    format,
+    eventDate: faker.date.future(),
+    isActive: faker.datatype.boolean(),
+    additionalLink: {
+      connect: link,
+    },
+    tags: {
+      connect: uniqueObjectsWithId(tags),
+    },
+  };
+}
+
 const prisma = new PrismaClient();
 
 async function main() {
@@ -92,6 +128,10 @@ async function main() {
     prisma.specialization.deleteMany(),
     prisma.district.deleteMany(),
     prisma.therapy.deleteMany(),
+    prisma.event.deleteMany(),
+    prisma.eventLink.deleteMany(),
+    prisma.eventTag.deleteMany(),
+    prisma.faq.deleteMany(),
   ]);
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
@@ -121,6 +161,16 @@ async function main() {
     data: therapyNames.map(name => ({ name })),
   });
 
+  const eventTags = ['EventTag1', 'EventTag2', 'EventTag3'];
+
+  const eventLink = { label: 'Some site', link: 'https://keenethics.com/' };
+
+  await prisma.eventTag.createMany({
+    data: eventTags.map(name => ({ name })),
+  });
+
+  await prisma.eventLink.create({ data: eventLink });
+
   await prisma.faq.createMany({
     data: faqs,
   });
@@ -131,6 +181,9 @@ async function main() {
   });
   const districts = await prisma.district.findMany({ select: { id: true } });
 
+  const tags = await prisma.eventTag.findMany({ select: { id: true } });
+  const link = await prisma.eventLink.findFirst({ select: { id: true } });
+
   // createMany does not support records with relations
   await Promise.all(
     Array(10)
@@ -138,9 +191,14 @@ async function main() {
       .map(
         // eslint-disable-next-line no-unused-vars
         _ =>
-          prisma.specialist.create({
-            data: randomSpecialist({ districts, specializations, therapies }),
-          }),
+          prisma.$transaction([
+            prisma.specialist.create({
+              data: randomSpecialist({ districts, specializations, therapies }),
+            }),
+            prisma.event.create({
+              data: randomEvent({ tags, link }),
+            }),
+          ]),
       ),
   );
 }
