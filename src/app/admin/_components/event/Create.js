@@ -13,11 +13,7 @@ function PriceInput() {
   return (
     <>
       <span className="self-center">{priceType === 'MIN_PRICE' && 'від'}</span>
-      <NumberInput
-        disabled={priceType !== 'FIXED_PRICE' && priceType !== 'MIN_PRICE'}
-        label="Вартість"
-        source="price"
-      />
+      <NumberInput disabled={priceType === 'FREE'} label="Вартість" source="price" />
     </>
   );
 }
