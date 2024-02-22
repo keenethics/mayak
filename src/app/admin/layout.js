@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function AdminLayout({ children }) {
   // Div is needed to avoid root layout overlap with admin panel
-  return <div className="absolute top-0 h-full w-full">{children}</div>;
+  return <div className="absolute z-[100] top-0 h-full w-full ">{children}</div>;
 }
 
 AdminLayout.propTypes = {
