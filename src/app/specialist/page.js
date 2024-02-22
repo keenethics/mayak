@@ -1,7 +1,7 @@
 import React from 'react';
+import { SpecialistList } from '@components';
 import { prisma } from '@/lib/db';
-import { ShortCardMain } from '@/app/_components/Cards/ShortCard/ShortCardMain';
-import { CardSpecialistPreview } from '@/app/_components/Cards/ShortCard/CardSpecialistPreview';
+import { include } from '@/app/specialist/consts';
 
 export const metadata = {
   title: 'Спеціалісти',
@@ -10,26 +10,8 @@ export const metadata = {
 
 export default async function Page() {
   const data = await prisma.specialist.findMany({
-    include: {
-      specializations: true,
-      therapies: true,
-      placesOfWork: true,
-    },
+    include,
   });
 
-  return (
-    <>
-      <ShortCardMain />
-      <ul>
-        {data?.map(specialist => (
-          <CardSpecialistPreview
-            key={specialist.id}
-            firstName={specialist.firstName}
-            lastName={specialist.lastName}
-            gender={specialist.gender}
-          />
-        ))}
-      </ul>
-    </>
-  );
+  return <SpecialistList specialists={data} />;
 }

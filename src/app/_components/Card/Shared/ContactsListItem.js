@@ -1,0 +1,28 @@
+import React from 'react';
+import P from 'prop-types';
+import { cn } from '@utils/cn';
+import Link from 'next/link';
+
+export function ContactsListItem({ contact, className }) {
+  const { id, icon, content, href } = contact;
+
+  return (
+    <li className={cn('flex gap-[8px]', className)} key={id}>
+      <span className="flex w-[20px] justify-center">{icon}</span>
+      <span className={cn(`text-inherit font-inherit text-center text-[12px] leading-[1.125rem] text-gray-700`)}>
+        {Array.isArray(content) ? (
+          content.map(c => <p key={c}>{c}</p>)
+        ) : (
+          <Link href={href} target="_blank">
+            {content}
+          </Link>
+        )}
+      </span>
+    </li>
+  );
+}
+
+ContactsListItem.propTypes = {
+  contact: P.object,
+  className: P.string,
+};

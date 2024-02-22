@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { prisma } from '@/lib/db';
+import { include } from '@/app/specialist/consts';
 
 export const metadata = {
   title: 'Спеціаліст',
@@ -13,11 +14,7 @@ export default async function Page({ params }) {
     where: {
       id,
     },
-    include: {
-      specializations: true,
-      therapies: true,
-      placesOfWork: true,
-    },
+    include,
   });
 
   return (
