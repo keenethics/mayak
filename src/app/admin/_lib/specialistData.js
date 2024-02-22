@@ -106,7 +106,7 @@ export const SpecialistFormFields = {
 export const SpecialistFormSections = {
   general: 'Основні дані',
   details: 'Деталі',
-  placesOfWOrk: 'Місце надання послуг',
+  placesOfWork: 'Місце надання послуг',
   services: 'Послуги',
   contacts: 'Контактні дані',
 };

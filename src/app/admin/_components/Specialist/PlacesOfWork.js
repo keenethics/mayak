@@ -23,7 +23,7 @@ export function PlacesOfWork() {
   const isOnline = format => format === FormatOfWork.ONLINE;
 
   return (
-    <FormFieldWrapper title={SpecialistFormSections.placesOfWOrk} className="mt-3">
+    <FormFieldWrapper title={SpecialistFormSections.placesOfWork} className="mt-3">
       <FormDataConsumer>
         {({ formData }) =>
           isOnline(formData.formatOfWork) ? (
