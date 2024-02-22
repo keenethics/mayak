@@ -121,18 +121,18 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Clear the database to make sure we can run seed
-  await prisma.$transaction([
-    prisma.address.deleteMany(),
-    prisma.specialist.deleteMany(),
-    prisma.placeOfWork.deleteMany(),
-    prisma.specialization.deleteMany(),
-    prisma.district.deleteMany(),
-    prisma.therapy.deleteMany(),
-    prisma.event.deleteMany(),
-    prisma.eventLink.deleteMany(),
-    prisma.eventTag.deleteMany(),
-    prisma.faq.deleteMany(),
-  ]);
+  await prisma.$transaction(async trx => {
+    await trx.address.deleteMany();
+    await trx.specialist.deleteMany();
+    await trx.placeOfWork.deleteMany();
+    await trx.specialization.deleteMany();
+    await trx.district.deleteMany();
+    await trx.therapy.deleteMany();
+    await trx.event.deleteMany();
+    await trx.eventLink.deleteMany();
+    await trx.eventTag.deleteMany();
+    await trx.faq.deleteMany();
+  });
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
   const specializationNames = [
@@ -185,22 +185,16 @@ async function main() {
   const link = await prisma.eventLink.findFirst({ select: { id: true } });
 
   // createMany does not support records with relations
-  await Promise.all(
-    Array(10)
-      .fill('')
-      .map(
-        // eslint-disable-next-line no-unused-vars
-        _ =>
-          prisma.$transaction([
-            prisma.specialist.create({
-              data: randomSpecialist({ districts, specializations, therapies }),
-            }),
-            prisma.event.create({
-              data: randomEvent({ tags, link }),
-            }),
-          ]),
-      ),
-  );
+  for (let i = 0; i < 10; i++) {
+    await prisma.specialist.create({
+      data: randomSpecialist({ districts, specializations, therapies }),
+    });
+  }
+  for (let i = 0; i < 10; i++) {
+    await prisma.event.create({
+      data: randomEvent({ tags, link }),
+    });
+  }
 }
 
 main().then(
