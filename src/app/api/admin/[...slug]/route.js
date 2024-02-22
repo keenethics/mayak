@@ -9,8 +9,7 @@ import { RESOURCES } from '@/app/admin/_lib/consts';
 
 export const MODEL_SEARCH_FIELDS = {
   [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
-  [RESOURCES.organisation]: ['name'],
-  [RESOURCES.event]: ['eventName', 'organizerName'],
+  [RESOURCES.event]: ['title', 'organizerName'],
 };
 
 export function searchInputFilters(modelName, filter) {

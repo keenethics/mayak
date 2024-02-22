@@ -1,8 +1,9 @@
+// this function formats the event form data, connects event to other tables and create proper prisma creation object
 export function transformEventData(data, tags) {
   let tagsObject = {};
   let linkObject = {};
 
-  if (tags && tags.length > 0) {
+  if (tags?.length > 0) {
     tagsObject = {
       connectOrCreate: tags.map(tag => ({ where: { name: tag.value }, create: { name: tag.value } })),
     };

@@ -1,13 +1,13 @@
 'use client';
 
 import React from 'react';
-import { Admin, EditGuesser, ListGuesser, Resource, ShowGuesser } from 'react-admin';
+import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
-import { authProvider } from '@/app/admin/authProvider';
-import { RESOURCES } from '@/app/admin/_lib/consts';
-import { SpecialistCreate } from '@/app/admin/_components/Specialist';
-import { CreateEvent } from '@/app/admin/_components/event/CreateEvent';
-import { EventsList } from '@/app/admin/_components/event/List';
+import { RESOURCES } from '@admin/_lib/consts';
+import { EventCreate, EventList } from '@admin/components/Event';
+import { FaqCreate, FaqEdit } from '@admin/components/Faq';
+import { SpecialistCreate } from '@admin/components/Specialist';
+import { authProvider } from './authProvider';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -29,7 +29,7 @@ export default function AdminPage() {
         show={ShowGuesser}
         create={SpecialistCreate}
       />
-      <Resource name={RESOURCES.event} options={{ label: 'Event' }} list={EventsList} create={CreateEvent} />
+      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
@@ -39,6 +39,14 @@ export default function AdminPage() {
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
+      />
+      <Resource
+        name={RESOURCES.faq}
+        options={{ label: 'FAQ' }}
+        list={ListGuesser}
+        show={ShowGuesser}
+        edit={FaqEdit}
+        create={FaqCreate}
       />
       <Resource
         name={RESOURCES.feedback}

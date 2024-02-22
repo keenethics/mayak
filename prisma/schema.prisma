@@ -115,22 +115,10 @@ model Feedback {
   @@map("feedback")
 }
 
-model Faq {
-  id        String   @id @default(uuid()) @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  isActive  Boolean  @default(false)
-  question  String
-  answer    String   @default("")
-  priority  Int?     @db.SmallInt
-
-  @@map("faq")
-}
-
 model Event {
   id             String           @id @default(uuid()) @db.Uuid
   createdAt      DateTime         @default(now())
-  eventName      String           @db.VarChar(128)
+  title          String           @db.VarChar(128)
   organizerName  String           @db.VarChar(128)
   notes          String?          @db.VarChar(350)
   address        String?          @db.VarChar(128)
@@ -165,4 +153,16 @@ model EventTag {
   events    Event[]
 
   @@map("event_tag")
+}
+
+model Faq {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isActive  Boolean  @default(false)
+  question  String
+  answer    String   @default("")
+  priority  Int?     @db.SmallInt
+
+  @@map("faq")
 }

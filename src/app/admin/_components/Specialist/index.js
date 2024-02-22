@@ -1,3 +1,1 @@
-import { SpecialistCreate } from './Create';
-
-export { SpecialistCreate };
+export * from './Create';

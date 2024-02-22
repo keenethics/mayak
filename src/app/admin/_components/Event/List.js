@@ -2,11 +2,11 @@ import React from 'react';
 import { Datagrid, List, TextField, BooleanField, DateField, DeleteWithConfirmButton } from 'react-admin';
 import { eventFilters } from '@admin/filters';
 
-export function EventsList() {
+export function EventList() {
   return (
     <List sort={{ field: 'createdAt', order: 'DESC' }} filters={eventFilters}>
       <Datagrid rowClick="show" bulkActionButtons={false}>
-        <TextField source="eventName" />
+        <TextField source="title" />
         <TextField source="organizerName" />
         <DateField source="eventDate" />
         <TextField source="format" />
