@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { EventFormat, EventPriceFormat } from '@prisma/client';
 import {
   Show,
@@ -11,7 +12,6 @@ import {
   useGetRecordId,
   Labeled,
   useGetOne,
-  UrlField,
 } from 'react-admin';
 import { TagList } from './TagList';
 import { RESOURCES } from '../../_lib/consts';
@@ -40,14 +40,30 @@ function ShowLayout() {
         )}
       </Labeled>
       {data?.additionalLink && (
-        <>
-          <TextField source="additionalLink.label" />
-          <UrlField source="additionalLink.link" />
-        </>
+        <Labeled label="Additional Link">
+          <AdditionalLink label={data.additionalLink.label} link={data.additionalLink.link} />
+        </Labeled>
       )}
     </SimpleShowLayout>
   );
 }
+
+// Must use a component for <Labeled/> wrapper to take effect
+function AdditionalLink({ label, link }) {
+  return (
+    <div>
+      <span>{label}</span>:{' '}
+      <a className="text-[#0000EE]" href={link}>
+        {link}
+      </a>
+    </div>
+  );
+}
+AdditionalLink.propTypes = {
+  label: PropTypes.string,
+  link: PropTypes.string,
+};
+
 export function EventShow() {
   return (
     <Show>
