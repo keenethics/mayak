@@ -15,8 +15,9 @@ import { SpecialistTitle } from '@/app/_components/Card/Shared/SpecialistTitle';
 import { CardButton } from '@/app/_components/Card/Shared/CardButton';
 import { displayYearsOfExperience } from '@/utils/common';
 
-export function CardSpecialist({ specialist, className }) {
+export function CardSpecialist({ specialist, children, className }) {
   const {
+    id,
     phone,
     email,
     website,
@@ -36,19 +37,19 @@ export function CardSpecialist({ specialist, className }) {
       id: 'phone',
       icon: <Phone />,
       content: phone,
-      href: 'tel:+380991234567',
+      href: `tel:${phone}`,
     },
     {
       id: 'email',
       icon: <Mail />,
       content: email,
-      href: 'mailto:user@gmail.com',
+      href: `mailto:${email}`,
     },
     {
       id: 'website',
       icon: <Calendar />,
       content: website,
-      href: 'www.website.com',
+      href: website,
     },
     {
       id: 'schedule',
@@ -79,7 +80,7 @@ export function CardSpecialist({ specialist, className }) {
     },
   ];
   const specializationsList = specializations.map(s => s.name);
-  const therapiesList = therapies.map(t => t.name);
+  const therapiesList = therapies.map(t => t.name.toLowerCase());
   const placeOfWork = [placesOfWork[0].addresses[0]];
 
   return (
@@ -101,7 +102,8 @@ export function CardSpecialist({ specialist, className }) {
           <TherapiesList therapies={therapiesList} className="mt-[14px]" />
           <PlacesOfWorkList className="mt-[24px]" places={placeOfWork} />
         </div>
-        <CardButton className="mt-[16px]" />
+        <CardButton className="mt-[16px]" id={id} />
+        {children}
       </CardSectionWrapper>
     </CardWrapper>
   );
@@ -109,5 +111,6 @@ export function CardSpecialist({ specialist, className }) {
 
 CardSpecialist.propTypes = {
   specialist: PropType.object,
+  children: PropType.node,
   className: PropType.string,
 };
