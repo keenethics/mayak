@@ -86,8 +86,7 @@ model Address {
   fullAddress  String        @db.VarChar(128) // street,building number,floor,room number
   district     District      @relation(fields: [districtId], references: [id])
   districtId   String        @db.Uuid
-  specialist   Specialist    @relation(fields: [specialistId], references: [id])
-  specialistId String        @db.Uuid
+  specialists  Specialist[]
 
   @@map("address")
 }

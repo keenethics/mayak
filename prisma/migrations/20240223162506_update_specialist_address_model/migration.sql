@@ -3,7 +3,6 @@
 
   - You are about to drop the `_AddressToPlaceOfWork` table. If the table is not empty, all the data it contains will be lost.
   - You are about to drop the `place_of_work` table. If the table is not empty, all the data it contains will be lost.
-  - Added the required column `specialistId` to the `address` table without a default value. This is not possible if the table is not empty.
 
 */
 -- DropForeignKey
@@ -15,14 +14,26 @@ ALTER TABLE "_AddressToPlaceOfWork" DROP CONSTRAINT "_AddressToPlaceOfWork_B_fke
 -- DropForeignKey
 ALTER TABLE "place_of_work" DROP CONSTRAINT "place_of_work_specialistId_fkey";
 
--- AlterTable
-ALTER TABLE "address" ADD COLUMN     "specialistId" UUID NOT NULL;
-
 -- DropTable
 DROP TABLE "_AddressToPlaceOfWork";
 
 -- DropTable
 DROP TABLE "place_of_work";
 
+-- CreateTable
+CREATE TABLE "_AddressToSpecialist" (
+    "A" UUID NOT NULL,
+    "B" UUID NOT NULL
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_AddressToSpecialist_AB_unique" ON "_AddressToSpecialist"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_AddressToSpecialist_B_index" ON "_AddressToSpecialist"("B");
+
 -- AddForeignKey
-ALTER TABLE "address" ADD CONSTRAINT "address_specialistId_fkey" FOREIGN KEY ("specialistId") REFERENCES "specialist"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "_AddressToSpecialist" ADD CONSTRAINT "_AddressToSpecialist_A_fkey" FOREIGN KEY ("A") REFERENCES "address"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_AddressToSpecialist" ADD CONSTRAINT "_AddressToSpecialist_B_fkey" FOREIGN KEY ("B") REFERENCES "specialist"("id") ON DELETE CASCADE ON UPDATE CASCADE;
