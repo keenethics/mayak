@@ -5,59 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/prisma/migrations/20240219223854_added_events_table/migration.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/icons/inputErrorIcon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/icons/tickIcon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Event/Create.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Event/TagSelect.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Event/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/AnswerTextInput.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/Create.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/Edit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/consts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/hooks/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/hooks/useActiveFaqs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_lib/validationSchemas/createEventSchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin/_utils/transformEventData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/validationSchemas/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/dev-deploy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/dev-deploy.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.lintstagedrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.lintstagedrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/CODESTYLE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CODESTYLE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/HOWTO.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/HOWTO.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/seed.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/seed.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/icons/close-cross.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/icons/headerCloseIcon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/icons/notFound.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/images/notFound.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/icons/white-logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/icons/whiteLogo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/CheckBox/CheckBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/CheckBox/CheckBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/CheckBox/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/CheckBox/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Icons/InputErrorIcon.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Icons/TickIcon.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Icons/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/InputFields/TextInputField.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/InputFields/TextInputField.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Create/Contacts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Contacts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Create/Details.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Details.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Create/General.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/General.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Create/PlacesOfWork.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/PlacesOfWork.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Create/Services.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Services.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Create/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Create.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Specialist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_lib/consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_lib/consts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/adminApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/AdminApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/not-found.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/not-found.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/styles/tailwind/ui/typography.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/styles/tailwind/ui/typography.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/validationSchemas/sendFeedbackSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/validationSchemas/sendFeedbackSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +51,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "Merging MID-61__add-short-specialist-card",
+    "git-widget-placeholder": "MID-61__add-short-specialist-card",
     "javascript.nodejs.core.library.configured.version": "20.10.0",
     "javascript.nodejs.core.library.typings.version": "20.10.8",
     "js.linters.configure.manually.selectedeslint": "true",

@@ -13,6 +13,7 @@ import { CardSectionWrapper } from '@/app/_components/Card/Shared/CardSectionWra
 import { SpecializationsPanel } from '@/app/_components/Card/Shared/SpecializationsPanel';
 import { SpecialistTitle } from '@/app/_components/Card/Shared/SpecialistTitle';
 import { CardButton } from '@/app/_components/Card/Shared/CardButton';
+import { displayYearsOfExperience } from '@/utils/common';
 
 export function CardSpecialist({ specialist, className }) {
   const {
@@ -56,11 +57,12 @@ export function CardSpecialist({ specialist, className }) {
       href: null,
     },
   ];
+
   const labels = [
     {
       id: 'yearsOfExperience',
       icon: <MedCare />,
-      content: `${yearsOfExperience} років досвіду`,
+      content: displayYearsOfExperience(yearsOfExperience),
       color: 'text-other-green',
     },
     {
