@@ -43,3 +43,42 @@ export const utility = () => {
   return ...
 };
 ```
+
+## Admin component folders/files conventions
+
+- Start folder names with capital letters. For ex: `Organization` instead of `organization`.
+- Filenames for files with feature components for specific model are `Create.js`, `Edit.js`, `List.js`, `Show.js`.
+- These files should contain components with name consisting of the **model name** and **feature name**, for ex: `FaqList` or `EventCreate`. Here is example of using them in `AdminApp.js` in a resource.
+
+```jsx
+<Resource
+  name={'specialist'}
+  list={SpecialistList}
+  edit={SpecialistEdit}
+  show={SpecialistShow}
+  create={SpecialistCreate}
+/>
+```
+
+```
+_components
+└───Specialist
+    ├───PlaceOfWork.js
+    ├───SomeOtherSpecialistComponent.js
+    ├───Create.js // File with SpecialistCreate component
+    ├───Edit.js // File with SpecialistEdit component
+    ├───Show.js // File with SpecialistShow component
+    ├───List.js // File with SpecialistList component
+    └───index.js
+```
+
+`Specialist/index.js` exports feature components so they can be imported to `AdminApp.js`
+
+```js
+export * from './Create';
+export * from './List';
+export * from './Edit';
+export * from './Show';
+```
+
+Other components related to admin panel, but not related to a specific model (or can be reused across multiple models), should be saved in the `admin/_components`

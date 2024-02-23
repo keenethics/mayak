@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import NotFound from '@icons/notFound.svg';
+import NotFound from '@images/notFound.svg';
 import { cn } from '@/utils/cn';
 
 export default function NotFoundPage() {
