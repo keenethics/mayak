@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputErrorIcon } from '../Icons/InputErrorIcon';
+import InputErrorIcon from '@icons/inputErrorIcon.svg';
 import { cn } from '@/utils/cn';
 import { variants } from './styles';
 

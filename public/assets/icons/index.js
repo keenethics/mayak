@@ -11,6 +11,7 @@ import Phone from './phone.svg';
 import Price from './price.svg';
 import Female from './specialist-female.png';
 import Male from './specialist-male.png';
+import Dot from './card-dot.svg';
 
 export {
   Calendar,
@@ -26,4 +27,5 @@ export {
   Price,
   Female,
   Male,
+  Dot,
 };

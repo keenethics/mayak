@@ -5,7 +5,7 @@ import { ContactsListItem } from '@/app/_components/Card/Shared/ContactsListItem
 
 export function ContactsList({ contacts, className }) {
   return (
-    <ul className={cn('flex flex-col gap-[8px]', className)}>
+    <ul className={cn('line-clamp-1 flex flex-col gap-[8px]', className)}>
       {contacts.map(contact => (contact.content ? <ContactsListItem key={contact.id} contact={contact} /> : ''))}
     </ul>
   );

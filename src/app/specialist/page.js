@@ -12,6 +12,5 @@ export default async function Page() {
   const data = await prisma.specialist.findMany({
     include,
   });
-
   return <SpecialistList specialists={data} />;
 }

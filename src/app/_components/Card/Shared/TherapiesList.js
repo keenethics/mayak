@@ -1,9 +1,10 @@
 import React from 'react';
 import P from 'prop-types';
+import { cn } from '@/utils/cn';
 
 export function TherapiesList({ therapies, className }) {
   return (
-    <div className={className}>
+    <div className={cn(className)}>
       <h3 className="text-p4 font-bold uppercase text-gray-600">Напрямок лікування</h3>
       <ul className="mt-[14px] flex flex-wrap gap-[10px]">
         {therapies.map(t => (

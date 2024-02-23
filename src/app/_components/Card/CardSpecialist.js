@@ -13,6 +13,8 @@ import { CardSectionWrapper } from '@/app/_components/Card/Shared/CardSectionWra
 import { SpecializationsPanel } from '@/app/_components/Card/Shared/SpecializationsPanel';
 import { SpecialistTitle } from '@/app/_components/Card/Shared/SpecialistTitle';
 import { CardButton } from '@/app/_components/Card/Shared/CardButton';
+import { cn } from '@/utils/cn';
+import { displayYearsOfExperience } from '@/utils/common';
 
 export function CardSpecialist({ specialist, className }) {
   const {
@@ -56,11 +58,12 @@ export function CardSpecialist({ specialist, className }) {
       href: null,
     },
   ];
+
   const labels = [
     {
       id: 'yearsOfExperience',
       icon: <MedCare />,
-      content: `${yearsOfExperience} років досвіду`,
+      content: displayYearsOfExperience(yearsOfExperience),
       color: 'text-other-green',
     },
     {
@@ -81,7 +84,12 @@ export function CardSpecialist({ specialist, className }) {
   const placeOfWork = [placesOfWork[0].addresses[0]];
 
   return (
-    <CardWrapper className={className}>
+    <CardWrapper
+      className={cn(
+        className,
+        'shadow-[4px_2px_4px_0px_rgba(192,191,206,0.25),0px_0px_16px_0px_rgba(192,191,206,0.50)]',
+      )}
+    >
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
         <ProfileImageSpecialist gender={gender} />
         <ContactsList contacts={contacts} className="mt-[16px]" />

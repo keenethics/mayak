@@ -9,7 +9,7 @@ export function CardButton({ text = 'Детальніше', className }) {
     <PillButton
       type={buttonType.outlined}
       colorVariant={buttonColorVariant.outlined.orange}
-      className={cn('hidden h-[min] self-end justify-self-end md:inline-block', className)}
+      className={cn('inline-block h-[min] self-end justify-self-end ', className)}
     >
       {text}
     </PillButton>
