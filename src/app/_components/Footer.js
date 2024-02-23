@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import FooterImg from '@icons/white-logo.svg';
+import FooterImg from '@icons/whiteLogo.svg';
 import { cn } from '@utils/cn';
 import siteNav from '@config/siteNav';
-import { OutlinedButton, SocialLink } from '@components';
+import { PillButton, SocialLink } from '@components';
+import { buttonColorVariant, buttonType } from './PillButton/style';
 
 export function Footer() {
   const { links } = siteNav;
@@ -17,11 +18,6 @@ export function Footer() {
   const basicLink = 'no-underline list-none cursor-pointer';
   const iconColors = 'text-other-white hover:text-primary-400';
   const transition = 'transition duration-200 ease-in-out';
-  const footerBtnHover = 'hover:bg-gray-100 hover:text-primary-500  ';
-  const footerBtnFocus = 'focus:bg-gray-100 focus:text-primary-600 ';
-  const footerBtnActive = 'active:bg-other-white active:text-primary-600';
-  const footerBtnBorder = 'focus:border-gray-100 active:border-other-white';
-  const outlinedColors = 'border-other-white text-other-white';
 
   return (
     <footer
@@ -38,12 +34,9 @@ export function Footer() {
         </Link>
         <div className={cn(flexColCenter, flexCenterMd, 'gap-2 py-3 text-other-white lg:gap-6')}>
           <p className={cn('text-p4 font-bold text-other-white lg:text-p1')}>Ставай нашим партнером</p>
-          <OutlinedButton
-            className={cn(footerBtnHover, footerBtnFocus, footerBtnActive, footerBtnBorder, outlinedColors, 'text-p4')}
-            aria-label="Click to fill application form"
-          >
+          <PillButton type={buttonType.outlined} colorVariant={buttonColorVariant.outlined.white}>
             Залишити заявку
-          </OutlinedButton>
+          </PillButton>
         </div>
       </div>
       <div className={cn('relative left-[-10%] my-3 h-[1px] w-[120%] bg-gray-300 lg:static lg:my-12 lg:w-full')}></div>

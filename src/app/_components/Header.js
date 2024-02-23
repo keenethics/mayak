@@ -4,11 +4,12 @@ import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 import Logo from '@icons/logo.svg';
 import BurgerIcon from '@icons/burger.svg';
-import CloseIcon from '@icons/close-cross.svg';
+import CloseIcon from '@icons/closeIcon.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
-import { InnerLink, OutlinedButton, SocialLink } from '@components';
 import { useBodyScrollLock } from '@hooks';
+import { InnerLink, PillButton, SocialLink } from '@components';
+import { buttonColorVariant, buttonType } from './PillButton/style';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
@@ -21,9 +22,6 @@ export function Header() {
   const listItemTextHover = 'text-primary-700 hover:text-primary-500';
   const iconColors = 'text-primary-700 hover:text-primary-500';
   const transition = 'transition duration-200 ease-in-out';
-  const basicBtnHover = 'hover:bg-primary-200 focus:border-primary-600';
-  const basicBtnFocus = 'focus:text-primary-600 focus:bg-primary-200';
-  const basicBtnActive = 'active:bg-primary-200 active:text-primary-600';
   const logoHeight = 'h-[36px]';
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -63,23 +61,21 @@ export function Header() {
             links={links}
             className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
           />
-          <OutlinedButton
-            className={cn(
-              basicBtnActive,
-              basicBtnFocus,
-              basicBtnHover,
-              'border-gray-700 text-p4 font-bold text-primary-500',
-            )}
+          <PillButton
+            type={buttonType.outlined}
+            colorVariant={buttonColorVariant.outlined.blue}
+            className={cn('border-gray-700 text-p4 font-bold text-primary-500')}
             aria-label="Click to fill feedback form"
           >
             Зворотній звʼязок
-          </OutlinedButton>
+          </PillButton>
         </div>
+        {/* Hamburger Menu */}
         <BurgerIcon className={'block lg:hidden'} onClick={toggleMenu} />
         <div
           className={cn(
-            'absolute left-[100dvw] top-0 flex h-dvh w-dvw flex-col bg-other-black transition-all duration-300 lg:hidden',
-            isMenuOpen && 'left-0',
+            'absolute left-[100dvw] right-0 top-0 flex h-dvh w-dvw flex-col bg-other-black transition-all duration-300 lg:hidden',
+            isMenuOpen && 'translate-x-[-100%]',
           )}
         >
           <div className={cn(flexBetween, 'w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4')}>
@@ -106,17 +102,14 @@ export function Header() {
                 )}
               />
             </div>
-            <OutlinedButton
-              className={cn(
-                basicBtnActive,
-                basicBtnFocus,
-                basicBtnHover,
-                'my-8 border-gray-700 text-p4 font-bold text-primary-500',
-              )}
+            <PillButton
+              type={buttonType.outlined}
+              colorVariant={buttonColorVariant.outlined.blue}
+              className={cn('my-8 border-gray-700 text-p4 font-bold text-primary-500')}
               aria-label="Click to fill feedback form"
             >
               Зворотній звʼязок
-            </OutlinedButton>
+            </PillButton>
             <div className={cn(flexBetween, 'items-center')}>
               <p className={cn('inline lg:hidden', 'text-p4 text-primary-700')}>Наші соціальні мережі:</p>
               <SocialLink

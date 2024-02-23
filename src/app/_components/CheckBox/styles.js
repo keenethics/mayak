@@ -36,8 +36,8 @@ export const variants = {
     },
     tick: {
       position: 'absolute left-[7px] top-[9px]',
-      base: 'stroke-primary-500',
-      disabled: 'stroke-gray-300',
+      base: '*:stroke-primary-500',
+      disabled: '*:stroke-gray-300',
     },
   },
 };
