@@ -6,7 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialistExtended.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialistExtended.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Modal/ModalCloseButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Modal/ModalCloseButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/specialist/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/specialist/[slug]/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

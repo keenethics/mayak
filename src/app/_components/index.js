@@ -6,6 +6,5 @@ export * from './Typography';
 export * from './Footer';
 export * from './Header';
 export * from './TextArea';
-export * from './OutlinedButton';
 export * from './Hint';
 export * from './SpecialistList';

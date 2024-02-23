@@ -1,7 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
 import { prisma } from '@/lib/db';
 import { include } from '@/app/specialist/consts';
+import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialistExtended';
 
 export const metadata = {
   title: 'Спеціаліст',
@@ -19,10 +19,8 @@ export default async function Page({ params }) {
 
   return (
     <div className="m-5">
-      <Link href={'/specialist'} className="bg-gray-500 p-2">
-        Back
-      </Link>
-      <pre className="m-5">{JSON.stringify(data, null, 4)}</pre>
+      <CardSpecialistExtended />
+      <pre className="m-6">{JSON.stringify(data, null, 4)}</pre>
     </div>
   );
 }

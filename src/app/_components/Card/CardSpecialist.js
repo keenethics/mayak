@@ -103,6 +103,7 @@ export function CardSpecialist({ specialist, children, className }) {
           <PlacesOfWorkList className="mt-[16px] md:mt-[12px]" places={placeOfWork} />
         </div>
         <CardButton className="mt-[16px]" id={id} />
+
         {children}
       </CardSectionWrapper>
     </CardWrapper>
