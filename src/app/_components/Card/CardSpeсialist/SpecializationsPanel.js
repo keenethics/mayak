@@ -1,8 +1,9 @@
 import React from 'react';
 import P from 'prop-types';
 import { Dot } from '@icons/index';
-import { Caption } from '../Typography';
-import { Show as ShowHint, Window as HintWindow } from '@/app/_components/Hint';
+
+import { Show as ShowHint, Window as HintWindow } from '../../Hint';
+import { Caption } from '../../Typography';
 
 export function SpecializationsPanel({ specializations }) {
   return (

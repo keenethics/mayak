@@ -1,27 +1,25 @@
 import React from 'react';
-import { Calendar, Clock, Mail, MedAttention, MedCare, OnlineMeeting, Phone } from '@icons/index';
+import { MedAttention, MedCare, OnlineMeeting } from '@icons/index';
 import PropType from 'prop-types';
 import { FormatOfWork } from '@prisma/client';
-import { CardWrapper } from '@/app/_components/Card/Shared/CardWrapper';
-import { CardHeader } from '@/app/_components/Card/Shared/CardHeader';
-import { ExperienceList } from '@/app/_components/Card/Shared/ExperienceList';
-import { TherapiesList } from '@/app/_components/Card/Shared/TherapiesList';
-import { PlacesOfWorkList } from '@/app/_components/Card/Shared/PlacesOfWorkList';
-import { ProfileImageSpecialist } from '@/app/_components/Card/Shared/ProfileImageSpecialist';
-import { ContactsList } from '@/app/_components/Card/Shared/ContactsList';
-import { CardSectionWrapper } from '@/app/_components/Card/Shared/CardSectionWrapper';
-import { SpecializationsPanel } from '@/app/_components/Card/Shared/SpecializationsPanel';
-import { SpecialistTitle } from '@/app/_components/Card/Shared/SpecialistTitle';
-import { CardButton } from '@/app/_components/Card/Shared/CardButton';
+
 import { cn } from '@/utils/cn';
 import { displayYearsOfExperience } from '@/utils/common';
+import { ProfileImage } from './ProfileImage';
+import { CardSectionWrapper } from './CardSectionWrapper';
+import { ContactsList } from './ContactsList';
+import { SpecializationsPanel } from './SpecializationsPanel';
+import { SpecialistTitle } from './SpecialistTitle';
+import { ExperienceList } from './ExperienceList';
+import { TherapiesList } from './TherapiesList';
+import { PlacesOfWorkList } from './PlacesOfWorkList';
+import { CardWrapper } from './CardWrapper';
+import { CardButton } from './CardButton';
+import { contacts } from './config';
 
 export function CardSpecialist({ specialist, children, className }) {
   const {
     id,
-    phone,
-    email,
-    website,
     gender,
     firstName,
     lastName,
@@ -31,34 +29,10 @@ export function CardSpecialist({ specialist, children, className }) {
     formatOfWork,
     therapies,
     placesOfWork,
+    phone,
+    email,
+    website,
   } = specialist;
-
-  const contacts = [
-    {
-      id: 'phone',
-      icon: <Phone />,
-      content: phone,
-      href: `tel:${phone}`,
-    },
-    {
-      id: 'email',
-      icon: <Mail />,
-      content: email,
-      href: `mailto:${email}`,
-    },
-    {
-      id: 'website',
-      icon: <Calendar />,
-      content: website,
-      href: website,
-    },
-    {
-      id: 'schedule',
-      icon: <Clock />,
-      content: ['пн-пт 9:00-18:00', 'ср-чт 18:00-20:00', 'ср-чт 08:00-13:00'],
-      href: null,
-    },
-  ];
 
   const labels = [
     {
@@ -83,6 +57,7 @@ export function CardSpecialist({ specialist, children, className }) {
   const specializationsList = specializations.map(s => s.name);
   const therapiesList = therapies.map(t => t.name.toLowerCase());
   const placeOfWork = [placesOfWork[0].addresses[0]];
+  const contactsList = contacts({ phone, email, website });
 
   return (
     <CardWrapper
@@ -92,18 +67,18 @@ export function CardSpecialist({ specialist, children, className }) {
       )}
     >
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
-        <ProfileImageSpecialist gender={gender} />
-        <ContactsList contacts={contacts} className="mt-[16px]" />
+        <ProfileImage gender={gender} />
+        <ContactsList contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
       <CardSectionWrapper className="flex w-[100%] flex-col md:ml-[16px]">
         <div className="flex-1">
-          <CardHeader gender={gender} firstName={firstName} lastName={lastName}>
-            <ProfileImageSpecialist gender={gender} className="md:hidden" />
+          <header className="flex flex-row gap-[10px]">
+            <ProfileImage gender={gender} className="md:hidden" />
             <div>
               <SpecializationsPanel specializations={specializationsList} />
               <SpecialistTitle title={`${firstName} ${lastName}`} />
             </div>
-          </CardHeader>
+          </header>
           <ExperienceList labels={labels} className="mt-[16px] md:mt-[12px]" />
           <TherapiesList therapies={therapiesList} className="mt-[14px] md:mt-[12px]" />
           <PlacesOfWorkList className="mt-[16px] md:mt-[12px]" places={placeOfWork} />

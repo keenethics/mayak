@@ -1,8 +1,8 @@
 import React from 'react';
 import P from 'prop-types';
-import { cn } from '@utils/cn';
 import Link from 'next/link';
-import { Paragraph } from '../Typography';
+import { cn } from '@/utils/cn';
+import { Paragraph } from '../../Typography';
 
 export function ContactsListItem({ contact, className }) {
   const { id, icon, content, href } = contact;

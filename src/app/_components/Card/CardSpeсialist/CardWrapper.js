@@ -1,6 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
-import { cn } from '@utils/cn';
+import { cn } from '@/utils/cn';
 
 export function CardWrapper({ children, className }) {
   return (

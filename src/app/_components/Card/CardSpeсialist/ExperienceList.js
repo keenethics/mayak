@@ -1,13 +1,13 @@
 import React from 'react';
 import P from 'prop-types';
-import { cn } from '@utils/cn';
-import { ExperienceListItem } from '@/app/_components/CardSpecialist/ExperienceListItem';
+import { cn } from '@/utils/cn';
+import { ExperienceListItem } from './ExperienceListItem';
 
 export function ExperienceList({ labels, className }) {
   return (
     <ul
       className={cn(
-        'flex gap-[10px] border-t border-dashed border-t-gray-200 pt-[16px] md:flex-initial md:gap-[24px] md:border-0 md:pt-0',
+        'flex gap-[10px] border-t-2 border-dashed border-t-gray-200 pt-[16px] md:flex-initial md:gap-[24px] md:border-0 md:pt-0',
         className,
       )}
     >
