@@ -5,7 +5,12 @@ import { ExperienceListItem } from '@/app/_components/Card/Shared/ExperienceList
 
 export function ExperienceList({ labels, className }) {
   return (
-    <ul className={cn(' line-clamp-1 flex gap-[16px] md:flex-initial md:gap-[24px]', className)}>
+    <ul
+      className={cn(
+        'flex gap-[10px] border-b border-t border-dashed border-t-gray-200 py-[16px] md:flex-initial md:gap-[24px]',
+        className,
+      )}
+    >
       {labels.map(({ icon, content, color }) =>
         content ? (
           <ExperienceListItem

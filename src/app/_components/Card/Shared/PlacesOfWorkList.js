@@ -7,11 +7,11 @@ export function PlacesOfWorkList({ places, className }) {
     <ul className={cn(className)}>
       {places.map(({ id, nameOfClinic, fullAddress, district }) => (
         <li key={id}>
-          <h3 className="mt-[12px] text-p4 font-bold text-gray-700 lg:text-p3">
-            {nameOfClinic || 'Місце надання послуг'}
-          </h3>
-          <p className="text-p4 text-gray-700 lg:text-p3">{fullAddress}</p>
-          <p className="text-p4 text-gray-700 lg:text-p3">{district.name} район</p>
+          <h3 className="mt-[12px] text-p4 font-bold text-gray-700">{nameOfClinic || 'Місце надання послуг'}</h3>
+          <div className="text-p4">
+            <p>{fullAddress}</p>
+            <p>{district.name} район</p>
+          </div>
         </li>
       ))}
     </ul>
