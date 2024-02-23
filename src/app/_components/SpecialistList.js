@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardSpecialist } from '@/app/_components/Card';
+import { CardSpecialist } from '@/app/_components/CardSpecialist';
 
 export function SpecialistList({ specialists, className }) {
   return (

@@ -1,15 +1,15 @@
 import React from 'react';
 import P from 'prop-types';
 import { Dot } from '@icons/index';
-import { Caption } from '../../Typography';
+import { Caption } from '../Typography';
 import { Show as ShowHint, Window as HintWindow } from '@/app/_components/Hint';
 
 export function SpecializationsPanel({ specializations }) {
   return (
-    <div className=" line-clamp-1 flex-row items-start gap-[8px] *:flex">
+    <div className="line-clamp-1 flex-row items-start gap-[8px] whitespace-nowrap *:flex">
       {specializations.map((specialization, index) => (
         <>
-          <Caption key={index} className="flex-row text-start font-bold text-gray-600 lg:text-p4">
+          <Caption key={index} className="text-start font-bold text-gray-600 lg:text-p4">
             {specialization}
           </Caption>
           {index !== specializations.length - 1 && <Dot />}
@@ -22,7 +22,7 @@ export function SpecializationsPanel({ specializations }) {
             <div>...</div>
           </ShowHint>
           <HintWindow name="organization-types-hint" id="organization-types-hint">
-            <div className="flex flex-col items-center gap-[8px] lg:text-p4">
+            <div className="line-clamp-1 flex flex-row gap-[8px] whitespace-nowrap lg:text-p4">
               {specializations.map((specialization, index) => (
                 <>
                   <Caption key={index} className="px-[4px] py-[8px] text-center text-c2   text-gray-900  ">

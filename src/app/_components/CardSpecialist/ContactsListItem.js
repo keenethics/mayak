@@ -2,7 +2,7 @@ import React from 'react';
 import P from 'prop-types';
 import { cn } from '@utils/cn';
 import Link from 'next/link';
-import { Paragraph } from '../../Typography';
+import { Paragraph } from '../Typography';
 
 export function ContactsListItem({ contact, className }) {
   const { id, icon, content, href } = contact;
@@ -22,7 +22,11 @@ export function ContactsListItem({ contact, className }) {
             </p>
           ))
         ) : (
-          <Link href={href} target="_blank" noopener norefferer>
+          <Link
+            href={href}
+            target="_blank"
+            // noopener norefferer
+          >
             <Paragraph className={cn('line-clamp-1 text-primary-400')}>{content}</Paragraph>
           </Link>
         )}

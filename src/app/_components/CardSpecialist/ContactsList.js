@@ -1,7 +1,7 @@
 import React from 'react';
 import P from 'prop-types';
 import { cn } from '@utils/cn';
-import { ContactsListItem } from '@/app/_components/Card/Shared/ContactsListItem';
+import { ContactsListItem } from '@/app/_components/CardSpecialist/ContactsListItem';
 
 export function ContactsList({ contacts, className }) {
   return (
