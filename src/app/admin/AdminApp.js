@@ -34,13 +34,6 @@ export default function AdminPage() {
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource
-        name={RESOURCES.placeOfWork}
-        options={{ label: 'Place of work' }}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-      />
-      <Resource
         name={RESOURCES.faq}
         options={{ label: 'FAQ' }}
         list={ListGuesser}
