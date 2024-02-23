@@ -2,7 +2,7 @@ export const displayYearsOfExperience = amountOfYears => {
   const lastDigit = amountOfYears % 10;
 
   if (amountOfYears === 0) {
-    return `менше року стажу`;
+    return `стаж менше року`;
   }
 
   if (amountOfYears === 1 || lastDigit === 1) {

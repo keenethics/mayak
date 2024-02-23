@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { cn } from '@/app/utils/cn';
 import { Paragraph } from '../Typography';
+import { cn } from '@/utils/cn';
 
 export function PillButton({ children, className, type, colorVariant, icon, disabled = false, onClick }) {
   const buttonType = icon ? type?.icon : type?.regular;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { cn } from '@/app/utils/cn';
+import { cn } from '@/utils/cn';
 import Montserrat from '@/app/styles/font';
 
 export function Heading({ children, type, className }) {

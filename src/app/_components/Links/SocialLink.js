@@ -1,7 +1,7 @@
 import React from 'react';
 import p from 'prop-types';
 import Link from 'next/link';
-import { cn } from '@utils/cn';
+import { cn } from '@/utils/cn';
 
 export function SocialLink({ links, className }) {
   return (

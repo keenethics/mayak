@@ -9,9 +9,8 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const data = await prisma.specialist.findMany({
+  const specialistsList = await prisma.specialist.findMany({
     include,
   });
-
-  return <SpecialistList specialists={data} />;
+  return <SpecialistList specialists={specialistsList} className="mt-[22px]" />;
 }

@@ -6,9 +6,9 @@ import Logo from '@icons/logo.svg';
 import BurgerIcon from '@icons/burger.svg';
 import CloseIcon from '@icons/closeIcon.svg';
 import siteNav from '@config/siteNav';
-import { cn } from '@utils/cn';
 import { useBodyScrollLock } from '@hooks';
 import { InnerLink, PillButton, SocialLink } from '@components';
+import { cn } from '@/utils/cn';
 import { buttonColorVariant, buttonType } from './PillButton/style';
 
 export function Header() {
@@ -39,7 +39,7 @@ export function Header() {
       <nav
         className={cn(
           flexBetween,
-          'z-9 fixed top-0 w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 lg:static lg:px-20',
+          'fixed top-0 w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 lg:static lg:px-20',
         )}
       >
         <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>

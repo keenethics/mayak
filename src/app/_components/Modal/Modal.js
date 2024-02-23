@@ -19,7 +19,7 @@ export const Modal = ({ isOpen, onClose, isBlurBackground = true, isCloseButton 
               }}
             >
               <div className="flex items-center justify-center text-center">
-                <p className="w-full  pl-2 pr-2 text-p2 md:pl-6 md:pr-6">{title}</p>
+                <p className="w-full pl-2 pr-2 text-p2 md:pl-6 md:pr-6">{title}</p>
 
                 {isCloseButton && <ModalCloseButton onClose={onClose} />}
               </div>

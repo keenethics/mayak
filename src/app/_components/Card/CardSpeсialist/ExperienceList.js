@@ -1,7 +1,7 @@
 import React from 'react';
 import P from 'prop-types';
-import { cn } from '@utils/cn';
-import { ExperienceListItem } from '@/app/_components/Card/Shared/ExperienceListItem';
+import { cn } from '@/utils/cn';
+import { ExperienceListItem } from './ExperienceListItem';
 
 export function ExperienceList({ labels, className }) {
   return (

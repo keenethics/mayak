@@ -1,6 +1,6 @@
 import React from 'react';
 import P from 'prop-types';
-import { cn } from '@utils/cn';
+import { cn } from '@/utils/cn';
 
 export function TherapiesList({ therapies, className }) {
   return (

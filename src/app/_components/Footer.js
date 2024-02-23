@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import FooterImg from '@icons/whiteLogo.svg';
-import { cn } from '@utils/cn';
 import siteNav from '@config/siteNav';
 import { PillButton, SocialLink } from '@components';
+import { cn } from '@/utils/cn';
 import { buttonColorVariant, buttonType } from './PillButton/style';
 
 export function Footer() {

@@ -3,28 +3,21 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { PillButton } from '@components';
-import { cn } from '@utils/cn';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/utils/cn';
 import { buttonColorVariant, buttonType } from '@/app/_components/PillButton/style';
 
 export function CardButton({ text = 'Детальніше', className, id }) {
   const router = useRouter();
-
-  function push() {
-    return router.push(`specialist/${id}`);
-  }
-
   return (
-    <>
-      <PillButton
-        type={buttonType.outlined}
-        colorVariant={buttonColorVariant.outlined.orange}
-        className={cn('hidden h-[min] self-end justify-self-end md:inline-block', className)}
-        onClick={push}
-      >
-        {text}
-      </PillButton>
-    </>
+    <PillButton
+      type={buttonType.outlined}
+      colorVariant={buttonColorVariant.outlined.orange}
+      className={cn('hidden h-[min] self-end justify-self-end md:inline-block', className)}
+      onClick={() => router.push(`specialist/${id}`)}
+    >
+      {text}
+    </PillButton>
   );
 }
 
