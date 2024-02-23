@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ExperienceList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/ExperienceList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/PlacesOfWorkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/PlacesOfWorkList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/TherapiesList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/Shared/TherapiesList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/common.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
