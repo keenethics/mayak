@@ -7,7 +7,7 @@ export function ExperienceList({ labels, className }) {
   return (
     <ul
       className={cn(
-        'flex gap-[10px] border-b border-t border-dashed border-t-gray-200 py-[16px] md:flex-initial md:gap-[24px]',
+        'flex gap-[10px] border-t border-dashed border-t-gray-200 pt-[16px] md:flex-initial md:gap-[24px] md:border-0 md:pt-0',
         className,
       )}
     >

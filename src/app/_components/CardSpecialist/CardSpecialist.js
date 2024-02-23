@@ -104,9 +104,9 @@ export function CardSpecialist({ specialist, children, className }) {
               <SpecialistTitle title={`${firstName} ${lastName}`} />
             </div>
           </CardHeader>
-          <ExperienceList labels={labels} className="mt-[16px]" />
-          <TherapiesList therapies={therapiesList} className="mt-[14px]" />
-          <PlacesOfWorkList className="mt-[24px]" places={placeOfWork} />
+          <ExperienceList labels={labels} className="mt-[16px] md:mt-[12px]" />
+          <TherapiesList therapies={therapiesList} className="mt-[14px] md:mt-[12px]" />
+          <PlacesOfWorkList className="mt-[16px] md:mt-[12px]" places={placeOfWork} />
         </div>
         <CardButton className="mt-[16px]" id={id} />
         {children}
