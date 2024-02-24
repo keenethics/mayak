@@ -28,7 +28,7 @@ Thats could be useful if you ran some wrong migration, or messed up things manua
 - for `docker` local setup - run `docker compose exec app npm run migrations:reset`
 - for other database locations - run `npm run migrations:reset`
 
-**⚠ Seeding is not automaticaly running after db reset**
+**⚠ Seeding is not automatically running after db reset**
 
 ## Linting & Formatting
 
@@ -102,7 +102,7 @@ All merged pull-requests to the `dev` branch automatically deploy to [dev-server
 
 - on the vercel page, go to the db you just created and on the left-side menu click on the "Projects"
 - click on the "Connect Project" button to connect the required project
-- on the quickstart panel at the top, click on the .env.local tab to grab the following env variables:
+- on the quick start panel at the top, click on the .env.local tab to grab the following env variables:
 
 ```dotenv
 POSTGRES_URL="************"

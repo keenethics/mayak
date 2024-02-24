@@ -1,4 +1,3 @@
-export * from './Icons';
 export * from './InputFields';
 export * from './Links';
 export * from './Modal';
@@ -8,3 +7,5 @@ export * from './Footer';
 export * from './Header';
 export * from './OutlinedButton';
 export * from './TextArea';
+export * from './TopWave';
+export * from './BottomWave';

@@ -99,7 +99,7 @@ function ActiveStateSwitch() {
   return <BooleanInput validate={[validate]} label="Is Active" source="isActive" />;
 }
 
-export function EditFaq() {
+export function FaqEdit() {
   return (
     <Edit>
       <SimpleForm toolbar={<Toolbar />}>

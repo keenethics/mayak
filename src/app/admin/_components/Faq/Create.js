@@ -1,6 +1,6 @@
 import { Create, SimpleForm, TextInput, NumberInput, required } from 'react-admin';
 
-export function CreateFaq() {
+export function FaqCreate() {
   return (
     <Create>
       <SimpleForm>
