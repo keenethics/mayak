@@ -12,5 +12,6 @@ export default async function Page() {
   const specialistsList = await prisma.specialist.findMany({
     include,
   });
+  
   return <SpecialistList specialists={specialistsList} className="mt-[22px]" />;
 }

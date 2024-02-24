@@ -5,59 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/assets/icons/card-dot.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/icons/female.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/icons/hospitalIMG.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/icons/male.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/BottomWave.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ContactsListItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/SpecializationsPanel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/_components/TopWave.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/icons/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/icons/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpecialistExtended.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialistExtended.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardHeader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardSectionWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSectionWrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/CardWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardWrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ContactsList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ContactsListItem.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ExperienceList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ExperienceList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ExperienceListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ExperienceListItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/PlacesOfWorkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/PlacesOfWorkList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ProfileImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImageOrganization.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/ProfileImageSpecialist.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecialistTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/SpecialistTitle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/SpecializationsPanel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/Shared/TherapiesList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/TherapiesList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Links/InnerLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Links/InnerLink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Links/SocialLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Links/SocialLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialistExtended.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialistExtended.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardWrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/SpecializationsPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/SpecializationsPanel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_components/Modal/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Modal/Modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/OutlinedButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/OutlinedButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/PillButton/component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/PillButton/component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_components/SpecialistList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/SpecialistList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Typography/Caption.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Typography/Caption.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Typography/Heading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Typography/Heading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Typography/Paragraph.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Typography/Paragraph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_hooks/useBodyScrollLock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_hooks/useBodyScrollLock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Event/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Event/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/FormFieldWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/FormFieldWrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/not-found.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/not-found.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/specialist/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/specialist/[slug]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/specialist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/specialist/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/styles/tailwind/ui/typography.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/styles/tailwind/ui/typography.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/utils/cn.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/utils/configuredTwMerge.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/common.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,33 +54,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.useTherapy.js.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "Merging MID-61__add-short-specialist-card",
-    "javascript.nodejs.core.library.configured.version": "20.10.0",
-    "javascript.nodejs.core.library.typings.version": "20.10.8",
-    "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "/home/bob/IT/mayak/src/app/_components/Card/Shared",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "/home/bob/IT/mayak/node_modules/eslint",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/home/bob/.nvm/versions/node/v20.10.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "prettier.import.notification.dismissed": "true",
-    "prettierjs.PrettierConfiguration.Package": "/home/bob/IT/mayak/node_modules/prettier",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "ts.external.directory.path": "/home/bob/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.useTherapy.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MID-61__add-short-specialist-card&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.10.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.10.8&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/bob/IT/mayak/src/app/_components/Card/Shared&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;/home/bob/IT/mayak/node_modules/eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/bob/.nvm/versions/node/v20.10.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettier.import.notification.dismissed&quot;: &quot;true&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/bob/IT/mayak/node_modules/prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/bob/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -202,6 +160,7 @@
       <workItem from="1708499843942" duration="10539000" />
       <workItem from="1708553172092" duration="1011000" />
       <workItem from="1708628311937" duration="7631000" />
+      <workItem from="1708782305116" duration="8455000" />
     </task>
     <servers />
   </component>

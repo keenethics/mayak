@@ -2,8 +2,6 @@ import React from 'react';
 import { MedAttention, MedCare, OnlineMeeting } from '@icons/index';
 import PropType from 'prop-types';
 import { FormatOfWork } from '@prisma/client';
-
-import { cn } from '@/utils/cn';
 import { displayYearsOfExperience } from '@/utils/common';
 import { ProfileImage } from './ProfileImage';
 import { CardSectionWrapper } from './CardSectionWrapper';
@@ -14,12 +12,10 @@ import { ExperienceList } from './ExperienceList';
 import { TherapiesList } from './TherapiesList';
 import { PlacesOfWorkList } from './PlacesOfWorkList';
 import { CardWrapper } from './CardWrapper';
-import { CardButton } from './CardButton';
 import { contacts } from './config';
 
 export function CardSpecialist({ specialist, children, className }) {
   const {
-    id,
     gender,
     firstName,
     lastName,
@@ -60,12 +56,7 @@ export function CardSpecialist({ specialist, children, className }) {
   const contactsList = contacts({ phone, email, website });
 
   return (
-    <CardWrapper
-      className={cn(
-        'rounded-[24px] border-2 border-gray-200 md:shadow-[4px_2px_4px_0px_rgba(192,191,206,0.25),0px_0px_16px_0px_rgba(192,191,206,0.50)]',
-        className,
-      )}
-    >
+    <CardWrapper className={className}>
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
         <ProfileImage gender={gender} className="w-[200px]" />
         <ContactsList contacts={contactsList} className="mt-[16px]" />
@@ -83,8 +74,6 @@ export function CardSpecialist({ specialist, children, className }) {
           <TherapiesList therapies={therapiesList} className="mt-[14px] md:mt-[12px]" />
           <PlacesOfWorkList className="mt-[16px] md:mt-[12px]" places={placeOfWork} />
         </div>
-        <CardButton className="mt-[16px]" id={id} />
-
         {children}
       </CardSectionWrapper>
     </CardWrapper>

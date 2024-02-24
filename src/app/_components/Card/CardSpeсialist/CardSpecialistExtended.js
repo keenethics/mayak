@@ -1,23 +1,23 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import P from 'prop-types';
 import { Modal } from '@components';
 import { useRouter } from 'next/navigation';
 import { useBodyScrollLock } from '@hooks';
-import P from 'prop-types';
 import { CardSpecialist } from '@/app/_components/Card/CardSpeсialist/CardSpecialist';
-import { cn } from '@/utils/cn';
+import { useScrollPosition } from '@/app/_hooks/useScrollPosition';
 
 export function CardSpecialistExtended({ specialist, className }) {
+  const scrollPosition = useScrollPosition();
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   function handleClose() {
-    return router.back();
+    return router.push(`/specialist#${specialist.id}`, { scroll: !scrollPosition });
   }
 
-  const [open, setOpen] = useState(false);
-
-  // TODO: add comment
+  // this is to ensure proper modal rendering
   useEffect(() => {
     setOpen(true);
   }, []);
@@ -25,8 +25,8 @@ export function CardSpecialistExtended({ specialist, className }) {
   useBodyScrollLock('y');
 
   return (
-    <Modal isOpen={open} onClose={handleClose} bgColor="bg-other-white">
-      <CardSpecialist specialist={specialist} className={cn('border-0 shadow-none', className)} />
+    <Modal isOpen={open} onClose={handleClose} bgColor="bg-other-white" className="min-w-[1000px] p-[24px]">
+      <CardSpecialist specialist={specialist} className={className} />
     </Modal>
   );
 }

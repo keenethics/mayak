@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={cn(montserrat.className, 'relative')}>
         <div className="flex min-h-screen flex-col">
           <Hint>

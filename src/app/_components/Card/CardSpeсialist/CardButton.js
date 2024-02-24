@@ -1,23 +1,25 @@
-'use client';
-
 import React from 'react';
 import PropType from 'prop-types';
 import { PillButton } from '@components';
-import { useRouter } from 'next/navigation';
-import { cn } from '@/utils/cn';
+import Link from 'next/link';
 import { buttonColorVariant, buttonType } from '@/app/_components/PillButton/style';
+import { cn } from '@/utils/cn';
 
 export function CardButton({ text = 'Детальніше', className, id }) {
-  const router = useRouter();
   return (
-    <PillButton
-      type={buttonType.outlined}
-      colorVariant={buttonColorVariant.outlined.orange}
+    <Link
+      href={`/specialist?id=${id}`}
+      scroll={false}
       className={cn('hidden h-[min] self-end justify-self-end md:inline-block', className)}
-      onClick={() => router.push(`specialist/${id}`)}
     >
-      {text}
-    </PillButton>
+      <PillButton
+        type={buttonType.outlined}
+        colorVariant={buttonColorVariant.outlined.orange}
+        className={cn('hidden h-[min] self-end justify-self-end md:inline-block', className)}
+      >
+        {text}
+      </PillButton>
+    </Link>
   );
 }
 
