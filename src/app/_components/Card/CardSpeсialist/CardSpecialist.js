@@ -1,8 +1,5 @@
 import React from 'react';
-import { MedAttention, MedCare, OnlineMeeting } from '@icons/index';
 import PropType from 'prop-types';
-import { FormatOfWork } from '@prisma/client';
-import { displayYearsOfExperience } from '@/utils/common';
 import { ProfileImage } from './ProfileImage';
 import { CardSectionWrapper } from './CardSectionWrapper';
 import { ContactsList } from './ContactsList';
@@ -12,10 +9,12 @@ import { ExperienceList } from './ExperienceList';
 import { TherapiesList } from './TherapiesList';
 import { PlacesOfWorkList } from './PlacesOfWorkList';
 import { CardWrapper } from './CardWrapper';
-import { contacts } from './config';
+import { getContactsList, getLablesList } from './config';
+import { CardButton } from '@/app/_components/Card/CardSpeсialist/CardButton';
 
-export function CardSpecialist({ specialist, children, className }) {
+export function CardSpecialist({ specialist, className, extended = false }) {
   const {
+    id,
     gender,
     firstName,
     lastName,
@@ -30,30 +29,11 @@ export function CardSpecialist({ specialist, children, className }) {
     website,
   } = specialist;
 
-  const labels = [
-    {
-      id: 'yearsOfExperience',
-      icon: <MedCare />,
-      content: displayYearsOfExperience(yearsOfExperience),
-      color: 'text-other-green',
-    },
-    {
-      id: 'isFreeReception',
-      icon: <MedAttention />,
-      content: isFreeReception ? 'Безкоштовний прийом' : null,
-      color: 'text-other-orange',
-    },
-    {
-      id: 'formatOfWork',
-      icon: <OnlineMeeting />,
-      content: formatOfWork === FormatOfWork.ONLINE ? 'Онлайн консультації' : null,
-      color: 'text-other-blue',
-    },
-  ];
   const specializationsList = specializations.map(s => s.name);
   const therapiesList = therapies.map(t => t.name.toLowerCase());
   const placeOfWork = [placesOfWork[0].addresses[0]];
-  const contactsList = contacts({ phone, email, website });
+  const contactsList = getContactsList({ phone, email, website });
+  const labelsList = getLablesList({ yearsOfExperience, isFreeReception, formatOfWork });
 
   return (
     <CardWrapper className={className}>
@@ -70,11 +50,11 @@ export function CardSpecialist({ specialist, children, className }) {
               <SpecialistTitle title={`${firstName} ${lastName}`} />
             </div>
           </header>
-          <ExperienceList labels={labels} className="mt-[16px] md:mt-[12px]" />
+          <ExperienceList labels={labelsList} className="mt-[16px] md:mt-[12px]" />
           <TherapiesList therapies={therapiesList} className="mt-[14px] md:mt-[12px]" />
           <PlacesOfWorkList className="mt-[16px] md:mt-[12px]" places={placeOfWork} />
         </div>
-        {children}
+        {!extended && <CardButton className="mt-[16px]" id={id} />}
       </CardSectionWrapper>
     </CardWrapper>
   );
@@ -82,6 +62,6 @@ export function CardSpecialist({ specialist, children, className }) {
 
 CardSpecialist.propTypes = {
   specialist: PropType.object,
-  children: PropType.node,
+  extended: PropType.bool,
   className: PropType.string,
 };

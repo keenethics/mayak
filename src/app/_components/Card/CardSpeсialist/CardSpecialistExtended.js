@@ -26,7 +26,7 @@ export function CardSpecialistExtended({ specialist, className }) {
 
   return (
     <Modal isOpen={open} onClose={handleClose} bgColor="bg-other-white" className="min-w-[1000px] p-[24px]">
-      <CardSpecialist specialist={specialist} className={className} />
+      <CardSpecialist specialist={specialist} className={className} extended={true} />
     </Modal>
   );
 }

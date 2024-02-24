@@ -6,16 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardButton.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialist.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialistExtended.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialistExtended.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardWrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/SpecializationsPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/SpecializationsPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Modal/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Modal/Modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_components/SpecialistList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/SpecialistList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/specialist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/specialist/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +154,7 @@
       <workItem from="1708499843942" duration="10539000" />
       <workItem from="1708553172092" duration="1011000" />
       <workItem from="1708628311937" duration="7631000" />
-      <workItem from="1708782305116" duration="8455000" />
+      <workItem from="1708782305116" duration="11318000" />
     </task>
     <servers />
   </component>
