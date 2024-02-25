@@ -1,3 +1,5 @@
+'use client';
+
 import { Clock, Mail, MedAttention, MedCare, OnlineMeeting, Phone, Site } from '@icons/index';
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
@@ -30,7 +32,7 @@ export const getContactsList = ({ phone, email, website }) => [
   },
 ];
 
-export const getLablesList = ({ yearsOfExperience, isFreeReception, formatOfWork }) => [
+export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork }) => [
   {
     id: 'yearsOfExperience',
     icon: <MedCare />,

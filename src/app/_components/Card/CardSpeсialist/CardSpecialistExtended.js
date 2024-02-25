@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useBodyScrollLock } from '@hooks';
 import { CardSpecialist } from '@/app/_components/Card/CardSpeсialist/CardSpecialist';
 import { useScrollPosition } from '@/app/_hooks/useScrollPosition';
+import { cn } from '@/utils/cn';
 
 export function CardSpecialistExtended({ specialist, className }) {
   const scrollPosition = useScrollPosition();
@@ -25,8 +26,9 @@ export function CardSpecialistExtended({ specialist, className }) {
   useBodyScrollLock('y');
 
   return (
-    <Modal isOpen={open} onClose={handleClose} bgColor="bg-other-white" className="min-w-[1000px] p-[24px]">
-      <CardSpecialist specialist={specialist} className={className} extended={true} />
+    <Modal isOpen={open} onClose={handleClose} bgColor="bg-other-white"
+      className="w-[100%] mx-[16px] lg:max-w-[1000px] p-[24px]">
+      <CardSpecialist specialist={specialist} className={cn('pointer-events-none', className)} extended={true} />
     </Modal>
   );
 }

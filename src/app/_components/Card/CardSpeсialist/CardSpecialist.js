@@ -9,7 +9,7 @@ import { ExperienceList } from './ExperienceList';
 import { TherapiesList } from './TherapiesList';
 import { PlacesOfWorkList } from './PlacesOfWorkList';
 import { CardWrapper } from './CardWrapper';
-import { getContactsList, getLablesList } from './config';
+import { getContactsList, getLabelsList } from './config';
 import { CardButton } from '@/app/_components/Card/CardSpeсialist/CardButton';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
@@ -33,10 +33,10 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   const therapiesList = therapies.map(t => t.name.toLowerCase());
   const placeOfWork = [placesOfWork[0].addresses[0]];
   const contactsList = getContactsList({ phone, email, website });
-  const labelsList = getLablesList({ yearsOfExperience, isFreeReception, formatOfWork });
+  const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork });
 
   return (
-    <CardWrapper className={className}>
+    <CardWrapper className={className} id={id}>
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
         <ProfileImage gender={gender} className="w-[200px]" />
         <ContactsList contacts={contactsList} className="mt-[16px]" />
