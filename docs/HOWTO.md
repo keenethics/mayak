@@ -7,7 +7,8 @@
 
 ### How to create a migration
 
-Change database schema and run `npm run migrations` - this will create migrations file if needed AND run newly created migrations on database.
+Change database schema and run `npm run migrations` - this will create migrations file if needed AND run newly created
+migrations on database.
 
 Consider following when creating migration:
 
@@ -27,7 +28,7 @@ Thats could be useful if you ran some wrong migration, or messed up things manua
 - for `docker` local setup - run `docker compose exec app npm run migrations:reset`
 - for other database locations - run `npm run migrations:reset`
 
-**⚠ Seeding is not automaticaly running after db reset**
+**⚠ Seeding is not automatically running after db reset**
 
 ## Linting & Formatting
 
@@ -95,8 +96,37 @@ All merged pull-requests to the `dev` branch automatically deploy to [dev-server
 
 1. Initialize Vercel project with `vercel link`, and accept all defaults
    ![vercel link](https://github.com/keenethics/mayak/assets/21224705/83782cc0-090f-49d3-8308-b45709d61ad8)
-2. Better will be to set nearest to you region. For it, please, visit `Settings` => `Functions` and set `Function Region` to `Frankfurt` or other one.
+2. Better will be to set nearest to you region. For it, please, visit `Settings` => `Functions` and
+   set `Function Region` to `Frankfurt` or other one.
 3. Create DB on Vercel. Visit tab `Storage` and create postgres DB.
+
+- on the vercel page, go to the db you just created and on the left-side menu click on the "Projects"
+- click on the "Connect Project" button to connect the required project
+- on the quick start panel at the top, click on the .env.local tab to grab the following env variables:
+
+```dotenv
+POSTGRES_URL="************"
+POSTGRES_URL_NON_POOLING="************"
+```
+
+- go back to the vercel dashboard and find the project you previously connected to db
+- click on "Settings" and then, on the left-side menu, go to the "Environment Variables" to create the following vars:
+
+```dotenv
+DATABASE_URL="" <- POSTGRES_URL goes here
+DATABASE_DIRECT_URL="" <- POSTGRES_URL_NON_POOLING goes here
+```
+
+- in your local root folder, there has to be a file vercel.json with the following code:
+
+```json
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install && npm run migrations && npm run seed"
+}
+```
+
 4. Open created project in Vercel dashboard, go to settings, and fill required environment variables
    ![fill environment](https://github.com/keenethics/mayak/assets/21224705/812af0ee-a738-4b3e-938e-280579290599)
    ![saved environment](https://github.com/keenethics/mayak/assets/21224705/a9d5a1e2-bb5b-4231-b6b0-30fb5c262c83)

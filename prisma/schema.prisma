@@ -19,6 +19,17 @@ enum FormatOfWork {
   BOTH
 }
 
+enum EventFormat {
+  OFFLINE
+  ONLINE
+}
+
+enum EventPriceFormat {
+  FREE
+  FIXED_PRICE
+  MIN_PRICE
+}
+
 model Specialist {
   id                String           @id @default(uuid()) @db.Uuid
   createdAt         DateTime         @default(now())
@@ -26,17 +37,17 @@ model Specialist {
   lastName          String           @db.VarChar(64)
   surname           String?          @db.VarChar(64)
   specializations   Specialization[]
-  gender            Gender
+  gender            Gender?
   yearsOfExperience Int?             @db.SmallInt
-  formatOfWork      FormatOfWork
+  formatOfWork      FormatOfWork?
   placesOfWork      PlaceOfWork[]
   therapies         Therapy[]
-  isFreeReception   Boolean
-  isActive          Boolean
-  description       String           @db.Text
+  isFreeReception   Boolean?
+  description       String?          @db.Text
   phone             String?          @db.VarChar(15)
   email             String?          @unique @db.VarChar(320)
   website           String?          @db.Text
+  isActive          Boolean          @default(false)
 
   @@map("specialist")
 }
@@ -102,4 +113,56 @@ model Feedback {
   isRead     Boolean  @default(false)
 
   @@map("feedback")
+}
+
+model Event {
+  id             String           @id @default(uuid()) @db.Uuid
+  createdAt      DateTime         @default(now())
+  title          String           @db.VarChar(128)
+  organizerName  String           @db.VarChar(128)
+  notes          String?          @db.VarChar(350)
+  address        String?          @db.VarChar(128)
+  locationLink   String?          @db.Text
+  price          Int?             @db.Integer
+  isActive       Boolean          @default(false)
+  additionalLink EventLink?       @relation(fields: [linkId], references: [id])
+  linkId         String?          @db.Uuid
+  eventDate      DateTime
+  format         EventFormat
+  priceType      EventPriceFormat
+  tags           EventTag[]
+
+  @@map("event")
+}
+
+model EventLink {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  label     String   @db.VarChar(30)
+  link      String   @db.Text
+  events    Event[]
+
+  @@unique([label, link])
+  @@map("event_link")
+}
+
+model EventTag {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  name      String   @unique @db.VarChar(64)
+  events    Event[]
+
+  @@map("event_tag")
+}
+
+model Faq {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isActive  Boolean  @default(false)
+  question  String
+  answer    String   @default("")
+  priority  Int?     @db.SmallInt
+
+  @@map("faq")
 }

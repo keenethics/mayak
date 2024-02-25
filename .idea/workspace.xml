@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/markdown.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/tailwindcss.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/CODESTYLE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/migrations/20240207084247_update_specialist_model/migration.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/migrations/20240214155652_add_q_and_a_table/migration.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/migrations/20240219223854_added_events_table/migration.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/icons/burger.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/icons/headerCloseIcon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/icons/inputErrorIcon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/icons/tickIcon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/images/notFound.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/BottomWave.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_components/TopWave.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_hooks/useBodyScrollLock.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/AdminApp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Event/Create.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Event/TagSelect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Event/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/AnswerTextInput.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/Create.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/Edit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/List.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/consts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/hooks/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/hooks/useActiveFaqs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Faq/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/FormFieldWrapper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/LinkTextField.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Contacts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Create.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Details.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/General.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/PlacesOfWork.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Services.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/TextInputList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/UpDownArrowMenu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_components/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_lib/consts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_lib/specialistData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_lib/translations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_lib/validationSchemas/createEventSchema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_utils/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_utils/transformEventData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/_utils/transformSpecialistFormData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/not-found.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/validationSchemas/specialistSchema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/validationSchemas/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/dev-deploy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/dev-deploy.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.lintstagedrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.lintstagedrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/HOWTO.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/HOWTO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240208124806_added_is_active_to_specialist/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/seed.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/seed.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/icons/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/icons/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/icons/white-logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/icons/whiteLogo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/CheckBox/CheckBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/CheckBox/CheckBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/CheckBox/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/CheckBox/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Icons/InputErrorIcon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Icons/TickIcon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Icons/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/InputFields/TextInputField.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/InputFields/TextInputField.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Links/InnerLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Links/InnerLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Modal/ModalCloseButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Modal/ModalCloseButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/OutlinedButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/OutlinedButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Therapies/Therapies.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Therapies/Therapies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_hooks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_hooks/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/adminApp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/admin/[...slug]/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/admin/[...slug]/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/consts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/errors/errorHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/errors/errorHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/validationSchemas/sendFeedbackSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/validationSchemas/sendFeedbackSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vercel.json" beforeDir="false" afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2bcyw90C0tO1T7Feiee7JvV30fj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.useTherapy.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "Merging MID-12__delete-specialist-or-oranization",
+    "javascript.nodejs.core.library.configured.version": "20.10.0",
+    "javascript.nodejs.core.library.typings.version": "20.10.8",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/home/bob/IT/mayak/src/app/_components/Card/Shared",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "/home/bob/IT/mayak/node_modules/eslint",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/bob/.nvm/versions/node/v20.10.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "prettier.import.notification.dismissed": "true",
+    "prettierjs.PrettierConfiguration.Package": "/home/bob/IT/mayak/node_modules/prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/bob/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/_components/Card/Shared" />
+      <recent name="$PROJECT_DIR$/src/app/_components/Cards/ShortCard" />
+      <recent name="$PROJECT_DIR$/src/app/_components/Specialists" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_utils" />
+      <recent name="$PROJECT_DIR$/src/app/admin/_components/specialist/Create" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist" />
+      <recent name="$PROJECT_DIR$/src/app/_components/Card/Shared" />
+      <recent name="$PROJECT_DIR$/src/app/_components/Card" />
+      <recent name="$PROJECT_DIR$/src/app/specialist" />
+      <recent name="$PROJECT_DIR$/src/app/admin" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="" />
+      <created>1706528897647</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706528897647</updated>
+      <workItem from="1706528898674" duration="3641000" />
+      <workItem from="1706537663395" duration="21816000" />
+      <workItem from="1706610757334" duration="199000" />
+      <workItem from="1706611244264" duration="9000" />
+      <workItem from="1706698803129" duration="1600000" />
+      <workItem from="1706710325690" duration="8924000" />
+      <workItem from="1706730281271" duration="6579000" />
+      <workItem from="1706769103501" duration="4188000" />
+      <workItem from="1706787241687" duration="2490000" />
+      <workItem from="1706790926177" duration="12460000" />
+      <workItem from="1706817178768" duration="594000" />
+      <workItem from="1706817777857" duration="321000" />
+      <workItem from="1706818267400" duration="2664000" />
+      <workItem from="1706824211616" duration="4786000" />
+      <workItem from="1706874347983" duration="3406000" />
+      <workItem from="1706879346259" duration="186000" />
+      <workItem from="1706879562617" duration="5237000" />
+      <workItem from="1706884811038" duration="743000" />
+      <workItem from="1706887368083" duration="1153000" />
+      <workItem from="1706889302436" duration="347000" />
+      <workItem from="1706892606817" duration="2820000" />
+      <workItem from="1706952767365" duration="10705000" />
+      <workItem from="1706974582775" duration="7205000" />
+      <workItem from="1707045467922" duration="22000" />
+      <workItem from="1707047858491" duration="99000" />
+      <workItem from="1707082624700" duration="7602000" />
+      <workItem from="1707152076163" duration="472000" />
+      <workItem from="1707152558127" duration="5441000" />
+      <workItem from="1707158407492" duration="5315000" />
+      <workItem from="1707165844331" duration="703000" />
+      <workItem from="1707206239815" duration="33790000" />
+      <workItem from="1707292608530" duration="15115000" />
+      <workItem from="1707314964250" duration="1570000" />
+      <workItem from="1707318673277" duration="24444000" />
+      <workItem from="1707393832290" duration="20762000" />
+      <workItem from="1707468702574" duration="16717000" />
+      <workItem from="1707557924226" duration="6754000" />
+      <workItem from="1707573554821" duration="347000" />
+      <workItem from="1707736342388" duration="21761000" />
+      <workItem from="1707815224656" duration="3371000" />
+      <workItem from="1707818629529" duration="17967000" />
+      <workItem from="1707855534848" duration="5043000" />
+      <workItem from="1707902638587" duration="2238000" />
+      <workItem from="1708499843942" duration="10539000" />
+      <workItem from="1708553172092" duration="1011000" />
+      <workItem from="1708628311937" duration="7631000" />
+      <workItem from="1708782305116" duration="11318000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
+  </component>
+</project>

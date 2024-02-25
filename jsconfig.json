@@ -3,8 +3,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@icons/*": ["./public/assets/icons/*"],
+      "@images/*": ["./public/assets/images/*"],
       "@components": ["./src/app/_components/index"],
-      "@components/*": ["./src/app/_components/*"],
+      "@hooks": ["./src/app/_hooks/index"],
       "@admin/*": ["./src/app/admin/*"],
       "@admin/components/*": ["./src/app/admin/_components/*"],
       "@utils/*": ["./src/app/utils/*"],

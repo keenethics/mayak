@@ -20,7 +20,5 @@ jobs:
         run: npm install --global vercel@latest
       - name: Install dependencies
         run: npm install
-      - name: Run Migrations
-        run: npm run migrations
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prod --token=${{ secrets.DEV_VERCEL_TOKEN }}
