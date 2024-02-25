@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
+import { Admin, EditGuesser, ListGuesser, Resource, ShowGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, ListFaq } from '@admin/components/Faq';
-import { SpecialistCreate } from '@admin/components/Specialist';
+import { SpecialistCreate, SpecialistShow, SpecialistsList } from '@admin/components/Specialist';
 import { authProvider } from './authProvider';
 
 export default function AdminPage() {
@@ -24,9 +24,9 @@ export default function AdminPage() {
       <Resource
         name={RESOURCES.specialist}
         options={{ label: 'Specialist' }}
-        list={ListGuesser}
+        list={SpecialistsList}
         edit={EditGuesser}
-        show={ShowGuesser}
+        show={SpecialistShow}
         create={SpecialistCreate}
       />
       <Resource name={RESOURCES.event} list={ListGuesser} create={EventCreate} />

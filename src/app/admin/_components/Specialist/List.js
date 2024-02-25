@@ -1,7 +1,6 @@
 import React from 'react';
-import { BooleanField, Datagrid, DateField, List, TextField } from 'react-admin';
+import { BooleanField, Datagrid, DateField, DeleteWithConfirmButton, List, TextField } from 'react-admin';
 import { specialistsFilters } from '@admin/filters';
-import { ButtonDelete } from '@admin/components/ButtonDelete';
 
 export function SpecialistsList() {
   return (
@@ -13,7 +12,12 @@ export function SpecialistsList() {
         <DateField showTime source="createdAt" />
         <TextField source="formatOfWork" />
         <BooleanField source="isActive" />
-        <ButtonDelete />
+        <DeleteWithConfirmButton
+          confirmContent="Ви впевнені?"
+          confirmTitle="Дані будуть видалені із бази."
+          confirmColor="warning"
+          label="Видалити"
+        />
       </Datagrid>
     </List>
   );
