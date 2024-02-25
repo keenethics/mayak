@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/AdminApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/AdminApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/ButtonDelete.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/Specialist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/specialist/List.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/List.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/specialist/Show.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/Specialist/Show.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/specialist/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/_components/organization/List.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/_components/organization/List.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
