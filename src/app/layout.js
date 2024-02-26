@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       <body className={[montserrat.className, 'relative']}>
         <Header />
         <QueryContext>
-          <main>{children}</main>
+          <main className="bg-other-white">{children}</main>
         </QueryContext>
         <Footer />
         <div id="modal-root" />
