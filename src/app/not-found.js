@@ -26,7 +26,7 @@ export default function NotFoundPage() {
          text-other-white transition-all duration-300 hover:bg-primary-400 focus:bg-primary-600 
          focus:outline-none active:bg-primary-700 `}
         >
-          Повернутись на головну
+          Повернутися на головну
         </Link>
       </div>
     </div>
