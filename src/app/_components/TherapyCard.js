@@ -2,12 +2,12 @@
 
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
-import TherapyInvididual from '@public/therapy_individual.svg';
-import TherapyKids from '@public/therapy_kids.svg';
-import TherapyFamily from '@public/therapy_family.svg';
-import TherapyGroup from '@public/therapy_group.svg';
-import TherapyPair from '@public/therapy_pair.svg';
-import TherapyBusiness from '@public/therapy_business.svg';
+import TherapyInvididual from '@public/images/therapy_individual.svg';
+import TherapyKids from '@public/images/therapy_kids.svg';
+import TherapyFamily from '@public/images/therapy_family.svg';
+import TherapyGroup from '@public/images/therapy_group.svg';
+import TherapyPair from '@public/images/therapy_pair.svg';
+import TherapyBusiness from '@public/images/therapy_business.svg';
 import { OutlinedButton } from './OutlinedButton';
 import { Heading, Paragraph } from './Typography';
 
