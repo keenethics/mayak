@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import { Admin, EditGuesser, ListGuesser, Resource, ShowGuesser } from 'react-admin';
+import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
-import { OrganizationCreate } from '@admin/components/Organization';
+import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
 import { authProvider } from '@admin/authProvider';
-import { RESOURCES } from '@admin/_lib/consts';
 import { SpecialistCreate } from '@admin/components/Specialist';
+import { OrganizationCreate } from '@admin/components/Organization';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -17,17 +17,31 @@ export default function AdminPage() {
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource name={RESOURCES.organization} list={ListGuesser} create={OrganizationCreate} />
       <Resource
+        name={RESOURCES.therapy}
+        options={{ label: 'Therapy' }}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+      />
+      <Resource
         name={RESOURCES.specialist}
+        options={{ label: 'Specialist' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
         create={SpecialistCreate}
       />
       <Resource name={RESOURCES.event} list={ListGuesser} create={EventCreate} />
-      <Resource name={RESOURCES.therapy} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource
+        name={RESOURCES.placeOfWork}
+        options={{ label: 'Place of work' }}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+      />
       <Resource
         name={RESOURCES.faq}
         options={{ label: 'FAQ' }}

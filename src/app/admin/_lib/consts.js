@@ -9,11 +9,8 @@ export const RESOURCES = {
   eventTag: 'eventTag',
   faq: 'faq',
   organization: 'organization',
+  organizationType: 'organizationType',
 };
-
-export const ORGANIZATION_TYPES = ['Психологічний центр', 'Лікарня', 'Соціальна служба'];
-export const DISTRICTS = ['Личаківський', 'Залізничний', 'Шевченківський', 'Галицький', 'Сихівський', 'Франківський'];
-export const THERAPIES = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
 
 export const SUCCESS_NOTIFICATIONS = {
   created: 'Created successfully',
