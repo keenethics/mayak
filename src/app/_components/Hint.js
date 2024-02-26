@@ -24,14 +24,9 @@ export function Show({ children, opens: opensWindowName }) {
   return cloneElement(children, {
     id: opensWindowName,
     onMouseEnter: () => {
-      // if (timeoutId !== null) {
-      //   clearTimeout(timeoutId);
-      //   timeoutId = null;
-      // }
       open(opensWindowName);
     },
     onMouseLeave: () => {
-      // timeoutId = setTimeout(close, 400); // 100ms delay
       close();
     },
   });
@@ -44,7 +39,7 @@ export function Window({ children, name, className }) {
     <ClientPortal selector={name} show={name === openName}>
       <div
         className={cn(
-          'shadow-[0_2px_8px_0_rgba(192, 191, 206, 0.50)] absolute z-[100] inline-flex items-center justify-center gap-[10px] rounded-[4px] bg-other-white bg-opacity-60 px-[4px] py-[8px] text-center text-[10px] font-medium leading-[0.938rem] backdrop-blur-[3px]',
+          'shadow-[0_2px_8px_0_rgba(192, 191, 206, 0.50)] pointer-events-none absolute z-[100] inline-flex items-center justify-center gap-[10px] rounded-[4px] bg-other-white bg-opacity-60 px-[4px] py-[8px] text-center text-[10px] font-medium leading-[0.938rem] backdrop-blur-[3px]',
           className,
         )}
       >

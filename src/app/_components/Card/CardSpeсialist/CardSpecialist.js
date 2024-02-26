@@ -75,9 +75,7 @@ export function CardSpecialist({ specialist, children, className }) {
           <header className="flex flex-row gap-[10px]">
             <ProfileImage gender={gender} className="md:hidden" />
             <div className="w-full">
-              <div className="w-full">
-                <SpecializationsPanel specialistId={id} specializations={specializationsList} />
-              </div>
+              <SpecializationsPanel specialistId={id} specializations={specializationsList} />
               <SpecialistTitle title={`${firstName} ${lastName}`} />
             </div>
           </header>

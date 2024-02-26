@@ -24,17 +24,13 @@ function ListTruncator({ id, items, ellipsis = '...', itemRender, tooltipItemRen
 
   return (
     <div id={`specializations-of-${id}`} ref={containerRef} className="relative w-full">
-      <span
-        id={`wrapper-of-${id}`}
-        className="inline-flex items-center gap-[8px] overflow-hidden pr-[50px]"
-        ref={wrapperRef}
-      >
+      <span id={`wrapper-of-${id}`} className="inline-flex items-center gap-[8px] pr-[50px]" ref={wrapperRef}>
         {items.map(itemRender)}
       </span>
       {overflown && (
         <>
           <ShowHint opens={`hint-for-${id}`}>
-            <span className="absolute right-0 top-0 z-[13] h-full w-[80px] cursor-pointer bg-gradient-to-l from-other-white from-[30%] text-end font-bold text-gray-600">
+            <span className="absolute right-[80px] top-0 z-[13] h-full w-[80px] cursor-pointer bg-gradient-to-l from-other-white from-[30%] text-end font-bold text-gray-600 md:right-0">
               &nbsp;{ellipsis}&nbsp;
             </span>
           </ShowHint>
