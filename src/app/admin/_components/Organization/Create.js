@@ -15,6 +15,7 @@ import { transformOrganizationData } from '@admin/_utils/transformOrganizationDa
 import { AddressInput } from './CreateAdresses';
 import { SelectTherapies } from './SelectTherapies';
 import { SelectOrganizationType } from './SelectOrgType';
+import { SelectFormat } from './SelectFormat';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
@@ -31,16 +32,7 @@ export function OrganizationCreate() {
               <NumberInput source="yearsOnMarket" label="Роки на ринку" />
               <p className="font-bold">Формат послуг та адреси</p>
               <div className={fieldGroupClass}>
-                <SelectInput
-                  source="formatOfWork"
-                  label="Формат послуг"
-                  choices={[
-                    { id: 'OFFLINE', name: 'Офлайн' },
-                    { id: 'ONLINE', name: 'Онлайн' },
-                    { id: 'BOTH', name: 'Офлайн + онлайн' },
-                  ]}
-                  validate={formData.isActive && required()}
-                />
+                <SelectFormat isActive={formData.isActive} />
               </div>
               <AddressInput isActive={formData.isActive} />
               <p className="font-bold">Типи терапії</p>
