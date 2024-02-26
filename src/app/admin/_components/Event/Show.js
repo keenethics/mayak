@@ -13,8 +13,8 @@ import {
   Labeled,
   useGetOne,
 } from 'react-admin';
+import { RESOURCES } from '@admin/_lib/consts';
 import { TagList } from './TagList';
-import { RESOURCES } from '../../_lib/consts';
 
 function ShowLayout() {
   const eventId = useGetRecordId();
