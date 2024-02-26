@@ -16,7 +16,7 @@ function ExperienceListItem({ icon, text, className }) {
 export { ExperienceListItem };
 
 ExperienceListItem.propTypes = {
-  icon: P.node,
+  icon: P.element,
   text: P.string,
   className: P.string,
 };

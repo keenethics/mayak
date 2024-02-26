@@ -11,6 +11,7 @@ import { PlacesOfWorkList } from './PlacesOfWorkList';
 import { CardWrapper } from './CardWrapper';
 import { getContactsList, getLabelsList } from './config';
 import { CardButton } from '@/app/_components/Card/CardSpeсialist/CardButton';
+import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   const {
@@ -61,7 +62,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
 }
 
 CardSpecialist.propTypes = {
-  specialist: PropType.object,
+  specialist: specialistPropType,
   extended: PropType.bool,
   className: PropType.string,
 };

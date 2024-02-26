@@ -8,6 +8,7 @@ import { useBodyScrollLock } from '@hooks';
 import { CardSpecialist } from '@/app/_components/Card/CardSpeсialist/CardSpecialist';
 import { useScrollPosition } from '@/app/_hooks/useScrollPosition';
 import { cn } from '@/utils/cn';
+import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 
 export function CardSpecialistExtended({ specialist, className }) {
   const scrollPosition = useScrollPosition();
@@ -26,14 +27,18 @@ export function CardSpecialistExtended({ specialist, className }) {
   useBodyScrollLock('y');
 
   return (
-    <Modal isOpen={open} onClose={handleClose} bgColor="bg-other-white"
-      className="w-[100%] mx-[16px] lg:max-w-[1000px] p-[24px]">
+    <Modal
+      isOpen={open}
+      onClose={handleClose}
+      bgColor="bg-other-white"
+      className="mt-[50px] h-full w-[100%] rounded-[24px] p-[24px] md:mx-[16px] md:h-auto lg:max-w-[1000px]"
+    >
       <CardSpecialist specialist={specialist} className={cn('pointer-events-none', className)} extended={true} />
     </Modal>
   );
 }
 
 CardSpecialistExtended.propTypes = {
-  specialist: P.object,
+  specialist: specialistPropType,
   className: P.string,
 };

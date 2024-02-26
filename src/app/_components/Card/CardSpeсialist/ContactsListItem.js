@@ -2,13 +2,14 @@ import React from 'react';
 import P from 'prop-types';
 import Link from 'next/link';
 import { cn } from '@/utils/cn';
+import { specialistContactPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 
 export function ContactsListItem({ contact, className }) {
   const { id, icon, content, href } = contact;
 
   return (
     <li className={cn('flex gap-[8px]', className)} key={id}>
-      <span className="flex w-[20px] justify-center">{icon}</span>
+      <span className="flex w-[20px] items-center justify-center">{icon}</span>
       <span
         className={cn(
           `text-inherit font-inherit line-clamp-1 text-start text-[12px] leading-[1.125rem] text-gray-700 lg:text-c3`,
@@ -34,6 +35,6 @@ export function ContactsListItem({ contact, className }) {
 }
 
 ContactsListItem.propTypes = {
-  contact: P.object,
+  contact: specialistContactPropType,
   className: P.string,
 };

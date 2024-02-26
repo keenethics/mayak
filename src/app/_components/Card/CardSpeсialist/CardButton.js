@@ -9,11 +9,6 @@ export function CardButton({ text = 'Детальніше', className, id }) {
   const router = useRouter();
 
   return (
-    // <Link
-    //   href={`/specialist?id=${id}`}
-    //   scroll={false}
-    //   className={cn('hidden h-[min] self-end justify-self-end md:inline-block', className)}
-    // >
     <PillButton
       type={buttonType.outlined}
       colorVariant={buttonColorVariant.outlined.orange}
@@ -22,7 +17,6 @@ export function CardButton({ text = 'Детальніше', className, id }) {
     >
       {text}
     </PillButton>
-    // </Link>
   );
 }
 

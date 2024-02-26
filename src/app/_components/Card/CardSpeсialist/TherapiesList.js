@@ -18,6 +18,6 @@ export function TherapiesList({ therapies, className }) {
 }
 
 TherapiesList.propTypes = {
-  therapies: P.array,
+  therapies: P.arrayOf(P.string),
   className: P.string,
 };

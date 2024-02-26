@@ -34,7 +34,7 @@ export const getContactsList = ({ phone, email, website }) => [
   },
 ];
 
-const iconStyle = 'h-[15px]  w-[15px] lg:h-[20px] lg:w-[20px]';
+const iconStyle = 'h-[15px] w-[15px] lg:h-[20px] lg:w-[20px]';
 
 export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork }) => [
   {
