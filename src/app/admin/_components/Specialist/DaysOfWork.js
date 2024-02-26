@@ -19,7 +19,10 @@ export function DaysOfWork() {
         {({ formData: outerFormData }) => (
           <>
             {outerFormData.daysOfWork && (
-              <p>Текстовий формат графіку роботи: {formatDaysOfWork(transformDaysOfWork(outerFormData.daysOfWork))}</p>
+              <p>
+                Текстовий формат графіку роботи:
+                {` ${formatDaysOfWork(transformDaysOfWork(outerFormData.daysOfWork)).join('; ')}`}
+              </p>
             )}
             <ArrayInput
               name={daysOfWork.name}

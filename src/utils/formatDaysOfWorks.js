@@ -71,5 +71,5 @@ export function formatDaysOfWork(daysOfWork) {
     const formattedText = `${formattedDays}: ${timeRanges}`;
     scheduleTexts.push(formattedText);
   });
-  return scheduleTexts.join('; ');
+  return scheduleTexts;
 }
