@@ -6,19 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa67f79-d30d-4447-8767-78e3a5c690f5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialist.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialistExtended.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardSpecialistExtended.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ContactsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ContactsList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/CardWrapper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ContactsListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ContactsListItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ExperienceList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ExperienceList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ExperienceListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ExperienceListItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ProfileImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/ProfileImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/TherapiesList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/TherapiesList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_components/Card/CardSpeсialist/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/specialist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/specialist/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_hooks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_hooks/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_hooks/useScrollPosition.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +158,7 @@
       <workItem from="1708553172092" duration="1011000" />
       <workItem from="1708628311937" duration="7631000" />
       <workItem from="1708782305116" duration="11318000" />
-      <workItem from="1708943166040" duration="5869000" />
+      <workItem from="1708943166040" duration="9832000" />
     </task>
     <servers />
   </component>
