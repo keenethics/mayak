@@ -1,34 +1,53 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
 import P from 'prop-types';
 import { Dot } from '@icons/index';
 
 import { Show as ShowHint, Window as HintWindow } from '../../Hint';
 import { Caption } from '../../Typography';
 
-export function SpecializationsPanel({ specializations }) {
+export function SpecializationsPanel({ specialistId, specializations }) {
+  const wrapperRef = useRef(null);
+  const containerRef = useRef(null);
+  const [overflown, setOverflown] = useState(false);
+
+  useEffect(() => {
+    const wrapperWidth = wrapperRef.current.offsetWidth;
+    const containerWidth = containerRef.current.offsetWidth;
+    if (wrapperWidth >= containerWidth) {
+      setOverflown(true);
+    } else {
+      setOverflown(false);
+    }
+  }, [wrapperRef, containerRef]);
+
   return (
-    <div className="line-clamp-1 flex-row items-start gap-[8px] whitespace-nowrap *:flex">
-      {specializations.map((specialization, index) => (
+    <div id={`specializations-of-${specialistId}`} ref={containerRef} className="relative w-full">
+      <span id={`wrapper-of-${specialistId}`} className="inline-flex items-center gap-[8px] pr-[50px]" ref={wrapperRef}>
+        {specializations.map((specialization, index) => (
+          <>
+            <Caption key={index} className="whitespace-nowrap text-start font-bold text-gray-600 lg:text-p4">
+              {specialization}
+            </Caption>
+            {index !== specializations.length - 1 && <Dot />}
+          </>
+        ))}
+      </span>
+      {overflown && (
         <>
-          <Caption key={index} className="text-start font-bold text-gray-600 lg:text-p4">
-            {specialization}
-          </Caption>
-          {index !== specializations.length - 1 && <Dot />}
-        </>
-      ))}
-      {/* Need to check number of symbols here. 60 max on full card on desktop */}
-      {specializations.length > 1 && (
-        <>
-          <ShowHint opens="organization-types-hint">
-            <div>...</div>
+          <ShowHint opens={`hint-for-${specialistId}`}>
+            <span className="absolute right-0 top-0 z-[13] h-full w-[30px] cursor-pointer bg-gradient-to-l from-other-white from-[60%] text-end text-gray-600">
+              &nbsp;...&nbsp;
+            </span>
           </ShowHint>
-          <HintWindow name="organization-types-hint" id="organization-types-hint">
-            <div className="line-clamp-1 flex flex-row gap-[8px] whitespace-nowrap lg:text-p4">
+          <HintWindow name={`hint-for-${specialistId}`} className="right-0 top-[20px] z-[99999]">
+            <div className="flex flex-col gap-[10px] rounded-[4px] px-[8px] py-[4px] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)]">
               {specializations.map((specialization, index) => (
                 <>
-                  <Caption key={index} className="px-[4px] py-[8px] text-center text-c2   text-gray-900  ">
+                  <div key={index} className="text-center text-c2 text-gray-900">
                     {specialization}
-                  </Caption>
+                  </div>
                 </>
               ))}
             </div>
@@ -41,4 +60,5 @@ export function SpecializationsPanel({ specializations }) {
 
 SpecializationsPanel.propTypes = {
   specializations: P.arrayOf(P.string).isRequired,
+  specialistId: P.string.isRequired,
 };
