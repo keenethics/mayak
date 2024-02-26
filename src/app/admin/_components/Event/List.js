@@ -1,6 +1,6 @@
 import React from 'react';
 import { Datagrid, List, TextField, BooleanField, DateField, DeleteWithConfirmButton } from 'react-admin';
-import { eventFilters } from '@admin/filters';
+import { eventFilters } from './filters';
 
 export function EventList() {
   return (
