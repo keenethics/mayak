@@ -4,7 +4,6 @@ import {
   FormDataConsumer,
   NullableBooleanInput,
   NumberInput,
-  SelectArrayInput,
   SelectInput,
   SimpleForm,
   TextInput,
@@ -13,9 +12,9 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OrganizationSchema } from '@admin/_lib/validationSchemas/createOrganizationSchema';
 import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
-import { ORGANIZATION_TYPES } from '@admin/_lib/consts';
 import { AddressInput } from './CreateAdresses';
 import { SelectTherapies } from './SelectTherapies';
+import { SelectOrganizationType } from './SelectOrgType';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
@@ -27,12 +26,7 @@ export function OrganizationCreate() {
           {({ formData }) => (
             <>
               <p className="font-bold">Основна інформація</p>
-              <SelectArrayInput
-                source="type"
-                choices={ORGANIZATION_TYPES.map(type => ({ id: type, name: type }))}
-                validate={formData.isActive && required()}
-                label="Тип організації"
-              />
+              <SelectOrganizationType isActive={formData.isActive} />
               <TextInput source="name" label="Назва організації" validate={required()} />
               <NumberInput source="yearsOnMarket" label="Роки на ринку" />
               <p className="font-bold">Формат послуг та адреси</p>

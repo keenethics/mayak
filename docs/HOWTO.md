@@ -105,16 +105,16 @@ All merged pull-requests to the `dev` branch automatically deploy to [dev-server
 - on the quick start panel at the top, click on the .env.local tab to grab the following env variables:
 
 ```dotenv
-POSTGRES_PRISMA_URL="************"
-POSTGRES_URL_NO_SSL="************"
+POSTGRES_URL="************"
+POSTGRES_URL_NON_POOLING="************"
 ```
 
 - go back to the vercel dashboard and find the project you previously connected to db
 - click on "Settings" and then, on the left-side menu, go to the "Environment Variables" to create the following vars:
 
 ```dotenv
-DATABASE_URL="" <- POSTGRES_PRISMA_URL goes here
-DATABASE_DIRECT_URL="" <- POSTGRES_URL_NO_SSL goes here
+DATABASE_URL="" <- POSTGRES_URL goes here
+DATABASE_DIRECT_URL="" <- POSTGRES_URL_NON_POOLING goes here
 ```
 
 - in your local root folder, there has to be a file vercel.json with the following code:

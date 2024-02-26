@@ -176,8 +176,8 @@ async function main() {
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
   const organizationTypeNames = ['Психологічний центр', 'Соціальна служба', 'Лікарня'];
-  const faqs = Array.from({ length: 5 }).map(() => ({
-    isActive: true,
+  const faqs = Array.from({ length: 15 }).map(() => ({
+    isActive: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
   }));

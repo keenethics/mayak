@@ -1,24 +1,28 @@
 import { z } from 'zod';
+import { FormatOfWork } from '@prisma/client';
 import { minMaxString } from '@/lib/validationSchemas/utils';
 import { PHONE_REGEX } from '@/lib/consts';
-import { DISTRICTS, ORGANIZATION_TYPES, THERAPIES } from '../consts';
 
 const DefaultSchema = z.object({
   name: minMaxString(1, 128, 'Назва'),
 });
 
-const TypeSchema = z.array(z.enum(ORGANIZATION_TYPES), {
+const TypeSchema = z.array(minMaxString(1, 64, 'Тип організації'), {
   required_error: "Тип організації - обов'язкове поле",
 });
 
-const TherapiesSchema = z.array(z.enum(THERAPIES), {
+const TherapiesSchema = z.array(minMaxString(1, 64, 'Тип терапії'), {
   required_error: "Тип терапії - обов'язкове поле",
 });
 
-const FormatOfWorkSchema = z.enum(['ONLINE', 'OFFLINE', 'BOTH'], {
-  required_error: "Формат - обов'язкове поле",
-  invalid_type_error: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
-});
+const FormatOfWorkSchema = z
+  .string({
+    required_error: "Формат - обов'язкове поле",
+    invalid_type_error: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
+  })
+  .refine(val => Object.values(FormatOfWork).includes(val), {
+    message: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
+  });
 
 const RestSchema = z.object({
   description: z
@@ -31,11 +35,15 @@ const RestSchema = z.object({
     .refine(val => PHONE_REGEX.test(val), { message: 'Введіть номер телефону у форматі +380ХХХХХХХХХ' })
     .nullish(),
   website: z.string({ invalid_type_error: 'Вебсайт має бути рядком' }).trim().nullish(),
-  yearsOnMarket: z.number({ invalid_type_error: 'Роки на ринку мають бути числом' }).nullish(),
+  yearsOnMarket: z
+    .number({ invalid_type_error: 'Роки на ринку мають бути числом' })
+    .int('Введіть ціле число')
+    .positive('Введіть додатнє число')
+    .nullish(),
   addresses: z.array(
     z.object({
       fullAddress: minMaxString(1, 128, 'Повна адреса').nullish(),
-      district: z.enum(DISTRICTS).nullish(),
+      district: minMaxString(1, 64, 'Район').nullish(),
     }),
   ),
   isFreeReception: z.boolean({

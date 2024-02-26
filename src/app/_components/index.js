@@ -7,3 +7,5 @@ export * from './Footer';
 export * from './Header';
 export * from './OutlinedButton';
 export * from './TextArea';
+export * from './TopWave';
+export * from './BottomWave';
