@@ -2,6 +2,7 @@ import { FormTranslations } from '@admin/_lib/translations';
 import { capitalizeFirstLetter } from '@admin/_utils/common';
 import { SelectInput, required } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
+import PropTypes from 'prop-types';
 
 export function SelectFormat({ isActive }) {
   const getChoicesList = (list, translations) =>
@@ -21,3 +22,7 @@ export function SelectFormat({ isActive }) {
     />
   );
 }
+
+SelectFormat.propTypes = {
+  isActive: PropTypes.bool,
+};

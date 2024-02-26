@@ -4,7 +4,6 @@ import {
   FormDataConsumer,
   NullableBooleanInput,
   NumberInput,
-  SelectInput,
   SimpleForm,
   TextInput,
   required,
