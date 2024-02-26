@@ -4,9 +4,10 @@ import React from 'react';
 import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
-import { EventCreate } from '@admin/components/Event';
-import { FaqCreate, FaqEdit } from '@admin/components/Faq';
-import { SpecialistCreate } from '@admin/components/Specialist';
+import { EventCreate, EventList, EventShow } from '@admin/components/Event';
+import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
+import { SpecialistCreate, SpecialistsList, SpecialistShow } from '@admin/components/Specialist';
+import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/components/Organization';
 import { authProvider } from './authProvider';
 
 export default function AdminPage() {
@@ -14,6 +15,12 @@ export default function AdminPage() {
 
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
+      <Resource
+        name={RESOURCES.organization}
+        list={OrganizationsList}
+        show={OrganizationShow}
+        create={OrganizationCreate}
+      />
       <Resource
         name={RESOURCES.therapy}
         options={{ label: 'Therapy' }}
@@ -24,12 +31,12 @@ export default function AdminPage() {
       <Resource
         name={RESOURCES.specialist}
         options={{ label: 'Specialist' }}
-        list={ListGuesser}
+        list={SpecialistsList}
         edit={EditGuesser}
-        show={ShowGuesser}
+        show={SpecialistShow}
         create={SpecialistCreate}
       />
-      <Resource name={RESOURCES.event} list={ListGuesser} create={EventCreate} />
+      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} show={EventShow} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
@@ -43,7 +50,7 @@ export default function AdminPage() {
       <Resource
         name={RESOURCES.faq}
         options={{ label: 'FAQ' }}
-        list={ListGuesser}
+        list={FaqList}
         show={ShowGuesser}
         edit={FaqEdit}
         create={FaqCreate}

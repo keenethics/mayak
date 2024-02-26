@@ -25,7 +25,7 @@ function uniqueObjectsWithId(instances) {
 
 function randomAddress(districts) {
   const randomNameOfClinic = `Клініка ${faker.company.name()}`;
-  const randomDistricts = faker.helpers.arrayElement(districts).id; // returns randowm object from districts array
+  const randomDistricts = faker.helpers.arrayElement(districts).id; // returns random object from districts array
   return {
     nameOfClinic: randomNameOfClinic,
     fullAddress: getFullAddress(),
@@ -37,22 +37,17 @@ function randomAddress(districts) {
   };
 }
 
-function randomPlaceOfWork(districts) {
-  const randomAddresses = Array(faker.number.int({ min: 1, max: 3 }))
-    .fill('')
-    .map(() => randomAddress(districts));
-  return {
-    addresses: {
-      create: randomAddresses,
-    },
-  };
-}
-
 function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
-  const randomPlacesOfWork = Array(faker.number.int({ min: 1, max: 3 }))
-    .fill('')
-    .map(() => randomPlaceOfWork(districts));
+  let addresses;
+  const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
+  if (formatOfWork !== 'ONLINE') {
+    addresses = {
+      create: Array(faker.number.int({ min: 1, max: 3 }))
+        .fill('')
+        .map(() => randomAddress(districts)),
+    };
+  }
 
   const phoneRegexp = '+380[0-9]{9}';
   return {
@@ -66,10 +61,39 @@ function randomSpecialist({ districts, specializations, therapies }) {
     gender,
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
     // take one of these
-    formatOfWork: faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']),
-    placesOfWork: {
-      create: randomPlacesOfWork,
+    formatOfWork,
+    addresses,
+    therapies: {
+      connect: uniqueObjectsWithId(therapies),
     },
+    isFreeReception: faker.datatype.boolean(),
+    isActive: faker.datatype.boolean(),
+    phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
+    email: nullable(faker.internet.email()),
+    website: nullable(faker.internet.url()),
+    description: faker.lorem.paragraph(),
+  };
+}
+
+function randomOrganization({ therapies, districts, organizationTypes }) {
+  let addresses;
+  const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
+  if (formatOfWork !== 'ONLINE') {
+    addresses = {
+      create: Array(faker.number.int({ min: 1, max: 3 }))
+        .fill('')
+        .map(() => randomAddress(districts)),
+    };
+  }
+  const phoneRegexp = '+380[0-9]{9}';
+  return {
+    name: faker.company.name(),
+    yearsOnMarket: nullable(faker.number.int({ min: 1, max: 30 })),
+    formatOfWork,
+    type: {
+      connect: uniqueObjectsWithId(organizationTypes),
+    },
+    addresses,
     therapies: {
       connect: uniqueObjectsWithId(therapies),
     },
@@ -106,7 +130,7 @@ function randomEvent({ tags, link }) {
     priceType,
     price,
     format,
-    eventDate: faker.date.future(),
+    eventDate: Math.random() > 0.5 ? faker.date.future() : faker.date.past(),
     isActive: faker.datatype.boolean(),
     additionalLink: {
       connect: link,
@@ -124,7 +148,6 @@ async function main() {
   await prisma.$transaction(async trx => {
     await trx.address.deleteMany();
     await trx.specialist.deleteMany();
-    await trx.placeOfWork.deleteMany();
     await trx.specialization.deleteMany();
     await trx.district.deleteMany();
     await trx.therapy.deleteMany();
@@ -132,6 +155,8 @@ async function main() {
     await trx.eventLink.deleteMany();
     await trx.eventTag.deleteMany();
     await trx.faq.deleteMany();
+    await trx.organization.deleteMany();
+    await trx.organizationType.deleteMany();
   });
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
@@ -143,8 +168,9 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
-  const faqs = Array.from({ length: 5 }).map(() => ({
-    isActive: true,
+  const organizationTypeNames = ['Психологічний центр', 'Соціальна служба', 'Лікарня'];
+  const faqs = Array.from({ length: 15 }).map(() => ({
+    isActive: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
   }));
@@ -175,6 +201,10 @@ async function main() {
     data: faqs,
   });
 
+  await prisma.organizationType.createMany({
+    data: organizationTypeNames.map(name => ({ name })),
+  });
+
   const therapies = await prisma.therapy.findMany({ select: { id: true } });
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
@@ -183,6 +213,7 @@ async function main() {
 
   const tags = await prisma.eventTag.findMany({ select: { id: true } });
   const link = await prisma.eventLink.findFirst({ select: { id: true } });
+  const organizationTypes = await prisma.organizationType.findMany({ select: { id: true } });
 
   // createMany does not support records with relations
   for (let i = 0; i < 10; i += 1) {
@@ -193,10 +224,15 @@ async function main() {
     });
   }
   for (let i = 0; i < 10; i += 1) {
-    // for instead of Promise.all to avoid overloading the database pool
     // eslint-disable-next-line no-await-in-loop
     await prisma.event.create({
       data: randomEvent({ tags, link }),
+    });
+  }
+  for (let i = 0; i < 10; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await prisma.organization.create({
+      data: randomOrganization({ therapies, districts, organizationTypes }),
     });
   }
 }

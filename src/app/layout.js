@@ -5,6 +5,7 @@ import { QueryContext } from './queryContext';
 import montserrat from '@/app/styles/font';
 
 import './globals.css';
+import { cn } from '@/utils/cn';
 
 export const metadata = {
   title: {
@@ -16,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={[montserrat.className, 'relative']}>
+      <body className={cn('relative', montserrat.className)}>
         <Header />
         <QueryContext>
           <main className="bg-other-white">{children}</main>
