@@ -12,6 +12,9 @@ import { CardWrapper } from './CardWrapper';
 import { getContactsList, getLabelsList } from './config';
 import { CardButton } from '@/app/_components/Card/CardSpeсialist/CardButton';
 import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
+import { borderStyle } from '@/app/_components/Card/CardSpeсialist/classNames';
+import { cn } from '@/utils/cn';
+import { DetailsList } from '@/app/_components/Card/CardSpeсialist/DetailsList';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   const {
@@ -28,6 +31,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     phone,
     email,
     website,
+    description,
   } = specialist;
 
   const specializationsList = specializations.map(s => s.name);
@@ -53,9 +57,23 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           </header>
           <ExperienceList labels={labelsList} className="mt-[16px] md:mt-[12px]" />
           <TherapiesList therapies={therapiesList} className="mt-[14px] md:mt-[12px]" />
-          <PlacesOfWorkList className="mt-[16px] md:mt-[12px]" places={placeOfWork} />
+          {!extended && (
+            <PlacesOfWorkList
+              className="mt-[16px] border-t pt-[12px] md:mt-[12px] md:border-b md:py-[12px]"
+              places={placeOfWork}
+            />
+          )}
         </div>
         {!extended && <CardButton className="mt-[16px]" id={id} />}
+        {extended && (
+          <>
+            <DetailsList className="mt-[24px] md:mt-[32px]" details={{ placeOfWork, description }} />
+            <ContactsList
+              contacts={contactsList}
+              className={cn('mt-[16px] border-t pt-[24px] md:hidden', borderStyle)}
+            />
+          </>
+        )}
       </CardSectionWrapper>
     </CardWrapper>
   );

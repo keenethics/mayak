@@ -16,7 +16,7 @@ export function CardWrapper({ children, className, id }) {
   const cursorStyle = isExtendedCardOpened ? 'cursor-auto' : 'cursor-pointer';
 
   const handleClick = () => {
-    router.push(`/specialist?id=${id}`);
+    router.push(`/specialist?id=${id}`, { scroll: false });
   };
 
   return (
