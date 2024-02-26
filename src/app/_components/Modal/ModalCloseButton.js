@@ -14,6 +14,5 @@ export const ModalCloseButton = ({ onClose }) => (
 );
 
 ModalCloseButton.propTypes = {
-  children: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
 };
