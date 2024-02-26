@@ -30,15 +30,24 @@ const zYearsOfExperience = z
   .nonnegative()
   .nullish();
 
-const zAddressesSchema = z.array(
-  z
-    .object({
-      fullAddress: zStringWithMax,
-      nameOfClinic: z.string().nullish(),
-      district: zString,
-    })
-    .default([]),
-);
+const zAddressesSchema = z
+  .array(
+    z
+      .object({
+        fullAddress: zStringWithMax,
+        nameOfClinic: z.string().nullish(),
+        district: zString,
+        isPrimary: z.boolean(),
+      })
+      .default([]),
+  )
+  .refine(
+    addresses => {
+      if (!addresses.length) return true;
+      return addresses.filter(el => el.isPrimary).length === 1;
+    },
+    { message: 'Необхідно вказати одну головну адресу' },
+  );
 
 const defaultProps = z.object({
   lastName: zStringWithMax,

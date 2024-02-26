@@ -3,6 +3,7 @@
 import React from 'react';
 import {
   ArrayInput,
+  BooleanInput,
   FormDataConsumer,
   required,
   SelectInput,
@@ -21,7 +22,6 @@ export function Addresses() {
   const { addresses, fullAddress, nameOfClinic, district } = SpecialistFormFields;
 
   const isOnline = format => format === FormatOfWork.ONLINE;
-
   return (
     <FormFieldWrapper title={SpecialistFormSections.addresses} className="mt-3">
       <FormDataConsumer>
@@ -31,6 +31,12 @@ export function Addresses() {
           ) : (
             <ArrayInput name={addresses.name} source={addresses.name} label={addresses.label} fullWidth>
               <SimpleFormIterator inline fullWidth>
+                <BooleanInput
+                  source={'isPrimary'}
+                  label="Головна адреса"
+                  defaultValue={formData?.placesOfWork?.length === 0}
+                  className="mt-8"
+                />
                 <TextInput
                   fullWidth
                   source={fullAddress.name}
