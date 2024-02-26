@@ -4,6 +4,7 @@ import { Clock, Mail, MedAttention, MedCare, OnlineMeeting, Phone, Site } from '
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
 import { displayYearsOfExperience } from '@/utils/common';
+import { cn } from '@/utils/cn';
 
 export const getContactsList = ({ phone, email, website }) => [
   {
@@ -32,22 +33,24 @@ export const getContactsList = ({ phone, email, website }) => [
   },
 ];
 
+const iconStyle = 'h-[15px]  w-[15px] lg:h-[20px] lg:w-[20px]';
+
 export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork }) => [
   {
     id: 'yearsOfExperience',
-    icon: <MedCare />,
+    icon: <MedCare className={cn(iconStyle)} />,
     content: displayYearsOfExperience(yearsOfExperience),
     color: 'text-other-green',
   },
   {
     id: 'isFreeReception',
-    icon: <MedAttention />,
+    icon: <MedAttention className={cn(iconStyle)} />,
     content: isFreeReception ? 'Безкоштовний прийом' : null,
     color: 'text-other-orange',
   },
   {
     id: 'formatOfWork',
-    icon: <OnlineMeeting />,
+    icon: <OnlineMeeting className={cn(iconStyle)} />,
     content: formatOfWork === FormatOfWork.ONLINE ? 'Онлайн консультації' : null,
     color: 'text-other-blue',
   },

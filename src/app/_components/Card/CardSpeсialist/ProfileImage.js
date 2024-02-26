@@ -12,8 +12,13 @@ export function ProfileImage({ gender, className }) {
   }
 
   return (
-    <div className={cn('flex items-center justify-center rounded-[16px] bg-gray-100 p-[20px] md:p-[56px]', className)}>
-      <svg viewBox="0 0 70 80" className="h-[40px] w-[40px] md:h-[80px] md:w-[80px]">
+    <div
+      className={cn(
+        'md:h-max-[200px] flex items-center justify-center rounded-[16px] bg-gray-100 p-[20px] sm:h-[70px] sm:w-[70px] md:h-[150px] md:w-full lg:h-[200px] lg:w-[200px]',
+        className,
+      )}
+    >
+      <svg className="sm:h:-[24px] h:-[24px] w-[24px] sm:w-[24px] md:h-[40px] md:w-[40px] lg:h-[88px] lg:w-[88px]">
         {image}
       </svg>
     </div>

@@ -38,13 +38,13 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   return (
     <CardWrapper className={className} id={id}>
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
-        <ProfileImage gender={gender} className="w-[200px]" />
+        <ProfileImage gender={gender} className="sm:w-[70px] md:max-w-[200px] lg:w-[200px]" />
         <ContactsList contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
       <CardSectionWrapper className="flex w-[100%] flex-col md:ml-[16px]">
         <div className="flex-1">
           <header className="flex flex-row gap-[10px]">
-            <ProfileImage gender={gender} className="h-[80px] md:hidden" />
+            <ProfileImage gender={gender} className="md:hidden" />
             <div>
               <SpecializationsPanel specializations={specializationsList} />
               <SpecialistTitle title={`${firstName} ${lastName}`} />

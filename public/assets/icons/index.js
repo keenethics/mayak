@@ -1,4 +1,4 @@
-import Site from './calendar.svg';
+import Site from './site.svg';
 import Clock from './clock.svg';
 import HospitalSVG from './hospital.svg';
 import HospitalLogo from './hospitalIMG.svg';
