@@ -23,7 +23,7 @@ function uniqueObjectsWithId(instances) {
     .map(id => ({ id }));
 }
 
-function randomAddress(districts) {
+function randomAddress(districts, isPrimary) {
   const randomNameOfClinic = `Клініка ${faker.company.name()}`;
   const randomDistricts = faker.helpers.arrayElement(districts).id; // returns random object from districts array
   return {
@@ -34,6 +34,7 @@ function randomAddress(districts) {
         id: randomDistricts,
       },
     },
+    isPrimary,
   };
 }
 
@@ -41,7 +42,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   const randomAddresses = Array(faker.number.int({ min: 1, max: 3 }))
     .fill('')
-    .map(() => randomAddress(districts));
+    .map((_, i) => randomAddress(districts, i === 0));
 
   const phoneRegexp = '+380[0-9]{9}';
   return {
