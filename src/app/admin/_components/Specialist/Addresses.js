@@ -34,7 +34,7 @@ export function Addresses() {
                 <BooleanInput
                   source={'isPrimary'}
                   label="Головна адреса"
-                  defaultValue={formData?.placesOfWork?.length === 0}
+                  defaultValue={formData?.addresses?.length === 0}
                   className="mt-8"
                 />
                 <TextInput
