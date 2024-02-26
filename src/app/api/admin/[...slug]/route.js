@@ -7,8 +7,8 @@ import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { MODEL_INCLUDES } from '@/lib/consts';
 
 export const MODEL_SEARCH_FIELDS = {
-  Specialist: ['firstName', 'lastName', 'surname'],
-  Organization: ['name'],
+  specialist: ['firstName', 'lastName', 'surname'],
+  organization: ['name'],
 };
 
 export function searchInputFilters(modelName, filter) {

@@ -30,6 +30,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 To see additional useful information about project check separate [howto](./docs/HOWTO.md) doc.
 
+## Code Style
+
+Beside linter rules there are few [others](./docs/CODESTYLE.md) which are gently enforced to ensure concise code base.
+
 ## Learn More
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.

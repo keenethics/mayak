@@ -1,5 +1,6 @@
 export const LOGIN_URL = '/admin#/login';
 export const PHONE_REGEX = /^\+380\d{9}$/;
+export const FAQ_PRIORITY_CHANGE_STEP = 1;
 export const BASE_ERROR_MESSAGES = {
   400: 'Bad Request',
   401: 'Unauthorized',
@@ -12,7 +13,7 @@ export const BASE_ERROR_MESSAGES = {
 };
 
 export const MODEL_INCLUDES = {
-  Specialist: {
+  specialist: {
     therapies: { select: { name: true } },
     specializations: { select: { name: true } },
     placesOfWork: {
@@ -27,7 +28,7 @@ export const MODEL_INCLUDES = {
       },
     },
   },
-  Organization: {
+  organization: {
     therapies: { select: { name: true } },
     types: { select: { name: true } },
     addresses: {
