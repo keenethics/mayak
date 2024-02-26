@@ -24,6 +24,7 @@ export const getContactsList = ({ phone, email, website }) => [
     icon: <Site />,
     content: website,
     href: website,
+    className: 'text-primary-300',
   },
   {
     id: 'schedule',

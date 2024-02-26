@@ -22,7 +22,7 @@ export function ContactsListItem({ contact, className }) {
             </p>
           ))
         ) : href ? (
-          <Link href={href} target="_blank" className="line-clamp-1">
+          <Link href={href} target="_blank" rel="noopener noreferrer" className="line-clamp-1 text-primary-400">
             {content}
           </Link>
         ) : (
