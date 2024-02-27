@@ -8,7 +8,7 @@ function ExperienceListItem({ icon, text, className }) {
       <span className="h-[15px] w-[15px] self-center sm:h-[15px] sm:w-[15px] md:h-[15px] md:w-[15px] lg:h-[20px] lg:w-[20px]">
         {icon}
       </span>
-      <p className={cn('text-center text-c2 font-semibold md:self-center md:text-left lg:text-p4')}>{text}</p>
+      <p className={cn('text-center text-c4 font-semibold md:self-center md:text-left lg:text-p4')}>{text}</p>
     </div>
   );
 }

@@ -15,8 +15,8 @@ export function PlacesOfWorkList({ places, className, showIcon = false }) {
             </span>
           )}
           <div>
-            <h3 className="text-p4 font-bold text-gray-700">{nameOfClinic || 'Місце надання послуг'}</h3>
-            <div className="text-p4">
+            <h3 className="text-p4 font-bold text-gray-700 lg:text-p3">{nameOfClinic || 'Місце надання послуг'}</h3>
+            <div className="text-p4 lg:text-p3">
               <p>{fullAddress}</p>
               <p>{district.name} район</p>
             </div>

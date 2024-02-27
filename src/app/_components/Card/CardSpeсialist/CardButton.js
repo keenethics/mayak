@@ -12,7 +12,7 @@ export function CardButton({ text = 'Детальніше', className, id }) {
     <PillButton
       type={buttonType.outlined}
       colorVariant={buttonColorVariant.outlined.orange}
-      className={cn('hidden h-[min] self-end justify-self-end md:inline-block', className)}
+      className={cn('hidden h-[min] self-end justify-self-end md:inline-block lg:text-p4', className)}
       onClick={() => router.push(`/specialist?id=${id}`, { scroll: false })}
     >
       {text}
