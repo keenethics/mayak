@@ -42,22 +42,20 @@ const zPlacesOfWorkSchema = z.array(
     })
     .default([]),
 );
-const zDaysOfWorkSchema = z
-  .array(
-    z.object({
-      daysOfWeek: z.array(zStringInEnum(DaysOfWeek)).min(1),
-      timeRanges: z
-        .array(
-          z.object({
-            timeRange: z.string().refine(val => TIME_RANGE_REGEX.test(val), {
-              message: 'Введіть проміжок часу у форматі: hh:mm-hh:mm',
-            }),
+const zDaysOfWorkSchema = z.array(
+  z.object({
+    daysOfWeek: z.array(zStringInEnum(DaysOfWeek)).min(1),
+    timeRanges: z
+      .array(
+        z.object({
+          timeRange: z.string().refine(val => TIME_RANGE_REGEX.test(val), {
+            message: 'Введіть проміжок часу у форматі: hh:mm-hh:mm',
           }),
-        )
-        .min(1),
-    }),
-  )
-  .min(1);
+        }),
+      )
+      .min(1),
+  }),
+);
 
 const defaultProps = z.object({
   lastName: zStringWithMax,
@@ -82,15 +80,18 @@ const restProps = z.object({
   email: zString.email().nullish(),
   website: zString.url().nullish(),
   placesOfWork: zPlacesOfWorkSchema.default([]),
-  daysOfWork: zDaysOfWorkSchema,
 });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
+  daysOfWork: zDaysOfWorkSchema.min(1, {
+    message: 'Необхідно ввести мінімум один робочий день',
+  }),
 });
 
 const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
+  daysOfWork: zDaysOfWorkSchema,
 });
 
 const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);

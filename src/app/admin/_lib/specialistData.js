@@ -105,7 +105,7 @@ export const SpecialistFormFields = {
     name: 'daysOfWork',
     type: null,
     label: 'Робочі дні',
-    validate: true,
+    validate: false,
   },
   daysOfWeek: {
     name: 'daysOfWeek',
