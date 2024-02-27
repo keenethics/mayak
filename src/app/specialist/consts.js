@@ -1,5 +1,9 @@
 export const include = {
-  specializations: true,
+  specializations: {
+    orderBy: {
+      name: 'asc',
+    },
+  },
   therapies: true,
   placesOfWork: {
     include: {

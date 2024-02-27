@@ -10,3 +10,4 @@ export * from './TopWave';
 export * from './BottomWave';
 export * from './Hint';
 export * from './SpecialistList';
+export * from './ListTruncator';
