@@ -8,7 +8,7 @@ export function TooltipCustom({ children, textToDisplay, show = false, className
     <div className={hasTooltip}>
       <span
         className={cn(
-          'tooltip -mt-7 rounded bg-primary-700 p-1 text-c3 font-bold text-other-white shadow-lg',
+          'tooltip z-50 -mt-9 rounded-[4px] bg-other-white px-[4px] py-[8px] text-c3 text-gray-900 shadow-[0px_2px_8px_0px_rgba(192,191,206,0.5)]',
           className,
         )}
       >
