@@ -2,8 +2,8 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import P from 'prop-types';
-
 import { Show as ShowHint, Window as HintWindow } from './Hint';
+import { getRandomInt } from '@/utils/common';
 
 export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRender }) {
   const wrapperRef = useRef(null);
@@ -29,28 +29,30 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
     };
   }, [calculateOverflow]);
 
+  const hintId = `hint-for-${id}-${getRandomInt(0, 1000000)}`;
+
   return (
     <div id={`specializations-of-${id}`} ref={containerRef} className="w-full">
-      <span id={`wrapper-of-${id}`} className="inline-flex items-center gap-[8px] pr-[50px]" ref={wrapperRef}>
+      <span id={`wrapper-of-${id}`} className="relative inline-flex items-center gap-[8px] pr-[50px]" ref={wrapperRef}>
         {items.map(itemRender)}
       </span>
       {overflown && (
         <>
           <ShowHint
-            opens={`hint-for-${id}`}
+            opens={hintId}
             actions={{
-              onMouseEnter: ({ open }) => open(`hint-for-${id}`),
+              onMouseEnter: ({ open }) => open(hintId),
               onMouseLeave: ({ close }) => close(),
               onClick: ({ open }) => {
-                open(n => (n === `hint-for-${id}` ? '' : `hint-for-${id}`));
+                open(n => (n === hintId ? '' : hintId));
               },
             }}
           >
-            <span className="absolute right-0 top-0 flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
+            <span className="absolute right-[-2px] top-0 flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
               {ellipsis || <div className="flex w-full justify-end font-bold text-gray-600">&nbsp;...&nbsp;</div>}
             </span>
           </ShowHint>
-          <HintWindow name={`hint-for-${id}`} className="right-0 top-[20px]">
+          <HintWindow name={hintId} id={hintId} className="right-0 top-[20px] z-[200]">
             <div className="flex flex-col gap-[10px] rounded-[4px] px-[8px] py-[4px] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)]">
               {items.map(tooltipItemRender)}
             </div>

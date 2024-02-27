@@ -1,15 +1,19 @@
 export const displayYearsOfExperience = amountOfYears => {
   const lastDigit = amountOfYears % 10;
+  const lastTwoDigits = amountOfYears % 100;
 
   if (amountOfYears === 0) {
     return `стаж менше року`;
   }
 
-  if (amountOfYears === 1 || lastDigit === 1) {
+  if ((amountOfYears === 1 || lastDigit === 1) && lastTwoDigits !== 11) {
     return `${amountOfYears} рік стажу`;
   }
 
-  if ((amountOfYears >= 2 && amountOfYears <= 4) || (lastDigit >= 2 && lastDigit <= 4)) {
+  if (
+    ((amountOfYears >= 2 && amountOfYears <= 4) || (lastDigit >= 2 && lastDigit <= 4)) &&
+    !(lastTwoDigits >= 12 && lastTwoDigits <= 14)
+  ) {
     return `${amountOfYears} роки стажу`;
   }
 
@@ -24,3 +28,9 @@ export const parsePhoneNumber = phoneNumber => {
 
   return `${countryCode} (${areaCode}) ${firstPart} ${secondPart}`;
 };
+
+export function getRandomInt(min, max) {
+  const minI = Math.ceil(min);
+  const maxI = Math.floor(max);
+  return Math.floor(Math.random() * (maxI - minI + 1)) + minI;
+}

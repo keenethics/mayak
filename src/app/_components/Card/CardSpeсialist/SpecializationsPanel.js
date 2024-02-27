@@ -11,12 +11,12 @@ export function SpecializationsPanel({ specialistId, specializations }) {
       id={specialistId}
       items={specializations}
       itemRender={(specialization, index) => (
-        <>
-          <Caption key={index} className="whitespace-nowrap text-start font-bold text-gray-600 lg:text-p4">
+        <div className="flex items-center justify-center gap-[10px]" key={index}>
+          <Caption className="whitespace-nowrap text-start font-bold text-gray-600 lg:text-p4">
             {specialization}
           </Caption>
           {index !== specializations.length - 1 && <Dot />}
-        </>
+        </div>
       )}
       tooltipItemRender={(specialization, index) => (
         <div key={index} className="text-center text-c2 text-gray-900">
