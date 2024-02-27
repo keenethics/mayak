@@ -17,8 +17,8 @@ const SendFeedback = z.object({
     required_error: 'callMe is required',
     invalid_type_error: 'callMe must be a boolean',
   }),
-  email: z.string().trim().email(),
-  message: minMaxString(1, 320, 'Message').optional(),
+  email: z.string().trim().email().optional(),
+  message: minMaxString(5, 320, 'Повідомлення'),
 });
 
 export default SendFeedback;
