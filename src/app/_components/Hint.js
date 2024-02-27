@@ -1,6 +1,6 @@
 'use client';
 
-import { cloneElement, createContext, useContext, useState } from 'react';
+import { cloneElement, createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 import { ClientPortal } from './ClientPortal';
@@ -18,11 +18,31 @@ export function Hint({ children }) {
 export function Show({ children, opens: opensWindowName, actions }) {
   const { open, close } = useContext(HintContext);
 
+  // close hints when window is scrolled
+  useEffect(() => {
+    const handleScroll = () => {
+      close();
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [close]);
+
   return cloneElement(children, {
     id: opensWindowName,
-    onClick: () => actions?.onClick?.({ open, close }),
-    onMouseEnter: () => actions?.onMouseEnter?.({ open, close }),
-    onMouseLeave: () => actions?.onMouseLeave?.({ open, close }),
+    onClick: e => {
+      e.stopPropagation();
+      actions?.onClick?.({ open, close });
+    },
+    onMouseEnter: e => {
+      e.stopPropagation();
+      actions?.onMouseEnter?.({ open, close });
+    },
+    onMouseLeave: e => {
+      e.stopPropagation();
+      actions?.onMouseLeave?.({ open, close });
+    },
   });
 }
 

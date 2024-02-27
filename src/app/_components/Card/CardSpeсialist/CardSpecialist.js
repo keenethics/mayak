@@ -51,13 +51,12 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         <ContactsList contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
 
-      <CardSectionWrapper className="flex w-[100%] flex-col md:ml-[16px]">
-        <div className="flex-1">
+      <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px]">
+        <div className="relative flex-1">
           <header className="flex flex-row gap-[10px]">
             <ProfileImage gender={gender} className="md:hidden" socials={socials} />
-
-            <div>
-              <SpecializationsPanel specializations={specializationsList} />
+            <div className="w-full">
+              <SpecializationsPanel specialistId={id} specializations={specializationsList} />
               <SpecialistTitle title={`${firstName} ${lastName}`} />
             </div>
           </header>

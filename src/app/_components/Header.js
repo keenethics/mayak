@@ -39,7 +39,7 @@ export function Header() {
       <nav
         className={cn(
           flexBetween,
-          'fixed top-0 w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 lg:static lg:px-20',
+          'fixed top-0 z-[17] w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 lg:static lg:px-20',
         )}
       >
         <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>

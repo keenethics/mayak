@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import P from 'prop-types';
 
 import { Show as ShowHint, Window as HintWindow } from './Hint';
@@ -10,7 +10,7 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
   const containerRef = useRef(null);
   const [overflown, setOverflown] = useState(false);
 
-  useEffect(() => {
+  const calculateOverflow = useCallback(() => {
     const wrapperWidth = wrapperRef.current.offsetWidth;
     const containerWidth = containerRef.current.offsetWidth;
     if (wrapperWidth >= containerWidth) {
@@ -20,8 +20,17 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
     }
   }, [wrapperRef, containerRef]);
 
+  useEffect(() => {
+    calculateOverflow();
+    window.addEventListener('resize', calculateOverflow);
+
+    return () => {
+      window.removeEventListener('resize', calculateOverflow);
+    };
+  }, [calculateOverflow]);
+
   return (
-    <div id={`specializations-of-${id}`} ref={containerRef} className="relative w-full">
+    <div id={`specializations-of-${id}`} ref={containerRef} className="w-full">
       <span id={`wrapper-of-${id}`} className="inline-flex items-center gap-[8px] pr-[50px]" ref={wrapperRef}>
         {items.map(itemRender)}
       </span>
@@ -37,7 +46,7 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
               },
             }}
           >
-            <span className="absolute right-[80px] top-0 flex h-full w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%] md:right-0">
+            <span className="absolute right-0 top-0 flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
               {ellipsis || <div className="flex w-full justify-end font-bold text-gray-600">&nbsp;...&nbsp;</div>}
             </span>
           </ShowHint>
