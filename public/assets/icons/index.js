@@ -12,6 +12,9 @@ import Price from './price.svg';
 import Female from './female.svg';
 import Male from './male.svg';
 import Dot from './card-dot.svg';
+import BlueFb from './specialist-facebook.svg';
+import BlueInsta from './specialist-instagram.svg';
+import BlueTikTok from './specialist-tiktok.svg';
 
 export {
   Site,
@@ -28,4 +31,7 @@ export {
   Female,
   Male,
   Dot,
+  BlueFb,
+  BlueInsta,
+  BlueTikTok,
 };

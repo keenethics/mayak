@@ -1,6 +1,17 @@
 'use client';
 
-import { Clock, Mail, MedAttention, MedCare, OnlineMeeting, Phone, Site } from '@icons/index';
+import {
+  Clock,
+  Mail,
+  MedAttention,
+  MedCare,
+  OnlineMeeting,
+  Phone,
+  Site,
+  BlueFb,
+  BlueInsta,
+  BlueTikTok,
+} from '@icons/index';
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
 import { displayYearsOfExperience } from '@/utils/common';
@@ -54,5 +65,23 @@ export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork
     icon: <OnlineMeeting className={cn(iconStyle)} />,
     content: formatOfWork === FormatOfWork.ONLINE ? 'Онлайн консультації' : null,
     color: 'text-other-blue',
+  },
+];
+
+export const getSpecialistSocials = ({ instagram, facebook, tiktok }) => [
+  {
+    id: 'Instagram',
+    icon: <BlueInsta />,
+    href: instagram,
+  },
+  {
+    id: 'Facebook',
+    icon: <BlueFb />,
+    href: facebook,
+  },
+  {
+    id: 'TikTok',
+    icon: <BlueTikTok />,
+    href: tiktok,
   },
 ];

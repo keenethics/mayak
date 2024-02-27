@@ -78,6 +78,9 @@ function randomSpecialist({ districts, specializations, therapies }) {
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
+    instagram: nullable(faker.internet.url()),
+    facebook: nullable(faker.internet.url()),
+    tiktok: nullable(faker.internet.url()),
   };
 }
 

@@ -17,6 +17,9 @@ export const specialistPropType = P.shape({
   email: P.string,
   website: P.string,
   isActive: P.bool,
+  instagram: P.string,
+  facebook: P.string,
+  tiktok: P.string,
 });
 
 export const specialistContactPropType = P.shape({
@@ -31,4 +34,10 @@ export const specialistLabelPropType = P.shape({
   icon: P.element,
   content: P.string,
   color: P.string,
+});
+
+export const specialistSocialsPropType = P.shape({
+  id: P.string,
+  icon: P.element,
+  href: P.string,
 });

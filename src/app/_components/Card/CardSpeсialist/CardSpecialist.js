@@ -9,7 +9,7 @@ import { ExperienceList } from './ExperienceList';
 import { TherapiesList } from './TherapiesList';
 import { PlacesOfWorkList } from './PlacesOfWorkList';
 import { CardWrapper } from './CardWrapper';
-import { getContactsList, getLabelsList } from './config';
+import { getContactsList, getLabelsList, getSpecialistSocials } from './config';
 import { CardButton } from '@/app/_components/Card/CardSpeсialist/CardButton';
 import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 import { borderStyle } from '@/app/_components/Card/CardSpeсialist/classNames';
@@ -32,6 +32,9 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     email,
     website,
     description,
+    instagram,
+    facebook,
+    tiktok,
   } = specialist;
 
   const specializationsList = specializations.map(s => s.name);
@@ -39,17 +42,20 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   const placeOfWork = [placesOfWork[0].addresses[0]];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork });
+  const socials = getSpecialistSocials({ instagram, facebook, tiktok });
 
   return (
     <CardWrapper className={className} id={id}>
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
-        <ProfileImage gender={gender} className="sm:w-[70px] md:max-w-[200px] lg:w-[200px]" />
+        <ProfileImage gender={gender} className="sm:w-[70px] md:max-w-[200px] lg:w-[200px]" socials={socials} />
         <ContactsList contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
+
       <CardSectionWrapper className="flex w-[100%] flex-col md:ml-[16px]">
         <div className="flex-1">
           <header className="flex flex-row gap-[10px]">
-            <ProfileImage gender={gender} className="md:hidden" />
+            <ProfileImage gender={gender} className="md:hidden" socials={socials} />
+
             <div>
               <SpecializationsPanel specializations={specializationsList} />
               <SpecialistTitle title={`${firstName} ${lastName}`} />
