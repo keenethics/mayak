@@ -6,7 +6,7 @@ import { DaysOfWeek } from '@prisma/client';
 import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
 import { SpecialistFormSections, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
 import { getChoicesListFromEnum } from '@/app/admin/_utils/getChoicesListFromEnum';
-import { transformDaysOfWork } from '@/app/admin/_utils/transformSpecialistFormData';
+import { transformDaysOfWork } from '@/app/admin/_utils/transformDaysOfWork';
 import { formatDaysOfWork } from '@/utils/formatDaysOfWorks';
 
 export function DaysOfWork() {

@@ -15,6 +15,7 @@ import { AddressInput } from './CreateAddresses';
 import { SelectTherapies } from './SelectTherapies';
 import { SelectOrganizationType } from './SelectOrgType';
 import { SelectFormat } from './SelectFormat';
+import { DaysOfWork } from './DaysOfWork';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
@@ -59,6 +60,8 @@ export function OrganizationCreate() {
                 label="Опис"
                 multiline
               />
+              <p className="mb-2 font-bold">Графік роботи</p>
+              <DaysOfWork isActive={formData.isActive} />
               <BooleanInput source="isActive" defaultValue={false} label="Активний" />
             </>
           )}

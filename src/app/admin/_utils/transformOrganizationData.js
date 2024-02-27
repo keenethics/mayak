@@ -1,8 +1,11 @@
+import { transformDaysOfWork } from './transformDaysOfWork';
+
 // this function transforms form data to proper prisma creation object
 export function transformOrganizationData(data) {
   let addressesObject = {};
   let typesObject = {};
   let therapiesObject = {};
+  let daysOfWorkObject = {};
 
   if (data?.addresses?.length > 0) {
     addressesObject = {
@@ -28,11 +31,16 @@ export function transformOrganizationData(data) {
       })),
     };
   }
-
+  if (data.daysOfWork?.length > 0) {
+    daysOfWorkObject = {
+      create: transformDaysOfWork(data.daysOfWork),
+    };
+  }
   return {
     ...data,
     addresses: addressesObject,
     type: typesObject,
     therapies: therapiesObject,
+    daysOfWork: daysOfWorkObject,
   };
 }

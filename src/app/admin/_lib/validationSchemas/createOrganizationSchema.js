@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { FormatOfWork } from '@prisma/client';
+import { DaysOfWeek, FormatOfWork } from '@prisma/client';
 import { minMaxString } from '@/lib/validationSchemas/utils';
-import { PHONE_REGEX } from '@/lib/consts';
+import { PHONE_REGEX, TIME_RANGE_REGEX } from '@/lib/consts';
 
 const DefaultSchema = z.object({
   name: minMaxString(1, 128, 'Назва'),
@@ -23,6 +23,21 @@ const FormatOfWorkSchema = z
   .refine(val => Object.values(FormatOfWork).includes(val), {
     message: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
   });
+
+const DaysOfWorkSchema = z.array(
+  z.object({
+    daysOfWeek: z.array(z.string().refine(val => Object.values(DaysOfWeek).includes(val))).min(1),
+    timeRanges: z
+      .array(
+        z.object({
+          timeRange: z.string().refine(val => TIME_RANGE_REGEX.test(val), {
+            message: 'Введіть проміжок часу у форматі: hh:mm-hh:mm',
+          }),
+        }),
+      )
+      .min(1),
+  }),
+);
 
 const RestSchema = z.object({
   description: z
@@ -57,14 +72,16 @@ const DraftOrganizationSchema = RestSchema.partial().extend({
   isActive: z.literal(false),
   isFreeReception: z.boolean().nullish(),
   type: TypeSchema.optional(),
-  thearpies: TherapiesSchema.optional(),
+  therapies: TherapiesSchema.optional(),
   formatOfWork: FormatOfWorkSchema.nullish(),
+  daysOfWork: DaysOfWorkSchema,
 });
 const ActiveOrganizationSchema = RestSchema.extend({
   isActive: z.literal(true),
   type: TypeSchema.nonempty({ message: 'Оберіть хоча б один тип організації' }),
   therapies: TherapiesSchema.nonempty({ message: 'Оберіть хоча б один тип терапії' }),
   formatOfWork: FormatOfWorkSchema,
+  daysOfWork: DaysOfWorkSchema.min(1, { message: 'Необхідно ввести мінімум один робочий день' }),
 });
 
 const OrganizationSchemaUnion = z.discriminatedUnion('isActive', [ActiveOrganizationSchema, DraftOrganizationSchema]);
