@@ -37,11 +37,9 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
               },
             }}
           >
-            {ellipsis || (
-              <span className="absolute right-[80px] top-0 h-full w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%] text-end font-bold text-gray-600 md:right-0">
-                &nbsp;...&nbsp;
-              </span>
-            )}
+            <span className="absolute right-[80px] top-0 flex h-full w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%] md:right-0">
+              {ellipsis || <div className="flex w-full justify-end font-bold text-gray-600">&nbsp;...&nbsp;</div>}
+            </span>
           </ShowHint>
           <HintWindow name={`hint-for-${id}`} className="right-0 top-[20px]">
             <div className="flex flex-col gap-[10px] rounded-[4px] px-[8px] py-[4px] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)]">

@@ -16,8 +16,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={cn(montserrat.className, 'relative')}>
+    <html lang="en" className="scroll-smooth">
+      <body className={cn(montserrat.className, 'relative scroll-smooth')}>
         <div className="flex min-h-screen flex-col">
           <Hint>
             <Header />
@@ -25,9 +25,9 @@ export default function RootLayout({ children }) {
               <main className="flex-1">{children}</main>
             </QueryContext>
             <Footer />
-            <div id="modal-root" />
           </Hint>
         </div>
+        <div id="modal-root" />
       </body>
     </html>
   );

@@ -1,22 +1,27 @@
 import React from 'react';
 import P from 'prop-types';
-import { Male, Female, HospitalLogo } from '@icons/index';
+import { Female, HospitalLogo, Male } from '@icons/index';
+import { Gender } from '@prisma/client';
 import { cn } from '@/utils/cn';
+import { specialistSocialsPropType } from './prop-types';
+import { SocialsList } from './SocialsList';
 
-export function ProfileImage({ gender, className }) {
+export function ProfileImage({ gender, className, socials }) {
   let image = <HospitalLogo />;
+
   if (gender) {
-    image = gender === 'MALE' ? <Male /> : <Female />;
+    image = gender === Gender.MALE ? <Male /> : <Female />;
   }
 
   return (
     <div
       className={cn(
-        'flex min-h-[70px] min-w-[70px] items-center justify-center rounded-[16px] bg-gray-100 md:p-[56px]',
+        'flex h-[70px] w-[70px] flex-col items-center justify-center rounded-[16px] bg-gray-100 p-[20px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px] lg:gap-[20px] lg:px-[52px] lg:pb-[12px] lg:pt-[56px]',
         className,
       )}
     >
-      {image}
+      <svg className="h-[24px] w-[24px] md:h-[40px] md:w-[40px] lg:h-[88px] lg:w-[88px]">{image}</svg>
+      <SocialsList socials={socials} />
     </div>
   );
 }
@@ -24,4 +29,5 @@ export function ProfileImage({ gender, className }) {
 ProfileImage.propTypes = {
   gender: P.string,
   className: P.string,
+  socials: P.arrayOf(specialistSocialsPropType),
 };

@@ -48,6 +48,9 @@ model Specialist {
   email             String?          @unique @db.VarChar(320)
   website           String?          @db.Text
   isActive          Boolean          @default(false)
+  instagram         String?          @db.Text
+  facebook          String?          @db.Text
+  tiktok            String?          @db.Text
 
   @@map("specialist")
 }

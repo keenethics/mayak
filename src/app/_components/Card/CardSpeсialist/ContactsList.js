@@ -2,6 +2,7 @@ import React from 'react';
 import P from 'prop-types';
 import { cn } from '@/utils/cn';
 import { ContactsListItem } from './ContactsListItem';
+import { specialistContactPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 
 export function ContactsList({ contacts, className }) {
   return (
@@ -12,6 +13,6 @@ export function ContactsList({ contacts, className }) {
 }
 
 ContactsList.propTypes = {
-  contacts: P.array,
+  contacts: P.arrayOf(specialistContactPropType),
   className: P.string,
 };

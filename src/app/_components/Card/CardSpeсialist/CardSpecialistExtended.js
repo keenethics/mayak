@@ -1,20 +1,23 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import P from 'prop-types';
 import { Modal } from '@components';
 import { useRouter } from 'next/navigation';
 import { useBodyScrollLock } from '@hooks';
+import { CardSpecialist } from '@/app/_components/Card/CardSpeсialist/CardSpecialist';
+import { cn } from '@/utils/cn';
+import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 
-export function CardSpecialistExtended() {
+export function CardSpecialistExtended({ specialist, className }) {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   function handleClose() {
-    return router.back();
+    router.push(`/specialist`, { scroll: false });
   }
 
-  const [open, setOpen] = useState(false);
-
-  // TODO: add comment
+  // this is to ensure proper modal rendering
   useEffect(() => {
     setOpen(true);
   }, []);
@@ -22,8 +25,18 @@ export function CardSpecialistExtended() {
   useBodyScrollLock('y');
 
   return (
-    <Modal isOpen={open} onClose={handleClose} title="Title of modal" bgColor="bg-primary-200">
-      <p>Modal content goes here..</p>
+    <Modal
+      isOpen={open}
+      onClose={handleClose}
+      bgColor="bg-other-white"
+      className="mt-[50px] h-full w-[100%] overflow-y-scroll rounded-[24px] p-[24px] md:mx-[16px] md:h-auto lg:max-w-[1000px]"
+    >
+      <CardSpecialist specialist={specialist} className={cn('', className)} extended={true} />
     </Modal>
   );
 }
+
+CardSpecialistExtended.propTypes = {
+  specialist: specialistPropType,
+  className: P.string,
+};

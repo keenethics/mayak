@@ -1,14 +1,28 @@
+'use client';
+
 import React from 'react';
 import PropType from 'prop-types';
+import { useMediaQuery } from '@mui/material';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/utils/cn';
+import { screens } from '@/app/styles/tailwind/ui';
 
-export function CardWrapper({ children, className }) {
+export function CardWrapper({ children, className, id }) {
+  const router = useRouter();
+  const matches = useMediaQuery(`(max-width: ${screens.md})`);
+  const params = useSearchParams();
+
+  const isExtendedCardOpened = !!params.get('id');
+  const cursorStyle = isExtendedCardOpened ? 'cursor-auto' : 'cursor-pointer';
+
+  const handleClick = () => {
+    router.push(`/specialist?id=${id}`, { scroll: false });
+  };
+
   return (
     <div
-      className={cn(
-        'max-w-[906px] rounded-[24px] border-2 border-gray-200 px-[15px] py-[20px] md:flex md:p-[40px] lg:mx-auto',
-        className,
-      )}
+      className={cn('md:flex md:cursor-auto lg:mx-auto', [cursorStyle, className])}
+      onClick={matches && !isExtendedCardOpened ? handleClick : undefined}
     >
       {children}
     </div>
@@ -18,4 +32,5 @@ export function CardWrapper({ children, className }) {
 CardWrapper.propTypes = {
   children: PropType.node,
   className: PropType.string,
+  id: PropType.string,
 };

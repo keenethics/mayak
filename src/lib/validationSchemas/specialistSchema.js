@@ -67,6 +67,9 @@ const restProps = z.object({
   email: zString.email().nullish(),
   website: zString.url().nullish(),
   placesOfWork: zPlacesOfWorkSchema.default([]),
+  instagram: zString.url().nullish(),
+  facebook: zString.url().nullish(),
+  tiktok: zString.url().nullish(),
 });
 
 const activeSpecialistSchema = restProps.extend({
