@@ -74,6 +74,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
       connect: uniqueObjectsWithId(therapies),
     },
     isFreeReception: faker.datatype.boolean(),
+    isActive: faker.datatype.boolean(),
     phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),

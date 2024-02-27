@@ -6,7 +6,7 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, ListFaq } from '@admin/components/Faq';
-import { SpecialistCreate } from '@admin/components/Specialist';
+import { SpecialistCreate, SpecialistsList, SpecialistShow } from '@admin/components/Specialist';
 import { authProvider } from './authProvider';
 import { OrganizationCreate } from './_components/Organization';
 
@@ -26,9 +26,9 @@ export default function AdminPage() {
       <Resource
         name={RESOURCES.specialist}
         options={{ label: 'Specialist' }}
-        list={ListGuesser}
+        list={SpecialistsList}
         edit={EditGuesser}
-        show={ShowGuesser}
+        show={SpecialistShow}
         create={SpecialistCreate}
       />
       <Resource name={RESOURCES.event} list={ListGuesser} create={EventCreate} />
