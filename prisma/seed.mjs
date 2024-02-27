@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { PrismaClient } from '@prisma/client';
+import { DaysOfWeek, PrismaClient } from '@prisma/client';
 
 function getFullAddress() {
   const street = faker.location.streetAddress();
@@ -48,6 +48,32 @@ function randomPlaceOfWork(districts) {
   };
 }
 
+function randomDaysOfWork() {
+  const daysOfWeek = [...Object.values(DaysOfWeek)];
+  const daysSet = new Set();
+  for (let i = 0; i < 5; i += 1) {
+    daysSet.add(faker.number.int({ min: 0, max: 6 }));
+  }
+  const daysArray = [...daysSet];
+  function randomTimeRange() {
+    function formatTime(time) {
+      return time < 10 ? `0${time}` : time;
+    }
+    const hourStart = faker.number.int({ min: 0, max: 12 });
+    const minutesStart = faker.number.int({ min: 0, max: 59 });
+    const hourEnd = faker.number.int({ min: 13, max: 23 });
+    const minutesEnd = faker.number.int({ min: 0, max: 59 });
+    return `${formatTime(hourStart)}:${formatTime(minutesStart)}-${formatTime(hourEnd)}:${formatTime(minutesEnd)}`;
+  }
+  const timeRange = randomTimeRange();
+  return {
+    create: daysArray.map(day => ({
+      dayOfWeek: daysOfWeek[day],
+      timeRanges: [timeRange],
+    })),
+  };
+}
+
 function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   const randomPlacesOfWork = Array(faker.number.int({ min: 1, max: 3 }))
@@ -78,10 +104,10 @@ function randomSpecialist({ districts, specializations, therapies }) {
     phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
+    daysOfWork: randomDaysOfWork(),
     description: faker.lorem.paragraph(),
   };
 }
-
 function randomOrganization({ therapies, districts, organizationTypes }) {
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
@@ -108,6 +134,7 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
+    daysOfWork: randomDaysOfWork(),
     description: faker.lorem.paragraph(),
   };
 }
