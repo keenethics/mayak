@@ -9,6 +9,7 @@ import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
 import { SocialLink, InnerLink, OutlinedButton } from '@components';
 import { useBodyScrollLock } from '@hooks';
+import { Feedback } from './Feedback';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
@@ -25,11 +26,17 @@ export function Header() {
   const basicBtnFocus = 'focus:text-primary-600 focus:bg-primary-200';
   const basicBtnActive = 'active:bg-primary-200 active:text-primary-600';
   const logoHeight = 'h-[36px]';
+
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isFeedbackOpen, setFeedbackOpen] = useState(false);
 
   const toggleMenu = useCallback(() => {
     setMenuOpen(state => !state);
   }, [setMenuOpen]);
+
+  const toggleFeedback = useCallback(() => {
+    setFeedbackOpen(prevState => !prevState);
+  }, [setFeedbackOpen]);
 
   useBodyScrollLock(isMenuOpen, 'y');
   return (
@@ -64,6 +71,7 @@ export function Header() {
             className={cn(basicLink, transition, iconColors, 'hover:color-primary-500 gap-6 hover:text-primary-500')}
           />
           <OutlinedButton
+            onClick={toggleFeedback}
             className={cn(
               basicBtnActive,
               basicBtnFocus,
@@ -107,6 +115,7 @@ export function Header() {
               />
             </div>
             <OutlinedButton
+              onClick={toggleFeedback}
               className={cn(
                 basicBtnActive,
                 basicBtnFocus,
@@ -134,6 +143,8 @@ export function Header() {
           <div className="h-[100px] bg-secondary-100 text-primary-700">Donation stub</div>
         </div>
       </nav>
+
+      <Feedback isFeedbackOpen={isFeedbackOpen} onClose={toggleFeedback} />
     </>
   );
 }
