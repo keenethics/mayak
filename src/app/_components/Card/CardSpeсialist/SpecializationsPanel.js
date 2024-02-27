@@ -2,11 +2,26 @@
 
 import P from 'prop-types';
 import { Dot } from '@icons/index';
+import { useSearchParams } from 'next/navigation';
 import { ListTruncator } from '../../ListTruncator';
 import { Caption } from '../../Typography';
 
 export function SpecializationsPanel({ specialistId, specializations }) {
-  return (
+  const params = useSearchParams();
+  const extendedCardOpened = !!params.get('id');
+
+  return extendedCardOpened ? (
+    <div className="inline-flex flex-wrap items-center gap-[8px]">
+      {specializations.map((specialization, index) => (
+        <div className="flex items-center justify-center gap-[10px]" key={index}>
+          <Caption className="whitespace-nowrap text-start font-bold text-gray-600 lg:text-p4">
+            {specialization}
+          </Caption>
+          {index !== specializations.length - 1 && <Dot />}
+        </div>
+      ))}
+    </div>
+  ) : (
     <ListTruncator
       id={specialistId}
       items={specializations}
