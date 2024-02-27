@@ -19,7 +19,7 @@ export function ExperienceList({ labels, className }) {
             icon={icon}
             key={content}
             text={content}
-            className={cn('flex-1 text-other-green md:flex-initial md:flex-shrink', color)}
+            className={cn('flex-shrink-1 flex-initial justify-between gap-2  text-other-green', color)}
           />
         ) : (
           ''

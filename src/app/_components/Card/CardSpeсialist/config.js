@@ -11,6 +11,8 @@ import {
   BlueFb,
   BlueInsta,
   BlueTikTok,
+  BlueYoutube,
+  BlueLinkedin,
 } from '@icons/index';
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
@@ -68,7 +70,7 @@ export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork
   },
 ];
 
-export const getSpecialistSocials = ({ instagram, facebook, tiktok }) => [
+export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, linkedin }) => [
   {
     id: 'Instagram',
     icon: <BlueInsta />,
@@ -78,6 +80,16 @@ export const getSpecialistSocials = ({ instagram, facebook, tiktok }) => [
     id: 'Facebook',
     icon: <BlueFb />,
     href: facebook,
+  },
+  {
+    id: 'Youtube',
+    icon: <BlueYoutube />,
+    href: youtube,
+  },
+  {
+    id: 'Linkdin',
+    icon: <BlueLinkedin />,
+    href: linkedin,
   },
   {
     id: 'TikTok',

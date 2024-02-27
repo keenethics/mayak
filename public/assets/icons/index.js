@@ -15,6 +15,8 @@ import Dot from './card-dot.svg';
 import BlueFb from './specialist-facebook.svg';
 import BlueInsta from './specialist-instagram.svg';
 import BlueTikTok from './specialist-tiktok.svg';
+import BlueYoutube from './specialist-youtube.svg';
+import BlueLinkedin from './specialist-linkedin.svg';
 
 export {
   Site,
@@ -34,4 +36,6 @@ export {
   BlueFb,
   BlueInsta,
   BlueTikTok,
+  BlueYoutube,
+  BlueLinkedin,
 };

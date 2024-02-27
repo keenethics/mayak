@@ -52,7 +52,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
       </CardSectionWrapper>
 
       <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px]">
-        <div className="relative flex-1">
+        <div className="relative w-full flex-1">
           <header className="flex flex-row gap-[10px]">
             <ProfileImage gender={gender} className="md:hidden" socials={socials} />
             <div className="w-full">

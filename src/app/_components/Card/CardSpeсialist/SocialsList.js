@@ -11,7 +11,7 @@ export function SocialsList({ socials }) {
             key={idx}
             target="_blank"
             rel="noopener noreferrer"
-            className="cursor-pointer text-primary-700 hover:text-primary-500 md:h-[20px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
+            className="cursor-pointer text-primary-700 hover:text-primary-500 md:h-[15px] md:w-[15px] lg:h-[24px] lg:w-[24px]"
             aria-label={`Open ${item.id} of specialist on click`}
           >
             {item.icon}
