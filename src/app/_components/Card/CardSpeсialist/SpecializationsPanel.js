@@ -29,13 +29,28 @@ function ListTruncator({ id, items, ellipsis = '...', itemRender, tooltipItemRen
       </span>
       {overflown && (
         <>
-          <ShowHint opens={`hint-for-${id}`}>
-            <span className="absolute right-[80px] top-0 z-[13] h-full w-[80px] cursor-pointer bg-gradient-to-l from-other-white from-[30%] text-end font-bold text-gray-600 md:right-0">
+          <ShowHint
+            opens={`hint-for-${id}`}
+            actions={{ onMouseEnter: ({ open }) => open(`hint-for-${id}`), onMouseLeave: ({ close }) => close() }}
+          >
+            <span className="invisible absolute right-[80px] top-0 h-full w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%] text-end font-bold text-gray-600 md:visible md:right-0">
               &nbsp;{ellipsis}&nbsp;
             </span>
           </ShowHint>
-          <HintWindow name={`hint-for-${id}`} className="right-0 top-[20px] z-[99999]">
-            <div className="flex flex-col gap-[10px] rounded-[4px] px-[8px] py-[4px] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)]">
+          <ShowHint
+            opens={`hint-for-${id}`}
+            actions={{
+              onClick: ({ open }) => {
+                open(n => (n === `hint-for-${id}` ? '' : `hint-for-${id}`));
+              },
+            }}
+          >
+            <span className="absolute right-[80px] top-0 h-full w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%] text-end font-bold text-gray-600 md:invisible md:right-0">
+              &nbsp;{ellipsis}&nbsp;
+            </span>
+          </ShowHint>
+          <HintWindow name={`hint-for-${id}`} className="right-0 top-[20px]">
+            <div className="visible flex flex-col gap-[10px] rounded-[4px] px-[8px] py-[4px] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)]">
               {items.map(tooltipItemRender)}
             </div>
           </HintWindow>

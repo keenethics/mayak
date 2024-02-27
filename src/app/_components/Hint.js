@@ -15,20 +15,14 @@ export function Hint({ children }) {
   return <HintContext.Provider value={{ open, close, openName }}>{children}</HintContext.Provider>;
 }
 
-export function Show({ children, opens: opensWindowName }) {
+export function Show({ children, opens: opensWindowName, actions }) {
   const { open, close } = useContext(HintContext);
 
-  // let timeoutId = null;
-
-  // setting timeout to prevent element "blinking" when mouse moves from trigger to window
   return cloneElement(children, {
     id: opensWindowName,
-    onMouseEnter: () => {
-      open(opensWindowName);
-    },
-    onMouseLeave: () => {
-      close();
-    },
+    onClick: () => actions?.onClick?.({ open, close }),
+    onMouseEnter: () => actions?.onMouseEnter?.({ open, close }),
+    onMouseLeave: () => actions?.onMouseLeave?.({ open, close }),
   });
 }
 
@@ -68,4 +62,9 @@ Hint.propTypes = {
 Show.propTypes = {
   children: PropTypes.node.isRequired,
   opens: PropTypes.string.isRequired,
+  actions: PropTypes.shape({
+    onClick: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+  }),
 };
