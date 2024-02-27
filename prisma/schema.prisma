@@ -63,6 +63,25 @@ model Specialist {
   @@map("specialist")
 }
 
+model Organization {
+  id              String             @id @default(uuid()) @db.Uuid
+  createdAt       DateTime           @default(now())
+  name            String             @db.VarChar(128)
+  type            OrganizationType[]
+  yearsOnMarket   Int?               @db.SmallInt
+  formatOfWork    FormatOfWork?
+  addresses       Address[]
+  therapies       Therapy[]
+  isFreeReception Boolean?
+  description     String?            @db.Text
+  phone           String?            @db.VarChar(15)
+  email           String?            @db.VarChar(320)
+  website         String?            @db.Text
+  isActive        Boolean            @default(false)
+
+  @@map("organization")
+}
+
 model Specialization {
   id          String       @id @default(uuid()) @db.Uuid
   createdAt   DateTime     @default(now())
@@ -91,23 +110,34 @@ model District {
   @@map("district")
 }
 
+model OrganizationType {
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  name          String         @unique @db.VarChar(64)
+  organizations Organization[]
+
+  @@map("organization_type")
+}
+
 model Therapy {
-  id          String       @id @default(uuid()) @db.Uuid
-  createdAt   DateTime     @default(now())
-  name        String       @unique @db.VarChar(64)
-  specialists Specialist[]
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  name          String         @unique @db.VarChar(64)
+  specialists   Specialist[]
+  organizations Organization[]
 
   @@map("therapy")
 }
 
 model Address {
-  id           String        @id @default(uuid()) @db.Uuid
-  createdAt    DateTime      @default(now())
-  nameOfClinic String?       @db.VarChar(255)
-  fullAddress  String        @db.VarChar(128) // street,building number,floor,room number
-  district     District      @relation(fields: [districtId], references: [id])
-  districtId   String        @db.Uuid
-  placesOfWork PlaceOfWork[]
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  nameOfClinic  String?        @db.VarChar(255)
+  fullAddress   String         @db.VarChar(128) // street,building number,floor,room number
+  district      District       @relation(fields: [districtId], references: [id])
+  districtId    String         @db.Uuid
+  placesOfWork  PlaceOfWork[]
+  organizations Organization[]
 
   @@map("address")
 }
