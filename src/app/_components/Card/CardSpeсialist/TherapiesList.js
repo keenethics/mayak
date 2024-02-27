@@ -1,7 +1,7 @@
 import React from 'react';
 import P from 'prop-types';
 import { cn } from '@/utils/cn';
-import { borderStyle } from '@/app/_components/Card/CardSpeсialist/classNames';
+import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
 
 export function TherapiesList({ therapies, className }) {
   return (

@@ -1,6 +1,11 @@
 'use client';
 
 import {
+  BlueFb,
+  BlueInsta,
+  BlueLinkedin,
+  BlueTikTok,
+  BlueYoutube,
   Clock,
   Mail,
   MedAttention,
@@ -8,11 +13,6 @@ import {
   OnlineMeeting,
   Phone,
   Site,
-  BlueFb,
-  BlueInsta,
-  BlueTikTok,
-  BlueYoutube,
-  BlueLinkedin,
 } from '@icons/index';
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
@@ -47,6 +47,7 @@ export const getContactsList = ({ phone, email, website }) => [
   },
 ];
 
+export const borderStyle = 'border-dashed border-t-gray-200';
 const iconStyle = 'h-[15px] w-[15px] lg:h-[20px] lg:w-[20px]';
 
 export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork }) => [

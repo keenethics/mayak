@@ -1,29 +1,35 @@
 import React from 'react';
 import P from 'prop-types';
 import { specialistSocialsPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
+import { cn } from '@/utils/cn';
 
-export function SocialsList({ socials }) {
+export function SocialsList({ socials, className }) {
   return (
-    <div className="hidden md:flex md:flex-row md:items-center md:justify-center md:gap-[12px] lg:flex lg:flex-row lg:items-center lg:justify-center">
+    <ul
+      className={cn(
+        'hidden md:flex md:flex-row md:items-center md:justify-center md:gap-[5px] lg:gap-[12px]',
+        className,
+      )}
+    >
       {socials?.map((item, idx) =>
         item.href !== null ? (
-          <a
+          <li
             key={idx}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer text-primary-700 hover:text-primary-500 md:h-[15px] md:w-[15px] lg:h-[24px] lg:w-[24px]"
-            aria-label={`Open ${item.id} of specialist on click`}
+            className="cursor-pointer text-primary-700 transition ease-in-out hover:text-primary-500 md:h-[22px] md:w-[22px] lg:h-[24px] lg:w-[24px]"
           >
-            {item.icon}
-          </a>
+            <a target="_blank" rel="noopener noreferrer" aria-label={`Open ${item.id} of specialist on click`}>
+              {item.icon}
+            </a>
+          </li>
         ) : (
           ''
         ),
       )}
-    </div>
+    </ul>
   );
 }
 
 SocialsList.propTypes = {
   socials: P.arrayOf(specialistSocialsPropType),
+  className: P.string,
 };

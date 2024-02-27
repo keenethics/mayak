@@ -10,15 +10,17 @@ export function DetailsList({ details, className }) {
   return (
     <div className={cn('flex flex-col gap-[16px]', className)}>
       <PlacesOfWorkList places={placeOfWork} showIcon={true} />
-      <li className="flex gap-[8px]">
-        <span className="text-gray-500">
-          <IDCard />
-        </span>
-        <div>
-          <h3 className="text-p4 font-bold text-gray-700">Про спеціаліста</h3>
-          <p className="text-p4">{description}</p>
-        </div>
-      </li>
+      <ul>
+        <li className="flex gap-[12px] md:gap-[16px]">
+          <span className="text-gray-500 lg:mt-[3px]">
+            <IDCard />
+          </span>
+          <div className="text-p4 lg:text-p3">
+            <h3 className="font-bold text-gray-700">Про спеціаліста</h3>
+            <p>{description}</p>
+          </div>
+        </li>
+      </ul>
     </div>
   );
 }

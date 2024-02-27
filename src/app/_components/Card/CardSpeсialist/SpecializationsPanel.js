@@ -3,8 +3,7 @@
 import P from 'prop-types';
 import { Dot } from '@icons/index';
 import { useSearchParams } from 'next/navigation';
-import { ListTruncator } from '../../ListTruncator';
-import { Caption } from '../../Typography';
+import { Caption, ListTruncator } from '@components';
 
 export function SpecializationsPanel({ specialistId, specializations }) {
   const params = useSearchParams();

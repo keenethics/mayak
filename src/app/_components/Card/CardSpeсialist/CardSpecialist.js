@@ -6,13 +6,12 @@ import { ContactsList } from './ContactsList';
 import { SpecializationsPanel } from './SpecializationsPanel';
 import { SpecialistTitle } from './SpecialistTitle';
 import { ExperienceList } from './ExperienceList';
-import { TherapiesList } from './TherapiesList';
 import { PlacesOfWorkList } from './PlacesOfWorkList';
 import { CardWrapper } from './CardWrapper';
 import { getContactsList, getLabelsList, getSpecialistSocials } from './config';
 import { CardButton } from '@/app/_components/Card/CardSpeсialist/CardButton';
 import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
-import { borderStyle } from '@/app/_components/Card/CardSpeсialist/classNames';
+import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
 import { cn } from '@/utils/cn';
 import { DetailsList } from '@/app/_components/Card/CardSpeсialist/DetailsList';
 
@@ -22,11 +21,11 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     gender,
     firstName,
     lastName,
+    surname,
     specializations,
     yearsOfExperience,
     isFreeReception,
     formatOfWork,
-    therapies,
     placesOfWork,
     phone,
     email,
@@ -38,11 +37,11 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   } = specialist;
 
   const specializationsList = specializations.map(s => s.name);
-  const therapiesList = therapies.map(t => t.name.toLowerCase());
   const placeOfWork = [placesOfWork[0].addresses[0]];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork });
   const socials = getSpecialistSocials({ instagram, facebook, tiktok });
+  const name = surname ? `${lastName} ${firstName}` : `${lastName} ${firstName} ${surname}`;
 
   return (
     <CardWrapper className={className} id={id}>
@@ -52,16 +51,15 @@ export function CardSpecialist({ specialist, className, extended = false }) {
       </CardSectionWrapper>
 
       <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px]">
-        <div className="relative w-full flex-1">
+        <div className="relative w-full">
           <header className="flex flex-row gap-[10px]">
             <ProfileImage gender={gender} className="md:hidden" socials={socials} />
             <div className="w-full">
               <SpecializationsPanel specialistId={id} specializations={specializationsList} />
-              <SpecialistTitle title={`${firstName} ${lastName}`} />
+              <SpecialistTitle name={name} />
             </div>
           </header>
           <ExperienceList labels={labelsList} className="mt-[16px] md:mt-[12px]" />
-          <TherapiesList therapies={therapiesList} className="mt-[14px] md:mt-[12px]" />
           {!extended && (
             <PlacesOfWorkList
               className="mt-[16px] border-t pt-[12px] md:mt-[12px] md:border-b md:py-[12px]"
@@ -69,13 +67,16 @@ export function CardSpecialist({ specialist, className, extended = false }) {
             />
           )}
         </div>
-        {!extended && <CardButton className="mt-[16px]" id={id} />}
+        {!extended && <CardButton className="mt-auto" id={id} />}
         {extended && (
           <>
-            <DetailsList className="mt-[24px] md:mt-[32px]" details={{ placeOfWork, description }} />
+            <DetailsList
+              className={cn('mt-[24px] border-t pt-[16px]', borderStyle)}
+              details={{ placeOfWork, description }}
+            />
             <ContactsList
               contacts={contactsList}
-              className={cn('mt-[16px] border-t pt-[24px] md:hidden', borderStyle)}
+              className={cn('mt-[12px] border-t pt-[12px] md:hidden', borderStyle)}
             />
           </>
         )}
