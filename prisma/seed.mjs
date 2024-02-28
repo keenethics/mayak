@@ -80,6 +80,8 @@ function randomSpecialist({ districts, specializations, therapies }) {
     description: faker.lorem.paragraph(),
     instagram: nullable(faker.internet.url()),
     facebook: nullable(faker.internet.url()),
+    youtube: nullable(faker.internet.url()),
+    linkedin: nullable(faker.internet.url()),
     tiktok: nullable(faker.internet.url()),
   };
 }

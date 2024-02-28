@@ -69,6 +69,8 @@ const restProps = z.object({
   placesOfWork: zPlacesOfWorkSchema.default([]),
   instagram: zString.url().nullish(),
   facebook: zString.url().nullish(),
+  youtube: zString.url().nullish(),
+  linkedin: zString.url().nullish(),
   tiktok: zString.url().nullish(),
 });
 

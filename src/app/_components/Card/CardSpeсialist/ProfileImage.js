@@ -16,12 +16,12 @@ export function ProfileImage({ gender, className, socials }) {
   return (
     <div
       className={cn(
-        'flex min-h-[70px] min-w-[70px] flex-col items-center justify-center rounded-[16px] bg-gray-100 p-[20px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px] lg:gap-[20px] lg:px-[52px] lg:pb-[12px] lg:pt-[56px]',
+        'relative flex min-h-[70px] min-w-[70px] flex-col items-center justify-center rounded-[16px] bg-gray-100 p-[20px] md:h-[150px] md:w-[150px] md:gap-[15px] md:p-[15px] lg:h-[200px] lg:w-[200px]',
         className,
       )}
     >
       <svg className="h-[24px] w-[24px] md:h-[40px] md:w-[40px] lg:h-[88px] lg:w-[88px]">{image}</svg>
-      <SocialsList socials={socials} />
+      <SocialsList socials={socials} className="absolute bottom-[14px] lg:bottom-[18px]" />
     </div>
   );
 }

@@ -3,8 +3,7 @@
 import P from 'prop-types';
 import { Dot } from '@icons/index';
 import { useSearchParams } from 'next/navigation';
-import { ListTruncator } from '../../ListTruncator';
-import { Caption } from '../../Typography';
+import { Caption, ListTruncator } from '@components';
 
 export function SpecializationsPanel({ specialistId, specializations }) {
   const params = useSearchParams();
@@ -27,7 +26,7 @@ export function SpecializationsPanel({ specialistId, specializations }) {
       items={specializations}
       itemRender={(specialization, index) => (
         <div className="flex items-center justify-center gap-[10px]" key={index}>
-          <Caption className="whitespace-nowrap text-start font-bold text-gray-600 lg:text-p4">
+          <Caption className="whitespace-nowrap text-start text-cardsm font-bold text-gray-600 lg:text-p4">
             {specialization}
           </Caption>
           {index !== specializations.length - 1 && <Dot />}

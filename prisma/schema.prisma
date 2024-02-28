@@ -50,6 +50,8 @@ model Specialist {
   isActive          Boolean          @default(false)
   instagram         String?          @db.Text
   facebook          String?          @db.Text
+  youtube           String?          @db.Text
+  linkedin          String?          @db.Text
   tiktok            String?          @db.Text
 
   @@map("specialist")

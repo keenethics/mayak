@@ -1,6 +1,11 @@
 'use client';
 
 import {
+  BlueFb,
+  BlueInsta,
+  BlueLinkedin,
+  BlueTikTok,
+  BlueYoutube,
   Clock,
   Mail,
   MedAttention,
@@ -8,9 +13,6 @@ import {
   OnlineMeeting,
   Phone,
   Site,
-  BlueFb,
-  BlueInsta,
-  BlueTikTok,
 } from '@icons/index';
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
@@ -45,6 +47,7 @@ export const getContactsList = ({ phone, email, website }) => [
   },
 ];
 
+export const borderStyle = 'border-dashed border-t-gray-200';
 const iconStyle = 'h-[15px] w-[15px] lg:h-[20px] lg:w-[20px]';
 
 export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork }) => [
@@ -68,7 +71,7 @@ export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork
   },
 ];
 
-export const getSpecialistSocials = ({ instagram, facebook, tiktok }) => [
+export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, linkedin }) => [
   {
     id: 'Instagram',
     icon: <BlueInsta />,
@@ -78,6 +81,16 @@ export const getSpecialistSocials = ({ instagram, facebook, tiktok }) => [
     id: 'Facebook',
     icon: <BlueFb />,
     href: facebook,
+  },
+  {
+    id: 'Youtube',
+    icon: <BlueYoutube />,
+    href: youtube,
+  },
+  {
+    id: 'Linkdin',
+    icon: <BlueLinkedin />,
+    href: linkedin,
   },
   {
     id: 'TikTok',

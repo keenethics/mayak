@@ -39,7 +39,7 @@ export function Header() {
       <nav
         className={cn(
           flexBetween,
-          'fixed top-0 z-[17] w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 lg:static lg:px-20',
+          'fixed left-0 right-0 top-0 z-[17] w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 lg:static lg:px-20',
         )}
       >
         <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
@@ -74,7 +74,8 @@ export function Header() {
         <BurgerIcon className={'block lg:hidden'} onClick={toggleMenu} />
         <div
           className={cn(
-            'absolute left-[100dvw] right-0 top-0 flex h-dvh w-dvw flex-col bg-other-black transition-all duration-300 lg:hidden',
+            'absolute left-[100%] right-0 top-0 flex h-dvh w-dvw flex-col bg-other-black lg:hidden',
+            transition,
             isMenuOpen && 'translate-x-[-100%]',
           )}
         >

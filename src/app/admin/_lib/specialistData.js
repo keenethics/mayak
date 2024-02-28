@@ -101,6 +101,36 @@ export const SpecialistFormFields = {
     label: 'Веб сторінка',
     isRequired: false,
   },
+  instagram: {
+    name: 'instagram',
+    type: 'url',
+    label: 'Інстаграм',
+    isRequired: false,
+  },
+  facebook: {
+    name: 'facebook',
+    type: 'url',
+    label: 'Фейсбук',
+    isRequired: false,
+  },
+  youtube: {
+    name: 'youtube',
+    type: 'url',
+    label: 'Ютуб',
+    isRequired: false,
+  },
+  linkedin: {
+    name: 'linkedin',
+    type: 'url',
+    label: 'Лінкедін',
+    isRequired: false,
+  },
+  tiktok: {
+    name: 'tiktok',
+    type: 'url',
+    label: 'Тікток',
+    isRequired: false,
+  },
 };
 
 export const SpecialistFormSections = {

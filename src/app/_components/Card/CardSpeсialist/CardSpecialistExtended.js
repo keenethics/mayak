@@ -29,9 +29,9 @@ export function CardSpecialistExtended({ specialist, className }) {
       isOpen={open}
       onClose={handleClose}
       bgColor="bg-other-white"
-      className="mt-[50px] h-full w-[100%] overflow-y-scroll rounded-[24px] p-[24px] md:mx-[16px] md:h-auto lg:max-w-[1000px]"
+      className="no-scrollbar mt-[50px] h-full w-[100%] overflow-y-scroll rounded-[24px] p-[24px] md:mx-[16px] md:h-auto lg:max-w-[1000px]"
     >
-      <CardSpecialist specialist={specialist} className={cn('', className)} extended={true} />
+      <CardSpecialist specialist={specialist} className={cn(className)} extended={true} />
     </Modal>
   );
 }
