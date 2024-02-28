@@ -31,7 +31,7 @@ export const MODEL_INCLUDES_GET_ONE = {
   },
   organization: {
     therapies: { select: { name: true } },
-    types: { select: { name: true } },
+    type: { select: { name: true } },
     addresses: {
       select: {
         nameOfClinic: true,

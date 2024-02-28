@@ -36,7 +36,7 @@ export function OrganizationShow() {
             <TextField source="district.name" label="District" />
           </Datagrid>
         </ArrayField>
-        <ArrayField source="types">
+        <ArrayField source="type">
           <SingleFieldList linkType={false}>
             <ChipField source="name" size="small" />
           </SingleFieldList>
