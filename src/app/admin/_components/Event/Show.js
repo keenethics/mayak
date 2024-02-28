@@ -27,7 +27,11 @@ function ShowLayout() {
       <RichTextField source="notes" emptyText="No notes..." />
       <TextField source="format" />
       {data?.format === EventFormat.OFFLINE && <TextField source="address" />}
-      {data?.locationLink && <TextField source="locationLink" />}
+      {data?.locationLink && (
+        <Labeled label="Location link">
+          <LocationLink link={data.locationLink} />
+        </Labeled>
+      )}
       <DateField source="createdAt" />
       <DateField source="eventDate" />
       <TextField source="priceType" />
@@ -54,13 +58,28 @@ function AdditionalLink({ label, link }) {
   return (
     <div>
       <span>{label}</span>:{' '}
-      <a className="text-[#0000EE]" href={link}>
+      <a className="text-[#0000EE]" rel="noopener noreferrer" target="_blank" href={link}>
         {link}
       </a>
     </div>
   );
 }
 AdditionalLink.propTypes = {
+  label: PropTypes.string,
+  link: PropTypes.string,
+};
+
+// Must use a component for <Labeled/> wrapper to take effect
+function LocationLink({ link }) {
+  return (
+    <div>
+      <a className="text-[#0000EE]" rel="noopener noreferrer" target="_blank" href={link}>
+        {link}
+      </a>
+    </div>
+  );
+}
+LocationLink.propTypes = {
   label: PropTypes.string,
   link: PropTypes.string,
 };

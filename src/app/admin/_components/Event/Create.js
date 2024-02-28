@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { CreateEventSchema } from '@admin/_lib/validationSchemas/createEventSchema';
 import { transformEventData } from '@admin/_utils/transformEventData';
+import { EventFormat, EventPriceFormat } from '@prisma/client';
 import { TagSelect } from './TagSelect';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
@@ -12,8 +13,8 @@ function PriceInput() {
   const priceType = useWatch({ name: 'priceType' });
   return (
     <>
-      <span className="self-center">{priceType === 'MIN_PRICE' && 'від'}</span>
-      <NumberInput disabled={priceType === 'FREE'} label="Вартість" source="price" />
+      <span className="self-center">{priceType === EventPriceFormat.MIN_PRICE && 'від'}</span>
+      <NumberInput disabled={priceType === EventPriceFormat.FREE} label="Вартість" source="price" />
     </>
   );
 }
@@ -22,8 +23,18 @@ function AddressInput() {
   const format = useWatch({ name: 'format' });
   return (
     <>
-      <TextInput disabled={format !== 'OFFLINE'} source="address" label="Адреса чи назва приміщення" className="w-96" />
-      <TextInput disabled={format !== 'OFFLINE'} source="locationLink" label="Посилання на локацію" className="w-96" />
+      <TextInput
+        disabled={format !== EventFormat.OFFLINE}
+        source="address"
+        label="Адреса чи назва приміщення"
+        className="w-96"
+      />
+      <TextInput
+        disabled={format !== EventFormat.OFFLINE}
+        source="locationLink"
+        label="Посилання на локацію"
+        className="w-96"
+      />
     </>
   );
 }
@@ -44,9 +55,9 @@ export function EventCreate() {
           <SelectInput
             source="priceType"
             choices={[
-              { id: 'FREE', name: 'Безкоштовно' },
-              { id: 'FIXED_PRICE', name: 'Фіксована вартість' },
-              { id: 'MIN_PRICE', name: 'Мінімальна вартість' },
+              { id: EventPriceFormat.FREE, name: 'Безкоштовно' },
+              { id: EventPriceFormat.FIXED_PRICE, name: 'Фіксована вартість' },
+              { id: EventPriceFormat.MIN_PRICE, name: 'Мінімальна вартість' },
             ]}
             label="Варіанти"
             validate={required()}
@@ -58,8 +69,8 @@ export function EventCreate() {
           <SelectInput
             source="format"
             choices={[
-              { id: 'OFFLINE', name: 'Офлайн' },
-              { id: 'ONLINE', name: 'Онлайн' },
+              { id: EventFormat.OFFLINE, name: 'Офлайн' },
+              { id: EventFormat.ONLINE, name: 'Онлайн' },
             ]}
             label="Формат події"
             validate={required()}
