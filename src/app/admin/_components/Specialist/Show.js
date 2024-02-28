@@ -11,7 +11,9 @@ import {
   ChipField,
   Datagrid,
   DateField,
+  FunctionField,
 } from 'react-admin';
+import { DaysOfWorkList } from '@admin/components';
 
 export function SpecialistShow() {
   return (
@@ -52,6 +54,7 @@ export function SpecialistShow() {
         <TextField source="phone" />
         <TextField source="email" />
         <TextField source="website" />
+        <FunctionField source="daysOfWork" render={record => <DaysOfWorkList rawDaysOfWork={record.daysOfWork} />} />
       </SimpleShowLayout>
     </Show>
   );

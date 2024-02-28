@@ -28,6 +28,12 @@ export const MODEL_INCLUDES_GET_ONE = {
         },
       },
     },
+    daysOfWork: {
+      select: {
+        dayOfWeek: true,
+        timeRanges: true,
+      },
+    },
   },
   organization: {
     therapies: { select: { name: true } },
@@ -37,6 +43,12 @@ export const MODEL_INCLUDES_GET_ONE = {
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { name: true } },
+      },
+    },
+    daysOfWork: {
+      select: {
+        dayOfWeek: true,
+        timeRanges: true,
       },
     },
   },
