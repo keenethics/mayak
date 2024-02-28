@@ -8,7 +8,6 @@ import { MODEL_INCLUDES } from '@/lib/consts';
 import { RESOURCES } from '@/app/admin/_lib/consts';
 
 export const MODEL_SEARCH_FIELDS = {
-  [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
   [RESOURCES.event]: ['title', 'organizerName'],
 };
 
@@ -29,6 +28,9 @@ const handler = auth(
         where: searchInputFilters(modelName, json.params?.filter?.q),
       },
       getOne: { debug: false, include: MODEL_INCLUDES[modelName] },
+      update: {
+        debug: true,
+      },
     });
     return NextResponse.json(result);
   }),

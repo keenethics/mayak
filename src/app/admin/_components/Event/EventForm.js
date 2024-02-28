@@ -1,9 +1,17 @@
-import { SimpleForm, TextInput, DateTimeInput, required, SelectInput, NumberInput } from 'react-admin';
+import {
+  SimpleForm,
+  TextInput,
+  DateTimeInput,
+  required,
+  SelectInput,
+  NumberInput,
+  useEditContext,
+  Loading,
+} from 'react-admin';
 import { TagSelect } from './TagSelect';
 import { useWatch } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { CreateEventSchema } from '@admin/_lib/validationSchemas/createEventSchema';
-import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod";
+import { EventSchema } from '@admin/_lib/validationSchemas/eventSchema';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
@@ -27,11 +35,18 @@ function AddressInput() {
   );
 }
 
-export function EventForm() {
-  const [selectedTags, setSelectedTags] = useState(null);
+export function EventFormEdit({ toolbar, setSelectedTags }) {
+  // it is possible that form will be rendered even if tags of event
+  // are still being fetched, so we need all data to be fetched before rendering a form
+  const { isFetching, isLoading, record } = useEditContext();
+  if (isFetching || isLoading) return <Loading />;
+  const recordTags = record.tags.map(tag => ({ label: tag.name, value: tag.name }));
+  return <EventForm toolbar={toolbar} setSelectedTags={setSelectedTags} recordTags={recordTags} />;
+}
 
+export function EventForm({ toolbar, setSelectedTags, recordTags }) {
   return (
-    <SimpleForm resolver={zodResolver(CreateEventSchema)}>
+    <SimpleForm resolver={zodResolver(EventSchema)} toolbar={toolbar}>
       <p className="font-bold">Основна інформація</p>
       <TextInput source="title" label="Назва події" validate={required()} className="w-72" />
       <TextInput source="organizerName" label="Ім'я організатора" validate={required()} className="w-72" />
@@ -65,7 +80,7 @@ export function EventForm() {
         <AddressInput />
       </div>
       <p className="font-bold">Теги події</p>
-      <TagSelect setSelectedTags={setSelectedTags} />
+      <TagSelect setSelectedTags={setSelectedTags} defaultValue={recordTags} />
       <p className="mt-6 font-bold">
         Додаткове посилання(У поле тип введіть що це за посилання: телеграм, вебсайт тощо)
       </p>

@@ -29,7 +29,7 @@ export default function AdminPage() {
         show={ShowGuesser}
         create={SpecialistCreate}
       />
-      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} edit={EventEdit} />
+      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} edit={EventEdit} show={ShowGuesser} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />

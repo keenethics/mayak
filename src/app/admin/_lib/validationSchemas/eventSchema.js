@@ -1,11 +1,11 @@
 import { z } from 'zod';
 import { minMaxString } from '@/lib/validationSchemas/utils';
 
-export const CreateEventSchema = z
+export const EventSchema = z
   .object({
     title: minMaxString(1, 128, 'Назва події'),
     organizerName: minMaxString(1, 128, 'Організатор'),
-    eventDate: z
+    eventDate: z.coerce
       .date({
         required_error: "Дата події - обов'язкове поле",
         invalid_type_error: 'Невірний формат дати',
@@ -48,6 +48,7 @@ export const CreateEventSchema = z
   })
   .superRefine((data, ctx) => {
     const { price, format, address, priceType } = data;
+    console.log(price);
     if (format === 'ONLINE' && address) {
       ctx.addIssue({
         code: z.ZodIssueCode.invalid_type,
