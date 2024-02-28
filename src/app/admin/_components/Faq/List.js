@@ -109,7 +109,7 @@ function ActiveStatusToggle() {
   return <Switch disabled={isLoading} checked={record.isActive} onChange={handleSwitch} />;
 }
 
-export function ListFaq() {
+export function FaqList() {
   const redirect = useRedirect();
 
   const redirectToEdit = useCallback(
