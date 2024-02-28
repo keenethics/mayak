@@ -65,11 +65,12 @@ function randomDaysOfWork() {
     const minutesEnd = faker.number.int({ min: 0, max: 59 });
     return `${formatTime(hourStart)}:${formatTime(minutesStart)}-${formatTime(hourEnd)}:${formatTime(minutesEnd)}`;
   }
-  const timeRange = randomTimeRange();
+  const timeRange1 = randomTimeRange();
+  const timeRange2 = randomTimeRange();
   return {
     create: daysArray.map(day => ({
       dayOfWeek: daysOfWeek[day],
-      timeRanges: [timeRange],
+      timeRanges: [Math.random() > 0.5 ? timeRange1 : timeRange2],
     })),
   };
 }
