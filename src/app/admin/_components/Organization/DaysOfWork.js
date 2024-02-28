@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ArrayInput, FormDataConsumer, required, SelectArrayInput, SimpleFormIterator, TextInput } from 'react-admin';
 import { DaysOfWeek } from '@prisma/client';
-import { getChoicesListFromEnum } from '@/app/admin/_utils/getChoicesListFromEnum';
-import { transformDaysOfWork } from '@/app/admin/_utils/transformDaysOfWork';
-import { formatDaysOfWork } from '@/utils/formatDaysOfWorks';
+import { DaysOfWorkList } from '@admin/components';
+import { getChoicesListFromEnum } from '@admin/_utils/getChoicesListFromEnum';
+import { transformDaysOfWork } from '@admin/_utils/transformDaysOfWork';
 
 export function DaysOfWork({ isActive }) {
   const daysOfWeekChoicesList = getChoicesListFromEnum(DaysOfWeek);
@@ -16,10 +16,10 @@ export function DaysOfWork({ isActive }) {
       {({ formData: outerFormData }) => (
         <>
           {outerFormData.daysOfWork && (
-            <p>
-              Текстовий формат графіку роботи:
-              {` ${formatDaysOfWork(transformDaysOfWork(outerFormData.daysOfWork)).join('; ')}`}
-            </p>
+            <>
+              <p>Текстовий формат графіку роботи:</p>
+              <DaysOfWorkList rawDaysOfWork={transformDaysOfWork(outerFormData.daysOfWork)} />
+            </>
           )}
           <ArrayInput source={'daysOfWork'} label={'Робочі дні'} validate={isActive && required()} fullWidth>
             <SimpleFormIterator inline>

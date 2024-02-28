@@ -3,11 +3,10 @@
 import React from 'react';
 import { ArrayInput, FormDataConsumer, required, SelectArrayInput, SimpleFormIterator, TextInput } from 'react-admin';
 import { DaysOfWeek } from '@prisma/client';
-import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistFormSections, SpecialistFormFields } from '@/app/admin/_lib/specialistData';
-import { getChoicesListFromEnum } from '@/app/admin/_utils/getChoicesListFromEnum';
-import { transformDaysOfWork } from '@/app/admin/_utils/transformDaysOfWork';
-import { formatDaysOfWork } from '@/utils/formatDaysOfWorks';
+import { DaysOfWorkList, FormFieldWrapper } from '@admin/components';
+import { SpecialistFormSections, SpecialistFormFields } from '@admin/_lib/specialistData';
+import { getChoicesListFromEnum } from '@admin/_utils/getChoicesListFromEnum';
+import { transformDaysOfWork } from '@admin/_utils/transformDaysOfWork';
 
 export function DaysOfWork() {
   const daysOfWeekChoicesList = getChoicesListFromEnum(DaysOfWeek);
@@ -19,10 +18,10 @@ export function DaysOfWork() {
         {({ formData: outerFormData }) => (
           <>
             {outerFormData.daysOfWork && (
-              <p>
-                Текстовий формат графіку роботи:
-                {` ${formatDaysOfWork(transformDaysOfWork(outerFormData.daysOfWork)).join('; ')}`}
-              </p>
+              <>
+                <p>Текстовий формат графіку роботи:</p>
+                <DaysOfWorkList rawDaysOfWork={transformDaysOfWork(outerFormData.daysOfWork)} />
+              </>
             )}
             <ArrayInput
               name={daysOfWork.name}

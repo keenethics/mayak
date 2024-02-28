@@ -1,7 +1,7 @@
 import React from 'react';
 import { Datagrid, List, TextField, BooleanField, DateField, FunctionField } from 'react-admin';
 import { organizationFilters } from '@admin/filters';
-import { formatDaysOfWork } from '@/utils/formatDaysOfWorks';
+import { DaysOfWorkList } from '@admin/components';
 
 export function OrganizationList() {
   return (
@@ -13,7 +13,7 @@ export function OrganizationList() {
         <BooleanField source="isActive" />
         <FunctionField
           source="daysOfWork"
-          render={record => formatDaysOfWork(record.daysOfWork).map((line, i) => <p key={i}>{line}</p>)}
+          render={record => <DaysOfWorkList rawDaysOfWork={record.daysOfWork} />}
           sortable={false}
         />
       </Datagrid>
