@@ -47,12 +47,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     <CardWrapper className={className} id={id}>
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
         <ProfileImage gender={gender} className="sm:w-[70px] md:max-w-[200px] lg:w-[200px]" socials={socials} />
-        <ContactsList
-          truncate={!extended}
-          specialistId={id}
-          contacts={contactsList}
-          className="mt-[16px] min-w-[70px] md:w-[150px] md:gap-[15px] lg:w-[200px]"
-        />
+        <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
 
       <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px]">
