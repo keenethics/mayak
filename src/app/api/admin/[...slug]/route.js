@@ -4,7 +4,7 @@ import { prisma } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
-import { MODEL_INCLUDES } from '@/lib/consts';
+import { MODEL_INCLUDES_GET_LIST, MODEL_INCLUDES_GET_ONE } from '@/lib/consts';
 
 export const MODEL_SEARCH_FIELDS = {
   specialist: ['firstName', 'lastName', 'surname'],
@@ -26,8 +26,9 @@ const handler = auth(
       getList: {
         debug: false,
         where: searchInputFilters(modelName, json.params?.filter?.q),
+        include: MODEL_INCLUDES_GET_LIST[modelName],
       },
-      getOne: { debug: false, include: MODEL_INCLUDES[modelName] },
+      getOne: { debug: false, include: MODEL_INCLUDES_GET_ONE[modelName] },
     });
     return NextResponse.json(result);
   }),

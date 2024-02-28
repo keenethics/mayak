@@ -1,8 +1,9 @@
 import React from 'react';
-import { Datagrid, List, TextField, BooleanField, DateField } from 'react-admin';
+import { Datagrid, List, TextField, BooleanField, DateField, FunctionField } from 'react-admin';
 import { organizationFilters } from '@admin/filters';
+import { formatDaysOfWork } from '@/utils/formatDaysOfWorks';
 
-export function OrganizationsList() {
+export function OrganizationList() {
   return (
     <List sort={{ field: 'createdAt', order: 'DESC' }} filters={organizationFilters}>
       <Datagrid rowClick="show">
@@ -10,6 +11,11 @@ export function OrganizationsList() {
         <DateField showTime source="createdAt" />
         <TextField source="formatOfWork" />
         <BooleanField source="isActive" />
+        <FunctionField
+          source="daysOfWork"
+          render={record => formatDaysOfWork(record.daysOfWork).map((line, i) => <p key={i}>{line}</p>)}
+          sortable={false}
+        />
       </Datagrid>
     </List>
   );

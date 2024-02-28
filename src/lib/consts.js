@@ -13,7 +13,7 @@ export const BASE_ERROR_MESSAGES = {
   500: 'Internal Server Error',
 };
 
-export const MODEL_INCLUDES = {
+export const MODEL_INCLUDES_GET_ONE = {
   specialist: {
     therapies: { select: { name: true } },
     specializations: { select: { name: true } },
@@ -37,6 +37,25 @@ export const MODEL_INCLUDES = {
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { name: true } },
+      },
+    },
+  },
+};
+
+export const MODEL_INCLUDES_GET_LIST = {
+  specialist: {
+    daysOfWork: {
+      select: {
+        dayOfWeek: true,
+        timeRanges: true,
+      },
+    },
+  },
+  organization: {
+    daysOfWork: {
+      select: {
+        dayOfWeek: true,
+        timeRanges: true,
       },
     },
   },

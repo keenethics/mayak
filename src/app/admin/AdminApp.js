@@ -7,15 +7,20 @@ import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, ListFaq } from '@admin/components/Faq';
 import { SpecialistCreate, SpecialistsList, SpecialistShow } from '@admin/components/Specialist';
+import { OrganizationCreate, OrganizationList, OrganizationShow } from '@admin/components/Organization';
 import { authProvider } from './authProvider';
-import { OrganizationCreate } from './_components/Organization';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
 
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
-      <Resource name={RESOURCES.organization} list={ListGuesser} create={OrganizationCreate} />
+      <Resource
+        name={RESOURCES.organization}
+        list={OrganizationList}
+        create={OrganizationCreate}
+        show={OrganizationShow}
+      />
       <Resource
         name={RESOURCES.therapy}
         options={{ label: 'Therapy' }}
