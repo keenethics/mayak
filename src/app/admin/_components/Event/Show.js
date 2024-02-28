@@ -21,6 +21,7 @@ function ShowLayout() {
   const { data, isLoading, error } = useGetOne(RESOURCES.event, { id: eventId });
   return (
     <SimpleShowLayout>
+      <TextField source="id" />
       <TextField source="title" />
       <TextField source="organizerName" />
       <RichTextField source="notes" emptyText="No notes..." />
