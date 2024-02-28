@@ -48,7 +48,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     <CardWrapper className={className} id={id}>
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
         <ProfileImage gender={gender} className="sm:w-[70px] md:max-w-[200px] lg:w-[200px]" socials={socials} />
-        <ContactsList contacts={contactsList} className="mt-[16px]" />
+        <ContactsList specialistId={id} contacts={contactsList} className="mt-[16px] max-w-full overflow-hidden" />
       </CardSectionWrapper>
 
       <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px]">
@@ -74,6 +74,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           <>
             <DetailsList className="mt-[24px] md:mt-[32px]" details={{ placeOfWork, description }} />
             <ContactsList
+              specialistId={id}
               contacts={contactsList}
               className={cn('mt-[16px] border-t pt-[24px] md:hidden', borderStyle)}
             />

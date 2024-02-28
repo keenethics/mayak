@@ -4,10 +4,12 @@ import { cn } from '@/utils/cn';
 import { ContactsListItem } from './ContactsListItem';
 import { specialistContactPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 
-export function ContactsList({ contacts, className }) {
+export function ContactsList({ specialistId, contacts, className }) {
   return (
-    <ul className={cn('flex flex-col gap-[8px]', className)}>
-      {contacts.map(contact => (contact.content ? <ContactsListItem key={contact.id} contact={contact} /> : ''))}
+    <ul className={cn('flex w-full flex-col gap-[8px]', className)}>
+      {contacts.map(contact =>
+        contact.content ? <ContactsListItem specialistId={specialistId} key={contact.id} contact={contact} /> : '',
+      )}
     </ul>
   );
 }
@@ -15,4 +17,5 @@ export function ContactsList({ contacts, className }) {
 ContactsList.propTypes = {
   contacts: P.arrayOf(specialistContactPropType),
   className: P.string,
+  specialistId: P.string.isRequired,
 };

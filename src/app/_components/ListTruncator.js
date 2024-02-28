@@ -13,7 +13,7 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
   const calculateOverflow = useCallback(() => {
     const wrapperWidth = wrapperRef.current.offsetWidth;
     const containerWidth = containerRef.current.offsetWidth;
-    if (wrapperWidth >= containerWidth) {
+    if (wrapperWidth > containerWidth) {
       setOverflown(true);
     } else {
       setOverflown(false);
@@ -32,8 +32,8 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
   const hintId = `hint-for-${id}-${getRandomInt(0, 1000000)}`;
 
   return (
-    <div id={`specializations-of-${id}`} ref={containerRef} className="w-full">
-      <span id={`wrapper-of-${id}`} className="relative inline-flex items-center gap-[8px] pr-[50px]" ref={wrapperRef}>
+    <div id={`container-of-${hintId}`} ref={containerRef} className="w-full overflow-hidden">
+      <span id={`wrapper-of-${hintId}`} className="relative inline-flex items-center gap-[8px]" ref={wrapperRef}>
         {items.map(itemRender)}
       </span>
       {overflown && (
@@ -41,14 +41,14 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
           <ShowHint
             opens={hintId}
             actions={{
-              onMouseEnter: ({ open }) => open(hintId),
-              onMouseLeave: ({ close }) => close(),
+              // onMouseEnter: ({ open }) => open(hintId),
+              // onMouseLeave: ({ close }) => close(),
               onClick: ({ open }) => {
                 open(n => (n === hintId ? '' : hintId));
               },
             }}
           >
-            <span className="absolute right-[-2px] top-0 flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
+            <span className="absolute right-[-2px] top-0 z-[200] flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
               {ellipsis || <div className="flex w-full justify-end font-bold text-gray-600">&nbsp;...&nbsp;</div>}
             </span>
           </ShowHint>
