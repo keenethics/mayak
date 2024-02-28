@@ -1,5 +1,6 @@
 import { SearchInput, DateTimeInput, SelectInput } from 'react-admin';
 import { QuickFilter } from '@admin/components/QuickFilter';
+import { EventFormat } from '@prisma/client';
 
 export const eventFilters = [
   <SearchInput key="search" source="q" alwaysOn />,
@@ -10,8 +11,8 @@ export const eventFilters = [
     key="format"
     source={'format_enum'}
     choices={[
-      { id: 'OFFLINE', name: 'Офлайн' },
-      { id: 'ONLINE', name: 'Онлайн' },
+      { id: EventFormat.OFFLINE, name: 'Офлайн' },
+      { id: EventFormat.ONLINE, name: 'Онлайн' },
     ]}
     alwaysOn
   />,

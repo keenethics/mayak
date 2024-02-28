@@ -12,7 +12,12 @@ export function EventList() {
         <TextField source="format" />
         <DateField source="createdAt" />
         <BooleanField source="isActive" />
-        <DeleteWithConfirmButton confirmTitle="Видалити подію?" />
+        <DeleteWithConfirmButton
+          confirmContent="Ви впевнені?"
+          confirmTitle="Дані будуть видалені із бази."
+          confirmColor="warning"
+          label="Видалити"
+        />
       </Datagrid>
     </List>
   );
