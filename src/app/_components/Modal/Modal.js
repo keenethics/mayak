@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import PropTypes from 'prop-types';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ClientPortal } from '../ClientPortal';
 import { ModalCloseButton } from './ModalCloseButton';
 import { cn } from '@/utils/cn';
@@ -14,15 +17,21 @@ export const Modal = ({
   children,
   className,
 }) => {
-  const blurBackground = <div className="fixed left-0 top-0 h-full w-full backdrop-blur-sm"></div>;
+  const blurBackground = (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 0.2 } }}
+      className="fixed left-0 top-0 h-full w-full backdrop-blur-sm"
+    ></motion.div>
+  );
 
   return (
     <ClientPortal selector="modal-root" show={isOpen}>
       {isOpen && (
-        <>
+        <AnimatePresence>
           {isBlurBackground && blurBackground}
           <div className="fixed left-0 top-0  z-[100] flex h-full w-full items-center justify-center" onClick={onClose}>
-            <div
+            <motion.div
               className={cn(
                 `rounded-xl shadow-[0_0_32px_0px_rgba(0,58,113,0.25)] ${bgColor} px-4 py-[18px] md:p-6`,
                 className,
@@ -30,17 +39,19 @@ export const Modal = ({
               onClick={e => {
                 e.stopPropagation();
               }}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
+              exit={{ opacity: 0, y: 100, transition: { duration: 0.2 } }}
             >
               <div className="flex items-center justify-center text-center">
                 <p className="w-full pl-2 pr-2 text-p2 md:pl-6 md:pr-6">{title}</p>
 
                 {isCloseButton && <ModalCloseButton onClose={onClose} />}
               </div>
-
               {children}
-            </div>
+            </motion.div>
           </div>
-        </>
+        </AnimatePresence>
       )}
     </ClientPortal>
   );
