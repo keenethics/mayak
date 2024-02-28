@@ -5,7 +5,6 @@ export const RESOURCES = {
   district: 'district',
   specialization: 'specialization',
   address: 'address',
-  placeOfWork: 'placeOfWork',
   feedback: 'feedback',
   event: 'event',
   eventTag: 'eventTag',
