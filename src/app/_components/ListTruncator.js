@@ -32,7 +32,7 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
   const hintId = `hint-for-${id}-${getRandomInt(0, 1000000)}`;
 
   return (
-    <div id={`container-of-${hintId}`} ref={containerRef} className="w-full overflow-hidden">
+    <div id={`container-of-${hintId}`} ref={containerRef} className="max-w-full overflow-hidden">
       <span id={`wrapper-of-${hintId}`} className="relative inline-flex items-center gap-[8px]" ref={wrapperRef}>
         {items.map(itemRender)}
       </span>
@@ -48,7 +48,7 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
               },
             }}
           >
-            <span className="absolute right-[-2px] top-0 z-[200] flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
+            <span className="absolute right-[-2px] top-0 flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
               {ellipsis || <div className="flex w-full justify-end font-bold text-gray-600">&nbsp;...&nbsp;</div>}
             </span>
           </ShowHint>
