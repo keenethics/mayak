@@ -68,7 +68,7 @@ const OrganizationSchemaUnion = z.discriminatedUnion('isActive', [ActiveOrganiza
 export const OrganizationSchema = z.intersection(OrganizationSchemaUnion, DefaultSchema).superRefine((data, ctx) => {
   const { addresses, formatOfWork, isActive } = data;
   // there should be no addresses for online org or for draft org without format of work
-  if ((!formatOfWork || formatOfWork === 'ONLINE') && addresses.length) {
+  if ((!formatOfWork || formatOfWork === 'ONLINE') && addresses?.length) {
     ctx.addIssue({
       code: 'custom',
       path: ['addresses'],
@@ -76,7 +76,7 @@ export const OrganizationSchema = z.intersection(OrganizationSchemaUnion, Defaul
     });
   }
   // at least 1 address for active org is required
-  if (formatOfWork !== 'ONLINE' && isActive && !addresses.length) {
+  if (formatOfWork !== 'ONLINE' && isActive && !addresses?.length) {
     ctx.addIssue({
       code: 'custom',
       path: ['addresses'],
