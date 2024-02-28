@@ -6,7 +6,7 @@ import { EventForm } from './EventForm';
 export function EventCreate() {
   const [selectedTags, setSelectedTags] = useState(null);
   return (
-    <Create mutationMode="pessimistic" transform={data => transformEventData(data, selectedTags)}>
+    <Create transform={data => transformEventData(data, selectedTags)}>
       <EventForm setSelectedTags={setSelectedTags} />
     </Create>
   );

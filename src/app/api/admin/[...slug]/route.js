@@ -30,6 +30,10 @@ const handler = auth(
       getOne: { debug: false, include: MODEL_INCLUDES[modelName] },
       update: {
         debug: true,
+        allowJsonUpdate: {
+          tags: true,
+          additionalLink: true,
+        },
       },
     });
     return NextResponse.json(result);

@@ -10,7 +10,7 @@ import {
 } from 'react-admin';
 import { TagSelect } from './TagSelect';
 import { useWatch } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod";
+import { zodResolver } from '@hookform/resolvers/zod';
 import { EventSchema } from '@admin/_lib/validationSchemas/eventSchema';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';

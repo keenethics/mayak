@@ -48,7 +48,6 @@ export const EventSchema = z
   })
   .superRefine((data, ctx) => {
     const { price, format, address, priceType } = data;
-    console.log(price);
     if (format === 'ONLINE' && address) {
       ctx.addIssue({
         code: z.ZodIssueCode.invalid_type,
