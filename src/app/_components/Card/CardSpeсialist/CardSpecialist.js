@@ -41,7 +41,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork });
   const socials = getSpecialistSocials({ instagram, facebook, tiktok });
-  const name = surname ? `${lastName} ${firstName}` : `${lastName} ${firstName} ${surname}`;
+  const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
 
   return (
     <CardWrapper className={className} id={id}>
@@ -49,14 +49,13 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         <ProfileImage gender={gender} className="sm:w-[70px] md:max-w-[200px] lg:w-[200px]" socials={socials} />
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
-
       <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px]">
         <div className="relative w-full">
           <header className="flex flex-row gap-[10px]">
             <ProfileImage gender={gender} className="md:hidden" socials={socials} />
             <div className="max-w-full overflow-hidden">
               <SpecializationsPanel specialistId={id} specializations={specializationsList} />
-              <SpecialistTitle name={name} />
+              <SpecialistTitle name={name} className="mt-[6px]" />
             </div>
           </header>
           <ExperienceList labels={labelsList} className="mt-[16px] md:mt-[12px]" />
@@ -71,7 +70,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         {extended && (
           <>
             <DetailsList
-              className={cn('mt-[24px] border-t pt-[16px]', borderStyle)}
+              className={cn('mt-[16px] border-t pt-[16px]', borderStyle)}
               details={{ placeOfWork, description }}
             />
             <ContactsList
