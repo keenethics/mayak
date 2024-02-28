@@ -3,15 +3,15 @@
 import React from 'react';
 import { BooleanInput, Create, SimpleForm, useNotify, useRedirect } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { General } from '@admin/components/Specialist/General';
-import { Details } from '@admin/components/Specialist/Details';
-import { PlacesOfWork } from '@admin/components/Specialist/PlacesOfWork';
-import { Services } from '@admin/components/Specialist/Services';
-import { Contacts } from '@admin/components/Specialist/Contacts';
-import { DaysOfWork } from '@admin/components/Specialist/DaysOfWork';
+import { General } from '@/app/admin/_components/Specialist/General';
+import { Details } from '@/app/admin/_components/Specialist/Details';
+import { Addresses } from '@/app/admin/_components/Specialist/Addresses';
+import { Services } from '@/app/admin/_components/Specialist/Services';
+import { Contacts } from '@/app/admin/_components/Specialist/Contacts';
+import { DaysOfWork } from '@/app/admin/_components/Specialist/DaysOfWork';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
-import { specialistValidationSchema } from '@/lib/validationSchemas/specialistSchema';
 import { transformData } from '@/app/admin/_utils/transformSpecialistFormData';
+import { specialistValidationSchema } from '@/lib/validationSchemas/specialistSchema';
 
 export function SpecialistCreate() {
   const notify = useNotify();
@@ -36,7 +36,7 @@ export function SpecialistCreate() {
         <SimpleForm resolver={zodResolver(specialistValidationSchema)}>
           <General />
           <Details />
-          <PlacesOfWork />
+          <Addresses />
           <Services />
           <Contacts />
           <DaysOfWork />

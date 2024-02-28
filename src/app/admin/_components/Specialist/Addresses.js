@@ -15,21 +15,21 @@ import { RESOURCES } from '@admin/_lib/consts';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { SpecialistFormFields, SpecialistFormSections } from '@admin/_lib/specialistData';
 
-export function PlacesOfWork() {
+export function Addresses() {
   const { data: districtsList, isLoading: districtsLoading } = useGetList(RESOURCES.district);
 
-  const { placesOfWork, fullAddress, nameOfClinic, district } = SpecialistFormFields;
+  const { addresses, fullAddress, nameOfClinic, district } = SpecialistFormFields;
 
   const isOnline = format => format === FormatOfWork.ONLINE;
 
   return (
-    <FormFieldWrapper title={SpecialistFormSections.placesOfWOrk} className="mt-3">
+    <FormFieldWrapper title={SpecialistFormSections.addresses} className="mt-3">
       <FormDataConsumer>
         {({ formData }) =>
           isOnline(formData.formatOfWork) ? (
             <p className="mb-6 text-gray-700">Спеціаліст працює онлайн</p>
           ) : (
-            <ArrayInput name={placesOfWork.name} source={placesOfWork.name} label={placesOfWork.label} fullWidth>
+            <ArrayInput name={addresses.name} source={addresses.name} label={addresses.label} fullWidth>
               <SimpleFormIterator inline fullWidth>
                 <TextInput
                   fullWidth

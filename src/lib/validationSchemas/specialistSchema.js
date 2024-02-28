@@ -33,7 +33,7 @@ const zYearsOfExperience = z
   .nonnegative()
   .nullish();
 
-const zPlacesOfWorkSchema = z.array(
+const zAddressesSchema = z.array(
   z
     .object({
       fullAddress: zStringWithMax,
@@ -79,7 +79,7 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
-  placesOfWork: zPlacesOfWorkSchema.default([]),
+  addresses: zAddressesSchema.default([]),
 });
 
 const activeSpecialistSchema = restProps.extend({
@@ -99,20 +99,20 @@ const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialist
 export const specialistValidationSchema = z
   .intersection(specialistSchemaUnion, defaultProps)
   .superRefine((schema, ctx) => {
-    const { formatOfWork, isActive, placesOfWork } = schema;
+    const { formatOfWork, isActive, addresses } = schema;
 
-    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !placesOfWork.length) {
+    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
       ctx.addIssue({
         code: 'custom',
         message: 'Необхідно вказати мінімум одне місце надання послуг',
-        path: ['placesOfWork'],
+        path: ['addresses'],
       });
     }
 
     if (formatOfWork === FormatOfWork.ONLINE) {
       return {
         ...schema,
-        placesOfWork: [],
+        addresses: [],
       };
     }
 

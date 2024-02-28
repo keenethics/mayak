@@ -39,16 +39,12 @@ export function SpecialistShow() {
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
-        <ArrayField source="placesOfWork">
-          <SingleFieldList linkType={false}>
-            <ArrayField source="addresses">
-              <Datagrid bulkActionButtons={false}>
-                <TextField source="fullAddress" />
-                <TextField source="nameOfClinic" />
-                <TextField source="district.name" label="District" />
-              </Datagrid>
-            </ArrayField>
-          </SingleFieldList>
+        <ArrayField source="addresses">
+          <Datagrid bulkActionButtons={false}>
+            <TextField source="fullAddress" />
+            <TextField source="nameOfClinic" />
+            <TextField source="district.name" label="District" />
+          </Datagrid>
         </ArrayField>
         <TextField source="description" />
         <TextField source="phone" />

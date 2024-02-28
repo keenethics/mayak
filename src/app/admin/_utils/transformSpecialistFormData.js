@@ -2,20 +2,11 @@ import { transformDaysOfWork } from './transformDaysOfWork';
 
 const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
 
-const transformPlacesOfWork = placesArray => {
-  const mappedPlaces = placesArray.map(place => ({
+const transformAddresses = placesArray =>
+  placesArray.map(place => ({
     ...place,
     district: { connect: { id: place.district } },
   }));
-
-  return [
-    {
-      addresses: {
-        create: mappedPlaces,
-      },
-    },
-  ];
-};
 
 export const transformData = data => ({
   ...data,
@@ -25,8 +16,8 @@ export const transformData = data => ({
   specializations: {
     connect: data.specializations?.length ? mapIdArrayToIdObjects(data.specializations) : undefined,
   },
-  placesOfWork: {
-    create: data.placesOfWork?.length ? transformPlacesOfWork(data.placesOfWork) : undefined,
+  addresses: {
+    create: data.addresses?.length ? transformAddresses(data.addresses) : undefined,
   },
   therapies: {
     connect: data.therapies?.length ? mapIdArrayToIdObjects(data.therapies) : undefined,

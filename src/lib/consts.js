@@ -17,15 +17,11 @@ export const MODEL_INCLUDES_GET_ONE = {
   specialist: {
     therapies: { select: { name: true } },
     specializations: { select: { name: true } },
-    placesOfWork: {
+    addresses: {
       select: {
-        addresses: {
-          select: {
-            nameOfClinic: true,
-            fullAddress: true,
-            district: { select: { name: true } },
-          },
-        },
+        nameOfClinic: true,
+        fullAddress: true,
+        district: { select: { name: true } },
       },
     },
     daysOfWork: {
