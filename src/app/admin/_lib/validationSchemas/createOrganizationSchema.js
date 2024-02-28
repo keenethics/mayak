@@ -15,14 +15,10 @@ const TherapiesSchema = z.array(minMaxString(1, 64, 'Тип терапії'), {
   required_error: "Тип терапії - обов'язкове поле",
 });
 
-const FormatOfWorkSchema = z
-  .string({
-    required_error: "Формат - обов'язкове поле",
-    invalid_type_error: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
-  })
-  .refine(val => Object.values(FormatOfWork).includes(val), {
-    message: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
-  });
+const FormatOfWorkSchema = z.enum(Object.values(FormatOfWork), {
+  required_error: "Формат - обов'язкове поле",
+  invalid_type_error: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
+});
 
 const RestSchema = z.object({
   description: z
