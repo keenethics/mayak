@@ -53,7 +53,7 @@ export function Window({ children, name, className }) {
     <ClientPortal selector={name} show={name === openName}>
       <div
         className={cn(
-          'shadow-[0_2px_8px_0_rgba(192, 191, 206, 0.50)] pointer-events-none absolute z-[100] inline-flex items-center justify-center gap-[10px] rounded-[4px] bg-other-white bg-opacity-60 px-[4px] py-[8px] text-center text-[10px] font-medium leading-[0.938rem] backdrop-blur-[3px]',
+          'pointer-events-none absolute z-[100] inline-flex items-center justify-center gap-[10px] rounded-[4px] bg-other-white bg-opacity-60 px-[4px] py-[8px] text-center text-[10px] font-medium leading-[0.938rem] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)] backdrop-blur-[3px]',
           className,
         )}
       >

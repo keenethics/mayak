@@ -4,8 +4,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import P from 'prop-types';
 import { Show as ShowHint, Window as HintWindow } from './Hint';
 import { getRandomInt } from '@/utils/common';
+import { cn } from '@/utils/cn';
 
-export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRender }) {
+export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRender, hintWindowClassName }) {
   const wrapperRef = useRef(null);
   const containerRef = useRef(null);
   const [overflown, setOverflown] = useState(false);
@@ -32,8 +33,8 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
   const hintId = `hint-for-${id}-${getRandomInt(0, 1000000)}`;
 
   return (
-    <div id={`container-of-${hintId}`} ref={containerRef} className="max-w-full overflow-hidden">
-      <span id={`wrapper-of-${hintId}`} className="relative inline-flex items-center gap-[8px]" ref={wrapperRef}>
+    <div ref={containerRef} className="max-w-full overflow-hidden">
+      <span className="relative inline-flex items-center gap-[8px]" ref={wrapperRef}>
         {items.map(itemRender)}
       </span>
       {overflown && (
@@ -52,10 +53,8 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
               {ellipsis || <div className="flex w-full justify-end text-gray-600">&nbsp;...&nbsp;</div>}
             </span>
           </ShowHint>
-          <HintWindow name={hintId} id={hintId} className="right-0 top-[20px] z-[200]">
-            <div className="flex select-text flex-col gap-[10px] rounded-[4px] px-[8px] py-[4px] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)]">
-              {items.map(tooltipItemRender)}
-            </div>
+          <HintWindow name={hintId} id={hintId} className={cn('right-[10px] top-[30px] z-[200]', hintWindowClassName)}>
+            <div className="flex select-text flex-col gap-[10px] text-gray-900">{items.map(tooltipItemRender)}</div>
           </HintWindow>
         </>
       )}
@@ -69,4 +68,5 @@ ListTruncator.propTypes = {
   itemRender: P.func.isRequired,
   tooltipItemRender: P.func.isRequired,
   ellipsis: P.node,
+  hintWindowClassName: P.string,
 };

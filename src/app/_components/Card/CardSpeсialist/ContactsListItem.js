@@ -69,6 +69,7 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
           items={[content]}
           itemRender={() => <InfoRow className={'whitespace-nowrap'} icon={icon} content={content} href={href} />}
           tooltipItemRender={(i, index) => <ListItem key={`${i}-${index}`} data={{ content, href }} />}
+          hintWindowClassName="translate-x-full right-[-10px] top-0 z-[200]"
         />
       ) : (
         <InfoRow className={'whitespace-normal break-words'} icon={icon} content={content} href={href} />

@@ -16,7 +16,7 @@ export function ProfileImage({ gender, className, socials }) {
   return (
     <div
       className={cn(
-        'relative flex min-h-[70px] min-w-[70px] flex-col items-center justify-center rounded-[16px] bg-gray-100 p-[20px] md:h-[150px] md:w-[150px] md:gap-[15px] md:p-[15px] lg:h-[200px] lg:w-[200px]',
+        'relative flex h-[70px] w-[70px] flex-col items-center justify-center rounded-[16px] bg-gray-100 p-[20px] md:h-[150px] md:w-[150px] md:gap-[15px] md:p-[15px] lg:h-[200px] lg:w-[200px]',
         className,
       )}
     >
