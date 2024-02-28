@@ -41,19 +41,19 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
           <ShowHint
             opens={hintId}
             actions={{
-              // onMouseEnter: ({ open }) => open(hintId),
-              // onMouseLeave: ({ close }) => close(),
+              onMouseEnter: ({ open }) => open(hintId),
+              onMouseLeave: ({ close }) => close(),
               onClick: ({ open }) => {
                 open(n => (n === hintId ? '' : hintId));
               },
             }}
           >
-            <span className="absolute right-[-2px] top-0 flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
-              {ellipsis || <div className="flex w-full justify-end font-bold text-gray-600">&nbsp;...&nbsp;</div>}
+            <span className="absolute right-[-2px] top-[-3px] flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
+              {ellipsis || <div className="flex w-full justify-end text-gray-600">&nbsp;...&nbsp;</div>}
             </span>
           </ShowHint>
           <HintWindow name={hintId} id={hintId} className="right-0 top-[20px] z-[200]">
-            <div className="flex flex-col gap-[10px] rounded-[4px] px-[8px] py-[4px] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)]">
+            <div className="flex select-text flex-col gap-[10px] rounded-[4px] px-[8px] py-[4px] shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)]">
               {items.map(tooltipItemRender)}
             </div>
           </HintWindow>

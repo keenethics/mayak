@@ -50,7 +50,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         <ContactsList
           specialistId={id}
           contacts={contactsList}
-          className="mt-[16px] min-h-[70px] min-w-[70px] md:h-[150px] md:w-[150px] md:gap-[15px] md:p-[15px] lg:h-[200px] lg:w-[200px]"
+          className="mt-[16px] min-w-[70px] md:w-[150px] md:gap-[15px] md:p-[15px] lg:w-[200px]"
         />
       </CardSectionWrapper>
 
