@@ -48,9 +48,10 @@ export function CardSpecialist({ specialist, className, extended = false }) {
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
         <ProfileImage gender={gender} className="sm:w-[70px] md:max-w-[200px] lg:w-[200px]" socials={socials} />
         <ContactsList
+          truncate={!extended}
           specialistId={id}
           contacts={contactsList}
-          className="mt-[16px] min-w-[70px] md:w-[150px] md:gap-[15px] md:p-[15px] lg:w-[200px]"
+          className="mt-[16px] min-w-[70px] md:w-[150px] md:gap-[15px] lg:w-[200px]"
         />
       </CardSectionWrapper>
 
@@ -79,6 +80,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
               details={{ placeOfWork, description }}
             />
             <ContactsList
+              truncate={!extended}
               specialistId={id}
               contacts={contactsList}
               className={cn('mt-[12px] border-t pt-[12px] md:hidden', borderStyle)}
