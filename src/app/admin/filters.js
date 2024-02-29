@@ -1,28 +1,33 @@
-import { SearchInput, DateTimeInput, SelectInput } from 'react-admin';
+import { SearchInput, DateTimeInput, SelectInput, NullableBooleanInput } from 'react-admin';
 
 export const specialistsFilters = [
-  <SearchInput key="search" source="q" alwaysOn />,
-  <DateTimeInput key="fromDate" label="From date" source={'createdAt_gte'} alwaysOn />,
-  <DateTimeInput key="toDate" label="To date" source={'createdAt_lte'} alwaysOn />,
+  <SearchInput placeholder="Пошук" key="search" source="q" alwaysOn />,
+  <DateTimeInput label="Було додано від" key="fromDate" source={'createdAt_gte'} alwaysOn />,
+  <DateTimeInput label="Було додано до" key="toDate" source={'createdAt_lte'} alwaysOn />,
   <SelectInput
-    label="Format of work"
+    label="Формат послуг"
     key="formatOfWork"
     source={'formatOfWork_enum'}
     choices={[
-      { id: 'BOTH', name: 'BOTH' },
-      { id: 'OFFLINE', name: 'OFFLINE' },
-      { id: 'ONLINE', name: 'ONLINE' },
+      { id: null, name: 'Усі' },
+      { id: 'BOTH', name: 'Офлайн + онлайн' },
+      { id: 'OFFLINE', name: 'Офлайн' },
+      { id: 'ONLINE', name: 'Онлайн' },
     ]}
     alwaysOn
   />,
-  <SelectInput
+  <NullableBooleanInput
     key="active"
-    label="Active"
+    label="Статус"
     source={'isActive'}
-    choices={[
-      { id: true, name: 'Active' },
-      { id: false, name: 'Not active' },
-    ]}
+    nullLabel="Усі"
+    falseLabel="Неактивний"
+    trueLabel="Активний"
+    // choices={[
+    //   { id: true, name: 'Активний' },
+    //   { id: true, name: 'Активний' },
+    //   { id: false, name: 'Неактивний' },
+    // ]}
     alwaysOn
   />,
 ];

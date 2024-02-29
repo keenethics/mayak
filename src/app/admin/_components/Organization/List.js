@@ -6,10 +6,10 @@ export function OrganizationsList() {
   return (
     <List sort={{ field: 'createdAt', order: 'DESC' }} filters={organizationFilters}>
       <Datagrid rowClick="show">
-        <TextField source="name" />
-        <DateField showTime source="createdAt" />
-        <TextField source="formatOfWork" />
-        <BooleanField source="isActive" />
+        <TextField label="Назва" source="name" />
+        <TextField label="Формат послуг" source="formatOfWork" />
+        <DateField label="Дата додавання в сервіс" showTime source="createdAt" />
+        <BooleanField label="Активна/Неактивна" source="isActive" />
       </Datagrid>
     </List>
   );

@@ -39,9 +39,15 @@ function randomAddress(districts) {
 
 function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
-  const randomAddresses = Array(faker.number.int({ min: 1, max: 3 }))
-    .fill('')
-    .map(() => randomAddress(districts));
+  let addresses;
+  const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
+  if (formatOfWork !== 'ONLINE') {
+    addresses = {
+      create: Array(faker.number.int({ min: 1, max: 3 }))
+        .fill('')
+        .map(() => randomAddress(districts)),
+    };
+  }
 
   const phoneRegexp = '+380[0-9]{9}';
   return {
@@ -55,10 +61,8 @@ function randomSpecialist({ districts, specializations, therapies }) {
     gender,
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
     // take one of these
-    formatOfWork: faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']),
-    addresses: {
-      create: randomAddresses,
-    },
+    formatOfWork,
+    addresses,
     therapies: {
       connect: uniqueObjectsWithId(therapies),
     },
