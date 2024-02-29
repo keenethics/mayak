@@ -5,13 +5,9 @@ export const include = {
     },
   },
   therapies: true,
-  placesOfWork: {
+  addresses: {
     include: {
-      addresses: {
-        include: {
-          district: true,
-        },
-      },
+      district: true,
     },
   },
 };

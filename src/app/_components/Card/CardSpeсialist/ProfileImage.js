@@ -3,10 +3,8 @@ import P from 'prop-types';
 import { Female, HospitalLogo, Male } from '@icons/index';
 import { Gender } from '@prisma/client';
 import { cn } from '@/utils/cn';
-import { specialistSocialsPropType } from './prop-types';
-import { SocialsList } from './SocialsList';
 
-export function ProfileImage({ gender, className, socials }) {
+export function ProfileImage({ children, gender, className }) {
   let image = <HospitalLogo />;
 
   if (gender) {
@@ -21,13 +19,13 @@ export function ProfileImage({ gender, className, socials }) {
       )}
     >
       <svg className="h-[24px] w-[24px] md:h-[40px] md:w-[40px] lg:h-[88px] lg:w-[88px]">{image}</svg>
-      <SocialsList socials={socials} />
+      {children}
     </div>
   );
 }
 
 ProfileImage.propTypes = {
+  children: P.node,
   gender: P.string,
   className: P.string,
-  socials: P.arrayOf(specialistSocialsPropType),
 };
