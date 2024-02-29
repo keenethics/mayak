@@ -36,9 +36,9 @@ export const Modal = ({
               onClick={e => {
                 e.stopPropagation();
               }}
-              initial={{ opacity: 0, y: 100 }}
+              initial={{ opacity: 0.75, y: '10vh' }}
               animate={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
-              exit={{ opacity: 0, y: 100, transition: { duration: 0.2 } }}
+              exit={{ opacity: 0, y: '10vh', transition: { duration: 0.2 } }}
             >
               <div className="flex items-center justify-center text-center">
                 <p className="w-full pl-2 pr-2 text-p2 md:pl-6 md:pr-6">{title}</p>
