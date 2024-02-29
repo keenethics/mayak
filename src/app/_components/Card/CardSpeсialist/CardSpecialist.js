@@ -14,6 +14,7 @@ import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
 import { cn } from '@/utils/cn';
 import { DetailsList } from '@/app/_components/Card/CardSpeсialist/DetailsList';
 import { AddressesList } from '@/app/_components/Card/CardSpeсialist/AddressesList';
+import { SocialsList } from '@/app/_components/Card/CardSpeсialist/SocialsList';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   const {
@@ -46,13 +47,15 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   return (
     <CardWrapper className={className} id={id}>
       <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
-        <ProfileImage gender={gender} className="sm:w-[70px] md:max-w-[200px] lg:w-[200px]" socials={socials} />
+        <ProfileImage gender={gender} className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
+          <SocialsList socials={socials} className="absolute bottom-[16px]" />
+        </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
       <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px]">
         <div className="relative w-full">
           <header className="flex flex-row gap-[10px]">
-            <ProfileImage gender={gender} className="md:hidden" socials={socials} />
+            <ProfileImage gender={gender} className="md:hidden" />
             <div className="max-w-full overflow-hidden">
               <SpecializationsPanel
                 specialistId={id}
