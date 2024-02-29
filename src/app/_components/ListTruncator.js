@@ -6,15 +6,7 @@ import { Show as ShowHint, Window as HintWindow } from './Hint';
 import { getRandomInt } from '@/utils/common';
 import { cn } from '@/utils/cn';
 
-export function ListTruncator({
-  id,
-  items,
-  ellipsis,
-  itemRender,
-  hintItemRender,
-  hintEllipsisClassName,
-  hintWindowClassName,
-}) {
+export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsisClassName, hintWindowClassName }) {
   const wrapperRef = useRef(null);
   const containerRef = useRef(null);
   const [overflown, setOverflown] = useState(false);
@@ -43,7 +35,7 @@ export function ListTruncator({
   return (
     <div ref={containerRef} className="max-w-full overflow-hidden">
       <span className="relative" ref={wrapperRef}>
-        <span className="inline-flex items-center gap-[8px]">{items.map(itemRender)}</span>
+        <span className="inline-flex items-center gap-[8px]">{content}</span>
       </span>
       {overflown && (
         <>
@@ -75,7 +67,7 @@ export function ListTruncator({
               hintWindowClassName,
             )}
           >
-            {items.map(hintItemRender)}
+            {hintContent}
           </HintWindow>
         </>
       )}
@@ -85,9 +77,8 @@ export function ListTruncator({
 
 ListTruncator.propTypes = {
   id: P.string.isRequired,
-  items: P.arrayOf(P.string).isRequired,
-  itemRender: P.func.isRequired,
-  hintItemRender: P.func.isRequired,
+  content: P.node.isRequired,
+  hintContent: P.node.isRequired,
   ellipsis: P.node,
   hintWindowClassName: P.string,
   hintEllipsisClassName: P.string,

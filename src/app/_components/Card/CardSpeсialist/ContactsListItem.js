@@ -32,8 +32,7 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
       {truncate && !Array.isArray(content) ? (
         <ListTruncator
           id={specialistId}
-          items={[content]}
-          itemRender={() => (
+          content={
             <InfoRow icon={icon}>
               {!isArray && href && (
                 <Link
@@ -47,9 +46,9 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
               )}
               {!isArray && !href && <p className={'whitespace-nowrap text-c3 text-gray-900'}>{content}</p>}
             </InfoRow>
-          )}
-          hintItemRender={(i, index) => (
-            <div key={`${i}-${index}`}>
+          }
+          hintContent={
+            <>
               {!isArray && href && (
                 <Link
                   href={href}
@@ -61,8 +60,8 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
                 </Link>
               )}
               {!isArray && !href && <p className={'whitespace-normal break-words text-gray-900'}>{content}</p>}
-            </div>
-          )}
+            </>
+          }
           hintWindowClassName="translate-x-full -right-[10px] top-0 z-[200] w-max"
         />
       ) : (
@@ -93,7 +92,6 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
 
 ContactsListItem.propTypes = {
   contact: specialistContactPropType,
-  // className: P.string,
   specialistId: P.string.isRequired,
   truncate: P.bool,
 };
