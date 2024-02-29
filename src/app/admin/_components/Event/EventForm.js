@@ -8,10 +8,11 @@ import {
   useEditContext,
   Loading,
 } from 'react-admin';
-import { TagSelect } from './TagSelect';
+import PropTypes from 'prop-types';
 import { useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EventSchema } from '@admin/_lib/validationSchemas/eventSchema';
+import { TagSelect } from './TagSelect';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
 
@@ -91,3 +92,14 @@ export function EventForm({ toolbar, setSelectedTags, recordTags }) {
     </SimpleForm>
   );
 }
+
+EventFormEdit.propTypes = {
+  setSelectedTags: PropTypes.func,
+  toolbar: PropTypes.element,
+};
+
+EventForm.propTypes = {
+  setSelectedTags: PropTypes.func,
+  toolbar: PropTypes.element,
+  recordTags: PropTypes.array,
+};

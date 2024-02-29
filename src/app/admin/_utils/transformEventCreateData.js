@@ -1,6 +1,6 @@
 // this function formats the event form data, connects event to other tables and create proper prisma creation object
-export function transformEventData(data, tags) {
-  let tagsObject = null;
+export function transformEventCreateData(data, tags) {
+  let tagsObject = {};
   let linkObject = {};
 
   if (tags?.length > 0) {

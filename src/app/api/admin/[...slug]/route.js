@@ -29,7 +29,7 @@ const handler = auth(
       },
       getOne: { debug: false, include: MODEL_INCLUDES[modelName] },
       update: {
-        debug: true,
+        debug: false,
         allowJsonUpdate: {
           tags: true,
           additionalLink: true,

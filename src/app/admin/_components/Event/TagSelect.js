@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CreatableSelect from 'react-select/creatable';
-import { Loading, useGetList, useCreate, useRecordContext } from 'react-admin';
+import { Loading, useGetList, useCreate } from 'react-admin';
 import PropTypes from 'prop-types';
 import { RESOURCES } from '@admin/_lib/consts';
 

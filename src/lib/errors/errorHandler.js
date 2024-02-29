@@ -7,7 +7,6 @@ export function withErrorHandler(fn) {
     try {
       return await fn(request, ...args);
     } catch (error) {
-      console.log(error);
       if (error instanceof ZodError) {
         return NextResponse.json(
           {
