@@ -1,14 +1,8 @@
-'use client';
-
 import P from 'prop-types';
 import { Dot } from '@icons/index';
-import { useSearchParams } from 'next/navigation';
 import { Caption, ListTruncator } from '@components';
 
-export function SpecializationsPanel({ specialistId, specializations }) {
-  const params = useSearchParams();
-  const extendedCardOpened = !!params.get('id');
-
+export function SpecializationsPanel({ specialistId, specializations, extendedCardOpened = false }) {
   return extendedCardOpened ? (
     <div className="inline-flex flex-wrap items-center gap-[8px]">
       {specializations.map((specialization, index) => (
@@ -43,4 +37,5 @@ export function SpecializationsPanel({ specialistId, specializations }) {
 SpecializationsPanel.propTypes = {
   specializations: P.arrayOf(P.string).isRequired,
   specialistId: P.string.isRequired,
+  extendedCardOpened: P.bool,
 };
