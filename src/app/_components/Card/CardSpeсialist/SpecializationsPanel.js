@@ -32,7 +32,7 @@ export function SpecializationsPanel({ specialistId, specializations }) {
           {index !== specializations.length - 1 && <Dot />}
         </div>
       )}
-      tooltipItemRender={(specialization, index) => (
+      hintItemRender={(specialization, index) => (
         <div key={index} className="text-center text-c2 text-gray-900">
           {specialization}
         </div>

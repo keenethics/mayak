@@ -6,7 +6,15 @@ import { Show as ShowHint, Window as HintWindow } from './Hint';
 import { getRandomInt } from '@/utils/common';
 import { cn } from '@/utils/cn';
 
-export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRender, hintWindowClassName }) {
+export function ListTruncator({
+  id,
+  items,
+  ellipsis,
+  itemRender,
+  hintItemRender,
+  hintEllipsisClassName,
+  hintWindowClassName,
+}) {
   const wrapperRef = useRef(null);
   const containerRef = useRef(null);
   const [overflown, setOverflown] = useState(false);
@@ -34,8 +42,8 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
 
   return (
     <div ref={containerRef} className="max-w-full overflow-hidden">
-      <span className="relative inline-flex items-center gap-[8px]" ref={wrapperRef}>
-        {items.map(itemRender)}
+      <span className="relative" ref={wrapperRef}>
+        <span className="inline-flex items-center gap-[8px]">{items.map(itemRender)}</span>
       </span>
       {overflown && (
         <>
@@ -49,12 +57,25 @@ export function ListTruncator({ id, items, ellipsis, itemRender, tooltipItemRend
               },
             }}
           >
-            <span className="absolute right-[-2px] top-[-3px] flex w-[80px] cursor-pointer select-none bg-gradient-to-l from-other-white from-[30%]">
-              {ellipsis || <div className="flex w-full justify-end text-gray-600">&nbsp;...&nbsp;</div>}
+            <span
+              className={cn(
+                'right-0 top-[-3px] flex w-[80px] cursor-pointer justify-end bg-gradient-to-l from-other-white from-[30%] text-gray-600',
+                hintEllipsisClassName,
+                'absolute select-none',
+              )}
+            >
+              {ellipsis || `...`}
             </span>
           </ShowHint>
-          <HintWindow name={hintId} id={hintId} className={cn('right-[10px] top-[30px] z-[200]', hintWindowClassName)}>
-            <div className="flex select-text flex-col gap-[10px] text-gray-900">{items.map(tooltipItemRender)}</div>
+          <HintWindow
+            name={hintId}
+            id={hintId}
+            className={cn(
+              'right-[10px] top-[30px] z-[200] flex select-text flex-col gap-[10px] text-gray-900',
+              hintWindowClassName,
+            )}
+          >
+            {items.map(hintItemRender)}
           </HintWindow>
         </>
       )}
@@ -66,7 +87,8 @@ ListTruncator.propTypes = {
   id: P.string.isRequired,
   items: P.arrayOf(P.string).isRequired,
   itemRender: P.func.isRequired,
-  tooltipItemRender: P.func.isRequired,
+  hintItemRender: P.func.isRequired,
   ellipsis: P.node,
   hintWindowClassName: P.string,
+  hintEllipsisClassName: P.string,
 };
