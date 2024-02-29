@@ -8,6 +8,8 @@ export const RESOURCES = {
   event: 'event',
   eventTag: 'eventTag',
   faq: 'faq',
+  organization: 'organization',
+  organizationType: 'organizationType',
 };
 
 export const SUCCESS_NOTIFICATIONS = {
