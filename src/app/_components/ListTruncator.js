@@ -34,9 +34,10 @@ export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsis
 
   return (
     <div ref={containerRef} className="max-w-full overflow-hidden">
-      <span className="relative" ref={wrapperRef}>
-        <span className="inline-flex items-center gap-[8px]">{content}</span>
+      <span ref={wrapperRef} className="relative inline-flex items-center gap-[8px]">
+        {content}
       </span>
+
       {overflown && (
         <>
           <ShowHint

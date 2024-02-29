@@ -3,6 +3,27 @@ import P from 'prop-types';
 import Link from 'next/link';
 import { ListTruncator } from '@components';
 import { specialistContactPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
+import { cn } from '@/utils/cn';
+
+function ContactItem({ type, content, href, className }) {
+  return (
+    <>
+      {type === 'link' && (
+        <Link href={href} target="_blank" rel="noopener noreferrer" className={cn('text-primary-400', className)}>
+          {content}
+        </Link>
+      )}
+      {type === 'text' && <p className={cn('text-c4 text-gray-900', className)}>{content}</p>}
+    </>
+  );
+}
+
+ContactItem.propTypes = {
+  type: P.oneOf(['link', 'text']).isRequired,
+  href: P.string,
+  content: P.string.isRequired,
+  className: P.string,
+};
 
 function InfoRow({ icon, children }) {
   return (
@@ -29,38 +50,21 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
 
   return (
     <div className="relative">
-      {truncate && !Array.isArray(content) ? (
+      {truncate && !isArray ? (
         <ListTruncator
           id={specialistId}
           content={
             <InfoRow icon={icon}>
-              {!isArray && href && (
-                <Link
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={'whitespace-nowrap text-primary-400'}
-                >
-                  {content}
-                </Link>
-              )}
-              {!isArray && !href && <p className={'whitespace-nowrap text-c3 text-gray-900'}>{content}</p>}
+              <ContactItem type={href ? 'link' : 'text'} href={href} content={content} className="whitespace-nowrap" />
             </InfoRow>
           }
           hintContent={
-            <>
-              {!isArray && href && (
-                <Link
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={'whitespace-normal break-words text-primary-400'}
-                >
-                  {content}
-                </Link>
-              )}
-              {!isArray && !href && <p className={'whitespace-normal break-words text-gray-900'}>{content}</p>}
-            </>
+            <ContactItem
+              type={href ? 'link' : 'text'}
+              href={href}
+              content={content}
+              className="whitespace-normal break-words"
+            />
           }
           hintWindowClassName="translate-x-full -right-[10px] top-0 z-[200] w-max"
         />
@@ -73,17 +77,14 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
                 {item}
               </p>
             ))}
-          {!isArray && href && (
-            <Link
+          {!isArray && (
+            <ContactItem
+              type={href ? 'link' : 'text'}
               href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={'whitespace-normal break-words text-primary-400'}
-            >
-              {content}
-            </Link>
+              content={content}
+              className="whitespace-normal break-words"
+            />
           )}
-          {!isArray && !href && <p className={'whitespace-normal break-words text-c3 text-gray-900'}>{content}</p>}
         </InfoRow>
       )}
     </div>

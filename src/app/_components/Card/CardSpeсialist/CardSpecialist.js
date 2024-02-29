@@ -62,7 +62,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
                 specializations={specializationsList}
                 extendedCardOpened={extended}
               />
-              <SpecialistTitle name={name} className="mt-[6px]" />
+              <SpecialistTitle id={id} truncate={!extended} name={name} className="mt-[6px]" />
             </div>
           </header>
           <ExperienceList labels={labelsList} className="mt-[16px] md:mt-[12px]" />
