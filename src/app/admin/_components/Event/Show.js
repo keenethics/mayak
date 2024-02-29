@@ -29,7 +29,11 @@ function ShowLayout() {
       {data?.format === EventFormat.OFFLINE && <TextField source="address" />}
       {data?.locationLink && (
         <Labeled label="Location link">
-          <LocationLink link={data.locationLink} />
+          <Wrapped>
+            <a className="text-[#0000EE]" rel="noopener noreferrer" target="_blank" href={data.locationLink}>
+              {data.locationLink}
+            </a>
+          </Wrapped>
         </Labeled>
       )}
       <DateField source="createdAt" />
@@ -46,7 +50,12 @@ function ShowLayout() {
       </Labeled>
       {data?.additionalLink && (
         <Labeled label="Additional Link">
-          <AdditionalLink label={data.additionalLink.label} link={data.additionalLink.link} />
+          <Wrapped>
+            <span>{data.additionalLink.label}</span>:{' '}
+            <a className="text-[#0000EE]" rel="noopener noreferrer" target="_blank" href={data.additionalLink.link}>
+              {data.additionalLink.link}
+            </a>
+          </Wrapped>
         </Labeled>
       )}
     </SimpleShowLayout>
@@ -54,34 +63,11 @@ function ShowLayout() {
 }
 
 // Must use a component for <Labeled/> wrapper to take effect
-function AdditionalLink({ label, link }) {
-  return (
-    <div>
-      <span>{label}</span>:{' '}
-      <a className="text-[#0000EE]" rel="noopener noreferrer" target="_blank" href={link}>
-        {link}
-      </a>
-    </div>
-  );
+function Wrapped({ children }) {
+  return <div>{children}</div>;
 }
-AdditionalLink.propTypes = {
-  label: PropTypes.string,
-  link: PropTypes.string,
-};
-
-// Must use a component for <Labeled/> wrapper to take effect
-function LocationLink({ link }) {
-  return (
-    <div>
-      <a className="text-[#0000EE]" rel="noopener noreferrer" target="_blank" href={link}>
-        {link}
-      </a>
-    </div>
-  );
-}
-LocationLink.propTypes = {
-  label: PropTypes.string,
-  link: PropTypes.string,
+Wrapped.propTypes = {
+  children: PropTypes.node,
 };
 
 export function EventShow() {
