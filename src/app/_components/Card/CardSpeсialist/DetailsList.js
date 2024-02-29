@@ -1,15 +1,15 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { IDCard } from '@icons/index';
-import { PlacesOfWorkList } from '@/app/_components/Card/CardSpeсialist/PlacesOfWorkList';
+import { AddressesList } from '@/app/_components/Card/CardSpeсialist/AddressesList';
 import { cn } from '@/utils/cn';
 
 export function DetailsList({ details, className }) {
-  const { placeOfWork, description } = details;
+  const { addresses, description } = details;
 
   return (
     <div className={cn('flex flex-col gap-[16px]', className)}>
-      <PlacesOfWorkList places={placeOfWork} showIcon={true} />
+      <AddressesList addresses={addresses} showIcon={true} />
       <ul>
         <li className="flex gap-[12px] md:gap-[16px]">
           <span className="text-gray-500 lg:mt-[3px]">

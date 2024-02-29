@@ -6,7 +6,6 @@ import { ContactsList } from './ContactsList';
 import { SpecializationsPanel } from './SpecializationsPanel';
 import { SpecialistTitle } from './SpecialistTitle';
 import { ExperienceList } from './ExperienceList';
-import { PlacesOfWorkList } from './PlacesOfWorkList';
 import { CardWrapper } from './CardWrapper';
 import { getContactsList, getLabelsList, getSpecialistSocials } from './config';
 import { CardButton } from '@/app/_components/Card/CardSpeсialist/CardButton';
@@ -14,6 +13,7 @@ import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-
 import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
 import { cn } from '@/utils/cn';
 import { DetailsList } from '@/app/_components/Card/CardSpeсialist/DetailsList';
+import { AddressesList } from '@/app/_components/Card/CardSpeсialist/AddressesList';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   const {
@@ -26,7 +26,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     yearsOfExperience,
     isFreeReception,
     formatOfWork,
-    placesOfWork,
+    addresses,
     phone,
     email,
     website,
@@ -37,7 +37,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   } = specialist;
 
   const specializationsList = specializations.map(s => s.name);
-  const placeOfWork = [placesOfWork[0].addresses[0]];
+  const addressPrimary = [addresses[0]];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork });
   const socials = getSpecialistSocials({ instagram, facebook, tiktok });
@@ -64,9 +64,9 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           </header>
           <ExperienceList labels={labelsList} className="mt-[16px] md:mt-[12px]" />
           {!extended && (
-            <PlacesOfWorkList
+            <AddressesList
               className="mt-[16px] border-t pt-[12px] md:mt-[12px] md:border-b md:py-[12px]"
-              places={placeOfWork}
+              addresses={addressPrimary}
             />
           )}
         </div>
@@ -75,7 +75,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           <>
             <DetailsList
               className={cn('mt-[16px] border-t pt-[16px]', borderStyle)}
-              details={{ placeOfWork, description }}
+              details={{ addresses, description }}
             />
             <ContactsList
               truncate={!extended}

@@ -9,7 +9,7 @@ export const specialistPropType = P.shape({
   gender: P.string,
   yearsOfExperience: P.number,
   formatOfWork: P.string,
-  placesOfWork: P.array,
+  addresses: P.array,
   therapies: P.array,
   isFreeReception: P.bool,
   description: P.string,

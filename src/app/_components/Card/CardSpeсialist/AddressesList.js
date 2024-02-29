@@ -4,10 +4,10 @@ import { HospitalSVG } from '@icons/index';
 import { cn } from '@/utils/cn';
 import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
 
-export function PlacesOfWorkList({ places, className, showIcon = false }) {
+export function AddressesList({ addresses, className, showIcon = false }) {
   return (
-    <ul className={cn(borderStyle, className)}>
-      {places.map(({ id, nameOfClinic, fullAddress, district }) => (
+    <ul className={cn('flex flex-col gap-[12px] md:gap-[16px]', borderStyle, className)}>
+      {addresses.map(({ id, nameOfClinic, fullAddress, district }) => (
         <li key={id} className="flex gap-[12px] md:gap-[16px]">
           {showIcon && (
             <span className="text-gray-500">
@@ -27,8 +27,8 @@ export function PlacesOfWorkList({ places, className, showIcon = false }) {
   );
 }
 
-PlacesOfWorkList.propTypes = {
-  places: PropType.array,
+AddressesList.propTypes = {
+  addresses: PropType.array,
   showIcon: PropType.bool,
   className: PropType.node,
 };
