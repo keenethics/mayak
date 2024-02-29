@@ -1,5 +1,6 @@
 import { defaultHandler } from 'ra-data-simple-prisma';
 import { NextResponse } from 'next/server';
+import { RESOURCES } from '@admin/_lib/consts';
 import { prisma } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
@@ -7,8 +8,8 @@ import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { MODEL_INCLUDES } from '@/lib/consts';
 
 export const MODEL_SEARCH_FIELDS = {
-  specialist: ['firstName', 'lastName', 'surname'],
-  organization: ['name'],
+  [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
+  [RESOURCES.organization]: ['name'],
 };
 
 export function searchInputFilters(modelName, filter) {

@@ -1,3 +1,5 @@
+import { RESOURCES } from '@/app/admin/_lib/consts';
+
 export const LOGIN_URL = '/admin#/login';
 export const PHONE_REGEX = /^\+380\d{9}$/;
 export const FAQ_PRIORITY_CHANGE_STEP = 1;
@@ -13,7 +15,7 @@ export const BASE_ERROR_MESSAGES = {
 };
 
 export const MODEL_INCLUDES = {
-  specialist: {
+  [RESOURCES.specialist]: {
     therapies: { select: { name: true } },
     specializations: { select: { name: true } },
     addresses: {
@@ -24,7 +26,7 @@ export const MODEL_INCLUDES = {
       },
     },
   },
-  organization: {
+  [RESOURCES.organization]: {
     therapies: { select: { name: true } },
     type: { select: { name: true } },
     addresses: {
