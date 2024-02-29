@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ClientPortal } from '../ClientPortal';
 import { ModalCloseButton } from './ModalCloseButton';
 import { cn } from '@/utils/cn';
@@ -17,18 +17,12 @@ export const Modal = ({
   children,
   className,
 }) => {
-  const blurBackground = (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { duration: 0.2 } }}
-      className="fixed left-0 top-0 h-full w-full backdrop-blur-sm"
-    ></motion.div>
-  );
+  const blurBackground = <div className="fixed left-0 top-0 h-full w-full backdrop-blur-sm"></div>;
 
   return (
     <ClientPortal selector="modal-root" show={isOpen}>
       {isOpen && (
-        <AnimatePresence>
+        <>
           {isBlurBackground && blurBackground}
           <div className="fixed left-0 top-0  z-[100] flex h-full w-full items-center justify-center" onClick={onClose}>
             <motion.div
@@ -51,7 +45,7 @@ export const Modal = ({
               {children}
             </motion.div>
           </div>
-        </AnimatePresence>
+        </>
       )}
     </ClientPortal>
   );
