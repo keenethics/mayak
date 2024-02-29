@@ -36,14 +36,16 @@ const RestSchema = z.object({
     .int('Введіть ціле число')
     .positive('Введіть додатнє число')
     .nullish(),
-  addresses: z.array(
-    z.object({
-      fullAddress: minMaxString(1, 128, 'Повна адреса').nullish(),
-      district: minMaxString(1, 64, 'Район').nullish(),
-    }),
-  ),
+  addresses: z
+    .array(
+      z.object({
+        fullAddress: minMaxString(1, 128, 'Повна адреса').nullish(),
+        district: minMaxString(1, 64, 'Район').nullish(),
+      }),
+    )
+    .nullish(),
   isFreeReception: z.boolean({
-    required_error: "Безкоштовна консультація - обов'язкове поле",
+    required_error: "Безкоштовний прийом - обов'язкове поле",
     invalid_type_error: "Оберіть 'Так' чи 'Ні' для активного спеціаліста",
   }),
   isActive: z.boolean(),
@@ -84,7 +86,7 @@ export const OrganizationSchema = z.intersection(OrganizationSchemaUnion, Defaul
     });
   }
   // no empty address and district for active org
-  if (formatOfWork && formatOfWork !== 'ONLINE') {
+  if (addresses && formatOfWork && formatOfWork !== 'ONLINE') {
     addresses.forEach((address, index) => {
       if (!address.fullAddress) {
         ctx.addIssue({

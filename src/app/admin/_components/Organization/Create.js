@@ -36,12 +36,12 @@ export function OrganizationCreate() {
               <AddressInput isActive={formData.isActive} />
               <p className="font-bold">Типи терапії</p>
               <SelectTherapies isActive={formData.isActive} />
-              <p className="font-bold">Безкоштовна консультація</p>
+              <p className="font-bold">Безкоштовний прийом</p>
               <NullableBooleanInput
                 source="isFreeReception"
                 validate={formData.isActive && required()}
-                label="Безкоштовна консультація"
-                className="w-96"
+                label="Безкоштовний прийом"
+                style={{ width: '224px' }}
                 falseLabel="Ні"
                 trueLabel="Так"
               />
