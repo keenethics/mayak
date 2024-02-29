@@ -9,6 +9,7 @@ export const RESOURCES = {
   event: 'event',
   eventTag: 'eventTag',
   faq: 'faq',
+  organizationType: 'organizationType',
 };
 
 export const SUCCESS_NOTIFICATIONS = {
