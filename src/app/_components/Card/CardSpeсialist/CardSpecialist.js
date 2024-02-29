@@ -54,28 +54,28 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
-      <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px]">
-        <div className="relative w-full">
-          <header className="flex flex-row gap-[10px]">
-            <ProfileImage gender={gender} className="md:hidden" />
-            <div className="max-w-full overflow-hidden">
-              <SpecializationsPanel
-                specialistId={id}
-                specializations={specializationsList}
-                extendedCardOpened={extended}
-              />
-              <SpecialistTitle id={id} truncate={!extended} name={name} className="mt-[6px]" />
-            </div>
-          </header>
-          <ExperienceList labels={labelsList} className="mt-[16px] md:mt-[12px]" />
-          {!extended && (
+      <CardSectionWrapper className="flex w-[100%] max-w-full flex-col md:ml-[16px]">
+        <header className="flex flex-row gap-[10px]">
+          <ProfileImage gender={gender} className="md:hidden" />
+          <div className="max-w-full overflow-hidden">
+            <SpecializationsPanel
+              specialistId={id}
+              specializations={specializationsList}
+              extendedCardOpened={extended}
+            />
+            <SpecialistTitle id={id} truncate={!extended} name={name} className="mt-[6px]" />
+          </div>
+        </header>
+        <ExperienceList labels={labelsList} className="mt-[16px] md:mt-[12px]" />
+        {!extended && (
+          <>
             <AddressesList
               className="mt-[16px] border-t pt-[12px] md:mt-[12px] md:border-b md:py-[12px]"
               addresses={addressPrimary}
             />
-          )}
-        </div>
-        {!extended && <CardButton className="mt-auto" id={id} />}
+            <CardButton className="mt-[16px]" id={id} />
+          </>
+        )}
         {extended && (
           <>
             <DetailsList
