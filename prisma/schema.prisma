@@ -40,7 +40,7 @@ model Specialist {
   gender            Gender?
   yearsOfExperience Int?             @db.SmallInt
   formatOfWork      FormatOfWork?
-  placesOfWork      PlaceOfWork[]
+  addresses         Address[]
   therapies         Therapy[]
   isFreeReception   Boolean?
   description       String?          @db.Text
@@ -66,16 +66,6 @@ model Specialization {
   @@map("specialization")
 }
 
-model PlaceOfWork {
-  id           String     @id @default(uuid()) @db.Uuid
-  createdAt    DateTime   @default(now())
-  addresses    Address[]
-  specialistId String     @db.Uuid
-  specialist   Specialist @relation(fields: [specialistId], references: [id], onDelete: Cascade)
-
-  @@map("place_of_work")
-}
-
 model District {
   id        String    @id @default(uuid()) @db.Uuid
   createdAt DateTime  @default(now())
@@ -95,13 +85,13 @@ model Therapy {
 }
 
 model Address {
-  id           String        @id @default(uuid()) @db.Uuid
-  createdAt    DateTime      @default(now())
-  nameOfClinic String?       @db.VarChar(255)
-  fullAddress  String        @db.VarChar(128) // street,building number,floor,room number
-  district     District      @relation(fields: [districtId], references: [id])
-  districtId   String        @db.Uuid
-  placesOfWork PlaceOfWork[]
+  id           String       @id @default(uuid()) @db.Uuid
+  createdAt    DateTime     @default(now())
+  nameOfClinic String?      @db.VarChar(255)
+  fullAddress  String       @db.VarChar(128) // street,building number,floor,room number
+  district     District     @relation(fields: [districtId], references: [id])
+  districtId   String       @db.Uuid
+  specialists  Specialist[]
 
   @@map("address")
 }

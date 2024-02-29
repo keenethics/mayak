@@ -30,16 +30,6 @@ const zYearsOfExperience = z
   .nonnegative()
   .nullish();
 
-const zPlacesOfWorkSchema = z.array(
-  z
-    .object({
-      fullAddress: zStringWithMax,
-      nameOfClinic: z.string().nullish(),
-      district: zString,
-    })
-    .default([]),
-);
-
 const defaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
@@ -66,7 +56,6 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
-  placesOfWork: zPlacesOfWorkSchema.default([]),
   instagram: zString.url().nullish(),
   facebook: zString.url().nullish(),
   youtube: zString.url().nullish(),
@@ -87,20 +76,20 @@ const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialist
 export const specialistValidationSchema = z
   .intersection(specialistSchemaUnion, defaultProps)
   .superRefine((schema, ctx) => {
-    const { formatOfWork, isActive, placesOfWork } = schema;
+    const { formatOfWork, isActive, addresses } = schema;
 
-    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !placesOfWork.length) {
+    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
       ctx.addIssue({
         code: 'custom',
         message: 'Необхідно вказати мінімум одне місце надання послуг',
-        path: ['placesOfWork'],
+        path: ['addresses'],
       });
     }
 
     if (formatOfWork === FormatOfWork.ONLINE) {
       return {
         ...schema,
-        placesOfWork: [],
+        addresses: [],
       };
     }
 
