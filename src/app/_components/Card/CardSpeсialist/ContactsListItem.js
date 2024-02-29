@@ -13,7 +13,7 @@ function ContactItem({ type, content, href, className }) {
           {content}
         </Link>
       )}
-      {type === 'text' && <p className={cn('text-c4 text-gray-900', className)}>{content}</p>}
+      {type === 'text' && <p className={cn('text-c3 text-gray-900', className)}>{content}</p>}
     </>
   );
 }
@@ -63,10 +63,10 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
               type={href ? 'link' : 'text'}
               href={href}
               content={content}
-              className="whitespace-normal break-words"
+              className="whitespace-normal break-words text-c4"
             />
           }
-          hintWindowClassName="translate-x-full -right-[10px] top-0 z-[200] w-max"
+          hintWindowClassName="translate-x-full right-[-10px] top-0 z-[200] w-max"
         />
       ) : (
         <InfoRow icon={icon}>
