@@ -40,6 +40,7 @@ export function PillButton({ children, className, icon, variant, colorVariant, .
 
 PillButton.propTypes = {
   children: PropTypes.node,
+  type: PropTypes.string,
   className: PropTypes.string,
   variant: PropTypes.string.isRequired,
   colorVariant: PropTypes.string.isRequired,
