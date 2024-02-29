@@ -17,7 +17,6 @@ import {
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
 import { displayYearsOfExperience } from '@/utils/common';
-import { cn } from '@/utils/cn';
 
 export const getContactsList = ({ phone, email, website }) => [
   {
@@ -48,24 +47,23 @@ export const getContactsList = ({ phone, email, website }) => [
 ];
 
 export const borderStyle = 'border-dashed border-t-gray-200';
-const iconStyle = 'h-[15px] w-[15px] lg:h-[20px] lg:w-[20px]';
 
 export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork }) => [
   {
     id: 'yearsOfExperience',
-    icon: <MedCare className={cn(iconStyle)} />,
+    icon: <MedCare />,
     content: displayYearsOfExperience(yearsOfExperience),
     color: 'text-other-green',
   },
   {
     id: 'isFreeReception',
-    icon: <MedAttention className={cn(iconStyle)} />,
+    icon: <MedAttention />,
     content: isFreeReception ? 'Безкоштовний прийом' : null,
     color: 'text-other-orange',
   },
   {
     id: 'formatOfWork',
-    icon: <OnlineMeeting className={cn(iconStyle)} />,
+    icon: <OnlineMeeting />,
     content: formatOfWork === FormatOfWork.ONLINE ? 'Онлайн консультації' : null,
     color: 'text-other-blue',
   },

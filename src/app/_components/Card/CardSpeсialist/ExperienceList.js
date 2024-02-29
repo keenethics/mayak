@@ -8,10 +8,11 @@ import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
 export function ExperienceList({ labels, className }) {
   return (
     <ul
-      className={cn('flex gap-[24px] border-t pt-[16px] md:flex-initial md:gap-[24px] md:border-0 md:pt-0', [
+      className={cn(
+        'flex gap-[24px] border-t pt-[16px] md:flex-initial md:gap-[24px] md:border-0 md:pt-0',
         borderStyle,
         className,
-      ])}
+      )}
     >
       {labels.map(({ icon, content, color }) =>
         content ? (
@@ -19,7 +20,7 @@ export function ExperienceList({ labels, className }) {
             icon={icon}
             key={content}
             text={content}
-            className={cn('flex-shrink-1 flex-initial justify-between gap-2  text-other-green', color)}
+            className={cn('flex-shrink-1 flex-initial justify-between gap-2 text-other-green', color)}
           />
         ) : (
           ''

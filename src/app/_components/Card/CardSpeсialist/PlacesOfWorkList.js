@@ -6,7 +6,7 @@ import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
 
 export function PlacesOfWorkList({ places, className, showIcon = false }) {
   return (
-    <ul className={cn('', [borderStyle, className])}>
+    <ul className={cn(borderStyle, className)}>
       {places.map(({ id, nameOfClinic, fullAddress, district }) => (
         <li key={id} className="flex gap-[12px] md:gap-[16px]">
           {showIcon && (

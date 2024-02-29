@@ -5,7 +5,7 @@ import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
 
 export function TherapiesList({ therapies, className }) {
   return (
-    <div className={cn('border-t pt-[16px] md:pt-[12px]', [borderStyle, className])}>
+    <div className={cn('border-t pt-[16px] md:pt-[12px]', borderStyle, className)}>
       <h3 className="text-p4 font-bold uppercase tracking-wide text-gray-600">Напрямок лікування</h3>
       <ul className="mt-[14px] flex flex-wrap gap-[10px]">
         {therapies.map(t => (

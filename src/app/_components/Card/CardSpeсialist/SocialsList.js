@@ -17,7 +17,12 @@ export function SocialsList({ socials, className }) {
             key={idx}
             className="cursor-pointer text-primary-700 transition ease-in-out hover:text-primary-500 md:h-[22px] md:w-[22px] lg:h-[24px] lg:w-[24px]"
           >
-            <a target="_blank" rel="noopener noreferrer" aria-label={`Open ${item.id} of specialist on click`}>
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${item.id} of specialist on click`}
+            >
               {item.icon}
             </a>
           </li>

@@ -24,7 +24,7 @@ export function CardWrapper({ children, className, id }) {
 
   return (
     <div
-      className={cn('md:flex md:cursor-auto lg:mx-auto', [cursorStyle, className])}
+      className={cn('transition-all md:flex md:cursor-auto lg:mx-auto', cursorStyle, className)}
       onClick={matches && !isExtendedCardOpened ? handleClick : undefined}
     >
       {children}
