@@ -24,7 +24,10 @@ export const Modal = ({
       {isOpen && (
         <>
           {isBlurBackground && blurBackground}
-          <div className="fixed left-0 top-0 z-[200] flex h-full w-full items-center justify-center" onClick={onClose}>
+          <div
+            className="fixed left-0 top-0 z-[200] flex h-full w-full items-center justify-center overflow-y-scroll"
+            onClick={onClose}
+          >
             <motion.div
               className={cn(
                 `rounded-xl shadow-[0_0_32px_0px_rgba(0,58,113,0.25)] ${bgColor} px-4 py-[18px] md:p-6`,
