@@ -5,7 +5,7 @@ import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-ad
 import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate } from '@admin/components/Event';
-import { FaqCreate, FaqEdit, ListFaq } from '@admin/components/Faq';
+import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
 import { SpecialistCreate, SpecialistsList, SpecialistShow } from '@admin/components/Specialist';
 import { authProvider } from './authProvider';
 
@@ -43,7 +43,7 @@ export default function AdminPage() {
       <Resource
         name={RESOURCES.faq}
         options={{ label: 'FAQ' }}
-        list={ListFaq}
+        list={FaqList}
         show={ShowGuesser}
         edit={FaqEdit}
         create={FaqCreate}
