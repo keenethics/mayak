@@ -4,13 +4,13 @@ import { Caption, ListTruncator } from '@components';
 
 export function SpecializationsPanel({ specialistId, specializations, extendedCardOpened = false }) {
   return extendedCardOpened ? (
-    <div className="inline-flex flex-wrap items-center gap-[8px]">
+    <div className="inline-flex shrink flex-wrap items-center gap-[8px]">
       {specializations.map((specialization, index) => (
         <div className="flex items-center justify-center gap-[10px]" key={`${specialization}-${index}`}>
-          <Caption className="whitespace-nowrap text-start font-bold text-gray-600 lg:text-p4">
+          <Caption className="whitespace-normal text-start font-bold text-gray-600 lg:text-p4">
             {specialization}
           </Caption>
-          {index !== specializations.length - 1 && <Dot />}
+          {index !== specializations.length - 1 && <Dot key={`dot-${specialization}-${index}`} />}
         </div>
       ))}
     </div>
