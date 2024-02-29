@@ -25,7 +25,7 @@ function uniqueObjectsWithId(instances) {
 
 function randomAddress(districts) {
   const randomNameOfClinic = `Клініка ${faker.company.name()}`;
-  const randomDistricts = faker.helpers.arrayElement(districts).id; // returns randowm object from districts array
+  const randomDistricts = faker.helpers.arrayElement(districts).id; // returns random object from districts array
   return {
     nameOfClinic: randomNameOfClinic,
     fullAddress: getFullAddress(),
@@ -37,22 +37,11 @@ function randomAddress(districts) {
   };
 }
 
-function randomPlaceOfWork(districts) {
+function randomSpecialist({ districts, specializations, therapies }) {
+  const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   const randomAddresses = Array(faker.number.int({ min: 1, max: 3 }))
     .fill('')
     .map(() => randomAddress(districts));
-  return {
-    addresses: {
-      create: randomAddresses,
-    },
-  };
-}
-
-function randomSpecialist({ districts, specializations, therapies }) {
-  const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
-  const randomPlacesOfWork = Array(faker.number.int({ min: 1, max: 3 }))
-    .fill('')
-    .map(() => randomPlaceOfWork(districts));
 
   const phoneRegexp = '+380[0-9]{9}';
   return {
@@ -67,8 +56,8 @@ function randomSpecialist({ districts, specializations, therapies }) {
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
     // take one of these
     formatOfWork: faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']),
-    placesOfWork: {
-      create: randomPlacesOfWork,
+    addresses: {
+      create: randomAddresses,
     },
     therapies: {
       connect: uniqueObjectsWithId(therapies),
@@ -124,7 +113,6 @@ async function main() {
   await prisma.$transaction(async trx => {
     await trx.address.deleteMany();
     await trx.specialist.deleteMany();
-    await trx.placeOfWork.deleteMany();
     await trx.specialization.deleteMany();
     await trx.district.deleteMany();
     await trx.therapy.deleteMany();
@@ -143,8 +131,8 @@ async function main() {
     'Соціальний працівник',
   ];
   const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
-  const faqs = Array.from({ length: 5 }).map(() => ({
-    isActive: true,
+  const faqs = Array.from({ length: 15 }).map(() => ({
+    isActive: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
   }));

@@ -41,10 +41,10 @@ export const SpecialistFormFields = {
     label: 'Формат послуг',
     isRequired: true,
   },
-  placesOfWork: {
-    name: 'placesOfWork',
+  addresses: {
+    name: 'addresses',
     type: null,
-    label: 'Адреса',
+    label: 'Адреси',
     isRequired: true,
   },
   fullAddress: {
@@ -106,7 +106,7 @@ export const SpecialistFormFields = {
 export const SpecialistFormSections = {
   general: 'Основні дані',
   details: 'Деталі',
-  placesOfWOrk: 'Місце надання послуг',
+  addresses: 'Місце надання послуг',
   services: 'Послуги',
   contacts: 'Контактні дані',
 };
