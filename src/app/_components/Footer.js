@@ -4,7 +4,6 @@ import FooterImg from '@icons/whiteLogo.svg';
 import siteNav from '@config/siteNav';
 import { PillButton, SocialLink } from '@components';
 import { cn } from '@/utils/cn';
-import { buttonColorVariant, buttonType } from './PillButton/style';
 
 export function Footer() {
   const { links } = siteNav;
@@ -31,7 +30,7 @@ export function Footer() {
         </Link>
         <div className={cn(flexColCenter, flexCenterMd, 'gap-2 py-3 text-other-white lg:gap-6')}>
           <p className="text-p4 font-bold text-other-white lg:text-p1">Ставай нашим партнером</p>
-          <PillButton type={buttonType.outlined} colorVariant={buttonColorVariant.outlined.white}>
+          <PillButton variant="outlined" colorVariant="white">
             Залишити заявку
           </PillButton>
         </div>

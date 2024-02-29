@@ -9,7 +9,6 @@ import siteNav from '@config/siteNav';
 import { useBodyScrollLock } from '@hooks';
 import { InnerLink, PillButton, SocialLink } from '@components';
 import { cn } from '@/utils/cn';
-import { buttonColorVariant, buttonType } from './PillButton/style';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
@@ -62,8 +61,8 @@ export function Header() {
             className={cn(basicLink, iconColors, 'hover:color-primary-500 gap-6 transition-all hover:text-primary-500')}
           />
           <PillButton
-            type={buttonType.outlined}
-            colorVariant={buttonColorVariant.outlined.blue}
+            variant="outlined"
+            colorVariant="blue"
             className="border-gray-700 text-p4 font-bold text-primary-500"
             aria-label="Click to fill feedback form"
           >
@@ -102,8 +101,8 @@ export function Header() {
               />
             </div>
             <PillButton
-              type={buttonType.outlined}
-              colorVariant={buttonColorVariant.outlined.blue}
+              variant="outlined"
+              colorVariant="blue"
               className="my-8 border-gray-700 text-p4 font-bold text-primary-500"
               aria-label="Click to fill feedback form"
             >
