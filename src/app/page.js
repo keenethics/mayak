@@ -12,7 +12,10 @@ export const metadata = {
 export default function Page() {
   return (
     <>
+      <section>TBD district & search section</section>
       <TherapiesSection />
+      <section>TBD goal section</section>
+      <section>FAQ section</section>
     </>
   );
 }

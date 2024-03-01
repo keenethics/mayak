@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "therapy" ALTER COLUMN "description" DROP DEFAULT,
+ALTER COLUMN "imagePath" DROP DEFAULT,
+ALTER COLUMN "title" DROP DEFAULT;

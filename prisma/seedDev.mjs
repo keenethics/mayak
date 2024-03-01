@@ -150,7 +150,6 @@ async function main() {
     await trx.specialist.deleteMany();
     await trx.specialization.deleteMany();
     await trx.district.deleteMany();
-    await trx.therapy.deleteMany();
     await trx.event.deleteMany();
     await trx.eventLink.deleteMany();
     await trx.eventTag.deleteMany();
@@ -167,7 +166,6 @@ async function main() {
     'Сексолог',
     'Соціальний працівник',
   ];
-  const therapyNames = ['Індивідуальна', 'Для дітей і підлітків', 'Сімейна', 'Групова', 'Для пар', 'Для бізнесу'];
   const organizationTypeNames = ['Психологічний центр', 'Соціальна служба', 'Лікарня'];
   const faqs = Array.from({ length: 15 }).map(() => ({
     isActive: faker.datatype.boolean(),
@@ -181,10 +179,6 @@ async function main() {
 
   await prisma.specialization.createMany({
     data: specializationNames.map(name => ({ name })),
-  });
-
-  await prisma.therapy.createMany({
-    data: therapyNames.map(name => ({ name })),
   });
 
   const eventTags = ['EventTag1', 'EventTag2', 'EventTag3'];

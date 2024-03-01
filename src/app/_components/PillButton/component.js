@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@/app/utils/cn';
 import { Paragraph } from '../Typography';
