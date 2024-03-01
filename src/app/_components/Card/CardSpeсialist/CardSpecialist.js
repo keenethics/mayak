@@ -1,7 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { ProfileImage } from './ProfileImage';
-import { CardSectionWrapper } from './CardSectionWrapper';
 import { ContactsList } from './ContactsList';
 import { SpecializationsPanel } from './SpecializationsPanel';
 import { SpecialistTitle } from './SpecialistTitle';
@@ -48,13 +47,13 @@ export function CardSpecialist({ specialist, className, extended = false }) {
 
   return (
     <CardWrapper className={className} id={id}>
-      <CardSectionWrapper className="hidden md:block md:max-w-[200px]">
+      <div className="hidden md:block md:max-w-[200px]">
         <ProfileImage gender={gender} className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
           <SocialsList socials={socials} className="absolute bottom-[16px]" />
         </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-[16px]" />
-      </CardSectionWrapper>
-      <CardSectionWrapper className="flex w-[100%] max-w-full flex-col gap-[16px] overflow-hidden md:ml-[16px]">
+      </div>
+      <div className="flex w-[100%] max-w-full flex-col gap-[16px] overflow-hidden md:ml-[16px]">
         <header className="relative flex flex-row gap-[10px]">
           <ProfileImage gender={gender} className="md:hidden" />
           <div className="max-w-full overflow-hidden">
@@ -67,13 +66,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           </div>
         </header>
         <ExperienceList labels={labelsList} />
-        {!extended && (
-          <>
-            <AddressesList className="border-t pt-[12px] md:border-b md:py-[12px]" addresses={addressPrimary} />
-            <CardButton className="mt-auto" id={id} />
-          </>
-        )}
-        {extended && (
+        {extended ? (
           <>
             <DetailsList
               className={cn('mt-[16px] border-t pt-[16px]', borderStyle)}
@@ -86,8 +79,13 @@ export function CardSpecialist({ specialist, className, extended = false }) {
               className={cn('mt-[12px] border-t pt-[12px] md:hidden', borderStyle)}
             />
           </>
+        ) : (
+          <>
+            <AddressesList className="border-t pt-[12px] md:border-b md:py-[12px]" addresses={addressPrimary} />
+            <CardButton className="mt-auto" id={id} />
+          </>
         )}
-      </CardSectionWrapper>
+      </div>
     </CardWrapper>
   );
 }
