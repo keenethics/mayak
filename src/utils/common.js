@@ -20,7 +20,7 @@ export const displayYearsOfExperience = amountOfYears => {
   return `${amountOfYears} років стажу`;
 };
 
-export const parsePhoneNumber = phoneNumber => {
+export const formatPhoneNumber = phoneNumber => {
   const countryCode = phoneNumber.slice(0, 3);
   const areaCode = phoneNumber.slice(3, 6);
   const firstPart = phoneNumber.slice(6, 9);

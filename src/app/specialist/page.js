@@ -2,7 +2,7 @@ import React from 'react';
 import { SpecialistList } from '@components';
 import { prisma } from '@/lib/db';
 import { include } from '@/app/specialist/consts';
-import { parsePhoneNumber } from '@/utils/common';
+import { formatPhoneNumber } from '@/utils/common';
 
 export const metadata = {
   title: 'Спеціалісти',
@@ -23,7 +23,7 @@ export default async function Page() {
     if (specialist.phone) {
       return {
         ...specialist,
-        phone: parsePhoneNumber(specialist.phone),
+        phone: formatPhoneNumber(specialist.phone),
       };
     }
 
