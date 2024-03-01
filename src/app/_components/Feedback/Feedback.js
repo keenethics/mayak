@@ -54,14 +54,16 @@ export function Feedback({ isFeedbackOpen, onClose }) {
   };
 
   useEffect(() => {
-    if (isFormOpen) return
+    if (isFormOpen) return;
     const timer = setTimeout(() => {
       setMessage('');
       setFormOpen(true);
-      //TODO! redirect to "Бажаєте задонатити" modal window
-      onClose()
+      // TODO! redirect to "Бажаєте задонатити" modal window
+      onClose();
     }, 4000);
 
+    // Existing lint rules do not allow this usage, but this code is required.
+    // eslint-disable-next-line consistent-return
     return () => clearTimeout(timer);
   }, [isFormOpen]);
 
