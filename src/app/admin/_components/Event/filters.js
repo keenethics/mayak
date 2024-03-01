@@ -11,6 +11,7 @@ export const eventFilters = [
     key="format"
     source={'format_enum'}
     choices={[
+      { id: undefined, name: 'Обидва' },
       { id: EventFormat.OFFLINE, name: 'Офлайн' },
       { id: EventFormat.ONLINE, name: 'Онлайн' },
     ]}
@@ -23,6 +24,7 @@ export const eventFilters = [
     label="Статус"
     source={'isActive'}
     choices={[
+      { id: undefined, name: 'Обидва' },
       { id: true, name: 'Активний' },
       { id: false, name: 'Неактивний' },
     ]}
