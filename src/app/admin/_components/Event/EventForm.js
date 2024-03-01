@@ -12,6 +12,9 @@ import PropTypes from 'prop-types';
 import { useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EventSchema } from '@admin/_lib/validationSchemas/eventSchema';
+import { capitalizeFirstLetter } from '@admin/_utils/common';
+import { EventPriceFormat, EventFormat } from '@prisma/client';
+import { FormTranslations } from '@admin/_lib/translations';
 import { TagSelect } from './TagSelect';
 
 const fieldGroupClass = 'flex flex-col md:flex-row md:gap-6';
@@ -46,6 +49,15 @@ export function EventFormEdit({ toolbar, setSelectedTags }) {
 }
 
 export function EventForm({ toolbar, setSelectedTags, recordTags }) {
+  const getChoicesList = (list, translations) =>
+    list.map(item => ({
+      id: item,
+      name: capitalizeFirstLetter(translations[item.toLowerCase()]) ?? item,
+    }));
+
+  const priceTypeChoices = getChoicesList(Object.values(EventPriceFormat), FormTranslations.eventPriceFormat);
+  const formatChoices = getChoicesList(Object.values(EventFormat), FormTranslations.eventFormat);
+
   return (
     <SimpleForm resolver={zodResolver(EventSchema)} toolbar={toolbar}>
       <p className="font-bold">Основна інформація</p>
@@ -55,29 +67,12 @@ export function EventForm({ toolbar, setSelectedTags, recordTags }) {
       <DateTimeInput source="eventDate" label="Дата події" validate={required()} />
       <p className="font-bold">Вартість</p>
       <div className={fieldGroupClass}>
-        <SelectInput
-          source="priceType"
-          choices={[
-            { id: 'FREE', name: 'Безкоштовно' },
-            { id: 'FIXED_PRICE', name: 'Фіксована вартість' },
-            { id: 'MIN_PRICE', name: 'Мінімальна вартість' },
-          ]}
-          label="Варіанти"
-          validate={required()}
-        />
+        <SelectInput source="priceType" choices={priceTypeChoices} label="Варіанти" validate={required()} />
         <PriceInput />
       </div>
       <p className="font-bold">Формат та локація</p>
       <div className={fieldGroupClass}>
-        <SelectInput
-          source="format"
-          choices={[
-            { id: 'OFFLINE', name: 'Офлайн' },
-            { id: 'ONLINE', name: 'Онлайн' },
-          ]}
-          label="Формат події"
-          validate={required()}
-        />
+        <SelectInput source="format" choices={formatChoices} label="Формат події" validate={required()} />
         <AddressInput />
       </div>
       <p className="font-bold">Теги події</p>
