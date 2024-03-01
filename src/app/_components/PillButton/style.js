@@ -27,7 +27,7 @@ export const buttonColorVariant = {
   // tonal: {},
 };
 
-export const buttonType = {
+export const buttonVariant = {
   outlined: {
     icon: {
       buttonStyle: 'inline-flex justify-center align-middle flex-col text-p4',
