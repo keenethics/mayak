@@ -66,13 +66,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           </div>
         </header>
         <ExperienceList labels={labelsList} />
-        {!extended && (
-          <>
-            <AddressesList className="border-t pt-[12px] md:border-b md:py-[12px]" addresses={addressPrimary} />
-            <CardButton className="mt-auto" id={id} />
-          </>
-        )}
-        {extended && (
+        {extended ? (
           <>
             <DetailsList
               className={cn('mt-[16px] border-t pt-[16px]', borderStyle)}
@@ -84,6 +78,11 @@ export function CardSpecialist({ specialist, className, extended = false }) {
               contacts={contactsList}
               className={cn('mt-[12px] border-t pt-[12px] md:hidden', borderStyle)}
             />
+          </>
+        ) : (
+          <>
+            <AddressesList className="border-t pt-[12px] md:border-b md:py-[12px]" addresses={addressPrimary} />
+            <CardButton className="mt-auto" id={id} />
           </>
         )}
       </div>
