@@ -30,7 +30,8 @@ export const Modal = ({
           >
             <motion.div
               className={cn(
-                `rounded-xl shadow-[0_0_32px_0px_rgba(0,58,113,0.25)] ${bgColor} px-4 py-[18px] md:p-6`,
+                'rounded-xl px-4 py-[18px] shadow-[0_0_32px_0px_rgba(0,58,113,0.25)] md:p-6',
+                bgColor,
                 className,
               )}
               onClick={e => {
