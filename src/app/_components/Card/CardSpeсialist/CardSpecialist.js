@@ -54,7 +54,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
-      <CardSectionWrapper className="flex w-[100%] max-w-full flex-col overflow-hidden md:ml-[16px] gap-[16px]">
+      <CardSectionWrapper className="flex w-[100%] max-w-full flex-col gap-[16px] overflow-hidden md:ml-[16px]">
         <header className="flex flex-row gap-[10px]">
           <ProfileImage gender={gender} className="md:hidden" />
           <div className="max-w-full overflow-hidden">
@@ -69,10 +69,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         <ExperienceList labels={labelsList} />
         {!extended && (
           <>
-            <AddressesList
-              className="border-t pt-[12px] md:border-b md:py-[12px]"
-              addresses={addressPrimary}
-            />
+            <AddressesList className="border-t pt-[12px] md:border-b md:py-[12px]" addresses={addressPrimary} />
             <CardButton className="mt-auto" id={id} />
           </>
         )}
