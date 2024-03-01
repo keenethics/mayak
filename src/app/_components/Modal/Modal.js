@@ -17,7 +17,7 @@ export const Modal = ({
   children,
   className,
 }) => {
-  const blurBackground = <div className="fixed left-0 top-0 z-[150] h-full w-full backdrop-blur-sm"></div>;
+  const blurBackground = <div className="no-scrollbar fixed left-0 top-0 z-[150] h-full w-full backdrop-blur-sm"></div>;
 
   return (
     <ClientPortal selector="modal-root" show={isOpen}>
@@ -25,7 +25,7 @@ export const Modal = ({
         <>
           {isBlurBackground && blurBackground}
           <div
-            className="fixed left-0 top-0 z-[200] flex h-full w-full items-center justify-center overflow-y-scroll"
+            className="no-scrollbar fixed left-0 top-0 z-[200] flex h-full w-full items-center justify-center overflow-y-scroll"
             onClick={onClose}
           >
             <motion.div
