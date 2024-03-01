@@ -25,7 +25,7 @@ export const Modal = ({
         <>
           {isBlurBackground && blurBackground}
           <div
-            className="no-scrollbar fixed left-0 top-0 z-[200] flex h-full w-full items-center justify-center overflow-y-scroll"
+            className="no-scrollbar fixed left-0 top-0 z-[200] grid h-full w-full place-content-center overflow-y-scroll"
             onClick={onClose}
           >
             <motion.div
