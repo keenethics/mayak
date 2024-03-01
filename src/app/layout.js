@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={cn('relative', montserrat.className)}>
-        <Header />
         <QueryContext>
           <Header />
           <main>{children}</main>

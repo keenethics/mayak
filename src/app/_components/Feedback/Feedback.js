@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LoveIcon from '@icons/loveIcon.svg';
 import { useCreateFeedback } from '@/app/_hooks';
@@ -53,11 +53,23 @@ export function Feedback({ isFeedbackOpen, onClose }) {
     }
   };
 
+  useEffect(() => {
+    if (isFormOpen) return
+    const timer = setTimeout(() => {
+      setMessage('');
+      setFormOpen(true);
+      //TODO! redirect to "Бажаєте задонатити" modal window
+      onClose()
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [isFormOpen]);
+
   return (
     <Modal isOpen={isFeedbackOpen} onClose={onClose} bgColor="bg-primary-200 ">
       <div className="px-[54px] pt-0">
         {isFormOpen ? (
-          <form onSubmit={onSubmit} className="grid gap-y-6">
+          <form onSubmit={onSubmit} className="grid gap-y-7">
             <h3 className="text-h3 font-bold"> Хочете поділитись ідеями?</h3>
             <p className="text-p2">Залиште свої контактні дані і ми зв’яжемось з Вами</p>
             <TextInputField
