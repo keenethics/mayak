@@ -14,13 +14,11 @@ export function CardSpecialistExtended({ specialist, className }) {
   const router = useRouter();
 
   function handleClose() {
-    document.body.style.marginRight = '0px';
     router.push(`/specialist`, { scroll: false });
   }
 
   // this is to ensure proper modal rendering
   useEffect(() => {
-    document.body.style.marginRight = '30px';
     setOpen(true);
   }, []);
 
