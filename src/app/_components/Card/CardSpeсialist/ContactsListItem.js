@@ -30,7 +30,7 @@ function InfoRow({ icon, children }) {
     <div className="flex items-center">
       <span className="flex w-[20px] flex-shrink-0 items-start justify-center">{icon}</span>
       <div
-        className={`text-inherit font-inherit ml-4 max-w-full flex-grow overflow-auto break-words
+        className={`text-inherit font-inherit ml-2 max-w-full flex-grow overflow-auto break-words
                 text-start text-c3 text-gray-700`}
       >
         {children}
