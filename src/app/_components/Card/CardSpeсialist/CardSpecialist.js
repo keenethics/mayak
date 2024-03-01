@@ -55,7 +55,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-[16px]" />
       </CardSectionWrapper>
       <CardSectionWrapper className="flex w-[100%] max-w-full flex-col gap-[16px] overflow-hidden md:ml-[16px]">
-        <header className="flex flex-row gap-[10px]">
+        <header className="relative flex flex-row gap-[10px]">
           <ProfileImage gender={gender} className="md:hidden" />
           <div className="max-w-full overflow-hidden">
             <SpecializationsPanel
