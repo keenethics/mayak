@@ -1,4 +1,4 @@
-import p from 'prop-types';
+import PropTypes from 'prop-types';
 
 export const metadata = {
   title: 'Admin Panel',
@@ -11,5 +11,5 @@ export default function AdminLayout({ children }) {
 }
 
 AdminLayout.propTypes = {
-  children: p.node,
+  children: PropTypes.node,
 };

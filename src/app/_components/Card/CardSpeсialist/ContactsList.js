@@ -1,5 +1,5 @@
 import React from 'react';
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 import { ContactsListItem } from './ContactsListItem';
 import { specialistContactPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
@@ -19,8 +19,8 @@ export function ContactsList({ truncate, specialistId, contacts, className }) {
 }
 
 ContactsList.propTypes = {
-  contacts: P.arrayOf(specialistContactPropType),
-  className: P.string,
-  specialistId: P.string.isRequired,
-  truncate: P.bool,
+  contacts: PropTypes.arrayOf(specialistContactPropType),
+  className: PropTypes.string,
+  specialistId: PropTypes.string.isRequired,
+  truncate: PropTypes.bool,
 };

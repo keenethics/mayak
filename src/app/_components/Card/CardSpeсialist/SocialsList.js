@@ -1,5 +1,5 @@
 import React from 'react';
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import { specialistSocialsPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 import { cn } from '@/utils/cn';
 
@@ -35,6 +35,6 @@ export function SocialsList({ socials, className }) {
 }
 
 SocialsList.propTypes = {
-  socials: P.arrayOf(specialistSocialsPropType),
-  className: P.string,
+  socials: PropTypes.arrayOf(specialistSocialsPropType),
+  className: PropTypes.string,
 };

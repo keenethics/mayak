@@ -1,6 +1,6 @@
 import React from 'react';
-import p from 'prop-types';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 
 export function SocialLink({ links, className }) {
@@ -25,6 +25,6 @@ export function SocialLink({ links, className }) {
 }
 
 SocialLink.propTypes = {
-  links: p.array,
-  className: p.string,
+  links: PropTypes.array,
+  className: PropTypes.string,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
-import P from 'prop-types';
 import Link from 'next/link';
 import { ListTruncator } from '@components';
+import PropTypes from 'prop-types';
 import { specialistContactPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
 import { cn } from '@/utils/cn';
 
@@ -19,10 +19,10 @@ function ContactItem({ type, content, href, className }) {
 }
 
 ContactItem.propTypes = {
-  type: P.oneOf(['link', 'text']).isRequired,
-  href: P.string,
-  content: P.string.isRequired,
-  className: P.string,
+  type: PropTypes.oneOf(['link', 'text']).isRequired,
+  href: PropTypes.string,
+  content: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 function InfoRow({ icon, children }) {
@@ -40,8 +40,8 @@ function InfoRow({ icon, children }) {
 }
 
 InfoRow.propTypes = {
-  icon: P.node,
-  children: P.node,
+  icon: PropTypes.node,
+  children: PropTypes.node,
 };
 
 export function ContactsListItem({ truncate, specialistId, contact }) {
@@ -93,6 +93,6 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
 
 ContactsListItem.propTypes = {
   contact: specialistContactPropType,
-  specialistId: P.string.isRequired,
-  truncate: P.bool,
+  specialistId: PropTypes.string.isRequired,
+  truncate: PropTypes.bool,
 };

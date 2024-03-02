@@ -1,5 +1,5 @@
 import React from 'react';
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 
 function ExperienceListItem({ icon, text, className }) {
@@ -16,7 +16,7 @@ function ExperienceListItem({ icon, text, className }) {
 export { ExperienceListItem };
 
 ExperienceListItem.propTypes = {
-  icon: P.element,
-  text: P.string,
-  className: P.string,
+  icon: PropTypes.element,
+  text: PropTypes.string,
+  className: PropTypes.string,
 };

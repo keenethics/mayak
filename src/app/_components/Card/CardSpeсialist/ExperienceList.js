@@ -1,5 +1,5 @@
 import React from 'react';
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 import { ExperienceListItem } from './ExperienceListItem';
 import { specialistLabelPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
@@ -31,6 +31,6 @@ export function ExperienceList({ labels, className }) {
 }
 
 ExperienceList.propTypes = {
-  labels: P.arrayOf(specialistLabelPropType),
-  className: P.string,
+  labels: PropTypes.arrayOf(specialistLabelPropType),
+  className: PropTypes.string,
 };

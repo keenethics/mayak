@@ -1,6 +1,6 @@
 import React from 'react';
-import P from 'prop-types';
 import { Footer, Header, Hint } from '@components';
+import PropTypes from 'prop-types';
 import { QueryContext } from './queryContext';
 import montserrat from '@/app/styles/font';
 import { cn } from '@/utils/cn';
@@ -34,5 +34,5 @@ export default function RootLayout({ children }) {
 }
 
 RootLayout.propTypes = {
-  children: P.node.isRequired,
+  children: PropTypes.node.isRequired,
 };

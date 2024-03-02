@@ -1,42 +1,19 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
-import P from 'prop-types';
-import { Modal } from '@components';
-import { useRouter } from 'next/navigation';
-import { useBodyScrollLock } from '@hooks';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { CardSpecialist } from '@/app/_components/Card/CardSpeсialist/CardSpecialist';
 import { cn } from '@/utils/cn';
 import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
+import { CardModalWrapper } from '@/app/_components/Card/CardSpeсialist/CardModalWrapper';
 
 export function CardSpecialistExtended({ specialist, className }) {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-
-  function handleClose() {
-    router.push(`/specialist`, { scroll: false });
-  }
-
-  // this is to ensure proper modal rendering
-  useEffect(() => {
-    setOpen(true);
-  }, []);
-
-  useBodyScrollLock('y');
-
   return (
-    <Modal
-      isOpen={open}
-      onClose={handleClose}
-      bgColor="bg-other-white"
-      className="no-scrollbar mt-[50px] h-full overflow-y-scroll rounded-b-none rounded-tl-[24px] rounded-tr-[24px] md:mx-[16px] md:mt-0 md:h-auto md:rounded-[24px] md:px-[50px] md:pb-[50px] lg:max-w-[1000px]"
-    >
+    <CardModalWrapper className="mt-[40px]">
       <CardSpecialist specialist={specialist} className={cn(className)} extended={true} />
-    </Modal>
+    </CardModalWrapper>
   );
 }
 
 CardSpecialistExtended.propTypes = {
   specialist: specialistPropType,
-  className: P.string,
+  className: PropTypes.string,
 };

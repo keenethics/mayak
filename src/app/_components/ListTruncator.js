@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import { Show as ShowHint, Window as HintWindow } from './Hint';
 import { getRandomInt } from '@/utils/common';
 import { cn } from '@/utils/cn';
@@ -77,10 +77,10 @@ export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsis
 }
 
 ListTruncator.propTypes = {
-  id: P.string.isRequired,
-  content: P.node.isRequired,
-  hintContent: P.node.isRequired,
-  ellipsis: P.node,
-  hintWindowClassName: P.string,
-  hintEllipsisClassName: P.string,
+  id: PropTypes.string.isRequired,
+  content: PropTypes.node.isRequired,
+  hintContent: PropTypes.node.isRequired,
+  ellipsis: PropTypes.node,
+  hintWindowClassName: PropTypes.string,
+  hintEllipsisClassName: PropTypes.string,
 };
