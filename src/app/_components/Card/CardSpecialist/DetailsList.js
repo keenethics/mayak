@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { IDCard } from '@icons/index';
-import { AddressesList } from '@/app/_components/Card/CardSpeсialist/AddressesList';
+import { AddressesList } from '@/app/_components/Card/CardSpecialist/AddressesList';
 import { cn } from '@/utils/cn';
 
 export function DetailsList({ details, className }) {
@@ -26,6 +26,16 @@ export function DetailsList({ details, className }) {
 }
 
 DetailsList.propTypes = {
-  details: PropType.object,
+  details: PropType.shape({
+    addresses: PropType.arrayOf(
+      PropType.shape({
+        id: PropType.string.isRequired,
+        nameOfClinic: PropType.string.isRequired,
+        fullAddress: PropType.string.isRequired,
+        district: PropType.string.isRequired,
+      }),
+    ),
+    description: PropType.string,
+  }),
   className: PropType.node,
 };

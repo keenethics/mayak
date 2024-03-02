@@ -28,9 +28,3 @@ export const formatPhoneNumber = phoneNumber => {
 
   return `${countryCode} (${areaCode}) ${firstPart} ${secondPart}`;
 };
-
-export function getRandomInt(min, max) {
-  const minI = Math.ceil(min);
-  const maxI = Math.floor(max);
-  return Math.floor(Math.random() * (maxI - minI + 1)) + minI;
-}

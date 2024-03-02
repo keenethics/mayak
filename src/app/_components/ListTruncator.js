@@ -1,36 +1,18 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import P from 'prop-types';
-import { Show as ShowHint, Window as HintWindow } from './Hint';
-import { getRandomInt } from '@/utils/common';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Show as ShowHint, Window as HintWindow } from '@components';
+import { useOverflow } from '@hooks';
 import { cn } from '@/utils/cn';
 
+let uniqueId = 0;
+
 export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsisClassName, hintWindowClassName }) {
-  const wrapperRef = useRef(null);
-  const containerRef = useRef(null);
-  const [overflown, setOverflown] = useState(false);
+  const { wrapperRef, containerRef, overflown } = useOverflow();
 
-  const calculateOverflow = useCallback(() => {
-    const wrapperWidth = wrapperRef.current.offsetWidth;
-    const containerWidth = containerRef.current.offsetWidth;
-    if (wrapperWidth > containerWidth) {
-      setOverflown(true);
-    } else {
-      setOverflown(false);
-    }
-  }, [wrapperRef, containerRef]);
-
-  useEffect(() => {
-    calculateOverflow();
-    window.addEventListener('resize', calculateOverflow);
-
-    return () => {
-      window.removeEventListener('resize', calculateOverflow);
-    };
-  }, [calculateOverflow]);
-
-  const hintId = `hint-for-${id}-${getRandomInt(0, 1000000)}`;
+  uniqueId += 1;
+  const hintId = `hint-for-${id}-${uniqueId}`;
 
   return (
     <div ref={containerRef} className="max-w-full overflow-hidden">
@@ -77,10 +59,10 @@ export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsis
 }
 
 ListTruncator.propTypes = {
-  id: P.string.isRequired,
-  content: P.node.isRequired,
-  hintContent: P.node.isRequired,
-  ellipsis: P.node,
-  hintWindowClassName: P.string,
-  hintEllipsisClassName: P.string,
+  id: PropTypes.string.isRequired,
+  content: PropTypes.node.isRequired,
+  hintContent: PropTypes.node.isRequired,
+  ellipsis: PropTypes.node,
+  hintWindowClassName: PropTypes.string,
+  hintEllipsisClassName: PropTypes.string,
 };

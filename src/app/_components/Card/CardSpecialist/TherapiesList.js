@@ -1,7 +1,7 @@
 import React from 'react';
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
-import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
+import { borderStyle } from '@/app/_components/Card/CardSpecialist/config';
 
 export function TherapiesList({ therapies, className }) {
   return (
@@ -19,6 +19,6 @@ export function TherapiesList({ therapies, className }) {
 }
 
 TherapiesList.propTypes = {
-  therapies: P.arrayOf(P.string),
-  className: P.string,
+  therapies: PropTypes.arrayOf(PropTypes.string),
+  className: PropTypes.string,
 };

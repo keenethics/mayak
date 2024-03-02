@@ -1,28 +1,27 @@
 import React from 'react';
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { ListTruncator } from '@components';
-import { specialistContactPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
+import { specialistContactPropType } from '@/app/_components/Card/CardSpecialist/prop-types';
 import { cn } from '@/utils/cn';
 
-function ContactItem({ type, content, href, className }) {
+function ContactItem({ content, href, className }) {
   return (
     <>
-      {type === 'link' && (
+      {href && (
         <Link href={href} target="_blank" rel="noopener noreferrer" className={cn('text-primary-400', className)}>
           {content}
         </Link>
       )}
-      {type === 'text' && <p className={cn('text-c3 text-gray-900', className)}>{content}</p>}
+      {!href && <p className={cn('text-c3 text-gray-900', className)}>{content}</p>}
     </>
   );
 }
 
 ContactItem.propTypes = {
-  type: P.oneOf(['link', 'text']).isRequired,
-  href: P.string,
-  content: P.string.isRequired,
-  className: P.string,
+  href: PropTypes.string,
+  content: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 function InfoRow({ icon, children }) {
@@ -40,8 +39,8 @@ function InfoRow({ icon, children }) {
 }
 
 InfoRow.propTypes = {
-  icon: P.node,
-  children: P.node,
+  icon: PropTypes.node,
+  children: PropTypes.node,
 };
 
 export function ContactsListItem({ truncate, specialistId, contact }) {
@@ -55,17 +54,10 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
           id={specialistId}
           content={
             <InfoRow icon={icon}>
-              <ContactItem type={href ? 'link' : 'text'} href={href} content={content} className="whitespace-nowrap" />
+              <ContactItem href={href} content={content} className="whitespace-nowrap" />
             </InfoRow>
           }
-          hintContent={
-            <ContactItem
-              type={href ? 'link' : 'text'}
-              href={href}
-              content={content}
-              className="whitespace-normal break-words text-c4"
-            />
-          }
+          hintContent={<ContactItem href={href} content={content} className="whitespace-normal break-words text-c4" />}
           hintWindowClassName="translate-x-full right-[-10px] top-0 z-[200] w-max"
         />
       ) : (
@@ -77,14 +69,7 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
                 {item}
               </p>
             ))}
-          {!isArray && (
-            <ContactItem
-              type={href ? 'link' : 'text'}
-              href={href}
-              content={content}
-              className="whitespace-normal break-words"
-            />
-          )}
+          {!isArray && <ContactItem href={href} content={content} className="whitespace-normal break-words" />}
         </InfoRow>
       )}
     </div>
@@ -93,6 +78,6 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
 
 ContactsListItem.propTypes = {
   contact: specialistContactPropType,
-  specialistId: P.string.isRequired,
-  truncate: P.bool,
+  specialistId: PropTypes.string.isRequired,
+  truncate: PropTypes.bool,
 };

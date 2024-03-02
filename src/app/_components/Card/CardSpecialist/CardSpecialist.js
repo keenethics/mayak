@@ -4,16 +4,16 @@ import { ProfileImage } from './ProfileImage';
 import { ContactsList } from './ContactsList';
 import { SpecializationsPanel } from './SpecializationsPanel';
 import { SpecialistTitle } from './SpecialistTitle';
-import { ExperienceList } from './ExperienceList';
+import { BadgeList } from './BadgeList';
 import { CardWrapper } from './CardWrapper';
 import { getContactsList, getLabelsList, getSpecialistSocials } from './config';
-import { CardButton } from '@/app/_components/Card/CardSpeсialist/CardButton';
-import { specialistPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
-import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
+import { CardButton } from '@/app/_components/Card/CardSpecialist/CardButton';
+import { specialistPropType } from '@/app/_components/Card/CardSpecialist/prop-types';
+import { borderStyle } from '@/app/_components/Card/CardSpecialist/config';
 import { cn } from '@/utils/cn';
-import { DetailsList } from '@/app/_components/Card/CardSpeсialist/DetailsList';
-import { AddressesList } from '@/app/_components/Card/CardSpeсialist/AddressesList';
-import { SocialsList } from '@/app/_components/Card/CardSpeсialist/SocialsList';
+import { DetailsList } from '@/app/_components/Card/CardSpecialist/DetailsList';
+import { AddressesList } from '@/app/_components/Card/CardSpecialist/AddressesList';
+import { SocialsList } from '@/app/_components/Card/CardSpecialist/SocialsList';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   const {
@@ -65,7 +65,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
             <SpecialistTitle id={id} truncate={!extended} name={name} className="mt-[6px]" />
           </div>
         </header>
-        <ExperienceList labels={labelsList} />
+        <BadgeList labels={labelsList} />
         {extended ? (
           <>
             <DetailsList
@@ -89,6 +89,10 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     </CardWrapper>
   );
 }
+
+CardSpecialist.defaultProps = {
+  extended: false,
+};
 
 CardSpecialist.propTypes = {
   specialist: specialistPropType,

@@ -3,8 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSearchParams } from 'next/navigation';
-import { CardSpecialist } from './Card/CardSpeсialist';
-import { CardSpecialistExtended } from '@/app/_components/Card/CardSpeсialist/CardSpecialistExtended';
+import { CardSpecialist } from './Card/CardSpecialist';
+import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialist/CardSpecialistExtended';
+import { specialistPropType } from './Card/CardSpecialist/prop-types';
 
 export function SpecialistList({ specialists, className }) {
   const searchParams = useSearchParams();
@@ -30,6 +31,6 @@ export function SpecialistList({ specialists, className }) {
 }
 
 SpecialistList.propTypes = {
-  specialists: PropTypes.array,
+  specialists: PropTypes.arrayOf(specialistPropType),
   className: PropTypes.string,
 };

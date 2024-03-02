@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import p from 'prop-types';
+import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 
 export function InnerLink({ items, className }) {
@@ -22,6 +22,6 @@ export function InnerLink({ items, className }) {
 }
 
 InnerLink.propTypes = {
-  items: p.array,
-  className: p.string,
+  items: PropTypes.array,
+  className: PropTypes.string,
 };

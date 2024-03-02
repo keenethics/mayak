@@ -1,4 +1,4 @@
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import { Dot } from '@icons/index';
 import { Caption, ListTruncator } from '@components';
 
@@ -34,8 +34,12 @@ export function SpecializationsPanel({ specialistId, specializations, extendedCa
   );
 }
 
+SpecializationsPanel.defaultProps = {
+  extendedCardOpened: false,
+};
+
 SpecializationsPanel.propTypes = {
-  specializations: P.arrayOf(P.string).isRequired,
-  specialistId: P.string.isRequired,
-  extendedCardOpened: P.bool,
+  specializations: PropTypes.arrayOf(PropTypes.string).isRequired,
+  specialistId: PropTypes.string.isRequired,
+  extendedCardOpened: PropTypes.bool,
 };

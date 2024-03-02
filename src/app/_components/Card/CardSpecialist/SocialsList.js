@@ -1,6 +1,6 @@
 import React from 'react';
-import P from 'prop-types';
-import { specialistSocialsPropType } from '@/app/_components/Card/CardSpeсialist/prop-types';
+import PropTypes from 'prop-types';
+import { specialistSocialsPropType } from '@/app/_components/Card/CardSpecialist/prop-types';
 import { cn } from '@/utils/cn';
 
 export function SocialsList({ socials, className }) {
@@ -12,7 +12,7 @@ export function SocialsList({ socials, className }) {
       )}
     >
       {socials?.map((item, idx) =>
-        item.href !== null ? (
+        item.href ? (
           <li
             key={idx}
             className="cursor-pointer text-primary-700 transition ease-in-out hover:text-primary-500 md:h-[22px] md:w-[22px] lg:h-[24px] lg:w-[24px]"
@@ -35,6 +35,6 @@ export function SocialsList({ socials, className }) {
 }
 
 SocialsList.propTypes = {
-  socials: P.arrayOf(specialistSocialsPropType),
-  className: P.string,
+  socials: PropTypes.arrayOf(specialistSocialsPropType),
+  className: PropTypes.string,
 };

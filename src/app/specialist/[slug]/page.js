@@ -1,7 +1,7 @@
 import React from 'react';
 import { prisma } from '@/lib/db';
 import { include } from '@/app/specialist/consts';
-import { CardSpecialistExtended } from '@/app/_components/Card/CardSpeсialist/CardSpecialistExtended';
+import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialist/CardSpecialistExtended';
 
 export const metadata = {
   title: 'Спеціаліст',

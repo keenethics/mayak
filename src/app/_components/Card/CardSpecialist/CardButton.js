@@ -19,6 +19,10 @@ export function CardButton({ text = 'Детальніше', className, id }) {
   );
 }
 
+CardButton.defaultProps = {
+  text: 'Детальніше',
+};
+
 CardButton.propTypes = {
   id: PropType.string,
   text: PropType.string,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 import { HospitalSVG } from '@icons/index';
 import { cn } from '@/utils/cn';
-import { borderStyle } from '@/app/_components/Card/CardSpeсialist/config';
+import { borderStyle } from '@/app/_components/Card/CardSpecialist/config';
 
 export function AddressesList({ addresses, className, showIcon = false }) {
   return (
@@ -26,6 +26,10 @@ export function AddressesList({ addresses, className, showIcon = false }) {
     </ul>
   );
 }
+
+AddressesList.defaultProps = {
+  showIcon: false,
+};
 
 AddressesList.propTypes = {
   addresses: PropType.array,

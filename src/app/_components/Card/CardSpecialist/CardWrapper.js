@@ -4,9 +4,9 @@ import React from 'react';
 import PropType from 'prop-types';
 import { useMediaQuery } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useHintContext } from '@components';
 import { cn } from '@/utils/cn';
 import { screens } from '@/app/styles/tailwind/ui';
-import { useHintContext } from '../../Hint';
 
 export function CardWrapper({ children, className, id }) {
   const router = useRouter();

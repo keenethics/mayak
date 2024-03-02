@@ -64,7 +64,7 @@ export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork
   {
     id: 'formatOfWork',
     icon: <OnlineMeeting />,
-    content: formatOfWork === FormatOfWork.ONLINE ? 'Онлайн консультації' : null,
+    content: formatOfWork !== FormatOfWork.OFFLINE ? 'Онлайн консультації' : null,
     color: 'text-other-blue',
   },
 ];

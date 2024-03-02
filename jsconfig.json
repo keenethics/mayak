@@ -8,7 +8,6 @@
       "@hooks": ["./src/app/_hooks/index"],
       "@admin/*": ["./src/app/admin/*"],
       "@admin/components/*": ["./src/app/admin/_components/*"],
-      "@/utils/*": ["./src/utils/*"],
       "@config/*": ["./src/app/config/*"]
     }
   }
