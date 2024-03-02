@@ -12,12 +12,4 @@
   scrollbar-width: none; /* Firefox */
 }
 
-html {
-  margin-right: calc(100% - 100vw);
-}
-
-body {
-  margin-right: calc(100vw - 100%);
-}
-
 @tailwind utilities;

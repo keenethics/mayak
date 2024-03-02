@@ -86,7 +86,7 @@ export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, lin
     href: youtube,
   },
   {
-    id: 'Linkdin',
+    id: 'Linkedin',
     icon: <BlueLinkedin />,
     href: linkedin,
   },
