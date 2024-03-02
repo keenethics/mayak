@@ -20,6 +20,7 @@ const FormatOfWorkSchema = z.enum(Object.values(FormatOfWork), {
   invalid_type_error: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
 });
 
+const invalidUrlMessage = 'Посилання має бути рядком';
 const RestSchema = z.object({
   description: z
     .string({ required_error: "Опис - обов'язкове поле", invalid_type_error: 'Опис має бути рядком' })
@@ -31,6 +32,11 @@ const RestSchema = z.object({
     .refine(val => PHONE_REGEX.test(val), { message: 'Введіть номер телефону у форматі +380ХХХХХХХХХ' })
     .nullish(),
   website: z.string({ invalid_type_error: 'Вебсайт має бути рядком' }).trim().nullish(),
+  instagram: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
+  facebook: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
+  youtube: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
+  linkedin: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
+  tiktok: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
   yearsOnMarket: z
     .number({ invalid_type_error: 'Роки на ринку мають бути числом' })
     .int('Введіть ціле число')
