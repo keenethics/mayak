@@ -1,14 +1,10 @@
-import { prisma } from '@/lib/db';
+import PropTypes from 'prop-types';
 import { TopWave } from './TopWave';
 import { BottomWave } from './BottomWave';
 import { TherapyCard } from './TherapyCard';
 import { Heading } from './Typography';
 
-export async function TherapiesSection() {
-  const therapies = await prisma.therapy.findMany({
-    where: { isActive: true },
-    orderBy: { priority: 'desc' },
-  });
+export async function TherapiesSection({ therapies }) {
   return (
     <section className="relative bg-primary-200 bg-blend-multiply ">
       <div className="bg-cover-noise" />
@@ -30,3 +26,14 @@ export async function TherapiesSection() {
     </section>
   );
 }
+
+TherapiesSection.propTypes = {
+  therapies: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      imagePath: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
