@@ -8,7 +8,7 @@ import { useBodyScrollLock } from '@hooks';
 import { cn } from '@/utils/cn';
 
 export function CardModalWrapper({ children, className }) {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   function handleClose() {
@@ -17,14 +17,14 @@ export function CardModalWrapper({ children, className }) {
 
   // this is to ensure proper modal rendering
   useEffect(() => {
-    setOpen(true);
+    setIsOpen(true);
   }, []);
 
   useBodyScrollLock('y');
 
   return (
     <Modal
-      isOpen={open}
+      isOpen={isOpen}
       onClose={handleClose}
       bgColor="bg-other-white"
       className={cn(
