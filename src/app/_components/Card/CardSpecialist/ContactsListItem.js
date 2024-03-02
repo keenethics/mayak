@@ -8,12 +8,13 @@ import { cn } from '@/utils/cn';
 function ContactItem({ content, href, className }) {
   return (
     <>
-      {href && (
+      {href ? (
         <Link href={href} target="_blank" rel="noopener noreferrer" className={cn('text-primary-400', className)}>
           {content}
         </Link>
+      ) : (
+        <p className={cn('text-c3 text-gray-900', className)}>{content}</p>
       )}
-      {!href && <p className={cn('text-c3 text-gray-900', className)}>{content}</p>}
     </>
   );
 }

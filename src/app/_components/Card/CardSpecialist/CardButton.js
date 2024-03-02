@@ -4,7 +4,7 @@ import { PillButton } from '@components';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/utils/cn';
 
-export function CardButton({ text = 'Детальніше', className, id }) {
+export function CardButton({ text, className, id }) {
   const router = useRouter();
 
   return (

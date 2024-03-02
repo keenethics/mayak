@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Dot } from '@icons/index';
 import { Caption, ListTruncator } from '@components';
 
-export function SpecializationsPanel({ specialistId, specializations, extendedCardOpened = false }) {
+export function SpecializationsPanel({ specialistId, specializations, extendedCardOpened }) {
   return extendedCardOpened ? (
     <div className="inline-flex shrink flex-wrap items-center gap-[8px]">
       {specializations.map((specialization, index) => (

@@ -15,7 +15,7 @@ import { DetailsList } from '@/app/_components/Card/CardSpecialist/DetailsList';
 import { AddressesList } from '@/app/_components/Card/CardSpecialist/AddressesList';
 import { SocialsList } from '@/app/_components/Card/CardSpecialist/SocialsList';
 
-export function CardSpecialist({ specialist, className, extended = false }) {
+export function CardSpecialist({ specialist, className, extended }) {
   const {
     id,
     gender,
