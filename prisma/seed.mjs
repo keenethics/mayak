@@ -102,6 +102,11 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
+    instagram: nullable(faker.internet.url()),
+    facebook: nullable(faker.internet.url()),
+    youtube: nullable(faker.internet.url()),
+    linkedin: nullable(faker.internet.url()),
+    tiktok: nullable(faker.internet.url()),
   };
 }
 

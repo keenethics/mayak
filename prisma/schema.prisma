@@ -72,6 +72,11 @@ model Organization {
   email           String?            @db.VarChar(320)
   website         String?            @db.Text
   isActive        Boolean            @default(false)
+  instagram       String?            @db.Text
+  facebook        String?            @db.Text
+  youtube         String?            @db.Text
+  linkedin        String?            @db.Text
+  tiktok          String?            @db.Text
 
   @@map("organization")
 }

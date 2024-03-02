@@ -1,7 +1,7 @@
 import React from 'react';
 import { SpecialistList } from '@components';
 import { prisma } from '@/lib/db';
-import { include } from '@/app/specialist/consts';
+import { specialistInclude } from '@/app/specialist/consts';
 import { formatPhoneNumber } from '@/utils/common';
 
 export const metadata = {
@@ -16,7 +16,7 @@ export default async function Page() {
         lastName: 'asc',
       },
     ],
-    include,
+    include: specialistInclude,
   });
 
   const mappedSpecialistList = specialistsList.map(specialist => {
