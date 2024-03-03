@@ -1,5 +1,5 @@
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { HospitalSVG } from '@icons/index';
 import { cn } from '@/utils/cn';
 import { borderStyle } from '@/app/_components/Card/CardSpecialist/config';
@@ -27,12 +27,8 @@ export function AddressesList({ addresses, className, showIcon = false }) {
   );
 }
 
-AddressesList.defaultProps = {
-  showIcon: false,
-};
-
 AddressesList.propTypes = {
-  addresses: PropType.array,
-  showIcon: PropType.bool,
-  className: PropType.node,
+  addresses: PropTypes.array,
+  showIcon: PropTypes.bool,
+  className: PropTypes.node,
 };

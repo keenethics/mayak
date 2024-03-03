@@ -1,21 +1,17 @@
 import React from 'react';
-import { prisma } from '@/lib/db';
-import { specialistInclude } from '@/app/specialist/consts';
 import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialist';
+import { getSpecialist } from '@/app/specialist/utils';
 
 export const metadata = {
   title: 'Спеціаліст',
   description: '...',
 };
 
+export const revalidate = 3600;
+
 export default async function Page({ params }) {
-  const { slug: id } = params;
-  const specialist = await prisma.specialist.findUnique({
-    where: {
-      id,
-    },
-    include: specialistInclude,
-  });
+  const { id } = params;
+  const specialist = await getSpecialist({ id });
 
   return <CardSpecialistExtended specialist={specialist} />;
 }

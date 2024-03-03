@@ -2,20 +2,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import { CardSpecialist } from './Card/CardSpecialist';
-import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialist/CardSpecialistExtended';
+// import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialist/CardSpecialistExtended';
 import { specialistPropType } from './Card/CardSpecialist/prop-types';
 
 export function SpecialistList({ specialists, className }) {
-  const searchParams = useSearchParams();
-  const selectedSpecialistId = searchParams.get('id');
+  // const searchParams = useSearchParams();
+  // const selectedSpecialistId = searchParams.get('id');
 
-  const getSpecialist = id => specialists.find(specialist => specialist.id === id);
+  // const getSpecialist = id => specialists.find(specialist => specialist.id === id);
 
   return (
     <>
-      {selectedSpecialistId && <CardSpecialistExtended specialist={getSpecialist(selectedSpecialistId)} />}
+      {/* {selectedSpecialistId && <CardSpecialistExtended specialist={getSpecialist(selectedSpecialistId)} />} */}
       <ul className={className}>
         {specialists.map(specialist => (
           <li id={specialist.id} key={specialist.id}>

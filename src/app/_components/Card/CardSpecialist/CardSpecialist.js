@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { ProfileImage } from './ProfileImage';
 import { ContactsList } from './ContactsList';
 import { SpecializationsPanel } from './SpecializationsPanel';
@@ -87,12 +89,8 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   );
 }
 
-CardSpecialist.defaultProps = {
-  extended: false,
-};
-
 CardSpecialist.propTypes = {
   specialist: specialistPropType,
-  extended: PropType.bool,
-  className: PropType.string,
+  extended: PropTypes.bool,
+  className: PropTypes.string,
 };

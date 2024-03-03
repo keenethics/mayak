@@ -12,7 +12,7 @@ export function CardModalWrapper({ children, className }) {
   const router = useRouter();
 
   function handleClose() {
-    router.push(`/specialist`, { scroll: false });
+    router.back();
   }
 
   // this is to ensure proper modal rendering

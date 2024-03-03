@@ -1,5 +1,5 @@
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { IDCard } from '@icons/index';
 import { AddressesList } from '@/app/_components/Card/CardSpecialist/AddressesList';
 import { cn } from '@/utils/cn';
@@ -26,16 +26,16 @@ export function DetailsList({ details, className }) {
 }
 
 DetailsList.propTypes = {
-  details: PropType.shape({
-    addresses: PropType.arrayOf(
-      PropType.shape({
-        id: PropType.string.isRequired,
-        nameOfClinic: PropType.string.isRequired,
-        fullAddress: PropType.string.isRequired,
-        district: PropType.string.isRequired,
+  details: PropTypes.shape({
+    addresses: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        nameOfClinic: PropTypes.string.isRequired,
+        fullAddress: PropTypes.string.isRequired,
+        district: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
       }),
     ),
-    description: PropType.string,
+    description: PropTypes.string,
   }),
-  className: PropType.node,
+  className: PropTypes.node,
 };

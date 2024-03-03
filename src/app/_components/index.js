@@ -9,3 +9,4 @@ export * from './TextArea';
 export * from './Hint';
 export * from './SpecialistList';
 export * from './ListTruncator';
+export * from './NotFoundPageWrapper';

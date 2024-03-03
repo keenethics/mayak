@@ -34,10 +34,6 @@ export function SpecializationsPanel({ specialistId, specializations, extendedCa
   );
 }
 
-SpecializationsPanel.defaultProps = {
-  extendedCardOpened: false,
-};
-
 SpecializationsPanel.propTypes = {
   specializations: PropTypes.arrayOf(PropTypes.string).isRequired,
   specialistId: PropTypes.string.isRequired,

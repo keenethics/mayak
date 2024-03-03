@@ -6,7 +6,7 @@ import { CardModalWrapper } from '@/app/_components/Card/CardSpecialist/CardModa
 
 export function CardSpecialistExtended({ specialist, className }) {
   return (
-    <CardModalWrapper className="mt-10">
+    <CardModalWrapper className="mt-[40px]">
       <CardSpecialist specialist={specialist} className={className} extended />
     </CardModalWrapper>
   );

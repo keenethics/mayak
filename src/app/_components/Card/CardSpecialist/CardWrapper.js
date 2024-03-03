@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { useMediaQuery } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useHintContext } from '@components';
@@ -18,7 +18,8 @@ export function CardWrapper({ children, className, id }) {
   const cursorStyle = isExtendedCardOpened ? 'cursor-auto' : 'cursor-pointer';
 
   const handleClick = () => {
-    router.push(`/specialist?id=${id}`, { scroll: false });
+    // router.push(`/specialist?id=${id}`, { scroll: false });
+    router.push(`/specialist/${id}`, { scroll: false });
     close();
   };
 
@@ -33,7 +34,7 @@ export function CardWrapper({ children, className, id }) {
 }
 
 CardWrapper.propTypes = {
-  children: PropType.node,
-  className: PropType.string,
-  id: PropType.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  id: PropTypes.string,
 };
