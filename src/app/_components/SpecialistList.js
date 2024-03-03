@@ -20,7 +20,7 @@ export function SpecialistList({ specialists, className }) {
         {specialists.map(specialist => (
           <li id={specialist.id} key={specialist.id}>
             <CardSpecialist
-              className="mx-[16px] my-[24px] max-w-[906px] rounded-[24px] border-2 border-gray-200 px-[15px] py-[20px] md:my-[40px] md:p-[40px] md:shadow-[4px_2px_4px_0px_rgba(192,191,206,0.25),0px_0px_16px_0px_rgba(192,191,206,0.50)] lg:mx-auto"
+              className="mx-4 my-6 max-w-[906px] rounded-3xl border-2 border-gray-200 px-[15px] py-5 md:my-10 md:p-10 md:shadow-[4px_2px_4px_0px_rgba(192,191,206,0.25),0px_0px_16px_0px_rgba(192,191,206,0.50)] lg:mx-auto"
               specialist={specialist}
             />
           </li>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { prisma } from '@/lib/db';
-import { include } from '@/app/specialist/consts';
-import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialist/CardSpecialistExtended';
+import { specialistInclude } from '@/app/specialist/consts';
+import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialist';
 
 export const metadata = {
   title: 'Спеціаліст',
@@ -14,7 +14,7 @@ export default async function Page({ params }) {
     where: {
       id,
     },
-    include,
+    include: specialistInclude,
   });
 
   return <CardSpecialistExtended specialist={specialist} />;

@@ -8,10 +8,10 @@ export function DetailsList({ details, className }) {
   const { addresses, description } = details;
 
   return (
-    <div className={cn('flex flex-col gap-[16px]', className)}>
+    <div className={cn('flex flex-col gap-4', className)}>
       <AddressesList addresses={addresses} showIcon={true} />
       <ul>
-        <li className="flex gap-[12px] md:gap-[16px]">
+        <li className="flex gap-3 md:gap-4">
           <span className="text-gray-500 lg:mt-[3px]">
             <IDCard />
           </span>

@@ -6,7 +6,7 @@ import { specialistContactPropType } from '@/app/_components/Card/CardSpecialist
 
 export function ContactsList({ truncate, specialistId, contacts, className }) {
   return (
-    <ul className={cn('flex w-full flex-col gap-[8px]', className)}>
+    <ul className={cn('flex w-full flex-col gap-2', className)}>
       {contacts.map(contact =>
         contact.content ? (
           <ContactsListItem truncate={truncate} specialistId={specialistId} key={contact.id} contact={contact} />

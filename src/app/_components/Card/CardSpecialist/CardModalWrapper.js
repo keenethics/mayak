@@ -28,8 +28,9 @@ export function CardModalWrapper({ children, className }) {
       onClose={handleClose}
       bgColor="bg-other-white"
       className={cn(
-        'no-scrollbar h-full overflow-y-scroll rounded-b-none rounded-tl-[24px]' +
-          ' rounded-tr-[24px] md:mx-[16px] md:mt-0 md:h-auto md:rounded-[24px] md:px-[50px] md:pb-[50px] lg:max-w-[1000px]',
+        'fixed bottom-0 top-0 overflow-y-auto rounded-b-none rounded-tl-3xl lg:static' +
+          ' rounded-tr-3xl lg:mx-4 lg:rounded-3xl lg:p-[50px]' +
+          ' lg:max-w-[1000px]',
         className,
       )}
     >

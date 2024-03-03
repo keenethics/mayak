@@ -15,7 +15,7 @@ import { DetailsList } from '@/app/_components/Card/CardSpecialist/DetailsList';
 import { AddressesList } from '@/app/_components/Card/CardSpecialist/AddressesList';
 import { SocialsList } from '@/app/_components/Card/CardSpecialist/SocialsList';
 
-export function CardSpecialist({ specialist, className, extended }) {
+export function CardSpecialist({ specialist, className, extended = false }) {
   const {
     id,
     gender,
@@ -47,14 +47,14 @@ export function CardSpecialist({ specialist, className, extended }) {
 
   return (
     <CardWrapper className={className} id={id}>
-      <div className="hidden md:block md:max-w-[200px]">
+      <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
         <ProfileImage gender={gender} className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
-          <SocialsList socials={socials} className="absolute bottom-[16px]" />
+          <SocialsList socials={socials} className="absolute bottom-4" />
         </ProfileImage>
-        <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-[16px]" />
+        <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-4" />
       </div>
-      <div className="flex w-[100%] max-w-full flex-col gap-[16px] overflow-hidden md:ml-[16px]">
-        <header className="relative flex flex-row gap-[10px]">
+      <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
+        <header className="relative flex flex-row gap-2.5">
           <ProfileImage gender={gender} className="md:hidden" />
           <div className="max-w-full overflow-hidden">
             <SpecializationsPanel
@@ -62,26 +62,23 @@ export function CardSpecialist({ specialist, className, extended }) {
               specializations={specializationsList}
               extendedCardOpened={extended}
             />
-            <SpecialistTitle id={id} truncate={!extended} name={name} className="mt-[6px]" />
+            <SpecialistTitle id={id} truncate={!extended} name={name} className="mt-1.5" />
           </div>
         </header>
         <BadgeList labels={labelsList} />
         {extended ? (
           <>
-            <DetailsList
-              className={cn('mt-[16px] border-t pt-[16px]', borderStyle)}
-              details={{ addresses, description }}
-            />
+            <DetailsList className={cn('mt-4 border-t pt-4', borderStyle)} details={{ addresses, description }} />
             <ContactsList
               truncate={!extended}
               specialistId={id}
               contacts={contactsList}
-              className={cn('mt-[12px] border-t pt-[12px] md:hidden', borderStyle)}
+              className={cn('mt-3 border-t pt-3 md:hidden', borderStyle)}
             />
           </>
         ) : (
           <>
-            <AddressesList className="border-t pt-[12px] md:border-b md:py-[12px]" addresses={addressPrimary} />
+            <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={addressPrimary} />
             <CardButton className="mt-auto" id={id} />
           </>
         )}

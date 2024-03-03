@@ -6,9 +6,9 @@ import { borderStyle } from '@/app/_components/Card/CardSpecialist/config';
 
 export function AddressesList({ addresses, className, showIcon = false }) {
   return (
-    <ul className={cn('flex flex-col gap-[16px]', borderStyle, className)}>
+    <ul className={cn('flex flex-col gap-4', borderStyle, className)}>
       {addresses.map(({ id, nameOfClinic, fullAddress, district }) => (
-        <li key={id} className="flex gap-[16px]">
+        <li key={id} className="flex gap-4">
           {showIcon && (
             <span className="text-gray-500">
               <HospitalSVG />

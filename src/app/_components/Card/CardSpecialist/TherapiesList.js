@@ -5,11 +5,11 @@ import { borderStyle } from '@/app/_components/Card/CardSpecialist/config';
 
 export function TherapiesList({ therapies, className }) {
   return (
-    <div className={cn('border-t pt-[16px] md:pt-[12px]', borderStyle, className)}>
+    <div className={cn('border-t pt-4 md:pt-3', borderStyle, className)}>
       <h3 className="text-p4 font-bold uppercase tracking-wide text-gray-600">Напрямок лікування</h3>
-      <ul className="mt-[14px] flex flex-wrap gap-[10px]">
+      <ul className="mt-3.5 flex flex-wrap gap-2.5">
         {therapies.map(t => (
-          <li key={t} className="rounded-[24px] bg-primary-100 px-[12px] py-[4x] text-c3 text-primary-600">
+          <li key={t} className="rounded-3xl bg-primary-100 px-3 py-1 text-c3 text-primary-600">
             {t}
           </li>
         ))}

@@ -28,7 +28,7 @@ ContactItem.propTypes = {
 function InfoRow({ icon, children }) {
   return (
     <div className="flex items-center">
-      <span className="flex w-[20px] flex-shrink-0 items-start justify-center">{icon}</span>
+      <span className="flex w-5 flex-shrink-0 items-start justify-center">{icon}</span>
       <div
         className={`text-inherit font-inherit ml-2 max-w-full flex-grow overflow-auto break-words
                 text-start text-c3 text-gray-700`}
@@ -59,7 +59,7 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
             </InfoRow>
           }
           hintContent={<ContactItem href={href} content={content} className="whitespace-normal break-words text-c4" />}
-          hintWindowClassName="translate-x-full right-[-10px] top-0 z-[200] w-max"
+          hintWindowClassName="translate-x-full -right-2.5 top-0 z-[200] w-max"
         />
       ) : (
         <InfoRow icon={icon}>

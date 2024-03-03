@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
+import { ListTruncator } from '@components';
 import { cn } from '@/utils/cn';
-import { ListTruncator } from '../../ListTruncator';
 
 export function SpecialistTitle({ id, truncate, name, className }) {
   return truncate ? (
@@ -13,7 +13,7 @@ export function SpecialistTitle({ id, truncate, name, className }) {
         </h4>
       }
       hintContent={<div>{name}</div>}
-      hintEllipsisClassName="top-[29px]"
+      hintEllipsisClassName="top-7"
     />
   ) : (
     <h4 className={cn('text-p3 font-bold text-gray-700 lg:text-p1', className)}>{name}</h4>

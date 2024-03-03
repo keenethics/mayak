@@ -16,7 +16,7 @@ export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsis
 
   return (
     <div ref={containerRef} className="max-w-full overflow-hidden">
-      <span ref={wrapperRef} className="relative inline-flex items-center gap-[8px]">
+      <span ref={wrapperRef} className="relative inline-flex items-center gap-2">
         {content}
       </span>
 
@@ -46,7 +46,7 @@ export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsis
             name={hintId}
             id={hintId}
             className={cn(
-              'right-[10px] top-[30px] z-[200] flex select-text flex-col gap-[10px] text-gray-900',
+              'right-2.5 top-[30px] z-[200] flex select-text flex-col gap-2.5 text-gray-900',
               hintWindowClassName,
             )}
           >

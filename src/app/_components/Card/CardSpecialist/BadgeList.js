@@ -6,11 +6,11 @@ import { borderStyle } from '@/app/_components/Card/CardSpecialist/config';
 
 function BadgeListItem({ icon, text, className }) {
   return (
-    <div className={cn('flex flex-col gap-[10px] md:flex-row', className)}>
-      <span className="h-[15px] w-[15px] self-center sm:h-[15px] sm:w-[15px] md:h-[15px] md:w-[15px] lg:h-[20px] lg:w-[20px]">
+    <div className={cn('flex flex-col gap-2.5 md:flex-row', className)}>
+      <span className="h-[15px] w-[15px] self-center sm:h-[15px] sm:w-[15px] md:h-[15px] md:w-[15px] lg:h-5 lg:w-5">
         {icon}
       </span>
-      <p className={cn('text-center text-c4 font-semibold md:self-center md:text-left lg:text-p4')}>{text}</p>
+      <p className="text-center text-c4 font-semibold md:self-center md:text-left lg:text-p4">{text}</p>
     </div>
   );
 }
@@ -23,13 +23,7 @@ BadgeListItem.propTypes = {
 
 export function BadgeList({ labels, className }) {
   return (
-    <ul
-      className={cn(
-        'flex gap-[24px] border-t pt-[16px] md:flex-initial md:gap-[24px] md:border-0 md:pt-0',
-        borderStyle,
-        className,
-      )}
-    >
+    <ul className={cn('flex gap-6 border-t pt-4 md:flex-initial md:gap-6 md:border-0 md:pt-0', borderStyle, className)}>
       {labels.map(({ icon, content, color }) =>
         content ? (
           <BadgeListItem

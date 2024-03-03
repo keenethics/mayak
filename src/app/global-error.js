@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 
-export default function Error({ error }) {
+export default function GlobalError({ error }) {
   return (
     <div className="w-[800]">
       <h2>Something went wrong!</h2>
@@ -11,6 +11,6 @@ export default function Error({ error }) {
   );
 }
 
-Error.propTypes = {
+GlobalError.propTypes = {
   error: PropTypes.object,
 };

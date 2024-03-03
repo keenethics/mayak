@@ -14,11 +14,12 @@ export function ProfileImage({ children, gender, className }) {
   return (
     <div
       className={cn(
-        'flex h-[70px] min-w-[70px] flex-col items-center justify-center rounded-[16px] bg-gray-100 p-[20px] md:h-[150px] md:w-[150px] md:gap-[15px] md:p-[15px] lg:h-[200px] lg:w-[200px]',
+        'flex h-[70px] min-w-[70px] flex-col items-center justify-center rounded-2xl bg-gray-100 p-5' +
+          ' md:h-[150px] md:w-[150px] md:gap-[15px] md:p-[15px] lg:h-[200px] lg:w-[200px]',
         className,
       )}
     >
-      <svg className="h-[24px] w-[24px] md:h-[40px] md:w-[40px] lg:h-[88px] lg:w-[88px]">{image}</svg>
+      <svg className="h-6 w-6 md:h-10 md:w-10 lg:h-[88px] lg:w-[88px]">{image}</svg>
       {children}
     </div>
   );

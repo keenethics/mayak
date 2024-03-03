@@ -5,17 +5,12 @@ import { cn } from '@/utils/cn';
 
 export function SocialsList({ socials, className }) {
   return (
-    <ul
-      className={cn(
-        'hidden md:flex md:flex-row md:items-center md:justify-center md:gap-[5px] lg:gap-[12px]',
-        className,
-      )}
-    >
+    <ul className={cn('hidden md:flex md:flex-row md:items-center md:justify-center md:gap-[5px] lg:gap-3', className)}>
       {socials?.map((item, idx) =>
         item.href ? (
           <li
             key={idx}
-            className="cursor-pointer text-primary-700 transition ease-in-out hover:text-primary-500 md:h-[22px] md:w-[22px] lg:h-[24px] lg:w-[24px]"
+            className="md:h-5.5 md:w-5.5 cursor-pointer text-primary-700 transition ease-in-out hover:text-primary-500 lg:h-6 lg:w-6"
           >
             <a
               href={item.href}
