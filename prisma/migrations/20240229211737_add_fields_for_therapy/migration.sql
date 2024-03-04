@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "therapy" ADD COLUMN     "description" VARCHAR(255) NOT NULL DEFAULT '',
-ADD COLUMN     "imagePath" VARCHAR(255) NOT NULL DEFAULT '',
-ADD COLUMN     "title" VARCHAR(128) NOT NULL DEFAULT '';
