@@ -10,18 +10,8 @@ module.exports = {
     'plugin:import/recommended',
     'prettier',
   ],
-  // settings: {
-  //   "import/resolver": {
-  //     "eslint-import-resolver-custom-alias": {
-  //       "alias": {
-  //         "src": "./src"
-  //       },
-  //       "extensions": [".js", ".jsx"]
-  //     }
-  //   }
-  // },
   rules: {
-    'import/namespace': 'off',
+    "import/namespace": 'off',
     'max-len': ['error', { code: 120, ignoreStrings: true }],
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
@@ -40,12 +30,13 @@ module.exports = {
     'import/order': [
       'error',
       {
-        pathGroups: [
-          { pattern: '@/**', group: 'internal' },
-          { pattern: '@*', group: 'internal' },
+        "pathGroups": [
+          { "pattern": "@/**", "group": "internal" },
+          { "pattern": "@*", "group": "internal" },
         ],
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling'],
-      },
+        "groups":
+          ["builtin", "external", "internal", "parent", "sibling"]
+      }
     ],
   },
-};
+}
