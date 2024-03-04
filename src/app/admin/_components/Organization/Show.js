@@ -1,50 +1,48 @@
 import React from 'react';
 
 import {
+  ArrayField,
+  BooleanField,
+  ChipField,
+  Datagrid,
+  DateField,
+  NumberField,
   Show,
   SimpleShowLayout,
-  BooleanField,
-  TextField,
-  ArrayField,
-  Datagrid,
-  NumberField,
-  DateField,
-  ChipField,
   SingleFieldList,
+  TextField,
 } from 'react-admin';
 
 export function OrganizationShow() {
   return (
     <Show>
       <SimpleShowLayout>
-        <TextField source="id" />
-        <TextField source="name" />
-        <DateField showTime source="createdAt" />
-        <TextField source="formatOfWork" />
-        <BooleanField source="isFreeReception" />
-        <BooleanField source="isActive" />
-        <NumberField source="yearsOfExperience" />
-        <ArrayField source="therapies">
+        <ArrayField label="Тип організації" source="type">
           <SingleFieldList linkType={false}>
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
-        <ArrayField source="addresses">
+        <TextField label="Назва" source="name" />
+        <DateField label="Дата додавання в сервіс" showTime source="createdAt" />
+        <NumberField label="Роки на ринку" source="yearsOnMarket" />
+        <TextField label="Формат послуг" source="formatOfWork" />
+        <ArrayField label="Адреси" source="addresses">
           <Datagrid bulkActionButtons={false}>
-            <TextField source="fullAddress" />
-            <TextField source="nameOfClinic" />
-            <TextField source="district.name" label="District" />
+            <TextField label="Повна адреса" source="fullAddress" />
+            <TextField label="Район" source="district.name" />
           </Datagrid>
         </ArrayField>
-        <ArrayField source="types">
+        <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
-        <TextField source="description" />
-        <TextField source="phone" />
+        <BooleanField label="Безкоштовний прийом" source="isFreeReception" />
+        <BooleanField label="Активна/неактивна" source="isActive" />
+        <TextField label="Опис" source="description" />
+        <TextField label="Номер телефону" source="phone" />
         <TextField source="email" />
-        <TextField source="website" />
+        <TextField label="Вебсайт" source="website" />
       </SimpleShowLayout>
     </Show>
   );

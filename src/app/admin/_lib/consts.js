@@ -1,6 +1,7 @@
 export const RESOURCES = {
   therapy: 'therapy',
   specialist: 'specialist',
+  organization: 'organization',
   district: 'district',
   specialization: 'specialization',
   address: 'address',
@@ -8,6 +9,7 @@ export const RESOURCES = {
   event: 'event',
   eventTag: 'eventTag',
   faq: 'faq',
+  organizationType: 'organizationType',
 };
 
 export const SUCCESS_NOTIFICATIONS = {

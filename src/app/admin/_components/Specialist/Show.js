@@ -1,57 +1,52 @@
 import React from 'react';
 
 import {
-  Show,
-  SimpleShowLayout,
-  BooleanField,
-  TextField,
-  NumberField,
   ArrayField,
-  SingleFieldList,
+  BooleanField,
   ChipField,
   Datagrid,
   DateField,
+  NumberField,
+  Show,
+  SimpleShowLayout,
+  SingleFieldList,
+  TextField,
 } from 'react-admin';
 
 export function SpecialistShow() {
   return (
     <Show>
       <SimpleShowLayout>
-        <TextField source="id" />
-        <TextField source="firstName" />
-        <TextField source="lastName" />
-        <TextField source="surname" />
-        <TextField source="gender" />
-        <DateField showTime source="createdAt" />
-        <TextField source="formatOfWork" />
-        <BooleanField source="isFreeReception" />
-        <BooleanField source="isActive" />
-        <NumberField source="yearsOfExperience" />
-        <ArrayField source="therapies">
+        <ArrayField label="Спеціалізації" source="specializations">
           <SingleFieldList linkType={false}>
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
-        <ArrayField source="specializations">
+        <TextField label="Ім'я" source="firstName" />
+        <TextField label="Прізвище" source="lastName" />
+        <TextField label="По-батькові" source="surname" />
+        <TextField label="Стать" source="gender" />
+        <DateField showTime label="Дата додавання у сервіс" source="createdAt" />
+        <NumberField label="Роки стажу" source="yearsOfExperience" />
+        <TextField label="Формат роботи" source="formatOfWork" />
+        <ArrayField label="Місця надання послуг" source="addresses">
+          <Datagrid bulkActionButtons={false}>
+            <TextField label="Повна адреса" source="fullAddress" />
+            <TextField label="Назва кліники" source="nameOfClinic" />
+            <TextField label="Район" source="district.name" />
+          </Datagrid>
+        </ArrayField>
+        <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
-        <ArrayField source="placesOfWork">
-          <SingleFieldList linkType={false}>
-            <ArrayField source="addresses">
-              <Datagrid bulkActionButtons={false}>
-                <TextField source="fullAddress" />
-                <TextField source="nameOfClinic" />
-                <TextField source="district.name" label="District" />
-              </Datagrid>
-            </ArrayField>
-          </SingleFieldList>
-        </ArrayField>
-        <TextField source="description" />
-        <TextField source="phone" />
+        <BooleanField label="Безкоштовний прийом" source="isFreeReception" />
+        <BooleanField label="Активний/Неактивний" source="isActive" />
+        <TextField label="Опис" source="description" />
+        <TextField label="Номер телефону" source="phone" />
         <TextField source="email" />
-        <TextField source="website" />
+        <TextField label="Вебсайт" source="website" />
       </SimpleShowLayout>
     </Show>
   );
