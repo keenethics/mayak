@@ -6,13 +6,13 @@ import { auth } from '@/lib/auth';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 
-export const MODEL_SEARCH_FIELDS = {
+const MODEL_SEARCH_FIELDS = {
   [RESOURCES.event]: ['title', 'organizerName'],
   [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
   [RESOURCES.organization]: ['name'],
 };
 
-export const MODEL_INCLUDES = {
+const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
     therapies: { select: { name: true } },
     specializations: { select: { name: true } },
@@ -41,7 +41,7 @@ export const MODEL_INCLUDES = {
   },
 };
 
-export function searchInputFilters(modelName, filter) {
+function searchInputFilters(modelName, filter) {
   if (!filter) return {};
   const filters = MODEL_SEARCH_FIELDS[modelName].map(field => ({ [field]: { contains: filter, mode: 'insensitive' } }));
   return { OR: filters };
