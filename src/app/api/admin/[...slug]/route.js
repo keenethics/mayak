@@ -1,14 +1,44 @@
 import { defaultHandler } from 'ra-data-simple-prisma';
 import { NextResponse } from 'next/server';
+import { RESOURCES } from '@admin/_lib/consts';
 import { prisma } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
-import { MODEL_INCLUDES } from '@/lib/consts';
-import { RESOURCES } from '@/app/admin/_lib/consts';
 
 export const MODEL_SEARCH_FIELDS = {
   [RESOURCES.event]: ['title', 'organizerName'],
+  [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
+  [RESOURCES.organization]: ['name'],
+};
+
+export const MODEL_INCLUDES = {
+  [RESOURCES.specialist]: {
+    therapies: { select: { name: true } },
+    specializations: { select: { name: true } },
+    addresses: {
+      select: {
+        nameOfClinic: true,
+        fullAddress: true,
+        district: { select: { name: true } },
+      },
+    },
+  },
+  [RESOURCES.organization]: {
+    therapies: { select: { name: true } },
+    type: { select: { name: true } },
+    addresses: {
+      select: {
+        nameOfClinic: true,
+        fullAddress: true,
+        district: { select: { name: true } },
+      },
+    },
+  },
+  [RESOURCES.event]: {
+    additionalLink: { select: { label: true, link: true } },
+    tags: { select: { name: true } },
+  },
 };
 
 export function searchInputFilters(modelName, filter) {

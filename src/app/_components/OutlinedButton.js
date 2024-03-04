@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import p from 'prop-types';
 import { cn } from '@utils/cn';
 
