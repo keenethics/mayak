@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { ProfileImage } from './ProfileImage';
 import { ContactsList } from './ContactsList';
 import { SpecializationsPanel } from './SpecializationsPanel';
@@ -85,7 +86,9 @@ export function CardSpecialist({ specialist, className, extended = false }) {
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <CardButton className="mt-auto" id={id} />
+            <Link href={`/specialist/${id}`} scroll={false} className="mt-auto self-end justify-self-end">
+              <CardButton id={id} />
+            </Link>
           </>
         )}
       </div>
