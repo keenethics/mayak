@@ -2,7 +2,7 @@
 
 import { cloneElement, createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 import { ClientPortal } from './ClientPortal';
 
 const HintContext = createContext();

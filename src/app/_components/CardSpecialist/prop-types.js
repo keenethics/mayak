@@ -3,7 +3,7 @@ import { FormatOfWork } from '@prisma/client';
 
 const relatedInstanceCore = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   createdAt: PropTypes.instanceOf(Date),
 };
 

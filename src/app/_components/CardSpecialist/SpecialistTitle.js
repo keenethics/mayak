@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { ListTruncator } from '@components';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 
 export function SpecialistTitle({ id, truncate, name, className }) {
   return truncate ? (

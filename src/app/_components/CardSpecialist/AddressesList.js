@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HospitalSVG } from '@icons/index';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 
 export function AddressesList({ addresses, className, showIcon = false }) {
   return (

@@ -8,7 +8,7 @@ import CloseIcon from '@icons/closeIcon.svg';
 import siteNav from '@config/siteNav';
 import { useBodyScrollLock } from '@hooks';
 import { InnerLink, PillButton, SocialLink } from '@components';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
@@ -33,7 +33,7 @@ export function Header() {
     <>
       {/* this element is used to fill the space under navbar on mobile screens */}
       <div className={'border-t-[1px] p-4 lg:hidden'}>
-        <div className={logoHeight}></div>
+        <div className={logoHeight} />
       </div>
       <nav
         className={cn(

@@ -16,7 +16,7 @@ import {
 } from '@icons/index';
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
-import { displayYearsOfExperience } from '@/utils/common';
+import { displayYearsOfExperience } from '@utils/common';
 
 export const getContactsList = ({ phone, email, website }) => [
   {

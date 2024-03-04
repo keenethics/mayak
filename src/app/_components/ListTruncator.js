@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Show as ShowHint, Window as HintWindow } from '@components';
 import { useOverflow } from '@hooks';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 
 let uniqueId = 0;
 

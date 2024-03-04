@@ -2,10 +2,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { cn } from '@utils/cn';
 import { motion } from 'framer-motion';
 import { ClientPortal } from '../ClientPortal';
 import { ModalCloseButton } from './ModalCloseButton';
-import { cn } from '@/utils/cn';
 
 export const Modal = ({
   isOpen,
@@ -17,7 +17,7 @@ export const Modal = ({
   children,
   className,
 }) => {
-  const blurBackground = <div className="fixed left-0 top-0 z-[150] h-full w-full backdrop-blur-sm"></div>;
+  const blurBackground = <div className="fixed left-0 top-0 z-[150] h-full w-full backdrop-blur-sm" />;
 
   const motionData = {
     initial: {

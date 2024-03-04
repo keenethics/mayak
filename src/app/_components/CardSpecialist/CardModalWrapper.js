@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Modal } from '@components';
 import { useRouter } from 'next/navigation';
 import { useBodyScrollLock } from '@hooks';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 
 export function CardModalWrapper({ children, className }) {
   const [isOpen, setIsOpen] = useState(false);

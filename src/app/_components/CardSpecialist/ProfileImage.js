@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Female, HospitalLogo, Male } from '@icons/index';
 import { Gender } from '@prisma/client';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 
 export function ProfileImage({ children, gender, className }) {
   let image = <HospitalLogo />;

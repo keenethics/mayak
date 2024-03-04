@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Footer, Header, Hint } from '@components';
+import { cn } from '@utils/cn';
 import { QueryContext } from './queryContext';
 import montserrat from '@/app/styles/font';
-import { cn } from '@/utils/cn';
 
 import './globals.css';
 
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
           <Hint>
             <Header />
             <QueryContext>
-              <main className="relative flex-1 lg:mt-[111px]">{children}</main>
+              <main className="relative flex-1 bg-other-white lg:mt-[111px]">{children}</main>
             </QueryContext>
             <Footer />
           </Hint>

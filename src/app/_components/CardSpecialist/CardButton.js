@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PillButton } from '@components';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 
 export function CardButton({ text = 'Детальніше', className, ...props }) {
   return (
