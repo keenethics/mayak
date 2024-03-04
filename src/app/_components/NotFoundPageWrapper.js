@@ -16,7 +16,6 @@ export function NotFoundPageWrapper({ children, href = '/', hrefText = 'Пове
         <div className="mb-[26px] mt-[10px] whitespace-pre-line text-[18px] text-primary-700 md:mt-0 lg:mb-[30px] lg:text-[28px]  xl:mb-[45px]">
           {children}
         </div>
-
         <Link
           href={href}
           aria-label="Click to back to the home page"

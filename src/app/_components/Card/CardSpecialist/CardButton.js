@@ -7,7 +7,6 @@ import { cn } from '@/utils/cn';
 export function CardButton({ text = 'Детальніше', className, id }) {
   const router = useRouter();
 
-  // const handleClick = () => router.push(`/specialist?id=${id}`, { scroll: false });
   const handleClick = () => router.push(`/specialist/${id}`, { scroll: false });
 
   return (

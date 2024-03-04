@@ -18,15 +18,16 @@ export function CardWrapper({ children, className, id }) {
   const cursorStyle = isExtendedCardOpened ? 'cursor-auto' : 'cursor-pointer';
 
   const handleClick = () => {
-    // router.push(`/specialist?id=${id}`, { scroll: false });
     router.push(`/specialist/${id}`, { scroll: false });
     close();
   };
 
+  const hasClickHandler = matches && !isExtendedCardOpened ? handleClick : undefined;
+
   return (
     <div
       className={cn('transition-all md:flex md:cursor-auto lg:mx-auto', cursorStyle, className)}
-      onClick={matches && !isExtendedCardOpened ? handleClick : undefined}
+      onClick={hasClickHandler}
     >
       {children}
     </div>

@@ -19,6 +19,24 @@ export const Modal = ({
 }) => {
   const blurBackground = <div className="no-scrollbar fixed left-0 top-0 z-[150] h-full w-full backdrop-blur-sm"></div>;
 
+  const motionData = {
+    initial: {
+      opacity: 0.5,
+      y: '20vh',
+      transition: { duration: 0.1 },
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.2 },
+    },
+    exit: {
+      opacity: 0,
+      y: '10vh',
+      transition: { duration: 0.2 },
+    },
+  };
+
   return (
     <ClientPortal selector="modal-root" show={isOpen}>
       {isOpen && (
@@ -29,17 +47,11 @@ export const Modal = ({
             onClick={onClose}
           >
             <motion.div
-              className={cn(
-                'rounded-xl px-4 py-[18px] shadow-[0_0_32px_0px_rgba(0,58,113,0.25)] md:p-6',
-                bgColor,
-                className,
-              )}
+              className={cn('shadow-custom-2 rounded-xl px-4 py-[18px] md:p-6', bgColor, className)}
               onClick={e => {
                 e.stopPropagation();
               }}
-              initial={{ opacity: 0.75, y: '10vh' }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
-              exit={{ opacity: 0, y: '10vh', transition: { duration: 0.2 } }}
+              {...motionData}
             >
               <div className="flex items-center justify-center text-center">
                 <p className="w-full pl-2 pr-2 text-p2 md:pl-6 md:pr-6">{title}</p>
