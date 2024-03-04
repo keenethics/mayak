@@ -3,20 +3,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { ProfileImage } from '../ProfileImage';
-import { ContactsList } from '../ContactsList';
-import { SpecializationsPanel } from '../SpecializationsPanel';
-import { SpecialistTitle } from '../SpecialistTitle';
 import { getContactsList, getLabelsList, getSpecialistSocials } from '../config';
+import { CardButton } from '@/app/_components/CardSpecialist/CardButton';
 import { organizationPropType } from '@/app/_components/CardSpecialist/prop-types';
 import { borderStyle } from '@/app/_components/CardSpecialist/config';
 import { cn } from '@/utils/cn';
 import { DetailsList } from '@/app/_components/CardSpecialist/DetailsList';
 import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
 import { SocialsList } from '@/app/_components/CardSpecialist/SocialsList';
-import { CardWrapper } from '../CardWrapper';
+import { ProfileImage } from '../ProfileImage';
+import { ContactsList } from '../ContactsList';
 import { BadgeList } from '../BadgeList';
-import { CardButton } from '../CardButton';
+import { SpecialistTitle } from '../SpecialistTitle';
+import { SpecializationsPanel } from '../SpecializationsPanel';
+import { CardWrapper } from '../CardWrapper';
 
 export function CardOrganization({ organization, className, extended = false }) {
   const {
@@ -56,7 +56,7 @@ export function CardOrganization({ organization, className, extended = false }) 
         </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-4" />
       </div>
-      <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
+      <div className="flex w-full max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
           <ProfileImage className="md:hidden" />
           <div className="max-w-full overflow-hidden">

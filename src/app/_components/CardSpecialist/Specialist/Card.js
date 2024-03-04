@@ -85,7 +85,6 @@ export function CardSpecialist({ specialist, className, extended = false }) {
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            {/* <CardButton className="mt-auto" id={id} redirectTo={`/specialist/${id}`} /> */}
             <Link href={`/specialist/${id}`} scroll={false} className="mt-auto self-end justify-self-end">
               <CardButton />
             </Link>
