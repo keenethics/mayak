@@ -157,6 +157,7 @@ async function main() {
     await trx.faq.deleteMany();
     await trx.organization.deleteMany();
     await trx.organizationType.deleteMany();
+    await trx.searchEntry.deleteMany();
   });
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
@@ -218,9 +219,22 @@ async function main() {
   // createMany does not support records with relations
   for (let i = 0; i < 10; i += 1) {
     // for instead of Promise.all to avoid overloading the database pool
+    const specialistData = randomSpecialist({ districts, specializations, therapies });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.specialist.create({
-      data: randomSpecialist({ districts, specializations, therapies }),
+    await prisma.$transaction(async trx => {
+      const specialist = await trx.specialist.create({
+        data: specialistData,
+      });
+      await trx.searchEntry.create({
+        data: {
+          sortString: `${specialist.firstName} ${specialist.lastName} ${specialist.surnameName || ''}`,
+          specialist: {
+            connect: {
+              id: specialist.id,
+            },
+          },
+        },
+      });
     });
   }
   for (let i = 0; i < 10; i += 1) {
@@ -230,9 +244,22 @@ async function main() {
     });
   }
   for (let i = 0; i < 10; i += 1) {
+    const organizationData = randomOrganization({ therapies, districts, organizationTypes });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.organization.create({
-      data: randomOrganization({ therapies, districts, organizationTypes }),
+    await prisma.$transaction(async trx => {
+      const organization = await trx.organization.create({
+        data: organizationData,
+      });
+      await trx.searchEntry.create({
+        data: {
+          sortString: organization.name,
+          organization: {
+            connect: {
+              id: organization.id,
+            },
+          },
+        },
+      });
     });
   }
 }

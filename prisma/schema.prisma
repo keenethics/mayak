@@ -48,6 +48,7 @@ model Specialist {
   email             String?          @unique @db.VarChar(320)
   website           String?          @db.Text
   isActive          Boolean          @default(false)
+  searchEntry       SearchEntry?
 
   @@map("specialist")
 }
@@ -67,8 +68,18 @@ model Organization {
   email           String?            @db.VarChar(320)
   website         String?            @db.Text
   isActive        Boolean            @default(false)
+  searchEntry     SearchEntry?
 
   @@map("organization")
+}
+
+model SearchEntry {
+  id             String        @id @default(uuid()) @db.Uuid
+  sortString     String
+  specialist     Specialist?   @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+  specialistId   String?       @unique @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String?       @unique @db.Uuid
 }
 
 model Specialization {
@@ -109,12 +120,12 @@ model Therapy {
 }
 
 model Address {
-  id            String        @id @default(uuid()) @db.Uuid
-  createdAt     DateTime      @default(now())
-  nameOfClinic  String?       @db.VarChar(255)
-  fullAddress   String        @db.VarChar(128) // street,building number,floor,room number
-  district      District      @relation(fields: [districtId], references: [id])
-  districtId    String        @db.Uuid
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  nameOfClinic  String?        @db.VarChar(255)
+  fullAddress   String         @db.VarChar(128) // street,building number,floor,room number
+  district      District       @relation(fields: [districtId], references: [id])
+  districtId    String         @db.Uuid
   specialists   Specialist[]
   organizations Organization[]
 
