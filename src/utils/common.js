@@ -7,21 +7,21 @@ export const displayYearsOfExperience = amountOfYears => {
   const lastTwoDigits = amountOfYears % 100;
 
   if (amountOfYears === 0) {
-    return `стаж менше року`;
+    return `менше року`;
   }
 
   if ((amountOfYears === 1 || lastDigit === 1) && lastTwoDigits !== 11) {
-    return `${amountOfYears} рік стажу`;
+    return `рік`;
   }
 
   if (
     ((amountOfYears >= 2 && amountOfYears <= 4) || (lastDigit >= 2 && lastDigit <= 4)) &&
     !(lastTwoDigits >= 12 && lastTwoDigits <= 14)
   ) {
-    return `${amountOfYears} роки стажу`;
+    return `роки`;
   }
 
-  return `${amountOfYears} років стажу`;
+  return `років`;
 };
 
 export const formatPhoneNumber = phoneNumber => {

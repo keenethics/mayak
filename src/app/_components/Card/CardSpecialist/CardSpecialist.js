@@ -44,7 +44,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   const specializationsList = specializations.map(s => s.name);
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
-  const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork });
+  const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork, specialistType: 'specialist' });
   const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin });
   const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
 

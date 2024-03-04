@@ -39,7 +39,12 @@ export function CardOrganization({ organization, className, extended = false }) 
 
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
-  const labelsList = getLabelsList({ yearsOfExperience: yearsOnMarket, isFreeReception, formatOfWork });
+  const labelsList = getLabelsList({
+    yearsOfExperience: yearsOnMarket,
+    isFreeReception,
+    formatOfWork,
+    specialistType: 'organization',
+  });
   const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin });
 
   return (

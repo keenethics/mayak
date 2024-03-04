@@ -48,11 +48,13 @@ export const getContactsList = ({ phone, email, website }) => [
 
 export const borderStyle = 'border-dashed border-t-gray-200';
 
-export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork }) => [
+export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork, specialistType }) => [
   {
     id: 'yearsOfExperience',
     icon: <MedCare />,
-    content: displayYearsOfExperience(yearsOfExperience),
+    content: yearsOfExperience
+      ? `${yearsOfExperience} ${displayYearsOfExperience(yearsOfExperience)} ${specialistType === 'specialist' ? 'стажу' : 'на ринку'}`
+      : null,
     color: 'text-other-green',
   },
   {
