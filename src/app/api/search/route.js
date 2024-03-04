@@ -6,8 +6,8 @@ import { prisma } from '@/lib/db';
 export async function GET(req) {
   const {
     type,
-    take,
-    skip,
+    // take,
+    // skip,
     format,
     district: districts,
   } = getSearchParamsFromRequest(
@@ -15,8 +15,8 @@ export async function GET(req) {
     {
       format: undefined,
       type: undefined,
-      take: 10,
-      skip: 0,
+      // take: 10,
+      // skip: 0,
       district: undefined,
     },
     params => ({
@@ -95,8 +95,8 @@ export async function GET(req) {
     orderBy: {
       sortString: 'asc',
     },
-    skip,
-    take,
+    // skip,
+    // take,
   });
 
   const data = searchEntries.map(entry => (entry.specialist ? entry.specialist : entry.organization));
