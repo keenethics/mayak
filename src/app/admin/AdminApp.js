@@ -8,6 +8,7 @@ import { EventCreate, EventList, EventShow } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
 import { SpecialistCreate, SpecialistsList, SpecialistShow } from '@admin/components/Specialist';
 import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/components/Organization';
+import { ListTherapy, CreateTherapy, EditTherapy } from '@admin/components/Therapy';
 import { authProvider } from './authProvider';
 
 export default function AdminPage() {
@@ -24,8 +25,9 @@ export default function AdminPage() {
       <Resource
         name={RESOURCES.therapy}
         options={{ label: 'Therapy' }}
-        list={ListGuesser}
-        edit={EditGuesser}
+        list={ListTherapy}
+        edit={EditTherapy}
+        create={CreateTherapy}
         show={ShowGuesser}
       />
       <Resource

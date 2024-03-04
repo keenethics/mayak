@@ -10,7 +10,7 @@ export const { auth, handlers } = NextAuth({
   logger: {
     error: console.error,
   },
-  secret: process.env.AUTH_SECRET,
+  secret: env.AUTH_SECRET,
   session: {
     strategy: 'jwt',
     maxAge: adminSessionLifetime,
