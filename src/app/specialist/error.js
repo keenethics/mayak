@@ -1,6 +1,6 @@
 'use client';
 
-import NotFoundPageWrapper from '@/app/_components/NotFoundPageWrapper';
+import { NotFoundPageWrapper } from '@components';
 
 export default function Error() {
   return (
