@@ -1,7 +1,7 @@
 import React from 'react';
 import { SpecialistList } from '@components';
 import { prisma } from '@/lib/db';
-import { specialistInclude } from '@/app/specialist/consts';
+import { specialistInclude, organizationInclude } from '@/app/specialist/consts';
 import { formatPhoneNumber } from '@/utils/common';
 
 export const metadata = {
@@ -11,6 +11,9 @@ export const metadata = {
 
 export default async function Page() {
   const specialistsList = await prisma.specialist.findMany({
+    where: {
+      isActive: true,
+    },
     orderBy: [
       {
         lastName: 'asc',
@@ -30,5 +33,36 @@ export default async function Page() {
     return specialist;
   });
 
-  return <SpecialistList specialists={mappedSpecialistList} className="mt-[22px]" />;
+  const organizationList = await prisma.organization.findMany({
+    where: {
+      isActive: true,
+    },
+    orderBy: [
+      {
+        name: 'asc',
+      },
+    ],
+    include: organizationInclude,
+  });
+
+  const mappedOrganizationList = organizationList.map(organization => {
+    if (organization.phone) {
+      return {
+        ...organization,
+        phone: formatPhoneNumber(organization.phone),
+      };
+    }
+
+    return organization;
+  });
+
+  return (
+    <>
+      {/* {organizationList.map(organization => (
+        <div key={organization.id}>{organization.name}</div>
+      ))} */}
+      <SpecialistList specialists={mappedOrganizationList} className="mt-[22px]" />
+      <SpecialistList specialists={mappedSpecialistList} className="mt-[22px]" />
+    </>
+  );
 }

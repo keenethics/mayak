@@ -1,4 +1,25 @@
 import PropTypes from 'prop-types';
+import { FormatOfWork } from '@prisma/client';
+
+const relatedInstanceCore = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  createdAt: PropTypes.string,
+};
+
+export const districtPropType = PropTypes.shape(relatedInstanceCore);
+
+export const therapyPropType = PropTypes.shape(relatedInstanceCore);
+
+export const specializationPropType = PropTypes.shape(relatedInstanceCore);
+
+export const addressPropType = PropTypes.shape({
+  id: PropTypes.string,
+  nameOfClinic: PropTypes.string,
+  fullAddress: PropTypes.string,
+  district: PropTypes.shape(districtPropType),
+  createdAt: PropTypes.string,
+});
 
 export const specialistPropType = PropTypes.shape({
   id: PropTypes.string,
@@ -8,9 +29,9 @@ export const specialistPropType = PropTypes.shape({
   specializations: PropTypes.array,
   gender: PropTypes.string,
   yearsOfExperience: PropTypes.number,
-  formatOfWork: PropTypes.string,
-  addresses: PropTypes.array,
-  therapies: PropTypes.array,
+  formatOfWork: PropTypes.oneOf(Object.values(FormatOfWork)),
+  addresses: PropTypes.arrayOf(addressPropType),
+  therapies: PropTypes.arrayOf(therapyPropType),
   isFreeReception: PropTypes.bool,
   description: PropTypes.string,
   phone: PropTypes.string,
@@ -20,6 +41,29 @@ export const specialistPropType = PropTypes.shape({
   instagram: PropTypes.string,
   facebook: PropTypes.string,
   tiktok: PropTypes.string,
+  createdAt: PropTypes.string,
+});
+
+export const organizationTypePropType = PropTypes.shape(relatedInstanceCore);
+
+export const organizationPropType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.arrayOf(organizationTypePropType),
+  yearsOnMarket: PropTypes.number,
+  formatOfWork: PropTypes.oneOf(Object.values(FormatOfWork)),
+  addresses: PropTypes.arrayOf(addressPropType),
+  therapies: PropTypes.arrayOf(therapyPropType),
+  isFreeReception: PropTypes.bool,
+  description: PropTypes.string,
+  phone: PropTypes.string,
+  email: PropTypes.string,
+  website: PropTypes.string,
+  isActive: PropTypes.bool,
+  instagram: PropTypes.string,
+  facebook: PropTypes.string,
+  tiktok: PropTypes.string,
+  createdAt: PropTypes.string,
 });
 
 export const specialistContactPropType = PropTypes.shape({

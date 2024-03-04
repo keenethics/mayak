@@ -1,4 +1,8 @@
 export const displayYearsOfExperience = amountOfYears => {
+  if (typeof amountOfYears !== 'number') {
+    return null;
+  }
+
   const lastDigit = amountOfYears % 10;
   const lastTwoDigits = amountOfYears % 100;
 
