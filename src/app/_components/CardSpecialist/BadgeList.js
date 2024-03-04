@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
-import { specialistLabelPropType } from '@/app/_components/Card/CardSpecialist/prop-types';
-import { borderStyle } from '@/app/_components/Card/CardSpecialist/config';
+import { specialistLabelPropType } from '@/app/_components/CardSpecialist/prop-types';
+import { borderStyle } from '@/app/_components/CardSpecialist/config';
 
 function BadgeListItem({ icon, text, className }) {
   return (

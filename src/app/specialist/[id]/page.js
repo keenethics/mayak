@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardSpecialistExtended } from '@/app/_components/Card/CardSpecialist';
+import { CardSpecialistExtended } from '@/app/_components/CardSpecialist';
 import { getSpecialist } from '@/app/specialist/utils';
 
 export const metadata = {

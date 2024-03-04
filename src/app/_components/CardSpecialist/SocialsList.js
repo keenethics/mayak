@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { specialistSocialsPropType } from '@/app/_components/Card/CardSpecialist/prop-types';
+import { specialistSocialsPropType } from '@/app/_components/CardSpecialist/prop-types';
 import { cn } from '@/utils/cn';
 
 export function SocialsList({ socials, className }) {

@@ -4,7 +4,7 @@ import { FormatOfWork } from '@prisma/client';
 const relatedInstanceCore = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  createdAt: PropTypes.string,
+  createdAt: PropTypes.date,
 };
 
 export const districtPropType = PropTypes.shape(relatedInstanceCore);
@@ -18,7 +18,7 @@ export const addressPropType = PropTypes.shape({
   nameOfClinic: PropTypes.string,
   fullAddress: PropTypes.string,
   district: PropTypes.shape(districtPropType),
-  createdAt: PropTypes.string,
+  createdAt: PropTypes.date,
 });
 
 export const specialistPropType = PropTypes.shape({
@@ -41,7 +41,7 @@ export const specialistPropType = PropTypes.shape({
   instagram: PropTypes.string,
   facebook: PropTypes.string,
   tiktok: PropTypes.string,
-  createdAt: PropTypes.string,
+  createdAt: PropTypes.date,
 });
 
 export const organizationTypePropType = PropTypes.shape(relatedInstanceCore);
@@ -63,7 +63,7 @@ export const organizationPropType = PropTypes.shape({
   instagram: PropTypes.string,
   facebook: PropTypes.string,
   tiktok: PropTypes.string,
-  createdAt: PropTypes.string,
+  createdAt: PropTypes.date,
 });
 
 export const specialistContactPropType = PropTypes.shape({

@@ -2,9 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardSpecialist } from './Card/CardSpecialist';
-import { specialistPropType } from './Card/CardSpecialist/prop-types';
-import { CardOrganization } from './Card/CardSpecialist/CardOrganization';
+import { CardOrganization, CardSpecialist } from './CardSpecialist';
+import { specialistPropType } from './CardSpecialist/prop-types';
 
 export function SpecialistList({ specialists, className }) {
   const cardStyle =

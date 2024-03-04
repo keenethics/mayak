@@ -32,15 +32,19 @@ export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsis
               },
             }}
           >
-            <span
+            <div
               className={cn(
-                'right-0 top-[-3px] flex w-[80px] cursor-pointer justify-end bg-gradient-to-l from-other-white from-[30%] text-gray-600',
+                'absolute right-0 top-[-3px] flex w-full cursor-pointer select-none justify-end',
                 hintEllipsisClassName,
                 'absolute select-none',
               )}
             >
-              {ellipsis || `...`}
-            </span>
+              {ellipsis || (
+                <span className="flex w-[80px] justify-end bg-gradient-to-l from-other-white from-[30%] text-gray-600">
+                  ...
+                </span>
+              )}
+            </div>
           </ShowHint>
           <HintWindow
             name={hintId}

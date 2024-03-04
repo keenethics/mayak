@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { IDCard } from '@icons/index';
-import { AddressesList } from '@/app/_components/Card/CardSpecialist/AddressesList';
+import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
 import { cn } from '@/utils/cn';
 
 export function DetailsList({ details, className }) {
