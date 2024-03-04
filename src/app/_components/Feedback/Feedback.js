@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import LoveIcon from '@icons/loveIcon.svg';
+import LikeIcon from '@icons/likeIcon.svg';
 import { useCreateFeedback } from '@/app/_hooks';
 import SendFeedback from '@/lib/validationSchemas/sendFeedbackSchema';
+import { cn } from '@/utils/cn';
 import { Modal } from '../Modal';
 import { TextInputField } from '../InputFields';
 import { CheckBox } from '../CheckBox';
 import { TextArea } from '../TextArea';
 import { PillButton } from '../PillButton';
-import { cn } from '@/utils/cn';
 import { buttonColorVariant, buttonVariant } from '../PillButton/style';
-
-const MAX_LENGTH = 320;
 
 export function Feedback({ isFeedbackOpen, onClose }) {
   const [isFormOpen, setFormOpen] = useState(true);
@@ -19,9 +17,8 @@ export function Feedback({ isFeedbackOpen, onClose }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [isChecked, setChecked] = useState(true);
+  const [isCallMe, setCallMe] = useState(true);
   const [message, setMessage] = useState('');
-
   const [validationErrors, setValidationErrors] = useState({});
 
   const { mutate: createFeedback } = useCreateFeedback();
@@ -31,7 +28,9 @@ export function Feedback({ isFeedbackOpen, onClose }) {
     const formData = {
       name,
       phone,
-      callMe: isChecked,
+      callMe: isCallMe,
+      // I am forced to do exactly that, since I have to pass a valid email or "undefined" to the backend.
+      // Input should have base value ""
       email: email.length ? email : undefined,
       message,
     };
@@ -43,12 +42,12 @@ export function Feedback({ isFeedbackOpen, onClose }) {
 
       setFormOpen(false);
     } catch (error) {
-      const errors = {};
-      error.errors.forEach(validationError => {
+      const errors = error.errors.reduce((acc, validationError) => {
         const fieldName = validationError.path[0];
         const errorMessage = validationError.message;
-        errors[fieldName] = errorMessage;
-      });
+        acc[fieldName] = errorMessage;
+        return acc;
+      }, {});
       setValidationErrors(errors);
     }
   };
@@ -65,6 +64,8 @@ export function Feedback({ isFeedbackOpen, onClose }) {
     // Existing lint rules do not allow this usage, but this code is required.
     // eslint-disable-next-line consistent-return
     return () => clearTimeout(timer);
+    // any additional dependencies will be redundant
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFormOpen]);
 
   return (
@@ -99,8 +100,8 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               error={validationErrors.email}
             />
             <CheckBox
-              onChange={() => setChecked(prev => !prev)}
-              checked={!isChecked}
+              onChange={() => setCallMe(prev => !prev)}
+              checked={!isCallMe}
               name={'feedBack'}
               value={'CheckBox'}
               text={'Не телефонувати мені'}
@@ -108,7 +109,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
             <TextArea
               value={message}
               onChange={setMessage}
-              maxLength={MAX_LENGTH}
+              maxLength={320}
               placeholder="Повідомлення"
               error={validationErrors.message}
             />
@@ -127,7 +128,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
           <div className="grid justify-items-center">
             <h3 className="pb-6 text-h3 font-bold">Дякую за повідомлення!</h3>
             <p className="text-p2">Наші менеджери незабаром звʼяжуться з Вами</p>
-            <LoveIcon
+            <LikeIcon
               alt="Thank you image"
               aria-label="Thank you image"
               priority="true"
