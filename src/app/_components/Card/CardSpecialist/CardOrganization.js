@@ -50,14 +50,14 @@ export function CardOrganization({ organization, className, extended = false }) 
   return (
     <CardWrapper className={className} id={id}>
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
-        <ProfileImage gender={null} className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
+        <ProfileImage gender={undefined} className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
           <SocialsList socials={socials} className="absolute bottom-4" />
         </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-4" />
       </div>
-      <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
+      <div className="flex w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
-          <ProfileImage gender={null} className="md:hidden" />
+          <ProfileImage gender={undefined} className="md:hidden" />
           <div className="max-w-full overflow-hidden">
             <SpecializationsPanel
               specialistId={id}

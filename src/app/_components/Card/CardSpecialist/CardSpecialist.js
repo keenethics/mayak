@@ -58,7 +58,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-4" />
       </div>
-      <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
+      <div className="flex w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
           <ProfileImage gender={gender} className="md:hidden" />
           <div className="max-w-full overflow-hidden">
@@ -86,7 +86,11 @@ export function CardSpecialist({ specialist, className, extended = false }) {
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <Link href={`/specialist/${id}`} scroll={false} className="mt-auto self-end justify-self-end">
+            <Link
+              href={`/specialist/${id}`}
+              scroll={false}
+              className="mt-auto hidden self-end justify-self-end md:inline-block"
+            >
               <CardButton id={id} />
             </Link>
           </>
