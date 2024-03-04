@@ -4,7 +4,7 @@ import { ClientPortal } from './ClientPortal';
 import { ModalCloseButton } from './ModalCloseButton';
 
 export const Modal = ({ isOpen, onClose, isBlurBackground = true, isCloseButton = true, bgColor, title, children }) => {
-  const blurBackground = <div className="fixed left-0 top-0 z-10 h-full w-full backdrop-blur-sm"></div>;
+  const blurBackground = <div className="fixed left-0 top-0 z-10 h-full w-full backdrop-blur-sm" />;
 
   return (
     <ClientPortal selector="modal-root" show={isOpen}>

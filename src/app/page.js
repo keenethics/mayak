@@ -1,4 +1,5 @@
-import React from 'react';
+import { TherapiesSection } from '@components';
+import { prisma } from '@/lib/db';
 
 // Page metadata should contain
 // title - gets formatted into "%s | Маяк", %s is replaced by title,
@@ -9,6 +10,17 @@ export const metadata = {
   description: 'Пошук психологічної допомоги в м.Львів',
 };
 
-export default function Page() {
-  return <div>Main</div>;
+export default async function Page() {
+  const activeTherapies = await prisma.therapy.findMany({
+    where: { isActive: true },
+    orderBy: { priority: 'desc' },
+  });
+  return (
+    <>
+      <section>TBD district & search section</section>
+      <TherapiesSection therapies={activeTherapies} />
+      <section>TBD goal section</section>
+      <section>FAQ section</section>
+    </>
+  );
 }
