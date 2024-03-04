@@ -1,23 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PillButton } from '@components';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { cn } from '@/utils/cn';
 
 export function CardButton({ text = 'Детальніше', className, id }) {
-  const router = useRouter();
-
-  const handleClick = () => router.push(`/specialist/${id}`, { scroll: false });
-
   return (
-    <PillButton
-      variant="outlined"
-      colorVariant="orange"
+    <Link
+      href={`/specialist/${id}`}
+      scroll={false}
       className={cn('hidden h-[min] self-end justify-self-end md:inline-block lg:text-p4', className)}
-      onClick={handleClick}
     >
-      {text}
-    </PillButton>
+      <PillButton variant="outlined" colorVariant="orange">
+        {text}
+      </PillButton>
+    </Link>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SpecialistList } from '@components';
 import { prisma } from '@/lib/db';
-import { specialistInclude, organizationInclude } from '@/app/specialist/consts';
+import { organizationInclude, specialistInclude } from '@/app/specialist/consts';
 import { formatPhoneNumber } from '@/utils/common';
 
 export const metadata = {

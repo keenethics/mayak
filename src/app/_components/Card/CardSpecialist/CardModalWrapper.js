@@ -12,7 +12,7 @@ export function CardModalWrapper({ children, className }) {
   const router = useRouter();
 
   function handleClose() {
-    router.back();
+    router.back('/specialist');
   }
 
   // this is to ensure proper modal rendering
@@ -20,7 +20,7 @@ export function CardModalWrapper({ children, className }) {
     setIsOpen(true);
   }, []);
 
-  useBodyScrollLock('y');
+  useBodyScrollLock(isOpen, 'y');
 
   return (
     <Modal

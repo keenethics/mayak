@@ -19,6 +19,7 @@ import { SocialsList } from '@/app/_components/Card/CardSpecialist/SocialsList';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   if (!specialist) throw new Error('Specialist is not found');
+
   const {
     id,
     gender,
@@ -71,7 +72,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         <BadgeList labels={labelsList} />
         {extended ? (
           <>
-            <DetailsList className={cn('mt-4 border-t pt-4', borderStyle)} details={{ addresses, description }} />
+            <DetailsList className={cn('border-t pt-4', borderStyle)} details={{ addresses, description }} />
             <ContactsList
               truncate={!extended}
               specialistId={id}

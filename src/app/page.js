@@ -10,5 +10,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <div>Main</div>;
+  return <div className="mx-auto mt-4 max-w-[900px] px-4">Main</div>;
 }
