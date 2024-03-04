@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 import { specialistLabelPropType } from '@/app/_components/CardSpecialist/prop-types';
-import { borderStyle } from '@/app/_components/CardSpecialist/config';
 
 function BadgeListItem({ icon, text, className }) {
   return (
@@ -23,7 +22,12 @@ BadgeListItem.propTypes = {
 
 export function BadgeList({ labels, className }) {
   return (
-    <ul className={cn('flex gap-6 border-t pt-4 md:flex-initial md:gap-6 md:border-0 md:pt-0', borderStyle, className)}>
+    <ul
+      className={cn(
+        'flex gap-6 border-t border-dashed border-t-gray-200 pt-4 md:flex-initial md:gap-6 md:border-0 md:pt-0',
+        className,
+      )}
+    >
       {labels.map(({ icon, content, color }) =>
         content ? (
           <BadgeListItem

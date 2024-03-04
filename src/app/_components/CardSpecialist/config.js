@@ -46,8 +46,6 @@ export const getContactsList = ({ phone, email, website }) => [
   },
 ];
 
-export const borderStyle = 'border-dashed border-t-gray-200';
-
 export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork, specialistType }) => [
   {
     id: 'yearsOfExperience',

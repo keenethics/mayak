@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
-import { borderStyle } from '@/app/_components/CardSpecialist/config';
 
 export function TherapiesList({ therapies, className }) {
   return (
-    <div className={cn('border-t pt-4 md:pt-3', borderStyle, className)}>
+    <div className={cn('border-t border-dashed border-t-gray-200 pt-4 md:pt-3', className)}>
       <h3 className="text-p4 font-bold uppercase tracking-wide text-gray-600">Напрямок лікування</h3>
       <ul className="mt-3.5 flex flex-wrap gap-2.5">
         {therapies.map(t => (

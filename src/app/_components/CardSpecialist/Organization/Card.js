@@ -6,8 +6,6 @@ import Link from 'next/link';
 import { getContactsList, getLabelsList, getSpecialistSocials } from '../config';
 import { CardButton } from '@/app/_components/CardSpecialist/CardButton';
 import { organizationPropType } from '@/app/_components/CardSpecialist/prop-types';
-import { borderStyle } from '@/app/_components/CardSpecialist/config';
-import { cn } from '@/utils/cn';
 import { DetailsList } from '@/app/_components/CardSpecialist/DetailsList';
 import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
 import { SocialsList } from '@/app/_components/CardSpecialist/SocialsList';
@@ -71,12 +69,15 @@ export function CardOrganization({ organization, className, extended = false }) 
         <BadgeList labels={labelsList} />
         {extended ? (
           <>
-            <DetailsList className={cn('mt-4 border-t pt-4', borderStyle)} details={{ addresses, description }} />
+            <DetailsList
+              className="mt-4 border-t border-dashed border-t-gray-200 pt-4"
+              details={{ addresses, description }}
+            />
             <ContactsList
               truncate={!extended}
               specialistId={id}
               contacts={contactsList}
-              className={cn('mt-3 border-t pt-3 md:hidden', borderStyle)}
+              className="mt-3 border-t border-dashed border-t-gray-200 pt-3 md:hidden"
             />
           </>
         ) : (
