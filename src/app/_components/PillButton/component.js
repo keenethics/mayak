@@ -3,7 +3,16 @@ import PropTypes from 'prop-types';
 import { cn } from '@/app/utils/cn';
 import { Paragraph } from '../Typography';
 
-export function PillButton({ children, type = "button", className, variant, colorVariant, icon, disabled = false, onClick, }) {
+export function PillButton({
+  children,
+  type = 'button',
+  className,
+  variant,
+  colorVariant,
+  icon,
+  disabled = false,
+  onClick,
+}) {
   const buttonVariant = icon ? variant?.icon : variant?.regular;
   const { regular, hover, focused, active, disabled: disabledState } = colorVariant || {};
 

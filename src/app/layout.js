@@ -1,11 +1,10 @@
 import React from 'react';
 import P from 'prop-types';
 import { Footer, Header } from '@components';
-import { QueryContext } from './queryContext';
 import montserrat from '@/app/styles/font';
-
-import './globals.css';
 import { cn } from '@/utils/cn';
+import { QueryContext } from './queryContext';
+import './globals.css';
 
 export const metadata = {
   title: {

@@ -45,8 +45,10 @@ export function TextInputField({
         {error && <InputErrorIcon className={cn(variant.errorIcon.base)} />}
       </div>
 
-      <label className={cn(variant.label.base, variant.label.stateful, absoluteLabel, error && variant.label.error)}
-        htmlFor={id}>
+      <label
+        className={cn(variant.label.base, variant.label.stateful, absoluteLabel, error && variant.label.error)}
+        htmlFor={id}
+      >
         {placeholder}
       </label>
     </div>
