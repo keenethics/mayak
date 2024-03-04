@@ -13,7 +13,7 @@ export function TherapyCard({ type, description, title, imagePath }) {
       <Paragraph className="text-center text-p4 font-bold text-[#FE9E75]">{description}</Paragraph>
       <Link href={`/specialist?type=${type}`}>
         <PillButton variant={buttonVariant.outlined} colorVariant={buttonColorVariant.outlined.blue}>
-          Ознайомитися
+          Ознайомитись
         </PillButton>
       </Link>
     </div>
