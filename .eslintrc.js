@@ -7,9 +7,21 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:@tanstack/eslint-plugin-query/recommended',
+    'plugin:import/recommended',
     'prettier',
   ],
+  // settings: {
+  //   "import/resolver": {
+  //     "eslint-import-resolver-custom-alias": {
+  //       "alias": {
+  //         "src": "./src"
+  //       },
+  //       "extensions": [".js", ".jsx"]
+  //     }
+  //   }
+  // },
   rules: {
+    'import/namespace': 'off',
     'max-len': ['error', { code: 120, ignoreStrings: true }],
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
@@ -24,5 +36,16 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-unresolved': 'off',
     'no-restricted-exports': 0,
+    'no-unused-vars': ['error'],
+    'import/order': [
+      'error',
+      {
+        pathGroups: [
+          { pattern: '@/**', group: 'internal' },
+          { pattern: '@*', group: 'internal' },
+        ],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling'],
+      },
+    ],
   },
 };
