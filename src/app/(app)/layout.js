@@ -14,7 +14,7 @@ export default function Layout({ children }) {
     <Hint>
       <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="relative mt-[111px] flex-1">{children}</main>
+        <main className="relative flex-1 lg:mt-[111px]">{children}</main>
         <Footer />
       </div>
     </Hint>

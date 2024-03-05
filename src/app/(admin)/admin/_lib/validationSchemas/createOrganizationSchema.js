@@ -63,7 +63,7 @@ const DraftOrganizationSchema = RestSchema.partial().extend({
   isActive: z.literal(false),
   isFreeReception: z.boolean().nullish(),
   type: TypeSchema.optional(),
-  thearpies: TherapiesSchema.optional(),
+  therapies: TherapiesSchema.optional(),
   formatOfWork: FormatOfWorkSchema.nullish(),
 });
 const ActiveOrganizationSchema = RestSchema.extend({

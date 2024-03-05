@@ -10,7 +10,7 @@ export function SelectTherapies({ isActive }) {
       label="Типи"
       source="therapies"
       validate={isActive && required()}
-      choices={therapies.map(therapy => ({ id: therapy.name, name: therapy.name }))}
+      choices={therapies.map(therapy => ({ id: therapy.id, name: therapy.title }))}
     />
   );
 }

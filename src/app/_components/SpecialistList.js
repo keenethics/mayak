@@ -5,8 +5,7 @@ import { specialistPropType } from './CardSpecialist/prop-types';
 
 export function SpecialistList({ specialists, className }) {
   const cardStyle =
-    'md:shadow-custom-1 mx-4 my-6 max-w-[900px] rounded-3xl border-2 border-gray-200 px-4 py-5 md:my-10 md:p-10' +
-    ' lg:mx-auto';
+    'mx-4 my-6 max-w-[900px] rounded-3xl border-2 border-gray-200 px-4 py-5 md:my-10 md:p-10 lg:mx-auto';
 
   return (
     <ul className={className}>

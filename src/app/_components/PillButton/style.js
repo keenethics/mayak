@@ -10,6 +10,15 @@ export const buttonColorVariant = {
       disabled,
     },
   },
+  tonal: {
+    lightblue: {
+      regular: 'bg-primary-200 text-gray-700',
+      hover: 'hover:bg-primary-300',
+      focused: 'focus:outline-none focus:bg-primary-300',
+      active: 'active:bg-primary-300',
+      disabled,
+    },
+  },
   outlined: {
     blue: {
       regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-primary-500',
@@ -46,30 +55,39 @@ export const buttonColorVariant = {
 export const buttonType = {
   outlined: {
     icon: {
-      buttonStyle: 'transition duration-200 ease-in-out inline-flex justify-center align-middle flex-col text-p4',
-      layoutStyle: `flex justify-center align-middle /
+      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col text-p4',
+      layoutStyle: `flex justify-center align-middle 
       gap-[8px] self-stretch h-[2.5rem] pt-[10px] pr-[24px] pb-[10px] pl-[16px]`,
     },
     regular: {
-      buttonStyle:
-        'transition duration-200 ease-in-out inline-flex justify-center align-middle flex-col h-[2.5rem] flex-shrink-0 text-p4',
-      layoutStyle: `flex justify-center align-middle /
+      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col h-[2.5rem] flex-shrink-0 text-p4',
+      layoutStyle: `flex justify-center align-middle
       gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[10px] px-[24px]`,
     },
   },
   filledBold: {
     icon: {
-      buttonStyle: 'inline-flex justify-center align-middle text-p3',
+      buttonStyle: 'transition-all inline-flex justify-center align-middle text-p3',
       layoutStyle: 'flex justify-center align-middle gap-[8px] pt-[12px] pr-[24px] pb-[12px] pl-[16px]',
     },
     regular: {
-      buttonStyle: 'inline-flex justify-center align-middle py-[12px] px-[0px] text-p3',
+      buttonStyle: 'transition-all inline-flex justify-center align-middle py-[12px] px-[0px] text-p3',
+      layoutStyle: 'flex justify-center align-middle gap-[8px] py-[0px] px-[24px] self-stretch',
+    },
+  },
+  tonal: {
+    icon: {
+      buttonStyle: 'transition-all inline-flex justify-center align-middle text-p3',
+      layoutStyle: 'flex justify-center align-middle gap-[8px] pt-[12px] pr-[24px] pb-[12px] pl-[16px]',
+    },
+    regular: {
+      buttonStyle: 'transition-all inline-flex justify-center align-middle py-[12px] px-[0px] text-p3',
       layoutStyle: 'flex justify-center align-middle gap-[8px] py-[0px] px-[24px] self-stretch',
     },
   },
   close: {
     icon: {
-      buttonStyle: `flex justify-center align-middle w-[1rem] h-[1rem] / 
+      buttonStyle: `flex justify-center align-middle w-[1rem] h-[1rem]  
       flex-shrink-0`,
     },
   },
