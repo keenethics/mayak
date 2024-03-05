@@ -4,7 +4,7 @@ import React from 'react';
 import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
-import { EventCreate, EventList, EventShow } from '@admin/components/Event';
+import { EventCreate, EventList, EventShow, EventEdit } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
 import { SpecialistCreate, SpecialistsList, SpecialistShow } from '@admin/components/Specialist';
 import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/components/Organization';
@@ -38,7 +38,7 @@ export default function AdminPage() {
         show={SpecialistShow}
         create={SpecialistCreate}
       />
-      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} show={EventShow} />
+      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} edit={EventEdit} show={EventShow} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
