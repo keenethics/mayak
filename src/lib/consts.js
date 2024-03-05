@@ -16,7 +16,7 @@ export const BASE_ERROR_MESSAGES = {
 
 export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
-    therapies: { select: { name: true } },
+    therapies: { select: { id: true, type: true } },
     specializations: { select: { name: true } },
     addresses: {
       select: {
@@ -27,7 +27,7 @@ export const MODEL_INCLUDES = {
     },
   },
   [RESOURCES.organization]: {
-    therapies: { select: { name: true } },
+    therapies: { select: { id: true, type: true } },
     type: { select: { name: true } },
     addresses: {
       select: {
