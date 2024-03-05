@@ -7,9 +7,7 @@ import { specialistSocialsPropType } from '@/app/_components/CardSpecialist/prop
 export function SocialsList({
   socials,
   className,
-  // extendedCardOpened
 }) {
-  // console.log(extendedCardOpened);
   return (
     <ul
       className={cn('sm:hidden md:flex md:flex-row md:items-center md:justify-center md:gap-[5px] lg:gap-3', className)}
@@ -18,9 +16,8 @@ export function SocialsList({
         item.href ? (
           <li
             key={idx}
-            className={cn(
-              'block cursor-pointer text-center text-primary-700 transition-all hover:text-primary-500 md:h-5 md:w-5 lg:h-6 lg:w-6',
-            )}
+            className=
+              'block cursor-pointer text-center text-primary-700 transition-all hover:text-primary-500 md:h-5 md:w-5 lg:h-6 lg:w-6'
           >
             <Link
               href={item.href}
@@ -42,5 +39,4 @@ export function SocialsList({
 SocialsList.propTypes = {
   socials: PropTypes.arrayOf(specialistSocialsPropType),
   className: PropTypes.string,
-  extendedCardOpened: PropTypes.bool,
 };
