@@ -7,6 +7,7 @@ const typography = {
   p2: ['1.125rem', '1.75rem'],
   p3: ['1rem', '1.5rem'],
   p4: ['0.875rem', '1.25rem'],
+  p5: ['0.75rem', '1rem'],
   link: ['1rem', '1.5rem'],
   caption: ['1rem', '1.5rem'],
 };

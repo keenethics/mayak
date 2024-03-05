@@ -57,7 +57,7 @@ function transformData(event) {
     priceText = `від ${price}`;
     break;
   case 'FIXED_PRICE':
-    priceText = price;
+    priceText = `${price}`;
     break;
   default:
     break;
