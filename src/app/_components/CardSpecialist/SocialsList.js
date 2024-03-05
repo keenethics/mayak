@@ -4,14 +4,15 @@ import Link from 'next/link';
 import { cn } from '@utils/cn';
 import { specialistSocialsPropType } from '@/app/_components/CardSpecialist/prop-types';
 
-export function SocialsList({ socials, className, extendedCardOpened = true }) {
+export function SocialsList({
+  socials,
+  className,
+  // extendedCardOpened
+}) {
+  // console.log(extendedCardOpened);
   return (
     <ul
-      className={cn(
-        'sm:hidden md:flex md:flex-row md:items-center md:justify-center md:gap-[5px] lg:gap-3',
-        className,
-        extendedCardOpened && 'sm:flex sm:flex-row sm:items-center sm:justify-center sm:gap-1 ',
-      )}
+      className={cn('sm:hidden md:flex md:flex-row md:items-center md:justify-center md:gap-[5px] lg:gap-3', className)}
     >
       {socials?.map((item, idx) =>
         item.href ? (

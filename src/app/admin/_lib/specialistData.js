@@ -101,12 +101,6 @@ export const SpecialistFormFields = {
     label: 'Веб сторінка',
     isRequired: false,
   },
-  socialsComment: {
-    name: 'comment',
-    type: 'text',
-    label: 'Ви можете вказати від 1 до 5 соцмереж',
-    isRequired: false,
-  },
   instagram: {
     name: 'instagram',
     type: 'url',
