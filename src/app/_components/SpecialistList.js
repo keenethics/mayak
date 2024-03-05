@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CardOrganization, CardSpecialist } from './CardSpecialist';
@@ -11,19 +9,17 @@ export function SpecialistList({ specialists, className }) {
     ' lg:mx-auto';
 
   return (
-    <>
-      <ul className={className}>
-        {specialists.map(specialist => (
-          <li id={specialist.id} key={specialist.id}>
-            {specialist.gender ? (
-              <CardSpecialist className={cardStyle} specialist={specialist} />
-            ) : (
-              <CardOrganization className={cardStyle} organization={specialist} />
-            )}
-          </li>
-        ))}
-      </ul>
-    </>
+    <ul className={className}>
+      {specialists.map(specialist => (
+        <li id={specialist.id} key={specialist.id}>
+          {specialist.gender ? (
+            <CardSpecialist className={cardStyle} specialist={specialist} />
+          ) : (
+            <CardOrganization className={cardStyle} organization={specialist} />
+          )}
+        </li>
+      ))}
+    </ul>
   );
 }
 

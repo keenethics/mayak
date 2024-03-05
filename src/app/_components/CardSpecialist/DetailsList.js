@@ -6,10 +6,11 @@ import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
 
 export function DetailsList({ details, className }) {
   const { addresses, description } = details;
+  const hasAddresses = addresses.length > 0;
 
   return (
     <div className={cn('flex flex-col gap-4', className)}>
-      <AddressesList addresses={addresses} showIcon={true} />
+      {hasAddresses && <AddressesList addresses={addresses} showIcon={true} />}
       <ul>
         <li className="flex gap-3 md:gap-4">
           <span className="text-gray-500 lg:mt-[3px]">

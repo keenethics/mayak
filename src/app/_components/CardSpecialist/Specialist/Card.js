@@ -18,6 +18,7 @@ import { CardButton } from '../CardButton';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   if (!specialist) throw new Error('Specialist is not found');
+
   const {
     id,
     gender,
@@ -91,7 +92,11 @@ export function CardSpecialist({ specialist, className, extended = false }) {
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <Link href={`/specialist/${id}`} scroll={false} className="mt-auto self-end justify-self-end">
+            <Link
+              href={`/specialist/${id}`}
+              scroll={false}
+              className="mt-auto hidden self-end justify-self-end md:inline-block"
+            >
               <CardButton />
             </Link>
           </>

@@ -87,7 +87,7 @@ export function CardOrganization({ organization, className, extended = false }) 
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <Link href={`#`} scroll={false} className="mt-auto self-end justify-self-end">
+            <Link href={`#`} scroll={false} className="mt-auto hidden self-end justify-self-end md:inline-block">
               <CardButton />
             </Link>
           </>
