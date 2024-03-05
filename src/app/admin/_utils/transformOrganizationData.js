@@ -24,7 +24,7 @@ export function transformOrganizationData(data) {
   if (data?.therapies?.length > 0) {
     therapiesObject = {
       connect: data.therapies.map(therapy => ({
-        id: therapy.id,
+        id: therapy,
       })),
     };
   }
