@@ -1,10 +1,10 @@
 import React from 'react';
 import { NumberInput, required, SelectInput } from 'react-admin';
 import { FormatOfWork, Gender } from '@prisma/client';
-import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistFormFields, SpecialistFormSections } from '@/app/admin/_lib/specialistData';
-import { FormTranslations } from '@/app/admin/_lib/translations';
-import { capitalizeFirstLetter } from '@/app/admin/_utils/common';
+import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
+import { SpecialistFormFields, SpecialistFormSections } from '@admin/_lib/specialistData';
+import { FormTranslations } from '@admin/_lib/translations';
+import { capitalizeFirstLetter } from '@admin/_utils/common';
 
 export function Details() {
   const getChoicesList = (list, translations) =>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NotFoundPageWrapper } from '@components';
+import { NotFoundPageWrapper } from '@/app/_components/NotFoundPageWrapper';
 
 export default function NotFoundPage() {
   return (

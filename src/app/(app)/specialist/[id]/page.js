@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardSpecialist } from '@/app/_components/CardSpecialist/Specialist';
-import { getSpecialist } from '@/app/specialist/utils';
+import { getSpecialist } from '@/app/(app)/specialist/utils';
 
 export async function generateMetadata({ params }) {
   try {

@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Footer, Header, Hint } from '@components';
-import { cn } from '@utils/cn';
+import P from 'prop-types';
+import { Hint } from '@components';
 import { QueryContext } from './queryContext';
 import montserrat from '@/app/styles/font';
 
 import './globals.css';
+import { cn } from '@/utils/cn';
 
 export const metadata = {
   title: {
@@ -16,23 +16,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="ua">
       <body className={cn(montserrat.className, 'relative scroll-smooth')}>
-        <div className="flex min-h-screen flex-col">
-          <Hint>
-            <Header />
-            <QueryContext>
-              <main className="relative flex-1 bg-other-white">{children}</main>
-            </QueryContext>
-            <Footer />
-          </Hint>
-        </div>
-        <div id="modal-root" />
+        <Hint>
+          <QueryContext>
+            <main className="bg-other-white">{children}</main>
+          </QueryContext>
+          <div id="modal-root" />
+        </Hint>
       </body>
     </html>
   );
 }
 
 RootLayout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: P.node.isRequired,
 };

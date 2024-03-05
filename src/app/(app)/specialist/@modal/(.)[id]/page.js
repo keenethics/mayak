@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardSpecialistExtended } from '@/app/_components/CardSpecialist';
-import { getSpecialist } from '@/app/specialist/utils';
+import { getSpecialist } from '@/app/(app)/specialist/utils';
 
 export default async function Page({ params }) {
   const { id } = params;

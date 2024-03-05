@@ -32,7 +32,7 @@ export function Header() {
   return (
     <>
       {/* this element is used to fill the space under navbar on mobile screens */}
-      <div className='border-t-[1px] p-4 lg:hidden'>
+      <div className="border-t-[1px] p-4 lg:hidden">
         <div className={logoHeight} />
       </div>
       <nav
@@ -70,7 +70,7 @@ export function Header() {
           </PillButton>
         </div>
         {/* Hamburger Menu */}
-        <BurgerIcon className='block transition-all lg:hidden' onClick={toggleMenu} />
+        <BurgerIcon className="block transition-all lg:hidden" onClick={toggleMenu} />
         <div
           className={cn(
             'absolute inset-0 flex h-dvh w-dvw flex-col bg-other-black transition-all lg:hidden ',
