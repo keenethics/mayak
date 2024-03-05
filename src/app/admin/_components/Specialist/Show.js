@@ -38,7 +38,7 @@ export function SpecialistShow() {
         </ArrayField>
         <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
-            <ChipField source="name" size="small" />
+            <ChipField source="type" size="small" />
           </SingleFieldList>
         </ArrayField>
         <BooleanField label="Безкоштовний прийом" source="isFreeReception" />
@@ -47,6 +47,13 @@ export function SpecialistShow() {
         <TextField label="Номер телефону" source="phone" />
         <TextField source="email" />
         <TextField label="Вебсайт" source="website" />
+        <TextField label="Instagram" source="instagram" />
+        <TextField label="Facebook" source="facebook" />
+        <TextField label="YouTube" source="youtube" />
+        <TextField label="LinkedIn" source="linkedin" />
+        <TextField label="TikTok" source="tiktok" />
+        <TextField label="Viber" source="viber" />
+        <TextField label="Telegram" source="telegram" />
       </SimpleShowLayout>
     </Show>
   );

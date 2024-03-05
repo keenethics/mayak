@@ -39,13 +39,38 @@ export default function AdminPage() {
         create={CreateTherapy}
         show={ShowGuesser}
       />
-      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} edit={EventEdit} show={EventShow} />
-      <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-      <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-      <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource
+        name={RESOURCES.event}
+        list={EventList}
+        create={EventCreate}
+        edit={EventEdit}
+        show={EventShow}
+        options={{ label: 'Заходи' }}
+      />
+      <Resource
+        name={RESOURCES.district}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+        options={{ label: 'Райони' }}
+      />
+      <Resource
+        name={RESOURCES.specialization}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+        options={{ label: 'Спеціалізації' }}
+      />
+      <Resource
+        name={RESOURCES.address}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+        options={{ label: 'Адреси' }}
+      />
       <Resource
         name={RESOURCES.placeOfWork}
-        options={{ label: 'Place of work' }}
+        options={{ label: 'Місця надання послуг' }}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
@@ -60,7 +85,7 @@ export default function AdminPage() {
       />
       <Resource
         name={RESOURCES.feedback}
-        options={{ label: 'Feedback' }}
+        options={{ label: "Зворотній зв'язок" }}
         list={ListGuesser}
         show={ShowGuesser}
         edit={EditGuesser}
