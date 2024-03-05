@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import {
+  BooleanInput,
+  Button,
+  Confirm,
   Edit,
+  NumberInput,
+  required,
+  SaveButton,
   SimpleForm,
   TextInput,
-  BooleanInput,
-  NumberInput,
   Toolbar as BaseToolbar,
-  SaveButton,
-  required,
+  useDelete,
   useNotify,
   useRecordContext,
-  useDelete,
   useRedirect,
-  Confirm,
-  Button,
 } from 'react-admin';
-import { RESOURCES } from '@/app/admin/_lib/consts';
+import { RESOURCES } from '@admin/_lib/consts';
 import { useActiveFaqs } from './hooks';
 import { AnswerTextInput } from './AnswerTextInput';
 import { MAX_ACTIVE_FAQS, MIN_ACTIVE_FAQS } from './consts';
