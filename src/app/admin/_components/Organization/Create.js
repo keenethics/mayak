@@ -51,6 +51,20 @@ export function OrganizationCreate() {
                 <TextInput label="Пошта" source="email" />
                 <TextInput label="Вебсайт" source="website" />
               </div>
+              <p className="font-bold">Соціальні мережі</p>
+              <div className={fieldGroupClass}>
+                <TextInput label="Instagram" source="instagram" />
+                <TextInput label="Facebook" source="facebook" />
+                <TextInput label="YouTube" source="youtube" />
+              </div>
+              <div className={fieldGroupClass}>
+                <TextInput label="LinkedIn" source="linkedin" />
+                <TextInput label="TikTok" source="tiktok" />
+              </div>
+              <div className={fieldGroupClass}>
+                <TextInput label="Viber" source="viber" />
+                <TextInput label="Telegram" source="telegram" />
+              </div>
               <p className="font-bold">Опис</p>
               <TextInput
                 source="description"

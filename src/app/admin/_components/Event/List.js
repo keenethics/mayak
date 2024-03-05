@@ -1,5 +1,5 @@
 import React from 'react';
-import { Datagrid, List, TextField, BooleanField, DateField, DeleteWithConfirmButton } from 'react-admin';
+import { Datagrid, List, TextField, BooleanField, DateField, DeleteWithConfirmButton, EditButton } from 'react-admin';
 import { eventFilters } from './filters';
 
 export function EventList() {
@@ -12,6 +12,7 @@ export function EventList() {
         <TextField source="format" />
         <DateField source="createdAt" />
         <BooleanField source="isActive" />
+        <EditButton />
         <DeleteWithConfirmButton
           confirmContent="Ви впевнені?"
           confirmTitle="Дані будуть видалені із бази."

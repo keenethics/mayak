@@ -7,13 +7,14 @@ import { withErrorHandler } from '@/lib/errors/errorHandler';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 
 const MODEL_SEARCH_FIELDS = {
-  [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
   [RESOURCES.event]: ['title', 'organizerName'],
+  [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
+  [RESOURCES.organization]: ['name'],
 };
 
 const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
-    therapies: { select: { name: true } },
+    therapies: { select: { type: true } },
     specializations: { select: { name: true } },
     addresses: {
       select: {
@@ -24,8 +25,8 @@ const MODEL_INCLUDES = {
     },
   },
   [RESOURCES.organization]: {
-    therapies: { select: { name: true } },
-    types: { select: { name: true } },
+    therapies: { select: { type: true } },
+    type: { select: { name: true } },
     addresses: {
       select: {
         nameOfClinic: true,
@@ -53,9 +54,17 @@ const handler = auth(
     const { resource: modelName } = json;
     const result = await defaultHandler(json, prisma, {
       getList: {
+        debug: false,
         where: searchInputFilters(modelName, json.params?.filter?.q),
       },
-      getOne: { include: MODEL_INCLUDES[modelName] },
+      getOne: { debug: false, include: MODEL_INCLUDES[modelName] },
+      update: {
+        debug: false,
+        allowJsonUpdate: {
+          tags: true,
+          additionalLink: true,
+        },
+      },
     });
     return NextResponse.json(result);
   }),
