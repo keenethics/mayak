@@ -6,10 +6,8 @@ import { specialistLabelPropType } from '@/app/_components/CardSpecialist/prop-t
 function BadgeListItem({ icon, text, className }) {
   return (
     <div className={cn('flex flex-col gap-2.5 md:flex-row', className)}>
-      <span className="h-[15px] w-[15px] self-center sm:h-[15px] sm:w-[15px] md:h-[15px] md:w-[15px] lg:h-5 lg:w-5">
-        {icon}
-      </span>
-      <p className="text-center text-c4 font-semibold md:self-center md:text-left lg:text-p4">{text}</p>
+      <span className="h-[15px] w-[15px] self-center lg:h-5 lg:w-5">{icon}</span>
+      <p className="text-c4 text-center font-semibold md:self-center md:text-left lg:text-p4">{text}</p>
     </div>
   );
 }
@@ -34,7 +32,7 @@ export function BadgeList({ labels, className }) {
             icon={icon}
             key={content}
             text={content}
-            className={cn('flex-shrink-1 flex-initial justify-between gap-2 text-other-green', color)}
+            className={cn('flex-shrink-1 text-other-green flex-initial justify-between gap-2', color)}
           />
         ) : (
           ''

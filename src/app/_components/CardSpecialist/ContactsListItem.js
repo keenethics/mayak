@@ -30,8 +30,8 @@ function InfoRow({ icon, children }) {
     <div className="flex items-center">
       <span className="flex w-5 flex-shrink-0 items-start justify-center">{icon}</span>
       <div
-        className={`text-inherit font-inherit ml-2 max-w-full flex-grow overflow-auto break-words
-                text-start text-c3 text-gray-700`}
+        className="text-c3 ml-2 max-w-full flex-grow overflow-auto
+                break-words text-start text-gray-700"
       >
         {children}
       </div>
@@ -58,7 +58,7 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
               <ContactItem href={href} content={content} className="whitespace-nowrap" />
             </InfoRow>
           }
-          hintContent={<ContactItem href={href} content={content} className="whitespace-normal break-words text-c4" />}
+          hintContent={<ContactItem href={href} content={content} className="text-c4 whitespace-normal break-words" />}
           hintWindowClassName="translate-x-full -right-2.5 top-0 z-[200] w-max"
         />
       ) : (
@@ -66,7 +66,7 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
           {isArray &&
             !href &&
             content.map(item => (
-              <p className={'whitespace-normal break-words text-c3'} key={item}>
+              <p className="text-c3 whitespace-normal break-words" key={item}>
                 {item}
               </p>
             ))}

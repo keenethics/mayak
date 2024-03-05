@@ -5,15 +5,13 @@ import { ContactsListItem } from './ContactsListItem';
 import { specialistContactPropType } from '@/app/_components/CardSpecialist/prop-types';
 
 export function ContactsList({ truncate, specialistId, contacts, className }) {
+  const contactsFiltered = contacts.filter(contact => contact.content);
+
   return (
     <ul className={cn('flex w-full flex-col gap-2', className)}>
-      {contacts.map(contact =>
-        contact.content ? (
-          <ContactsListItem truncate={truncate} specialistId={specialistId} key={contact.id} contact={contact} />
-        ) : (
-          ''
-        ),
-      )}
+      {contactsFiltered.map(contact => (
+        <ContactsListItem truncate={truncate} specialistId={specialistId} key={contact.id} contact={contact} />
+      ))}
     </ul>
   );
 }
