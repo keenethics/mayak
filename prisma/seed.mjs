@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from '@prisma/client';
+import { getSpecialistFullName } from '../src/utils/getSpecialistFullName.mjs';
 
 function getFullAddress() {
   const street = faker.location.streetAddress();
@@ -227,7 +228,7 @@ async function main() {
       });
       await trx.searchEntry.create({
         data: {
-          sortString: `${specialist.firstName} ${specialist.lastName} ${specialist.surnameName || ''}`,
+          sortString: getSpecialistFullName(specialist),
           specialist: {
             connect: {
               id: specialist.id,

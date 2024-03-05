@@ -8,10 +8,9 @@ const handler = withErrorHandlerAndAuth(async req => {
   const { resource: modelName } = json;
   const result = await defaultHandler(json, prisma, {
     getList: {
-      debug: false,
       where: searchInputFilters(modelName, json.params?.filter?.q),
     },
-    getOne: { debug: false, include: MODEL_INCLUDES[modelName] },
+    getOne: { include: MODEL_INCLUDES[modelName] },
   });
   return NextResponse.json(result);
 });
