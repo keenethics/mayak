@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { env } from './env';
-import { getSpecialistFullName } from '@/utils/getSpecialistFullName';
+import { organizationQueryExtension, specialistQueryExtension } from './prismaExtensions';
 
 const globalForPrisma = global;
 
@@ -8,40 +8,11 @@ const globalForPrisma = global;
 export let prisma = globalForPrisma.prisma;
 
 if (!prisma) {
-  prisma = new PrismaClient().$extends({
+  prisma = new PrismaClient();
+  prisma = prisma.$extends({
     query: {
-      specialist: {
-        async create({ args }) {
-          const searchEntry = await prisma.searchEntry.create({
-            data: {
-              sortString: getSpecialistFullName(args.data),
-              specialist: {
-                create: args.data,
-              },
-            },
-            select: {
-              specialist: {},
-            },
-          });
-          return searchEntry.specialist;
-        },
-      },
-      organization: {
-        async create({ args }) {
-          const searchEntry = await prisma.searchEntry.create({
-            data: {
-              sortString: args.data.name,
-              organization: {
-                create: args.data,
-              },
-            },
-            select: {
-              organization: {},
-            },
-          });
-          return searchEntry.organization;
-        },
-      },
+      specialist: specialistQueryExtension(prisma),
+      organization: organizationQueryExtension(prisma),
     },
   });
 }
