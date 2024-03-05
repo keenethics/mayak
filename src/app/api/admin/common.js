@@ -1,4 +1,4 @@
-import { RESOURCES } from '@/app/admin/_lib/consts';
+import { RESOURCES } from '@admin/_lib/consts';
 import { auth } from '@/lib/auth';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
@@ -11,7 +11,7 @@ const MODEL_SEARCH_FIELDS = {
 
 export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
-    therapies: { select: { type: true } },
+    therapies: { select: { id: true, type: true, title: true } },
     specializations: { select: { name: true } },
     addresses: {
       select: {
@@ -22,7 +22,7 @@ export const MODEL_INCLUDES = {
     },
   },
   [RESOURCES.organization]: {
-    therapies: { select: { type: true } },
+    therapies: { select: { id: true, type: true, title: true } },
     type: { select: { name: true } },
     addresses: {
       select: {
