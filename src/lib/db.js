@@ -11,39 +11,35 @@ if (!prisma) {
   prisma = new PrismaClient().$extends({
     query: {
       specialist: {
-        async create({ query, args }) {
-          return prisma.$transaction(async trx => {
-            const specialist = await query(args);
-            await trx.searchEntry.create({
-              data: {
-                sortString: getSpecialistFullName(specialist),
-                specialist: {
-                  connect: {
-                    id: specialist.id,
-                  },
-                },
+        async create({ args }) {
+          const searchEntry = await prisma.searchEntry.create({
+            data: {
+              sortString: getSpecialistFullName(args.data),
+              specialist: {
+                create: args.data,
               },
-            });
-            return specialist;
+            },
+            select: {
+              specialist: {},
+            },
           });
+          return searchEntry.specialist;
         },
       },
       organization: {
-        async create({ query, args }) {
-          return prisma.$transaction(async trx => {
-            const organization = await query(args);
-            await trx.searchEntry.create({
-              data: {
-                sortString: organization.name,
-                organization: {
-                  connect: {
-                    id: organization.id,
-                  },
-                },
+        async create({ args }) {
+          const searchEntry = await prisma.searchEntry.create({
+            data: {
+              sortString: args.data.name,
+              organization: {
+                create: args.data,
               },
-            });
-            return organization;
+            },
+            select: {
+              organization: {},
+            },
           });
+          return searchEntry.organization;
         },
       },
     },
