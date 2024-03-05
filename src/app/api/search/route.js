@@ -30,7 +30,7 @@ export async function GET(req) {
     AND: {
       therapies: type && {
         some: {
-          id: type,
+          type,
         },
       },
       OR: format && [{ formatOfWork: FormatOfWork.BOTH }, { formatOfWork: format }],
@@ -44,7 +44,7 @@ export async function GET(req) {
     },
   };
   const sharedInclude = {
-    therapies: { select: { id: true, name: true } },
+    therapies: { select: { title: true } },
     addresses: {
       select: {
         nameOfClinic: true,
