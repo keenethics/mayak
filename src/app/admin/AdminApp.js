@@ -4,37 +4,51 @@ import React from 'react';
 import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
-import { EventCreate } from '@admin/components/Event';
+import { EventCreate, EventList, EventShow, EventEdit } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
-import { SpecialistCreate } from '@admin/components/Specialist';
+import { SpecialistCreate, SpecialistsList, SpecialistShow } from '@admin/components/Specialist';
+import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/components/Organization';
+import { ListTherapy, CreateTherapy, EditTherapy } from '@admin/components/Therapy';
 import { authProvider } from './authProvider';
-import { OrganizationCreate } from './_components/Organization';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
 
   return (
     <Admin dataProvider={data} authProvider={authProvider}>
-      <Resource name={RESOURCES.organization} list={ListGuesser} create={OrganizationCreate} />
+      <Resource
+        name={RESOURCES.organization}
+        list={OrganizationsList}
+        show={OrganizationShow}
+        create={OrganizationCreate}
+      />
       <Resource
         name={RESOURCES.therapy}
         options={{ label: 'Therapy' }}
-        list={ListGuesser}
-        edit={EditGuesser}
+        list={ListTherapy}
+        edit={EditTherapy}
+        create={CreateTherapy}
         show={ShowGuesser}
       />
       <Resource
         name={RESOURCES.specialist}
         options={{ label: 'Specialist' }}
-        list={ListGuesser}
+        list={SpecialistsList}
         edit={EditGuesser}
-        show={ShowGuesser}
+        show={SpecialistShow}
         create={SpecialistCreate}
       />
-      <Resource name={RESOURCES.event} list={ListGuesser} create={EventCreate} />
+      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} edit={EventEdit} show={EventShow} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource
+        name={RESOURCES.placeOfWork}
+        options={{ label: 'Place of work' }}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+      />
       <Resource
         name={RESOURCES.faq}
         options={{ label: 'FAQ' }}

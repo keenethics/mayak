@@ -1,21 +1,26 @@
-'use client';
+import { TherapiesSection } from '@components';
+import { prisma } from '@/lib/db';
 
-import React from 'react';
-import EventCard from './_components/Event/Card';
-import { useListEvents } from './_hooks/api/useEvent';
 // Page metadata should contain
 // title - gets formatted into "%s | Маяк", %s is replaced by title,
 // description - short description of the page,
 
-export default function Page() {
-  const { data: events } = useListEvents();
-  if (events) {
-    return (
-      <div>
-        {events.map(event => (
-          <EventCard key={event.id} event={event} />
-        ))}
-      </div>
-    );
-  }
+export const metadata = {
+  title: 'Головна сторінка',
+  description: 'Пошук психологічної допомоги в м.Львів',
+};
+
+export default async function Page() {
+  const activeTherapies = await prisma.therapy.findMany({
+    where: { isActive: true },
+    orderBy: { priority: 'desc' },
+  });
+  return (
+    <>
+      <section>TBD district & search section</section>
+      <TherapiesSection therapies={activeTherapies} />
+      <section>TBD goal section</section>
+      <section>FAQ section</section>
+    </>
+  );
 }
