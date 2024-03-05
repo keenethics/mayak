@@ -9,39 +9,38 @@ const HintContext = createContext();
 
 export function Hint({ children }) {
   const [openName, setOpenName] = useState('');
-  const close = () => setOpenName('');
-  const open = setOpenName;
+  const toggle = name => (openName === name ? setOpenName('') : setOpenName(name));
 
-  return <HintContext.Provider value={{ open, close, openName }}>{children}</HintContext.Provider>;
+  return <HintContext.Provider value={{ toggle, openName }}>{children}</HintContext.Provider>;
 }
 
-export function Show({ children, opens: opensWindowName, actions }) {
-  const { open, close } = useContext(HintContext);
+export function Show({ children, opens: opensWindowName }) {
+  const { toggle } = useContext(HintContext);
 
   // close hints when window is scrolled
   useEffect(() => {
     const handleScroll = () => {
-      close();
+      toggle('');
     };
 
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [close]);
+  }, [toggle]);
 
   return cloneElement(children, {
     id: opensWindowName,
     onClick: e => {
       e.stopPropagation();
-      actions?.onClick?.({ open, close });
+      toggle(opensWindowName);
     },
     onMouseEnter: e => {
       e.stopPropagation();
-      actions?.onMouseEnter?.({ open, close });
+      toggle(opensWindowName);
     },
     onMouseLeave: e => {
       e.stopPropagation();
-      actions?.onMouseLeave?.({ open, close });
+      toggle('');
     },
   });
 }
