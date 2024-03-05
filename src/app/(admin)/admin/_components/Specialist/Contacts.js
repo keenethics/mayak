@@ -1,7 +1,7 @@
 import React from 'react';
-import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistFormFields, SpecialistFormSections } from '@/app/admin/_lib/specialistData';
-import { TextInputList } from '@/app/admin/_components/TextInputList';
+import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
+import { SpecialistFormFields, SpecialistFormSections } from '@admin/_lib/specialistData';
+import { TextInputList } from '@admin/components/TextInputList';
 
 export function Contacts() {
   const { phone, email, website } = SpecialistFormFields;

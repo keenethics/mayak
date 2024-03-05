@@ -1,5 +1,5 @@
 import React from 'react';
-import Therapies from '../_components/Therapies';
+import Therapies from '../../_components/Therapies';
 
 export const metadata = {
   title: 'Терапія',

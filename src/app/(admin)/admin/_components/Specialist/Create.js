@@ -3,14 +3,14 @@
 import React from 'react';
 import { BooleanInput, Create, SimpleForm, useNotify, useRedirect } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { General } from '@admin/components/Specialist/General';
+import { Details } from '@admin/components/Specialist/Details';
+import { Addresses } from '@admin/components/Specialist/Addresses';
+import { Services } from '@admin/components/Specialist/Services';
+import { Contacts } from '@admin/components/Specialist/Contacts';
+import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@admin/_lib/consts';
+import { transformData } from '@admin/_utils/transformSpecialistFormData';
 import { specialistValidationSchema } from '@/lib/validationSchemas/specialistSchema';
-import { General } from '@/app/admin/_components/Specialist/General';
-import { Details } from '@/app/admin/_components/Specialist/Details';
-import { Addresses } from '@/app/admin/_components/Specialist/Addresses';
-import { Services } from '@/app/admin/_components/Specialist/Services';
-import { Contacts } from '@/app/admin/_components/Specialist/Contacts';
-import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@/app/admin/_lib/consts';
-import { transformData } from '@/app/admin/_utils/transformSpecialistFormData';
 
 export function SpecialistCreate() {
   const notify = useNotify();
