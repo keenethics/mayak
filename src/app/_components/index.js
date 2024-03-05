@@ -9,3 +9,5 @@ export * from './OutlinedButton';
 export * from './TextArea';
 export * from './TopWave';
 export * from './BottomWave';
+export * from './TherapyCard';
+export * from './TherapiesSection';

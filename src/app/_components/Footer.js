@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import FooterImg from '@icons/whiteLogo.svg';
 import { cn } from '@utils/cn';
@@ -46,7 +45,7 @@ export function Footer() {
           </OutlinedButton>
         </div>
       </div>
-      <div className={cn('relative left-[-10%] my-3 h-[1px] w-[120%] bg-gray-300 lg:static lg:my-12 lg:w-full')}></div>
+      <div className={cn('relative left-[-10%] my-3 h-[1px] w-[120%] bg-gray-300 lg:static lg:my-12 lg:w-full')} />
       <div className={cn(flexColRevCenter, flexBetweenMd, 'gap-4 text-other-white')}>
         <p className={cn('text-[0.75rem] font-normal leading-5 lg:text-p4 ')}>Маяк @ 2024</p>
         <div className={cn(flexCenter, 'gap-5 lg:gap-4')}>

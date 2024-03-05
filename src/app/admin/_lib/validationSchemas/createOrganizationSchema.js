@@ -15,14 +15,10 @@ const TherapiesSchema = z.array(minMaxString(1, 64, 'Тип терапії'), {
   required_error: "Тип терапії - обов'язкове поле",
 });
 
-const FormatOfWorkSchema = z
-  .string({
-    required_error: "Формат - обов'язкове поле",
-    invalid_type_error: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
-  })
-  .refine(val => Object.values(FormatOfWork).includes(val), {
-    message: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
-  });
+const FormatOfWorkSchema = z.enum(Object.values(FormatOfWork), {
+  required_error: "Формат - обов'язкове поле",
+  invalid_type_error: 'Формат має бути Офлайн/Онлайн/Офлайн + онлайн',
+});
 
 const RestSchema = z.object({
   description: z
@@ -56,7 +52,7 @@ const RestSchema = z.object({
       { message: 'Необхідно вказати одну головну адресу' },
     ),
   isFreeReception: z.boolean({
-    required_error: "Безкоштовна консультація - обов'язкове поле",
+    required_error: "Безкоштовний прийом - обов'язкове поле",
     invalid_type_error: "Оберіть 'Так' чи 'Ні' для активного спеціаліста",
   }),
   isActive: z.boolean(),
@@ -81,7 +77,7 @@ const OrganizationSchemaUnion = z.discriminatedUnion('isActive', [ActiveOrganiza
 export const OrganizationSchema = z.intersection(OrganizationSchemaUnion, DefaultSchema).superRefine((data, ctx) => {
   const { addresses, formatOfWork, isActive } = data;
   // there should be no addresses for online org or for draft org without format of work
-  if ((!formatOfWork || formatOfWork === 'ONLINE') && addresses.length) {
+  if ((!formatOfWork || formatOfWork === 'ONLINE') && addresses?.length) {
     ctx.addIssue({
       code: 'custom',
       path: ['addresses'],
@@ -89,7 +85,7 @@ export const OrganizationSchema = z.intersection(OrganizationSchemaUnion, Defaul
     });
   }
   // at least 1 address for active org is required
-  if (formatOfWork !== 'ONLINE' && isActive && !addresses.length) {
+  if (formatOfWork !== 'ONLINE' && isActive && !addresses?.length) {
     ctx.addIssue({
       code: 'custom',
       path: ['addresses'],
@@ -97,7 +93,7 @@ export const OrganizationSchema = z.intersection(OrganizationSchemaUnion, Defaul
     });
   }
   // no empty address and district for active org
-  if (formatOfWork && formatOfWork !== 'ONLINE') {
+  if (addresses && formatOfWork && formatOfWork !== 'ONLINE') {
     addresses.forEach((address, index) => {
       if (!address.fullAddress) {
         ctx.addIssue({

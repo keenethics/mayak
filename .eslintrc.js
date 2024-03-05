@@ -15,6 +15,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/function-component-definition': [2, { namedComponents: ['arrow-function', 'function-declaration'] }],
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
+    'no-return-await': 'off',
     indent: ['error', 2],
     'no-multiple-empty-lines': ['error', { max: 3, maxBOF: 0, maxEOF: 0 }],
     'no-underscore-dangle': 0,
@@ -24,5 +25,12 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-unresolved': 'off',
     'no-restricted-exports': 0,
+    'react/self-closing-comp': [
+      'error',
+      {
+        component: true,
+        html: true,
+      },
+    ],
   },
 };
