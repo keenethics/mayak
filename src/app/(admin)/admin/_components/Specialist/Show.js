@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {
-  Show,
-  SimpleShowLayout,
-  BooleanField,
-  TextField,
-  NumberField,
   ArrayField,
-  SingleFieldList,
+  BooleanField,
   ChipField,
   Datagrid,
   DateField,
+  NumberField,
+  Show,
+  SimpleShowLayout,
+  SingleFieldList,
+  TextField,
 } from 'react-admin';
 
 export function SpecialistShow() {

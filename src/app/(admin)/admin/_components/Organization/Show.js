@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {
+  ArrayField,
+  BooleanField,
+  ChipField,
+  Datagrid,
+  DateField,
+  NumberField,
   Show,
   SimpleShowLayout,
-  BooleanField,
-  TextField,
-  ArrayField,
-  Datagrid,
-  NumberField,
-  DateField,
-  ChipField,
   SingleFieldList,
+  TextField,
 } from 'react-admin';
 
 export function OrganizationShow() {
