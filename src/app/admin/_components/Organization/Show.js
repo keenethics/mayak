@@ -34,7 +34,7 @@ export function OrganizationShow() {
         </ArrayField>
         <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
-            <ChipField source="type" size="small" />
+            <ChipField source="title" size="small" />
           </SingleFieldList>
         </ArrayField>
         <BooleanField label="Безкоштовний прийом" source="isFreeReception" />

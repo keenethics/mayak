@@ -11,6 +11,7 @@ export function Services() {
 
   const { therapies, isFreeReception, description } = SpecialistFormFields;
 
+  const therapiesChoices = therapiesList?.map(({ id, title }) => ({ id, name: title }));
   return (
     <FormFieldWrapper title={SpecialistFormSections.services}>
       <SelectArrayInput
@@ -18,7 +19,7 @@ export function Services() {
         source={therapies.name}
         label={therapies.label}
         isLoading={therapiesLoading}
-        choices={therapiesList}
+        choices={therapiesChoices}
         validate={therapies.isRequired && required()}
         className="w-full"
       />
