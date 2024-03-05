@@ -4,13 +4,14 @@ import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 
 const MODEL_SEARCH_FIELDS = {
+  [RESOURCES.event]: ['title', 'organizerName'],
   [RESOURCES.specialist]: ['firstName', 'lastName', 'surname'],
   [RESOURCES.organization]: ['name'],
 };
 
 export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
-    therapies: { select: { name: true } },
+    therapies: { select: { type: true } },
     specializations: { select: { name: true } },
     addresses: {
       select: {
@@ -21,7 +22,7 @@ export const MODEL_INCLUDES = {
     },
   },
   [RESOURCES.organization]: {
-    therapies: { select: { name: true } },
+    therapies: { select: { type: true } },
     type: { select: { name: true } },
     addresses: {
       select: {
@@ -30,6 +31,10 @@ export const MODEL_INCLUDES = {
         district: { select: { name: true } },
       },
     },
+  },
+  [RESOURCES.event]: {
+    additionalLink: { select: { label: true, link: true } },
+    tags: { select: { name: true } },
   },
 };
 

@@ -11,6 +11,13 @@ const handler = withErrorHandlerAndAuth(async req => {
       where: searchInputFilters(modelName, json.params?.filter?.q),
     },
     getOne: { include: MODEL_INCLUDES[modelName] },
+    update: {
+      debug: false,
+      allowJsonUpdate: {
+        tags: true,
+        additionalLink: true,
+      },
+    },
   });
   return NextResponse.json(result);
 });

@@ -23,11 +23,6 @@ export const specialistsFilters = [
     nullLabel="Усі"
     falseLabel="Неактивний"
     trueLabel="Активний"
-    // choices={[
-    //   { id: true, name: 'Активний' },
-    //   { id: true, name: 'Активний' },
-    //   { id: false, name: 'Неактивний' },
-    // ]}
     alwaysOn
   />,
 ];

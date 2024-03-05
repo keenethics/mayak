@@ -48,6 +48,13 @@ model Specialist {
   email             String?          @unique @db.VarChar(320)
   website           String?          @db.Text
   isActive          Boolean          @default(false)
+  instagram         String?          @db.Text
+  facebook          String?          @db.Text
+  youtube           String?          @db.Text
+  linkedin          String?          @db.Text
+  tiktok            String?          @db.Text
+  viber             String?          @db.Text
+  telegram          String?          @db.Text
   searchEntry       SearchEntry?
 
   @@map("specialist")
@@ -68,6 +75,13 @@ model Organization {
   email           String?            @db.VarChar(320)
   website         String?            @db.Text
   isActive        Boolean            @default(false)
+  instagram       String?            @db.Text
+  facebook        String?            @db.Text
+  youtube         String?            @db.Text
+  linkedin        String?            @db.Text
+  tiktok          String?            @db.Text
+  viber           String?            @db.Text
+  telegram        String?            @db.Text
   searchEntry     SearchEntry?
 
   @@map("organization")
@@ -110,9 +124,15 @@ model OrganizationType {
 }
 
 model Therapy {
-  id            String         @id @default(uuid()) @db.Uuid
-  createdAt     DateTime       @default(now())
-  name          String         @unique @db.VarChar(64)
+  id          String   @id @default(uuid()) @db.Uuid
+  createdAt   DateTime @default(now())
+  type        String   @unique @db.VarChar(64)
+  title       String   @db.VarChar(128)
+  description String   @db.VarChar(255)
+  imagePath   String   @db.VarChar(255)
+  isActive    Boolean  @default(false)
+  priority    Int      @default(0) @db.SmallInt
+
   specialists   Specialist[]
   organizations Organization[]
 
