@@ -1,14 +1,21 @@
-import React from 'react';
+'use client';
 
+import React from 'react';
+import EventCard from './_components/Event/Card';
+import { useListEvents } from './_hooks/api/useEvent';
 // Page metadata should contain
 // title - gets formatted into "%s | Маяк", %s is replaced by title,
 // description - short description of the page,
 
-export const metadata = {
-  title: 'Головна сторінка',
-  description: 'Пошук психологічної допомоги в м.Львів',
-};
-
 export default function Page() {
-  return <div>Main</div>;
+  const { data: events } = useListEvents();
+  if (events) {
+    return (
+      <div>
+        {events.map(event => (
+          <EventCard key={event.id} event={event} />
+        ))}
+      </div>
+    );
+  }
 }

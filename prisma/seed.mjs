@@ -182,7 +182,7 @@ async function main() {
     data: therapyNames.map(name => ({ name })),
   });
 
-  const eventTags = ['EventTag1', 'EventTag2', 'EventTag3'];
+  const eventTags = ['Tag1', 'Tag2', 'Tag3'];
 
   const eventLink = { label: 'Some site', link: 'https://keenethics.com/' };
 

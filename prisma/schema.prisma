@@ -109,12 +109,12 @@ model Therapy {
 }
 
 model Address {
-  id            String        @id @default(uuid()) @db.Uuid
-  createdAt     DateTime      @default(now())
-  nameOfClinic  String?       @db.VarChar(255)
-  fullAddress   String        @db.VarChar(128) // street,building number,floor,room number
-  district      District      @relation(fields: [districtId], references: [id])
-  districtId    String        @db.Uuid
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  nameOfClinic  String?        @db.VarChar(255)
+  fullAddress   String         @db.VarChar(128) // street,building number,floor,room number
+  district      District       @relation(fields: [districtId], references: [id])
+  districtId    String         @db.Uuid
   specialists   Specialist[]
   organizations Organization[]
 
