@@ -1,11 +1,11 @@
 'use client';
 
-import { NotFoundPageWrapper } from '@components';
+import { AppNotFound } from '@components';
 
 export default function Error() {
   return (
-    <NotFoundPageWrapper href="/specialist" hrefText="Повернутися до списку спеціалістів">
+    <AppNotFound href="/specialist" hrefText="Список спеціалістів" className="m-10">
       <p className="mt-6">Такого спеціаліста не існує...</p>
-    </NotFoundPageWrapper>
+    </AppNotFound>
   );
 }

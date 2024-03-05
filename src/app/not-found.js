@@ -1,12 +1,12 @@
 import React from 'react';
-import { NotFoundPageWrapper } from '@/app/_components/NotFoundPageWrapper';
+import { AppNotFound } from '@components';
 
 export default function NotFoundPage() {
   return (
-    <NotFoundPageWrapper>
+    <AppNotFound className="m-10">
       <span>Error</span>
       <div className="text-h4 font-bold lg:text-h2">404</div>
       <span>Not found</span>
-    </NotFoundPageWrapper>
+    </AppNotFound>
   );
 }
