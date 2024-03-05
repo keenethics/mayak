@@ -38,13 +38,15 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     tiktok,
     youtube,
     linkedin,
+    viber,
+    telegram,
   } = specialist;
 
   const specializationsList = specializations.map(s => s.name);
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork, specialistType: 'specialist' });
-  const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin });
+  const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
   const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
 
   return (
@@ -57,7 +59,10 @@ export function CardSpecialist({ specialist, className, extended = false }) {
       </div>
       <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
-          <ProfileImage gender={gender} className="md:hidden" />
+          {/* <ProfileImage gender={gender} className="md:hidden" /> */}
+          <ProfileImage gender={gender} className="md:hidden">
+            <SocialsList socials={socials} className="absolute bottom-4" extendedCardOpened={!extended} />
+          </ProfileImage>
           <div className="max-w-full overflow-hidden">
             <SpecializationsPanel
               specialistId={id}

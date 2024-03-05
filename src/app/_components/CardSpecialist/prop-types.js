@@ -40,7 +40,11 @@ export const specialistPropType = PropTypes.shape({
   isActive: PropTypes.bool,
   instagram: PropTypes.string,
   facebook: PropTypes.string,
+  youtube: PropTypes.string,
+  linkedin: PropTypes.string,
   tiktok: PropTypes.string,
+  viber: PropTypes.string,
+  telegram: PropTypes.string,
   createdAt: PropTypes.instanceOf(Date),
 });
 
@@ -63,6 +67,10 @@ export const organizationPropType = PropTypes.shape({
   instagram: PropTypes.string,
   facebook: PropTypes.string,
   tiktok: PropTypes.string,
+  youtube: PropTypes.string,
+  linkedin: PropTypes.string,
+  viber: PropTypes.string,
+  telegram: PropTypes.string,
   createdAt: PropTypes.instanceOf(Date),
 });
 

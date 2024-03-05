@@ -77,6 +77,8 @@ function randomSpecialist({ districts, specializations, therapies }) {
     youtube: nullable(faker.internet.url()),
     linkedin: nullable(faker.internet.url()),
     tiktok: nullable(faker.internet.url()),
+    viber: nullable(faker.internet.url()),
+    telegram: nullable(faker.internet.url()),
   };
 }
 
@@ -112,6 +114,8 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     youtube: nullable(faker.internet.url()),
     linkedin: nullable(faker.internet.url()),
     tiktok: nullable(faker.internet.url()),
+    viber: nullable(faker.internet.url()),
+    telegram: nullable(faker.internet.url()),
   };
 }
 

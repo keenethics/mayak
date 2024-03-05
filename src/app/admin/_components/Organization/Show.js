@@ -48,6 +48,8 @@ export function OrganizationShow() {
         <TextField label="YouTube" source="youtube" />
         <TextField label="LinkedIn" source="linkedin" />
         <TextField label="TikTok" source="tiktok" />
+        <TextField label="Viber" source="viber" />
+        <TextField label="Telegram" source="telegram" />
       </SimpleShowLayout>
     </Show>
   );

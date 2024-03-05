@@ -4,7 +4,9 @@ import {
   BlueFb,
   BlueInsta,
   BlueLinkedin,
+  BlueTelegram,
   BlueTikTok,
+  BlueViber,
   BlueYoutube,
   Clock,
   Mail,
@@ -69,7 +71,7 @@ export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork
   },
 ];
 
-export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, linkedin }) => [
+export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram }) => [
   {
     id: 'Instagram',
     icon: <BlueInsta />,
@@ -94,5 +96,15 @@ export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, lin
     id: 'TikTok',
     icon: <BlueTikTok />,
     href: tiktok,
+  },
+  {
+    id: 'Viber',
+    icon: <BlueViber />,
+    href: viber,
+  },
+  {
+    id: 'Telegram',
+    icon: <BlueTelegram />,
+    href: telegram,
   },
 ];

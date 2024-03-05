@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
           <Hint>
             <Header />
             <QueryContext>
-              <main className="relative flex-1 bg-other-white lg:mt-[111px]">{children}</main>
+              <main className="relative flex-1 bg-other-white">{children}</main>
             </QueryContext>
             <Footer />
           </Hint>

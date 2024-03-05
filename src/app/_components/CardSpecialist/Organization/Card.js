@@ -34,6 +34,8 @@ export function CardOrganization({ organization, className, extended = false }) 
     tiktok,
     youtube,
     linkedin,
+    viber,
+    telegram,
   } = organization;
 
   const addressPrimary = addresses[0];
@@ -44,7 +46,7 @@ export function CardOrganization({ organization, className, extended = false }) 
     formatOfWork,
     specialistType: 'organization',
   });
-  const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin });
+  const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
 
   return (
     <CardWrapper className={className} id={id}>

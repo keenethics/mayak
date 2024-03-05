@@ -37,6 +37,8 @@ const RestSchema = z.object({
   youtube: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
   linkedin: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
   tiktok: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
+  viber: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
+  telegram: z.string({ invalid_type_error: invalidUrlMessage }).trim().url().nullish(),
   yearsOnMarket: z
     .number({ invalid_type_error: 'Роки на ринку мають бути числом' })
     .int('Введіть ціле число')

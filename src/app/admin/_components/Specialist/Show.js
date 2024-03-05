@@ -47,6 +47,13 @@ export function SpecialistShow() {
         <TextField label="Номер телефону" source="phone" />
         <TextField source="email" />
         <TextField label="Вебсайт" source="website" />
+        <TextField label="Instagram" source="instagram" />
+        <TextField label="Facebook" source="facebook" />
+        <TextField label="YouTube" source="youtube" />
+        <TextField label="LinkedIn" source="linkedin" />
+        <TextField label="TikTok" source="tiktok" />
+        <TextField label="Viber" source="viber" />
+        <TextField label="Telegram" source="telegram" />
       </SimpleShowLayout>
     </Show>
   );

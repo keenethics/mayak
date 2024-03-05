@@ -53,6 +53,8 @@ model Specialist {
   youtube           String?          @db.Text
   linkedin          String?          @db.Text
   tiktok            String?          @db.Text
+  viber             String?          @db.Text
+  telegram          String?          @db.Text
 
   @@map("specialist")
 }
@@ -77,6 +79,8 @@ model Organization {
   youtube         String?            @db.Text
   linkedin        String?            @db.Text
   tiktok          String?            @db.Text
+  viber           String?            @db.Text
+  telegram        String?            @db.Text
 
   @@map("organization")
 }
