@@ -22,16 +22,7 @@ export function ListTruncator({ id, content, hintContent, ellipsis, hintEllipsis
 
       {overflown && (
         <>
-          <ShowHint
-            opens={hintId}
-            actions={{
-              onMouseEnter: ({ open }) => open(hintId),
-              onMouseLeave: ({ close }) => close(),
-              onClick: ({ open }) => {
-                open(n => (n === hintId ? '' : hintId));
-              },
-            }}
-          >
+          <ShowHint opens={hintId}>
             <div
               className={cn(
                 'absolute right-0 top-[-3px] flex w-full cursor-pointer select-none justify-end',
