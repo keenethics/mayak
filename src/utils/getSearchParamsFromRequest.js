@@ -1,6 +1,5 @@
 export function getSearchParamsFromRequest(request, defaultValues = {}, transform = null) {
-  if (!request) return undefined;
-  if (!request.url) return undefined;
+  if (!request?.url) return {};
   try {
     const url = new URL(request.url);
     const searchParams = {};
@@ -22,6 +21,6 @@ export function getSearchParamsFromRequest(request, defaultValues = {}, transfor
     });
     return transform ? transform(searchParams) : searchParams;
   } catch (e) {
-    return undefined;
+    return {};
   }
 }
