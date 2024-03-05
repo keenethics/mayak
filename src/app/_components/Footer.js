@@ -1,9 +1,8 @@
-import React from 'react';
 import Link from 'next/link';
 import FooterImg from '@icons/whiteLogo.svg';
+import { cn } from '@utils/cn';
 import siteNav from '@config/siteNav';
 import { PillButton, SocialLink } from '@components';
-import { cn } from '@/utils/cn';
 
 export function Footer() {
   const { links } = siteNav;
@@ -30,12 +29,12 @@ export function Footer() {
         </Link>
         <div className={cn(flexColCenter, flexCenterMd, 'gap-2 py-3 text-other-white lg:gap-6')}>
           <p className="text-p4 font-bold text-other-white lg:text-p1">Ставай нашим партнером</p>
-          <PillButton variant="outlined" colorVariant="white">
+          <PillButton variant="outlined" colorVariant="white" aria-label="Click to fill application form">
             Залишити заявку
           </PillButton>
         </div>
       </div>
-      <div className="relative left-[-10%] my-3 h-[1px] w-[120%] bg-gray-300 lg:static lg:my-12 lg:w-full"></div>
+      <div className="relative left-[-10%] my-3 h-[1px] w-[120%] bg-gray-300 lg:static lg:my-12 lg:w-full" />
       <div className={cn(flexColRevCenter, flexBetweenMd, 'gap-4 text-other-white')}>
         <p className="text-[0.75rem] font-normal leading-5 lg:text-p4">Маяк @ 2024</p>
         <div className={cn(flexCenter, 'gap-5 lg:gap-4')}>

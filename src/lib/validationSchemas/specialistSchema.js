@@ -61,6 +61,8 @@ const restProps = z.object({
   youtube: zString.url().nullish(),
   linkedin: zString.url().nullish(),
   tiktok: zString.url().nullish(),
+  viber: zString.url().nullish(),
+  telegram: zString.url().nullish(),
 });
 
 const activeSpecialistSchema = restProps.extend({

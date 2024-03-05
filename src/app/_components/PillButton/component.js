@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paragraph } from '../Typography';
-import { cn } from '@/utils/cn';
-import { buttonType, buttonColorVariant } from './style';
+import { Paragraph } from '@components';
+import { cn } from '@utils/cn';
+import { buttonColorVariant, buttonType } from './style';
 
 export function PillButton({ children, className, icon, variant, colorVariant, ...props }) {
   const buttonVariant = icon ? buttonType[variant]?.icon : buttonType[variant]?.regular;

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { ListTruncator } from '@components';
+import { cn } from '@utils/cn';
 import { specialistContactPropType } from '@/app/_components/CardSpecialist/prop-types';
-import { cn } from '@/utils/cn';
 
 function ContactItem({ content, href, className }) {
   return (
@@ -30,8 +30,8 @@ function InfoRow({ icon, children }) {
     <div className="flex items-center">
       <span className="flex w-5 flex-shrink-0 items-start justify-center">{icon}</span>
       <div
-        className={`text-inherit font-inherit ml-2 max-w-full flex-grow overflow-auto break-words
-                text-start text-c3 text-gray-700`}
+        className="ml-2 max-w-full flex-grow overflow-auto break-words
+                text-start text-c3 text-gray-700"
       >
         {children}
       </div>
@@ -66,7 +66,7 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
           {isArray &&
             !href &&
             content.map(item => (
-              <p className={'whitespace-normal break-words text-c3'} key={item}>
+              <p className="whitespace-normal break-words text-c3" key={item}>
                 {item}
               </p>
             ))}

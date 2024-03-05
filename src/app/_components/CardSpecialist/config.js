@@ -4,7 +4,9 @@ import {
   BlueFb,
   BlueInsta,
   BlueLinkedin,
+  BlueTelegram,
   BlueTikTok,
+  BlueViber,
   BlueYoutube,
   Clock,
   Mail,
@@ -16,7 +18,7 @@ import {
 } from '@icons/index';
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
-import { displayYearsOfExperience } from '@/utils/common';
+import { displayYearsOfExperience } from '@utils/common';
 
 export const getContactsList = ({ phone, email, website }) => [
   {
@@ -46,8 +48,6 @@ export const getContactsList = ({ phone, email, website }) => [
   },
 ];
 
-export const borderStyle = 'border-dashed border-t-gray-200';
-
 export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork, specialistType }) => [
   {
     id: 'yearsOfExperience',
@@ -71,7 +71,7 @@ export const getLabelsList = ({ yearsOfExperience, isFreeReception, formatOfWork
   },
 ];
 
-export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, linkedin }) => [
+export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram }) => [
   {
     id: 'Instagram',
     icon: <BlueInsta />,
@@ -96,5 +96,15 @@ export const getSpecialistSocials = ({ instagram, facebook, tiktok, youtube, lin
     id: 'TikTok',
     icon: <BlueTikTok />,
     href: tiktok,
+  },
+  {
+    id: 'Viber',
+    icon: <BlueViber />,
+    href: viber,
+  },
+  {
+    id: 'Telegram',
+    icon: <BlueTelegram />,
+    href: telegram,
   },
 ];

@@ -2,10 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import NotFound from '@images/notFound.svg';
 import PropTypes from 'prop-types';
+import { cn } from '@utils/cn';
 
-export function NotFoundPageWrapper({ children, href = '/', hrefText = 'Повернутися на головну' }) {
+export function NotFoundPageWrapper({ children, href = '/', hrefText = 'Повернутися на головну', className }) {
   return (
-    <div className="mb-10 mt-5 flex justify-center lg:mb-20 xl:mb-28">
+    <div className={cn('fixed bottom-0 top-0 grid w-full place-content-center', className)}>
       <div className="flex-col text-center">
         <NotFound
           alt="Not Found image"
@@ -34,4 +35,5 @@ NotFoundPageWrapper.propTypes = {
   children: PropTypes.node,
   href: PropTypes.string,
   hrefText: PropTypes.string,
+  className: PropTypes.string,
 };

@@ -8,7 +8,7 @@ import CloseIcon from '@icons/closeIcon.svg';
 import siteNav from '@config/siteNav';
 import { useBodyScrollLock } from '@hooks';
 import { InnerLink, PillButton, SocialLink } from '@components';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
@@ -32,8 +32,8 @@ export function Header() {
   return (
     <>
       {/* this element is used to fill the space under navbar on mobile screens */}
-      <div className={'border-t-[1px] p-4 lg:hidden'}>
-        <div className={logoHeight}></div>
+      <div className="border-t-[1px] p-4 lg:hidden">
+        <div className={logoHeight} />
       </div>
       <nav
         className={cn(
@@ -70,10 +70,10 @@ export function Header() {
           </PillButton>
         </div>
         {/* Hamburger Menu */}
-        <BurgerIcon className={'block lg:hidden'} onClick={toggleMenu} />
+        <BurgerIcon className="block transition-all lg:hidden" onClick={toggleMenu} />
         <div
           className={cn(
-            'absolute inset-0 flex h-dvh w-dvw flex-col bg-other-black lg:hidden',
+            'absolute inset-0 flex h-dvh w-dvw flex-col bg-other-black transition-all lg:hidden ',
             isMenuOpen === false && 'hidden',
           )}
         >
@@ -86,7 +86,7 @@ export function Header() {
                 className="h-[36px] w-[66px] lg:h-[74px] lg:w-[129px]"
               />
             </Link>
-            <CloseIcon onClick={toggleMenu} />
+            <CloseIcon onClick={toggleMenu} className="transition-all" />
           </div>
           <div className="flex grow flex-col bg-other-white p-4">
             <div className="flex flex-col items-center">

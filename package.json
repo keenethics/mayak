@@ -9,7 +9,9 @@
     "start": "next start",
     "migrations": "prisma migrate dev",
     "migrations:reset": "prisma migrate reset",
-    "seed": "node prisma/seed.mjs",
+    "seed": "npm run seed:prod && npm run seed:dev",
+    "seed:dev": "node prisma/seedDev.mjs",
+    "seed:prod": "node prisma/seedProd.mjs",
     "lint": "eslint --ext .js,.mjs .",
     "lint:fix": "prettier --write . && eslint --ext .js,.mjs --fix .",
     "prepare": "husky"

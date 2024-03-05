@@ -9,8 +9,6 @@ import { SpecializationsPanel } from '../SpecializationsPanel';
 import { SpecialistTitle } from '../SpecialistTitle';
 import { getContactsList, getLabelsList, getSpecialistSocials } from '../config';
 import { specialistPropType } from '@/app/_components/CardSpecialist/prop-types';
-import { borderStyle } from '@/app/_components/CardSpecialist/config';
-import { cn } from '@/utils/cn';
 import { DetailsList } from '@/app/_components/CardSpecialist/DetailsList';
 import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
 import { SocialsList } from '@/app/_components/CardSpecialist/SocialsList';
@@ -20,6 +18,7 @@ import { CardButton } from '../CardButton';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   if (!specialist) throw new Error('Specialist is not found');
+
   const {
     id,
     gender,
@@ -40,13 +39,15 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     tiktok,
     youtube,
     linkedin,
+    viber,
+    telegram,
   } = specialist;
 
   const specializationsList = specializations.map(s => s.name);
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork, specialistType: 'specialist' });
-  const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin });
+  const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
   const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
 
   return (
@@ -59,7 +60,10 @@ export function CardSpecialist({ specialist, className, extended = false }) {
       </div>
       <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
-          <ProfileImage gender={gender} className="md:hidden" />
+          {/* <ProfileImage gender={gender} className="md:hidden" /> */}
+          <ProfileImage gender={gender} className="md:hidden">
+            <SocialsList socials={socials} className="absolute bottom-4" />
+          </ProfileImage>
           <div className="max-w-full overflow-hidden">
             <SpecializationsPanel
               specialistId={id}
@@ -72,12 +76,15 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         <BadgeList labels={labelsList} />
         {extended ? (
           <>
-            <DetailsList className={cn('mt-4 border-t pt-4', borderStyle)} details={{ addresses, description }} />
+            <DetailsList
+              className="mt-4 border-t border-dashed border-t-gray-200 pt-4"
+              details={{ addresses, description }}
+            />
             <ContactsList
               truncate={!extended}
               specialistId={id}
               contacts={contactsList}
-              className={cn('mt-3 border-t pt-3 md:hidden', borderStyle)}
+              className="mt-3 border-t border-dashed border-t-gray-200 pt-3 md:hidden"
             />
           </>
         ) : (
@@ -85,7 +92,11 @@ export function CardSpecialist({ specialist, className, extended = false }) {
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <Link href={`/specialist/${id}`} scroll={false} className="mt-auto self-end justify-self-end">
+            <Link
+              href={`/specialist/${id}`}
+              scroll={false}
+              className="mt-auto hidden self-end justify-self-end md:inline-block"
+            >
               <CardButton />
             </Link>
           </>

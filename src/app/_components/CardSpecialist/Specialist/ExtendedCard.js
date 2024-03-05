@@ -6,7 +6,7 @@ import { specialistPropType } from '../prop-types';
 
 export function CardSpecialistExtended({ specialist, className }) {
   return (
-    <CardModalWrapper className="mt-[40px]" key={specialist.id}>
+    <CardModalWrapper className="mt-[40px] lg:mt-0" key={specialist.id}>
       <CardSpecialist specialist={specialist} className={className} extended />
     </CardModalWrapper>
   );

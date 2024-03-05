@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HospitalSVG } from '@icons/index';
-import { cn } from '@/utils/cn';
-import { borderStyle } from '@/app/_components/CardSpecialist/config';
+import { cn } from '@utils/cn';
 
 export function AddressesList({ addresses, className, showIcon = false }) {
   return (
-    <ul className={cn('flex flex-col gap-4', borderStyle, className)}>
+    <ul className={cn('flex flex-col gap-4 border-dashed border-t-gray-200', className)}>
       {addresses.map(({ id, nameOfClinic, fullAddress, district }) => (
         <li key={id} className="flex gap-4">
           {showIcon && (

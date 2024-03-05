@@ -4,10 +4,12 @@
       "@/*": ["./src/*"],
       "@icons/*": ["./public/assets/icons/*"],
       "@images/*": ["./public/assets/images/*"],
+      "@public/*": ["./public/assets/*"],
       "@components": ["./src/app/_components/index"],
       "@hooks": ["./src/app/_hooks/index"],
-      "@admin/*": ["./src/app/admin/*"],
-      "@admin/components/*": ["./src/app/admin/_components/*"],
+      "@admin/*": ["./src/app/(admin)/admin/*"],
+      "@admin/components/*": ["./src/app/(admin)/admin/_components/*"],
+      "@utils/*": ["./src/utils/*"],
       "@config/*": ["./src/app/config/*"]
     }
   }
