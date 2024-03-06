@@ -19,6 +19,8 @@ BadgeListItem.propTypes = {
 };
 
 export function BadgeList({ labels, className }) {
+  const labelsFiltered = labels.filter(label => !!label.content);
+  
   return (
     <ul
       className={cn(
@@ -26,18 +28,14 @@ export function BadgeList({ labels, className }) {
         className,
       )}
     >
-      {labels.map(({ icon, content, color }) =>
-        content ? (
-          <BadgeListItem
-            icon={icon}
-            key={content}
-            text={content}
-            className={cn('flex-shrink-1 flex-initial justify-between gap-2 text-other-green', color)}
-          />
-        ) : (
-          ''
-        ),
-      )}
+      {labelsFiltered.map(({ icon, content, color }) => (
+        <BadgeListItem
+          icon={icon}
+          key={content}
+          text={content}
+          className={cn('flex-shrink-1 flex-initial justify-between gap-2 text-other-green', color)}
+        />
+      ))}
     </ul>
   );
 }

@@ -58,9 +58,6 @@ export default async function Page() {
 
   return (
     <div className="mx-auto mb-16 max-w-[900px]">
-      {/* {organizationList.map(organization => (
-        <div key={organization.id}>{organization.name}</div>
-      ))} */}
       <SpecialistList specialists={mappedOrganizationList} className="mt-[22px]" />
       <SpecialistList specialists={mappedSpecialistList} className="mt-[22px]" />
       <div className="flex w-full justify-center">

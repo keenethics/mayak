@@ -3,7 +3,7 @@ import Link from 'next/link';
 import NotFound from '@images/notFound.svg';
 import PropTypes from 'prop-types';
 
-export function NotFound404({ children, href = '/', hrefText = 'Повернутися на головну', className }) {
+export function NotFoundLayout({ children, href = '/', hrefText = 'Повернутися на головну', className }) {
   return (
     <div className={className}>
       <div className="flex flex-col text-center">
@@ -31,7 +31,7 @@ export function NotFound404({ children, href = '/', hrefText = 'Повернут
   );
 }
 
-NotFound404.propTypes = {
+NotFoundLayout.propTypes = {
   children: PropTypes.node,
   href: PropTypes.string,
   hrefText: PropTypes.string,

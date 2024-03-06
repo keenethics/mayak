@@ -47,14 +47,14 @@ export function Show({ children, opens: opensWindowName }) {
 
 export function Window({ children, name, className }) {
   const { openName } = useContext(HintContext);
-  // translate-x-1/5 translate-y-1/4
+
   return (
     <ClientPortal selector={name} show={name === openName}>
       <div
         className={cn(
           'pointer-events-none absolute z-[100] inline-flex items-center justify-center gap-[10px] rounded' +
-            ' bg-other-white bg-opacity-60 px-1 py-2 text-center text-[10px] font-medium leading-[0.938rem]' +
-            ' shadow-[0_2px_8px_0px_rgba(192,191,206,0.50)] backdrop-blur-[3px] transition-all',
+          ' bg-other-white bg-opacity-60 px-1 py-2 text-center text-[10px] font-medium leading-[0.938rem]' +
+          ' shadow-custom-3 backdrop-blur-[3px] transition-all',
           className,
         )}
       >

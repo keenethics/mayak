@@ -9,6 +9,6 @@ export * from './TextArea';
 export * from './Hint';
 export * from './SpecialistList';
 export * from './ListTruncator';
-export * from './NotFound404';
+export * from './NotFoundLayout';
 export * from './TherapiesSection';
 export * from './OutlinedButton';

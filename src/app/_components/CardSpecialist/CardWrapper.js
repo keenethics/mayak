@@ -22,12 +22,12 @@ export function CardWrapper({ children, className, id }) {
     close();
   };
 
-  const hasClickHandler = matches && !isExtendedCardOpened ? handleClick : undefined;
+  const hasClickHandler = matches && !isExtendedCardOpened;
 
   return (
     <div
       className={cn('transition-all md:flex md:cursor-auto lg:mx-auto', cursorStyle, className)}
-      onClick={hasClickHandler}
+      onClick={hasClickHandler ? handleClick : undefined}
     >
       {children}
     </div>
