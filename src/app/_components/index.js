@@ -11,5 +11,4 @@ export * from './SpecialistList';
 export * from './ListTruncator';
 export * from './NotFoundLayout';
 export * from './TherapiesSection';
-export * from './OutlinedButton';
 export * from './Therapies';

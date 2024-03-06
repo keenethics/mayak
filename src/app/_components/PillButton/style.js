@@ -48,8 +48,6 @@ export const buttonColorVariant = {
       hover: 'hover:text-other-white',
     },
   },
-  // text: {},
-  // tonal: {},
 };
 
 export const buttonType = {

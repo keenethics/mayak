@@ -19,7 +19,7 @@ export function Footer() {
   return (
     <footer className="text-white relative flex w-full flex-col overflow-hidden bg-primary-800 p-4 lg:px-20 lg:py-12">
       <div className={cn(flexColCenter, flexBetweenMd, 'gap-4')}>
-        <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
+        <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink, 'transition-all')}>
           <FooterImg
             alt="Footer logo image"
             aria-label="Footer logo image"
