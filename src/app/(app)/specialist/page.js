@@ -58,8 +58,8 @@ export default async function Page() {
 
   return (
     <div className="mx-auto mb-16 max-w-[900px]">
-      <SpecialistList specialists={mappedOrganizationList} className="mt-[22px]" />
       <SpecialistList specialists={mappedSpecialistList} className="mt-[22px]" />
+      <SpecialistList specialists={mappedOrganizationList} className="mt-[22px]" />
       <div className="flex w-full justify-center">
         <PillButton variant="tonal" colorVariant="lightblue" aria-label="Load more items">
           Завантажити ще

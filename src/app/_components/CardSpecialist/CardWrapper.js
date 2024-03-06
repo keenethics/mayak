@@ -12,14 +12,14 @@ export function CardWrapper({ children, className, id }) {
   const router = useRouter();
   const matches = useMediaQuery(`(max-width: ${screens.md})`);
   const params = useSearchParams();
-  const { close } = useHintContext();
+  const { toggle } = useHintContext();
 
   const isExtendedCardOpened = !!params.get('id');
   const cursorStyle = isExtendedCardOpened ? 'cursor-auto' : 'cursor-pointer';
 
   const handleClick = () => {
     router.push(`/specialist/${id}`, { scroll: false });
-    close();
+    toggle();
   };
 
   const hasClickHandler = matches && !isExtendedCardOpened;
