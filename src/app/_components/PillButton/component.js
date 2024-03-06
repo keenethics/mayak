@@ -5,14 +5,8 @@ import { cn } from '@utils/cn';
 import { buttonColorVariant, buttonType } from './style';
 
 export function PillButton({ children, className, icon, variant, colorVariant, ...props }) {
-  const buttonVariant = icon ? buttonType[variant]?.icon : buttonType[variant]?.regular;
-  const buttonColor = buttonColorVariant?.[variant]?.[colorVariant];
-
-  if (!buttonVariant) {
-    throw new Error('Invalid button variant');
-  } else if (!buttonColor) {
-    throw new Error('Invalid button color variant');
-  }
+  const buttonVariant = icon ? buttonType[variant]?.icon : buttonType[variant]?.regular || {};
+  const buttonColor = buttonColorVariant[variant]?.[colorVariant] || {};
 
   const { regular, hover, focused, active, disabled: disabledState } = buttonColor;
   const { buttonStyle, layoutStyle } = buttonVariant;
