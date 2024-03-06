@@ -3,12 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { getContactsList, getLabelsList, getSpecialistSocials } from '../config';
 import { CardButton } from '@/app/_components/CardSpecialist/CardButton';
 import { organizationPropType } from '@/app/_components/CardSpecialist/prop-types';
 import { DetailsList } from '@/app/_components/CardSpecialist/DetailsList';
 import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
 import { SocialsList } from '@/app/_components/CardSpecialist/SocialsList';
+import { getContactsList, getLabelsList, getSpecialistSocials } from '../config';
 import { ProfileImage } from '../ProfileImage';
 import { ContactsList } from '../ContactsList';
 import { BadgeList } from '../BadgeList';

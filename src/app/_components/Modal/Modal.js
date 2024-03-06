@@ -17,7 +17,7 @@ export const Modal = ({
   children,
   className,
 }) => {
-  const blurBackground = <div className="fixed left-0 top-0 z-[150] h-full w-full backdrop-blur-sm" />;
+  const blurBackground = <div className="fixed left-0 top-0 z-10 h-full w-full backdrop-blur-sm" />;
 
   const motionData = {
     initial: {
@@ -43,7 +43,7 @@ export const Modal = ({
         <>
           {isBlurBackground && blurBackground}
           <div
-            className="fixed left-0 top-0 z-[200] grid h-full w-full place-content-center overflow-y-scroll"
+            className="fixed left-0 top-0 z-10 grid h-full w-full place-content-center overflow-y-scroll"
             onClick={onClose}
           >
             <motion.div
