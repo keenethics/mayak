@@ -1,6 +1,5 @@
 import React from 'react';
 import P from 'prop-types';
-import { Footer, Header } from '@components';
 import montserrat from '@/app/styles/font';
 import { cn } from '@/utils/cn';
 import { QueryContext } from './queryContext';
@@ -15,13 +14,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={cn('relative', montserrat.className)}>
+    <html lang="ua">
+      <body className={cn(montserrat.className, 'relative scroll-smooth')}>
         <QueryContext>
-          <Header />
           <main className="bg-other-white">{children}</main>
         </QueryContext>
-        <Footer />
         <div id="modal-root" />
       </body>
     </html>
