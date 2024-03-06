@@ -15,9 +15,10 @@ const MODEL_SEARCH_FIELDS = {
 const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
     therapies: { select: { id: true, type: true, title: true } },
-    specializations: { select: { name: true } },
+    specializations: { select: { id: true, name: true } },
     addresses: {
       select: {
+        id: true,
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { name: true } },
@@ -26,9 +27,10 @@ const MODEL_INCLUDES = {
   },
   [RESOURCES.organization]: {
     therapies: { select: { id: true, type: true, title: true } },
-    type: { select: { name: true } },
+    type: { select: { id: true, name: true } },
     addresses: {
       select: {
+        id: true,
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { name: true } },
@@ -55,7 +57,8 @@ const handler = auth(
     const { resource: modelName } = json;
     let result;
 
-    if (modelName === 'Specialist' || modelName === 'Organization') {
+    // console.log({ modelName });
+    if (modelName.toLocaleLowerCase() === 'specialist' || modelName.toLocaleLowerCase() === 'organization') {
       result = await defaultHandler(json, prisma, {
         getList: {
           debug: false,
@@ -65,10 +68,15 @@ const handler = auth(
           debug: false,
           include: MODEL_INCLUDES[modelName],
           transform: instance => {
+            // console.log({ instance: JSON.stringify(instance) });
             const instanceWithIds = { ...instance };
-            instanceWithIds.specializationsIds = instance.specializations.map(s => s.id);
-            instanceWithIds.therapiesIds = instance.therapies.map(t => t.id);
-            instanceWithIds.addressesIds = instance.addresses.map(a => a.id);
+            instanceWithIds.specializationsIds = instance.specializations.map(specialization => specialization.id);
+            instanceWithIds.therapiesIds = instance.therapies.map(therapy => therapy.id);
+            instanceWithIds.addressesIds = instance.addresses.map(address => address.id);
+            instanceWithIds.addresses = instance.addresses.map(address => ({
+              ...address,
+              districtId: address.district.id,
+            }));
             return instanceWithIds;
           },
         },

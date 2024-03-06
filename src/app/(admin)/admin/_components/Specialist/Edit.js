@@ -5,15 +5,20 @@ const {
   NumberInput,
   BooleanInput,
   required,
-  useGetList,
-  SelectArrayInput,
+  TextInput,
+  AutocompleteArrayInput,
+  ReferenceArrayInput,
+  FormDataConsumer,
+  ArrayInput,
+  SimpleFormIterator,
+  ReferenceInput,
+  AutocompleteInput,
 } = require('react-admin');
 const { Gender, FormatOfWork } = require('@prisma/client');
 const { FormFieldWrapper } = require('../FormFieldWrapper');
 const { SpecialistFormSections, SpecialistFormFields } = require('../../_lib/specialistData');
 const { capitalizeFirstLetter } = require('../../_utils/common');
 const { FormTranslations } = require('../../_lib/translations');
-const { RESOURCES } = require('../../_lib/consts');
 const { TextInputList } = require('../TextInputList');
 
 export function SpecialistEdit() {
@@ -28,9 +33,13 @@ export function SpecialistEdit() {
 
   const { gender, yearsOfExperience, formatOfWork } = SpecialistFormFields;
 
-  const { data: specializationsList, isLoading: specializationsLoading } = useGetList(RESOURCES.specialization);
+  const { isFreeReception, description } = SpecialistFormFields;
 
-  const { name, label, isRequired } = SpecialistFormFields.specializations;
+  // const { data: districtsList, isLoading: districtsLoading } = useGetList(RESOURCES.district);
+
+  const { addresses, fullAddress, nameOfClinic } = SpecialistFormFields;
+
+  const isOnline = format => format === FormatOfWork.ONLINE;
 
   const { lastName, firstName, surname } = SpecialistFormFields;
   const generalInfoList = [lastName, firstName, surname];
@@ -48,17 +57,12 @@ export function SpecialistEdit() {
           <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
             <TextInputList textInputList={generalInfoList} />
           </div>
-          <SelectArrayInput
-            name={name}
-            source={name}
-            label={label}
-            isLoading={specializationsLoading}
-            choices={specializationsList}
-            validate={isRequired && required()}
-            fullWidth
-          />
+          <ReferenceArrayInput source="specializationsIds" reference="Specialization">
+            <AutocompleteArrayInput optionValue="id" optionText="name" />
+          </ReferenceArrayInput>
         </FormFieldWrapper>
         {/* DETAILS */}
+
         <FormFieldWrapper title={SpecialistFormSections.details} className="mt-3">
           <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
             <SelectInput
@@ -85,7 +89,60 @@ export function SpecialistEdit() {
             />
           </div>
         </FormFieldWrapper>
-        {/* ACTIVATE */}
+        {/* ADDRESSES */}
+        <FormFieldWrapper title={SpecialistFormSections.addresses} className="mt-3">
+          <FormDataConsumer>
+            {({ formData }) =>
+              isOnline(formData.formatOfWork) ? (
+                <p className="mb-6 text-gray-700">Спеціаліст працює онлайн</p>
+              ) : (
+                <ArrayInput name={addresses.name} source={addresses.name} label={addresses.label} fullWidth>
+                  <SimpleFormIterator inline fullWidth>
+                    <TextInput
+                      fullWidth
+                      source={fullAddress.name}
+                      label={fullAddress.label}
+                      validate={fullAddress.isRequired && required()}
+                      helperText="Вулиця, номер будинку, поверх, кабінет"
+                    />
+                    <TextInput
+                      source={nameOfClinic.name}
+                      label={nameOfClinic.label}
+                      validate={nameOfClinic.isRequired && required()}
+                      fullWidth
+                    />
+                    <ReferenceInput source="districtId" reference="District">
+                      <AutocompleteInput optionValue="id" optionText="name" />
+                    </ReferenceInput>
+                    {/* <SelectInput
+                      source={'district'}
+                      label={district.label}
+                      isLoading={districtsLoading}
+                      choices={districtsList}
+                      validate={district.isRequired && required()}
+                      optionText="name"
+                      optionValue="id"
+                    /> */}
+                  </SimpleFormIterator>
+                </ArrayInput>
+              )
+            }
+          </FormDataConsumer>
+        </FormFieldWrapper>
+        {/* SERVICES */}
+        <FormFieldWrapper title={SpecialistFormSections.services}>
+          <ReferenceArrayInput source="therapiesIds" reference="Therapy">
+            <AutocompleteArrayInput optionValue="id" optionText="title" />
+          </ReferenceArrayInput>
+          <BooleanInput
+            name={isFreeReception.name}
+            source={isFreeReception.name}
+            label={isFreeReception.label}
+            className="w-max"
+          />
+          <TextInput name={description.name} source={description.name} label={description.label} fullWidth multiline />
+        </FormFieldWrapper>
+        {/* CONTACTS */}
         <FormFieldWrapper title={SpecialistFormSections.contacts} className="mt-3">
           <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
             <TextInputList textInputList={contactsList} />
