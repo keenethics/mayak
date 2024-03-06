@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardSpecialist } from '@/app/_components/CardSpecialist/Specialist';
-import { getSpecialist, getSpecialistById } from '@/app/(app)/specialist/utils';
+import { getSpecialistById } from '@/app/(app)/specialist/utils';
 
 export async function generateMetadata({ params }) {
   try {
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { id } = params;
-  const specialist = await getSpecialist({ id });
+  const specialist = await getSpecialistById({ id });
 
   return (
     <CardSpecialist specialist={specialist} extended className="mx-auto my-6 max-w-[900px] px-4 md:my-10 lg:px-0" />
