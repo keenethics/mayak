@@ -21,9 +21,9 @@ export const Modal = ({
 
   const motionData = {
     initial: {
-      opacity: 0.5,
+      opacity: 0.9,
       y: '20vh',
-      transition: { duration: 0.1 },
+      transition: { duration: 0.2 },
     },
     animate: {
       opacity: 1,
