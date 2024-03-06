@@ -1,11 +1,11 @@
 import React from 'react';
 import { CardSpecialist } from '@/app/_components/CardSpecialist/Specialist';
-import { getSpecialist } from '@/app/(app)/specialist/utils';
+import { getSpecialist, getSpecialistById } from '@/app/(app)/specialist/utils';
 
 export async function generateMetadata({ params }) {
   try {
     const { id } = params;
-    const specialist = await getSpecialist({ id });
+    const specialist = await getSpecialistById({ id });
     const name = specialist.gender ? `${specialist.lastName} ${specialist.firstName}` : specialist.name;
 
     return {

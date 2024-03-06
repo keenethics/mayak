@@ -23,7 +23,7 @@ export function PillButton({ children, className, icon, variant, colorVariant, .
   );
 
   return (
-    <button className={styles} {...props}>
+    <button type="button" className={styles} {...props}>
       <div className={layoutStyle || ''}>
         {icon}
         <Paragraph className="text-inherit">{children}</Paragraph>

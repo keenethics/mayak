@@ -48,12 +48,10 @@ export const specialistPropType = PropTypes.shape({
   createdAt: PropTypes.instanceOf(Date),
 });
 
-export const organizationTypePropType = PropTypes.shape(relatedInstanceCore);
-
 export const organizationPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.arrayOf(organizationTypePropType),
+  type: PropTypes.arrayOf(PropTypes.shape(relatedInstanceCore)),
   yearsOnMarket: PropTypes.number,
   formatOfWork: PropTypes.oneOf(Object.values(FormatOfWork)),
   addresses: PropTypes.arrayOf(addressPropType),

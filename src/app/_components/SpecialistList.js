@@ -23,6 +23,6 @@ export function SpecialistList({ specialists, className }) {
 }
 
 SpecialistList.propTypes = {
-  specialists: PropTypes.arrayOf(specialistPropType),
+  specialists: PropTypes.arrayOf(specialistPropType).isRequired,
   className: PropTypes.string,
 };

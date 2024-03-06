@@ -110,7 +110,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
 }
 
 CardSpecialist.propTypes = {
-  specialist: specialistPropType,
+  specialist: specialistPropType.isRequired,
   extended: PropTypes.bool,
   className: PropTypes.string,
 };
