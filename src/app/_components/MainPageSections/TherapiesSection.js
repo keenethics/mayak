@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
-import { TopWave } from './TopWave';
-import { BottomWave } from './BottomWave';
-import { TherapyCard } from './TherapyCard';
-import { Heading } from './Typography';
+import { TopWave, BottomWave, TherapyCard, Heading } from '@components';
 
 export async function TherapiesSection({ therapies }) {
   return (
-    <section className="relative bg-primary-200 bg-blend-multiply ">
+    <section className="relative bg-primary-200 bg-blend-multiply">
       <div className="bg-cover-noise" />
       <TopWave className="h-3 bg-other-white lg:h-12" />
       <div className="flex flex-col gap-[20px] px-4 md:p-10 lg:gap-12 lg:p-20">
@@ -32,6 +29,7 @@ export async function TherapiesSection({ therapies }) {
 TherapiesSection.propTypes = {
   therapies: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,

@@ -1,4 +1,4 @@
-import { TherapiesSection } from '@components';
+import { TherapiesSection, FAQSection } from '@components';
 import { prisma } from '@/lib/db';
 
 // Page metadata should contain
@@ -13,14 +13,32 @@ export const metadata = {
 export default async function Page() {
   const activeTherapies = await prisma.therapy.findMany({
     where: { isActive: true },
+    select: {
+      id: true,
+      type: true,
+      description: true,
+      title: true,
+      imagePath: true,
+    },
     orderBy: { priority: 'desc' },
+  });
+
+  const activeFAQs = await prisma.faq.findMany({
+    where: { isActive: true },
+    select: {
+      id: true,
+      question: true,
+      priority: true,
+      answer: true,
+    },
+    orderBy: { priority: 'asc' },
   });
   return (
     <>
       <section>TBD district & search section</section>
       <TherapiesSection therapies={activeTherapies} />
       <section>TBD goal section</section>
-      <section>FAQ section</section>
+      <FAQSection faqs={activeFAQs} />
     </>
   );
 }
