@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@utils/cn';
+import { ContactsListItem } from '@components';
 import { specialistContactPropType } from '@/app/_components/CardSpecialist/prop-types';
-import { ContactsListItem } from './ContactsListItem';
 
 export function ContactsList({ truncate, specialistId, contacts, className }) {
   const contactsFiltered = contacts.filter(contact => contact.content);

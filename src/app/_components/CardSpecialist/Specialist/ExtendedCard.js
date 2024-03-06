@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardModalWrapper } from '../CardModalWrapper';
-import { specialistPropType } from '../prop-types';
-import { CardSpecialist } from './Card';
+import { CardModalWrapper, CardSpecialist } from '@components';
+import { specialistPropType } from '@/app/_components/CardSpecialist/prop-types';
 
 export function CardSpecialistExtended({ specialist, className }) {
   return (
