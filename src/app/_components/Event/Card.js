@@ -99,7 +99,7 @@ export default function EventCard({ event }) {
         <li className="flex gap-2">
           <LocationIcon />
           {locationLink ? (
-            <a href={locationLink} target="_blank" rel="noreferrer">
+            <a href={locationLink} target="_blank" rel="noopener noreferrer">
               {addressElement}
             </a>
           ) : (

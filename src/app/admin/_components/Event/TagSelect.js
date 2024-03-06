@@ -14,7 +14,7 @@ export function TagSelect({ setSelectedTags, defaultValue }) {
 
   if (isLoading) return <Loading />;
 
-  const onChage = newTags => {
+  const onChange = newTags => {
     newTagsLength = newTags.reduce((currLen, tag) => currLen + tag.label.length, 0);
     if (newTagsLength > 16) {
       setError(true);
@@ -31,17 +31,15 @@ export function TagSelect({ setSelectedTags, defaultValue }) {
         placeholder="Оберіть теги..."
         styles={{ menu: base => ({ ...base, zIndex: 9999 }) }}
         isMulti
-        onChange={onChage}
+        onChange={onChange}
         value={value}
         onCreateOption={name => create(RESOURCES.eventTag, { data: { name } })}
         options={defaultOptions}
       />
-      {error ? (
+      {error && (
         <p className="text-p5 text-system-error">
           Сумарна кількість символів в усіх тегах події має бути не більше, ніж 24
         </p>
-      ) : (
-        ''
       )}
     </>
   );
