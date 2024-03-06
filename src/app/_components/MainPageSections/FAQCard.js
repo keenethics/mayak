@@ -6,9 +6,9 @@ import Minus from '@icons/minus.svg';
 
 export function FAQCard({ id, question, answer }) {
   return (
-    <div className="flex flex-col gap-2 rounded-[40px] border-[1px] border-gray-600 bg-other-white px-6 py-5">
+    <div className="flex w-full max-w-[906px] flex-col gap-2 rounded-[40px] border-[1px] border-gray-600 bg-other-white px-6 py-5">
       <div className="group peer relative flex justify-between">
-        <input type="checkbox" className="absolute z-[-10]" id={id} />
+        <input type="checkbox" className="hidden" id={id} />
         <label htmlFor={id} className="cursor-pointer">
           <Paragraph className="text-p1 font-bold text-primary-600">{question}</Paragraph>
         </label>
