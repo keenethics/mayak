@@ -50,22 +50,59 @@ function searchInputFilters(modelName, filter) {
 const handler = auth(
   withErrorHandler(async req => {
     if (!req.auth) throw new NotAuthorizedException();
+
     const json = await req.json();
     const { resource: modelName } = json;
-    const result = await defaultHandler(json, prisma, {
-      getList: {
-        debug: false,
-        where: searchInputFilters(modelName, json.params?.filter?.q),
-      },
-      getOne: { debug: false, include: MODEL_INCLUDES[modelName] },
-      update: {
-        debug: false,
-        allowJsonUpdate: {
-          tags: true,
-          additionalLink: true,
+    let result;
+
+    if (modelName === 'Specialist' || modelName === 'Organization') {
+      result = await defaultHandler(json, prisma, {
+        getList: {
+          debug: false,
+          where: searchInputFilters(modelName, json.params?.filter?.q),
         },
-      },
-    });
+        getOne: {
+          debug: false,
+          include: MODEL_INCLUDES[modelName],
+          transform: instance => {
+            const instanceWithIds = { ...instance };
+            instanceWithIds.specializationsIds = instance.specializations.map(s => s.id);
+            instanceWithIds.therapiesIds = instance.therapies.map(t => t.id);
+            instanceWithIds.addressesIds = instance.addresses.map(a => a.id);
+            return instanceWithIds;
+          },
+        },
+        update: {
+          include: MODEL_INCLUDES[modelName],
+          set: {
+            specializationsIds: {
+              specializations: 'id',
+            },
+            therapiesIds: {
+              therapies: 'id',
+            },
+          },
+        },
+      });
+    } else {
+      result = await defaultHandler(json, prisma, {
+        getList: {
+          debug: false,
+          where: searchInputFilters(modelName, json.params?.filter?.q),
+        },
+        getOne: {
+          debug: false,
+          include: MODEL_INCLUDES[modelName],
+        },
+        update: {
+          debug: false,
+          allowJsonUpdate: {
+            tags: true,
+            additionalLink: true,
+          },
+        },
+      });
+    }
     return NextResponse.json(result);
   }),
 );

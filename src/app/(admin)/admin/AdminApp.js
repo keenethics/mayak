@@ -10,6 +10,7 @@ import { SpecialistCreate, SpecialistShow, SpecialistsList } from '@admin/compon
 import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/components/Organization';
 import { CreateTherapy, EditTherapy, ListTherapy } from '@admin/components/Therapy';
 import { authProvider } from './authProvider';
+import { SpecialistEdit } from './_components/Specialist/Edit';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -27,7 +28,7 @@ export default function AdminPage() {
         name={RESOURCES.specialist}
         options={{ label: 'Спеціалісти' }}
         list={SpecialistsList}
-        edit={EditGuesser}
+        edit={SpecialistEdit}
         show={SpecialistShow}
         create={SpecialistCreate}
       />
