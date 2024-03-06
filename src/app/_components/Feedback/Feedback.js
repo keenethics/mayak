@@ -80,16 +80,23 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               name="name"
               onChange={e => setName(e.target.value)}
               placeholder={`Прізвище та ім'я`}
-              required
               error={validationErrors.name}
+              required
             />
             <TextInputField
               value={phone}
               name="phone"
               onChange={e => setPhone(e.target.value)}
               placeholder={`Номер телефону`}
-              required
               error={validationErrors.phone}
+              required
+            />
+            <CheckBox
+              onChange={() => setCallMe(prev => !prev)}
+              checked={!isCallMe}
+              name={'feedBack'}
+              value={'CheckBox'}
+              text={'Не телефонувати мені'}
             />
             <TextInputField
               value={email}
@@ -99,13 +106,6 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               placeholder={`Електронна пошта`}
               error={validationErrors.email}
             />
-            <CheckBox
-              onChange={() => setCallMe(prev => !prev)}
-              checked={!isCallMe}
-              name={'feedBack'}
-              value={'CheckBox'}
-              text={'Не телефонувати мені'}
-            />
             <TextArea
               value={message}
               onChange={setMessage}
@@ -113,7 +113,6 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               placeholder="Повідомлення"
               error={validationErrors.message}
             />
-
             <PillButton
               type="submit"
               variant={buttonVariant.filled}
