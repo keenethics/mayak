@@ -15,9 +15,9 @@ import {
 
 import { useCallback } from 'react';
 import { FAQ_PRIORITY_CHANGE_STEP } from '@/lib/consts';
-import { MAX_ACTIVE_FAQS, MIN_ACTIVE_FAQS } from './consts';
 import { LinkTextField } from '../LinkTextField';
 import { UpDownArrowMenu } from '../UpDownArrowMenu';
+import { MAX_ACTIVE_FAQS, MIN_ACTIVE_FAQS } from './consts';
 import { useActiveFaqs } from './hooks';
 
 function PriorityModifier() {
