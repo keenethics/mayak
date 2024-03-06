@@ -60,7 +60,6 @@ export function CardSpecialist({ specialist, className, extended = false }) {
       </div>
       <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
-          {/* <ProfileImage gender={gender} className="md:hidden" /> */}
           <ProfileImage gender={gender} className="md:hidden">
             <SocialsList socials={socials} className="absolute bottom-4" />
           </ProfileImage>

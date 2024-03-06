@@ -20,7 +20,7 @@ BadgeListItem.propTypes = {
 
 export function BadgeList({ labels, className }) {
   const labelsFiltered = labels.filter(label => !!label.content);
-  
+
   return (
     <ul
       className={cn(

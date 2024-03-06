@@ -47,10 +47,10 @@ InfoRow.propTypes = {
 export function ContactsListItem({ truncate, specialistId, contact }) {
   const { icon, content, href } = contact;
   const isArray = Array.isArray(content);
-
+  const truncateContent = truncate && !isArray;
   return (
     <div className="relative">
-      {truncate && !isArray ? (
+      {truncateContent ? (
         <ListTruncator
           id={specialistId}
           content={
@@ -64,7 +64,6 @@ export function ContactsListItem({ truncate, specialistId, contact }) {
       ) : (
         <InfoRow icon={icon}>
           {isArray &&
-            !href &&
             content.map(item => (
               <p className="whitespace-normal break-words text-c3" key={item}>
                 {item}
