@@ -3,18 +3,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { CardButton } from '@/app/_components/CardSpecialist/CardButton';
+import {
+  getContactsList,
+  getLabelsList,
+  getSpecialistSocials,
+  ProfileImage,
+  ContactsList,
+  BadgeList,
+  SpecialistTitle,
+  SpecializationsPanel,
+  CardWrapper,
+  SocialsList,
+  DetailsList,
+  AddressesList,
+  CardButton,
+} from '@components';
 import { organizationPropType } from '@/app/_components/CardSpecialist/prop-types';
-import { DetailsList } from '@/app/_components/CardSpecialist/DetailsList';
-import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
-import { SocialsList } from '@/app/_components/CardSpecialist/SocialsList';
-import { getContactsList, getLabelsList, getSpecialistSocials } from '../config';
-import { ProfileImage } from '../ProfileImage';
-import { ContactsList } from '../ContactsList';
-import { BadgeList } from '../BadgeList';
-import { SpecialistTitle } from '../SpecialistTitle';
-import { SpecializationsPanel } from '../SpecializationsPanel';
-import { CardWrapper } from '../CardWrapper';
 
 export function CardOrganization({ organization, className, extended = false }) {
   const {
@@ -87,7 +91,7 @@ export function CardOrganization({ organization, className, extended = false }) 
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <Link href={`#`} scroll={false} className="mt-auto hidden self-end justify-self-end md:inline-block">
+            <Link href="#" scroll={false} className="mt-auto hidden self-end justify-self-end md:inline-block">
               <CardButton />
             </Link>
           </>

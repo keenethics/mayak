@@ -12,3 +12,4 @@ export * from './ListTruncator';
 export * from './NotFoundLayout';
 export * from './TherapiesSection';
 export * from './Therapies';
+export * from './CardSpecialist';
