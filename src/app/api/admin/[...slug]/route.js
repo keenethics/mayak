@@ -21,7 +21,7 @@ const MODEL_INCLUDES = {
         id: true,
         nameOfClinic: true,
         fullAddress: true,
-        district: { select: { name: true } },
+        district: { select: { id: true, name: true } },
       },
     },
   },
@@ -33,7 +33,7 @@ const MODEL_INCLUDES = {
         id: true,
         nameOfClinic: true,
         fullAddress: true,
-        district: { select: { name: true } },
+        district: { select: { id: true, name: true } },
       },
     },
   },
@@ -57,38 +57,37 @@ const handler = auth(
     const { resource: modelName } = json;
     let result;
 
-    // console.log({ modelName });
     if (modelName.toLocaleLowerCase() === 'specialist' || modelName.toLocaleLowerCase() === 'organization') {
       result = await defaultHandler(json, prisma, {
         getList: {
           debug: false,
           where: searchInputFilters(modelName, json.params?.filter?.q),
+          include: MODEL_INCLUDES[modelName],
         },
         getOne: {
           debug: false,
           include: MODEL_INCLUDES[modelName],
           transform: instance => {
-            // console.log({ instance: JSON.stringify(instance) });
-            const instanceWithIds = { ...instance };
-            instanceWithIds.specializationsIds = instance.specializations.map(specialization => specialization.id);
-            instanceWithIds.therapiesIds = instance.therapies.map(therapy => therapy.id);
-            instanceWithIds.addressesIds = instance.addresses.map(address => address.id);
-            instanceWithIds.addresses = instance.addresses.map(address => ({
+            // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
+            // eslint-disable-next-line no-param-reassign
+            instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
+            // eslint-disable-next-line no-param-reassign
+            instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
+            // eslint-disable-next-line no-param-reassign
+            instance.addressesIds = instance.addresses.map(address => address.id);
+            // eslint-disable-next-line no-param-reassign
+            instance.addresses = instance?.addresses?.map(address => ({
               ...address,
               districtId: address.district.id,
             }));
-            return instanceWithIds;
           },
         },
         update: {
-          include: MODEL_INCLUDES[modelName],
-          set: {
-            specializationsIds: {
-              specializations: 'id',
-            },
-            therapiesIds: {
-              therapies: 'id',
-            },
+          allowJsonUpdate: {
+            addresses: true,
+            districts: true,
+            specializations: true,
+            therapies: true,
           },
         },
       });
@@ -97,6 +96,7 @@ const handler = auth(
         getList: {
           debug: false,
           where: searchInputFilters(modelName, json.params?.filter?.q),
+          include: MODEL_INCLUDES[modelName],
         },
         getOne: {
           debug: false,
@@ -108,9 +108,11 @@ const handler = auth(
             tags: true,
             additionalLink: true,
           },
+          include: MODEL_INCLUDES[modelName],
         },
       });
     }
+    // console.log({ result: JSON.stringify(result) });
     return NextResponse.json(result);
   }),
 );
