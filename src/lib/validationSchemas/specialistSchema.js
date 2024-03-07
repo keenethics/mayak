@@ -30,6 +30,16 @@ const zYearsOfExperience = z
   .nonnegative()
   .nullish();
 
+const zAddressesSchema = z.array(
+  z
+    .object({
+      fullAddress: zStringWithMax,
+      nameOfClinic: z.string().nullish(),
+      district: zString,
+    })
+    .default([]),
+);
+
 const defaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
@@ -56,6 +66,7 @@ const restProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
+  addresses: zAddressesSchema.default([]),
   instagram: zString.url().nullish(),
   facebook: zString.url().nullish(),
   youtube: zString.url().nullish(),
