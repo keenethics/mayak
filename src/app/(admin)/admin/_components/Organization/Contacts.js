@@ -31,17 +31,14 @@ export function Contacts({ className }) {
         <TextInput label="Пошта" source="email" />
         <TextInput label="Вебсайт" source="website" />
       </div>
-      {hasEntitiesMatchingPhone ||
-        (hasEntitiesMatchingEmail && (
-          <div className="mb-6">
-            {currentPhone && numEntitiesMatchingPhone > 0 && (
-              <DisplayMatchingEntity entities={entitiesMatchingPhone} label="телефон" />
-            )}
-            {currentEmail && numEntitiesMatchingEmail > 0 && (
-              <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />
-            )}
-          </div>
-        ))}
+      <div className="mb-6 flex flex-col gap-6">
+        {hasEntitiesMatchingPhone && (
+          <DisplayMatchingEntity entities={entitiesMatchingPhone} label="телефон" />
+        )}
+        {hasEntitiesMatchingEmail && (
+          <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />
+        )}
+      </div>
     </>
   );
 }

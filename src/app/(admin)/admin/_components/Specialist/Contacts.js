@@ -33,13 +33,10 @@ export function Contacts() {
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
         <TextInputList textInputList={contactsList} />
       </div>
-      {hasEntitiesMatchingPhone ||
-        (hasEntitiesMatchingEmail && (
-          <div className="mb-8 flex flex-col gap-6">
-            {hasEntitiesMatchingPhone && <DisplayMatchingEntity entities={entitiesMatchingPhone} label="телефон" />}
-            {hasEntitiesMatchingEmail && <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />}
-          </div>
-        ))}
+      <div className="mb-8 flex flex-col gap-6">
+        {hasEntitiesMatchingPhone && <DisplayMatchingEntity entities={entitiesMatchingPhone} label="телефон" />}
+        {hasEntitiesMatchingEmail && <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />}
+      </div>
     </FormFieldWrapper>
   );
 }
