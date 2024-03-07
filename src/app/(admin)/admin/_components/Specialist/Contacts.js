@@ -3,41 +3,43 @@ import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { SpecialistFormFields, SpecialistFormSections } from '@admin/_lib/specialistData';
 import { TextInputList } from '@admin/components/TextInputList';
 import { useWatch } from 'react-hook-form';
-import { useGetList } from 'react-admin';
-import { RESOURCES } from '@admin/_lib/consts';
 import { DisplayMatchingEntity } from '@admin/components/DisplayMatchingEntity';
+import { useFindMatchingEntities } from '@admin/_hooks/common';
 
 export function Contacts() {
+  const PHONE = 'phone';
+  const EMAIL = 'email';
+
   const { phone, email, website } = SpecialistFormFields;
   const contactsList = [phone, email, website];
 
-  const currentPhone = useWatch({ name: 'phone' });
-  const currentEmail = useWatch({ name: 'email' });
+  const currentPhone = useWatch({ name: PHONE });
+  const currentEmail = useWatch({ name: EMAIL });
 
-  const { data: specialistData } = useGetList(RESOURCES.specialist);
-  const { data: organizationData } = useGetList(RESOURCES.organization);
+  const { data: entitiesMatchingPhone, num: numEntitiesMatchingPhone } = useFindMatchingEntities({
+    key: PHONE,
+    value: currentPhone,
+  });
+  const { data: entitiesMatchingEmail, num: numEntitiesMatchingEmail } = useFindMatchingEntities({
+    key: EMAIL,
+    value: currentEmail,
+  });
 
-  const allEntities = specialistData?.concat(organizationData);
-
-  const entitiesMatchingPhone = allEntities?.filter(specialist => specialist.phone === currentPhone);
-  const entitiesMatchingEmail = allEntities?.filter(specialist => specialist.email === currentEmail);
-
-  const numEntitiesMatchingPhone = entitiesMatchingPhone?.length;
-  const numEntitiesMatchingEmail = entitiesMatchingEmail?.length;
+  const hasEntitiesMatchingPhone = currentPhone && numEntitiesMatchingPhone > 0;
+  const hasEntitiesMatchingEmail = currentEmail && numEntitiesMatchingEmail > 0;
 
   return (
     <FormFieldWrapper title={SpecialistFormSections.contacts}>
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
         <TextInputList textInputList={contactsList} />
       </div>
-      <div className="mb-8 flex flex-col gap-6">
-        {currentPhone && numEntitiesMatchingPhone > 0 && (
-          <DisplayMatchingEntity entities={entitiesMatchingPhone} label="телефон" />
-        )}
-        {currentEmail && numEntitiesMatchingEmail > 0 && (
-          <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />
-        )}
-      </div>
+      {hasEntitiesMatchingPhone ||
+        (hasEntitiesMatchingEmail && (
+          <div className="mb-8 flex flex-col gap-6">
+            {hasEntitiesMatchingPhone && <DisplayMatchingEntity entities={entitiesMatchingPhone} label="телефон" />}
+            {hasEntitiesMatchingEmail && <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />}
+          </div>
+        ))}
     </FormFieldWrapper>
   );
 }

@@ -1,24 +1,28 @@
 import React from 'react';
 import { useWatch } from 'react-hook-form';
-import { TextInput, useGetList } from 'react-admin';
+import { TextInput } from 'react-admin';
 import PropTypes from 'prop-types';
-import { RESOURCES } from '@admin/_lib/consts';
 import { DisplayMatchingEntity } from '@admin/components/DisplayMatchingEntity';
+import { useFindMatchingEntities } from '@admin/_hooks/common';
 
 export function Contacts({ className }) {
-  const currentPhone = useWatch({ name: 'phone' });
-  const currentEmail = useWatch({ name: 'email' });
+  const PHONE = 'phone';
+  const EMAIL = 'email';
 
-  const { data: specialistData } = useGetList(RESOURCES.specialist);
-  const { data: organizationData } = useGetList(RESOURCES.organization);
+  const currentPhone = useWatch({ name: PHONE });
+  const currentEmail = useWatch({ name: EMAIL });
 
-  const allEntities = specialistData?.concat(organizationData);
+  const { data: entitiesMatchingPhone, num: numEntitiesMatchingPhone } = useFindMatchingEntities({
+    key: PHONE,
+    value: currentPhone,
+  });
+  const { data: entitiesMatchingEmail, num: numEntitiesMatchingEmail } = useFindMatchingEntities({
+    key: EMAIL,
+    value: currentEmail,
+  });
 
-  const entitiesMatchingPhone = allEntities?.filter(specialist => specialist.phone === currentPhone);
-  const entitiesMatchingEmail = allEntities?.filter(specialist => specialist.email === currentEmail);
-
-  const numEntitiesMatchingPhone = entitiesMatchingPhone?.length;
-  const numEntitiesMatchingEmail = entitiesMatchingEmail?.length;
+  const hasEntitiesMatchingPhone = currentPhone && numEntitiesMatchingPhone > 0;
+  const hasEntitiesMatchingEmail = currentEmail && numEntitiesMatchingEmail > 0;
 
   return (
     <>
@@ -27,14 +31,17 @@ export function Contacts({ className }) {
         <TextInput label="Пошта" source="email" />
         <TextInput label="Вебсайт" source="website" />
       </div>
-      <div className="mb-8 flex flex-col gap-6">
-        {currentPhone && numEntitiesMatchingPhone > 0 && (
-          <DisplayMatchingEntity entities={entitiesMatchingPhone} label="телефон" />
-        )}
-        {currentEmail && numEntitiesMatchingEmail > 0 && (
-          <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />
-        )}
-      </div>
+      {hasEntitiesMatchingPhone ||
+        (hasEntitiesMatchingEmail && (
+          <div className="mb-6">
+            {currentPhone && numEntitiesMatchingPhone > 0 && (
+              <DisplayMatchingEntity entities={entitiesMatchingPhone} label="телефон" />
+            )}
+            {currentEmail && numEntitiesMatchingEmail > 0 && (
+              <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />
+            )}
+          </div>
+        ))}
     </>
   );
 }
