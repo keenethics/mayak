@@ -5,8 +5,8 @@ import PriceIcon from '@icons/priceFilled.svg';
 import LocationIcon from '@icons/locationFilled.svg';
 import TimeIcon from '@icons/timeFilled.svg';
 import PropTypes from 'prop-types';
-import { Label } from '../Label';
 import { cn } from '@/utils/cn';
+import { Label } from '../Label';
 import { OverflownText } from '../OverflownText';
 
 function ListItem({ icon, text, textColor, fontWeight }) {
