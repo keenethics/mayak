@@ -10,11 +10,13 @@ export async function TherapiesSection({ therapies }) {
       <div className="bg-cover-noise" />
       <TopWave className="h-3 bg-other-white lg:h-12" />
       <div className="flex flex-col gap-[20px] px-4 md:p-10 lg:gap-12 lg:p-20">
-        <div className="flex flex-col items-center justify-center">
-          <Heading className="text-center text-p2 font-bold text-primary-800 lg:text-h3">
+        <div className="flex flex-col items-center justify-center gap-2">
+          <Heading type="h2" className="text-center text-p2 font-bold text-primary-800 lg:text-h3">
             Ти заслуговуєш на гарне самопочуття
           </Heading>
-          <Heading className="text-p4 font-bold text-primary-600 lg:text-h4">Який тип терапії ти потребуєш?</Heading>
+          <Heading type="h3" className="text-p4 font-bold text-primary-600 lg:text-h4">
+            Який тип терапії ти потребуєш?
+          </Heading>
         </div>
         <div className="grid place-items-center gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {therapies.map(therapy => (
