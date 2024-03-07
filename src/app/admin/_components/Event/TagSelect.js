@@ -38,7 +38,7 @@ export function TagSelect({ setSelectedTags, defaultValue }) {
       />
       {error && (
         <p className="text-p5 text-system-error">
-          Сумарна кількість символів в усіх тегах події має бути не більше, ніж 24
+          Сумарна кількість символів в усіх тегах події має бути не більше, ніж 16
         </p>
       )}
     </>
