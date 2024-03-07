@@ -4,17 +4,15 @@ import { organizationQueryExtension, specialistQueryExtension } from './prismaEx
 
 const globalForPrisma = global;
 
-// eslint-disable-next-line
-export let prisma = globalForPrisma.prisma;
-
-if (!prisma) {
-  prisma = new PrismaClient();
-  prisma = prisma.$extends({
+function extendPrisma(prisma) {
+  return prisma.$extends({
     query: {
       specialist: specialistQueryExtension(prisma),
       organization: organizationQueryExtension(prisma),
     },
   });
 }
+
+export const prisma = globalForPrisma.prisma || extendPrisma(new PrismaClient());
 
 if (env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;

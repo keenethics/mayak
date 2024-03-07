@@ -1,39 +1,29 @@
+import { RESOURCES } from '@/app/(admin)/admin/_lib/consts';
 import { getSpecialistFullName } from '@/utils/getSpecialistFullName.mjs';
+
+function createSearchEntryExtension(prisma, type) {
+  return async ({ args }) => {
+    const isOrganization = type === RESOURCES.organization;
+    const sortString = isOrganization ? args.data.name : getSpecialistFullName(args.data);
+    const searchEntry = await prisma.searchEntry.create({
+      data: {
+        sortString,
+        ...(isOrganization ? { organization: { create: args.data } } : { specialist: { create: args.data } }),
+      },
+      select: isOrganization ? { organization: args.select || {} } : { specialist: args.select || {} },
+    });
+    return isOrganization ? searchEntry.organization : searchEntry.specialist;
+  };
+}
 
 export function specialistQueryExtension(prisma) {
   return {
-    async create({ args }) {
-      const searchEntry = await prisma.searchEntry.create({
-        data: {
-          sortString: getSpecialistFullName(args.data),
-          specialist: {
-            create: args.data,
-          },
-        },
-        select: {
-          specialist: {},
-        },
-      });
-      return searchEntry.specialist;
-    },
+    create: createSearchEntryExtension(prisma, RESOURCES.specialist),
   };
 }
 
 export function organizationQueryExtension(prisma) {
   return {
-    async create({ args }) {
-      const searchEntry = await prisma.searchEntry.create({
-        data: {
-          sortString: args.data.name,
-          organization: {
-            create: args.data,
-          },
-        },
-        select: {
-          organization: {},
-        },
-      });
-      return searchEntry.organization;
-    },
+    create: createSearchEntryExtension(prisma, RESOURCES.organization),
   };
 }

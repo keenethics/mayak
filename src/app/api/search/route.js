@@ -6,6 +6,7 @@ import { prisma } from '@/lib/db';
 export async function GET(req) {
   const {
     type,
+    // TODO: Uncomment pagination params take and skip when pagination is implemented on the frontend
     // take,
     // skip,
     format,
@@ -95,8 +96,8 @@ export async function GET(req) {
     orderBy: {
       sortString: 'asc',
     },
-    // skip,
     // take,
+    // skip,
   });
 
   const data = searchEntries.map(entry => (entry.specialist ? entry.specialist : entry.organization));
