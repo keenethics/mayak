@@ -4,13 +4,15 @@ import {
   FormDataConsumer,
   NullableBooleanInput,
   NumberInput,
+  required,
   SimpleForm,
   TextInput,
-  required,
 } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OrganizationSchema } from '@admin/_lib/validationSchemas/createOrganizationSchema';
 import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
+import React from 'react';
+import { Contacts } from '@admin/components/Organization/Contacts';
 import { AddressInput } from './CreateAdresses';
 import { SelectTherapies } from './SelectTherapies';
 import { SelectOrganizationType } from './SelectOrgType';
@@ -46,11 +48,7 @@ export function OrganizationCreate() {
                 trueLabel="Так"
               />
               <p className="font-bold">Контакти</p>
-              <div className={fieldGroupClass}>
-                <TextInput label="Номер телефону" source="phone" />
-                <TextInput label="Пошта" source="email" />
-                <TextInput label="Вебсайт" source="website" />
-              </div>
+              <Contacts className={fieldGroupClass} />
               <p className="font-bold">Соціальні мережі</p>
               <div className={fieldGroupClass}>
                 <TextInput label="Instagram" source="instagram" />

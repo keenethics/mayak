@@ -1,16 +1,11 @@
 import React from 'react';
-import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
-import { SpecialistFormFields, SpecialistFormSections } from '@admin/_lib/specialistData';
-import { TextInputList } from '@admin/components/TextInputList';
 import { useWatch } from 'react-hook-form';
-import { useGetList } from 'react-admin';
+import { TextInput, useGetList } from 'react-admin';
+import PropTypes from 'prop-types';
 import { RESOURCES } from '@admin/_lib/consts';
 import { DisplayMatchingEntity } from '@admin/components/DisplayMatchingEntity';
 
-export function Contacts() {
-  const { phone, email, website } = SpecialistFormFields;
-  const contactsList = [phone, email, website];
-
+export function Contacts({ className }) {
   const currentPhone = useWatch({ name: 'phone' });
   const currentEmail = useWatch({ name: 'email' });
 
@@ -26,9 +21,11 @@ export function Contacts() {
   const numEntitiesMatchingEmail = entitiesMatchingEmail?.length;
 
   return (
-    <FormFieldWrapper title={SpecialistFormSections.contacts}>
-      <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <TextInputList textInputList={contactsList} />
+    <>
+      <div className={className}>
+        <TextInput label="Номер телефону" source="phone" />
+        <TextInput label="Пошта" source="email" />
+        <TextInput label="Вебсайт" source="website" />
       </div>
       <div className="mb-8 flex flex-col gap-6">
         {currentPhone && numEntitiesMatchingPhone > 0 && (
@@ -38,6 +35,10 @@ export function Contacts() {
           <DisplayMatchingEntity entities={entitiesMatchingEmail} label="пошта" />
         )}
       </div>
-    </FormFieldWrapper>
+    </>
   );
 }
+
+Contacts.propTypes = {
+  className: PropTypes.string,
+};
