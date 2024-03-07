@@ -5,7 +5,12 @@ export const useFindMatchingEntities = ({ key, value }) => {
   const { data: specialistData } = useGetList(RESOURCES.specialist);
   const { data: organizationData } = useGetList(RESOURCES.organization);
 
-  const allEntities = specialistData?.concat(organizationData);
+  const mappedOrganizationData = organizationData?.map(organization => ({
+    ...organization,
+    isOrganization: true,
+  }));
+
+  const allEntities = specialistData?.concat(mappedOrganizationData);
 
   const data = allEntities?.filter(entity => entity[key] === value);
 

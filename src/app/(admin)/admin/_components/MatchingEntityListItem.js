@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function DisplayMatchingEntity({ entities, label, className }) {
+export function MatchingEntityListItem({ entities, label, className }) {
   const numEntities = entities.length;
 
   return (
@@ -12,10 +12,9 @@ export function DisplayMatchingEntity({ entities, label, className }) {
       </h3>
       <ul className="mt-2 flex gap-6">
         {entities?.map(entity => {
-          const { id } = entity;
-          const hasLastName = entity.lastName;
-          const href = hasLastName ? `/admin#/specialist/${id}/show` : `/admin#/organization/${id}/show`;
-          const name = hasLastName ? `${entity.lastName} ${entity.firstName}` : `${entity.name}`;
+          const { id, isOrganization } = entity;
+          const href = isOrganization ? `/admin#/organization/${id}/show` : `/admin#/specialist/${id}/show`;
+          const name = isOrganization ? `${entity.name}` : `${entity.lastName} ${entity.firstName}`;
 
           return (
             <li key={id}>
@@ -34,7 +33,7 @@ export function DisplayMatchingEntity({ entities, label, className }) {
   );
 }
 
-DisplayMatchingEntity.propTypes = {
+MatchingEntityListItem.propTypes = {
   entities: PropTypes.array,
   label: PropTypes.string,
   className: PropTypes.string,
