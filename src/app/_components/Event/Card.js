@@ -8,21 +8,7 @@ import PropTypes from 'prop-types';
 import { Label } from '../Label';
 import { cn } from '@/utils/cn';
 import { OverflownText } from '../OverflownText';
-
-const months = {
-  0: 'січня',
-  1: 'лютого',
-  2: 'березня',
-  3: 'квітня',
-  4: 'травня',
-  5: 'червня',
-  6: 'липня',
-  7: 'серпня',
-  8: 'вересня',
-  9: 'жовтня',
-  10: 'листопада',
-  11: 'грудня',
-};
+import { MONTHS } from '@/lib/consts';
 
 const weekDays = {
   0: 'неділя',
@@ -46,7 +32,7 @@ function ListItem({ icon, text, textColor, fontWeight }) {
 function transformData(event) {
   const { title, organizerName, tags, priceType, eventDate, format, address, price, locationLink } = event;
   const date = new Date(eventDate);
-  const dateText = `${date.getDate()} ${months[date.getMonth()]}, ${weekDays[date.getDay()]}`;
+  const dateText = `${date.getDate()} ${MONTHS[date.getMonth()]}, ${weekDays[date.getDay()]}`;
   const minutes = date.getMinutes().toString();
   const hours = date.getHours().toString();
   const timeText = `${(hours.length === 1 ? '0' : '') + hours}:${(minutes.length === 1 ? '0' : '') + minutes}`;
