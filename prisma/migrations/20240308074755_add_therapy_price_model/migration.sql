@@ -3,7 +3,7 @@ CREATE TABLE "therapy_price" (
     "id" UUID NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "therapyId" UUID NOT NULL,
-    "price" INTEGER NOT NULL CONSTRAINT positive_price CHECK (price > 0),
+    "price" INTEGER NOT NULL CONSTRAINT positive_price CHECK (price >= 0),
 
     CONSTRAINT "therapy_price_pkey" PRIMARY KEY ("id")
 );
