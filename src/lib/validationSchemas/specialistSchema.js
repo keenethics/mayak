@@ -40,6 +40,72 @@ const zAddressesSchema = z.array(
     .default([]),
 );
 
+const editRestProps = z.object({
+  isActive: z.boolean().optional(),
+  surname: zStringWithMax.nullish(),
+  gender: zString.refine(val => Object.values(Gender).includes(val), {
+    message: MESSAGES.unacceptableValue,
+  }),
+  yearsOfExperience: zYearsOfExperience,
+  formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
+    message: MESSAGES.unacceptableValue,
+  }),
+  // addresses: zAddressesSchema,
+  isFreeReception: z.boolean(),
+  description: zString.nullish(),
+  phone: zString
+    .refine(val => PHONE_REGEX.test(val), {
+      message: 'Введіть номер телефона у форматі +380XXXXXXXXX',
+    })
+    .nullish(),
+  email: zString.email().nullish(),
+  website: zString.url().nullish(),
+  addresses: z.any().array(),
+});
+
+const editDefaultProps = z.object({
+  lastName: zStringWithMax,
+  firstName: zStringWithMax,
+  specializationsIds: zStringArray,
+});
+
+const activeSpecialistEditSchema = editRestProps.extend({
+  therapiesIds: zStringArray,
+  isActive: z.literal(true),
+});
+
+const draftSpecialistEditSchema = editRestProps.partial().extend({
+  isActive: z.literal(false),
+});
+
+const specialistSchemaEditUnion = z.discriminatedUnion('isActive', [
+  activeSpecialistEditSchema,
+  draftSpecialistEditSchema,
+]);
+
+export const specialistEditValidationSchema = z
+  .intersection(specialistSchemaEditUnion, editDefaultProps)
+  .superRefine((schema, ctx) => {
+    const { formatOfWork, isActive, addresses } = schema;
+
+    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Необхідно вказати мінімум одне місце надання послуг',
+        path: ['addresses'],
+      });
+    }
+
+    if (formatOfWork === FormatOfWork.ONLINE) {
+      return {
+        ...schema,
+        addresses: [],
+      };
+    }
+
+    return schema;
+  });
+
 const defaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
@@ -101,3 +167,53 @@ export const specialistValidationSchema = z
 
     return schema;
   });
+
+// export const specialistEditValidationSchema = z
+//   .object({
+//     isActive: z.boolean().optional(),
+//     surname: zStringWithMax.nullish(),
+//     gender: zString.refine(val => Object.values(Gender).includes(val), {
+//       message: MESSAGES.unacceptableValue,
+//     }),
+//     yearsOfExperience: zYearsOfExperience,
+//     formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
+//       message: MESSAGES.unacceptableValue,
+//     }),
+//     phone: zString
+//       .refine(val => PHONE_REGEX.test(val), {
+//         message: 'Введіть номер телефона у форматі +380XXXXXXXXX',
+//       })
+//       .nullish(),
+//     email: zString.email().nullish(),
+//     website: zString.url().nullish(),
+//     isFreeReception: z.boolean(),
+//     description: zString.nullish(),
+//     addresses: zAddressesSchema.default([]),
+
+//     therapiesIds: z.string().array().min(1, {
+//       message: MESSAGES.requiredField,
+//     }),
+//     specializationsIds: z.string().array().min(1, {
+//       message: MESSAGES.requiredField,
+//     }),
+//   })
+//   .superRefine((schema, ctx) => {
+//     const { formatOfWork, isActive, addresses } = schema;
+
+//     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
+//       ctx.addIssue({
+//         code: 'custom',
+//         message: 'Необхідно вказати мінімум одне місце надання послуг',
+//         path: ['addresses'],
+//       });
+//     }
+
+//     if (formatOfWork === FormatOfWork.ONLINE) {
+//       return {
+//         ...schema,
+//         addresses: [],
+//       };
+//     }
+
+//     return schema;
+//   });

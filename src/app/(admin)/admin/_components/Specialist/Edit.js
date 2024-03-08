@@ -1,3 +1,6 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { specialistEditValidationSchema } from '@/lib/validationSchemas/specialistSchema';
+
 const {
   Edit,
   SimpleForm,
@@ -184,18 +187,23 @@ function ContactsEdit() {
 }
 
 const transformData = data => {
-  const addressesToConnect = data.addresses.filter(address => address.id).map(address => ({ id: address.id }));
-  const addressesToCreate = data.addresses
-    .filter(address => !address.id)
-    .map(address => ({
-      ...address,
-      district: { connect: { id: address.districtId } },
-      districtId: undefined,
-    }));
+  // console.log({ data: JSON.stringify(data) });
+  const therapiesToConnect = data.therapiesIds?.map(id => ({ id })) ?? [];
+  const specializationsToConnect = data.specializationsIds?.map(id => ({ id }));
+  const addressesToConnect = data.addresses?.filter(address => address.id).map(address => ({ id: address.id })) ?? [];
+  const addressesToCreate =
+    data.addresses
+      ?.filter(address => !address.id)
+      .map(address => ({
+        ...address,
+        district: { connect: { id: address.districtId } },
+        districtId: undefined,
+      })) ?? [];
 
-  const addressesToDelete = data.addressesIds
-    .filter(addressId => !addressesToConnect.some(address => address.id === addressId))
-    .map(id => ({ id }));
+  const unselectedAddresses =
+    data.addressesIds?.filter(addressId => !addressesToConnect.some(address => address.id === addressId)) ?? [];
+  const addressesToDelete =
+    data.formatOfWork !== FormatOfWork.ONLINE ? unselectedAddresses.map(id => ({ id })) ?? [] : {};
 
   return {
     ...data,
@@ -204,11 +212,11 @@ const transformData = data => {
     addressesIds: undefined,
     therapies: {
       set: [],
-      connect: data.therapiesIds?.map(id => ({ id })),
+      connect: therapiesToConnect,
     },
     specializations: {
       set: [],
-      connect: data.specializationsIds?.map(id => ({ id })),
+      connect: specializationsToConnect,
     },
     addresses: {
       connect: addressesToConnect,
@@ -221,7 +229,7 @@ const transformData = data => {
 export function SpecialistEdit() {
   return (
     <Edit title={'Редагувати спеціаліста'} className="w-[800px]" transform={transformData} mutationMode="pessimistic">
-      <SimpleForm mode="onBlur" reValidateMode="onChange">
+      <SimpleForm mode="onBlur" reValidateMode="onChange" resolver={zodResolver(specialistEditValidationSchema)}>
         {/* GENERAL */}
         <GeneralInfoEdit />
         {/* DETAILS */}

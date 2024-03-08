@@ -57,6 +57,7 @@ const handler = auth(
     const { resource: modelName } = json;
     let result;
 
+    // console.log({ json, modelName, data: JSON.stringify(json.params.data) });
     if (modelName.toLocaleLowerCase() === 'specialist' || modelName.toLocaleLowerCase() === 'organization') {
       result = await defaultHandler(json, prisma, {
         getList: {
