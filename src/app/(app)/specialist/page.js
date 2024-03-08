@@ -3,13 +3,16 @@ import { PillButton, SpecialistList } from '@components';
 import { formatPhoneNumber } from '@utils/common';
 import { organizationInclude, specialistInclude } from '@/app/(app)/specialist/consts';
 import { getSpecialists, sortSpecialistsByName } from '@/app/(app)/specialist/utils';
+import { env } from '@/lib/env';
 
 export const metadata = {
   title: 'Спеціалісти',
   description: 'Список доступних спеціалістів',
 };
 
-export const revalidate = 10;
+const { REVALIDATION_TIME } = env;
+
+export const revalidate = REVALIDATION_TIME;
 
 export default async function Page() {
   const specialistsList = getSpecialists({
