@@ -2,7 +2,8 @@ import Link from 'next/link';
 import FooterImg from '@icons/whiteLogo.svg';
 import { cn } from '@utils/cn';
 import siteNav from '@config/siteNav';
-import { OutlinedButton, SocialLink } from '@components';
+import { OutlinedButton } from '@components/OutlinedButton';
+import { SocialLink } from '@components/Links';
 
 export function Footer() {
   const { links } = siteNav;

@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import p from 'prop-types';
 import { cn } from '@utils/cn';

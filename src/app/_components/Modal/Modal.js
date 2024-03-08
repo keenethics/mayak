@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import PropTypes from 'prop-types';
 import { ClientPortal } from './ClientPortal';
 import { ModalCloseButton } from './ModalCloseButton';

@@ -1,15 +1,17 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LikeIcon from '@icons/likeIcon.svg';
+import { Modal } from '@components/Modal';
+import { TextInputField } from '@components/InputFields';
+import { CheckBox } from '@components/CheckBox';
+import { TextArea } from '@components/TextArea';
+import { PillButton } from '@components/PillButton';
+import { buttonColorVariant, buttonVariant } from '@components/PillButton/style';
 import { useCreateFeedback } from '@/app/_hooks';
 import SendFeedback from '@/lib/validationSchemas/sendFeedbackSchema';
 import { cn } from '@/utils/cn';
-import { Modal } from '../Modal';
-import { TextInputField } from '../InputFields';
-import { CheckBox } from '../CheckBox';
-import { TextArea } from '../TextArea';
-import { PillButton } from '../PillButton';
-import { buttonColorVariant, buttonVariant } from '../PillButton/style';
 
 export function Feedback({ isFeedbackOpen, onClose }) {
   const [isFormOpen, setFormOpen] = useState(true);

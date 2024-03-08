@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { TopWave } from './TopWave';
-import { BottomWave } from './BottomWave';
-import { TherapyCard } from './TherapyCard';
-import { Heading } from './Typography';
+import { TopWave } from '@components/TopWave';
+import { BottomWave } from '@components/BottomWave';
+import { TherapyCard } from '@components/TherapyCard';
+import { Heading } from '@components/Typography';
 
 export async function TherapiesSection({ therapies }) {
   return (

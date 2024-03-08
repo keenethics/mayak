@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import NotFound from '@images/notFound.svg';
 import PropTypes from 'prop-types';
@@ -21,7 +20,7 @@ export function NotFoundPageWrapper({ children, href = '/', hrefText = 'Пове
           href={href}
           aria-label="Click to back to the home page"
           className={`text-sm rounded-[100px] bg-primary-500 px-6 py-3 align-middle text-p3 font-bold
-         text-other-white transition-all duration-300 hover:bg-primary-400 focus:bg-primary-600 
+         text-other-white transition-all duration-300 hover:bg-primary-400 focus:bg-primary-600
          focus:outline-none active:bg-primary-700 `}
         >
           {hrefText}

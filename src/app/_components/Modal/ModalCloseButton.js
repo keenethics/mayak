@@ -1,6 +1,7 @@
-import React from 'react';
+'use client';
+
 import PropTypes from 'prop-types';
-import СloseIcon from '../../../../public/assets/icons/closeIcon.svg';
+import СloseIcon from '@icons/closeIcon.svg';
 
 export const ModalCloseButton = ({ onClose }) => (
   <button onClick={onClose} className="p-[9.3px]">
