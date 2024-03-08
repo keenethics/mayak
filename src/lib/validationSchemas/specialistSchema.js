@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { FormatOfWork, Gender } from '@prisma/client';
 import { PHONE_REGEX } from '@/lib/consts';
 
+// ------------------ COMMON SECTION ---------------------
 const MESSAGES = {
   requiredField: `Обов'язкове поле`,
   unacceptableValue: 'Недопустиме значення',
@@ -40,7 +41,7 @@ const zAddressesSchema = z.array(
     .default([]),
 );
 
-const editRestProps = z.object({
+const specialistCore = z.object({
   isActive: z.boolean().optional(),
   surname: zStringWithMax.nullish(),
   gender: zString.refine(val => Object.values(Gender).includes(val), {
@@ -50,7 +51,6 @@ const editRestProps = z.object({
   formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
     message: MESSAGES.unacceptableValue,
   }),
-  // addresses: zAddressesSchema,
   isFreeReception: z.boolean(),
   description: zString.nullish(),
   phone: zString
@@ -60,6 +60,33 @@ const editRestProps = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
+});
+
+const createValidationSchema = (schemaUnion, defaultProperties) =>
+  z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {
+    const { formatOfWork, isActive, addresses } = schema;
+
+    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Необхідно вказати мінімум одне місце надання послуг',
+        path: ['addresses'],
+      });
+    }
+
+    if (formatOfWork === FormatOfWork.ONLINE) {
+      return {
+        ...schema,
+        addresses: [],
+      };
+    }
+
+    return schema;
+  });
+
+// ------------------ EDIT SECTION ---------------------
+
+const editRestProps = specialistCore.extend({
   addresses: z.any().array(),
 });
 
@@ -70,6 +97,9 @@ const editDefaultProps = z.object({
 });
 
 const activeSpecialistEditSchema = editRestProps.extend({
+  addresses: z.any().array().min(1, {
+    message: MESSAGES.requiredField,
+  }),
   therapiesIds: zStringArray,
   isActive: z.literal(true),
 });
@@ -83,57 +113,15 @@ const specialistSchemaEditUnion = z.discriminatedUnion('isActive', [
   draftSpecialistEditSchema,
 ]);
 
-export const specialistEditValidationSchema = z
-  .intersection(specialistSchemaEditUnion, editDefaultProps)
-  .superRefine((schema, ctx) => {
-    const { formatOfWork, isActive, addresses } = schema;
-
-    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Необхідно вказати мінімум одне місце надання послуг',
-        path: ['addresses'],
-      });
-    }
-
-    if (formatOfWork === FormatOfWork.ONLINE) {
-      return {
-        ...schema,
-        addresses: [],
-      };
-    }
-
-    return schema;
-  });
-
+export const specialistEditValidationSchema = createValidationSchema(specialistSchemaEditUnion, editDefaultProps);
+// ------------------ CREATE SECTION ---------------------
 const defaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializations: zStringArray,
 });
 
-const restProps = z.object({
-  isActive: z.boolean().optional(),
-  surname: zStringWithMax.nullish(),
-  gender: zString.refine(val => Object.values(Gender).includes(val), {
-    message: MESSAGES.unacceptableValue,
-  }),
-  yearsOfExperience: zYearsOfExperience,
-  formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
-    message: MESSAGES.unacceptableValue,
-  }),
-  therapies: zStringArray,
-  isFreeReception: z.boolean(),
-  description: zString.nullish(),
-  phone: zString
-    .refine(val => PHONE_REGEX.test(val), {
-      message: 'Введіть номер телефона у форматі +380XXXXXXXXX',
-    })
-    .nullish(),
-  email: zString.email().nullish(),
-  website: zString.url().nullish(),
-  addresses: zAddressesSchema.default([]),
-});
+const restProps = specialistCore.extend({ therapies: zStringArray, addresses: zAddressesSchema.default([]) });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
@@ -143,77 +131,5 @@ const draftSpecialistSchema = restProps.partial().extend({
   isActive: z.literal(false),
 });
 
-const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
-
-export const specialistValidationSchema = z
-  .intersection(specialistSchemaUnion, defaultProps)
-  .superRefine((schema, ctx) => {
-    const { formatOfWork, isActive, addresses } = schema;
-
-    if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Необхідно вказати мінімум одне місце надання послуг',
-        path: ['addresses'],
-      });
-    }
-
-    if (formatOfWork === FormatOfWork.ONLINE) {
-      return {
-        ...schema,
-        addresses: [],
-      };
-    }
-
-    return schema;
-  });
-
-// export const specialistEditValidationSchema = z
-//   .object({
-//     isActive: z.boolean().optional(),
-//     surname: zStringWithMax.nullish(),
-//     gender: zString.refine(val => Object.values(Gender).includes(val), {
-//       message: MESSAGES.unacceptableValue,
-//     }),
-//     yearsOfExperience: zYearsOfExperience,
-//     formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
-//       message: MESSAGES.unacceptableValue,
-//     }),
-//     phone: zString
-//       .refine(val => PHONE_REGEX.test(val), {
-//         message: 'Введіть номер телефона у форматі +380XXXXXXXXX',
-//       })
-//       .nullish(),
-//     email: zString.email().nullish(),
-//     website: zString.url().nullish(),
-//     isFreeReception: z.boolean(),
-//     description: zString.nullish(),
-//     addresses: zAddressesSchema.default([]),
-
-//     therapiesIds: z.string().array().min(1, {
-//       message: MESSAGES.requiredField,
-//     }),
-//     specializationsIds: z.string().array().min(1, {
-//       message: MESSAGES.requiredField,
-//     }),
-//   })
-//   .superRefine((schema, ctx) => {
-//     const { formatOfWork, isActive, addresses } = schema;
-
-//     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
-//       ctx.addIssue({
-//         code: 'custom',
-//         message: 'Необхідно вказати мінімум одне місце надання послуг',
-//         path: ['addresses'],
-//       });
-//     }
-
-//     if (formatOfWork === FormatOfWork.ONLINE) {
-//       return {
-//         ...schema,
-//         addresses: [],
-//       };
-//     }
-
-//     return schema;
-//   });
+export const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialistSchema, draftSpecialistSchema]);
+export const specialistValidationSchema = createValidationSchema(specialistSchemaUnion, defaultProps);

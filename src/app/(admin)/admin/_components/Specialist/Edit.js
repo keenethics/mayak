@@ -25,12 +25,14 @@ const { capitalizeFirstLetter } = require('../../_utils/common');
 const { FormTranslations } = require('../../_lib/translations');
 const { TextInputList } = require('../TextInputList');
 
-function AddressForm({ getSource, disabled }) {
+function AddressForm({ getSource, readOnly }) {
   const { fullAddress, nameOfClinic } = SpecialistFormFields;
   return (
     <>
       <TextInput
-        disabled={disabled}
+        InputProps={{
+          readOnly,
+        }}
         fullWidth
         source={getSource(fullAddress.name)}
         label={fullAddress.label}
@@ -38,14 +40,22 @@ function AddressForm({ getSource, disabled }) {
         helperText="Вулиця, номер будинку, поверх, кабінет"
       />
       <TextInput
-        disabled={disabled}
+        InputProps={{
+          readOnly,
+        }}
         source={getSource(nameOfClinic.name)}
         label={nameOfClinic.label}
         validate={nameOfClinic.isRequired && required()}
         fullWidth
       />
       <ReferenceInput source={getSource('districtId')} reference="District">
-        <SelectInput disabled={disabled} optionText="name" optionValue="id" />
+        <SelectInput
+          optionText="name"
+          optionValue="id"
+          InputProps={{
+            readOnly,
+          }}
+        />
       </ReferenceInput>
     </>
   );
@@ -53,7 +63,7 @@ function AddressForm({ getSource, disabled }) {
 
 AddressForm.propTypes = {
   getSource: PropTypes.func.isRequired,
-  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 function AddressesEdit() {
@@ -75,7 +85,7 @@ function AddressesEdit() {
                   {({ scopedFormData, getSource }) => {
                     if (!scopedFormData) return null;
                     return scopedFormData.id ? (
-                      <AddressForm scopedFormData={scopedFormData} getSource={getSource} disabled />
+                      <AddressForm scopedFormData={scopedFormData} getSource={getSource} readOnly />
                     ) : (
                       <AddressForm scopedFormData={scopedFormData} getSource={getSource} />
                     );
