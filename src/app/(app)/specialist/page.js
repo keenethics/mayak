@@ -9,6 +9,8 @@ export const metadata = {
   description: 'Список доступних спеціалістів',
 };
 
+export const revalidate = 10;
+
 export default async function Page() {
   const specialistsList = getSpecialists({
     model: 'specialist',
