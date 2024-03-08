@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { TopWave, BottomWave, TherapyCard, Heading } from '@components';
+import { TherapyCardPropTypes } from './prop-types';
 
 export async function TherapiesSection({ therapies }) {
   return (
@@ -27,13 +28,5 @@ export async function TherapiesSection({ therapies }) {
 }
 
 TherapiesSection.propTypes = {
-  therapies: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      imagePath: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  therapies: PropTypes.arrayOf(PropTypes.shape(TherapyCardPropTypes)).isRequired,
 };

@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PillButton, Heading, Paragraph } from '@components';
 import { buttonColorVariant, buttonVariant } from '../PillButton/style';
+import { TherapyCardPropTypes } from './prop-types';
 
 export function TherapyCard({ type, description, title, imagePath }) {
   return (
@@ -19,9 +19,4 @@ export function TherapyCard({ type, description, title, imagePath }) {
   );
 }
 
-TherapyCard.propTypes = {
-  type: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  imagePath: PropTypes.string.isRequired,
-};
+TherapyCard.propTypes = TherapyCardPropTypes;

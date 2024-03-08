@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Heading, TopWave, FAQCard } from '@components';
+import { FAQCardPropTypes } from './prop-types';
 
 export function FAQSection({ faqs }) {
   return (
@@ -21,11 +22,5 @@ export function FAQSection({ faqs }) {
 }
 
 FAQSection.propTypes = {
-  faqs: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      question: PropTypes.string.isRequired,
-      answer: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  faqs: PropTypes.arrayOf(PropTypes.shape(FAQCardPropTypes)).isRequired,
 };

@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Paragraph } from '@components';
 import Plus from '@icons/plus.svg';
 import Minus from '@icons/minus.svg';
+import { FAQCardPropTypes } from './prop-types';
 
 export function FAQCard({ id, question, answer }) {
   return (
@@ -24,8 +24,4 @@ export function FAQCard({ id, question, answer }) {
   );
 }
 
-FAQCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  question: PropTypes.string.isRequired,
-  answer: PropTypes.string.isRequired,
-};
+FAQCard.propTypes = FAQCardPropTypes;
