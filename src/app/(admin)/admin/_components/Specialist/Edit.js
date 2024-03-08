@@ -115,7 +115,7 @@ function DetailsEdit() {
   return (
     <FormFieldWrapper title={SpecialistFormSections.details} className="mt-3">
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <TextInput
+        <SelectInput
           name={gender.name}
           source={gender.name}
           label={gender.label}
@@ -212,9 +212,10 @@ const transformData = data => {
 
   const unselectedAddresses =
     data.addressesIds?.filter(addressId => !addressesToConnect.some(address => address.id === addressId)) ?? [];
+  // if formatOfWork is ONLINE, we need to delete all connected addresses
   const addressesToDelete =
     data.formatOfWork !== FormatOfWork.ONLINE ? unselectedAddresses.map(id => ({ id })) ?? [] : {};
-
+  // console.log({ addressesToDelete: JSON.stringify(addressesToDelete) });
   return {
     ...data,
     specializationsIds: undefined,
@@ -239,7 +240,7 @@ const transformData = data => {
 export function SpecialistEdit() {
   return (
     <Edit title={'Редагувати спеціаліста'} className="w-[800px]" transform={transformData} mutationMode="pessimistic">
-      <SimpleForm mode="onBlur" reValidateMode="onChange" resolver={zodResolver(specialistEditValidationSchema)}>
+      <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(specialistEditValidationSchema)}>
         {/* GENERAL */}
         <GeneralInfoEdit />
         {/* DETAILS */}

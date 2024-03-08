@@ -31,15 +31,18 @@ const zYearsOfExperience = z
   .nonnegative()
   .nullish();
 
-const zAddressesSchema = z.array(
-  z
+const zAddressSchema = z.object({
+  id: z.string().nullish(),
+  fullAddress: zStringWithMax,
+  nameOfClinic: z.string().nullish(),
+  districtId: z.string(),
+  district: z
     .object({
-      fullAddress: zStringWithMax,
-      nameOfClinic: z.string().nullish(),
-      district: zString,
+      id: z.string(),
+      name: zString,
     })
-    .default([]),
-);
+    .nullish(),
+});
 
 const specialistCore = z.object({
   isActive: z.boolean().optional(),
@@ -60,12 +63,12 @@ const specialistCore = z.object({
     .nullish(),
   email: zString.email().nullish(),
   website: zString.url().nullish(),
+  addressesIds: zString.array(),
 });
 
 const createValidationSchema = (schemaUnion, defaultProperties) =>
   z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {
     const { formatOfWork, isActive, addresses } = schema;
-
     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
       ctx.addIssue({
         code: 'custom',
@@ -86,38 +89,25 @@ const createValidationSchema = (schemaUnion, defaultProperties) =>
 
 // ------------------ EDIT SECTION ---------------------
 
-const zAddressSchema = z.object({
-  id: z.string().nullish(),
-  fullAddress: zStringWithMax,
-  nameOfClinic: z.string().nullish(),
-  districtId: z.string(),
-  district: z
-    .object({
-      id: z.string(),
-      name: zString,
-    })
-    .nullish(),
-});
-
-const editRestProps = specialistCore.extend({
-  addresses: zAddressSchema.array().min(1, {
-    message: MESSAGES.requiredField,
-  }),
-  addressesIds: zStringArray,
-});
-
 const editDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializationsIds: zStringArray,
 });
 
-const activeSpecialistEditSchema = editRestProps.extend({
+const activeSpecialistEditSchema = specialistCore.extend({
+  addresses: zAddressSchema
+    .array()
+    .min(1, {
+      message: MESSAGES.requiredField,
+    })
+    .default([]),
   therapiesIds: zStringArray,
   isActive: z.literal(true),
 });
 
-const draftSpecialistEditSchema = editRestProps.partial().extend({
+const draftSpecialistEditSchema = specialistCore.partial().extend({
+  addresses: zAddressSchema.array(),
   isActive: z.literal(false),
 });
 
@@ -134,7 +124,7 @@ const defaultProps = z.object({
   specializations: zStringArray,
 });
 
-const restProps = specialistCore.extend({ therapies: zStringArray, addresses: zAddressesSchema.default([]) });
+const restProps = specialistCore.extend({ therapies: zStringArray, addresses: zAddressSchema.array().default([]) });
 
 const activeSpecialistSchema = restProps.extend({
   isActive: z.literal(true),
