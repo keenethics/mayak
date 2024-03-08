@@ -6,6 +6,7 @@ import LocationIcon from '@icons/locationFilled.svg';
 import TimeIcon from '@icons/timeFilled.svg';
 import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
+import { parseDate } from '@/utils/parseDate';
 import { Label } from '../Label';
 import { OverflownText } from '../OverflownText';
 
@@ -20,11 +21,8 @@ function ListItem({ icon, text, textColor, fontWeight }) {
 
 function transformData(event) {
   const { title, organizerName, tags, priceType, eventDate, format, address, price, locationLink } = event;
-  const date = new Date(eventDate);
-  const day = date.toLocaleDateString('uk-UA', { weekday: 'long' });
-  const monthDate = date.toLocaleDateString('uk-UA', { day: 'numeric', month: 'long' });
-  const dateText = `${monthDate}, ${day}`;
-  const timeText = date.toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' });
+  const { day, month, time } = parseDate(eventDate);
+  const date = `${month}, ${day} `;
   const locationText = format === 'ONLINE' ? 'Онлайн' : address;
   let priceText;
   switch (priceType) {
@@ -40,12 +38,11 @@ function transformData(event) {
   default:
     break;
   }
-  return { title, organizerName, tags, priceText, locationText, dateText, timeText, locationLink };
+  return { title, organizerName, tags, priceText, locationText, date, time, locationLink };
 }
 
 export default function EventCard({ event }) {
-  const { title, organizerName, tags, priceText, locationText, dateText, timeText, locationLink } =
-    transformData(event);
+  const { title, organizerName, tags, priceText, locationText, date, time, locationLink } = transformData(event);
 
   const addressElement = (
     <OverflownText
@@ -66,8 +63,8 @@ export default function EventCard({ event }) {
       <div className="flex w-64 items-start gap-4 overflow-hidden">{tagsElements}</div>
       <hr className="border border-dashed border-gray-300" />
       <ul className="flex w-[259px] flex-col gap-4">
-        <ListItem icon={<CalendarIcon />} textColor="text-secondary-400" fontWeight="font-bold" text={dateText} />
-        <ListItem icon={<TimeIcon />} textColor="text-gray-700" fontWeight="font-medium" text={timeText} />
+        <ListItem icon={<CalendarIcon />} textColor="text-secondary-400" fontWeight="font-bold" text={date} />
+        <ListItem icon={<TimeIcon />} textColor="text-gray-700" fontWeight="font-medium" text={time} />
         <ListItem icon={<PriceIcon />} textColor="text-gray-700" fontWeight="font-medium" text={priceText} />
         <li className="flex gap-2">
           <LocationIcon />
