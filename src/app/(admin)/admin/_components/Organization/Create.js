@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { OrganizationSchema } from '@admin/_lib/validationSchemas/createOrganizationSchema';
 import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
 import React from 'react';
-import { Contacts } from '@admin/components/Organization/Contacts';
+import { ContactsList } from '@admin/_components';
 import { AddressInput } from './CreateAdresses';
 import { SelectTherapies } from './SelectTherapies';
 import { SelectOrganizationType } from './SelectOrgType';
@@ -47,8 +47,7 @@ export function OrganizationCreate() {
                 falseLabel="Ні"
                 trueLabel="Так"
               />
-              <p className="font-bold">Контакти</p>
-              <Contacts className={fieldGroupClass} />
+              <ContactsList />
               <p className="font-bold">Соціальні мережі</p>
               <div className={fieldGroupClass}>
                 <TextInput label="Instagram" source="instagram" />
