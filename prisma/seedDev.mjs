@@ -36,7 +36,20 @@ function randomAddress(districts) {
     },
   };
 }
-
+function randomTherapyPrices(selectedTherapies) {
+  const therapyPrices = [];
+  selectedTherapies.forEach(el => {
+    if (Math.random() > 0.5) {
+      therapyPrices.push({
+        price: faker.number.int({ min: 0, max: 20 }) * 100,
+        therapy: {
+          connect: el,
+        },
+      });
+    }
+  });
+  return therapyPrices;
+}
 function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
@@ -48,7 +61,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
         .map(() => randomAddress(districts)),
     };
   }
-
+  const specialistTherapies = uniqueObjectsWithId(therapies);
   const phoneRegexp = '+380[0-9]{9}';
   return {
     specializations: {
@@ -64,7 +77,10 @@ function randomSpecialist({ districts, specializations, therapies }) {
     formatOfWork,
     addresses,
     therapies: {
-      connect: uniqueObjectsWithId(therapies),
+      connect: specialistTherapies,
+    },
+    therapyPrices: {
+      create: randomTherapyPrices(specialistTherapies),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
