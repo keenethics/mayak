@@ -86,8 +86,24 @@ const createValidationSchema = (schemaUnion, defaultProperties) =>
 
 // ------------------ EDIT SECTION ---------------------
 
+const zAddressSchema = z.object({
+  id: z.string().nullish(),
+  fullAddress: zStringWithMax,
+  nameOfClinic: z.string().nullish(),
+  districtId: z.string(),
+  district: z
+    .object({
+      id: z.string(),
+      name: zString,
+    })
+    .nullish(),
+});
+
 const editRestProps = specialistCore.extend({
-  addresses: z.any().array(),
+  addresses: zAddressSchema.array().min(1, {
+    message: MESSAGES.requiredField,
+  }),
+  addressesIds: zStringArray,
 });
 
 const editDefaultProps = z.object({
@@ -97,9 +113,6 @@ const editDefaultProps = z.object({
 });
 
 const activeSpecialistEditSchema = editRestProps.extend({
-  addresses: z.any().array().min(1, {
-    message: MESSAGES.requiredField,
-  }),
   therapiesIds: zStringArray,
   isActive: z.literal(true),
 });
