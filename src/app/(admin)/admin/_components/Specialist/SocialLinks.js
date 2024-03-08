@@ -11,7 +11,7 @@ export function SocialLinks({ className }) {
   return (
     <FormFieldWrapper title={SpecialistFormSections.socialLinks} className={className}>
       <div className="grid w-full gap-x-6 md:grid-cols-2 lg:grid-cols-3">
-        <TextInputList textInputList={socialMediaList} className="" />
+        <TextInputList list={socialMediaList} className="" />
       </div>
     </FormFieldWrapper>
   );

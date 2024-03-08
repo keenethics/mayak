@@ -31,7 +31,9 @@ export function MatchingEntityList({ matchingParams, className }) {
     );
   };
 
-  return (
+  const isShown = hasEntitiesMatchingPhone || hasEntitiesMatchingEmail;
+
+  return isShown ? (
     <div className={cn('flex flex-col gap-6', className)}>
       {hasEntitiesMatchingPhone && <MatchingEntityListItem entities={entitiesMatchingPhone} label="телефон" />}
       {hasEntitiesMatchingEmail && <MatchingEntityListItem entities={entitiesMatchingEmail} label="пошта" />}
@@ -40,7 +42,7 @@ export function MatchingEntityList({ matchingParams, className }) {
         {noteIndicator({ isActive: false })}
       </div>
     </div>
-  );
+  ) : null;
 }
 
 MatchingEntityList.propTypes = {

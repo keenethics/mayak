@@ -1,15 +1,15 @@
 import { useGetList } from 'react-admin';
-import { RESOURCES } from '@admin/_lib/consts';
+import { EMAIL, PHONE, RESOURCES } from '@admin/_lib/consts';
 import { z } from 'zod';
 import { PHONE_REGEX } from '@/lib/consts';
 
 export const useFindEntityMatchingPhoneOrEmail = ({ key, value }) => {
   const validationSchema = {
-    phone: z
+    [PHONE]: z
       .string()
       .trim()
       .refine(val => PHONE_REGEX.test(val)),
-    email: z.string().trim().email(),
+    [EMAIL]: z.string().trim().email(),
   };
 
   const { success } = validationSchema[key].safeParse(value);

@@ -17,7 +17,7 @@ export function Contacts() {
   return (
     <FormFieldWrapper title={SpecialistFormSections.contacts}>
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <TextInputList textInputList={contactsList} />
+        <TextInputList list={contactsList} />
       </div>
       <MatchingEntityList matchingParams={matchingParams} className="mb-7" />
     </FormFieldWrapper>

@@ -9,7 +9,8 @@ export function MatchingEntityListItem({ entities, label, className }) {
   return (
     <div className={className}>
       <h3 className="text-p4 text-primary-700">
-        {`Знайдені співпадіння за параметром "${label}"`} <span className="font-bold">({numEntities})</span>:
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        Знайдені співпадіння за параметром "{label}" <span className="font-bold">({numEntities})</span>:
       </h3>
       <ul className="mt-4 flex flex-col gap-4">
         {numEntities > 0 &&
