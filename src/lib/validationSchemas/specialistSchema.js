@@ -67,6 +67,7 @@ const restProps = z.object({
   email: zString.email().nullish(),
   website: zString.url().nullish(),
   addresses: zAddressesSchema.default([]),
+  therapyPrices: z.record(z.string(), z.any()).nullish(),
 });
 
 const activeSpecialistSchema = restProps.extend({
@@ -82,7 +83,26 @@ const specialistSchemaUnion = z.discriminatedUnion('isActive', [activeSpecialist
 export const specialistValidationSchema = z
   .intersection(specialistSchemaUnion, defaultProps)
   .superRefine((schema, ctx) => {
-    const { formatOfWork, isActive, addresses } = schema;
+    const { formatOfWork, isActive, addresses, therapyPrices, therapies } = schema;
+
+    if (therapyPrices) {
+      const invalidPrices = therapies.filter(el => {
+        const result = z
+          .number()
+          .int()
+          .refine(n => n >= 0)
+          .nullish()
+          .safeParse(therapyPrices[el]);
+        return !result.success;
+      });
+      invalidPrices.forEach(el => {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Ціна повинна бути цілим числом не менше 0',
+          path: [`therapyPrices.${el}`],
+        });
+      });
+    }
 
     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
       ctx.addIssue({
