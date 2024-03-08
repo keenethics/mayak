@@ -42,10 +42,11 @@ export const useFindEntityMatchingPhoneOrEmail = ({ key, value }) => {
     isOrganization: true,
   }));
 
-  const data = specialists?.concat(mappedOrganizations);
+  const data = specialists?.concat(mappedOrganizations) ?? [];
+  const num = data.length;
 
   return {
-    data: data ?? [],
-    num: data?.length ?? 0,
+    data,
+    num,
   };
 };

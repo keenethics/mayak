@@ -13,7 +13,7 @@ export function MatchingEntityListItem({ entities, label, className }) {
         Знайдені співпадіння за параметром "{label}" <span className="font-bold">({numEntities})</span>:
       </h3>
       <ul className="mt-4 flex flex-col gap-4">
-        {numEntities > 0 &&
+        {numEntities &&
           entities?.map(entity => {
             const { id, isOrganization, isActive } = entity;
             const href = isOrganization ? `/admin#/organization/${id}/show` : `/admin#/specialist/${id}/show`;
