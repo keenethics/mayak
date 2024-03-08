@@ -15,6 +15,16 @@ const MODEL_SEARCH_FIELDS = {
 const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
     therapies: { select: { id: true, type: true, title: true } },
+    therapyPrices: {
+      select: {
+        price: true,
+        therapy: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    },
     specializations: { select: { name: true } },
     addresses: {
       select: {
