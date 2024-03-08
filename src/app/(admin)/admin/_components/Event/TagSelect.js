@@ -5,8 +5,9 @@ import { Loading, useGetList, useCreate } from 'react-admin';
 import PropTypes from 'prop-types';
 import { RESOURCES } from '@admin/_lib/consts';
 
+let newTagsLength;
+
 export function TagSelect({ setSelectedTags, defaultValue }) {
-  let newTagsLength;
   const [create] = useCreate();
   const [value, setValue] = useState(defaultValue);
   const [error, setError] = useState(false);
