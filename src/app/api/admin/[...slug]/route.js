@@ -70,8 +70,13 @@ const handler = auth(
           include: MODEL_INCLUDES[modelName],
           transform: instance => {
             // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
-            // eslint-disable-next-line no-param-reassign
-            instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
+            if (modelName.toLocaleLowerCase() === 'organization') {
+              // eslint-disable-next-line no-param-reassign
+              instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
+            } else {
+              // eslint-disable-next-line no-param-reassign
+              instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
+            }
             // eslint-disable-next-line no-param-reassign
             instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
             // eslint-disable-next-line no-param-reassign
@@ -89,6 +94,7 @@ const handler = auth(
             districts: true,
             specializations: true,
             therapies: true,
+            type: true,
           },
         },
       });

@@ -11,6 +11,7 @@ import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/
 import { CreateTherapy, EditTherapy, ListTherapy } from '@admin/components/Therapy';
 import { authProvider } from './authProvider';
 import { SpecialistEdit } from './_components/Specialist/Edit';
+import { OrganizationEdit } from './_components/Organization/Edit';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -23,6 +24,7 @@ export default function AdminPage() {
         list={OrganizationsList}
         show={OrganizationShow}
         create={OrganizationCreate}
+        edit={OrganizationEdit}
       />
       <Resource
         name={RESOURCES.specialist}

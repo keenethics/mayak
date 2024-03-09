@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { specialistEditValidationSchema } from '@/lib/validationSchemas/specialistSchema';
+import { organizationEditValidationSchema } from '../../_lib/validationSchemas/editOrganizationSchema';
 
 const {
   Edit,
@@ -18,9 +18,9 @@ const {
 } = require('react-admin');
 
 const PropTypes = require('prop-types');
-const { Gender, FormatOfWork } = require('@prisma/client');
+const { FormatOfWork } = require('@prisma/client');
 const { FormFieldWrapper } = require('../FormFieldWrapper');
-const { SpecialistFormSections, SpecialistFormFields } = require('../../_lib/specialistData');
+const { SpecialistFormSections, SpecialistFormFields, OrganizationFormFields } = require('../../_lib/specialistData');
 const { capitalizeFirstLetter } = require('../../_utils/common');
 const { FormTranslations } = require('../../_lib/translations');
 const { TextInputList } = require('../TextInputList');
@@ -107,26 +107,18 @@ function DetailsEdit() {
       name: capitalizeFirstLetter(translations[item.toLowerCase()]) ?? item,
     }));
 
-  const genderChoicesList = getChoicesList(Object.values(Gender), FormTranslations.gender);
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork), FormTranslations.formatOfWork);
 
-  const { gender, yearsOfExperience, formatOfWork } = SpecialistFormFields;
+  const { yearsOnMarket, formatOfWork } = OrganizationFormFields;
 
   return (
     <FormFieldWrapper title={SpecialistFormSections.details} className="mt-3">
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <SelectInput
-          name={gender.name}
-          source={gender.name}
-          label={gender.label}
-          validate={gender.isRequired && required()}
-          choices={genderChoicesList}
-        />
         <NumberInput
-          name={yearsOfExperience.name}
-          source={yearsOfExperience.name}
-          label={yearsOfExperience.label}
-          validate={yearsOfExperience.isRequired && required()}
+          name={yearsOnMarket.name}
+          source={yearsOnMarket.name}
+          label={yearsOnMarket.label}
+          validate={yearsOnMarket.isRequired && required()}
           min="0"
         />
         <SelectInput
@@ -138,22 +130,6 @@ function DetailsEdit() {
           className="flex-1"
         />
       </div>
-    </FormFieldWrapper>
-  );
-}
-
-function GeneralInfoEdit() {
-  const { lastName, firstName, surname } = SpecialistFormFields;
-  const generalInfoList = [lastName, firstName, surname];
-
-  return (
-    <FormFieldWrapper title={SpecialistFormSections.general}>
-      <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <TextInputList textInputList={generalInfoList} />
-      </div>
-      <ReferenceArrayInput source={'specializationsIds'} reference="Specialization">
-        <AutocompleteArrayInput optionValue="id" optionText="name" />
-      </ReferenceArrayInput>
     </FormFieldWrapper>
   );
 }
@@ -179,7 +155,7 @@ function ServicesEdit() {
 
 function ContactsEdit() {
   const { phone, email, website, instagram, facebook, youtube, linkedin, tiktok, viber, telegram } =
-    SpecialistFormFields;
+    OrganizationFormFields;
 
   const contactsList = [phone, email, website];
   const socialMediaList = [instagram, facebook, youtube, linkedin, tiktok, viber, telegram];
@@ -196,10 +172,25 @@ function ContactsEdit() {
   );
 }
 
+function GeneralInfoEdit() {
+  const { name } = OrganizationFormFields;
+  const generalInfoList = [name];
+  return (
+    <FormFieldWrapper title={SpecialistFormSections.general}>
+      <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
+        <TextInputList textInputList={generalInfoList} />
+      </div>
+      <ReferenceArrayInput source={'organizationTypesIds'} reference="OrganizationType">
+        <AutocompleteArrayInput optionValue="id" optionText="name" />
+      </ReferenceArrayInput>
+    </FormFieldWrapper>
+  );
+}
+
 const transformData = data => {
   // console.log({ data: JSON.stringify(data) });
   const therapiesToConnect = data.therapiesIds?.map(id => ({ id })) ?? [];
-  const specializationsToConnect = data.specializationsIds?.map(id => ({ id }));
+  const organizationTypesToConnect = data.organizationTypesIds?.map(id => ({ id }));
   const addressesToConnect = data.addresses?.filter(address => address.id).map(address => ({ id: address.id })) ?? [];
   const addressesToCreate =
     data.addresses
@@ -215,19 +206,19 @@ const transformData = data => {
   // if formatOfWork is ONLINE, we need to delete all connected addresses
   const addressesToDelete =
     data.formatOfWork !== FormatOfWork.ONLINE ? unselectedAddresses.map(id => ({ id })) ?? [] : {};
-  // console.log({ addressesToDelete: JSON.stringify(addressesToDelete) });
+
   return {
     ...data,
-    specializationsIds: undefined,
+    organizationTypesIds: undefined,
     therapiesIds: undefined,
     addressesIds: undefined,
     therapies: {
       set: [],
       connect: therapiesToConnect,
     },
-    specializations: {
+    type: {
       set: [],
-      connect: specializationsToConnect,
+      connect: organizationTypesToConnect,
     },
     addresses: {
       connect: addressesToConnect,
@@ -237,26 +228,15 @@ const transformData = data => {
   };
 };
 
-export function SpecialistEdit() {
+export function OrganizationEdit() {
   return (
-    <Edit
-      title={'Редагувати дані спеціаліста'}
-      className="w-[800px]"
-      transform={transformData}
-      mutationMode="pessimistic"
-    >
-      <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(specialistEditValidationSchema)}>
-        {/* GENERAL */}
+    <Edit title={'Редагувати дані організації'} transform={transformData} mutationMode="pessimistic">
+      <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(organizationEditValidationSchema)}>
         <GeneralInfoEdit />
-        {/* DETAILS */}
         <DetailsEdit />
-        {/* ADDRESSES */}
         <AddressesEdit />
-        {/* SERVICES */}
         <ServicesEdit />
-        {/* CONTACTS */}
         <ContactsEdit />
-        {/* ACTIVATE */}
         <BooleanInput name="isActive" source="isActive" label="Активувати спеціаліста" className="mt-8" />
       </SimpleForm>
     </Edit>

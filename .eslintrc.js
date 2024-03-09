@@ -16,7 +16,7 @@ module.exports = {
     'react/function-component-definition': [2, { namedComponents: ['arrow-function', 'function-declaration'] }],
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
     'no-return-await': 'off',
-    indent: ['error', 2],
+    'indent': ['error', 2, { SwitchCase: 1 }],
     'no-multiple-empty-lines': ['error', { max: 3, maxBOF: 0, maxEOF: 0 }],
     'no-underscore-dangle': 0,
     'arrow-parens': ['error', 'as-needed', { requireForBlockBody: false }],
