@@ -1,27 +1,28 @@
 'use client';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { PillButton } from '@components';
 import { Tick } from '@icons/index';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { cn } from '@utils/cn';
 import { useState } from 'react';
+
+import 'swiper/css';
 
 export function DistrictList({ list, className }) {
   const [selected, setSelected] = useState(0);
-
   const handleClick = index => {
     setSelected(index);
   };
 
   return (
-    <ul className={cn('mt-4 flex gap-4', className)}>
+    <Swiper slidesPerView={'auto'} spaceBetween={15} wrapperClass={className}>
       {list.map(({ id, name }, index) => {
         const isSelected = index === selected;
         const hasIcon = isSelected ? <Tick /> : null;
 
         return (
-          <li key={id} onClick={() => handleClick(index)}>
+          <SwiperSlide key={id} onClick={() => handleClick(index)} className="fit-co">
             <Link href={`?district=${name}`} className={isSelected ? 'pointer-events-none cursor-none' : ''}>
               <PillButton
                 variant="transparent"
@@ -32,10 +33,10 @@ export function DistrictList({ list, className }) {
                 {name}
               </PillButton>
             </Link>
-          </li>
+          </SwiperSlide>
         );
       })}
-    </ul>
+    </Swiper>
   );
 }
 

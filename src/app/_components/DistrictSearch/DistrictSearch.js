@@ -8,11 +8,11 @@ export async function DistrictSearch({ className }) {
   const optionsList = await getDistrictsList();
 
   return (
-    <section className={cn('mx-auto w-full max-w-[900px]', className)}>
+    <section className={cn('mx-auto w-full max-w-[900px] px-4 lg:px-0', className)}>
       <Heading type="h3" className="text-p4 font-bold uppercase text-primary-600">
         Райони міста Львова
       </Heading>
-      <DistrictList list={optionsList} />
+      <DistrictList list={optionsList} className="mt-4 w-[100%]" />
     </section>
   );
 }
