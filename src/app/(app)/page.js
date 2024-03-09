@@ -1,4 +1,4 @@
-import { TherapiesSection } from '@components';
+import { DistrictSearch, TherapiesSection } from '@components';
 import { prisma } from '@/lib/db';
 
 // Page metadata should contain
@@ -15,9 +15,10 @@ export default async function Page() {
     where: { isActive: true },
     orderBy: { priority: 'desc' },
   });
+
   return (
     <>
-      <section>TBD district & search section</section>
+      <DistrictSearch className="my-8" />
       <TherapiesSection therapies={activeTherapies} />
       <section>TBD goal section</section>
       <section>FAQ section</section>

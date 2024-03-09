@@ -42,6 +42,15 @@ export const buttonColorVariant = {
       disabled,
     },
   },
+  transparent: {
+    orange: {
+      regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-p4 text-gray-900 font-normal',
+      hover: 'hover:bg-secondary-300',
+      focused: 'focus:outline-none focus:bg-secondary-300 focus:border-secondary-300',
+      active: 'active:bg-secondary-300 active:border-secondary-300',
+      disabled,
+    },
+  },
   close: {
     grey: {
       regular: 'text-[transparent]',
@@ -61,6 +70,18 @@ export const buttonType = {
       buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col h-[2.5rem] flex-shrink-0 text-p4',
       layoutStyle: `flex justify-center align-middle
       gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[10px] px-[24px]`,
+    },
+  },
+  transparent: {
+    icon: {
+      buttonStyle: 'transition-all inline-flex justify-center items-center flex-col flex-shrink-0 text-p4',
+      layoutStyle: `flex justify-center items-center
+      gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-1.5 px-3`,
+    },
+    regular: {
+      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col flex-shrink-0 text-p4',
+      layoutStyle: `flex justify-center align-middle
+      gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-1.5 px-3`,
     },
   },
   filledBold: {
