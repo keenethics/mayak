@@ -4,19 +4,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import {
+  AddressesList,
+  BadgeList,
+  CardButton,
+  CardWrapper,
+  ContactsList,
+  DetailsList,
   getContactsList,
   getLabelsList,
   getSpecialistSocials,
   ProfileImage,
-  ContactsList,
-  BadgeList,
+  SocialsList,
   SpecialistTitle,
   SpecializationsPanel,
-  CardWrapper,
-  SocialsList,
-  DetailsList,
-  AddressesList,
-  CardButton,
 } from '@components';
 import { specialistPropType } from '@/app/_components/CardSpecialist/prop-types';
 
@@ -80,7 +80,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         {extended ? (
           <>
             <DetailsList
-              className="mt-4 border-t border-dashed border-t-gray-200 pt-4"
+              className="border-t border-dashed border-t-gray-200 pt-4"
               details={{ addresses, description }}
             />
             <ContactsList

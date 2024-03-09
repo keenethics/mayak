@@ -15,7 +15,6 @@ export function CardWrapper({ children, className, id }) {
   const { toggle } = useHintContext();
 
   const isExtendedCardOpened = !!params.get('id');
-  const cursorStyle = isExtendedCardOpened ? 'cursor-auto' : 'cursor-pointer';
 
   const handleClick = () => {
     router.push(`/specialist/${id}`, { scroll: false });
@@ -26,7 +25,11 @@ export function CardWrapper({ children, className, id }) {
 
   return (
     <div
-      className={cn('transition-all md:flex md:cursor-auto lg:mx-auto', cursorStyle, className)}
+      className={cn(
+        'transition-all md:flex md:cursor-auto lg:mx-auto',
+        isExtendedCardOpened ? 'cursor-auto' : 'cursor-pointer',
+        className,
+      )}
       onClick={hasClickHandler ? handleClick : undefined}
     >
       {children}
