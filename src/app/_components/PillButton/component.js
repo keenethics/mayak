@@ -1,8 +1,8 @@
 'use client';
 
 import PropTypes from 'prop-types';
+import { Paragraph } from '@components/Typography';
 import { cn } from '@/app/utils/cn';
-import { Paragraph } from '../Typography';
 
 export function PillButton({
   children,

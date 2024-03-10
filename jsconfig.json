@@ -5,7 +5,6 @@
       "@icons/*": ["./public/assets/icons/*"],
       "@images/*": ["./public/assets/images/*"],
       "@public/*": ["./public/assets/*"],
-      "@components": ["./src/app/_components/index"],
       "@components/*": ["./src/app/_components/*"],
       "@hooks": ["./src/app/_hooks/index"],
       "@admin/*": ["./src/app/(admin)/admin/*"],

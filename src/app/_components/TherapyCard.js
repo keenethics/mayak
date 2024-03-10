@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PillButton } from '@components';
 import { Heading, Paragraph } from '@components/Typography';
+import { PillButton } from '@components/PillButton';
 import { buttonColorVariant, buttonVariant } from '@components/PillButton/style';
 
 export function TherapyCard({ type, description, title, imagePath }) {
