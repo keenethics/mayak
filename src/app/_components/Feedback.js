@@ -8,7 +8,6 @@ import { TextInputField } from '@components/InputFields';
 import { CheckBox } from '@components/CheckBox';
 import { TextArea } from '@components/TextArea';
 import { PillButton } from '@components/PillButton';
-import { buttonColorVariant, buttonVariant } from '@components/PillButton/style';
 import { useCreateFeedback } from '@/app/_hooks';
 import SendFeedback from '@/lib/validationSchemas/sendFeedbackSchema';
 import { cn } from '@/utils/cn';
@@ -117,9 +116,9 @@ export function Feedback({ isFeedbackOpen, onClose }) {
             />
             <PillButton
               type="submit"
-              variant={buttonVariant.filled}
-              colorVariant={buttonColorVariant.filled.blue}
-              className={cn('justify-self-end px-6 py-3 text-p3 font-bold text-primary-100')}
+              variant="filled"
+              colorVariant="blue"
+              className="justify-self-end px-6 py-3 text-p3 font-bold text-primary-100"
               aria-label="Click to send feedback data"
             >
               Надіслати

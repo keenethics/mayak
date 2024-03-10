@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { cn } from '@/app/utils/cn';
+import { cn } from '@utils/cn';
 
 const classes = {
   h1: 'text-h1',

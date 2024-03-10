@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import p from 'prop-types';
+import PropTypes from 'prop-types';
 import { cn } from '@utils/cn';
 
-export function InnerLink({ items, className }) {
+export function InnerLink({ items, className, onClick }) {
   return (
     <>
       {items?.map((link, idx) => (
@@ -11,10 +11,8 @@ export function InnerLink({ items, className }) {
           role="listitem"
           href={link.href}
           aria-label={`Open ${link.title} on click`}
-          target="_blank"
-          noopener="true"
-          noreferrer="true"
           className={cn(className)}
+          onClick={onClick}
         >
           {link?.title}
         </Link>
@@ -24,6 +22,7 @@ export function InnerLink({ items, className }) {
 }
 
 InnerLink.propTypes = {
-  items: p.array,
-  className: p.string,
+  items: PropTypes.array,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
 };
