@@ -1,29 +1,29 @@
 import { z } from 'zod';
-import { FormatOfWork, Gender } from '@prisma/client';
+import { FormatOfWork } from '@prisma/client';
 import { PHONE_REGEX } from '@/lib/consts';
 
 // ------------------ COMMON SECTION ---------------------
-const MESSAGES = {
+export const MESSAGES = {
   requiredField: `Обов'язкове поле`,
   unacceptableValue: 'Недопустиме значення',
 };
 
-const zString = z
+export const zString = z
   .string({
     required_error: MESSAGES.requiredField,
     invalid_type_error: MESSAGES.requiredField,
   })
   .trim();
 
-const zStringWithMax = zString.max(128, {
+export const zStringWithMax = zString.max(128, {
   message: 'Поле не повинно перевищувати 128 символів',
 });
 
-const zStringArray = zString.array().min(1, {
+export const zStringArray = zString.array().min(1, {
   message: MESSAGES.requiredField,
 });
 
-const zYearsOfExperience = z
+export const zInteger = z
   .number({
     required_error: MESSAGES.requiredField,
     invalid_type_error: MESSAGES.unacceptableValue,
@@ -31,7 +31,30 @@ const zYearsOfExperience = z
   .nonnegative()
   .nullish();
 
-const zAddressSchema = z.object({
+export const specialistCore = z.object({
+  isActive: z.boolean().optional(),
+  formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
+    message: MESSAGES.unacceptableValue,
+  }),
+  isFreeReception: z.boolean(),
+  phone: zString
+    .refine(val => PHONE_REGEX.test(val), {
+      message: 'Введіть номер телефона у форматі +380XXXXXXXXX',
+    })
+    .nullish(),
+  email: zString.email().nullish(),
+  website: zString.url().nullish(),
+  addressesIds: zString.array().nullish(),
+  instagram: zString.url().nullish(),
+  facebook: zString.url().nullish(),
+  youtube: zString.url().nullish(),
+  linkedin: zString.url().nullish(),
+  tiktok: zString.url().nullish(),
+  viber: zString.url().nullish(),
+  telegram: zString.url().nullish(),
+});
+
+export const zEditAddressSchema = z.object({
   id: z.string().nullish(),
   fullAddress: zStringWithMax,
   nameOfClinic: z.string().nullish(),
@@ -44,58 +67,16 @@ const zAddressSchema = z.object({
     .nullish(),
 });
 
-const organizationCore = z.object({
-  isActive: z.boolean().optional(),
-  surname: zStringWithMax.nullish(),
-  gender: zString.refine(val => Object.values(Gender).includes(val), {
-    message: MESSAGES.unacceptableValue,
-  }),
-  yearsOfExperience: zYearsOfExperience,
-  formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
-    message: MESSAGES.unacceptableValue,
-  }),
-  isFreeReception: z.boolean(),
-  description: zString.nullish(),
-  phone: zString
-    .refine(val => PHONE_REGEX.test(val), {
-      message: 'Введіть номер телефона у форматі +380XXXXXXXXX',
-    })
-    .nullish(),
-  email: zString.email().nullish(),
-  website: zString.url().nullish(),
-  addressesIds: zString.array(),
+export const zCreateAddressSchema = z.object({
+  fullAddress: zStringWithMax,
+  district: zStringWithMax,
+  nameOfClinic: zStringWithMax.nullish(),
 });
 
-const editDefaultProps = z.object({
-  name: zStringWithMax,
-  organizationTypesIds: zStringArray,
-});
-
-const activeOrganizationEditSchema = organizationCore.extend({
-  addresses: zAddressSchema
-    .array()
-    .min(1, {
-      message: MESSAGES.requiredField,
-    })
-    .default([]),
-  therapiesIds: zStringArray,
-  isActive: z.literal(true),
-});
-
-const draftOrganizationEditSchema = organizationCore.partial().extend({
-  addresses: zAddressSchema.array(),
-  isActive: z.literal(false),
-});
-
-const organizationSchemaEditUnion = z.discriminatedUnion('isActive', [
-  activeOrganizationEditSchema,
-  draftOrganizationEditSchema,
-]);
-
-export const organizationEditValidationSchema = z
-  .intersection(organizationSchemaEditUnion, editDefaultProps)
-  .superRefine((schema, ctx) => {
+export const createValidationSchema = (schemaUnion, defaultProperties) =>
+  z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {
     const { formatOfWork, isActive, addresses } = schema;
+
     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
       ctx.addIssue({
         code: 'custom',

@@ -1,58 +1,118 @@
-import { useWatch } from 'react-hook-form';
 import {
   SelectInput,
   TextInput,
   ArrayInput,
   SimpleFormIterator,
-  useGetList,
-  Loading,
   FormDataConsumer,
+  useGetList,
+  ReferenceInput,
+  required,
 } from 'react-admin';
+import { FormatOfWork } from '@prisma/client';
 import { RESOURCES } from '@admin/_lib/consts';
 import PropTypes from 'prop-types';
 import { FormFieldWrapper } from '../FormFieldWrapper';
 import { districtPropType } from '@/lib/specialistPropTypes';
+import Loading from '@/app/loading';
 
-function AddressForm({ validate, districts, disabled }) {
+function AddressForm({ getSource, validate, districts, type, readOnly = false }) {
   return (
-    <ArrayInput source="addresses" label="Адреси">
-      <SimpleFormIterator inline disableReordering disableAdd={disabled}>
-        <TextInput source="fullAddress" validate={validate} label="Повна адреса" />
-        <TextInput source={'nameOfClinic'} label={'Назва клініки'} fullWidth />
+    <>
+      <TextInput
+        InputProps={{
+          readOnly,
+        }}
+        fullWidth
+        source={getSource('fullAddress')}
+        label={'Повна адреса'}
+        validate={required()}
+        helperText="Вулиця, номер будинку, поверх, кабінет"
+      />
+      <TextInput
+        InputProps={{
+          readOnly,
+        }}
+        source={getSource('nameOfClinic')}
+        label={'Назва клініки'}
+        validate={required()}
+        fullWidth
+      />
+      {type === 'create' && (
         <SelectInput
+          InputProps={{
+            readOnly: true,
+          }}
           label="Район"
-          source="district"
+          source={getSource('district')}
           optionText={'name'}
           optionValue={'id'}
           validate={validate}
           choices={districts.map(district => ({ id: district.id, name: district.name }))}
         />
-      </SimpleFormIterator>
-    </ArrayInput>
+      )}
+      {type === 'edit' && (
+        <ReferenceInput source={getSource('districtId')} reference="District">
+          <SelectInput
+            InputProps={{
+              readOnly,
+            }}
+            optionText="name"
+            optionValue="id"
+          />
+        </ReferenceInput>
+      )}
+    </>
   );
 }
 
 AddressForm.propTypes = {
   validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   districts: PropTypes.arrayOf(districtPropType),
-  disabled: PropTypes.bool,
+  getSource: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['create', 'edit']),
+  readOnly: PropTypes.bool,
 };
 
-export function AddressesForm({ validate }) {
-  const format = useWatch({ name: 'formatOfWork' });
-  const disabled = format === 'ONLINE' || !format;
+export function AddressesForm({ validate, type = 'create', label }) {
   const { data: districts, isLoading } = useGetList(RESOURCES.district);
   if (isLoading) return <Loading />;
   return (
-    <FormFieldWrapper title={'Адреси надання послуг'} className="mt-3">
+    <FormFieldWrapper title={label} className="mt-3">
       <FormDataConsumer>
-        {() =>
-          disabled ? (
-            <p className="mb-6 text-gray-700">Спеціаліст працює онлайн</p>
-          ) : (
-            <AddressForm validate={validate} districts={districts} disabled={disabled} />
-          )
-        }
+        {({ formData }) => {
+          if (!formData) return null;
+          const { formatOfWork } = formData;
+          const onlineOnly = formatOfWork === FormatOfWork.ONLINE;
+          const disabled = onlineOnly || !formatOfWork;
+          return (
+            <>
+              {!formatOfWork && <p className="mb-6 text-gray-700">Виберіть формат роботи спеціаліста</p>}
+              {onlineOnly && <p className="mb-6 text-gray-700">Спеціаліст працює тільки онлайн</p>}
+              {!onlineOnly && !disabled && (
+                <ArrayInput source="addresses" label="Адреси">
+                  <SimpleFormIterator inline disableReordering fullWidth disableAdd={disabled}>
+                    <FormDataConsumer>
+                      {({ scopedFormData, getSource }) => {
+                        if (!scopedFormData) return null;
+                        return scopedFormData.id ? (
+                          <AddressForm
+                            getSource={getSource}
+                            validate={validate}
+                            readOnly
+                            type={type}
+                            districts={districts}
+                          />
+                        ) : (
+                          <AddressForm getSource={getSource} validate={validate} type={type} districts={districts} />
+                        );
+                      }}
+                    </FormDataConsumer>
+                  </SimpleFormIterator>
+                </ArrayInput>
+              )}
+            </>
+          );
+        }}
       </FormDataConsumer>
     </FormFieldWrapper>
   );
@@ -60,4 +120,6 @@ export function AddressesForm({ validate }) {
 
 AddressesForm.propTypes = {
   validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  type: PropTypes.oneOf(['create', 'edit']),
+  label: PropTypes.string,
 };

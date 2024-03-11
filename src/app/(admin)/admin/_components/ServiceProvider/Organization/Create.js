@@ -1,4 +1,3 @@
-import { OrganizationSchema } from '@admin/_lib/validationSchemas/createOrganizationSchema';
 import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Create, FormDataConsumer, NumberInput, SimpleForm, TextInput, required } from 'react-admin';
@@ -9,13 +8,14 @@ import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
 import { OrganizationTypesSelect } from '../OrganizationTypesSelect';
 import { ServicesForm } from '../ServicesForm';
 import { AddressesForm } from '../AddressesForm';
+import { organizationCreateValidationSchema } from '../../../_lib/validationSchemas/organizationSchema';
 
 const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
 
 export function OrganizationCreate() {
   return (
     <Create transform={transformOrganizationData}>
-      <SimpleForm resolver={zodResolver(OrganizationSchema)}>
+      <SimpleForm resolver={zodResolver(organizationCreateValidationSchema)}>
         <FormDataConsumer>
           {({ formData }) => {
             if (!formData) return null;
@@ -34,7 +34,7 @@ export function OrganizationCreate() {
                     <NumberInput
                       name={'yearsOnMarket'}
                       source={'yearsOnMarket'}
-                      label={'Роки на ринку'}
+                      label={'Років на ринку'}
                       validate={unnecessaryForDraft}
                       min="0"
                     />

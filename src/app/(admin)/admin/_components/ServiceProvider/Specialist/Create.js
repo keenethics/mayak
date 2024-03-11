@@ -14,7 +14,6 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@admin/_lib/consts';
 import { transformData } from '@admin/_utils/transformSpecialistFormData';
-import { specialistValidationSchema } from '@/lib/validationSchemas/specialistSchema';
 import { ContactsForm } from '../ContactsForm';
 import { ActivationForm } from '../ActivationForm';
 import { FormFieldWrapper } from '../../FormFieldWrapper';
@@ -23,6 +22,7 @@ import { SpecializationsSelect } from '../SpecializationsSelect';
 import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
 import { GenderSelect } from '../GenderSelect';
 import { AddressesForm } from '../AddressesForm';
+import { specialistCreateValidationSchema } from '../../../_lib/validationSchemas/specialistSchema';
 
 const filedGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
 
@@ -46,7 +46,7 @@ export function SpecialistCreate() {
         transform={transformData}
         mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
       >
-        <SimpleForm resolver={zodResolver(specialistValidationSchema)}>
+        <SimpleForm resolver={zodResolver(specialistCreateValidationSchema)}>
           <FormDataConsumer>
             {({ formData }) => {
               if (!formData) return null;

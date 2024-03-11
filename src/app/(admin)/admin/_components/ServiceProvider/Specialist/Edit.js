@@ -1,184 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { specialistEditValidationSchema } from '@/lib/validationSchemas/specialistSchema';
-import { SpecialistFormFields, SpecialistFormSections } from '../../../_lib/specialistData';
-import { FormFieldWrapper } from '../../FormFieldWrapper';
-import { capitalizeFirstLetter } from '../../../_utils/common';
-import { FormTranslations } from '../../../_lib/translations';
-import { TextInputList } from '../../TextInputList';
+import { Edit, SimpleForm, required, FormDataConsumer, NumberInput } from 'react-admin';
 import { ContactsForm } from '../ContactsForm';
 import { ActivationForm } from '../ActivationForm';
-import { DescriptionForm } from '../DescriptionForm';
+import { specialistEditValidationSchema } from '../../../_lib/validationSchemas/specialistSchema';
+import { ServicesForm } from '../ServicesForm';
+import { AddressesForm } from '../AddressesForm';
+import { GeneralInfoEdit } from '../GeneralInfoEdit';
+import { FormFieldWrapper } from '../../FormFieldWrapper';
+import { GenderSelect } from '../GenderSelect';
+import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
 
-const {
-  Edit,
-  SimpleForm,
-  SelectInput,
-  NumberInput,
-  BooleanInput,
-  required,
-  TextInput,
-  AutocompleteArrayInput,
-  ReferenceArrayInput,
-  FormDataConsumer,
-  ArrayInput,
-  SimpleFormIterator,
-  ReferenceInput,
-} = require('react-admin');
-
-const PropTypes = require('prop-types');
-const { Gender, FormatOfWork } = require('@prisma/client');
-
-function AddressForm({ getSource, readOnly }) {
-  const { fullAddress, nameOfClinic } = SpecialistFormFields;
-  return (
-    <>
-      <TextInput
-        InputProps={{
-          readOnly,
-        }}
-        fullWidth
-        source={getSource(fullAddress.name)}
-        label={fullAddress.label}
-        validate={fullAddress.isRequired && required()}
-        helperText="Вулиця, номер будинку, поверх, кабінет"
-      />
-      <TextInput
-        InputProps={{
-          readOnly,
-        }}
-        source={getSource(nameOfClinic.name)}
-        label={nameOfClinic.label}
-        validate={nameOfClinic.isRequired && required()}
-        fullWidth
-      />
-      <ReferenceInput source={getSource('districtId')} reference="District">
-        <SelectInput
-          optionText="name"
-          optionValue="id"
-          InputProps={{
-            readOnly,
-          }}
-        />
-      </ReferenceInput>
-    </>
-  );
-}
-
-AddressForm.propTypes = {
-  getSource: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool,
-};
-
-function AddressesEdit() {
-  const { addresses } = SpecialistFormFields;
-
-  const isOnline = format => format === FormatOfWork.ONLINE;
-
-  return (
-    <FormFieldWrapper title={SpecialistFormSections.addresses} className="mt-3">
-      <FormDataConsumer>
-        {({ formData }) => {
-          if (!formData) return null;
-          return isOnline(formData.formatOfWork) ? (
-            <p className="mb-6 text-gray-700">Спеціаліст працює онлайн</p>
-          ) : (
-            <ArrayInput name={addresses.name} source={addresses.name} label={addresses.label} fullWidth readOnly>
-              <SimpleFormIterator inline fullWidth readOnly={true}>
-                <FormDataConsumer>
-                  {({ scopedFormData, getSource }) => {
-                    if (!scopedFormData) return null;
-                    return scopedFormData.id ? (
-                      <AddressForm scopedFormData={scopedFormData} getSource={getSource} readOnly />
-                    ) : (
-                      <AddressForm scopedFormData={scopedFormData} getSource={getSource} />
-                    );
-                  }}
-                </FormDataConsumer>
-              </SimpleFormIterator>
-            </ArrayInput>
-          );
-        }}
-      </FormDataConsumer>
-    </FormFieldWrapper>
-  );
-}
-
-function DetailsEdit() {
-  const getChoicesList = (list, translations) =>
-    list.map(item => ({
-      id: item,
-      name: capitalizeFirstLetter(translations[item.toLowerCase()]) ?? item,
-    }));
-
-  const genderChoicesList = getChoicesList(Object.values(Gender), FormTranslations.gender);
-  const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork), FormTranslations.formatOfWork);
-
-  const { gender, yearsOfExperience, formatOfWork } = SpecialistFormFields;
-
-  return (
-    <FormFieldWrapper title={SpecialistFormSections.details} className="mt-3">
-      <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <SelectInput
-          name={gender.name}
-          source={gender.name}
-          label={gender.label}
-          validate={gender.isRequired && required()}
-          choices={genderChoicesList}
-        />
-        <NumberInput
-          name={yearsOfExperience.name}
-          source={yearsOfExperience.name}
-          label={yearsOfExperience.label}
-          validate={yearsOfExperience.isRequired && required()}
-          min="0"
-        />
-        <SelectInput
-          name={formatOfWork.name}
-          source={formatOfWork.name}
-          label={formatOfWork.label}
-          choices={formatOfWorkChoicesList}
-          validate={formatOfWork.isRequired && required()}
-          className="flex-1"
-        />
-      </div>
-    </FormFieldWrapper>
-  );
-}
-
-function GeneralInfoEdit() {
-  const { lastName, firstName, surname } = SpecialistFormFields;
-  const generalInfoList = [lastName, firstName, surname];
-
-  return (
-    <FormFieldWrapper title={SpecialistFormSections.general}>
-      <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <TextInputList textInputList={generalInfoList} />
-      </div>
-      <ReferenceArrayInput source={'specializationsIds'} reference="Specialization">
-        <AutocompleteArrayInput optionValue="id" optionText="name" />
-      </ReferenceArrayInput>
-    </FormFieldWrapper>
-  );
-}
-
-function ServicesEdit() {
-  const { isFreeReception, description } = SpecialistFormFields;
-
-  return (
-    <FormFieldWrapper title={SpecialistFormSections.services}>
-      <ReferenceArrayInput source="therapiesIds" reference="Therapy">
-        <AutocompleteArrayInput optionValue="id" optionText="title" />
-      </ReferenceArrayInput>
-      <BooleanInput
-        name={isFreeReception.name}
-        source={isFreeReception.name}
-        label={isFreeReception.label}
-        className="w-max"
-      />
-      <TextInput name={description.name} source={description.name} label={description.label} fullWidth multiline />
-    </FormFieldWrapper>
-  );
-}
+const { FormatOfWork } = require('@prisma/client');
 
 const transformData = data => {
   // console.log({ data: JSON.stringify(data) });
@@ -199,7 +31,7 @@ const transformData = data => {
   // if formatOfWork is ONLINE, we need to delete all connected addresses
   const addressesToDelete =
     data.formatOfWork !== FormatOfWork.ONLINE ? unselectedAddresses.map(id => ({ id })) ?? [] : {};
-  // console.log({ addressesToDelete: JSON.stringify(addressesToDelete) });
+
   return {
     ...data,
     specializationsIds: undefined,
@@ -230,32 +62,34 @@ export function SpecialistEdit() {
       mutationMode="pessimistic"
     >
       <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(specialistEditValidationSchema)}>
-        {/* GENERAL */}
-        <GeneralInfoEdit />
-        {/* DETAILS */}
-        <DetailsEdit />
-        {/* ADDRESSES */}
-        <AddressesEdit />
-        {/* SERVICES */}
-        <ServicesEdit />
-        <FormFieldWrapper title={'Послуги'}>
-          <ReferenceArrayInput source="therapiesIds" reference="Therapy">
-            <AutocompleteArrayInput optionValue="id" optionText="title" />
-          </ReferenceArrayInput>
-          <BooleanInput
-            name={'isFreeReception'}
-            source={'isFreeReception'}
-            label={'Безкоштовний прийом'}
-            className="w-max"
-          />
-
-          <DescriptionForm label={'Опис спеціаліста'} />
-          {/* <TextInput name={'description'} source={'description'} label={'Опис'} fullWidth multiline /> */}
-        </FormFieldWrapper>
-        {/* CONTACTS */}
-        <ContactsForm />
-        {/* <ContactsEdit /> */}
-        <ActivationForm label={'Активувати/деактивувати спеціаліста'} />
+        <FormDataConsumer>
+          {({ formData }) => {
+            if (!formData) return null;
+            const unnecessaryForDraft = formData.isActive && required();
+            return (
+              <>
+                <GeneralInfoEdit type="edit" />
+                <FormFieldWrapper title={'Details'} className="mt-3">
+                  <div className={'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow'}>
+                    <GenderSelect label={'Стать'} validate={unnecessaryForDraft} />
+                    <NumberInput
+                      name={'yearsOfExperience'}
+                      source={'yearsOfExperience'}
+                      label={'Роки досвіду'}
+                      validate={unnecessaryForDraft}
+                      min="0"
+                    />
+                    <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
+                  </div>
+                </FormFieldWrapper>
+                <AddressesForm validate={unnecessaryForDraft} type="edit" label="Адреси надання послуг" />
+                <ServicesForm type="edit" validate={unnecessaryForDraft} label="Послуги" />
+                <ContactsForm />
+                <ActivationForm label={'Активувати/деактивувати спеціаліста'} />
+              </>
+            );
+          }}
+        </FormDataConsumer>
       </SimpleForm>
     </Edit>
   );

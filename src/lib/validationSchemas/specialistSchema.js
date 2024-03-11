@@ -38,11 +38,11 @@ const specialistCore = z.object({
     message: MESSAGES.unacceptableValue,
   }),
   yearsOfExperience: zYearsOfExperience,
+  description: zString.nullish(),
   formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
     message: MESSAGES.unacceptableValue,
   }),
   isFreeReception: z.boolean(),
-  description: zString.nullish(),
   phone: zString
     .refine(val => PHONE_REGEX.test(val), {
       message: 'Введіть номер телефона у форматі +380XXXXXXXXX',
