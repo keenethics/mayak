@@ -1,4 +1,4 @@
-import { colors, screens, typography, boxShadow } from './ui';
+import { boxShadow, colors, screens, typography } from './ui';
 
 const presets = {
   theme: {

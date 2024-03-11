@@ -52,6 +52,9 @@ export function OrganizationCreate() {
                 <TextInput label="Вебсайт" source="website" />
               </div>
               <p className="font-bold">Соціальні мережі</p>
+              <p className="my-1 flex w-full text-primary-500">
+                *Ви можете вказати від 1 до 5 посилань на соціальні мережі організації.
+              </p>
               <div className={fieldGroupClass}>
                 <TextInput label="Instagram" source="instagram" />
                 <TextInput label="Facebook" source="facebook" />
