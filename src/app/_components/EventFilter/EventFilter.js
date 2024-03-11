@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { CheckMark } from '@icons/index';
 import { cn } from '@/utils/cn';
 import { PillButton } from '../PillButton';
+import { NoEvents } from '../NoEvents';
 
 export function EventFilter({ events }) {
   const [dates, setDates] = useState([]);
@@ -12,9 +13,43 @@ export function EventFilter({ events }) {
   const [months, setMonths] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth() + 1;
+  const monthsAhead = 5;
+  const monthNames = [
+    'січень',
+    'лютий',
+    'березень',
+    'квітень',
+    'травень',
+    'червень',
+    'липень',
+    'серпень',
+    'вересень',
+    'жовтень',
+    'листопад',
+    'грудень',
+  ];
+
+  useEffect(() => {
+    const getNextMonths = () => {
+      const nextMonths = [];
+      for (let i = 0; i <= monthsAhead; i++) {
+        const nextMonthIndex = (currentMonth + i - 1) % 12; // Ensure month index doesn't exceed 12
+        const nextMonthName = monthNames[nextMonthIndex];
+        nextMonths.push(nextMonthName);
+      }
+      return nextMonths;
+    };
+
+    const nextMonths = getNextMonths();
+    setMonths(nextMonths);
+    // eslint-disable-next-line
+  }, [currentMonth]);
+
   useEffect(() => {
     // Filter out dates for this year and not before today
-    const currentYear = new Date().getFullYear();
+
     const filteredData = events
       .filter(item => {
         const eventYear = item.eventDate.getFullYear();
@@ -40,12 +75,6 @@ export function EventFilter({ events }) {
   //     });
 
   useEffect(() => {
-    // Extract unique month names from dates
-    const uniqueMonths = dates.map(date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }));
-    setMonths(uniqueMonths);
-  }, [dates]);
-
-  useEffect(() => {
     // Filter data for the first month initially
     const firstMonth = months[0];
     const filtered = dates.filter(
@@ -57,7 +86,7 @@ export function EventFilter({ events }) {
   const handleFilter = (index, month) => {
     // Filter data based on selected month
     const filtered = dates.filter(
-      date => new Date(date.eventDate).toLocaleString('default', { month: 'long' }) === month,
+      date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === month,
     );
     setFilteredDates(filtered);
 
@@ -65,9 +94,9 @@ export function EventFilter({ events }) {
   };
 
   return (
-    <div className="mx-auto flex w-full flex-col items-start justify-start gap-6 self-stretch  lg:w-[900px]">
+    <div className="mx-auto flex w-full flex-col items-start justify-start gap-6 self-stretch lg:w-[900px]">
       <div className="flex flex-row flex-wrap items-start justify-start gap-3">
-        {months.slice(0, 6).map((month, index) => (
+        {months.map((month, index) => (
           <PillButton
             variant="outlined"
             colorVariant="orange"
@@ -90,20 +119,24 @@ export function EventFilter({ events }) {
         className="grid w-full
            self-stretch sm:grid-cols-1 md:grid-cols-2 md:gap-[12px] lg:grid-cols-3 lg:gap-[16px]"
       >
-        {filteredDates
-          .filter(date => date.eventDate >= new Date())
-          .map((date, index) => (
-            <li key={index}>
-              {new Date(date.eventDate).toLocaleString('uk-UA', {
-                timeZone: 'UTC',
-                hour: 'numeric',
-                minute: '2-digit',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </li>
-          ))}
+        {filteredDates.length === 0 ? (
+          <NoEvents />
+        ) : (
+          filteredDates
+            .filter(date => date.eventDate >= new Date())
+            .map((date, index) => (
+              <li key={index}>
+                {new Date(date.eventDate).toLocaleString('uk-UA', {
+                  timeZone: 'UTC',
+                  hour: 'numeric',
+                  minute: '2-digit',
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </li>
+            ))
+        )}
       </ul>
     </div>
   );
