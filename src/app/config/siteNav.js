@@ -10,7 +10,7 @@ const siteNav = {
     },
   ],
   innerLinks: [
-    { title: 'Спеціалісти', href: '/specialists' },
+    { title: 'Спеціалісти', href: '/specialist' },
     { title: 'Події', href: '/events' },
   ],
   links: [

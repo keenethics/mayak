@@ -7,7 +7,7 @@ import { prisma } from '@/lib/db';
 
 export const metadata = {
   title: 'Головна сторінка',
-  description: 'Пошук психологічної допомоги в м.Львів',
+  description: 'Пошук психологічної допомоги у м. Львів',
 };
 
 export default async function Page() {
