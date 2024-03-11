@@ -43,7 +43,7 @@ export function OrganizationEdit() {
                     <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
                   </div>
                 </FormFieldWrapper>
-                <AddressesForm label="Адреси" type="edit" validate={unnecessaryForDraft} />
+                <AddressesForm label="Адреси надання послуг" type="edit" validate={unnecessaryForDraft} />
                 <ServicesForm type="edit" validate={unnecessaryForDraft} label={'Послуги'} />
                 <ContactsForm />
                 <ActivationForm label={'Активувати/деактивувати організацію'} />

@@ -40,7 +40,7 @@ function AddressForm({ getSource, validate, districts, type, readOnly = false })
       {type === 'create' && (
         <SelectInput
           InputProps={{
-            readOnly: true,
+            readOnly,
           }}
           label="Район"
           source={getSource('district')}

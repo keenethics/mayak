@@ -48,7 +48,7 @@ export function OrganizationCreate() {
                   <div className={fieldGroupClass}>
                     <TextInput source="name" label="Назва організації" validate={required()} />
                   </div>
-                  <OrganizationTypesSelect fullWidth validate={required()} label={'Тип організації'} />
+                  <OrganizationTypesSelect fullWidth validate={unnecessaryForDraft} label={'Тип організації'} />
                 </FormFieldWrapper>
 
                 <FormFieldWrapper title={'Деталі'} className="mt-3">
@@ -63,7 +63,7 @@ export function OrganizationCreate() {
                     <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
                   </div>
                 </FormFieldWrapper>
-                <AddressesForm validate={unnecessaryForDraft} />
+                <AddressesForm label="Адреси надання послуг" validate={unnecessaryForDraft} />
                 <ServicesForm validate={unnecessaryForDraft} label={'Послуги'} />
                 <ContactsForm />
                 <ActivationForm label={'Активувати/деактивувати організацію'} />
