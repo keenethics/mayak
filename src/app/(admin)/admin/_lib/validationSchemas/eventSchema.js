@@ -1,26 +1,20 @@
 import { z } from 'zod';
-import { minMaxString } from '@/lib/validationSchemas/utils';
+import { string, date, errors } from '@/lib/validationSchemas/utils';
+
+const title = string('Назва події').min(1).max(128).zod;
+const organizerName = string('Організатор').min(1).max(128).zod;
 
 const ActiveEventSchema = z.object({
   isActive: z.literal(true),
-  title: minMaxString(1, 128, 'Назва події'),
-  organizerName: minMaxString(1, 128, 'Організатор'),
-  eventDate: z.coerce
-    .date({
-      required_error: "Дата події - обов'язкове поле",
-      invalid_type_error: 'Невірний формат дати',
-    })
-    .min(new Date(), { message: 'Дата не може бути ранішою за поточну' }),
-  notes: minMaxString(1, 350, 'Коментарі').nullish(),
-  locationLink: z.string({ invalid_type_error: 'Коментарі мають бути рядком' }).trim().nullish(),
+  title,
+  organizerName,
+  eventDate: date('Дата події').min(new Date()).zod,
+  notes: string('Коментарі').min(1).max(350).nullish().zod,
+  locationLink: string('Посилання').nullish().zod,
   additionalLink: z
     .object({
-      label: minMaxString(1, 30, 'Тип').nullish(),
-      link: z
-        .string({ invalid_type_error: 'Посилання має бути рядком' })
-        .min(1, 'Посилання не має бути пустим')
-        .trim()
-        .nullish(),
+      label: string('Тип').min(1).max(30).nullish(),
+      link: string('Посилання', { required: false }).min(1).nullish(),
     })
     .superRefine((data, ctx) => {
       const { label, link } = data;
@@ -28,29 +22,33 @@ const ActiveEventSchema = z.object({
         ctx.addIssue({
           code: z.ZodIssueCode.invalid_type,
           path: ['link'],
-          message: "Посилання - обов'язкове поле",
+          message: errors('Посилання').required,
         });
       }
       if (link && !label) {
-        ctx.addIssue({ code: z.ZodIssueCode.invalid_type, path: ['label'], message: "Тип - обов'язкове поле" });
+        ctx.addIssue({
+          code: z.ZodIssueCode.invalid_type,
+          path: ['label'],
+          message: errors('Тип').required,
+        });
       }
     }),
   format: z.enum(['ONLINE', 'OFFLINE'], {
-    required_error: 'Формат - необхідне поле',
-    invalid_type_error: 'Формат має бути OFFLINE/ONLINE',
+    required_error: errors('Формат').required,
+    invalid_type_error: errors('Формат').format('OFFLINE/ONLINE'),
   }),
   priceType: z.enum(['FREE', 'FIXED_PRICE', 'MIN_PRICE'], {
-    required_error: "Варіант вартості - обов'язкове поле",
-    invalid_type_error: 'Варіант має бути FREE/FIXED_PRICE/MIN_PRICE',
+    required_error: errors('Варіант вартості').required,
+    invalid_type_error: errors('Варіант вартості').format('FREE/FIXED_PRICE/MIN_PRICE'),
   }),
   price: z.number().nullish(),
-  address: minMaxString(1, 128, 'Address').nullish(),
+  address: string('Адреса').min(1).max(128).nullish().zod,
 });
 
 const DraftEventSchema = z.object({
   isActive: z.literal(false),
-  title: minMaxString(1, 128, 'Назва події'),
-  organizerName: minMaxString(1, 128, 'Організатор'),
+  title,
+  organizerName,
 });
 
 export const EventSchema = z
