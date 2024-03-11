@@ -11,3 +11,4 @@ export * from './TopWave';
 export * from './BottomWave';
 export * from './TherapyCard';
 export * from './TherapiesSection';
+export * from './Therapies';

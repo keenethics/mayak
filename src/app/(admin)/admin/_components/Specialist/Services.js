@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { BooleanInput, required, SelectArrayInput, TextInput, useGetList } from 'react-admin';
-import { RESOURCES } from '@/app/admin/_lib/consts';
-import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistFormFields, SpecialistFormSections } from '@/app/admin/_lib/specialistData';
+import { RESOURCES } from '@admin/_lib/consts';
+import { FormFieldWrapper } from '@admin/_components/FormFieldWrapper';
+import { SpecialistFormFields, SpecialistFormSections } from '@admin/_lib/specialistData';
 
 export function Services() {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);

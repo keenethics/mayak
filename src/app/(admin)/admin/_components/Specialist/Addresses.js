@@ -12,9 +12,9 @@ import {
   useGetList,
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
-import { RESOURCES } from '@/app/admin/_lib/consts';
-import { FormFieldWrapper } from '@/app/admin/_components/FormFieldWrapper';
-import { SpecialistFormFields, SpecialistFormSections } from '@/app/admin/_lib/specialistData';
+import { RESOURCES } from '@admin/_lib/consts';
+import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
+import { SpecialistFormFields, SpecialistFormSections } from '@admin/_lib/specialistData';
 
 export function Addresses() {
   const { data: districtsList, isLoading: districtsLoading } = useGetList(RESOURCES.district);
