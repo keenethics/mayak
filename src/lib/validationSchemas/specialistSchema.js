@@ -68,6 +68,13 @@ const restProps = z.object({
   website: zString.url().nullish(),
   addresses: zAddressesSchema.default([]),
   therapyPrices: z.record(z.string(), z.any()).nullish(),
+  instagram: zString.url().nullish(),
+  facebook: zString.url().nullish(),
+  youtube: zString.url().nullish(),
+  linkedin: zString.url().nullish(),
+  tiktok: zString.url().nullish(),
+  viber: zString.url().nullish(),
+  telegram: zString.url().nullish(),
 });
 
 const activeSpecialistSchema = restProps.extend({
