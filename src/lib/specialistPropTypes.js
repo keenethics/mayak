@@ -4,7 +4,7 @@ import { FormatOfWork } from '@prisma/client';
 const relatedInstanceCore = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string,
-  createdAt: PropTypes.instanceOf(Date),
+  createdAt: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
 };
 
 export const districtPropType = PropTypes.shape(relatedInstanceCore);

@@ -17,33 +17,37 @@ export function OrganizationCreate() {
     <Create transform={transformOrganizationData}>
       <SimpleForm resolver={zodResolver(OrganizationSchema)}>
         <FormDataConsumer>
-          {() => (
-            <>
-              <FormFieldWrapper title={'General info'}>
-                <div className={fieldGroupClass}>
-                  <TextInput source="name" label="Назва організації" validate={required()} />
-                </div>
-                <OrganizationTypesSelect fullWidth validate={required()} label={'Тип організації'} />
-              </FormFieldWrapper>
+          {({ formData }) => {
+            if (!formData) return null;
+            const unnecessaryForDraft = formData.isActive && required();
+            return (
+              <>
+                <FormFieldWrapper title={'General info'}>
+                  <div className={fieldGroupClass}>
+                    <TextInput source="name" label="Назва організації" validate={required()} />
+                  </div>
+                  <OrganizationTypesSelect fullWidth validate={required()} label={'Тип організації'} />
+                </FormFieldWrapper>
 
-              <FormFieldWrapper title={'Details'} className="mt-3">
-                <div className={fieldGroupClass}>
-                  <NumberInput
-                    name={'yearsOnMarket'}
-                    source={'yearsOnMarket'}
-                    label={'Роки на ринку'}
-                    validate={required()}
-                    min="0"
-                  />
-                  <FormatOfWorkSelect label={'Формат роботи'} />
-                </div>
-              </FormFieldWrapper>
-              <AddressesForm />
-              <ServicesForm label={'Послуги'} />
-              <ContactsForm />
-              <ActivationForm label={'Активувати/деактивувати організацію'} />
-            </>
-          )}
+                <FormFieldWrapper title={'Details'} className="mt-3">
+                  <div className={fieldGroupClass}>
+                    <NumberInput
+                      name={'yearsOnMarket'}
+                      source={'yearsOnMarket'}
+                      label={'Роки на ринку'}
+                      validate={unnecessaryForDraft}
+                      min="0"
+                    />
+                    <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
+                  </div>
+                </FormFieldWrapper>
+                <AddressesForm validate={unnecessaryForDraft} />
+                <ServicesForm validate={unnecessaryForDraft} label={'Послуги'} />
+                <ContactsForm />
+                <ActivationForm label={'Активувати/деактивувати організацію'} />
+              </>
+            );
+          }}
         </FormDataConsumer>
       </SimpleForm>
     </Create>

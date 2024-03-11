@@ -4,7 +4,6 @@ import {
   TextInput,
   ArrayInput,
   SimpleFormIterator,
-  required,
   useGetList,
   Loading,
   FormDataConsumer,
@@ -14,17 +13,19 @@ import PropTypes from 'prop-types';
 import { FormFieldWrapper } from '../FormFieldWrapper';
 import { districtPropType } from '@/lib/specialistPropTypes';
 
-function AddressForm({ isActive, districts, disabled }) {
+function AddressForm({ validate, districts, disabled }) {
   return (
     <ArrayInput source="addresses" label="Адреси">
       <SimpleFormIterator inline disableReordering disableAdd={disabled}>
-        <TextInput source="fullAddress" validate={isActive && required()} label="Повна адреса" />
+        <TextInput source="fullAddress" validate={validate} label="Повна адреса" />
         <TextInput source={'nameOfClinic'} label={'Назва клініки'} fullWidth />
         <SelectInput
           label="Район"
           source="district"
-          validate={isActive && required()}
-          choices={districts.map(district => ({ id: district.name, name: district.name }))}
+          optionText={'name'}
+          optionValue={'id'}
+          validate={validate}
+          choices={districts.map(district => ({ id: district.id, name: district.name }))}
         />
       </SimpleFormIterator>
     </ArrayInput>
@@ -32,12 +33,12 @@ function AddressForm({ isActive, districts, disabled }) {
 }
 
 AddressForm.propTypes = {
-  isActive: PropTypes.bool,
+  validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   districts: PropTypes.arrayOf(districtPropType),
   disabled: PropTypes.bool,
 };
 
-export function AddressesForm({ isActive }) {
+export function AddressesForm({ validate }) {
   const format = useWatch({ name: 'formatOfWork' });
   const disabled = format === 'ONLINE' || !format;
   const { data: districts, isLoading } = useGetList(RESOURCES.district);
@@ -49,7 +50,7 @@ export function AddressesForm({ isActive }) {
           disabled ? (
             <p className="mb-6 text-gray-700">Спеціаліст працює онлайн</p>
           ) : (
-            <AddressForm isActive={isActive} districts={districts} disabled={disabled} />
+            <AddressForm validate={validate} districts={districts} disabled={disabled} />
           )
         }
       </FormDataConsumer>
@@ -58,5 +59,5 @@ export function AddressesForm({ isActive }) {
 }
 
 AddressesForm.propTypes = {
-  isActive: PropTypes.bool,
+  validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 };

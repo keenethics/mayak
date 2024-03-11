@@ -40,6 +40,7 @@ const RestSchema = z.object({
     .array(
       z.object({
         fullAddress: minMaxString(1, 128, 'Повна адреса').nullish(),
+        nameOfClinic: z.string().nullish(),
         district: minMaxString(1, 64, 'Район').nullish(),
       }),
     )
