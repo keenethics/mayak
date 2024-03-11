@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LikeIcon from '@icons/likeIcon.svg';
+import { PillButton, TextInputField } from '@components';
 import { useCreateFeedback } from '@/app/_hooks';
 import SendFeedback from '@/lib/validationSchemas/sendFeedbackSchema';
 import { cn } from '@/utils/cn';
 import { Modal } from '../Modal';
-import { TextInputField } from '../InputFields';
 import { CheckBox } from '../CheckBox';
 import { TextArea } from '../TextArea';
-import { PillButton } from '../PillButton';
-import { buttonColorVariant, buttonVariant } from '../PillButton/style';
 
 export function Feedback({ isFeedbackOpen, onClose }) {
   const [isFormOpen, setFormOpen] = useState(true);
@@ -115,9 +113,9 @@ export function Feedback({ isFeedbackOpen, onClose }) {
             />
             <PillButton
               type="submit"
-              variant={buttonVariant.filled}
-              colorVariant={buttonColorVariant.filled.blue}
-              className={cn('justify-self-end px-6 py-3 text-p3 font-bold text-primary-100')}
+              variant="filled"
+              colorVariant="blue"
+              className="justify-self-end px-6 py-3 text-p3 font-bold text-primary-100"
               aria-label="Click to send feedback data"
             >
               Надіслати

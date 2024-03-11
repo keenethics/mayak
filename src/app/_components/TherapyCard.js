@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PillButton } from '@components';
 import { Heading, Paragraph } from './Typography';
-import { buttonColorVariant, buttonVariant } from './PillButton/style';
 
 export function TherapyCard({ type, description, title, imagePath }) {
   return (
@@ -12,8 +11,8 @@ export function TherapyCard({ type, description, title, imagePath }) {
       <Heading className="text-center text-h4 font-bold text-primary-700">{title}</Heading>
       <Paragraph className="text-center text-p4 font-bold text-[#FE9E75]">{description}</Paragraph>
       <Link href={`/specialist?type=${type}`}>
-        <PillButton variant={buttonVariant.outlined} colorVariant={buttonColorVariant.outlined.blue}>
-          Ознайомитись
+        <PillButton variant="outlined" colorVariant="blue">
+          Ознайомитися
         </PillButton>
       </Link>
     </div>
