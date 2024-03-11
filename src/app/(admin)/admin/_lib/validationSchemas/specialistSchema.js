@@ -56,7 +56,12 @@ const editDefaultProps = z.object({
 });
 
 const activeSpecialistEditSchema = restProps.extend({
-  addresses: zEditAddressSchema.array().default([]),
+  addresses: zEditAddressSchema
+    .array()
+    .min(1, {
+      message: MESSAGES.requiredField,
+    })
+    .default([]),
   therapiesIds: zStringArray,
   isActive: z.literal(true),
 });

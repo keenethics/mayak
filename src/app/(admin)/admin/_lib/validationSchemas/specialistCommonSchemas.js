@@ -31,6 +31,8 @@ export const zInteger = z
   .nonnegative()
   .nullish();
 
+export const zUrl = zString.url({ message: MESSAGES.unacceptableValue });
+
 export const specialistCore = z.object({
   isActive: z.boolean().optional(),
   formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
@@ -43,15 +45,15 @@ export const specialistCore = z.object({
     })
     .nullish(),
   email: zString.email().nullish(),
-  website: zString.url().nullish(),
   addressesIds: zString.array().nullish(),
-  instagram: zString.url().nullish(),
-  facebook: zString.url().nullish(),
-  youtube: zString.url().nullish(),
-  linkedin: zString.url().nullish(),
-  tiktok: zString.url().nullish(),
-  viber: zString.url().nullish(),
-  telegram: zString.url().nullish(),
+  website: zString.url({ message: MESSAGES.unacceptableValue }).nullish(),
+  instagram: zUrl.nullish(),
+  facebook: zUrl.nullish(),
+  youtube: zUrl.nullish(),
+  linkedin: zUrl.nullish(),
+  tiktok: zUrl.nullish(),
+  viber: zUrl.nullish(),
+  telegram: zUrl.nullish(),
 });
 
 export const zEditAddressSchema = z.object({

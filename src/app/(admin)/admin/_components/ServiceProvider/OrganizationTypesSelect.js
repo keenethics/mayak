@@ -1,22 +1,32 @@
 import PropTypes from 'prop-types';
-import { SelectArrayInput, useGetList } from 'react-admin';
+import { AutocompleteArrayInput, ReferenceArrayInput, SelectArrayInput, useGetList } from 'react-admin';
 import { RESOURCES } from '../../_lib/consts';
 
-export function OrganizationTypesSelect({ label, ...props }) {
+export function OrganizationTypesSelect({ label, type = 'create', ...props }) {
   const { data: typesList, isLoading: typesLoading } = useGetList(RESOURCES.organizationType);
 
   return (
-    <SelectArrayInput
-      name={'type'}
-      source={'type'}
-      label={label}
-      isLoading={typesLoading}
-      choices={typesList}
-      {...props}
-    />
+    <>
+      {type === 'create' && (
+        <SelectArrayInput
+          name={'type'}
+          source={'type'}
+          label={label}
+          isLoading={typesLoading}
+          choices={typesList}
+          {...props}
+        />
+      )}
+      {type === 'edit' && (
+        <ReferenceArrayInput source={'organizationTypesIds'} reference="OrganizationType">
+          <AutocompleteArrayInput optionValue="id" optionText="name" />
+        </ReferenceArrayInput>
+      )}
+    </>
   );
 }
 
 OrganizationTypesSelect.propTypes = {
   label: PropTypes.string,
+  type: PropTypes.oneOf(['create', 'edit']),
 };

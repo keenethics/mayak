@@ -1,64 +1,56 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormatOfWork } from '@prisma/client';
-import { organizationEditValidationSchema } from '../../../_lib/validationSchemas/editOrganizationSchema';
+import { organizationEditValidationSchema } from '../../../_lib/validationSchemas/organizationSchema';
 
 import { ContactsForm } from '../ContactsForm';
 import { ActivationForm } from '../ActivationForm';
+import { FormFieldWrapper } from '../../FormFieldWrapper';
+import { OrganizationTypesSelect } from '../OrganizationTypesSelect';
+import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
+import { AddressesForm } from '../AddressesForm';
+import { ServicesForm } from '../ServicesForm';
+import { transformOrganizationEditData } from '../../../_utils/transformOrganizationEditData';
 
-const { Edit, SimpleForm } = require('react-admin');
+const { Edit, SimpleForm, TextInput, required, FormDataConsumer, NumberInput } = require('react-admin');
 
-const transformData = data => {
-  // console.log({ data: JSON.stringify(data) });
-  const therapiesToConnect = data.therapiesIds?.map(id => ({ id })) ?? [];
-  const organizationTypesToConnect = data.organizationTypesIds?.map(id => ({ id }));
-  const addressesToConnect = data.addresses?.filter(address => address.id).map(address => ({ id: address.id })) ?? [];
-  const addressesToCreate =
-    data.addresses
-      ?.filter(address => !address.id)
-      .map(address => ({
-        ...address,
-        district: { connect: { id: address.districtId } },
-        districtId: undefined,
-      })) ?? [];
-
-  const unselectedAddresses =
-    data.addressesIds?.filter(addressId => !addressesToConnect.some(address => address.id === addressId)) ?? [];
-  // if formatOfWork is ONLINE, we need to delete all connected addresses
-  const addressesToDelete =
-    data.formatOfWork !== FormatOfWork.ONLINE ? unselectedAddresses.map(id => ({ id })) ?? [] : {};
-
-  return {
-    ...data,
-    organizationTypesIds: undefined,
-    therapiesIds: undefined,
-    addressesIds: undefined,
-    therapies: {
-      set: [],
-      connect: therapiesToConnect,
-    },
-    type: {
-      set: [],
-      connect: organizationTypesToConnect,
-    },
-    addresses: {
-      connect: addressesToConnect,
-      create: addressesToCreate,
-      deleteMany: addressesToDelete,
-    },
-  };
-};
+const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
 
 export function OrganizationEdit() {
   return (
-    <Edit title={'Редагувати дані організації'} transform={transformData} mutationMode="pessimistic">
+    <Edit title={'Редагувати дані організації'} transform={transformOrganizationEditData} mutationMode="pessimistic">
       <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(organizationEditValidationSchema)}>
-        {/* <GeneralInfoEdit />
-        <DetailsEdit />
-        <AddressesEdit /> */}
-        {/* <ServicesEdit /> */}
-        {/* <DescriptionForm label={'Опис організації'} /> */}
-        <ContactsForm />
-        <ActivationForm label={'Активувати/деактивувати організацію'} />
+        <FormDataConsumer>
+          {({ formData }) => {
+            if (!formData) return null;
+            const unnecessaryForDraft = formData.isActive && required();
+            return (
+              <>
+                <FormFieldWrapper title={'Основна інформація'}>
+                  <div className={fieldGroupClass}>
+                    <TextInput source="name" label="Назва організації" validate={required()} />
+                  </div>
+                  <OrganizationTypesSelect type="edit" fullWidth validate={required()} label={'Тип організації'} />
+                </FormFieldWrapper>
+
+                <FormFieldWrapper title={'Деталі'} className="mt-3">
+                  <div className={fieldGroupClass}>
+                    <NumberInput
+                      name={'yearsOnMarket'}
+                      source={'yearsOnMarket'}
+                      label={'Років на ринку'}
+                      validate={unnecessaryForDraft}
+                      min="0"
+                    />
+                    <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
+                  </div>
+                </FormFieldWrapper>
+                <AddressesForm label="Адреси" type="edit" validate={unnecessaryForDraft} />
+                <ServicesForm type="edit" validate={unnecessaryForDraft} label={'Послуги'} />
+                <ContactsForm />
+                <ActivationForm label={'Активувати/деактивувати організацію'} />
+              </>
+            );
+          }}
+        </FormDataConsumer>
       </SimpleForm>
     </Edit>
   );

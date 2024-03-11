@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  MESSAGES,
   createValidationSchema,
   specialistCore,
   zCreateAddressSchema,
@@ -46,13 +47,17 @@ export const organizationCreateValidationSchema = createValidationSchema(organiz
 // ------------------ EDIT SECTION ---------------------
 
 const editDefaultProps = z.object({
-  lastName: zStringWithMax,
-  firstName: zStringWithMax,
-  specializationsIds: zStringArray,
+  name: zStringWithMax,
+  organizationTypesIds: zStringArray,
 });
 
 const activeOrganizationEditSchema = restProps.extend({
-  addresses: zEditAddressSchema.array().default([]),
+  addresses: zEditAddressSchema
+    .array()
+    .min(1, {
+      message: MESSAGES.requiredField,
+    })
+    .default([]),
   therapiesIds: zStringArray,
   isActive: z.literal(true),
 });

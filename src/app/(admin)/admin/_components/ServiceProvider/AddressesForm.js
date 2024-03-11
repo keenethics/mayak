@@ -86,10 +86,10 @@ export function AddressesForm({ validate, type = 'create', label }) {
           const disabled = onlineOnly || !formatOfWork;
           return (
             <>
-              {!formatOfWork && <p className="mb-6 text-gray-700">Виберіть формат роботи спеціаліста</p>}
+              {!formatOfWork && <p className="mb-6 text-gray-700">Оберіть формат роботи</p>}
               {onlineOnly && <p className="mb-6 text-gray-700">Спеціаліст працює тільки онлайн</p>}
-              {!onlineOnly && !disabled && (
-                <ArrayInput source="addresses" label="Адреси">
+              {!onlineOnly && (
+                <ArrayInput source="addresses" label="">
                   <SimpleFormIterator inline disableReordering fullWidth disableAdd={disabled}>
                     <FormDataConsumer>
                       {({ scopedFormData, getSource }) => {
