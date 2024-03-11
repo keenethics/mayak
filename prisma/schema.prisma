@@ -89,7 +89,7 @@ model Organization {
 
 model SearchEntry {
   id             String        @id @default(uuid()) @db.Uuid
-  sortString     String        // sort string contains Full Name if record is for specialist and Clinic name if record is for organization
+  sortString     String // sort string contains Full Name if record is for specialist and Clinic name if record is for organization
   specialist     Specialist?   @relation(fields: [specialistId], references: [id], onDelete: Cascade)
   specialistId   String?       @unique @db.Uuid
   organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
