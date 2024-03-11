@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { CheckMark } from '@icons/index';
 import { cn } from '@/utils/cn';
 import { PillButton } from '../PillButton';
 
@@ -70,11 +71,15 @@ export function EventFilter({ events }) {
           <PillButton
             variant="outlined"
             colorVariant="orange"
-            className={cn(activeIndex === index && 'border-gray-700 bg-secondary-300 text-secondary-500')}
+            className={cn(
+              activeIndex === index &&
+                'flex-row gap-1 border-gray-700 bg-secondary-300 align-middle text-secondary-500',
+            )}
             key={index}
             onClick={() => {
               handleFilter(index, month);
             }}
+            icon={activeIndex === index && <CheckMark className="h-4 w-4" />}
           >
             {month.charAt(0).toUpperCase() + month.slice(1)}
           </PillButton>

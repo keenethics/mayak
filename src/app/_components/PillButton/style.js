@@ -54,7 +54,7 @@ export const buttonType = {
   outlined: {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col text-p4',
-      layoutStyle: `flex justify-center align-middle 
+      layoutStyle: `flex justify-center align-middle items-center
       gap-[8px] self-stretch h-[2.5rem] pt-[10px] pr-[24px] pb-[10px] pl-[16px]`,
     },
     regular: {
