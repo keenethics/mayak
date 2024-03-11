@@ -1,6 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { specialistEditValidationSchema } from '@/lib/validationSchemas/specialistSchema';
-import { ContactsForm } from '../ServiceProvider/ContactsForm';
+import { SpecialistFormFields, SpecialistFormSections } from '../../../_lib/specialistData';
+import { FormFieldWrapper } from '../../FormFieldWrapper';
+import { capitalizeFirstLetter } from '../../../_utils/common';
+import { FormTranslations } from '../../../_lib/translations';
+import { TextInputList } from '../../TextInputList';
+import { ContactsForm } from '../ContactsForm';
+import { ActivationForm } from '../ActivationForm';
+import { DescriptionForm } from '../DescriptionForm';
 
 const {
   Edit,
@@ -20,11 +27,6 @@ const {
 
 const PropTypes = require('prop-types');
 const { Gender, FormatOfWork } = require('@prisma/client');
-const { FormFieldWrapper } = require('../FormFieldWrapper');
-const { SpecialistFormSections, SpecialistFormFields } = require('../../_lib/specialistData');
-const { capitalizeFirstLetter } = require('../../_utils/common');
-const { FormTranslations } = require('../../_lib/translations');
-const { TextInputList } = require('../TextInputList');
 
 function AddressForm({ getSource, readOnly }) {
   const { fullAddress, nameOfClinic } = SpecialistFormFields;
@@ -178,25 +180,6 @@ function ServicesEdit() {
   );
 }
 
-// function ContactsEdit() {
-//   const { phone, email, website, instagram, facebook, youtube, linkedin, tiktok, viber, telegram } =
-//     SpecialistFormFields;
-
-//   const contactsList = [phone, email, website];
-//   const socialMediaList = [instagram, facebook, youtube, linkedin, tiktok, viber, telegram];
-
-//   return (
-//     <FormFieldWrapper title={SpecialistFormSections.contacts} className="mt-3">
-//       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-//         <TextInputList textInputList={contactsList} />
-//       </div>
-//       <div className="flex w-full flex-col flex-wrap md:flex-row md:gap-6 [&>*]:flex-grow">
-//         <TextInputList textInputList={socialMediaList} className="w-1/3" />
-//       </div>
-//     </FormFieldWrapper>
-//   );
-// }
-
 const transformData = data => {
   // console.log({ data: JSON.stringify(data) });
   const therapiesToConnect = data.therapiesIds?.map(id => ({ id })) ?? [];
@@ -242,7 +225,7 @@ export function SpecialistEdit() {
   return (
     <Edit
       title={'Редагувати дані спеціаліста'}
-      className="w-[800px]"
+      // className="w-[800px]"
       transform={transformData}
       mutationMode="pessimistic"
     >
@@ -255,10 +238,24 @@ export function SpecialistEdit() {
         <AddressesEdit />
         {/* SERVICES */}
         <ServicesEdit />
+        <FormFieldWrapper title={'Послуги'}>
+          <ReferenceArrayInput source="therapiesIds" reference="Therapy">
+            <AutocompleteArrayInput optionValue="id" optionText="title" />
+          </ReferenceArrayInput>
+          <BooleanInput
+            name={'isFreeReception'}
+            source={'isFreeReception'}
+            label={'Безкоштовний прийом'}
+            className="w-max"
+          />
+
+          <DescriptionForm label={'Опис спеціаліста'} />
+          {/* <TextInput name={'description'} source={'description'} label={'Опис'} fullWidth multiline /> */}
+        </FormFieldWrapper>
         {/* CONTACTS */}
         <ContactsForm />
-        {/* ACTIVATE */}
-        <BooleanInput name="isActive" source="isActive" label="Активувати спеціаліста" className="mt-8" />
+        {/* <ContactsEdit /> */}
+        <ActivationForm label={'Активувати/деактивувати спеціаліста'} />
       </SimpleForm>
     </Edit>
   );
