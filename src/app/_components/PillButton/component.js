@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import { Paragraph } from '@components/Typography';
-import { cn } from '@/app/utils/cn';
+import { cn } from '@/utils/cn';
 import { buttonColorVariant, buttonType } from './style';
 
 export function PillButton({ children, className, icon, variant, colorVariant, ...props }) {
