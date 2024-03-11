@@ -14,7 +14,7 @@ const MODEL_SEARCH_FIELDS = {
 
 const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
-    therapies: { select: { type: true } },
+    therapies: { select: { id: true, type: true, title: true } },
     specializations: { select: { name: true } },
     addresses: {
       select: {
@@ -26,7 +26,7 @@ const MODEL_INCLUDES = {
     },
   },
   [RESOURCES.organization]: {
-    therapies: { select: { type: true } },
+    therapies: { select: { id: true, type: true, title: true } },
     type: { select: { name: true } },
     addresses: {
       select: {

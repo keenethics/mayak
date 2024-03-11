@@ -1,0 +1,41 @@
+import PropTypes from 'prop-types';
+import { Dot } from '@icons/index';
+import { Caption, ListTruncator } from '@components';
+
+export function SpecializationsPanel({ specialistId, specializations, extendedCardOpened = false }) {
+  return extendedCardOpened ? (
+    <div className="inline-flex shrink flex-wrap items-center gap-[8px]">
+      {specializations.map((specialization, index) => (
+        <div className="flex items-center justify-center gap-2.5" key={`${specialization}-${index}`}>
+          <Caption className="whitespace-normal text-start font-bold text-gray-600 lg:text-p4">
+            {specialization}
+          </Caption>
+          {index !== specializations.length - 1 && <Dot key={`dot-${specialization}-${index}`} />}
+        </div>
+      ))}
+    </div>
+  ) : (
+    <ListTruncator
+      id={specialistId}
+      content={specializations.map((specialization, index) => (
+        <div key={`${specialization}-${index}`} className="flex items-center justify-center gap-2.5">
+          <Caption className="text-cardsm whitespace-nowrap text-start font-bold text-gray-600 lg:text-p4">
+            {specialization}
+          </Caption>
+          {index !== specializations.length - 1 && <Dot />}
+        </div>
+      ))}
+      hintContent={specializations.map((specialization, index) => (
+        <div key={`hint-${specialization}-${index}`} className="text-c2 text-center text-gray-900">
+          {specialization}
+        </div>
+      ))}
+    />
+  );
+}
+
+SpecializationsPanel.propTypes = {
+  specializations: PropTypes.arrayOf(PropTypes.string).isRequired,
+  specialistId: PropTypes.string.isRequired,
+  extendedCardOpened: PropTypes.bool,
+};

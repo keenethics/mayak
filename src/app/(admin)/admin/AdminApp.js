@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import { Admin, ListGuesser, Resource, ShowGuesser, EditGuesser } from 'react-admin';
+import { Admin, EditGuesser, ListGuesser, Resource, ShowGuesser } from 'react-admin';
 import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
-import { EventCreate, EventList, EventShow, EventEdit } from '@admin/components/Event';
+import { EventCreate, EventEdit, EventList, EventShow } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
 import { SpecialistCreate, SpecialistShow, SpecialistsList } from '@admin/components/Specialist';
 import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/components/Organization';
-import { ListTherapy, CreateTherapy, EditTherapy } from '@admin/components/Therapy';
+import { TherapyList, TherapyCreate, TherapyEdit } from '@admin/components/Therapy';
 import { authProvider } from '@admin/authProvider';
 
 export default function AdminPage() {
@@ -18,25 +18,55 @@ export default function AdminPage() {
     <Admin dataProvider={data} authProvider={authProvider}>
       <Resource
         name={RESOURCES.organization}
+        options={{ label: 'Організації' }}
         list={OrganizationsList}
         show={OrganizationShow}
         create={OrganizationCreate}
       />
       <Resource
-        name={RESOURCES.therapy}
-        options={{ label: 'Therapy' }}
-        list={ListTherapy}
-        edit={EditTherapy}
-        create={CreateTherapy}
-        show={ShowGuesser}
-      />
-      <Resource
         name={RESOURCES.specialist}
-        options={{ label: 'Specialist' }}
+        options={{ label: 'Спеціалісти' }}
         list={SpecialistsList}
         edit={EditGuesser}
         show={SpecialistShow}
         create={SpecialistCreate}
+      />
+      <Resource
+        name={RESOURCES.therapy}
+        options={{ label: 'Терапії' }}
+        list={TherapyList}
+        edit={TherapyEdit}
+        create={TherapyCreate}
+        show={ShowGuesser}
+      />
+      <Resource
+        name={RESOURCES.event}
+        list={EventList}
+        create={EventCreate}
+        edit={EventEdit}
+        show={EventShow}
+        options={{ label: 'Заходи' }}
+      />
+      <Resource
+        name={RESOURCES.district}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+        options={{ label: 'Райони' }}
+      />
+      <Resource
+        name={RESOURCES.specialization}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+        options={{ label: 'Спеціалізації' }}
+      />
+      <Resource
+        name={RESOURCES.address}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+        options={{ label: 'Адреси' }}
       />
       <Resource name={RESOURCES.event} list={EventList} create={EventCreate} edit={EventEdit} show={EventShow} />
       <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
@@ -52,7 +82,7 @@ export default function AdminPage() {
       />
       <Resource
         name={RESOURCES.feedback}
-        options={{ label: 'Feedback' }}
+        options={{ label: "Зворотній зв'язок" }}
         list={ListGuesser}
         show={ShowGuesser}
         edit={EditGuesser}

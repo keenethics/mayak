@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {
+  ArrayField,
+  BooleanField,
+  ChipField,
+  Datagrid,
+  DateField,
+  NumberField,
   Show,
   SimpleShowLayout,
-  BooleanField,
-  TextField,
-  ArrayField,
-  Datagrid,
-  NumberField,
-  DateField,
-  ChipField,
   SingleFieldList,
+  TextField,
 } from 'react-admin';
 
 export function OrganizationShow() {
@@ -30,6 +30,7 @@ export function OrganizationShow() {
           <Datagrid bulkActionButtons={false}>
             <TextField label="Повна адреса" source="fullAddress" />
             <TextField label="Район" source="district.name" />
+            <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
         <ArrayField label="Типи терапії" source="therapies">

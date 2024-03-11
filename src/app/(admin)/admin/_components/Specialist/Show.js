@@ -1,16 +1,14 @@
-import React from 'react';
-
 import {
-  Show,
-  SimpleShowLayout,
-  BooleanField,
-  TextField,
-  NumberField,
   ArrayField,
-  SingleFieldList,
+  BooleanField,
   ChipField,
   Datagrid,
   DateField,
+  NumberField,
+  Show,
+  SimpleShowLayout,
+  SingleFieldList,
+  TextField,
 } from 'react-admin';
 
 export function SpecialistShow() {
@@ -34,11 +32,12 @@ export function SpecialistShow() {
             <TextField label="Повна адреса" source="fullAddress" />
             <TextField label="Назва кліники" source="nameOfClinic" />
             <TextField label="Район" source="district.name" />
+            <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
         <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
-            <ChipField source="type" size="small" />
+            <ChipField source="title" size="small" />
           </SingleFieldList>
         </ArrayField>
         <BooleanField label="Безкоштовний прийом" source="isFreeReception" />

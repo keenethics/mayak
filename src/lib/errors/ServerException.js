@@ -1,5 +1,5 @@
-import { BaseError } from './BaseError';
 import { BASE_ERROR_MESSAGES } from '../consts';
+import { BaseError } from './BaseError';
 
 export class ServerException extends BaseError {
   constructor(data = null) {
