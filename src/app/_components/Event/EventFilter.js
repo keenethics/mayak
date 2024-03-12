@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { CheckMark } from '@icons/index';
 import { cn } from '@/utils/cn';
 import { PillButton } from '../PillButton';
+import { NoEvents } from '../NoEvents';
+import { EventCard } from './Card';
 
 export function EventFilter({ events }) {
   const [dates, setDates] = useState([]);
@@ -14,8 +16,7 @@ export function EventFilter({ events }) {
 
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
-  // const currentDay = new Date().getDay();
-  // console.log(currentDay);
+
   const monthsAhead = 5;
   const monthNames = [
     'січень',
@@ -32,6 +33,7 @@ export function EventFilter({ events }) {
     'грудень',
   ];
 
+  // Get 6 basic month starting from today
   useEffect(() => {
     const getNextMonths = () => {
       const nextMonths = [];
@@ -49,9 +51,8 @@ export function EventFilter({ events }) {
     // eslint-disable-next-line
   }, [currentMonth]);
 
+  // Filter out dates for this year and not before today
   useEffect(() => {
-    // Filter out dates for this year and not before today
-
     const filteredData = events
       .filter(item => {
         const eventYear = item.eventDate.getFullYear();
@@ -64,20 +65,8 @@ export function EventFilter({ events }) {
     // eslint-disable-next-line
   }, []);
 
-  //   const getDate = events
-  //     .map(({ eventDate }) => eventDate)
-  //     .toSorted((a, b) => a - b)
-  //     .toLocaleString('uk-UA', {
-  //       timeZone: 'UTC',
-  //       hour: 'numeric',
-  //       minute: '2-digit',
-  //       day: 'numeric',
-  //       month: 'long',
-  //       year: 'numeric',
-  //     });
-
+  // Filter data for the first month initially
   useEffect(() => {
-    // Filter data for the first month initially
     const firstMonth = months[0];
     const filtered = dates.filter(
       date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === firstMonth,
@@ -85,8 +74,8 @@ export function EventFilter({ events }) {
     setFilteredDates(filtered);
   }, [dates, months]);
 
+  // Filter data based on selected month
   const handleFilter = (index, month) => {
-    // Filter data based on selected month
     const filtered = dates.filter(
       date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === month,
     );
@@ -115,6 +104,7 @@ export function EventFilter({ events }) {
           </PillButton>
         ))}
       </div>
+      {filteredDates.length === 0 && <NoEvents />}
       <ul
         className="grid w-full
            self-stretch sm:grid-cols-1 md:grid-cols-2 md:gap-[12px] lg:grid-cols-3 lg:gap-[16px]"
@@ -122,16 +112,7 @@ export function EventFilter({ events }) {
         {filteredDates
           .filter(date => date.eventDate >= new Date())
           .map((date, index) => (
-            <li key={index}>
-              {new Date(date.eventDate).toLocaleString('uk-UA', {
-                timeZone: 'UTC',
-                hour: 'numeric',
-                minute: '2-digit',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </li>
+            <EventCard key={index} event={date} />
           ))}
       </ul>
     </div>

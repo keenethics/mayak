@@ -26,24 +26,23 @@ function transformData(event) {
   const locationText = format === 'ONLINE' ? 'Онлайн' : address;
   let priceText;
   switch (priceType) {
-  case 'FREE':
-    priceText = 'Безкоштовно';
-    break;
-  case 'MIN_PRICE':
-    priceText = `від ${price}`;
-    break;
-  case 'FIXED_PRICE':
-    priceText = `${price}`;
-    break;
-  default:
-    break;
+    case 'FREE':
+      priceText = 'Безкоштовно';
+      break;
+    case 'MIN_PRICE':
+      priceText = `від ${price}`;
+      break;
+    case 'FIXED_PRICE':
+      priceText = `${price}`;
+      break;
+    default:
+      break;
   }
   return { title, organizerName, tags, priceText, locationText, date, time, locationLink };
 }
 
-export default function EventCard({ event }) {
+export function EventCard({ event }) {
   const { title, organizerName, tags, priceText, locationText, date, time, locationLink } = transformData(event);
-
   const addressElement = (
     <OverflownText
       className={cn('w-56 truncate text-p3 font-medium text-gray-700', { 'hover:underline': locationLink })}
@@ -51,7 +50,7 @@ export default function EventCard({ event }) {
     />
   );
 
-  const tagsElements = tags.map(tag => (
+  const tagsElements = tags?.map(tag => (
     <Label key={tag.name} className="bg-primary-100" textClassName="text-primary-600" text={tag.name} />
   ));
   return (
