@@ -26,17 +26,17 @@ function transformData(event) {
   const locationText = format === 'ONLINE' ? 'Онлайн' : address;
   let priceText;
   switch (priceType) {
-    case 'FREE':
-      priceText = 'Безкоштовно';
-      break;
-    case 'MIN_PRICE':
-      priceText = `від ${price}`;
-      break;
-    case 'FIXED_PRICE':
-      priceText = `${price}`;
-      break;
-    default:
-      break;
+  case 'FREE':
+    priceText = 'Безкоштовно';
+    break;
+  case 'MIN_PRICE':
+    priceText = `від ${price}`;
+    break;
+  case 'FIXED_PRICE':
+    priceText = `${price}`;
+    break;
+  default:
+    break;
   }
   return { title, organizerName, tags, priceText, locationText, date, time, locationLink };
 }
