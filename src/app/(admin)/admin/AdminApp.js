@@ -6,13 +6,18 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate, EventEdit, EventList, EventShow } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
-
 import { CreateTherapy, EditTherapy, ListTherapy } from '@admin/components/Therapy';
 import { authProvider } from './authProvider';
-import { OrganizationShow, OrganizationsList, OrganizationCreate } from './_components/ServiceProvider/Organization';
-import { OrganizationEdit } from './_components/ServiceProvider/Organization/Edit';
-import { SpecialistCreate, SpecialistShow, SpecialistsList } from './_components/ServiceProvider/Specialist';
-import { SpecialistEdit } from './_components/ServiceProvider/Specialist/Edit';
+import {
+  OrganizationCreate,
+  OrganizationShow,
+  OrganizationsList,
+  SpecialistCreate,
+  SpecialistShow,
+  SpecialistsList,
+  SpecialistEdit,
+  OrganizationEdit,
+} from './_components/ServiceProvider';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
