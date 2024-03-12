@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputErrorIcon from '@icons/inputErrorIcon.svg';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 import { variants } from './styles';
 
 export function TextInputField({

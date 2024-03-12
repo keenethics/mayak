@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import P from 'prop-types';
+import PropTypes from 'prop-types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -17,5 +17,5 @@ export function QueryContext({ children }) {
 }
 
 QueryContext.propTypes = {
-  children: P.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
