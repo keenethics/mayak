@@ -3,9 +3,9 @@ import { Heading } from '../Typography';
 
 export function SearchSection() {
   return (
-    <section className="px-[80px] pb-[88px] pt-[72px]">
-      <div className="mx-auto flex max-w-[906px] flex-col gap-12">
-        <Heading type="h1" className="text-center text-[3.5rem] font-bold leading-[4rem]">
+    <section className="px-4 pt-6 lg:px-[80px] lg:pb-[88px] lg:pt-[72px]">
+      <div className="mx-auto flex max-w-[906px] flex-col gap-4 lg:gap-12">
+        <Heading type="h1" className="text-center text-p2 font-bold lg:text-[3.5rem] lg:leading-[4rem]">
           Шукай пункти психологічної підтримки у місті <span className="text-secondary-400">Львові</span>
         </Heading>
         <SearchInput />
