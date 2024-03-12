@@ -37,23 +37,25 @@ export const string = (
 
 export const date = (
   fieldName,
-  opts = { required: true },
   schema = z.coerce.date({
-    required_error: opts.required ? errors(fieldName).required : undefined,
+    required_error: errors(fieldName).required,
     invalid_type_error: errors(fieldName).date.format,
   }),
 ) => ({
-  min: d => date(fieldName, opts, schema.min(d, { message: errors(fieldName).date.min(d) })),
+  min: d => date(fieldName, schema.min(d, { message: errors(fieldName).date.min(d) })),
   zod: schema,
 });
 
 export const boolean = (
   fieldName,
-  opts = { required: true },
   schema = z.boolean({
-    required_error: opts.required ? errors(fieldName).required : undefined,
+    required_error: errors(fieldName).required,
     invalid_type_error: errors(fieldName).boolean.format,
   }),
 ) => ({
   zod: schema,
+});
+
+export const array = (fieldName, itemSchema) => ({
+  zod: z.array(itemSchema, { required_error: errors(fieldName).required }),
 });

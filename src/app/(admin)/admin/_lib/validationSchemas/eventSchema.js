@@ -1,20 +1,17 @@
 import { z } from 'zod';
 import { string, date, errors } from '@/lib/validationSchemas/utils';
 
-const title = string('Назва події').min(1).max(128).zod;
-const organizerName = string('Організатор').min(1).max(128).zod;
-
 const ActiveEventSchema = z.object({
   isActive: z.literal(true),
-  title,
-  organizerName,
+  title: string('Назва події').min(1).max(128).zod,
+  organizerName: string('Організатор').min(1).max(128).zod,
   eventDate: date('Дата події').min(new Date()).zod,
   notes: string('Коментарі').min(1).max(350).nullish().zod,
   locationLink: string('Посилання').nullish().zod,
   additionalLink: z
     .object({
-      label: string('Тип').min(1).max(30).nullish(),
-      link: string('Посилання', { required: false }).min(1).nullish(),
+      label: string('Тип').min(1).max(30).nullish().zod,
+      link: string('Посилання').min(1).nullish().zod,
     })
     .superRefine((data, ctx) => {
       const { label, link } = data;
@@ -47,8 +44,8 @@ const ActiveEventSchema = z.object({
 
 const DraftEventSchema = z.object({
   isActive: z.literal(false),
-  title,
-  organizerName,
+  title: string('Назва події').min(1).max(128).zod,
+  organizerName: string('Організатор').min(1).max(128).zod,
 });
 
 export const EventSchema = z
@@ -76,7 +73,7 @@ export const EventSchema = z
         message: 'Безкоштовна подія не може мати ціну',
       });
     }
-    if (priceType !== 'FREE' && (!price || price <= 0)) {
+    if (priceType && priceType !== 'FREE' && (!price || price <= 0)) {
       ctx.addIssue({
         code: z.ZodIssueCode.invalid_type,
         path: ['price'],
