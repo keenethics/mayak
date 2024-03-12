@@ -39,6 +39,7 @@ export const transformEditData = ({ therapiesIds, addresses, addressesIds, forma
 
   return {
     ...rest,
+    formatOfWork,
     therapiesIds: undefined,
     addressesIds: undefined,
     therapies: {
