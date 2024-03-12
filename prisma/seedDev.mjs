@@ -16,6 +16,7 @@ function nullable(value) {
 
 // returns array of unique objects with id field
 function uniqueObjectsWithId(instances) {
+  if (instances.length === 0) return [];
   return faker.helpers
     .uniqueArray(
       instances.map(s => s.id),
@@ -232,20 +233,11 @@ async function main() {
     // for instead of Promise.all to avoid overloading the database pool
     const specialistData = randomSpecialist({ districts, specializations, therapies });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.$transaction(async trx => {
-      const specialist = await trx.specialist.create({
-        data: specialistData,
-      });
-      await trx.searchEntry.create({
-        data: {
-          sortString: getSpecialistFullName(specialist),
-          specialist: {
-            connect: {
-              id: specialist.id,
-            },
-          },
-        },
-      });
+    await prisma.searchEntry.create({
+      data: {
+        sortString: getSpecialistFullName(specialistData),
+        specialist: { create: specialistData },
+      },
     });
   }
   for (let i = 0; i < 10; i += 1) {
@@ -257,20 +249,11 @@ async function main() {
   for (let i = 0; i < 10; i += 1) {
     const organizationData = randomOrganization({ therapies, districts, organizationTypes });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.$transaction(async trx => {
-      const organization = await trx.organization.create({
-        data: organizationData,
-      });
-      await trx.searchEntry.create({
-        data: {
-          sortString: organization.name,
-          organization: {
-            connect: {
-              id: organization.id,
-            },
-          },
-        },
-      });
+    await prisma.searchEntry.create({
+      data: {
+        sortString: organizationData.name,
+        organization: { create: organizationData },
+      },
     });
   }
 }
