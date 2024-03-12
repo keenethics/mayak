@@ -24,11 +24,11 @@ const zSpecialistSchema = specialistCore.extend({
   description: zString.nullish(),
 });
 
-const restProps = zSpecialistSchema.extend({
+// ------------------ CREATE SECTION ---------------------
+
+const restCreateProps = zSpecialistSchema.extend({
   addresses: zCreateAddressSchema.array().default([]),
 });
-
-// ------------------ CREATE SECTION ---------------------
 
 const createDefaultProps = z.object({
   lastName: zStringWithMax,
@@ -36,12 +36,12 @@ const createDefaultProps = z.object({
   specializations: zStringArray,
 });
 
-const activeSpecialistSchema = restProps.extend({
+const activeSpecialistSchema = restCreateProps.extend({
   therapies: zStringArray,
   isActive: z.literal(true),
 });
 
-const draftSpecialistSchema = restProps.partial().extend({
+const draftSpecialistSchema = restCreateProps.partial().extend({
   isActive: z.literal(false),
 });
 
@@ -50,25 +50,22 @@ export const specialistCreateValidationSchema = createValidationSchema(specialis
 
 // ------------------ EDIT SECTION ---------------------
 
+const restEditProps = zSpecialistSchema.extend({
+  addresses: zEditAddressSchema.array().default([]),
+});
+
 const editDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializationsIds: zStringArray,
 });
 
-const activeSpecialistEditSchema = restProps.extend({
-  addresses: zEditAddressSchema
-    .array()
-    .min(1, {
-      message: MESSAGES.requiredField,
-    })
-    .default([]),
+const activeSpecialistEditSchema = restEditProps.extend({
   therapiesIds: zStringArray,
   isActive: z.literal(true),
 });
 
-const draftSpecialistEditSchema = restProps.partial().extend({
-  addresses: zEditAddressSchema.array(),
+const draftSpecialistEditSchema = restEditProps.partial().extend({
   isActive: z.literal(false),
 });
 
