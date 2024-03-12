@@ -7,5 +7,6 @@ export const env = z
     DATABASE_DIRECT_URL: z.string().url(),
     ADMIN_USERNAME: z.string().min(5),
     ADMIN_PASSWORD: z.string().min(5),
+    REVALIDATION_TIME: z.preprocess(val => Number(val), z.number()),
   })
   .parse(process.env);
