@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import {
-  MESSAGES,
   createValidationSchema,
   specialistCore,
   zCreateAddressSchema,
@@ -16,25 +15,26 @@ import {
 const zOrganizationSchema = specialistCore.extend({
   name: zStringWithMax,
   yearsOnMarket: zInteger,
-  description: zString,
-});
-
-const restProps = zOrganizationSchema.extend({
-  addresses: zCreateAddressSchema.array().default([]),
 });
 
 // ------------------ CREATE SECTION ---------------------
 
+const restCreateProps = zOrganizationSchema.extend({
+  addresses: zCreateAddressSchema.array().default([]),
+});
+
 const createDefaultProps = z.object({
   name: zStringWithMax,
   type: zStringArray,
+  description: zString,
 });
 
-const activeOrganizationSchema = restProps.extend({
+const activeOrganizationSchema = restCreateProps.extend({
+  therapies: zStringArray,
   isActive: z.literal(true),
 });
 
-const draftOrganizationSchema = restProps.partial().extend({
+const draftOrganizationSchema = restCreateProps.partial().extend({
   isActive: z.literal(false),
 });
 
@@ -46,24 +46,22 @@ export const organizationCreateValidationSchema = createValidationSchema(organiz
 
 // ------------------ EDIT SECTION ---------------------
 
+const restEditProps = zOrganizationSchema.extend({
+  addresses: zEditAddressSchema.array().default([]),
+});
+
 const editDefaultProps = z.object({
   name: zStringWithMax,
   organizationTypesIds: zStringArray,
+  description: zString,
 });
 
-const activeOrganizationEditSchema = restProps.extend({
-  addresses: zEditAddressSchema
-    .array()
-    .min(1, {
-      message: MESSAGES.requiredField,
-    })
-    .default([]),
+const activeOrganizationEditSchema = restEditProps.extend({
   therapiesIds: zStringArray,
   isActive: z.literal(true),
 });
 
-const draftOrganizationEditSchema = restProps.partial().extend({
-  addresses: zEditAddressSchema.array(),
+const draftOrganizationEditSchema = restEditProps.partial().extend({
   isActive: z.literal(false),
 });
 
