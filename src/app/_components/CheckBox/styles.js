@@ -5,6 +5,7 @@ export const variants = {
     },
     checkBox: {
       base: 'peer h-[20px] w-[20px] rounded-[4px] border-gray-500 bg-other-white p-[2px]',
+      radioBase: 'peer h-5 w-5 rounded-[10px] border-gray-500 bg-other-white p-0.5',
       disabled:
         'disabled:border-gray-300 disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:hover:border-gray-300',
       hover: 'hover:border-primary-500 hover:bg-primary-100',
@@ -17,6 +18,7 @@ export const variants = {
     labelBefore: {
       layout: 'before:absolute before:left-[4px] before:top-[4px] before:block before:h-[18px]  before:w-[18px]',
       base: 'before:border-spacing-[1px] before:rounded-[4px] before:bg-other-white',
+      radioBase: 'before:border-spacing-[1px] before:rounded-[10px] before:bg-other-white',
       peerChecked: `peer-checked:before:border-primary-400 peer-checked:before::bg-primary-100 
         peer-checked:before:hover:border-primary-500 peer-checked:before:hover:border-primary-500`,
       peerFocus: 'peer-focus:before:bg-other-white',
@@ -35,6 +37,7 @@ export const variants = {
       disabled: 'text-gray-400',
     },
     tick: {
+      radioPosition: 'absolute left-[3px]',
       position: 'absolute left-[7px] top-[9px]',
       base: '*:stroke-primary-500',
       disabled: '*:stroke-gray-300',

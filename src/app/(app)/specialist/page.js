@@ -3,6 +3,7 @@ import { PillButton, SpecialistList } from '@components';
 import { formatPhoneNumber } from '@utils/common';
 import { organizationInclude, specialistInclude } from '@/app/(app)/specialist/consts';
 import { getSpecialists, sortSpecialistsByName } from '@/app/(app)/specialist/utils';
+import { FilterList } from '@/app/_components/Specialists/FilterList';
 import { env } from '@/lib/env';
 
 export const metadata = {
@@ -46,6 +47,7 @@ export default async function Page() {
 
   return (
     <div className="mx-auto mb-16 max-w-[900px]">
+      <FilterList />
       <SpecialistList specialists={allSpecialists} className="mt-[22px]" />
       <div className="flex w-full justify-center">
         <PillButton variant="tonal" colorVariant="lightblue" aria-label="Load more items">
