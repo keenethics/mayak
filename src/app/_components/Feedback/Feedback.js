@@ -59,7 +59,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
       onClose();
     }, 4000);
 
-    // Existing lint rules do not allow this usage, but this code is required.
+    // that because of first return void, and second return clearTimeout
     // eslint-disable-next-line consistent-return
     return () => clearTimeout(timer);
     // any additional dependencies will be redundant
@@ -67,7 +67,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
   }, [isFormOpen]);
 
   return (
-    <Modal isOpen={isFeedbackOpen} onClose={onClose} bgColor="bg-primary-200 ">
+    <Modal isOpen={isFeedbackOpen} onClose={onClose} className="bg-primary-200">
       <div className="px-[54px] pt-0">
         {isFormOpen ? (
           <form onSubmit={onSubmit} className="grid gap-y-7">
