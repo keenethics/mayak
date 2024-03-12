@@ -37,6 +37,7 @@ const createDefaultProps = z.object({
 });
 
 const activeSpecialistSchema = restProps.extend({
+  therapies: zStringArray,
   isActive: z.literal(true),
 });
 

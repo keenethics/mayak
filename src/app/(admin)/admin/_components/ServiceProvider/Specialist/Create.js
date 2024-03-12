@@ -80,7 +80,7 @@ export function SpecialistCreate() {
                       <NumberInput
                         name={'yearsOfExperience'}
                         source={'yearsOfExperience'}
-                        label={'Роки досвіду'}
+                        label={'Роки cтажу'}
                         validate={unnecessaryForDraft}
                         min="0"
                       />

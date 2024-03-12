@@ -6,7 +6,6 @@ import {
   FormDataConsumer,
   useGetList,
   ReferenceInput,
-  required,
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
 import { RESOURCES } from '@admin/_lib/consts';
@@ -25,7 +24,7 @@ function AddressForm({ getSource, validate, districts, type, readOnly = false })
         fullWidth
         source={getSource('fullAddress')}
         label={'Повна адреса'}
-        validate={required()}
+        validate={validate}
         helperText="Вулиця, номер будинку, поверх, кабінет"
       />
       <TextInput
@@ -34,7 +33,6 @@ function AddressForm({ getSource, validate, districts, type, readOnly = false })
         }}
         source={getSource('nameOfClinic')}
         label={'Назва клініки'}
-        validate={required()}
         fullWidth
       />
       {type === 'create' && (
@@ -58,6 +56,7 @@ function AddressForm({ getSource, validate, districts, type, readOnly = false })
             }}
             optionText="name"
             optionValue="id"
+            validate={validate}
           />
         </ReferenceInput>
       )}
