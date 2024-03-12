@@ -1,14 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/navigation';
 import { CheckMark } from '@icons/index';
 import { cn } from '@/utils/cn';
 import { PillButton } from '../PillButton';
-import { NoEvents } from '../NoEvents';
+import { NoInfoToShow } from '../NoInfoToShow';
 import { EventCard } from './Card';
 
 export function EventFilter({ events }) {
+  const router = useRouter();
+
   const [dates, setDates] = useState([]);
   const [filteredDates, setFilteredDates] = useState([]);
   const [months, setMonths] = useState([]);
@@ -59,29 +62,50 @@ export function EventFilter({ events }) {
         return eventYear <= currentYear;
       })
       .toSorted((a, b) => a.eventDate - b.eventDate)
-      .filter(date => date.eventDate >= new Date());
+      .filter(date => date.isActive && date.eventDate >= new Date());
 
     setDates(filteredData);
     // eslint-disable-next-line
   }, []);
 
-  // Filter data for the first month initially
+  // Get the month from the query parameters or use the first month from array and fetch data
   useEffect(() => {
-    const firstMonth = months[0];
+    router.push(
+      `/events?month=${months[0]}`,
+
+      undefined,
+      { shallow: true },
+    );
     const filtered = dates.filter(
-      date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === firstMonth,
+      date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === months[0],
     );
     setFilteredDates(filtered);
-  }, [dates, months]);
+  }, [router, months, dates]);
 
   // Filter data based on selected month
-  const handleFilter = (index, month) => {
-    const filtered = dates.filter(
-      date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === month,
-    );
-    setFilteredDates(filtered);
-    setActiveIndex(index);
-  };
+  const handleFilter = useCallback(
+    (index, month) => {
+      const filtered = dates.filter(
+        date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === month,
+      );
+      setFilteredDates(filtered);
+      setActiveIndex(index);
+
+      if (currentMonth === month) {
+        router.push(`/events?month=${months[0]}`, undefined, { shallow: true });
+      } else {
+        router.push(
+          `/events?month=${month}`,
+
+          undefined,
+          { shallow: true },
+        );
+      }
+
+      router.push(`/events?month=${month}`);
+    },
+    [router, dates, months, currentMonth],
+  );
 
   return (
     <div className="mx-auto flex w-full flex-col items-start justify-start gap-6 self-stretch lg:w-[900px]">
@@ -94,7 +118,7 @@ export function EventFilter({ events }) {
               activeIndex === index &&
                 'flex-row gap-1 border-gray-700 bg-secondary-300 align-middle text-secondary-500',
             )}
-            key={index}
+            key={month}
             onClick={() => {
               handleFilter(index, month);
             }}
@@ -104,7 +128,7 @@ export function EventFilter({ events }) {
           </PillButton>
         ))}
       </div>
-      {filteredDates.length === 0 && <NoEvents />}
+      {filteredDates.length === 0 && <NoInfoToShow text="подій" />}
       <ul
         className="grid w-full
            self-stretch sm:grid-cols-1 md:grid-cols-2 md:gap-[12px] lg:grid-cols-3 lg:gap-[16px]"
