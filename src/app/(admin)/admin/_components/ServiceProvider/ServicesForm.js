@@ -23,7 +23,7 @@ export function ServicesForm({ label, validate, type = 'create' }) {
       )}
       {type === 'edit' && (
         <ReferenceArrayInput source="therapiesIds" reference="Therapy">
-          <AutocompleteArrayInput label="Терапії" optionValue="id" optionText="title" />
+          <AutocompleteArrayInput label="Терапії" optionValue="id" optionText="title" validate={validate} />
         </ReferenceArrayInput>
       )}
       <BooleanInput

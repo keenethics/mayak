@@ -1,26 +1,15 @@
 import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Create,
-  FormDataConsumer,
-  NumberInput,
-  SimpleForm,
-  TextInput,
-  required,
-  useNotify,
-  useRedirect,
-} from 'react-admin';
-import { FormFieldWrapper } from '../../FormFieldWrapper';
+import { Create, FormDataConsumer, SimpleForm, required, useNotify, useRedirect } from 'react-admin';
 import { ActivationForm } from '../ActivationForm';
 import { ContactsForm } from '../ContactsForm';
-import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
-import { OrganizationTypesSelect } from '../OrganizationTypesSelect';
 import { ServicesForm } from '../ServicesForm';
 import { AddressesForm } from '../AddressesForm';
 import { organizationCreateValidationSchema } from '../../../_lib/validationSchemas/organizationSchema';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '../../../_lib/consts';
-
-const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
+import { DetailsEditOrg } from './DetailsEditOrg';
+import { GeneralInfoEditOrg } from './GeneralInfoEditOrg';
+import { DescriptionEdit } from '../DescriptionEdit';
 
 export function OrganizationCreate() {
   const notify = useNotify();
@@ -36,7 +25,11 @@ export function OrganizationCreate() {
   };
 
   return (
-    <Create mutationOptions={{ onSuccess: handleSuccess, onError: handleError }} transform={transformOrganizationData}>
+    <Create
+      title={'Додавання нової огранізації'}
+      mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
+      transform={transformOrganizationData}
+    >
       <SimpleForm resolver={zodResolver(organizationCreateValidationSchema)}>
         <FormDataConsumer>
           {({ formData }) => {
@@ -44,35 +37,11 @@ export function OrganizationCreate() {
             const unnecessaryForDraft = formData.isActive && required();
             return (
               <>
-                <FormFieldWrapper title={'Основна інформація'}>
-                  <div className={fieldGroupClass}>
-                    <TextInput source="name" label="Назва організації" validate={required()} />
-                  </div>
-                  <OrganizationTypesSelect fullWidth validate={unnecessaryForDraft} label={'Тип організації'} />
-                </FormFieldWrapper>
-
-                <FormFieldWrapper title={'Деталі'} className="mt-3">
-                  <div className={fieldGroupClass}>
-                    <NumberInput
-                      name={'yearsOnMarket'}
-                      source={'yearsOnMarket'}
-                      label={'Років на ринку'}
-                      validate={unnecessaryForDraft}
-                      min="0"
-                    />
-                    <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
-                  </div>
-                </FormFieldWrapper>
+                <GeneralInfoEditOrg type="create" validate={unnecessaryForDraft} />
+                <DetailsEditOrg validate={unnecessaryForDraft} />
                 <AddressesForm label="Адреси надання послуг" />
                 <ServicesForm validate={unnecessaryForDraft} label={'Послуги'} />
-                <TextInput
-                  name={'description'}
-                  source={'description'}
-                  label={'Опис'}
-                  validate={required()}
-                  fullWidth
-                  multiline
-                />
+                <DescriptionEdit validate={required()} />
                 <ContactsForm />
                 <ActivationForm label={'Активувати/деактивувати організацію'} />
               </>

@@ -1,41 +1,14 @@
-import { FormatOfWork } from '@prisma/client';
+import { toConnectList, transformEditData } from './common';
 
-export const transformSpecialistEditData = data => {
-  const therapiesToConnect = data.therapiesIds?.map(id => ({ id })) ?? [];
-  const specializationsToConnect = data.specializationsIds?.map(id => ({ id }));
-  const addressesToConnect = data.addresses?.filter(address => address.id).map(address => ({ id: address.id })) ?? [];
-  const addressesToCreate =
-    data.addresses
-      ?.filter(address => !address.id)
-      .map(address => ({
-        ...address,
-        district: { connect: { id: address.districtId } },
-        districtId: undefined,
-      })) ?? [];
-
-  const unselectedAddresses =
-    data.addressesIds?.filter(addressId => !addressesToConnect.some(address => address.id === addressId)) ?? [];
-  // if formatOfWork is ONLINE, we need to delete all connected addresses
-  const addressesToDelete =
-    data.formatOfWork !== FormatOfWork.ONLINE ? unselectedAddresses.map(id => ({ id })) ?? [] : {};
-
+export function transformSpecialistEditData({ specializationsIds, ...rest }) {
+  const specializationsToConnect = toConnectList(specializationsIds);
+  const base = transformEditData(rest);
   return {
-    ...data,
-    specializationsIds: undefined,
-    therapiesIds: undefined,
-    addressesIds: undefined,
-    therapies: {
-      set: [],
-      connect: therapiesToConnect,
-    },
+    ...base,
     specializations: {
       set: [],
       connect: specializationsToConnect,
     },
-    addresses: {
-      connect: addressesToConnect,
-      create: addressesToCreate,
-      deleteMany: addressesToDelete,
-    },
+    specializationsIds: undefined,
   };
-};
+}

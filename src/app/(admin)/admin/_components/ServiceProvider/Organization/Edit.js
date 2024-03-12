@@ -3,20 +3,18 @@ import { organizationEditValidationSchema } from '../../../_lib/validationSchema
 
 import { ContactsForm } from '../ContactsForm';
 import { ActivationForm } from '../ActivationForm';
-import { FormFieldWrapper } from '../../FormFieldWrapper';
-import { OrganizationTypesSelect } from '../OrganizationTypesSelect';
-import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
 import { AddressesForm } from '../AddressesForm';
 import { ServicesForm } from '../ServicesForm';
 import { transformOrganizationEditData } from '../../../_utils/transformOrganizationEditData';
+import { DetailsEditOrg } from './DetailsEditOrg';
+import { GeneralInfoEditOrg } from './GeneralInfoEditOrg';
+import { DescriptionEdit } from '../DescriptionEdit';
 
-const { Edit, SimpleForm, TextInput, required, FormDataConsumer, NumberInput } = require('react-admin');
-
-const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
+const { Edit, SimpleForm, required, FormDataConsumer } = require('react-admin');
 
 export function OrganizationEdit() {
   return (
-    <Edit title={'Редагуванні даних організації'} transform={transformOrganizationEditData} mutationMode="pessimistic">
+    <Edit title={'Редагування данних організації'} transform={transformOrganizationEditData} mutationMode="pessimistic">
       <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(organizationEditValidationSchema)}>
         <FormDataConsumer>
           {({ formData }) => {
@@ -24,35 +22,11 @@ export function OrganizationEdit() {
             const unnecessaryForDraft = formData.isActive && required();
             return (
               <>
-                <FormFieldWrapper title={'Основна інформація'}>
-                  <div className={fieldGroupClass}>
-                    <TextInput source="name" label="Назва організації" validate={required()} />
-                  </div>
-                  <OrganizationTypesSelect type="edit" fullWidth validate={required()} label={'Тип організації'} />
-                </FormFieldWrapper>
-
-                <FormFieldWrapper title={'Деталі'} className="mt-3">
-                  <div className={fieldGroupClass}>
-                    <NumberInput
-                      name={'yearsOnMarket'}
-                      source={'yearsOnMarket'}
-                      label={'Років на ринку'}
-                      validate={unnecessaryForDraft}
-                      min="0"
-                    />
-                    <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
-                  </div>
-                </FormFieldWrapper>
+                <GeneralInfoEditOrg type="edit" validate={unnecessaryForDraft} />
+                <DetailsEditOrg validate={unnecessaryForDraft} />
                 <AddressesForm label="Адреси надання послуг" type="edit" />
                 <ServicesForm type="edit" validate={unnecessaryForDraft} label={'Послуги'} />
-                <TextInput
-                  name={'description'}
-                  source={'description'}
-                  label={'Опис'}
-                  validate={required()}
-                  fullWidth
-                  multiline
-                />
+                <DescriptionEdit validate={required()} />
                 <ContactsForm />
                 <ActivationForm label={'Активувати/деактивувати організацію'} />
               </>

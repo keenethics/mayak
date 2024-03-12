@@ -1,30 +1,17 @@
 'use client';
 
 import React from 'react';
-import {
-  Create,
-  FormDataConsumer,
-  NumberInput,
-  SimpleForm,
-  TextInput,
-  required,
-  useNotify,
-  useRedirect,
-} from 'react-admin';
+import { Create, FormDataConsumer, SimpleForm, TextInput, required, useNotify, useRedirect } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@admin/_lib/consts';
 import { transformData } from '@admin/_utils/transformSpecialistFormData';
 import { ContactsForm } from '../ContactsForm';
 import { ActivationForm } from '../ActivationForm';
-import { FormFieldWrapper } from '../../FormFieldWrapper';
 import { ServicesForm } from '../ServicesForm';
-import { SpecializationsSelect } from '../SpecializationsSelect';
-import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
-import { GenderSelect } from '../GenderSelect';
 import { AddressesForm } from '../AddressesForm';
 import { specialistCreateValidationSchema } from '../../../_lib/validationSchemas/specialistSchema';
-
-const filedGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
+import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
+import { DetailsEditSpec } from './DetailsEditSpec';
 
 export function SpecialistCreate() {
   const notify = useNotify();
@@ -53,42 +40,10 @@ export function SpecialistCreate() {
               const unnecessaryForDraft = formData.isActive && required();
               return (
                 <>
-                  <FormFieldWrapper title={'General info'}>
-                    <div className={filedGroupClass}>
-                      <TextInput
-                        key={'firstName'}
-                        name={'firstName'}
-                        type={'text'}
-                        label={"Ім'я"}
-                        validate={required()}
-                      />
-                      <TextInput
-                        key={'lastName'}
-                        name={'lastName'}
-                        type={'text'}
-                        label={'Last Name'}
-                        validate={required()}
-                      />
-                      <TextInput key={'surname'} name={'surname'} type={'text'} label={'SUname'} />
-                    </div>
-                    <SpecializationsSelect label={'Спеціалізації'} fullWidth validate={required()} />
-                  </FormFieldWrapper>
-
-                  <FormFieldWrapper title={'Details'} className="mt-3">
-                    <div className={filedGroupClass}>
-                      <GenderSelect label={'Стать'} validate={unnecessaryForDraft} />
-                      <NumberInput
-                        name={'yearsOfExperience'}
-                        source={'yearsOfExperience'}
-                        label={'Роки cтажу'}
-                        validate={unnecessaryForDraft}
-                        min="0"
-                      />
-                      <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
-                    </div>
-                  </FormFieldWrapper>
+                  <GeneralInfoEditSpec />
+                  <DetailsEditSpec validate={unnecessaryForDraft} />
                   <AddressesForm label="Адреси надання послуг" />
-                  <ServicesForm validate={unnecessaryForDraft} label={'Послуги'} />
+                  <ServicesForm validate={unnecessaryForDraft} label="Послуги" />
                   <TextInput name={'description'} source={'description'} label={'Опис'} fullWidth multiline />
                   <ContactsForm />
                   <ActivationForm label={'Активувати/деактивувати спеціаліста'} />
