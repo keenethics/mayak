@@ -13,10 +13,12 @@ export function TextArea({ value, onChange, maxLength, placeholder, error }) {
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
       />
-      {error && <p className="absolute top-[64px] ml-4 mt-[4px] text-p4 font-semibold text-system-error">{error}</p>}
+      {error && <p className="absolute top-[64px] ml-4 mt-[4px] text-[12px] lg:text-p4 font-semibold text-system-error">
+        {error}
+      </p>}
       {maxLength && (
         <div className="flex flex-row-reverse">
-          <span className="text-primary-500">
+          <span className="text-primary-500 mt-5 lg:mt-0">
             {valueLength ? `${valueLength} / ${maxLength}` : `${maxLength} символів`}
           </span>
         </div>
