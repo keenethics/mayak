@@ -12,7 +12,7 @@ import { FormatOfWork } from '@prisma/client';
 import { RESOURCES } from '@admin/_lib/consts';
 import PropTypes from 'prop-types';
 import { FormFieldWrapper } from '../FormFieldWrapper';
-import { districtPropType } from '@/lib/specialistPropTypes';
+import { districtPropType } from '@/app/(admin)/admin/_lib/specialistPropTypes';
 import Loading from '@/app/loading';
 
 function AddressForm({ getSource, districts, type, readOnly = false }) {
