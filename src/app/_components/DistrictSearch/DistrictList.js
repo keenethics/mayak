@@ -23,12 +23,17 @@ export function DistrictList({ list, className }) {
 
         return (
           <SwiperSlide key={id} onClick={() => handleClick(index)} className="fit-co">
-            <Link href={`?district=${name}`} className={isSelected ? 'pointer-events-none cursor-none' : ''}>
+            <Link
+              href={`?district=${name}`}
+              className={isSelected ? 'pointer-events-none cursor-none' : ''}
+              tabindex={-1}
+            >
               <PillButton
                 variant="transparent"
                 colorVariant="orange"
                 icon={hasIcon}
                 className={isSelected ? 'border-secondary-300 bg-secondary-300 font-semibold' : ''}
+                aria-label={`Click to see specialists related to ${name} district`}
               >
                 {name}
               </PillButton>

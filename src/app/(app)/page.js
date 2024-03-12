@@ -1,5 +1,6 @@
-import { DistrictSearch, TherapiesSection } from '@components';
+import { DistrictSearch, FAQSection, TherapiesSection } from '@components';
 import { prisma } from '@/lib/db';
+import { env } from '@/lib/env';
 
 // Page metadata should contain
 // title - gets formatted into "%s | Маяк", %s is replaced by title,
@@ -10,10 +11,32 @@ export const metadata = {
   description: 'Пошук психологічної допомоги у м. Львів',
 };
 
+const { REVALIDATION_TIME } = env;
+
+export const revalidate = REVALIDATION_TIME;
+
 export default async function Page() {
   const activeTherapies = await prisma.therapy.findMany({
     where: { isActive: true },
+    select: {
+      id: true,
+      type: true,
+      description: true,
+      title: true,
+      imagePath: true,
+    },
     orderBy: { priority: 'desc' },
+  });
+
+  const activeFAQs = await prisma.faq.findMany({
+    where: { isActive: true },
+    select: {
+      id: true,
+      question: true,
+      priority: true,
+      answer: true,
+    },
+    orderBy: { priority: 'asc' },
   });
 
   return (
@@ -21,7 +44,7 @@ export default async function Page() {
       <DistrictSearch className="my-8" />
       <TherapiesSection therapies={activeTherapies} />
       <section>TBD goal section</section>
-      <section>FAQ section</section>
+      <FAQSection faqs={activeFAQs} />
     </>
   );
 }
