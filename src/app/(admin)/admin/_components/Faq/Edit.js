@@ -44,7 +44,7 @@ function DeleteButton() {
   const handleClick = () => setOpen(true);
   const handleDialogClose = () => setOpen(false);
   const handleConfirm = () => {
-    if (activeFaqsCount <= MIN_ACTIVE_FAQS) {
+    if (record.isActive && activeFaqsCount <= MIN_ACTIVE_FAQS) {
       notify(TOO_FEW_ACTIVE_FAQS, { type: 'error' });
       setOpen(false);
       return;
