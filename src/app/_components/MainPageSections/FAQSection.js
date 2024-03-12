@@ -1,6 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { Heading, TopWave, FAQCard } from '@components';
+import { Heading } from '@components/Typography';
+import { TopWave } from '@components/TopWave';
+import { FAQCard } from '@components/MainPageSections/FAQCard';
 import { FAQCardPropTypes } from './prop-types';
 
 export function FAQSection({ faqs }) {

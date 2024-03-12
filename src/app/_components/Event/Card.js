@@ -1,10 +1,10 @@
 'use client';
 
+import PropTypes from 'prop-types';
 import CalendarIcon from '@icons/calendarFilled.svg';
 import PriceIcon from '@icons/priceFilled.svg';
 import LocationIcon from '@icons/locationFilled.svg';
 import TimeIcon from '@icons/timeFilled.svg';
-import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 import { parseDate } from '@/utils/parseDate';
 import { Label } from '../Label';

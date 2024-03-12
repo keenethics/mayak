@@ -4,13 +4,15 @@ import {
   FormDataConsumer,
   NullableBooleanInput,
   NumberInput,
+  required,
   SimpleForm,
   TextInput,
-  required,
 } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OrganizationSchema } from '@admin/_lib/validationSchemas/createOrganizationSchema';
 import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
+import React from 'react';
+import { ContactsList } from '@admin/_components';
 import { AddressInput } from './CreateAdresses';
 import { SelectTherapies } from './SelectTherapies';
 import { SelectOrganizationType } from './SelectOrgType';
@@ -45,12 +47,7 @@ export function OrganizationCreate() {
                 falseLabel="Ні"
                 trueLabel="Так"
               />
-              <p className="font-bold">Контакти</p>
-              <div className={fieldGroupClass}>
-                <TextInput label="Номер телефону" source="phone" />
-                <TextInput label="Пошта" source="email" />
-                <TextInput label="Вебсайт" source="website" />
-              </div>
+              <ContactsList />
               <p className="font-bold">Соціальні мережі</p>
               <p className="my-1 flex w-full text-primary-500">
                 *Ви можете вказати від 1 до 5 посилань на соціальні мережі організації.

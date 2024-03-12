@@ -3,11 +3,12 @@
 import React from 'react';
 import { BooleanInput, Create, SimpleForm, useNotify, useRedirect } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ContactsList } from '@admin/_components';
 import { General } from '@admin/components/Specialist/General';
 import { Details } from '@admin/components/Specialist/Details';
 import { Addresses } from '@admin/components/Specialist/Addresses';
 import { Services } from '@admin/components/Specialist/Services';
-import { Contacts } from '@admin/components/Specialist/Contacts';
+import { SocialLinks } from '@admin/components/Specialist/SocialLinks';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@admin/_lib/consts';
 import { transformData } from '@admin/_utils/transformSpecialistFormData';
 import { specialistValidationSchema } from '@/lib/validationSchemas/specialistSchema';
@@ -37,7 +38,8 @@ export function SpecialistCreate() {
           <Details />
           <Addresses />
           <Services />
-          <Contacts />
+          <ContactsList />
+          <SocialLinks />
           <BooleanInput name="isActive" source="isActive" label="Активувати спеціаліста" className="mt-8" />
         </SimpleForm>
       </Create>

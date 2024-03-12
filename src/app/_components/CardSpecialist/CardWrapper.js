@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useHintContext } from '@components';
+import { useHintContext } from '@components/Hint';
 import { cn } from '@utils/cn';
 import { screens } from '@/app/styles/tailwind/ui';
 

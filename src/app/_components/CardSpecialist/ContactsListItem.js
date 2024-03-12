@@ -1,9 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { ListTruncator } from '@components';
 import { cn } from '@utils/cn';
-import { specialistContactPropType } from '@/app/_components/CardSpecialist/prop-types';
+import { ListTruncator } from '@components/ListTruncator';
+import { specialistContactPropType } from '@components/CardSpecialist/prop-types';
 
 function ContactItem({ content, href, className }) {
   return (

@@ -18,7 +18,7 @@ export function General() {
   return (
     <FormFieldWrapper title={SpecialistFormSections.general}>
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <TextInputList textInputList={generalInfoList} />
+        <TextInputList list={generalInfoList} />
       </div>
       <SelectArrayInput
         name={name}
