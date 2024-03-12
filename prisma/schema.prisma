@@ -167,20 +167,20 @@ model Feedback {
 }
 
 model Event {
-  id             String           @id @default(uuid()) @db.Uuid
-  createdAt      DateTime         @default(now())
-  title          String           @db.VarChar(128)
-  organizerName  String           @db.VarChar(128)
-  notes          String?          @db.VarChar(350)
-  address        String?          @db.VarChar(128)
-  locationLink   String?          @db.Text
-  price          Int?             @db.Integer
-  isActive       Boolean          @default(false)
-  additionalLink EventLink?       @relation(fields: [linkId], references: [id])
-  linkId         String?          @db.Uuid
-  eventDate      DateTime
-  format         EventFormat
-  priceType      EventPriceFormat
+  id             String            @id @default(uuid()) @db.Uuid
+  createdAt      DateTime          @default(now())
+  title          String            @db.VarChar(128)
+  organizerName  String            @db.VarChar(128)
+  notes          String?           @db.VarChar(350)
+  address        String?           @db.VarChar(128)
+  locationLink   String?           @db.Text
+  price          Int?              @db.Integer
+  isActive       Boolean           @default(false)
+  additionalLink EventLink?        @relation(fields: [linkId], references: [id])
+  linkId         String?           @db.Uuid
+  eventDate      DateTime?
+  format         EventFormat?
+  priceType      EventPriceFormat?
   tags           EventTag[]
 
   @@map("event")

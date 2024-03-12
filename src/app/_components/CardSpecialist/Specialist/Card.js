@@ -1,24 +1,19 @@
 'use client';
 
-import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import {
-  AddressesList,
-  BadgeList,
-  CardButton,
-  CardWrapper,
-  ContactsList,
-  DetailsList,
-  getContactsList,
-  getLabelsList,
-  getSpecialistSocials,
-  ProfileImage,
-  SocialsList,
-  SpecialistTitle,
-  SpecializationsPanel,
-} from '@components';
-import { specialistPropType } from '@/app/_components/CardSpecialist/prop-types';
+import { ProfileImage } from '@components/CardSpecialist/ProfileImage';
+import { AddressesList } from '@components/CardSpecialist/AddressesList';
+import { BadgeList } from '@components/CardSpecialist/BadgeList';
+import { CardButton } from '@components/CardSpecialist/CardButton';
+import { CardWrapper } from '@components/CardSpecialist/CardWrapper';
+import { ContactsList } from '@components/CardSpecialist/ContactsList';
+import { DetailsList } from '@components/CardSpecialist/DetailsList';
+import { SocialsList } from '@components/CardSpecialist/SocialsList';
+import { SpecialistTitle } from '@components/CardSpecialist/SpecialistTitle';
+import { SpecializationsPanel } from '@components/CardSpecialist/SpecializationsPanel';
+import { getContactsList, getLabelsList, getSpecialistSocials } from '@components/CardSpecialist/config';
+import { specialistPropType } from '@components/CardSpecialist/prop-types';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   if (!specialist) throw new Error('Specialist is not found');
