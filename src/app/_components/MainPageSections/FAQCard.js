@@ -1,5 +1,4 @@
-import React from 'react';
-import { Paragraph } from '@components';
+import { Paragraph } from '@components/Typography';
 import Plus from '@icons/plus.svg';
 import Minus from '@icons/minus.svg';
 import { FAQCardPropTypes } from './prop-types';

@@ -1,19 +1,16 @@
-import { TherapiesSection, FAQSection, SearchSection } from '@components';
+import { TherapiesSection, FAQSection, SearchSection } from '@components/MainPageSections';
 import { prisma } from '@/lib/db';
 import { env } from '@/lib/env';
 
 // Page metadata should contain
 // title - gets formatted into "%s | Маяк", %s is replaced by title,
 // description - short description of the page,
-
 export const metadata = {
   title: 'Головна сторінка',
   description: 'Пошук психологічної допомоги у м. Львів',
 };
 
-const { REVALIDATION_TIME } = env;
-
-export const revalidate = REVALIDATION_TIME;
+export const { REVALIDATION_TIME: revalidate } = env;
 
 export default async function Page() {
   const activeTherapies = await prisma.therapy.findMany({

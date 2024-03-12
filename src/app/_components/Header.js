@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Link from 'next/link';
 import Logo from '@icons/logo.svg';
 import BurgerIcon from '@icons/burger.svg';
 import CloseIcon from '@icons/headerCloseIcon.svg';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
-import { SocialLink, InnerLink, PillButton } from '@components';
 import { useBodyScrollLock } from '@hooks';
-import { Feedback } from './Feedback';
+import { SocialLink, InnerLink } from '@components/Links';
+import { PillButton } from '@components/PillButton';
+import { Feedback } from '@components/Feedback';
 
 export function Header() {
   const { links, innerLinks } = siteNav;
