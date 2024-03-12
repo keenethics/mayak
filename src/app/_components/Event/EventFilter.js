@@ -102,7 +102,7 @@ export function EventFilter({ events }) {
         );
       }
 
-      router.push(`/events?month=${month}`);
+      // router.push(`/events?month=${month}`);
     },
     [router, dates, months, currentMonth],
   );
@@ -112,12 +112,9 @@ export function EventFilter({ events }) {
       <div className="flex flex-row flex-wrap items-start justify-start gap-3">
         {months.map((month, index) => (
           <PillButton
-            variant="outlined"
-            colorVariant="orange"
-            className={cn(
-              activeIndex === index &&
-                'flex-row gap-1 border-gray-700 bg-secondary-300 align-middle text-secondary-500',
-            )}
+            variant="eventFilter"
+            colorVariant="semiorange"
+            className={cn(activeIndex === index && 'border-secondary-300 bg-secondary-300 text-gray-900')}
             key={month}
             onClick={() => {
               handleFilter(index, month);
@@ -131,7 +128,7 @@ export function EventFilter({ events }) {
       {filteredDates.length === 0 && <NoInfoToShow text="подій" />}
       <ul
         className="grid w-full
-           self-stretch sm:grid-cols-1 md:grid-cols-2 md:gap-[12px] lg:grid-cols-3 lg:gap-[16px]"
+           gap-6 self-stretch sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
       >
         {filteredDates
           .filter(date => date.eventDate >= new Date())
