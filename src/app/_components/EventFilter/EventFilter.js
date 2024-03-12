@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { CheckMark } from '@icons/index';
 import { cn } from '@/utils/cn';
 import { PillButton } from '../PillButton';
-import { NoEvents } from '../NoEvents';
 
 export function EventFilter({ events }) {
   const [dates, setDates] = useState([]);
@@ -15,6 +14,8 @@ export function EventFilter({ events }) {
 
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
+  // const currentDay = new Date().getDay();
+  // console.log(currentDay);
   const monthsAhead = 5;
   const monthNames = [
     'січень',
@@ -34,8 +35,9 @@ export function EventFilter({ events }) {
   useEffect(() => {
     const getNextMonths = () => {
       const nextMonths = [];
-      for (let i = 0; i <= monthsAhead; i++) {
-        const nextMonthIndex = (currentMonth + i - 1) % 12; // Ensure month index doesn't exceed 12
+      // no-plusplus rule for eslint
+      for (let i = 0; i <= monthsAhead; i += 1) {
+        const nextMonthIndex = (currentMonth + i - 1) % 12;
         const nextMonthName = monthNames[nextMonthIndex];
         nextMonths.push(nextMonthName);
       }
@@ -89,7 +91,6 @@ export function EventFilter({ events }) {
       date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === month,
     );
     setFilteredDates(filtered);
-
     setActiveIndex(index);
   };
 
@@ -114,29 +115,24 @@ export function EventFilter({ events }) {
           </PillButton>
         ))}
       </div>
-
       <ul
         className="grid w-full
            self-stretch sm:grid-cols-1 md:grid-cols-2 md:gap-[12px] lg:grid-cols-3 lg:gap-[16px]"
       >
-        {filteredDates.length === 0 ? (
-          <NoEvents />
-        ) : (
-          filteredDates
-            .filter(date => date.eventDate >= new Date())
-            .map((date, index) => (
-              <li key={index}>
-                {new Date(date.eventDate).toLocaleString('uk-UA', {
-                  timeZone: 'UTC',
-                  hour: 'numeric',
-                  minute: '2-digit',
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </li>
-            ))
-        )}
+        {filteredDates
+          .filter(date => date.eventDate >= new Date())
+          .map((date, index) => (
+            <li key={index}>
+              {new Date(date.eventDate).toLocaleString('uk-UA', {
+                timeZone: 'UTC',
+                hour: 'numeric',
+                minute: '2-digit',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </li>
+          ))}
       </ul>
     </div>
   );
