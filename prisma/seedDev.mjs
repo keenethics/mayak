@@ -16,6 +16,7 @@ function nullable(value) {
 
 // returns array of unique objects with id field
 function uniqueObjectsWithId(instances) {
+  if (instances.length === 0) return [];
   return faker.helpers
     .uniqueArray(
       instances.map(s => s.id),
