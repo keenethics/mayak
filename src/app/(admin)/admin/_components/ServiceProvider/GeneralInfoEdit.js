@@ -8,13 +8,13 @@ export function GeneralInfoEdit({ type = 'create' }) {
     <FormFieldWrapper title={'General info'}>
       <div className={'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow'}>
         <TextInput key={'firstName'} name={'firstName'} type={'text'} label={"Ім'я"} validate={required()} />
-        <TextInput key={'lastName'} name={'lastName'} type={'text'} label={'Last Name'} validate={required()} />
-        <TextInput key={'surname'} name={'surname'} type={'text'} label={'SUname'} />
+        <TextInput key={'lastName'} name={'lastName'} type={'text'} label={'Прізвище'} validate={required()} />
+        <TextInput key={'surname'} name={'surname'} type={'text'} label={'По-батькові'} />
       </div>
       {type === 'create' && <SpecializationsSelect label={'Спеціалізації'} fullWidth validate={required()} />}
       {type === 'edit' && (
         <ReferenceArrayInput source={'specializationsIds'} reference="Specialization">
-          <AutocompleteArrayInput optionValue="id" optionText="name" />
+          <AutocompleteArrayInput optionValue="id" optionText="name" validate={required()} />
         </ReferenceArrayInput>
       )}
     </FormFieldWrapper>

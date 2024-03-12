@@ -60,11 +60,11 @@ export const zEditAddressSchema = z.object({
   id: z.string().nullish(),
   fullAddress: zStringWithMax,
   nameOfClinic: z.string().nullish(),
-  districtId: z.string(),
+  districtId: zString,
   district: z
     .object({
       id: z.string(),
-      name: zString,
+      name: z.string(),
     })
     .nullish(),
 });

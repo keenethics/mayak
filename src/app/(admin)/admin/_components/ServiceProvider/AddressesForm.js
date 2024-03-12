@@ -6,6 +6,7 @@ import {
   FormDataConsumer,
   useGetList,
   ReferenceInput,
+  required,
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
 import { RESOURCES } from '@admin/_lib/consts';
@@ -14,7 +15,7 @@ import { FormFieldWrapper } from '../FormFieldWrapper';
 import { districtPropType } from '@/lib/specialistPropTypes';
 import Loading from '@/app/loading';
 
-function AddressForm({ getSource, validate, districts, type, readOnly = false }) {
+function AddressForm({ getSource, districts, type, readOnly = false }) {
   return (
     <>
       <TextInput
@@ -24,7 +25,7 @@ function AddressForm({ getSource, validate, districts, type, readOnly = false })
         fullWidth
         source={getSource('fullAddress')}
         label={'Повна адреса'}
-        validate={validate}
+        validate={required()}
         helperText="Вулиця, номер будинку, поверх, кабінет"
       />
       <TextInput
@@ -44,7 +45,7 @@ function AddressForm({ getSource, validate, districts, type, readOnly = false })
           source={getSource('district')}
           optionText={'name'}
           optionValue={'id'}
-          validate={validate}
+          validate={required()}
           choices={districts.map(district => ({ id: district.id, name: district.name }))}
         />
       )}
@@ -54,9 +55,10 @@ function AddressForm({ getSource, validate, districts, type, readOnly = false })
             InputProps={{
               readOnly,
             }}
+            label="Район"
             optionText="name"
             optionValue="id"
-            validate={validate}
+            validate={required()}
           />
         </ReferenceInput>
       )}
@@ -72,7 +74,7 @@ AddressForm.propTypes = {
   readOnly: PropTypes.bool,
 };
 
-export function AddressesForm({ validate, type = 'create', label }) {
+export function AddressesForm({ type = 'create', label }) {
   const { data: districts, isLoading } = useGetList(RESOURCES.district);
   if (isLoading) return <Loading />;
   return (
@@ -94,15 +96,9 @@ export function AddressesForm({ validate, type = 'create', label }) {
                       {({ scopedFormData, getSource }) => {
                         if (!scopedFormData) return null;
                         return scopedFormData.id ? (
-                          <AddressForm
-                            getSource={getSource}
-                            validate={validate}
-                            readOnly
-                            type={type}
-                            districts={districts}
-                          />
+                          <AddressForm getSource={getSource} readOnly type={type} districts={districts} />
                         ) : (
-                          <AddressForm getSource={getSource} validate={validate} type={type} districts={districts} />
+                          <AddressForm getSource={getSource} type={type} districts={districts} />
                         );
                       }}
                     </FormDataConsumer>

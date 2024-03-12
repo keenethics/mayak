@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Edit, SimpleForm, required, FormDataConsumer, NumberInput } from 'react-admin';
+import { Edit, SimpleForm, required, FormDataConsumer, NumberInput, TextInput } from 'react-admin';
 import { ContactsForm } from '../ContactsForm';
 import { ActivationForm } from '../ActivationForm';
 import { specialistEditValidationSchema } from '../../../_lib/validationSchemas/specialistSchema';
@@ -29,14 +29,14 @@ export function SpecialistEdit() {
                       name={'yearsOfExperience'}
                       source={'yearsOfExperience'}
                       label={'Роки досвіду'}
-                      validate={unnecessaryForDraft}
                       min="0"
                     />
                     <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
                   </div>
                 </FormFieldWrapper>
-                <AddressesForm validate={unnecessaryForDraft} type="edit" label="Адреси надання послуг" />
+                <AddressesForm type="edit" label="Адреси надання послуг" />
                 <ServicesForm type="edit" validate={unnecessaryForDraft} label="Послуги" />
+                <TextInput name={'description'} source={'description'} label={'Опис'} fullWidth multiline />
                 <ContactsForm />
                 <ActivationForm label={'Активувати/деактивувати спеціаліста'} />
               </>

@@ -1,6 +1,6 @@
 import { FormatOfWork } from '@prisma/client';
 
-export const transformOrganizationEditData = data => {
+export function transformOrganizationEditData(data) {
   const therapiesToConnect = data.therapiesIds?.map(id => ({ id })) ?? [];
   const organizationTypesToConnect = data.organizationTypesIds?.map(id => ({ id }));
   const addressesToConnect = data.addresses?.filter(address => address.id).map(address => ({ id: address.id })) ?? [];
@@ -38,4 +38,4 @@ export const transformOrganizationEditData = data => {
       deleteMany: addressesToDelete,
     },
   };
-};
+}

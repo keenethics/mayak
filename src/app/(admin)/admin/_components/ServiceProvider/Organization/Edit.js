@@ -16,7 +16,7 @@ const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-gr
 
 export function OrganizationEdit() {
   return (
-    <Edit title={'Редагувати дані організації'} transform={transformOrganizationEditData} mutationMode="pessimistic">
+    <Edit title={'Редагуванні даних організації'} transform={transformOrganizationEditData} mutationMode="pessimistic">
       <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(organizationEditValidationSchema)}>
         <FormDataConsumer>
           {({ formData }) => {
@@ -43,8 +43,16 @@ export function OrganizationEdit() {
                     <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
                   </div>
                 </FormFieldWrapper>
-                <AddressesForm label="Адреси надання послуг" type="edit" validate={unnecessaryForDraft} />
+                <AddressesForm label="Адреси надання послуг" type="edit" />
                 <ServicesForm type="edit" validate={unnecessaryForDraft} label={'Послуги'} />
+                <TextInput
+                  name={'description'}
+                  source={'description'}
+                  label={'Опис'}
+                  validate={required()}
+                  fullWidth
+                  multiline
+                />
                 <ContactsForm />
                 <ActivationForm label={'Активувати/деактивувати організацію'} />
               </>

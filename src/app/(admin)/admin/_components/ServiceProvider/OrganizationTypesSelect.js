@@ -19,7 +19,7 @@ export function OrganizationTypesSelect({ label, type = 'create', ...props }) {
       )}
       {type === 'edit' && (
         <ReferenceArrayInput source={'organizationTypesIds'} reference="OrganizationType">
-          <AutocompleteArrayInput optionValue="id" optionText="name" />
+          <AutocompleteArrayInput label={label} optionValue="id" optionText="name" {...props} />
         </ReferenceArrayInput>
       )}
     </>

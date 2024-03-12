@@ -87,8 +87,9 @@ export function SpecialistCreate() {
                       <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
                     </div>
                   </FormFieldWrapper>
-                  <AddressesForm label="Адреси надання послуг" validate={unnecessaryForDraft} />
+                  <AddressesForm label="Адреси надання послуг" />
                   <ServicesForm validate={unnecessaryForDraft} label={'Послуги'} />
+                  <TextInput name={'description'} source={'description'} label={'Опис'} fullWidth multiline />
                   <ContactsForm />
                   <ActivationForm label={'Активувати/деактивувати спеціаліста'} />
                 </>

@@ -49,77 +49,65 @@ function searchInputFilters(modelName, filter) {
   return { OR: filters };
 }
 
+function transformServiceProvider(instance, modelName) {
+  // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
+  // React Admin issues
+  if (modelName === RESOURCES.organization) {
+    // eslint-disable-next-line no-param-reassign
+    instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
+  } else {
+    // eslint-disable-next-line no-param-reassign
+    instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
+  }
+  // eslint-disable-next-line no-param-reassign
+  instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
+  // eslint-disable-next-line no-param-reassign
+  instance.addressesIds = instance.addresses.map(address => address.id);
+  // eslint-disable-next-line no-param-reassign
+  instance.addresses = instance?.addresses?.map(address => ({
+    ...address,
+    districtId: address.district.id,
+  }));
+}
+
 const handler = auth(
   withErrorHandler(async req => {
     if (!req.auth) throw new NotAuthorizedException();
 
     const json = await req.json();
-    const { resource: modelName } = json;
-    let result;
 
-    // console.log({ json, modelName, data: JSON.stringify(json.params.data) });
-    if (modelName.toLocaleLowerCase() === 'specialist' || modelName.toLocaleLowerCase() === 'organization') {
-      result = await defaultHandler(json, prisma, {
-        getList: {
-          debug: false,
-          where: searchInputFilters(modelName, json.params?.filter?.q),
-          include: MODEL_INCLUDES[modelName],
+    const modelName = json.resource.charAt(0).toLowerCase() + json.resource.slice(1);
+    const isServiceProvider = modelName === 'specialist' || modelName === 'organization';
+
+    const getOneTransform = instance => {
+      transformServiceProvider(instance, modelName);
+    };
+
+    const result = await defaultHandler(json, prisma, {
+      getList: {
+        debug: false,
+        where: searchInputFilters(modelName, json.params?.filter?.q),
+        include: MODEL_INCLUDES[modelName],
+      },
+      getOne: {
+        debug: false,
+        include: MODEL_INCLUDES[modelName],
+        transform: isServiceProvider ? getOneTransform : undefined,
+      },
+      update: {
+        debug: false,
+        allowJsonUpdate: {
+          tags: true,
+          additionalLink: true,
+          addresses: true,
+          districts: true,
+          specializations: true,
+          therapies: true,
+          type: true,
         },
-        getOne: {
-          debug: false,
-          include: MODEL_INCLUDES[modelName],
-          transform: instance => {
-            // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
-            if (modelName.toLocaleLowerCase() === 'organization') {
-              // eslint-disable-next-line no-param-reassign
-              instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
-            } else {
-              // eslint-disable-next-line no-param-reassign
-              instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
-            }
-            // eslint-disable-next-line no-param-reassign
-            instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
-            // eslint-disable-next-line no-param-reassign
-            instance.addressesIds = instance.addresses.map(address => address.id);
-            // eslint-disable-next-line no-param-reassign
-            instance.addresses = instance?.addresses?.map(address => ({
-              ...address,
-              districtId: address.district.id,
-            }));
-          },
-        },
-        update: {
-          allowJsonUpdate: {
-            addresses: true,
-            districts: true,
-            specializations: true,
-            therapies: true,
-            type: true,
-          },
-        },
-      });
-    } else {
-      result = await defaultHandler(json, prisma, {
-        getList: {
-          debug: false,
-          where: searchInputFilters(modelName, json.params?.filter?.q),
-          include: MODEL_INCLUDES[modelName],
-        },
-        getOne: {
-          debug: false,
-          include: MODEL_INCLUDES[modelName],
-        },
-        update: {
-          debug: false,
-          allowJsonUpdate: {
-            tags: true,
-            additionalLink: true,
-          },
-          include: MODEL_INCLUDES[modelName],
-        },
-      });
-    }
-    // console.log({ result: JSON.stringify(result) });
+        include: MODEL_INCLUDES[modelName],
+      },
+    });
     return NextResponse.json(result);
   }),
 );

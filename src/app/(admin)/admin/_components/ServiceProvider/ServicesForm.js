@@ -1,12 +1,5 @@
 import PropTypes from 'prop-types';
-import {
-  AutocompleteArrayInput,
-  BooleanInput,
-  ReferenceArrayInput,
-  SelectArrayInput,
-  TextInput,
-  useGetList,
-} from 'react-admin';
+import { AutocompleteArrayInput, BooleanInput, ReferenceArrayInput, SelectArrayInput, useGetList } from 'react-admin';
 import { FormFieldWrapper } from '../FormFieldWrapper';
 import { RESOURCES } from '../../_lib/consts';
 
@@ -30,7 +23,7 @@ export function ServicesForm({ label, validate, type = 'create' }) {
       )}
       {type === 'edit' && (
         <ReferenceArrayInput source="therapiesIds" reference="Therapy">
-          <AutocompleteArrayInput optionValue="id" optionText="title" />
+          <AutocompleteArrayInput label="Терапії" optionValue="id" optionText="title" />
         </ReferenceArrayInput>
       )}
       <BooleanInput
@@ -40,7 +33,6 @@ export function ServicesForm({ label, validate, type = 'create' }) {
         className="w-max"
         validate={validate}
       />
-      <TextInput name={'description'} source={'description'} label={'Опис'} validate={validate} fullWidth multiline />
     </FormFieldWrapper>
   );
 }
