@@ -1,11 +1,15 @@
-import { NumberInput } from 'react-admin';
-import PropTypes from 'prop-types';
+'use client';
+
+import { useWatch } from 'react-hook-form';
+import { NumberInput, required } from 'react-admin';
 import { FormFieldWrapper } from '../../FormFieldWrapper';
 import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
 
 const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
 
-export function DetailsEditOrg({ validate }) {
+export function DetailsEditOrg() {
+  const isActive = useWatch({ name: 'isActive' });
+  const unnecessaryForDraft = isActive && required();
   return (
     <FormFieldWrapper title={'Деталі'} className="mt-3">
       <div className={fieldGroupClass}>
@@ -13,15 +17,11 @@ export function DetailsEditOrg({ validate }) {
           name={'yearsOnMarket'}
           source={'yearsOnMarket'}
           label={'Років на ринку'}
-          validate={validate}
+          validate={unnecessaryForDraft}
           min="0"
         />
-        <FormatOfWorkSelect label={'Формат роботи'} validate={validate} className="flex-1" />
+        <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
       </div>
     </FormFieldWrapper>
   );
 }
-
-DetailsEditOrg.propTypes = {
-  validate: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-};

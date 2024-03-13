@@ -13,7 +13,6 @@ import {
 // ------------------ COMMON SECTION ---------------------
 
 const zOrganizationSchema = specialistCore.extend({
-  name: zStringWithMax,
   yearsOnMarket: zInteger,
 });
 
@@ -25,12 +24,12 @@ const restCreateProps = zOrganizationSchema.extend({
 
 const createDefaultProps = z.object({
   name: zStringWithMax,
-  type: zStringArray,
-  description: zString,
 });
 
 const activeOrganizationSchema = restCreateProps.extend({
   therapies: zStringArray,
+  type: zStringArray.default([]),
+  description: zString,
   isActive: z.literal(true),
 });
 
@@ -52,12 +51,12 @@ const restEditProps = zOrganizationSchema.extend({
 
 const editDefaultProps = z.object({
   name: zStringWithMax,
-  organizationTypesIds: zStringArray,
-  description: zString,
 });
 
 const activeOrganizationEditSchema = restEditProps.extend({
   therapiesIds: zStringArray,
+  organizationTypesIds: zStringArray.default([]),
+  description: zString,
   isActive: z.literal(true),
 });
 

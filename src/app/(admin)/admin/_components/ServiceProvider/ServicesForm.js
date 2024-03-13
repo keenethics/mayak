@@ -1,12 +1,23 @@
+import { useWatch } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import { AutocompleteArrayInput, BooleanInput, ReferenceArrayInput, SelectArrayInput, useGetList } from 'react-admin';
+import {
+  AutocompleteArrayInput,
+  BooleanInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
+  required,
+  useGetList,
+} from 'react-admin';
 import { FormFieldWrapper } from '../FormFieldWrapper';
 import { RESOURCES } from '../../_lib/consts';
 
-export function ServicesForm({ label, validate, type = 'create' }) {
+export function ServicesForm({ label, type = 'create' }) {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
 
   const therapiesChoices = therapiesList?.map(({ id, title }) => ({ id, name: title }));
+
+  const isActive = useWatch({ name: 'isActive' });
+  const unnecessaryForDraft = isActive && required();
 
   return (
     <FormFieldWrapper title={label}>
@@ -17,13 +28,13 @@ export function ServicesForm({ label, validate, type = 'create' }) {
           label={'Терапії'}
           isLoading={therapiesLoading}
           choices={therapiesChoices}
-          validate={validate}
+          validate={unnecessaryForDraft}
           className="w-full"
         />
       )}
       {type === 'edit' && (
         <ReferenceArrayInput source="therapiesIds" reference="Therapy">
-          <AutocompleteArrayInput label="Терапії" optionValue="id" optionText="title" validate={validate} />
+          <AutocompleteArrayInput label="Терапії" optionValue="id" optionText="title" validate={unnecessaryForDraft} />
         </ReferenceArrayInput>
       )}
       <BooleanInput
@@ -31,7 +42,7 @@ export function ServicesForm({ label, validate, type = 'create' }) {
         source={'isFreeReception'}
         label={'Безкоштовний прийом'}
         className="w-max"
-        validate={validate}
+        validate={unnecessaryForDraft}
       />
     </FormFieldWrapper>
   );
