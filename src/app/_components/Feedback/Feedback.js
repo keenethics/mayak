@@ -51,7 +51,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
   };
 
   useEffect(() => {
-    if (isFormOpen) return;
+    if (isFormOpen) return null;
     const timer = setTimeout(() => {
       setMessage('');
       setFormOpen(true);
@@ -59,8 +59,6 @@ export function Feedback({ isFeedbackOpen, onClose }) {
       onClose();
     }, 4000);
 
-    // that because of first return void, and second return clearTimeout
-    // eslint-disable-next-line consistent-return
     return () => clearTimeout(timer);
     // any additional dependencies will be redundant
     // eslint-disable-next-line react-hooks/exhaustive-deps
