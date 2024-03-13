@@ -1,9 +1,11 @@
 'use client';
 
 import { ClearSearchIcon, SearchIcon } from '@icons/index';
+import { PillButton } from '@components/PillButton';
 import { cn } from '@/utils/cn';
 import { useSearchContext } from './SearchContext';
 import { SearchTypeDropDown } from './SearchTypeDropDown';
+import { SearchAutoCompleteDropDown } from './SearchAutoCompleteDropDown';
 
 export function SearchInput() {
   const { currentConfig, query, isSelectTypeOpen, setQuery, setIsSelectTypeOpen } = useSearchContext();
@@ -23,7 +25,7 @@ export function SearchInput() {
         >
           <SearchTypeDropDown />
         </div>
-        <div className="group flex grow items-center gap-2 rounded-full border-[1px] border-gray-600 px-4 py-3 before:mr-2 before:hidden before:h-[100%] before:w-[1px] before:rounded-full before:bg-gray-500 lg:border-0 lg:bg-other-white/0 lg:p-0  lg:before:block">
+        <div className="group relative flex grow items-center gap-2 rounded-full border-[1px] border-gray-600 px-4 py-3 before:mr-2 before:hidden before:h-[100%] before:w-[1px] before:rounded-full before:bg-gray-500 lg:border-0 lg:bg-other-white/0 lg:p-0  lg:before:block">
           <SearchIcon className={cn('group-focus-within:hidden', query && 'hidden')} />
           <input
             className="h-6 w-[1px] grow border-none bg-other-black/0 p-0 caret-primary-500 placeholder:text-p3 placeholder:text-gray-500 focus:ring-0"
@@ -32,9 +34,12 @@ export function SearchInput() {
             onChange={e => setQuery(e.target.value)}
           />
           <ClearSearchIcon className={cn('hidden', query && 'block')} onClick={() => setQuery('')} />
+          <SearchAutoCompleteDropDown />
         </div>
       </div>
-      <button className="rounded-full bg-primary-500 px-6 py-3 text-p3 font-bold text-other-white">Знайти</button>
+      <PillButton variant="filled" colorVariant="blue" className="px-6 py-3">
+        Знайти
+      </PillButton>
     </div>
   );
 }

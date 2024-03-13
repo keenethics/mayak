@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { getSearchTypeConfig } from './config';
 
 const SearchContext = createContext();
@@ -15,10 +15,23 @@ export function SearchProvider({ children }) {
   const [searchType, setSearchType] = useState(searchTypeParam);
   const currentConfig = getSearchTypeConfig(searchType);
   const [isSelectTypeOpen, setIsSelectTypeOpen] = useState(false);
-
+  const [isAutoCompleteOpen, setIsAutoCompleteOpen] = useState(false);
+  useEffect(() => {
+    setIsAutoCompleteOpen(query !== '');
+  }, [query]);
   return (
     <SearchContext.Provider
-      value={{ query, searchType, currentConfig, setQuery, setSearchType, isSelectTypeOpen, setIsSelectTypeOpen }}
+      value={{
+        currentConfig,
+        query,
+        searchType,
+        isSelectTypeOpen,
+        isAutoCompleteOpen,
+        setQuery,
+        setSearchType,
+        setIsSelectTypeOpen,
+        setIsAutoCompleteOpen,
+      }}
     >
       {children}
     </SearchContext.Provider>

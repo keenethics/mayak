@@ -1,9 +1,10 @@
 'use client';
 
 import { DownTick } from '@icons/index';
-import { cn } from '@/utils/cn';
 import { useSearchContext } from './SearchContext';
 import { searchInputTypeConfigs } from './config';
+import { OverlayContainer } from './OverlayContainer';
+import { OverlayList } from './OverlayList';
 
 export function SearchTypeDropDown() {
   const { currentConfig, isSelectTypeOpen, setSearchType, setIsSelectTypeOpen } = useSearchContext();
@@ -16,27 +17,22 @@ export function SearchTypeDropDown() {
           <DownTick />
         </button>
       </div>
-      <ul
-        className={cn(
-          'shadow-[1px_2px_4px_0px_rgba(192,191,206,0.50),0px_0px_8px_0px_rgba(192,191,206,0.50)]',
-          'absolute left-0 top-[58px] z-[1] hidden w-full flex-col rounded-[24px] bg-other-white p-1 text-gray-700 lg:left-[-24px] lg:w-[300px]',
-          isSelectTypeOpen && 'flex',
-        )}
+      <OverlayContainer
+        isOpen={isSelectTypeOpen}
+        className="left-0 top-[58px] z-[3] lg:left-[-24px] lg:top-[44px] lg:w-[300px]"
       >
-        {searchInputTypeConfigs.map(config => (
-          <li
-            className="rounded-full p-2 pl-8 hover:bg-gray-200 hover:font-bold hover:text-primary-800"
-            key={config.id}
-            onClick={e => {
+        <OverlayList
+          listItems={searchInputTypeConfigs.map(config => ({
+            id: config.id,
+            onClick: e => {
               e.stopPropagation();
               setSearchType(config.searchType);
               setIsSelectTypeOpen(state => !state);
-            }}
-          >
-            {config.title}
-          </li>
-        ))}
-      </ul>
+            },
+            title: config.title,
+          }))}
+        />
+      </OverlayContainer>
     </>
   );
 }
