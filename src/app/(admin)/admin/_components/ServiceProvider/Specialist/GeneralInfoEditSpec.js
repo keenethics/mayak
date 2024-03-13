@@ -8,7 +8,7 @@ export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
   return (
     <FormFieldWrapper title="Основна інформація">
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
-        <TextInput key="firstName" name="firstName" type="text" label={"Ім'я"} validate={required()} />
+        <TextInput key="firstName" name="firstName" type="text" label={`Ім'я`} validate={required()} />
         <TextInput key="lastName" name="lastName" type="text" label="Прізвище" validate={required()} />
         <TextInput key="surname" name="surname" type="text" label="По-батькові" />
       </div>
