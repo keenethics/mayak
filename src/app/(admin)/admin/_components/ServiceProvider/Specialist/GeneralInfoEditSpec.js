@@ -1,8 +1,8 @@
 import { TextInput, required } from 'react-admin';
 import PropTypes from 'prop-types';
-import { FormFieldWrapper } from '../../FormFieldWrapper';
+import { FORM_TYPES } from '@admin/_lib/consts';
+import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { SpecializationsSelect } from './SpecializationsSelect';
-import { FORM_TYPES } from '../../../_lib/consts';
 
 export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
   return (

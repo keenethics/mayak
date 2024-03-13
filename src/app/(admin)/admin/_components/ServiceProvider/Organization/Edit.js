@@ -1,14 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { organizationEditValidationSchema } from '../../../_lib/validationSchemas/organizationSchema';
-
-import { ContactsForm } from '../ContactsForm';
-import { ActivationForm } from '../ActivationForm';
-import { AddressesForm } from '../AddressesForm';
-import { ServicesForm } from '../ServicesForm';
-import { transformOrganizationEditData } from '../../../_utils/transformOrganizationEditData';
+import { organizationEditValidationSchema } from '@admin/_lib/validationSchemas/organizationSchema';
+import { transformOrganizationEditData } from '@admin/_utils/transformOrganizationEditData';
+import {
+  ContactsForm,
+  ActivationForm,
+  ServicesForm,
+  AddressesForm,
+  DescriptionEdit,
+} from '@admin/components/ServiceProvider';
 import { DetailsEditOrg } from './DetailsEditOrg';
 import { GeneralInfoEditOrg } from './GeneralInfoEditOrg';
-import { DescriptionEdit } from '../DescriptionEdit';
 
 const { Edit, SimpleForm, required } = require('react-admin');
 

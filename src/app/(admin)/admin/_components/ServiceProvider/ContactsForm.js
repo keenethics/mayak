@@ -1,5 +1,5 @@
 import { TextInput } from 'react-admin';
-import { FormFieldWrapper } from '../FormFieldWrapper';
+import { FormFieldWrapper } from '@admin/_components';
 
 const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6';
 

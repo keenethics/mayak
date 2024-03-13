@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Gender } from '@prisma/client';
 import { SelectInput } from 'react-admin';
-import { getChoicesList } from '../../_utils/common';
-import { FormTranslations } from '../../_lib/translations';
+import { getChoicesList } from '@admin/_utils/common';
+import { FormTranslations } from '@admin/_lib/translations';
 
 export function GenderSelect({ label, ...props }) {
   const genderChoicesList = getChoicesList(Object.values(Gender), FormTranslations.gender);

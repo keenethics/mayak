@@ -5,14 +5,11 @@ import { Create, SimpleForm, TextInput } from 'react-admin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@admin/_lib/consts';
 import { transformData } from '@admin/_utils/transformSpecialistFormData';
-import { ContactsForm } from '../ContactsForm';
-import { ActivationForm } from '../ActivationForm';
-import { ServicesForm } from '../ServicesForm';
-import { AddressesForm } from '../AddressesForm';
-import { specialistCreateValidationSchema } from '../../../_lib/validationSchemas/specialistSchema';
+import { specialistCreateValidationSchema } from '@admin/_lib/validationSchemas/specialistSchema';
+import { ContactsForm, ActivationForm, ServicesForm, AddressesForm } from '@admin/components/ServiceProvider';
+import { useRedirectToList } from '@admin/components/ServiceProvider/hooks';
 import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
 import { DetailsEditSpec } from './DetailsEditSpec';
-import { useRedirectToList } from '../hooks/useRedirectToList';
 
 export function SpecialistCreate() {
   const { handleError, handleSuccess } = useRedirectToList({

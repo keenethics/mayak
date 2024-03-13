@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { AutocompleteArrayInput, ReferenceArrayInput, SelectArrayInput, useGetList } from 'react-admin';
-import { FORM_TYPES, RESOURCES } from '../../../_lib/consts';
+import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 
 export function OrganizationTypesSelect({ label, type = FORM_TYPES.create, ...props }) {
   const { data: typesList, isLoading: typesLoading } = useGetList(RESOURCES.organizationType);

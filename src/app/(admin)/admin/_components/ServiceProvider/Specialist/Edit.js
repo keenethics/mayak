@@ -1,13 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Edit, SimpleForm, TextInput } from 'react-admin';
-import { ContactsForm } from '../ContactsForm';
-import { ActivationForm } from '../ActivationForm';
-import { specialistEditValidationSchema } from '../../../_lib/validationSchemas/specialistSchema';
-import { ServicesForm } from '../ServicesForm';
-import { AddressesForm } from '../AddressesForm';
+import { specialistEditValidationSchema } from '@admin/_lib/validationSchemas/specialistSchema';
+import { transformSpecialistEditData } from '@admin/_utils/transformSpecialistEditData';
+import { ContactsForm, ActivationForm, ServicesForm, AddressesForm } from '@admin/components/ServiceProvider';
 import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
 import { DetailsEditSpec } from './DetailsEditSpec';
-import { transformSpecialistEditData } from '../../../_utils/transformSpecialistEditData';
 
 export function SpecialistEdit() {
   return (

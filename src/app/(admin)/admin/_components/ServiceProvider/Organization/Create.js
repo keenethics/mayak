@@ -1,16 +1,18 @@
 import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Create, SimpleForm, required } from 'react-admin';
-import { ActivationForm } from '../ActivationForm';
-import { ContactsForm } from '../ContactsForm';
-import { ServicesForm } from '../ServicesForm';
-import { AddressesForm } from '../AddressesForm';
-import { organizationCreateValidationSchema } from '../../../_lib/validationSchemas/organizationSchema';
-import { RESOURCES, SUCCESS_NOTIFICATIONS } from '../../../_lib/consts';
+import { organizationCreateValidationSchema } from '@admin/_lib/validationSchemas/organizationSchema';
+import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@admin/_lib/consts';
+import {
+  ContactsForm,
+  ActivationForm,
+  ServicesForm,
+  AddressesForm,
+  DescriptionEdit,
+} from '@admin/components/ServiceProvider';
+import { useRedirectToList } from '@admin/components/ServiceProvider/hooks';
 import { DetailsEditOrg } from './DetailsEditOrg';
 import { GeneralInfoEditOrg } from './GeneralInfoEditOrg';
-import { DescriptionEdit } from '../DescriptionEdit';
-import { useRedirectToList } from '../hooks/useRedirectToList';
 
 export function OrganizationCreate() {
   const { handleError, handleSuccess } = useRedirectToList({

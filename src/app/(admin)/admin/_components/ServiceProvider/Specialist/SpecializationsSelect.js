@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { AutocompleteArrayInput, ReferenceArrayInput, SelectArrayInput, required, useGetList } from 'react-admin';
-import { FORM_TYPES, RESOURCES } from '../../../_lib/consts';
+import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 
 export function SpecializationsSelect({ type = FORM_TYPES.create, label, ...props }) {
   const { data: specializationsList, isLoading: specializationsLoading } = useGetList(RESOURCES.specialization);

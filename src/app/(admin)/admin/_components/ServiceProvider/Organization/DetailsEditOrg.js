@@ -2,8 +2,8 @@
 
 import { useWatch } from 'react-hook-form';
 import { NumberInput, required } from 'react-admin';
-import { FormFieldWrapper } from '../../FormFieldWrapper';
-import { FormatOfWorkSelect } from '../FormatOfWorkSelect';
+import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
+import { FormatOfWorkSelect } from '@admin/components/ServiceProvider';
 
 const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
 

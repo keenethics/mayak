@@ -8,8 +8,8 @@ import {
   required,
   useGetList,
 } from 'react-admin';
-import { FormFieldWrapper } from '../FormFieldWrapper';
-import { FORM_TYPES, RESOURCES } from '../../_lib/consts';
+import { FormFieldWrapper } from '@admin/_components';
+import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 
 export function ServicesForm({ label, type = FORM_TYPES.create }) {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
