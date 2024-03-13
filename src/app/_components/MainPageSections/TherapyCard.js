@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PillButton } from '@components';
-import { Heading, Paragraph } from './Typography';
+import { Heading, Paragraph } from '@components/Typography';
+import { PillButton } from '@components/PillButton';
+import { TherapyCardPropTypes } from './prop-types';
 
 export function TherapyCard({ type, description, title, imagePath }) {
   return (
@@ -12,16 +12,11 @@ export function TherapyCard({ type, description, title, imagePath }) {
       <Paragraph className="text-center text-p4 font-bold text-[#FE9E75]">{description}</Paragraph>
       <Link href={`/specialist?type=${type}`}>
         <PillButton variant="outlined" colorVariant="blue">
-          Ознайомитися
+          Ознайомитись
         </PillButton>
       </Link>
     </div>
   );
 }
 
-TherapyCard.propTypes = {
-  type: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  imagePath: PropTypes.string.isRequired,
-};
+TherapyCard.propTypes = TherapyCardPropTypes;

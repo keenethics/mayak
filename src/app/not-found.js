@@ -1,5 +1,5 @@
 import React from 'react';
-import { NotFoundLayout } from '@components';
+import { NotFoundLayout } from '@components/NotFoundLayout';
 
 export default function NotFoundPage() {
   return (

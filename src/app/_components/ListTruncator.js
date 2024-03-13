@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
 import PropTypes from 'prop-types';
-import { Show as ShowHint, Window as HintWindow } from '@components';
+import { Show as ShowHint, Window as HintWindow } from '@components/Hint';
 import { useOverflow } from '@hooks';
 import { cn } from '@utils/cn';
 

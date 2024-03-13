@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import NotFound from '@images/notFound.svg';
 import PropTypes from 'prop-types';

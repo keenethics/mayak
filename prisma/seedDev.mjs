@@ -184,10 +184,11 @@ async function main() {
     'Соціальний працівник',
   ];
   const organizationTypeNames = ['Психологічний центр', 'Соціальна служба', 'Лікарня'];
-  const faqs = Array.from({ length: 15 }).map(() => ({
+  const faqs = Array.from({ length: 15 }).map((_, i) => ({
     isActive: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
+    priority: i + 10,
   }));
 
   await prisma.district.createMany({
@@ -198,7 +199,7 @@ async function main() {
     data: specializationNames.map(name => ({ name })),
   });
 
-  const eventTags = ['EventTag1', 'EventTag2', 'EventTag3'];
+  const eventTags = ['Tag1', 'Tag2', 'Tag3'];
 
   const eventLink = { label: 'Some site', link: 'https://keenethics.com/' };
 

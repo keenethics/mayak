@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import PropTypes from 'prop-types';
 import TickIcon from '@icons/tickIcon.svg';
 import RadionIcon from '@icons/radio.svg';

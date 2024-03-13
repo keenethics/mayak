@@ -1,24 +1,19 @@
 'use client';
 
-import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import {
-  getContactsList,
-  getLabelsList,
-  getSpecialistSocials,
-  ProfileImage,
-  ContactsList,
-  BadgeList,
-  SpecialistTitle,
-  SpecializationsPanel,
-  CardWrapper,
-  SocialsList,
-  DetailsList,
-  AddressesList,
-  CardButton,
-} from '@components';
-import { organizationPropType } from '@/app/_components/CardSpecialist/prop-types';
+import { getContactsList, getLabelsList, getSpecialistSocials } from '@components/CardSpecialist/config';
+import { ProfileImage } from '@components/CardSpecialist/ProfileImage';
+import { ContactsList } from '@components/CardSpecialist/ContactsList';
+import { BadgeList } from '@components/CardSpecialist/BadgeList';
+import { SpecialistTitle } from '@components/CardSpecialist/SpecialistTitle';
+import { SpecializationsPanel } from '@components/CardSpecialist/SpecializationsPanel';
+import { CardWrapper } from '@components/CardSpecialist/CardWrapper';
+import { SocialsList } from '@components/CardSpecialist/SocialsList';
+import { DetailsList } from '@components/CardSpecialist/DetailsList';
+import { AddressesList } from '@components/CardSpecialist/AddressesList';
+import { CardButton } from '@components/CardSpecialist/CardButton';
+import { organizationPropType } from '@components/CardSpecialist/prop-types';
 
 export function CardOrganization({ organization, className, extended = false }) {
   const {
