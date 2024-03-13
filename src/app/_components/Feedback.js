@@ -71,11 +71,11 @@ export function Feedback({ isFeedbackOpen, onClose }) {
 
   return (
     <Modal isOpen={isFeedbackOpen} onClose={onClose} bgColor="bg-primary-200 ">
-      <div className="px-[54px] pt-0">
+      <div className="px-0 pt-0 md:px-[27px] lg:px-[54px]">
         {isFormOpen ? (
-          <form onSubmit={onSubmit} className="grid gap-y-7">
-            <h3 className="text-h3 font-bold"> Хочете поділитись ідеями?</h3>
-            <p className="text-p2">Залиште свої контактні дані і ми зв’яжемось з Вами</p>
+          <form onSubmit={onSubmit} className="grid gap-y-6 lg:gap-y-7 ">
+            <h3 className="text-h4 font-bold lg:text-h3"> Хочете поділитись ідеями?</h3>
+            <p className="md:text-p3 lg:text-p2">Залиште свої контактні дані і ми зв’яжемось з Вами</p>
             <TextInputField
               value={name}
               name="name"
