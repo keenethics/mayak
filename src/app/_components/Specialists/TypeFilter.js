@@ -2,19 +2,19 @@
 
 import { useState } from 'react';
 import { CircularProgress } from '@mui/material';
+import { ClearFilterButton, FilterBase, CheckBox } from '@components';
+import { useSetParam, useListTherapies } from '@hooks';
+import { useSearchParams } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useListTherapies } from '@/app/_hooks/api/useTherapy';
-import { CheckBox } from '../CheckBox';
-import { FilterChip } from '../FilterChip';
-import { FilterDropdown } from './FilterDropdown';
-import { ClearFilterButton } from './ClearFilterButton';
 
-function TypeList({ setCount }) {
+function TypeList({ setCount, defaultValue }) {
   const { data: therapies, isLoading } = useListTherapies();
-  const [selectedType, setSelectedType] = useState(null);
+  const [selectedType, setSelectedType] = useState(defaultValue);
+  const { addParam, deleteParam } = useSetParam('type');
   const onChange = type => {
     setSelectedType(type);
     setCount(1);
+    addParam(type);
   };
   if (isLoading) return <CircularProgress />;
   if (therapies) {
@@ -39,6 +39,7 @@ function TypeList({ setCount }) {
           clear={() => {
             setSelectedType(null);
             setCount(0);
+            deleteParam();
           }}
         />
       </>
@@ -47,20 +48,16 @@ function TypeList({ setCount }) {
 }
 
 export function TypeFilter() {
-  const [opened, setOpened] = useState(false);
-  const [count, setCount] = useState(0);
+  const typeInUrl = useSearchParams().get('type');
+  const [count, setCount] = useState(Number(!!typeInUrl));
   return (
-    <>
-      <FilterChip opened={opened} setOpened={setOpened} text="Тип" count={count} />
-      {opened && (
-        <FilterDropdown opened={opened} setOpened={setOpened}>
-          <TypeList setCount={setCount} />
-        </FilterDropdown>
-      )}
-    </>
+    <FilterBase filterText="Тип" count={count}>
+      <TypeList setCount={setCount} defaultValue={typeInUrl} />
+    </FilterBase>
   );
 }
 
 TypeList.propTypes = {
   setCount: PropTypes.func,
+  defaultValue: PropTypes.string,
 };

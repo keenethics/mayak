@@ -2,19 +2,20 @@
 
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FilterChip } from '../FilterChip';
-import { CheckBox } from '../CheckBox';
-import { FilterDropdown } from './FilterDropdown';
-import { ClearFilterButton } from './ClearFilterButton';
+import { CheckBox, ClearFilterButton, FilterBase } from '@components';
+import { useSetParam } from '@hooks';
+import { useSearchParams } from 'next/navigation';
 
 const offline = 'OFFLINE';
 const online = 'ONLINE';
 
-function FormatList({ setCount }) {
-  const [selectedFormat, setSelectedFormat] = useState(null);
+function FormatList({ setCount, defaultValue }) {
+  const [selectedFormat, setSelectedFormat] = useState(defaultValue);
+  const { addParam, deleteParam } = useSetParam('format');
   const onChange = format => {
     setSelectedFormat(format);
     setCount(1);
+    addParam(format);
   };
   return (
     <>
@@ -44,6 +45,7 @@ function FormatList({ setCount }) {
         clear={() => {
           setSelectedFormat(null);
           setCount(0);
+          deleteParam();
         }}
       />
     </>
@@ -51,20 +53,16 @@ function FormatList({ setCount }) {
 }
 
 export function FormatFilter() {
-  const [opened, setOpened] = useState(false);
-  const [count, setCount] = useState(0);
+  const formatInUrl = useSearchParams().get('format');
+  const [count, setCount] = useState(Number(!!formatInUrl));
   return (
-    <>
-      <FilterChip opened={opened} setOpened={setOpened} text="Формат роботи" count={count} />
-      {opened && (
-        <FilterDropdown opened={opened} setOpened={setOpened}>
-          <FormatList setCount={setCount} />
-        </FilterDropdown>
-      )}
-    </>
+    <FilterBase filterText="Формат роботи" count={count}>
+      <FormatList setCount={setCount} defaultValue={formatInUrl} />
+    </FilterBase>
   );
 }
 
 FormatList.propTypes = {
   setCount: PropTypes.func,
+  defaultValue: PropTypes.string,
 };

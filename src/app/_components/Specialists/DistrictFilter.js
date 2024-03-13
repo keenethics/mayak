@@ -2,23 +2,24 @@
 
 import { useState } from 'react';
 import { CircularProgress } from '@mui/material';
+import { useListDistrict, useSetParam } from '@hooks';
+import { CheckBox, ClearFilterButton, FilterBase } from '@components';
+import { useSearchParams } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useListDistrict } from '@/app/_hooks/api/useDistrict';
-import { FilterChip } from '../FilterChip';
-import { CheckBox } from '../CheckBox';
-import { FilterDropdown } from './FilterDropdown';
-import { ClearFilterButton } from './ClearFilterButton';
 
-function DistrictList({ setCount }) {
+function DistrictList({ setCount, defaultValue }) {
   const { data: districts, isLoading } = useListDistrict();
-  const [selectedDistricts, setSelectedDistricts] = useState([]);
+  const [selectedDistricts, setSelectedDistricts] = useState(defaultValue);
+  const { addParam, deleteParam } = useSetParam('district');
   const onChange = district => {
     if (selectedDistricts.includes(district)) {
       setSelectedDistricts(selectedDistricts.filter(selDistrict => selDistrict !== district));
       setCount(count => count - 1);
+      deleteParam(district);
     } else {
       setSelectedDistricts([...selectedDistricts, district]);
       setCount(count => count + 1);
+      addParam(district);
     }
   };
   if (isLoading) return <CircularProgress />;
@@ -32,8 +33,8 @@ function DistrictList({ setCount }) {
                 name={district.id}
                 value={district.id}
                 key={district.id}
-                checked={selectedDistricts.includes(district.name)}
-                onChange={() => onChange(district.name)}
+                checked={selectedDistricts.includes(district.id)}
+                onChange={() => onChange(district.id)}
                 text={district.name}
               />
             </li>
@@ -43,6 +44,7 @@ function DistrictList({ setCount }) {
           clear={() => {
             setSelectedDistricts([]);
             setCount(0);
+            deleteParam();
           }}
         />
       </>
@@ -51,20 +53,16 @@ function DistrictList({ setCount }) {
 }
 
 export function DistrictFilter() {
-  const [opened, setOpened] = useState(false);
-  const [count, setCount] = useState(0);
+  const districtsInUrl = useSearchParams().getAll('district');
+  const [count, setCount] = useState(districtsInUrl.length);
   return (
-    <>
-      <FilterChip opened={opened} setOpened={setOpened} text="Район" count={count} />
-      {opened && (
-        <FilterDropdown opened={opened} setOpened={setOpened}>
-          <DistrictList setCount={setCount} />
-        </FilterDropdown>
-      )}
-    </>
+    <FilterBase filterText="Район" count={count}>
+      <DistrictList setCount={setCount} defaultValue={districtsInUrl} />
+    </FilterBase>
   );
 }
 
 DistrictList.propTypes = {
   setCount: PropTypes.func,
+  defaultValue: PropTypes.string,
 };
