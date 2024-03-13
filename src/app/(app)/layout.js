@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Footer, Header } from '@components';
+import { Footer } from '@components/Footer';
+import { Header } from '@components/Header';
+import { Hint } from '@components/Hint';
 
 export const metadata = {
   title: {
@@ -11,11 +13,13 @@ export const metadata = {
 
 export default function Layout({ children }) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="relative flex-1">{children}</main>
-      <Footer />
-    </div>
+    <Hint>
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="relative flex-1">{children}</main>
+        <Footer />
+      </div>
+    </Hint>
   );
 }
 

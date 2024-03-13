@@ -1,21 +1,16 @@
+'use client';
+
 import PropTypes from 'prop-types';
-import { cn } from '@/app/utils/cn';
-import { Paragraph } from '../Typography';
+import { Paragraph } from '@components/Typography';
+import { cn } from '@/utils/cn';
+import { buttonColorVariant, buttonType } from './style';
 
-export function PillButton({
-  children,
-  type = 'button',
-  className,
-  variant,
-  colorVariant,
-  icon,
-  disabled = false,
-  onClick,
-}) {
-  const buttonVariant = icon ? variant?.icon : variant?.regular;
-  const { regular, hover, focused, active, disabled: disabledState } = colorVariant || {};
+export function PillButton({ children, className, icon, variant, colorVariant, ...props }) {
+  const buttonVariant = icon ? buttonType[variant]?.icon : buttonType[variant]?.regular || {};
+  const buttonColor = buttonColorVariant[variant]?.[colorVariant] || {};
 
-  const { buttonStyle, layoutStyle } = buttonVariant || {};
+  const { regular, hover, focused, active, disabled: disabledState } = buttonColor;
+  const { buttonStyle, layoutStyle } = buttonVariant;
 
   const styles = cn(
     'gap-[8px] rounded-[100px] font-bold',
@@ -29,7 +24,7 @@ export function PillButton({
   );
 
   return (
-    <button className={styles} disabled={disabled} onClick={onClick} type={type}>
+    <button type="button" className={styles} {...props}>
       <div className={layoutStyle || ''}>
         {icon}
         <Paragraph className="text-inherit">{children}</Paragraph>
@@ -42,24 +37,7 @@ PillButton.propTypes = {
   children: PropTypes.node,
   type: PropTypes.string,
   className: PropTypes.string,
-  variant: PropTypes.shape({
-    icon: PropTypes.shape({
-      buttonStyle: PropTypes.string.isRequired,
-      layoutStyle: PropTypes.string,
-    }),
-    regular: PropTypes.shape({
-      buttonStyle: PropTypes.string.isRequired,
-      layoutStyle: PropTypes.string,
-    }),
-  }),
-  colorVariant: PropTypes.shape({
-    regular: PropTypes.string.isRequired,
-    hover: PropTypes.string,
-    focused: PropTypes.string,
-    active: PropTypes.string,
-    disabled: PropTypes.string,
-  }),
+  variant: PropTypes.string.isRequired,
+  colorVariant: PropTypes.string.isRequired,
   icon: PropTypes.node,
-  disabled: PropTypes.bool,
-  onClick: PropTypes.func,
 };

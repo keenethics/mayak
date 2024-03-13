@@ -1,7 +1,8 @@
-import React from 'react';
+'use client';
+
 import PropTypes from 'prop-types';
 import InputErrorIcon from '@icons/inputErrorIcon.svg';
-import { cn } from '@/utils/cn';
+import { cn } from '@utils/cn';
 import { variants } from './styles';
 
 export function TextInputField({
@@ -14,11 +15,15 @@ export function TextInputField({
   error = '',
   required = false,
   variant = variants.default,
+  absolute = true,
 }) {
   const id = `textinput_${name}`;
+  const absoluteError = absolute ? 'absolute top-[45px] duration-150 ease-out transform' : '';
+  const absoluteLabel = absolute ? 'absolute bottom-[47px]' : '';
+
   return (
-    <div className={cn(variant.mainContainer.base)}>
-      {error && <p className={cn(variant.errorParagraph.base)}>{error}</p>}
+    <div className={cn(`relative`, variant.mainContainer.base)}>
+      {error && <p className={cn(absoluteError, variant.errorParagraph.base)}>{error}</p>}
       <div
         className={cn(
           variant.inputContainer.base,
@@ -41,7 +46,10 @@ export function TextInputField({
         {error && <InputErrorIcon className={cn(variant.errorIcon.base)} />}
       </div>
 
-      <label className={cn(variant.label.base, variant.label.stateful, error && variant.label.error)} htmlFor={id}>
+      <label
+        className={cn(variant.label.base, variant.label.stateful, absoluteLabel, error && variant.label.error)}
+        htmlFor={id}
+      >
         {placeholder}
       </label>
     </div>
@@ -57,6 +65,7 @@ TextInputField.propTypes = {
   placeholder: PropTypes.string,
   error: PropTypes.string,
   required: PropTypes.bool,
+  absolute: PropTypes.bool,
   variant: PropTypes.shape({
     mainContainer: PropTypes.shape({
       base: PropTypes.string.isRequired,

@@ -8,7 +8,7 @@ import {
   required,
   useGetList,
 } from 'react-admin';
-import { FormFieldWrapper } from '@admin/_components';
+import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 
 export function ServicesForm({ label, type = FORM_TYPES.create }) {

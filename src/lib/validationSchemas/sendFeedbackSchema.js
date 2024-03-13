@@ -1,24 +1,15 @@
 import { z } from 'zod';
 import { PHONE_REGEX } from '../consts';
-import { minMaxString } from './utils';
+import { string, boolean } from './utils';
 
 const SendFeedback = z.object({
-  name: minMaxString(1, 128, 'Name'),
-  phone: z
-    .string({
-      required_error: 'Phone number is required',
-      invalid_type_error: 'Phone number must be a string',
-    })
-    .trim()
-    .refine(val => PHONE_REGEX.test(val), {
-      message: 'Please, enter phone number in format +380XXXXXXXXX',
-    }),
-  callMe: z.boolean({
-    required_error: 'callMe is required',
-    invalid_type_error: 'callMe must be a boolean',
+  name: string('Вкажіть Ваше Імʼя').min(1).max(128).zod,
+  phone: string('Мобільний телефон').zod.refine(val => PHONE_REGEX.test(val), {
+    message: 'Будь ласка введіть номер у форматі +380XXXXXXXXX',
   }),
-  email: z.string().trim().email(),
-  message: minMaxString(1, 320, 'Message').optional(),
+  callMe: boolean('Подзвоніть мені').zod,
+  email: string('Email').email().optional().zod,
+  message: string('Повідомлення').min(5).max(320).zod,
 });
 
 export default SendFeedback;

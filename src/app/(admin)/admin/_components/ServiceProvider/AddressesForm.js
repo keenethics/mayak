@@ -11,7 +11,7 @@ import {
 import { FormatOfWork } from '@prisma/client';
 import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 import PropTypes from 'prop-types';
-import { FormFieldWrapper } from '../FormFieldWrapper';
+import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { districtPropType } from '@/app/(admin)/admin/_lib/specialistPropTypes';
 import Loading from '@/app/loading';
 

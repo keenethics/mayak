@@ -7,17 +7,21 @@ import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate, EventEdit, EventList, EventShow } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
 import { CreateTherapy, EditTherapy, ListTherapy } from '@admin/components/Therapy';
-import { authProvider } from './authProvider';
 import {
   OrganizationCreate,
   OrganizationShow,
   OrganizationsList,
+  OrganizationEdit,
+} from '@admin/components/ServiceProvider/Organization';
+
+import {
   SpecialistCreate,
   SpecialistShow,
   SpecialistsList,
   SpecialistEdit,
-  OrganizationEdit,
-} from './_components/ServiceProvider';
+} from '@admin/components/ServiceProvider/Specialist';
+
+import { authProvider } from './authProvider';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');

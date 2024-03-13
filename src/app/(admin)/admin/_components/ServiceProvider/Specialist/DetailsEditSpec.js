@@ -3,7 +3,8 @@
 import { useWatch } from 'react-hook-form';
 import { NumberInput, required } from 'react-admin';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
-import { GenderSelect, FormatOfWorkSelect } from '@admin/components/ServiceProvider';
+import { GenderSelect } from '@admin/components/ServiceProvider/GenderSelect';
+import { FormatOfWorkSelect } from '@admin/components/ServiceProvider/FormatOfWorkSelect';
 
 export function DetailsEditSpec() {
   const isActive = useWatch({ name: 'isActive' });

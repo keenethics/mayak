@@ -45,7 +45,7 @@ model Specialist {
   isFreeReception   Boolean?
   description       String?          @db.Text
   phone             String?          @db.VarChar(15)
-  email             String?          @unique @db.VarChar(320)
+  email             String?          @db.VarChar(320)
   website           String?          @db.Text
   isActive          Boolean          @default(false)
   instagram         String?          @db.Text
@@ -55,6 +55,7 @@ model Specialist {
   tiktok            String?          @db.Text
   viber             String?          @db.Text
   telegram          String?          @db.Text
+  searchEntry       SearchEntry?
 
   @@map("specialist")
 }
@@ -81,8 +82,18 @@ model Organization {
   tiktok          String?            @db.Text
   viber           String?            @db.Text
   telegram        String?            @db.Text
+  searchEntry     SearchEntry?
 
   @@map("organization")
+}
+
+model SearchEntry {
+  id             String        @id @default(uuid()) @db.Uuid
+  sortString     String // sort string contains Full Name if record is for specialist and Clinic name if record is for organization
+  specialist     Specialist?   @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+  specialistId   String?       @unique @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String?       @unique @db.Uuid
 }
 
 model Specialization {
@@ -156,20 +167,20 @@ model Feedback {
 }
 
 model Event {
-  id             String           @id @default(uuid()) @db.Uuid
-  createdAt      DateTime         @default(now())
-  title          String           @db.VarChar(128)
-  organizerName  String           @db.VarChar(128)
-  notes          String?          @db.VarChar(350)
-  address        String?          @db.VarChar(128)
-  locationLink   String?          @db.Text
-  price          Int?             @db.Integer
-  isActive       Boolean          @default(false)
-  additionalLink EventLink?       @relation(fields: [linkId], references: [id])
-  linkId         String?          @db.Uuid
-  eventDate      DateTime
-  format         EventFormat
-  priceType      EventPriceFormat
+  id             String            @id @default(uuid()) @db.Uuid
+  createdAt      DateTime          @default(now())
+  title          String            @db.VarChar(128)
+  organizerName  String            @db.VarChar(128)
+  notes          String?           @db.VarChar(350)
+  address        String?           @db.VarChar(128)
+  locationLink   String?           @db.Text
+  price          Int?              @db.Integer
+  isActive       Boolean           @default(false)
+  additionalLink EventLink?        @relation(fields: [linkId], references: [id])
+  linkId         String?           @db.Uuid
+  eventDate      DateTime?
+  format         EventFormat?
+  priceType      EventPriceFormat?
   tags           EventTag[]
 
   @@map("event")

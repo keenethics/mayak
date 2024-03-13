@@ -3,14 +3,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Create, SimpleForm, required } from 'react-admin';
 import { organizationCreateValidationSchema } from '@admin/_lib/validationSchemas/organizationSchema';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@admin/_lib/consts';
-import {
-  ContactsForm,
-  ActivationForm,
-  ServicesForm,
-  AddressesForm,
-  DescriptionEdit,
-} from '@admin/components/ServiceProvider';
+import { ActivationForm } from '@admin/components/ServiceProvider/ActivationForm';
+import { ServicesForm } from '@admin/components/ServiceProvider/ServicesForm';
+import { AddressesForm } from '@admin/components/ServiceProvider/AddressesForm';
+import { DescriptionEdit } from '@admin/components/ServiceProvider/DescriptionEdit';
 import { useRedirectToList } from '@admin/components/ServiceProvider/hooks';
+import { ContactsList } from '@admin/components/ContactsList';
+import { SocialLinks } from '@admin/components/ServiceProvider/SocialLinks';
 import { DetailsEditOrg } from './DetailsEditOrg';
 import { GeneralInfoEditOrg } from './GeneralInfoEditOrg';
 
@@ -32,7 +31,8 @@ export function OrganizationCreate() {
         <AddressesForm label="Адреси надання послуг" />
         <ServicesForm label="Послуги" />
         <DescriptionEdit validate={required()} />
-        <ContactsForm />
+        <ContactsList />
+        <SocialLinks />
         <ActivationForm label="Активувати/деактивувати організацію" className="mt-3" />
       </SimpleForm>
     </Create>

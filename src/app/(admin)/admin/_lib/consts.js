@@ -22,3 +22,6 @@ export const SUCCESS_NOTIFICATIONS = {
   updated: 'Updated successfully',
   deleted: 'Deleted successfully',
 };
+
+export const PHONE = 'phone';
+export const EMAIL = 'email';

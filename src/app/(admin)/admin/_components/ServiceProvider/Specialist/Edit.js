@@ -2,7 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Edit, SimpleForm, TextInput } from 'react-admin';
 import { specialistEditValidationSchema } from '@admin/_lib/validationSchemas/specialistSchema';
 import { transformSpecialistEditData } from '@admin/_utils/transformSpecialistEditData';
-import { ContactsForm, ActivationForm, ServicesForm, AddressesForm } from '@admin/components/ServiceProvider';
+import { ActivationForm } from '@admin/components/ServiceProvider/ActivationForm';
+import { ServicesForm } from '@admin/components/ServiceProvider/ServicesForm';
+import { AddressesForm } from '@admin/components/ServiceProvider/AddressesForm';
+import { ContactsList } from '@admin/components/ContactsList';
+import { SocialLinks } from '@admin/components/ServiceProvider/SocialLinks';
 import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
 import { DetailsEditSpec } from './DetailsEditSpec';
 
@@ -15,7 +19,8 @@ export function SpecialistEdit() {
         <AddressesForm type="edit" label="Адреси надання послуг" />
         <ServicesForm type="edit" label="Послуги" />
         <TextInput name="description" source="description" label="Опис" fullWidth multiline />
-        <ContactsForm />
+        <ContactsList />
+        <SocialLinks />
         <ActivationForm label="Активувати/деактивувати спеціаліста" className="mt-3" />
       </SimpleForm>
     </Edit>
