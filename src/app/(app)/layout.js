@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Footer, Header, Hint } from '@components';
+import { Footer } from '@components/Footer';
+import { Header } from '@components/Header';
+import { Hint } from '@components/Hint';
 
 export const metadata = {
   title: {

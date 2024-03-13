@@ -1,17 +1,17 @@
 import { z } from 'zod';
 import { FormatOfWork } from '@prisma/client';
-import { minMaxString } from '@/lib/validationSchemas/utils';
+import { string } from '@/lib/validationSchemas/utils';
 import { PHONE_REGEX } from '@/lib/consts';
 
 const DefaultSchema = z.object({
-  name: minMaxString(1, 128, 'Назва'),
+  name: string('Назва').min(1).max(128).zod,
 });
 
-const TypeSchema = z.array(minMaxString(1, 64, 'Тип організації'), {
+const TypeSchema = z.array(string('Тип організації').min(1).max(64).zod, {
   required_error: "Тип організації - обов'язкове поле",
 });
 
-const TherapiesSchema = z.array(minMaxString(1, 64, 'Тип терапії'), {
+const TherapiesSchema = z.array(string('Тип терапії').min(1).max(64).zod, {
   required_error: "Тип терапії - обов'язкове поле",
 });
 
@@ -47,8 +47,8 @@ const RestSchema = z.object({
   addresses: z
     .array(
       z.object({
-        fullAddress: minMaxString(1, 128, 'Повна адреса').nullish(),
-        district: minMaxString(1, 64, 'Район').nullish(),
+        fullAddress: string('Повна адреса').min(1).max(128).zod.nullish(),
+        district: string('Район').min(1).max(64).zod.nullish(),
         isPrimary: z.boolean(),
       }),
     )

@@ -19,7 +19,7 @@ export function Details() {
   const { gender, yearsOfExperience, formatOfWork } = SpecialistFormFields;
 
   return (
-    <FormFieldWrapper title={SpecialistFormSections.details} className="mt-3">
+    <FormFieldWrapper title={SpecialistFormSections.details}>
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
         <SelectInput
           name={gender.name}

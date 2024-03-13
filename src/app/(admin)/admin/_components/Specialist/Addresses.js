@@ -23,7 +23,7 @@ export function Addresses() {
 
   const isOnline = format => format === FormatOfWork.ONLINE;
   return (
-    <FormFieldWrapper title={SpecialistFormSections.addresses} className="mt-3">
+    <FormFieldWrapper title={SpecialistFormSections.addresses}>
       <FormDataConsumer>
         {({ formData }) =>
           isOnline(formData.formatOfWork) ? (
