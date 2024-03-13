@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { FilterChip } from '@components';
+import { FilterChip } from '@components/FilterChip';
 import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 
@@ -27,12 +27,9 @@ export function FilterBase({ count, children, filterText }) {
       <FilterChip opened={opened} text={filterText} count={count} onClick={() => setOpened(!opened)} />
       <div
         ref={dropdownRef}
-        className={cn(
-          'absolute top-8 z-10 hidden w-max flex-col rounded-3xl border bg-other-white px-2 py-1 transition-[display]',
-          {
-            flex: opened,
-          },
-        )}
+        className={cn('absolute top-8 z-10 hidden w-max flex-col rounded-3xl border bg-other-white px-2 py-1', {
+          flex: opened,
+        })}
       >
         {children}
       </div>

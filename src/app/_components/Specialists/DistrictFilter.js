@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import { useListDistrict, useSetParam } from '@hooks';
-import { CheckBox, ClearFilterButton, FilterBase } from '@components';
+import { CheckBox } from '@components/CheckBox';
+import { ClearFilterButton, FilterBase } from '@components/Specialists';
 import { useSearchParams } from 'next/navigation';
 import PropTypes from 'prop-types';
 
@@ -56,7 +57,7 @@ export function DistrictFilter() {
   const districtsInUrl = useSearchParams().getAll('district');
   const [count, setCount] = useState(districtsInUrl.length);
   return (
-    <FilterBase filterText="Район" count={count}>
+    <FilterBase filterText="Райони" count={count}>
       <DistrictList setCount={setCount} defaultValue={districtsInUrl} />
     </FilterBase>
   );
@@ -64,5 +65,5 @@ export function DistrictFilter() {
 
 DistrictList.propTypes = {
   setCount: PropTypes.func,
-  defaultValue: PropTypes.string,
+  defaultValue: PropTypes.arrayOf(PropTypes.string),
 };

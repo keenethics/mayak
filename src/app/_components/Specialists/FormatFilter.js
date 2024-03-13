@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { CheckBox, ClearFilterButton, FilterBase } from '@components';
+import { CheckBox } from '@components/CheckBox';
+import { ClearFilterButton, FilterBase } from '@components/Specialists';
 import { useSetParam } from '@hooks';
 import { useSearchParams } from 'next/navigation';
 

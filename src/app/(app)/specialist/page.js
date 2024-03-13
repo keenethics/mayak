@@ -1,5 +1,6 @@
 import React from 'react';
-import { SpecialistList, Filters } from '@components';
+import { SpecialistList } from '@components/Specialists/SpecialistList';
+import { Filters } from '@components/Specialists/Filters';
 import { env } from '@/lib/env';
 
 export const metadata = {
@@ -15,7 +16,7 @@ export default function Page() {
   return (
     <div className="mx-auto mb-16 max-w-[900px]">
       <Filters />
-      <SpecialistList className="mt-[22px]" />
+      <SpecialistList className="mt-5 md:mt-[22px]" />
     </div>
   );
 }

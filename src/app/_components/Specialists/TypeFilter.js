@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { CircularProgress } from '@mui/material';
-import { ClearFilterButton, FilterBase, CheckBox } from '@components';
+import { CheckBox } from '@components/CheckBox';
+import { ClearFilterButton, FilterBase } from '@components/Specialists';
 import { useSetParam, useListTherapies } from '@hooks';
 import { useSearchParams } from 'next/navigation';
 import PropTypes from 'prop-types';

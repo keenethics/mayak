@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { PillButton } from '@components';
+import { PillButton } from '@components/PillButton';
 
 export function ClearFilterButton({ clear }) {
   return (

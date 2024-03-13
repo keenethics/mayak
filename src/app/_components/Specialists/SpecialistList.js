@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardOrganization, CardSpecialist } from '@components';
+import { CardOrganization, CardSpecialist } from '@components/CardSpecialist';
 import { useListEntries } from '@hooks';
 import { CircularProgress } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
@@ -21,7 +21,7 @@ export function SpecialistList({ className }) {
     const { data: specialists, totalCount } = data;
     return (
       <>
-        <p className="font-bold uppercase text-primary-600">{`Знайдено: ${totalCount} результатів`}</p>
+        <p className="hidden font-bold uppercase text-primary-600 md:block">{`Знайдено: ${totalCount} результатів`}</p>
         <ul className={className}>
           {specialists.map(specialist => (
             <li id={specialist.id} key={specialist.id}>
