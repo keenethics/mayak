@@ -86,23 +86,23 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               value={phone}
               name="phone"
               onChange={e => setPhone(e.target.value)}
-              placeholder={`Номер телефону`}
+              placeholder="Номер телефону"
               error={validationErrors.phone}
               required
             />
             <CheckBox
               onChange={() => setCallMe(prev => !prev)}
               checked={!isCallMe}
-              name={'feedBack'}
-              value={'CheckBox'}
-              text={'Не телефонувати мені'}
+              name="feedBack"
+              value="CheckBox"
+              text="Не телефонувати мені"
             />
             <TextInputField
               value={email}
               type="email"
               name="email"
               onChange={e => setEmail(e.target.value)}
-              placeholder={`Електронна пошта`}
+              placeholder="Електронна пошта"
               error={validationErrors.email}
             />
             <TextArea
