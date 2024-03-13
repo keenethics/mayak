@@ -1,5 +1,3 @@
-'use client';
-
 import PropTypes from 'prop-types';
 import { Paragraph } from '@components/Typography';
 import { cn } from '@/utils/cn';
@@ -34,10 +32,10 @@ export function PillButton({ children, className, icon, variant, colorVariant, .
 }
 
 PillButton.propTypes = {
+  variant: PropTypes.string.isRequired,
+  colorVariant: PropTypes.string.isRequired,
   children: PropTypes.node,
   type: PropTypes.string,
   className: PropTypes.string,
-  variant: PropTypes.string.isRequired,
-  colorVariant: PropTypes.string.isRequired,
   icon: PropTypes.node,
 };

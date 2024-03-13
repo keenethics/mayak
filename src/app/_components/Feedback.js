@@ -54,7 +54,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
   };
 
   useEffect(() => {
-    if (isFormOpen) return;
+    if (isFormOpen) return null;
     const timer = setTimeout(() => {
       setMessage('');
       setFormOpen(true);
@@ -62,15 +62,13 @@ export function Feedback({ isFeedbackOpen, onClose }) {
       onClose();
     }, 4000);
 
-    // Existing lint rules do not allow this usage, but this code is required.
-    // eslint-disable-next-line consistent-return
     return () => clearTimeout(timer);
     // any additional dependencies will be redundant
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFormOpen]);
 
   return (
-    <Modal isOpen={isFeedbackOpen} onClose={onClose} bgColor="bg-primary-200 ">
+    <Modal isOpen={isFeedbackOpen} onClose={onClose} className="bg-primary-200">
       <div className="px-0 pt-0 md:px-[27px] lg:px-[54px]">
         {isFormOpen ? (
           <form onSubmit={onSubmit} className="grid gap-y-6 lg:gap-y-7 ">
