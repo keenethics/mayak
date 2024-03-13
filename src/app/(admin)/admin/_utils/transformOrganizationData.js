@@ -8,7 +8,8 @@ export function transformOrganizationData(data) {
     addressesObject = {
       create: data.addresses.map(address => ({
         fullAddress: address.fullAddress,
-        district: { connect: { name: address.district } },
+        nameOfClinic: address.nameOfClinic,
+        district: { connect: { id: address.district } },
       })),
     };
   }
@@ -16,7 +17,7 @@ export function transformOrganizationData(data) {
   if (data?.type?.length > 0) {
     typesObject = {
       connect: data.type.map(type => ({
-        name: type,
+        id: type,
       })),
     };
   }

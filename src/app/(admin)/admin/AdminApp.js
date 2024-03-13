@@ -6,10 +6,22 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate, EventEdit, EventList, EventShow } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
-import { SpecialistCreate, SpecialistShow, SpecialistsList } from '@admin/components/Specialist';
-import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/components/Organization';
-import { TherapyList, TherapyCreate, TherapyEdit } from '@admin/components/Therapy';
-import { authProvider } from '@admin/authProvider';
+import { TherapyCreate, TherapyEdit, TherapyList } from '@admin/components/Therapy';
+import {
+  OrganizationCreate,
+  OrganizationShow,
+  OrganizationsList,
+  OrganizationEdit,
+} from '@admin/components/ServiceProvider/Organization';
+
+import {
+  SpecialistCreate,
+  SpecialistShow,
+  SpecialistsList,
+  SpecialistEdit,
+} from '@admin/components/ServiceProvider/Specialist';
+
+import { authProvider } from './authProvider';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -22,12 +34,13 @@ export default function AdminPage() {
         list={OrganizationsList}
         show={OrganizationShow}
         create={OrganizationCreate}
+        edit={OrganizationEdit}
       />
       <Resource
         name={RESOURCES.specialist}
         options={{ label: 'Спеціалісти' }}
         list={SpecialistsList}
-        edit={EditGuesser}
+        edit={SpecialistEdit}
         show={SpecialistShow}
         create={SpecialistCreate}
       />
