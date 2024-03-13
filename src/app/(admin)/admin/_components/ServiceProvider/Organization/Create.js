@@ -20,7 +20,7 @@ export function OrganizationCreate() {
 
   return (
     <Create
-      title={'Додавання нової огранізації'}
+      title="Додавання нової огранізації"
       mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
       transform={transformOrganizationData}
     >
@@ -28,10 +28,10 @@ export function OrganizationCreate() {
         <GeneralInfoEditOrg type="create" />
         <DetailsEditOrg />
         <AddressesForm label="Адреси надання послуг" />
-        <ServicesForm label={'Послуги'} />
+        <ServicesForm label="Послуги" />
         <DescriptionEdit validate={required()} />
         <ContactsForm />
-        <ActivationForm label={'Активувати/деактивувати організацію'} className="mt-3" />
+        <ActivationForm label="Активувати/деактивувати організацію" className="mt-3" />
       </SimpleForm>
     </Create>
   );

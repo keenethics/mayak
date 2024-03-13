@@ -6,7 +6,7 @@ import { FormTranslations } from '../../_lib/translations';
 
 export function GenderSelect({ label, ...props }) {
   const genderChoicesList = getChoicesList(Object.values(Gender), FormTranslations.gender);
-  return <SelectInput name={'gender'} source={'gender'} label={label} choices={genderChoicesList} {...props} />;
+  return <SelectInput name="gender" source="gender" label={label} choices={genderChoicesList} {...props} />;
 }
 
 GenderSelect.propTypes = {

@@ -7,7 +7,7 @@ export function SpecializationsSelect({ type = 'create', label, ...props }) {
 
   return (
     <>
-      {type === 'create' && (
+      {type === 'create' ? (
         <SelectArrayInput
           name={'specializations'}
           source={'specializations'}
@@ -17,10 +17,9 @@ export function SpecializationsSelect({ type = 'create', label, ...props }) {
           validate={required()}
           {...props}
         />
-      )}
-      {type === 'edit' && (
+      ) : (
         <ReferenceArrayInput source={'specializationsIds'} reference="Specialization">
-          <AutocompleteArrayInput label={label} optionValue="id" optionText="name" validate={required()} />
+          <AutocompleteArrayInput label={label} optionValue="id" optionText="name" validate={required()} {...props} />
         </ReferenceArrayInput>
       )}
     </>

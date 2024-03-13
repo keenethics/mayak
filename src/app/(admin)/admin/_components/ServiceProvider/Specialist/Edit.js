@@ -11,15 +11,15 @@ import { transformSpecialistEditData } from '../../../_utils/transformSpecialist
 
 export function SpecialistEdit() {
   return (
-    <Edit title={'Редагувати дані спеціаліста'} transform={transformSpecialistEditData} mutationMode="pessimistic">
+    <Edit title="Редагувати дані спеціаліста" transform={transformSpecialistEditData} mutationMode="pessimistic">
       <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(specialistEditValidationSchema)}>
         <GeneralInfoEditSpec type="edit" />
         <DetailsEditSpec />
         <AddressesForm type="edit" label="Адреси надання послуг" />
         <ServicesForm type="edit" label="Послуги" />
-        <TextInput name={'description'} source={'description'} label={'Опис'} fullWidth multiline />
+        <TextInput name="description" source="description" label="Опис" fullWidth multiline />
         <ContactsForm />
-        <ActivationForm label={'Активувати/деактивувати спеціаліста'} className="mt-3" />
+        <ActivationForm label="Активувати/деактивувати спеціаліста" className="mt-3" />
       </SimpleForm>
     </Edit>
   );

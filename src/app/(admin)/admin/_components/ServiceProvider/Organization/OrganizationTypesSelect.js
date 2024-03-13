@@ -9,8 +9,8 @@ export function OrganizationTypesSelect({ label, type = 'create', ...props }) {
     <>
       {type === 'create' && (
         <SelectArrayInput
-          name={'type'}
-          source={'type'}
+          name="type"
+          source="type"
           label={label}
           isLoading={typesLoading}
           choices={typesList}
@@ -18,7 +18,7 @@ export function OrganizationTypesSelect({ label, type = 'create', ...props }) {
         />
       )}
       {type === 'edit' && (
-        <ReferenceArrayInput source={'organizationTypesIds'} reference="OrganizationType">
+        <ReferenceArrayInput source="organizationTypesIds" reference="OrganizationType">
           <AutocompleteArrayInput label={label} optionValue="id" optionText="name" {...props} />
         </ReferenceArrayInput>
       )}

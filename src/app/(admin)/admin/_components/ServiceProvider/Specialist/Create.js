@@ -31,9 +31,9 @@ export function SpecialistCreate() {
         <DetailsEditSpec />
         <AddressesForm label="Адреси надання послуг" />
         <ServicesForm label="Послуги" />
-        <TextInput name={'description'} source={'description'} label={'Опис'} fullWidth multiline />
+        <TextInput name="description" source="description" label="Опис" fullWidth multiline />
         <ContactsForm />
-        <ActivationForm label={'Активувати/деактивувати спеціаліста'} className="mt-3" />
+        <ActivationForm label="Активувати/деактивувати спеціаліста" className="mt-3" />
       </SimpleForm>
     </Create>
   );

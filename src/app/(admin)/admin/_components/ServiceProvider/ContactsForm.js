@@ -5,7 +5,7 @@ const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6';
 
 export function ContactsForm() {
   return (
-    <FormFieldWrapper title={'Контакти'} className="mt-3 w-full">
+    <FormFieldWrapper title="Контакти" className="mt-3 w-full">
       <div className={fieldGroupClass}>
         <TextInput label="Номер телефону" source="phone" />
         <TextInput label="Пошта" source="email" />

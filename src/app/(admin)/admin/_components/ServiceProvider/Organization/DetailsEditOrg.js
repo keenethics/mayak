@@ -11,16 +11,16 @@ export function DetailsEditOrg() {
   const isActive = useWatch({ name: 'isActive' });
   const unnecessaryForDraft = isActive && required();
   return (
-    <FormFieldWrapper title={'Деталі'} className="mt-3">
+    <FormFieldWrapper title="Деталі" className="mt-3">
       <div className={fieldGroupClass}>
         <NumberInput
-          name={'yearsOnMarket'}
-          source={'yearsOnMarket'}
-          label={'Років на ринку'}
+          name="yearsOnMarket"
+          source="yearsOnMarket"
+          label="Років на ринку"
           validate={unnecessaryForDraft}
           min="0"
         />
-        <FormatOfWorkSelect label={'Формат роботи'} validate={unnecessaryForDraft} className="flex-1" />
+        <FormatOfWorkSelect label="Формат роботи" validate={unnecessaryForDraft} className="flex-1" />
       </div>
     </FormFieldWrapper>
   );

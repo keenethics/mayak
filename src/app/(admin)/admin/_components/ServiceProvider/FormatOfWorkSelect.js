@@ -7,13 +7,7 @@ import { getChoicesList } from '../../_utils/common';
 export function FormatOfWorkSelect({ label, ...props }) {
   const formatOfWorkChoicesList = getChoicesList(Object.values(FormatOfWork), FormTranslations.formatOfWork);
   return (
-    <SelectInput
-      name={'formatOfWork'}
-      source={'formatOfWork'}
-      label={label}
-      choices={formatOfWorkChoicesList}
-      {...props}
-    />
+    <SelectInput name="formatOfWork" source="formatOfWork" label={label} choices={formatOfWorkChoicesList} {...props} />
   );
 }
 

@@ -23,9 +23,9 @@ export function ServicesForm({ label, type = 'create' }) {
     <FormFieldWrapper title={label}>
       {type === 'create' && (
         <SelectArrayInput
-          name={'therapies'}
-          source={'therapies'}
-          label={'Терапії'}
+          name="therapies"
+          source="therapies"
+          label="Терапії"
           isLoading={therapiesLoading}
           choices={therapiesChoices}
           validate={unnecessaryForDraft}
@@ -38,9 +38,9 @@ export function ServicesForm({ label, type = 'create' }) {
         </ReferenceArrayInput>
       )}
       <BooleanInput
-        name={'isFreeReception'}
-        source={'isFreeReception'}
-        label={'Безкоштовний прийом'}
+        name="isFreeReception"
+        source="isFreeReception"
+        label="Безкоштовний прийом"
         className="w-max"
         validate={unnecessaryForDraft}
       />

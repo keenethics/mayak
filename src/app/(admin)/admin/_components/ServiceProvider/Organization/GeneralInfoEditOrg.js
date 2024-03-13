@@ -12,11 +12,11 @@ export function GeneralInfoEditOrg({ type = 'create' }) {
   const isActive = useWatch({ name: 'isActive' });
   const unnecessaryForDraft = isActive && required();
   return (
-    <FormFieldWrapper title={'Основна інформація'}>
+    <FormFieldWrapper title="Основна інформація">
       <div className={fieldGroupClass}>
         <TextInput source="name" label="Назва організації" validate={required()} />
       </div>
-      <OrganizationTypesSelect label={'Тип організації'} type={type} validate={unnecessaryForDraft} />
+      <OrganizationTypesSelect label="Тип організації" type={type} validate={unnecessaryForDraft} />
     </FormFieldWrapper>
   );
 }
