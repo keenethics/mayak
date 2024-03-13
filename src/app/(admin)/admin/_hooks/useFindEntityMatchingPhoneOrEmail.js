@@ -3,7 +3,7 @@ import { EMAIL, PHONE, RESOURCES } from '@admin/_lib/consts';
 import { z } from 'zod';
 import { PHONE_REGEX } from '@/lib/consts';
 
-export const useFindEntityMatchingPhoneOrEmail = ({ key, value }) => {
+export const useFindEntityMatchingPhoneOrEmail = ({ key, value, idToExclude }) => {
   const validationSchema = {
     [PHONE]: z
       .string()
@@ -42,7 +42,8 @@ export const useFindEntityMatchingPhoneOrEmail = ({ key, value }) => {
     isOrganization: true,
   }));
 
-  const data = specialists?.concat(mappedOrganizations) ?? [];
+  const data = specialists?.concat(mappedOrganizations).filter(entity => entity.id !== idToExclude) ?? [];
+  
   const num = data.length;
 
   return {
