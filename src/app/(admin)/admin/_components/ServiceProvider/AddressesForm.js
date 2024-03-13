@@ -9,7 +9,7 @@ import {
   required,
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
-import { RESOURCES } from '@admin/_lib/consts';
+import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 import PropTypes from 'prop-types';
 import { FormFieldWrapper } from '../FormFieldWrapper';
 import { districtPropType } from '@/app/(admin)/admin/_lib/specialistPropTypes';
@@ -24,7 +24,7 @@ function AddressForm({ getSource, districts, type, readOnly = false }) {
         }}
         fullWidth
         source={getSource('fullAddress')}
-        label={'Повна адреса'}
+        label="Повна адреса"
         validate={required()}
         helperText="Вулиця, номер будинку, поверх, кабінет"
       />
@@ -33,23 +33,22 @@ function AddressForm({ getSource, districts, type, readOnly = false }) {
           readOnly,
         }}
         source={getSource('nameOfClinic')}
-        label={'Назва клініки'}
+        label="Назва клініки"
         fullWidth
       />
-      {type === 'create' && (
+      {type === FORM_TYPES.create ? (
         <SelectInput
           InputProps={{
             readOnly,
           }}
           label="Район"
           source={getSource('district')}
-          optionText={'name'}
-          optionValue={'id'}
+          optionText="name"
+          optionValue="id"
           validate={required()}
           choices={districts.map(district => ({ id: district.id, name: district.name }))}
         />
-      )}
-      {type === 'edit' && (
+      ) : (
         <ReferenceInput source={getSource('districtId')} reference="District">
           <SelectInput
             InputProps={{
@@ -67,14 +66,21 @@ function AddressForm({ getSource, districts, type, readOnly = false }) {
 }
 
 AddressForm.propTypes = {
-  validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  districts: PropTypes.arrayOf(districtPropType),
   getSource: PropTypes.func.isRequired,
-  type: PropTypes.oneOf(['create', 'edit']),
+  districts: PropTypes.arrayOf(districtPropType),
+  type: PropTypes.oneOf(Object.values(FORM_TYPES)),
   readOnly: PropTypes.bool,
 };
 
-export function AddressesForm({ type = 'create', label }) {
+function HelperText({ children }) {
+  return <p className="mb-6 text-gray-700">{children}</p>;
+}
+
+HelperText.propTypes = {
+  children: PropTypes.node,
+};
+
+export function AddressesForm({ type = FORM_TYPES.create, label }) {
   const { data: districts, isLoading } = useGetList(RESOURCES.district);
   if (isLoading) return <Loading />;
   return (
@@ -87,8 +93,8 @@ export function AddressesForm({ type = 'create', label }) {
           const disabled = onlineOnly || !formatOfWork;
           return (
             <>
-              {!formatOfWork && <p className="mb-6 text-gray-700">Оберіть формат роботи</p>}
-              {onlineOnly && <p className="mb-6 text-gray-700">Спеціаліст працює тільки онлайн</p>}
+              {!formatOfWork && <HelperText>Оберіть формат роботи</HelperText>}
+              {onlineOnly && <HelperText>Спеціаліст працює тільки онлайн</HelperText>}
               {!onlineOnly && (
                 <ArrayInput source="addresses" label="">
                   <SimpleFormIterator inline disableReordering fullWidth disableAdd={disabled}>
@@ -114,7 +120,6 @@ export function AddressesForm({ type = 'create', label }) {
 }
 
 AddressesForm.propTypes = {
-  validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  type: PropTypes.oneOf(['create', 'edit']),
+  type: PropTypes.oneOf(Object.values(FORM_TYPES)),
   label: PropTypes.string,
 };

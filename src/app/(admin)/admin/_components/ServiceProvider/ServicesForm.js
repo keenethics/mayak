@@ -9,9 +9,9 @@ import {
   useGetList,
 } from 'react-admin';
 import { FormFieldWrapper } from '../FormFieldWrapper';
-import { RESOURCES } from '../../_lib/consts';
+import { FORM_TYPES, RESOURCES } from '../../_lib/consts';
 
-export function ServicesForm({ label, type = 'create' }) {
+export function ServicesForm({ label, type = FORM_TYPES.create }) {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
 
   const therapiesChoices = therapiesList?.map(({ id, title }) => ({ id, name: title }));
@@ -21,7 +21,7 @@ export function ServicesForm({ label, type = 'create' }) {
 
   return (
     <FormFieldWrapper title={label}>
-      {type === 'create' && (
+      {type === FORM_TYPES.create ? (
         <SelectArrayInput
           name="therapies"
           source="therapies"
@@ -31,8 +31,7 @@ export function ServicesForm({ label, type = 'create' }) {
           validate={unnecessaryForDraft}
           className="w-full"
         />
-      )}
-      {type === 'edit' && (
+      ) : (
         <ReferenceArrayInput source="therapiesIds" reference="Therapy">
           <AutocompleteArrayInput label="Терапії" optionValue="id" optionText="title" validate={unnecessaryForDraft} />
         </ReferenceArrayInput>
@@ -41,7 +40,7 @@ export function ServicesForm({ label, type = 'create' }) {
         name="isFreeReception"
         source="isFreeReception"
         label="Безкоштовний прийом"
-        className="w-max"
+        className="w-full"
         validate={unnecessaryForDraft}
       />
     </FormFieldWrapper>
@@ -50,6 +49,6 @@ export function ServicesForm({ label, type = 'create' }) {
 
 ServicesForm.propTypes = {
   label: PropTypes.string,
-  type: PropTypes.oneOf(['create', 'edit']),
+  type: PropTypes.oneOf(Object.values(FORM_TYPES)),
   validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 };

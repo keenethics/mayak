@@ -35,7 +35,7 @@ export function Header() {
   return (
     <>
       {/* this element is used to fill the space under navbar on mobile screens */}
-      <div className={'border-t-[1px] p-4 lg:hidden'}>
+      <div className="border-t-[1px] p-4 lg:hidden">
         <div className={logoHeight} />
       </div>
       <nav
@@ -75,7 +75,7 @@ export function Header() {
             Зворотній звʼязок
           </OutlinedButton>
         </div>
-        <BurgerIcon className={'block lg:hidden'} onClick={toggleMenu} />
+        <BurgerIcon className="block lg:hidden" onClick={toggleMenu} />
         <div
           className={cn(
             'absolute left-[100dvw] top-0 flex h-dvh w-dvw flex-col bg-other-black transition-all duration-300 lg:hidden',

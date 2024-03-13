@@ -12,6 +12,11 @@ export const RESOURCES = {
   organizationType: 'organizationType',
 };
 
+export const FORM_TYPES = {
+  create: 'create',
+  edit: 'edit',
+};
+
 export const SUCCESS_NOTIFICATIONS = {
   created: 'Created successfully',
   updated: 'Updated successfully',

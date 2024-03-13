@@ -2,8 +2,9 @@ import { TextInput, required } from 'react-admin';
 import PropTypes from 'prop-types';
 import { FormFieldWrapper } from '../../FormFieldWrapper';
 import { SpecializationsSelect } from './SpecializationsSelect';
+import { FORM_TYPES } from '../../../_lib/consts';
 
-export function GeneralInfoEditSpec({ type = 'create' }) {
+export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
   return (
     <FormFieldWrapper title="Основна інформація">
       <div className="flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow">
@@ -17,5 +18,5 @@ export function GeneralInfoEditSpec({ type = 'create' }) {
 }
 
 GeneralInfoEditSpec.propTypes = {
-  type: PropTypes.oneOf(['create', 'edit']),
+  type: PropTypes.oneOf(Object.values(FORM_TYPES)),
 };

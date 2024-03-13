@@ -13,6 +13,7 @@ module.exports = {
     'max-len': ['error', { code: 120, ignoreStrings: true }],
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-curly-brace-presence': [2, { props: 'never', children: 'never' }],
     'react/function-component-definition': [2, { namedComponents: ['arrow-function', 'function-declaration'] }],
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
     'no-return-await': 'off',

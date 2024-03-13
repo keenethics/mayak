@@ -17,6 +17,7 @@ export function DetailsEditOrg() {
           name="yearsOnMarket"
           source="yearsOnMarket"
           label="Років на ринку"
+          type="number"
           validate={unnecessaryForDraft}
           min="0"
         />
