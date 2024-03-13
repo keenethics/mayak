@@ -21,6 +21,7 @@ services:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://developer:dev_pass@postgres:5432/mayak?schema=public
       - DATABASE_DIRECT_URL=postgresql://developer:dev_pass@postgres:5432/mayak?schema=public
+      - REVALIDATION_TIME=10
     depends_on:
       - postgres
 volumes:

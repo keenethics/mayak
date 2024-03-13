@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import PropTypes from 'prop-types';
 import InputErrorIcon from '@icons/inputErrorIcon.svg';
 import { cn } from '@utils/cn';

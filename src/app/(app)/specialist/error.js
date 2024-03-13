@@ -1,6 +1,6 @@
 'use client';
 
-import { NotFoundLayout } from '@components';
+import { NotFoundLayout } from '@components/NotFoundLayout';
 
 export default function Error() {
   return (

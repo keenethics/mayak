@@ -1,7 +1,8 @@
-import React from 'react';
+'use client';
+
 import PropTypes from 'prop-types';
-import { Paragraph } from '@components';
-import { cn } from '@utils/cn';
+import { Paragraph } from '@components/Typography';
+import { cn } from '@/utils/cn';
 import { buttonColorVariant, buttonType } from './style';
 
 export function PillButton({ children, className, icon, variant, colorVariant, ...props }) {

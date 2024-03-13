@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { PillButton } from '@components/PillButton';
 import { Heading, Paragraph } from '@components/Typography';
+import { PillButton } from '@components/PillButton';
 import { TherapyCardPropTypes } from './prop-types';
 
 export function TherapyCard({ type, description, title, imagePath }) {
