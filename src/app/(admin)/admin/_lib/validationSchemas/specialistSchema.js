@@ -3,6 +3,7 @@ import { Gender } from '@prisma/client';
 import {
   MESSAGES,
   createValidationSchema,
+  singlePrimaryAddressRefine,
   specialistCore,
   zCreateAddressSchema,
   zEditAddressSchema,
@@ -30,13 +31,7 @@ const restCreateProps = zSpecialistSchema.extend({
   addresses: zCreateAddressSchema
     .array()
     .default([])
-    .refine(
-      addresses => {
-        if (!addresses.length) return true;
-        return addresses.filter(el => el.isPrimary).length === 1;
-      },
-      { message: 'Необхідно вказати одну головну адресу' },
-    ),
+    .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
 });
 
 const createDefaultProps = z.object({
@@ -60,7 +55,10 @@ export const specialistCreateValidationSchema = createValidationSchema(specialis
 // ------------------ EDIT SECTION ---------------------
 
 const restEditProps = zSpecialistSchema.extend({
-  addresses: zEditAddressSchema.array().default([]),
+  addresses: zEditAddressSchema
+    .array()
+    .default([])
+    .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
 });
 
 const editDefaultProps = z.object({

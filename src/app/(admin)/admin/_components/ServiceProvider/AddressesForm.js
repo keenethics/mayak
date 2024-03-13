@@ -8,6 +8,8 @@ import {
   ReferenceInput,
   required,
   BooleanInput,
+  BooleanField,
+  Labeled,
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
 import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
@@ -19,6 +21,19 @@ import Loading from '@/app/loading';
 function AddressForm({ getSource, districts, type, readOnly = false }) {
   return (
     <>
+      {readOnly ? (
+        <Labeled label="Головна адреса" className="ml-[13px]">
+          <BooleanField source={getSource('isPrimary')} />
+        </Labeled>
+      ) : (
+        <BooleanInput
+          defaultValue={false}
+          source={getSource('isPrimary')}
+          label="Головна адреса"
+          fullWidth
+          className="mb-[-0.6rem] mt-4"
+        />
+      )}
       <TextInput
         InputProps={{
           readOnly,
@@ -62,7 +77,6 @@ function AddressForm({ getSource, districts, type, readOnly = false }) {
           />
         </ReferenceInput>
       )}
-      <BooleanInput fullWidth source={getSource('isPrimary')} label="Головна адреса" className="mt-8" />
     </>
   );
 }

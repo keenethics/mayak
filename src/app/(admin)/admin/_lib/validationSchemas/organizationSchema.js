@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import {
+  MESSAGES,
   createValidationSchema,
+  singlePrimaryAddressRefine,
   specialistCore,
   zCreateAddressSchema,
   zEditAddressSchema,
@@ -22,13 +24,7 @@ const restCreateProps = zOrganizationSchema.extend({
   addresses: zCreateAddressSchema
     .array()
     .default([])
-    .refine(
-      addresses => {
-        if (!addresses.length) return true;
-        return addresses.filter(el => el.isPrimary).length === 1;
-      },
-      { message: 'Необхідно вказати одну головну адресу' },
-    ),
+    .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
 });
 
 const createDefaultProps = z.object({
@@ -55,7 +51,10 @@ export const organizationCreateValidationSchema = createValidationSchema(organiz
 // ------------------ EDIT SECTION ---------------------
 
 const restEditProps = zOrganizationSchema.extend({
-  addresses: zEditAddressSchema.array().default([]),
+  addresses: zEditAddressSchema
+    .array()
+    .default([])
+    .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
 });
 
 const editDefaultProps = z.object({
