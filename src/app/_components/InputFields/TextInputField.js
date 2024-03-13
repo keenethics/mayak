@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import PropTypes from 'prop-types';
 import InputErrorIcon from '@icons/inputErrorIcon.svg';
 import { cn } from '@utils/cn';
@@ -21,8 +22,8 @@ export function TextInputField({
   const absoluteLabel = absolute ? 'absolute bottom-[47px]' : '';
 
   return (
-    <div className={cn(`${variant.mainContainer.base} relative`)}>
-      {error && <p className={cn(`${variant.errorParagraph.base} ${absoluteError}`)}>{error}</p>}
+    <div className={cn(`relative`, variant.mainContainer.base)}>
+      {error && <p className={cn(absoluteError, variant.errorParagraph.base)}>{error}</p>}
       <div
         className={cn(
           variant.inputContainer.base,
