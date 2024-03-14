@@ -7,6 +7,7 @@ import { PHONE_REGEX } from '@/lib/consts';
 export const MESSAGES = {
   requiredField: `Обов'язкове поле`,
   unacceptableValue: 'Недопустиме значення',
+  singlePrimaryAddress: 'Необхідно вказати одну головну адресу',
 };
 
 export const zString = z
@@ -81,13 +82,20 @@ export const zEditAddressSchema = z.object({
       name: z.string(),
     })
     .nullish(),
+  isPrimary: z.boolean(),
 });
 
 export const zCreateAddressSchema = z.object({
   fullAddress: zStringWithMax,
   district: zStringWithMax,
   nameOfClinic: zStringWithMax.nullish(),
+  isPrimary: z.boolean(),
 });
+
+export const singlePrimaryAddressRefine = addresses => {
+  if (!addresses.length) return true;
+  return addresses.filter(el => el.isPrimary).length === 1;
+};
 
 export const createValidationSchema = (schemaUnion, defaultProperties) =>
   z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {

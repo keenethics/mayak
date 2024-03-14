@@ -1,6 +1,9 @@
 import {
   ArrayInput,
+  BooleanField,
+  BooleanInput,
   FormDataConsumer,
+  Labeled,
   ReferenceInput,
   required,
   SelectInput,
@@ -18,6 +21,19 @@ import Loading from '@/app/loading';
 function AddressForm({ getSource, districts, type, readOnly = false }) {
   return (
     <>
+      {readOnly ? (
+        <Labeled label="Головна адреса" className="ml-[13px]">
+          <BooleanField source={getSource('isPrimary')} />
+        </Labeled>
+      ) : (
+        <BooleanInput
+          defaultValue={false}
+          source={getSource('isPrimary')}
+          label="Головна адреса"
+          fullWidth
+          className="mb-[-0.6rem] mt-4"
+        />
+      )}
       <TextInput
         InputProps={{
           readOnly,

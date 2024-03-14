@@ -26,7 +26,6 @@ export function CardModalWrapper({ children, className }) {
     <Modal
       isOpen
       onClose={handleClose}
-      bgColor="bg-other-white"
       className={cn(
         'fixed bottom-0 top-0 overflow-y-auto rounded-b-none rounded-tl-3xl lg:static' +
           ' rounded-tr-3xl lg:mx-4 lg:rounded-3xl lg:p-[50px]' +

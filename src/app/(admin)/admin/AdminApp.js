@@ -6,7 +6,7 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate, EventEdit, EventList, EventShow } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
-import { CreateTherapy, EditTherapy, ListTherapy } from '@admin/components/Therapy';
+import { TherapyCreate, TherapyEdit, TherapyList } from '@admin/components/Therapy';
 import {
   OrganizationCreate,
   OrganizationShow,
@@ -47,9 +47,9 @@ export default function AdminPage() {
       <Resource
         name={RESOURCES.therapy}
         options={{ label: 'Терапії' }}
-        list={ListTherapy}
-        edit={EditTherapy}
-        create={CreateTherapy}
+        list={TherapyList}
+        edit={TherapyEdit}
+        create={TherapyCreate}
         show={ShowGuesser}
       />
       <Resource
@@ -81,13 +81,10 @@ export default function AdminPage() {
         show={ShowGuesser}
         options={{ label: 'Адреси' }}
       />
-      <Resource
-        name={RESOURCES.placeOfWork}
-        options={{ label: 'Місця надання послуг' }}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-      />
+      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} edit={EventEdit} show={EventShow} />
+      <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource
         name={RESOURCES.faq}
         options={{ label: 'FAQ' }}
