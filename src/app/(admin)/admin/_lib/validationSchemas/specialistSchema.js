@@ -37,11 +37,13 @@ const createDefaultProps = z.object({
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
-  therapies: zStringArray,
+  therapiesCuts: z.any(),
   isActive: z.literal(true),
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
+  therapiesCuts: z.any().nullish(),
+  addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
 

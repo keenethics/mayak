@@ -56,6 +56,7 @@ model Specialist {
   viber             String?          @db.Text
   telegram          String?          @db.Text
   searchEntry       SearchEntry?
+  therapiesCuts     TherapyCut[]
 
   @@map("specialist")
 }
@@ -83,8 +84,23 @@ model Organization {
   viber           String?            @db.Text
   telegram        String?            @db.Text
   searchEntry     SearchEntry?
+  therapiesCuts   TherapyCut[]
 
   @@map("organization")
+}
+
+model TherapyCut {
+  id             String        @id @default(uuid()) @db.Uuid
+  createdAt      DateTime      @default(now())
+  specialist     Specialist?   @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+  specialistId   String?       @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String?       @db.Uuid
+  therapy        Therapy       @relation(fields: [therapyId], references: [id], onDelete: Cascade)
+  therapyId      String        @db.Uuid
+  requests       Request[]
+
+  @@map("therapy_cut")
 }
 
 model SearchEntry {
@@ -135,8 +151,20 @@ model Therapy {
 
   specialists   Specialist[]
   organizations Organization[]
+  therapyCuts   TherapyCut[]
+  requests      Request[]
 
   @@map("therapy")
+}
+
+model Request {
+  id            String       @id @default(uuid()) @db.Uuid
+  createdAt     DateTime     @default(now())
+  name          String       @unique @db.VarChar(128)
+  therapiesCuts TherapyCut[]
+  therapies     Therapy[]
+
+  @@map("request")
 }
 
 model Address {
