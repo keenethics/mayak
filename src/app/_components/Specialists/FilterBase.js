@@ -12,7 +12,6 @@ export function FilterBase({ count, children, filterText }) {
   const handleClickOutside = event => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target) && opened) {
       setOpened(false);
-      document.removeEventListener('click', handleClickOutside);
     }
   };
 

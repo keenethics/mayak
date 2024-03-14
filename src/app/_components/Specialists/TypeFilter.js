@@ -20,6 +20,8 @@ function TypeList({ setCount, defaultValue }) {
     addParam(type);
   };
 
+  if (!isLoading && !therapies) return null;
+
   if (isLoading) return <CircularProgress />;
 
   if (therapies) {

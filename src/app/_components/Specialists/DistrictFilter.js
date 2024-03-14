@@ -28,6 +28,8 @@ function DistrictList({ setCount, defaultValue }) {
 
   if (isLoading) return <CircularProgress />;
 
+  if (!isLoading && !districts) return null;
+
   if (districts) {
     return (
       <>

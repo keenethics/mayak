@@ -54,7 +54,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
   };
 
   useEffect(() => {
-    if (isFormOpen) return null;
+    if (isFormOpen) return undefined;
     const timer = setTimeout(() => {
       setMessage('');
       setFormOpen(true);
