@@ -1,6 +1,6 @@
 import { Create, SimpleForm, TextInput, NumberInput, BooleanInput, required } from 'react-admin';
 
-export function CreateTherapy() {
+export function TherapyCreate() {
   return (
     <Create>
       <SimpleForm>

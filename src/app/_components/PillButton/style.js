@@ -85,7 +85,7 @@ export const buttonType = {
       gap-1 self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[6px] px-3 h-8`,
     },
   },
-  filledBold: {
+  filled: {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle text-p3',
       layoutStyle: 'flex justify-center align-middle gap-[8px] pt-[12px] pr-[24px] pb-[12px] pl-[16px]',
@@ -107,7 +107,7 @@ export const buttonType = {
   },
   close: {
     icon: {
-      buttonStyle: `flex justify-center align-middle w-[1rem] h-[1rem]  
+      buttonStyle: `flex justify-center align-middle w-[1rem] h-[1rem]
       flex-shrink-0`,
     },
   },
