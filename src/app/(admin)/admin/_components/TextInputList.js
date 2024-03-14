@@ -2,9 +2,9 @@ import React from 'react';
 import { required, TextInput } from 'react-admin';
 import PropTypes from 'prop-types';
 
-export const TextInputList = ({ textInputList, className }) => (
+export const TextInputList = ({ list, className }) => (
   <>
-    {textInputList.map(({ name, type, label, isRequired, ...inputProps }) => (
+    {list.map(({ name, type, label, isRequired, ...inputProps }) => (
       <TextInput
         key={name}
         name={name}
@@ -19,7 +19,7 @@ export const TextInputList = ({ textInputList, className }) => (
 );
 
 TextInputList.propTypes = {
-  textInputList: PropTypes.arrayOf(
+  list: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,

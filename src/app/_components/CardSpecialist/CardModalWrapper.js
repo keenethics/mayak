@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from '@components';
+import { Modal } from '@components/Modal';
 import { useRouter } from 'next/navigation';
 import { cn } from '@utils/cn';
 import { useBodyScrollLock } from '@hooks';

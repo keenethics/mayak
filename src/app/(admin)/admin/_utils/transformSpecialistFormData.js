@@ -8,7 +8,7 @@ const transformAddresses = placesArray =>
 
 const transformTherapyPrices = (therapies, therapyPrices) => {
   const result = [];
-  therapies.forEach(el => {
+  therapies?.forEach(el => {
     if (therapyPrices[el] !== null) {
       result.push({
         therapy: { connect: { id: el } },
