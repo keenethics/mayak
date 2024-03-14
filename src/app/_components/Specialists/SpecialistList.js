@@ -17,12 +17,13 @@ export function SpecialistList({ className }) {
         <CircularProgress size={50} />
       </div>
     );
+  if (!isLoading && !data) return null;
   if (data) {
     const { data: specialists, totalCount } = data;
     return (
       <>
-        <p className="hidden font-bold uppercase text-primary-600 md:block">{`Знайдено: ${totalCount} результатів`}</p>
         <ul className={className}>
+          <p className="hidden font-bold uppercase text-primary-600 md:block">{`Знайдено: ${totalCount} результатів`}</p>
           {specialists.map(specialist => (
             <li id={specialist.id} key={specialist.id}>
               {specialist.gender ? (
