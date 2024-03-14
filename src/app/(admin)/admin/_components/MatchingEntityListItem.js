@@ -25,7 +25,7 @@ export function MatchingEntityListItem({ entities, label, className }) {
 
             return (
               <li key={id}>
-                <Link href={href} target="_blank" className={cn('rounded  p-1.5 transition-all', bgColor)}>
+                <Link href={href} target="_blank" className={cn('rounded p-1.5 transition-all', bgColor)}>
                   {name}
                 </Link>
               </li>
