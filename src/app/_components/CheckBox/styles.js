@@ -26,10 +26,10 @@ export const variants = {
     },
     textContainer: {
       base: 'flex flex-col content-between',
-      position: 'mt-[-2px]',
+      position: 'mt-0 lg:mt-[-2px]',
     },
     text: {
-      base: 'text-p3',
+      base: 'text-p4 lg:text-p3',
       disabled: 'text-gray-400',
     },
     subText: {

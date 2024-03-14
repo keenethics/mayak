@@ -54,7 +54,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
   };
 
   useEffect(() => {
-    if (isFormOpen) return;
+    if (isFormOpen) return null;
     const timer = setTimeout(() => {
       setMessage('');
       setFormOpen(true);
@@ -62,20 +62,18 @@ export function Feedback({ isFeedbackOpen, onClose }) {
       onClose();
     }, 4000);
 
-    // Existing lint rules do not allow this usage, but this code is required.
-    // eslint-disable-next-line consistent-return
     return () => clearTimeout(timer);
     // any additional dependencies will be redundant
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFormOpen]);
 
   return (
-    <Modal isOpen={isFeedbackOpen} onClose={onClose} bgColor="bg-primary-200 ">
-      <div className="px-[54px] pt-0">
+    <Modal isOpen={isFeedbackOpen} onClose={onClose} className="bg-primary-200">
+      <div className="px-0 pt-0 md:px-[27px] lg:px-[54px]">
         {isFormOpen ? (
-          <form onSubmit={onSubmit} className="grid gap-y-7">
-            <h3 className="text-h3 font-bold"> Хочете поділитись ідеями?</h3>
-            <p className="text-p2">Залиште свої контактні дані і ми зв’яжемось з Вами</p>
+          <form onSubmit={onSubmit} className="grid gap-y-6 lg:gap-y-7 ">
+            <h3 className="text-h4 font-bold lg:text-h3"> Хочете поділитись ідеями?</h3>
+            <p className="md:text-p3 lg:text-p2">Залиште свої контактні дані і ми зв’яжемось з Вами</p>
             <TextInputField
               value={name}
               name="name"
@@ -88,23 +86,23 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               value={phone}
               name="phone"
               onChange={e => setPhone(e.target.value)}
-              placeholder={`Номер телефону`}
+              placeholder="Номер телефону"
               error={validationErrors.phone}
               required
             />
             <CheckBox
               onChange={() => setCallMe(prev => !prev)}
               checked={!isCallMe}
-              name={'feedBack'}
-              value={'CheckBox'}
-              text={'Не телефонувати мені'}
+              name="feedBack"
+              value="CheckBox"
+              text="Не телефонувати мені"
             />
             <TextInputField
               value={email}
               type="email"
               name="email"
               onChange={e => setEmail(e.target.value)}
-              placeholder={`Електронна пошта`}
+              placeholder="Електронна пошта"
               error={validationErrors.email}
             />
             <TextArea

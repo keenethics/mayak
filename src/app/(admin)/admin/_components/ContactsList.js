@@ -3,7 +3,7 @@ import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { SpecialistFormFields, SpecialistFormSections } from '@admin/_lib/specialistData';
 import { TextInputList } from '@admin/components/TextInputList';
 import { useWatch } from 'react-hook-form';
-import { MatchingEntityList } from '@admin/_components';
+import { MatchingEntityList } from '@admin/components/MatchingEntityList';
 import { EMAIL, PHONE } from '@admin/_lib/consts';
 import PropTypes from 'prop-types';
 

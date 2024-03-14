@@ -29,6 +29,7 @@ export function OrganizationShow() {
         <ArrayField label="Адреси" source="addresses">
           <Datagrid bulkActionButtons={false}>
             <TextField label="Повна адреса" source="fullAddress" />
+            <TextField label="Назва кліники" source="nameOfClinic" />
             <TextField label="Район" source="district.name" />
           </Datagrid>
         </ArrayField>
