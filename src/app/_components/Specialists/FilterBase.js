@@ -15,6 +15,7 @@ export function FilterBase({ count, children, filterText }) {
       document.removeEventListener('click', handleClickOutside);
     }
   };
+
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
     return () => {
@@ -23,11 +24,11 @@ export function FilterBase({ count, children, filterText }) {
   });
 
   return (
-    <div className="relative">
+    <div className={cn(`relative`)}>
       <FilterChip opened={opened} text={filterText} count={count} onClick={() => setOpened(!opened)} />
       <div
         ref={dropdownRef}
-        className={cn('absolute top-8 z-10 hidden w-max flex-col rounded-3xl border bg-other-white px-2 py-1', {
+        className={cn(`z-10 -mr-[255px] hidden w-max flex-col rounded-3xl border bg-other-white px-2 py-1`, {
           flex: opened,
         })}
       >

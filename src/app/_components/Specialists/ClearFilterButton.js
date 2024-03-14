@@ -3,7 +3,7 @@ import { PillButton } from '@components/PillButton';
 
 export function ClearFilterButton({ clear }) {
   return (
-    <PillButton onClick={clear} variant="text" colorVariant="blue" className="self-end">
+    <PillButton onClick={clear} variant="text" colorVariant="blue" className="self-start md:self-end">
       Очистити
     </PillButton>
   );

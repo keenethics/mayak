@@ -11,7 +11,9 @@ import PropTypes from 'prop-types';
 function DistrictList({ setCount, defaultValue }) {
   const { data: districts, isLoading } = useListDistrict();
   const [selectedDistricts, setSelectedDistricts] = useState(defaultValue);
+
   const { addParam, deleteParam } = useSetParam('district');
+
   const onChange = district => {
     if (selectedDistricts.includes(district)) {
       setSelectedDistricts(selectedDistricts.filter(selDistrict => selDistrict !== district));
@@ -23,23 +25,28 @@ function DistrictList({ setCount, defaultValue }) {
       addParam(district);
     }
   };
+
   if (isLoading) return <CircularProgress />;
+
   if (districts) {
     return (
       <>
         <ul>
-          {districts.map(district => (
-            <li key={district.id} className="w-[300px]">
-              <CheckBox
-                name={district.id}
-                value={district.id}
-                key={district.id}
-                checked={selectedDistricts.includes(district.id)}
-                onChange={() => onChange(district.id)}
-                text={district.name}
-              />
-            </li>
-          ))}
+          {districts.map(district => {
+            const { id, name } = district;
+            return (
+              <li key={id} className="w-[280px] md:w-[300px]">
+                <CheckBox
+                  name={id}
+                  value={id}
+                  key={id}
+                  checked={selectedDistricts.includes(id)}
+                  onChange={() => onChange(id)}
+                  text={name}
+                />
+              </li>
+            );
+          })}
         </ul>
         <ClearFilterButton
           clear={() => {

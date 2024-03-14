@@ -12,16 +12,19 @@ const online = 'ONLINE';
 
 function FormatList({ setCount, defaultValue }) {
   const [selectedFormat, setSelectedFormat] = useState(defaultValue);
+
   const { addParam, deleteParam } = useSetParam('format');
+
   const onChange = format => {
     setSelectedFormat(format);
     setCount(1);
     addParam(format);
   };
+
   return (
     <>
       <ul>
-        <li className="w-[300px]">
+        <li className="w-[280px] md:w-[300px]">
           <CheckBox
             name={offline}
             value={offline}
@@ -31,7 +34,7 @@ function FormatList({ setCount, defaultValue }) {
             text="Офлайн"
           />
         </li>
-        <li className="w-[300px]">
+        <li className="w-[280px] md:w-[300px]">
           <CheckBox
             name={online}
             value={online}

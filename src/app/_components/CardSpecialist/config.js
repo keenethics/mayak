@@ -18,13 +18,13 @@ import {
 } from '@icons/index';
 import { FormatOfWork } from '@prisma/client';
 import React from 'react';
-import { displayYearsOfExperience } from '@utils/common';
+import { displayYearsOfExperience, formatPhoneNumber } from '@utils/common';
 
 export const getContactsList = ({ phone, email, website }) => [
   {
     id: 'phone',
     icon: <Phone />,
-    content: phone,
+    content: phone ? formatPhoneNumber(phone) : null,
     href: null,
   },
   {
