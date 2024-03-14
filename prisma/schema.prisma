@@ -217,3 +217,13 @@ model Faq {
 
   @@map("faq")
 }
+
+model ClientCategories {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  title     String   @unique @db.VarChar(64)
+  // organizations Organization[]
+  // specialists Specialist[]
+
+  @@map("client_categories")
+}

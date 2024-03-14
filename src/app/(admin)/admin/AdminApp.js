@@ -10,6 +10,7 @@ import { SpecialistCreate, SpecialistShow, SpecialistsList } from '@admin/compon
 import { OrganizationCreate, OrganizationShow, OrganizationsList } from '@admin/components/Organization';
 import { CreateTherapy, EditTherapy, ListTherapy } from '@admin/components/Therapy';
 import { authProvider } from './authProvider';
+import { CreateCategory } from './_components/ClientCategories';
 
 export default function AdminPage() {
   const data = dataProvider('/api/admin');
@@ -89,6 +90,13 @@ export default function AdminPage() {
         list={ListGuesser}
         show={ShowGuesser}
         edit={EditGuesser}
+      />
+      <Resource
+        name={RESOURCES.clientCategories}
+        options={{ label: 'Категорії клієнтів' }}
+        create={CreateCategory}
+        list={ListGuesser}
+        show={ShowGuesser}
       />
     </Admin>
   );

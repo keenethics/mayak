@@ -173,6 +173,7 @@ async function main() {
     await trx.organization.deleteMany();
     await trx.organizationType.deleteMany();
     await trx.searchEntry.deleteMany();
+    // await trx.clientCategories.deleteMany();
   });
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];

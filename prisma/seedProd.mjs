@@ -63,6 +63,23 @@ async function main() {
   await prisma.therapy.createMany({
     data: therapiesToCreate,
   });
+
+  const clientCategoriesName = [
+    'сім’ї військових',
+    'військові',
+    'ЛГБТ+',
+    'супровід у психіатрії',
+    'ВІЛ - інфіковані',
+  ].map(title => ({ title }));
+
+  const existingCategories = await prisma.clientCategories.findMany();
+  const catagoriesToCreate = clientCategoriesName.filter(
+    category => !existingCategories.find(existing => existing.title === category.title),
+  );
+
+  await prisma.clientCategories.createMany({
+    data: catagoriesToCreate,
+  });
 }
 
 main().then(

@@ -10,6 +10,7 @@ export const RESOURCES = {
   eventTag: 'eventTag',
   faq: 'faq',
   organizationType: 'organizationType',
+  clientCategories: 'clientCategories',
 };
 
 export const SUCCESS_NOTIFICATIONS = {
