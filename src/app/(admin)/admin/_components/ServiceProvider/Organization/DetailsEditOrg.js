@@ -4,14 +4,15 @@ import { useWatch } from 'react-hook-form';
 import { NumberInput, required } from 'react-admin';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { FormatOfWorkSelect } from '@admin/components/ServiceProvider/FormatOfWorkSelect';
+import PropTypes from 'prop-types';
 
 const fieldGroupClass = 'flex w-full flex-col md:flex-row md:gap-6 [&>*]:flex-grow';
 
-export function DetailsEditOrg() {
+export function DetailsEditOrg({ className }) {
   const isActive = useWatch({ name: 'isActive' });
   const unnecessaryForDraft = isActive && required();
   return (
-    <FormFieldWrapper title="Деталі" className="mt-3">
+    <FormFieldWrapper title="Деталі" className={className}>
       <div className={fieldGroupClass}>
         <NumberInput
           name="yearsOnMarket"
@@ -26,3 +27,7 @@ export function DetailsEditOrg() {
     </FormFieldWrapper>
   );
 }
+
+DetailsEditOrg.propTypes = {
+  className: PropTypes.string,
+};

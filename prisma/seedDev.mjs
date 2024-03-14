@@ -39,24 +39,14 @@ function randomAddress(districts) {
 }
 
 function generateSocialMediaLinks() {
-  const socialMediaList = [
-    'facebook',
-    'instagram',
-    'youtube',
-    'linkedin',
-    'tiktok',
-    'viber',
-    'telegram',
-  ];
+  const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
   const subsetLength = Math.floor(Math.random() * 5) + 1;
   const shuffledList = socialMediaList.sort(() => Math.random() - 0.5);
 
-  return shuffledList.slice(0, subsetLength).reduce((obj, cur) => {
-    return ({
-      ...obj,
-      [cur]: faker.internet.url()
-    });
-  }, {});
+  return shuffledList.slice(0, subsetLength).reduce((obj, cur) => ({
+    ...obj,
+    [cur]: faker.internet.url(),
+  }), {});
 }
 
 function randomSpecialist({ districts, specializations, therapies }) {
@@ -97,7 +87,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
-    ...socialMediaLinks
+    ...socialMediaLinks,
   };
 }
 
@@ -131,7 +121,7 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
-    ...socialMediaLinks
+    ...socialMediaLinks,
   };
 }
 

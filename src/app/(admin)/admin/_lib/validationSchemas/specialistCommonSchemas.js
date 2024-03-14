@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { FormatOfWork } from '@prisma/client';
+import { MAX_NUM_SELECTED_SOCIAL_LINKS } from '@admin/_lib/consts';
 import { PHONE_REGEX } from '@/lib/consts';
 
 // ------------------ COMMON SECTION ---------------------
@@ -47,13 +48,26 @@ export const specialistCore = z.object({
   email: zString.email().nullish(),
   addressesIds: zString.array().nullish(),
   website: zString.url({ message: MESSAGES.unacceptableValue }).nullish(),
-  instagram: zUrl.nullish(),
-  facebook: zUrl.nullish(),
-  youtube: zUrl.nullish(),
-  linkedin: zUrl.nullish(),
-  tiktok: zUrl.nullish(),
-  viber: zUrl.nullish(),
-  telegram: zUrl.nullish(),
+  socialLink: z
+    .object({
+      instagram: zUrl.nullish(),
+      facebook: zUrl.nullish(),
+      youtube: zUrl.nullish(),
+      linkedin: zUrl.nullish(),
+      tiktok: zUrl.nullish(),
+      viber: zUrl.nullish(),
+      telegram: zUrl.nullish(),
+    })
+    .refine(
+      links => {
+        const numLinks = Object.values(links).filter(link => link)?.length;
+        return numLinks <= MAX_NUM_SELECTED_SOCIAL_LINKS;
+      },
+      {
+        message: `Максимальна кількість вказаних соціальних мереж 
+        не повинна перевищувати ${MAX_NUM_SELECTED_SOCIAL_LINKS}`,
+      },
+    ),
 });
 
 export const zEditAddressSchema = z.object({
