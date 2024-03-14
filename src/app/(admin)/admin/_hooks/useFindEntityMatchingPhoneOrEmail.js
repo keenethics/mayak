@@ -43,7 +43,7 @@ export const useFindEntityMatchingPhoneOrEmail = ({ key, value, idToExclude }) =
   }));
 
   const data = specialists?.concat(mappedOrganizations).filter(entity => entity.id !== idToExclude) ?? [];
-  
+
   const num = data.length;
 
   return {
