@@ -17,7 +17,7 @@ function Toolbar() {
   );
 }
 
-export function EditTherapy() {
+export function TherapyEdit() {
   return (
     <Edit>
       <SimpleForm toolbar={<Toolbar />}>
