@@ -1,5 +1,6 @@
 import {
   SimpleForm,
+  BooleanInput,
   TextInput,
   DateTimeInput,
   required,
@@ -7,6 +8,7 @@ import {
   NumberInput,
   useEditContext,
   Loading,
+  FormDataConsumer,
 } from 'react-admin';
 import PropTypes from 'prop-types';
 import { useWatch } from 'react-hook-form';
@@ -60,30 +62,47 @@ export function EventForm({ toolbar, setSelectedTags, recordTags }) {
 
   return (
     <SimpleForm resolver={zodResolver(EventSchema)} toolbar={toolbar}>
-      <p className="font-bold">Основна інформація</p>
-      <TextInput source="title" label="Назва події" validate={required()} className="w-72" />
-      <TextInput source="organizerName" label="Ім'я організатора" validate={required()} className="w-72" />
-      <TextInput className="mt-32 w-96" source="notes" label="Коментарі" multiline />
-      <DateTimeInput source="eventDate" label="Дата події" validate={required()} />
-      <p className="font-bold">Вартість</p>
-      <div className={fieldGroupClass}>
-        <SelectInput source="priceType" choices={priceTypeChoices} label="Варіанти" validate={required()} />
-        <PriceInput />
-      </div>
-      <p className="font-bold">Формат та локація</p>
-      <div className={fieldGroupClass}>
-        <SelectInput source="format" choices={formatChoices} label="Формат події" validate={required()} />
-        <AddressInput />
-      </div>
-      <p className="font-bold">Теги події</p>
-      <TagSelect setSelectedTags={setSelectedTags} defaultValue={recordTags} />
-      <p className="mt-6 font-bold">
-        Додаткове посилання(У поле тип введіть що це за посилання: телеграм, вебсайт тощо)
-      </p>
-      <div className={fieldGroupClass}>
-        <TextInput source="additionalLink.label" label="Тип" />
-        <TextInput source="additionalLink.link" label="Посилання" fullWidth />
-      </div>
+      <FormDataConsumer>
+        {({ formData }) => (
+          <>
+            <BooleanInput source="isActive" label="Активний" />
+            <p className="font-bold">Основна інформація</p>
+            <TextInput source="title" label="Назва події" validate={required()} className="w-72" />
+            <TextInput source="organizerName" label="Ім'я організатора" validate={required()} className="w-72" />
+            <TextInput className="mt-32 w-96" source="notes" label="Коментарі" multiline />
+            <DateTimeInput source="eventDate" label="Дата події" validate={formData.isActive && required()} />
+            <p className="font-bold">Вартість</p>
+            <div className={fieldGroupClass}>
+              <SelectInput
+                source="priceType"
+                choices={priceTypeChoices}
+                label="Варіанти"
+                validate={formData.isActive && required()}
+              />
+              <PriceInput />
+            </div>
+            <p className="font-bold">Формат та локація</p>
+            <div className={fieldGroupClass}>
+              <SelectInput
+                source="format"
+                choices={formatChoices}
+                label="Формат події"
+                validate={formData.isActive && required()}
+              />
+              <AddressInput />
+            </div>
+            <p className="font-bold">Теги події</p>
+            <TagSelect setSelectedTags={setSelectedTags} defaultValue={recordTags} />
+            <p className="mt-6 font-bold">
+              Додаткове посилання(У поле тип введіть що це за посилання: телеграм, вебсайт тощо)
+            </p>
+            <div className={fieldGroupClass}>
+              <TextInput source="additionalLink.label" label="Тип" />
+              <TextInput source="additionalLink.link" label="Посилання" fullWidth />
+            </div>
+          </>
+        )}
+      </FormDataConsumer>
     </SimpleForm>
   );
 }

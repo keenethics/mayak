@@ -1,6 +1,6 @@
-import { Heading } from '@components';
 import PropTypes from 'prop-types';
 import { cn } from '@utils/cn';
+import { Heading } from '@/app/_components';
 import { getDistrictsList } from '@/app/_components/DistrictSearch/actions';
 import { DistrictList } from '@/app/_components/DistrictSearch/DistrictList';
 

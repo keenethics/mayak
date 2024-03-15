@@ -13,6 +13,5 @@ export * from './NotFoundLayout';
 export * from './TopWave';
 export * from './BottomWave';
 export * from './MainPageSections';
-export * from './Therapies';
 export * from './CardSpecialist';
 export * from './DistrictSearch';

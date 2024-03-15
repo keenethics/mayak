@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Dot } from '@icons/index';
-import { Caption, ListTruncator } from '@components';
+import { ListTruncator } from '@components/ListTruncator';
+import { Caption } from '@components/Typography';
 
 export function SpecializationsPanel({ specialistId, specializations, extendedCardOpened = false }) {
   return extendedCardOpened ? (

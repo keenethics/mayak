@@ -1,13 +1,14 @@
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { PillButton } from '@components';
+
 import { Tick } from '@icons/index';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import 'swiper/css';
+import { PillButton } from '@/app/_components';
 
 export function DistrictList({ list, className }) {
   const [selected, setSelected] = useState(0);
@@ -16,7 +17,7 @@ export function DistrictList({ list, className }) {
   };
 
   return (
-    <Swiper slidesPerView={'auto'} spaceBetween={15} wrapperClass={className}>
+    <Swiper slidesPerView="auto" spaceBetween={15} wrapperClass={className}>
       {list.map(({ id, name }, index) => {
         const isSelected = index === selected;
         const hasIcon = isSelected ? <Tick /> : null;

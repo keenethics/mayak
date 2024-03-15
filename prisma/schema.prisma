@@ -45,7 +45,7 @@ model Specialist {
   isFreeReception   Boolean?
   description       String?          @db.Text
   phone             String?          @db.VarChar(15)
-  email             String?          @unique @db.VarChar(320)
+  email             String?          @db.VarChar(320)
   website           String?          @db.Text
   isActive          Boolean          @default(false)
   instagram         String?          @db.Text
@@ -148,6 +148,7 @@ model Address {
   districtId    String         @db.Uuid
   specialists   Specialist[]
   organizations Organization[]
+  isPrimary     Boolean        @default(false)
 
   @@map("address")
 }
@@ -167,20 +168,20 @@ model Feedback {
 }
 
 model Event {
-  id             String           @id @default(uuid()) @db.Uuid
-  createdAt      DateTime         @default(now())
-  title          String           @db.VarChar(128)
-  organizerName  String           @db.VarChar(128)
-  notes          String?          @db.VarChar(350)
-  address        String?          @db.VarChar(128)
-  locationLink   String?          @db.Text
-  price          Int?             @db.Integer
-  isActive       Boolean          @default(false)
-  additionalLink EventLink?       @relation(fields: [linkId], references: [id])
-  linkId         String?          @db.Uuid
-  eventDate      DateTime
-  format         EventFormat
-  priceType      EventPriceFormat
+  id             String            @id @default(uuid()) @db.Uuid
+  createdAt      DateTime          @default(now())
+  title          String            @db.VarChar(128)
+  organizerName  String            @db.VarChar(128)
+  notes          String?           @db.VarChar(350)
+  address        String?           @db.VarChar(128)
+  locationLink   String?           @db.Text
+  price          Int?              @db.Integer
+  isActive       Boolean           @default(false)
+  additionalLink EventLink?        @relation(fields: [linkId], references: [id])
+  linkId         String?           @db.Uuid
+  eventDate      DateTime?
+  format         EventFormat?
+  priceType      EventPriceFormat?
   tags           EventTag[]
 
   @@map("event")

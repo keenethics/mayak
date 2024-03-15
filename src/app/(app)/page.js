@@ -1,6 +1,6 @@
-import { DistrictSearch, FAQSection, TherapiesSection } from '@components';
 import { prisma } from '@/lib/db';
 import { env } from '@/lib/env';
+import { DistrictSearch, FAQSection, TherapiesSection } from '@/app/_components';
 
 // Page metadata should contain
 // title - gets formatted into "%s | Маяк", %s is replaced by title,

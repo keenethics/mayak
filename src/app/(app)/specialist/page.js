@@ -1,5 +1,6 @@
 import React from 'react';
-import { PillButton, SpecialistList } from '@components';
+import { PillButton } from '@components/PillButton';
+import { SpecialistList } from '@components/SpecialistList';
 import { formatPhoneNumber } from '@utils/common';
 import { organizationInclude, specialistInclude } from '@/app/(app)/specialist/consts';
 import { getSpecialists, sortSpecialistsByName } from '@/app/(app)/specialist/utils';
