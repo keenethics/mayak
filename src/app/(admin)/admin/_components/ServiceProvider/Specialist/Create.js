@@ -31,7 +31,7 @@ export function SpecialistCreate() {
         <GeneralInfoEditSpec />
         <DetailsEditSpec />
         <AddressesForm label="Адреси надання послуг" />
-        <ServicesForm label="Послуги" />
+        <ServicesForm label="Послуги" type="create" />
 
         <TextInput name="description" source="description" label="Опис" fullWidth multiline />
         <ContactsList />

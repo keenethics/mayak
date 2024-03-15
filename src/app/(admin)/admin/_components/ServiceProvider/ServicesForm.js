@@ -1,6 +1,6 @@
 import { useWatch } from 'react-hook-form';
 import PropTypes from 'prop-types';
-import { AutocompleteArrayInput, BooleanInput, ReferenceArrayInput, required } from 'react-admin';
+import { BooleanInput, required } from 'react-admin';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { FORM_TYPES } from '@admin/_lib/consts';
 import { TherapiesCutsSelect } from './TherapiesCutsSelect';
@@ -11,13 +11,7 @@ export function ServicesForm({ label, type = FORM_TYPES.create }) {
 
   return (
     <FormFieldWrapper title={label}>
-      {type === FORM_TYPES.create ? (
-        <TherapiesCutsSelect />
-      ) : (
-        <ReferenceArrayInput source="therapiesIds" reference="Therapy">
-          <AutocompleteArrayInput label="Терапії" optionValue="id" optionText="title" validate={unnecessaryForDraft} />
-        </ReferenceArrayInput>
-      )}
+      <TherapiesCutsSelect type={type} />
       <BooleanInput
         name="isFreeReception"
         source="isFreeReception"

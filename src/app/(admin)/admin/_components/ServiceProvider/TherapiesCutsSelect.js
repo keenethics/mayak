@@ -4,18 +4,85 @@ import {
   ArrayInput,
   AutocompleteArrayInput,
   FormDataConsumer,
+  ReferenceArrayInput,
+  ReferenceInput,
   SelectInput,
   SimpleFormIterator,
+  required,
   useGetList,
 } from 'react-admin';
-import { RESOURCES } from '@admin/_lib/consts';
+import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 import { useFormContext, useWatch } from 'react-hook-form';
+import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 
-export function TherapiesCutsSelect() {
+function TherapiesCutForm({ getSource, resetRequests, choices, requests, loading, type, readOnly = false }) {
+  return (
+    <>
+      {type === 'create' && (
+        <>
+          <SelectInput
+            isLoading={loading}
+            label="Тип терапії"
+            source={getSource('therapyId')}
+            fullWidth
+            choices={choices}
+            onChange={resetRequests}
+          />
+          <AutocompleteArrayInput
+            isLoading={loading}
+            label="Запити які лікуються типом терапії"
+            fullWidth
+            source={getSource('requests')}
+            choices={requests}
+          />
+        </>
+      )}
+      {type === 'edit' && (
+        <>
+          <ReferenceInput source={getSource('therapyId')} reference="Therapy">
+            <SelectInput
+              InputProps={{
+                readOnly,
+              }}
+              label="Тип терапії"
+              optionText="title"
+              optionValue="id"
+              validate={required()}
+              fullWidth
+            />
+          </ReferenceInput>
+          <ReferenceArrayInput source={getSource('requestsIds')} reference="Request">
+            <AutocompleteArrayInput
+              isLoading={loading}
+              label="Запити які лікуються типом терапії"
+              fullWidth
+              optionText="name"
+              optionValue="id"
+            />
+          </ReferenceArrayInput>
+        </>
+      )}
+    </>
+  );
+}
+
+TherapiesCutForm.propTypes = {
+  getSource: PropTypes.func,
+  resetRequests: PropTypes.func,
+  choices: PropTypes.array,
+  requests: PropTypes.array,
+  loading: PropTypes.bool,
+  type: PropTypes.oneOf(Object.values(FORM_TYPES)),
+  readOnly: PropTypes.bool,
+};
+
+export function TherapiesCutsSelect({ type = 'create' }) {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
-  const therapiesCuts = useWatch({ name: 'therapiesCuts' });
+
   const { setValue } = useFormContext();
+
+  const therapiesCuts = useWatch({ name: 'therapiesCuts' });
 
   const therapiesChoices =
     therapiesList?.map(therapy => ({
@@ -48,23 +115,14 @@ export function TherapiesCutsSelect() {
           {({ scopedFormData, getSource }) => {
             if (!scopedFormData) return null;
             return (
-              <>
-                <SelectInput
-                  isLoading={therapiesLoading}
-                  label="Тип терапії"
-                  source={getSource('therapyId')}
-                  fullWidth
-                  choices={therapiesChoices}
-                  onChange={resetRequests}
-                />
-                <AutocompleteArrayInput
-                  isLoading={therapiesLoading}
-                  label="Запити які лікуються типом терапії"
-                  fullWidth
-                  source={getSource('requests')}
-                  choices={getTherapyRequests(scopedFormData.therapyId)}
-                />
-              </>
+              <TherapiesCutForm
+                getSource={getSource}
+                choices={therapiesChoices}
+                resetRequests={resetRequests}
+                loading={therapiesLoading}
+                requests={getTherapyRequests(scopedFormData.therapyId)}
+                type={type}
+              />
             );
           }}
         </FormDataConsumer>
@@ -72,3 +130,13 @@ export function TherapiesCutsSelect() {
     </ArrayInput>
   );
 }
+
+TherapiesCutsSelect.propTypes = {
+  getSource: PropTypes.func,
+  resetRequests: PropTypes.func,
+  choices: PropTypes.array,
+  requests: PropTypes.array,
+  loading: PropTypes.bool,
+  type: PropTypes.oneOf(Object.values(FORM_TYPES)),
+  readOnly: PropTypes.bool,
+};
