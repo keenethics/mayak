@@ -25,7 +25,7 @@ export function DistrictList({ list, className }) {
         return (
           <SwiperSlide key={id} onClick={() => handleClick(index)} className="fit-co">
             <Link
-              href={`?district=${name}`}
+              href={`/specialist?district=${id}`}
               className={isSelected ? 'pointer-events-none cursor-none' : ''}
               tabindex={-1}
             >

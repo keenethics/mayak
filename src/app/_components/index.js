@@ -7,7 +7,6 @@ export * from './Footer';
 export * from './Header';
 export * from './TextArea';
 export * from './Hint';
-export * from './SpecialistList';
 export * from './ListTruncator';
 export * from './NotFoundLayout';
 export * from './TopWave';
