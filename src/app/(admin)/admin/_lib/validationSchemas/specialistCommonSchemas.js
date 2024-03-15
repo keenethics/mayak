@@ -56,6 +56,8 @@ export const specialistCore = z.object({
   telegram: zUrl.nullish(),
 });
 
+// ---- ADDRESS SECTION ----
+
 export const zEditAddressSchema = z.object({
   id: z.string().nullish(),
   fullAddress: zStringWithMax,
@@ -73,6 +75,14 @@ export const zCreateAddressSchema = z.object({
   fullAddress: zStringWithMax,
   district: zStringWithMax,
   nameOfClinic: zStringWithMax.nullish(),
+});
+
+// ---- THERAPY CUT SECTION ----
+export const zCreateTherapyCutSchema = z.object({
+  therapyId: zString,
+  requests: zString.array().min(1, {
+    message: 'Необхідно обрати хоча б один запит',
+  }),
 });
 
 export const createValidationSchema = (schemaUnion, defaultProperties) =>

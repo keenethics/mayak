@@ -9,23 +9,31 @@ import {
   useGetList,
 } from 'react-admin';
 import { RESOURCES } from '@admin/_lib/consts';
+import { useWatch } from 'react-hook-form';
 
 export function TherapiesCutsSelect() {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
+  const therapiesCuts = useWatch({ name: 'therapiesCuts' });
 
   if (therapiesLoading) return null;
 
+  const therapiesChoices = therapiesList.map(therapy => ({
+    id: therapy.id,
+    name: therapy.title,
+    disabled: therapiesCuts ? therapiesCuts.some(therapyCut => therapyCut.therapyId === therapy.id) : false,
+  }));
+
   const therapyRequestById = id => therapiesList.find(therapy => therapy.id === id)?.requests ?? [];
-  // const therapiesCuts = useWatch({ name: 'therapiesCuts' });
 
   return (
     <ArrayInput source="therapiesCuts" isLoading={therapiesLoading} label="Типи терапій">
       <SimpleFormIterator fullWidth disableReordering={true}>
         <SelectInput
+          isLoading={therapiesLoading}
           label="Тип терапії"
           source="therapyId"
           fullWidth
-          choices={therapiesList.map(therapy => ({ id: therapy.id, name: therapy.title }))}
+          choices={therapiesChoices}
         />
         <FormDataConsumer>
           {({
@@ -35,11 +43,11 @@ export function TherapiesCutsSelect() {
           }) => {
             if (!formData || !scopedFormData) return null;
             const therapyRequests = therapyRequestById(scopedFormData.therapyId);
-            // console.log({ scopedFormData: JSON.stringify(scopedFormData) });
-            // console.log({ formData: JSON.stringify(formData) });
+
             return (
               <>
                 <AutocompleteArrayInput
+                  isLoading={therapiesLoading}
                   label="Запити які лікуються типом терапії"
                   fullWidth
                   source={getSource('requests')}

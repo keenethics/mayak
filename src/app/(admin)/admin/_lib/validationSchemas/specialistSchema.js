@@ -5,6 +5,7 @@ import {
   createValidationSchema,
   specialistCore,
   zCreateAddressSchema,
+  zCreateTherapyCutSchema,
   zEditAddressSchema,
   zInteger,
   zString,
@@ -37,12 +38,14 @@ const createDefaultProps = z.object({
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
-  therapiesCuts: z.any(),
+  therapiesCuts: zCreateTherapyCutSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   isActive: z.literal(true),
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
-  therapiesCuts: z.any().nullish(),
+  therapiesCuts: zCreateTherapyCutSchema.array().nullish(),
   addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
