@@ -3,6 +3,7 @@ import { Gender } from '@prisma/client';
 import {
   MESSAGES,
   createValidationSchema,
+  singlePrimaryAddressRefine,
   specialistCore,
   zCreateAddressSchema,
   zEditAddressSchema,
@@ -27,7 +28,10 @@ const zSpecialistSchema = specialistCore.extend({
 // ------------------ CREATE SECTION ---------------------
 
 const restCreateProps = zSpecialistSchema.extend({
-  addresses: zCreateAddressSchema.array().default([]),
+  addresses: zCreateAddressSchema
+    .array()
+    .default([])
+    .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
   therapies: zStringArray,
   therapyPricesCreate: z.record(z.string(), z.any()).nullish(),
 });
@@ -52,7 +56,10 @@ export const specialistCreateValidationSchema = createValidationSchema(specialis
 // ------------------ EDIT SECTION ---------------------
 
 const restEditProps = zSpecialistSchema.extend({
-  addresses: zEditAddressSchema.array().default([]),
+  addresses: zEditAddressSchema
+    .array()
+    .default([])
+    .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
   therapiesIds: zStringArray,
   therapyPrices: z.array(
     z.object({

@@ -33,6 +33,7 @@ export function SpecialistShow() {
             <TextField label="Повна адреса" source="fullAddress" />
             <TextField label="Назва кліники" source="nameOfClinic" />
             <TextField label="Район" source="district.name" />
+            <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
         <FunctionField

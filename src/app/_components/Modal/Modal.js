@@ -45,7 +45,7 @@ export const Modal = ({
             onClick={onClose}
           >
             <motion.div
-              className={cn('rounded-xl px-4 py-[18px] shadow-custom-2 md:p-6', className)}
+              className={cn('rounded-xl bg-other-white px-4 py-[18px] shadow-custom-2 md:p-6', className)}
               onClick={e => {
                 e.stopPropagation();
               }}

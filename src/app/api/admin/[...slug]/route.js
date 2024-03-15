@@ -6,7 +6,7 @@ import { MODEL_INCLUDES, searchInputFilters, transformServiceProvider, withError
 const handler = withErrorHandlerAndAuth(async req => {
   const json = await req.json();
 
-  const modelName = json.resource.charAt(0).toLowerCase() + json.resource.slice(1);
+  const modelName = json.resource.toLowerCase();
   const isServiceProvider = modelName === 'specialist' || modelName === 'organization';
 
   const getOneTransform = instance => {
