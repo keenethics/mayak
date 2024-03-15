@@ -16,9 +16,19 @@ export function SearchProvider({ children }) {
   const currentConfig = getSearchTypeConfig(searchType);
   const [isSelectTypeOpen, setIsSelectTypeOpen] = useState(false);
   const [isAutoCompleteOpen, setIsAutoCompleteOpen] = useState(false);
+  const [autoCompleteItems, setAutoCompleteItems] = useState([]);
+
+  async function syncAutoCompleteItems() {
+    const baseQueryString = `searchSync=true&searchType=${currentConfig.searchType}&query=${query}`;
+    const res = await fetch(`/api/search?${baseQueryString}`);
+    const data = await res.json();
+    setAutoCompleteItems(data.data);
+  }
+
   useEffect(() => {
     setIsAutoCompleteOpen(query !== '');
   }, [query]);
+
   return (
     <SearchContext.Provider
       value={{
@@ -27,10 +37,12 @@ export function SearchProvider({ children }) {
         searchType,
         isSelectTypeOpen,
         isAutoCompleteOpen,
+        autoCompleteItems,
         setQuery,
         setSearchType,
         setIsSelectTypeOpen,
         setIsAutoCompleteOpen,
+        syncAutoCompleteItems,
       }}
     >
       {children}

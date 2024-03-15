@@ -8,7 +8,8 @@ import { SearchTypeDropDown } from './SearchTypeDropDown';
 import { SearchAutoCompleteDropDown } from './SearchAutoCompleteDropDown';
 
 export function SearchInput() {
-  const { currentConfig, query, isSelectTypeOpen, setQuery, setIsSelectTypeOpen } = useSearchContext();
+  const { currentConfig, query, isSelectTypeOpen, setQuery, setIsSelectTypeOpen, syncAutoCompleteItems } =
+    useSearchContext();
 
   return (
     <div className="flex w-full flex-col gap-4 lg:flex-row">
@@ -31,7 +32,10 @@ export function SearchInput() {
             className="h-6 w-[1px] grow border-none bg-other-black/0 p-0 caret-primary-500 placeholder:text-p3 placeholder:text-gray-500 focus:ring-0"
             placeholder={currentConfig.placeholder}
             value={query}
-            onChange={e => setQuery(e.target.value)}
+            onChange={e => {
+              setQuery(e.target.value);
+              syncAutoCompleteItems();
+            }}
           />
           <ClearSearchIcon className={cn('hidden', query && 'block')} onClick={() => setQuery('')} />
           <SearchAutoCompleteDropDown />
