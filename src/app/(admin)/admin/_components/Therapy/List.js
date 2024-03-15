@@ -88,7 +88,7 @@ function ActiveStatusToggle() {
   return <Switch disabled={isLoading} checked={record.isActive} onChange={handleSwitch} />;
 }
 
-export function ListTherapy() {
+export function TherapyList() {
   const redirect = useRedirect();
 
   const redirectToEdit = useCallback(

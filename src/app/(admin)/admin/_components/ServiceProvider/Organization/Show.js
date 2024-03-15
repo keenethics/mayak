@@ -31,6 +31,7 @@ export function OrganizationShow() {
             <TextField label="Повна адреса" source="fullAddress" />
             <TextField label="Назва кліники" source="nameOfClinic" />
             <TextField label="Район" source="district.name" />
+            <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
         <ArrayField label="Типи терапій" source="therapiesCuts">

@@ -21,7 +21,7 @@ export function OrganizationCreate() {
 
   return (
     <Create
-      title="Додавання нової огранізації"
+      title="Додавання нової організації"
       mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
       transform={transformOrganizationData}
     >

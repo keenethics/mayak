@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import {
+  MESSAGES,
   createValidationSchema,
+  singlePrimaryAddressRefine,
   specialistCore,
   zCreateAddressSchema,
   zCreateTherapyCutSchema,
@@ -20,7 +22,10 @@ const zOrganizationSchema = specialistCore.extend({
 // ------------------ CREATE SECTION ---------------------
 
 const restCreateProps = zOrganizationSchema.extend({
-  addresses: zCreateAddressSchema.array().default([]),
+  addresses: zCreateAddressSchema
+    .array()
+    .default([])
+    .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
 });
 
 const createDefaultProps = z.object({
@@ -51,7 +56,10 @@ export const organizationCreateValidationSchema = createValidationSchema(organiz
 // ------------------ EDIT SECTION ---------------------
 
 const restEditProps = zOrganizationSchema.extend({
-  addresses: zEditAddressSchema.array().default([]),
+  addresses: zEditAddressSchema
+    .array()
+    .default([])
+    .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
 });
 
 const editDefaultProps = z.object({

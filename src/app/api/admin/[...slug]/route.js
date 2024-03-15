@@ -1,10 +1,10 @@
 import { defaultHandler } from 'ra-data-simple-prisma';
 import { NextResponse } from 'next/server';
-import { RESOURCES } from '@admin/_lib/consts';
 import { prisma } from '@/lib/db';
 import { auth } from '@/lib/auth';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
+import { RESOURCES } from '@/app/(admin)/admin/_lib/consts';
 
 const MODEL_SEARCH_FIELDS = {
   [RESOURCES.event]: ['title', 'organizerName'],

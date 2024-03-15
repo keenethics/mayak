@@ -4,18 +4,23 @@ import PropTypes from 'prop-types';
 import { cn } from '@utils/cn';
 import { MatchingEntityListItem } from '@admin/components/MatchingEntityListItem';
 import { EMAIL, PHONE } from '@admin/_lib/consts';
+import { useWatch } from 'react-hook-form';
 
 export function MatchingEntityList({ matchingParams, className }) {
   const { phone, email } = matchingParams;
 
+  const currentEntityId = useWatch({ name: 'id' });
+
   const { data: entitiesMatchingPhone, num: numEntitiesMatchingPhone } = useFindEntityMatchingPhoneOrEmail({
     key: PHONE,
     value: phone,
+    idToExclude: currentEntityId,
   });
 
   const { data: entitiesMatchingEmail, num: numEntitiesMatchingEmail } = useFindEntityMatchingPhoneOrEmail({
     key: EMAIL,
     value: email,
+    idToExclude: currentEntityId,
   });
 
   const hasEntitiesMatchingPhone = !!phone && !!numEntitiesMatchingPhone;

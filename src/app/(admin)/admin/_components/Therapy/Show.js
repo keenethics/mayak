@@ -10,7 +10,7 @@ import {
   NumberField,
 } from 'react-admin';
 
-export function ShowTherapy() {
+export function TherapyShow() {
   return (
     <Show>
       <SimpleShowLayout>
