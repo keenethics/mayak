@@ -9,11 +9,12 @@ import {
   useGetList,
 } from 'react-admin';
 import { RESOURCES } from '@admin/_lib/consts';
-import { useWatch } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 export function TherapiesCutsSelect() {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
   const therapiesCuts = useWatch({ name: 'therapiesCuts' });
+  const { setValue } = useFormContext();
 
   if (therapiesLoading) return null;
 
@@ -23,18 +24,18 @@ export function TherapiesCutsSelect() {
     disabled: therapiesCuts ? therapiesCuts.some(therapyCut => therapyCut.therapyId === therapy.id) : false,
   }));
 
+  const resetRequests = e => {
+    const index = Number(e.target.name.split('.')[1]); // therapiesCuts.[index].therapyId
+    const newId = e.target.value;
+    therapiesCuts[index].requests = { therapyId: newId, requests: [] };
+    setValue('therapiesCuts', therapiesCuts);
+  };
+
   const therapyRequestById = id => therapiesList.find(therapy => therapy.id === id)?.requests ?? [];
 
   return (
     <ArrayInput source="therapiesCuts" isLoading={therapiesLoading} label="Типи терапій">
       <SimpleFormIterator fullWidth disableReordering={true}>
-        <SelectInput
-          isLoading={therapiesLoading}
-          label="Тип терапії"
-          source="therapyId"
-          fullWidth
-          choices={therapiesChoices}
-        />
         <FormDataConsumer>
           {({
             formData, // The whole form data
@@ -43,9 +44,16 @@ export function TherapiesCutsSelect() {
           }) => {
             if (!formData || !scopedFormData) return null;
             const therapyRequests = therapyRequestById(scopedFormData.therapyId);
-
             return (
               <>
+                <SelectInput
+                  isLoading={therapiesLoading}
+                  label="Тип терапії"
+                  source={getSource('therapyId')}
+                  fullWidth
+                  choices={therapiesChoices}
+                  onChange={resetRequests}
+                />
                 <AutocompleteArrayInput
                   isLoading={therapiesLoading}
                   label="Запити які лікуються типом терапії"
