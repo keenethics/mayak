@@ -29,7 +29,7 @@ const zSpecialistSchema = specialistCore.extend({
 const restCreateProps = zSpecialistSchema.extend({
   addresses: zCreateAddressSchema.array().default([]),
   therapies: zStringArray,
-  therapyPrices: z.record(z.string(), z.any()).nullish(),
+  therapyPricesCreate: z.record(z.string(), z.any()).nullish(),
 });
 
 const createDefaultProps = z.object({
@@ -53,7 +53,17 @@ export const specialistCreateValidationSchema = createValidationSchema(specialis
 
 const restEditProps = zSpecialistSchema.extend({
   addresses: zEditAddressSchema.array().default([]),
-  therapyPrices: z.record(z.string(), z.any()).nullish(),
+  therapiesIds: zStringArray,
+  therapyPrices: z.array(
+    z.object({
+      id: z.string(),
+      price: z.number().nullish(),
+      therapy: z.object({
+        id: z.string(),
+      }),
+    }),
+  ),
+  therapyPricesEdit: z.record(z.string(), z.any()),
 });
 
 const editDefaultProps = z.object({
@@ -63,7 +73,6 @@ const editDefaultProps = z.object({
 });
 
 const activeSpecialistEditSchema = restEditProps.extend({
-  therapiesIds: zStringArray,
   isActive: z.literal(true),
 });
 

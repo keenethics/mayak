@@ -14,6 +14,7 @@ export const MODEL_INCLUDES = {
     therapies: { select: { id: true, type: true, title: true } },
     therapyPrices: {
       select: {
+        id: true,
         price: true,
         therapy: {
           select: {

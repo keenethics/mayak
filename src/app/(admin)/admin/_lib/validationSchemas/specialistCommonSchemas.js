@@ -77,26 +77,30 @@ export const zCreateAddressSchema = z.object({
 
 export const createValidationSchema = (schemaUnion, defaultProperties) =>
   z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {
-    const { formatOfWork, isActive, addresses, therapyPrices, therapies } = schema;
+    const { formatOfWork, isActive, addresses, therapyPricesCreate, therapyPricesEdit, therapies, therapiesIds } =
+      schema;
 
-    if (therapyPrices) {
-      const invalidPrices = therapies?.filter(el => {
-        const result = z
-          .number()
-          .int()
-          .refine(n => n >= 0)
-          .nullish()
-          .safeParse(therapyPrices[el]);
-        return !result.success;
-      });
-
-      invalidPrices?.forEach(el => {
+    function mapInvalidTherapyPrices(id, type) {
+      id?.forEach(el => {
         ctx.addIssue({
           code: 'custom',
           message: 'Ціна повинна бути цілим числом не менше 0',
-          path: [`therapyPrices.${el}`],
+          path: [`${type === 'create' ? 'therapyPricesCreate' : 'therapyPricesEdit'}.${el}`],
         });
       });
+    }
+
+    if (therapyPricesCreate) {
+      mapInvalidTherapyPrices(
+        therapies?.filter(el => !zInteger.safeParse(therapyPricesCreate[el]).success),
+        'create',
+      );
+    }
+    if (therapyPricesEdit) {
+      mapInvalidTherapyPrices(
+        therapiesIds?.filter(el => !zInteger.safeParse(therapyPricesEdit[el]).success),
+        'edit',
+      );
     }
 
     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
@@ -113,6 +117,5 @@ export const createValidationSchema = (schemaUnion, defaultProperties) =>
         addresses: [],
       };
     }
-
     return schema;
   });

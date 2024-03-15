@@ -12,6 +12,19 @@ export function toConnectList(list, cb) {
   return list?.map(id => ({ id: cb?.(id) ?? id })) ?? [];
 }
 
+export function transformTherapyPrices(therapies, therapyPrices) {
+  const result = [];
+  therapies?.forEach(el => {
+    if (therapyPrices[el] !== null) {
+      result.push({
+        therapy: { connect: { id: el } },
+        price: therapyPrices[el],
+      });
+    }
+  });
+  return result;
+}
+
 function transformAddresses(addresses) {
   return (
     addresses
@@ -46,6 +59,7 @@ export const transformEditData = ({ therapiesIds, addresses, addressesIds, forma
       set: [],
       connect: therapiesToConnect,
     },
+    therapyPricesEdit: undefined,
     addresses: {
       connect: addressesToConnect,
       create: addressesToCreate,
