@@ -68,7 +68,10 @@ export const zEditAddressSchema = z.object({
       name: z.string(),
     })
     .nullish(),
-  isPrimary: z.boolean(),
+  isPrimary: z
+    .boolean()
+    .nullish()
+    .transform(arg => (arg === null ? false : arg)),
 });
 
 export const zCreateAddressSchema = z.object({
