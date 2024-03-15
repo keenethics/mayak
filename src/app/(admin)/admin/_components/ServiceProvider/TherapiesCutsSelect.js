@@ -25,10 +25,12 @@ export function TherapiesCutsSelect() {
   }));
 
   const resetRequests = e => {
-    const index = Number(e.target.name.split('.')[1]); // therapiesCuts.[index].therapyId
-    const newId = e.target.value;
-    therapiesCuts[index].requests = { therapyId: newId, requests: [] };
-    setValue('therapiesCuts', therapiesCuts);
+    if (therapiesCuts) {
+      const index = Number(e.target.name.split('.')[1]); // therapiesCuts.[index].therapyId
+      const newId = e.target.value;
+      therapiesCuts[index] = { therapyId: newId, requests: [] };
+      setValue('therapiesCuts', therapiesCuts);
+    }
   };
 
   const therapyRequestById = id => therapiesList.find(therapy => therapy.id === id)?.requests ?? [];
@@ -38,11 +40,10 @@ export function TherapiesCutsSelect() {
       <SimpleFormIterator fullWidth disableReordering={true}>
         <FormDataConsumer>
           {({
-            formData, // The whole form data
             scopedFormData, // The data for this item of the ArrayInput
             getSource, // A function to get the valid source inside an ArrayInput
           }) => {
-            if (!formData || !scopedFormData) return null;
+            if (!scopedFormData) return null;
             const therapyRequests = therapyRequestById(scopedFormData.therapyId);
             return (
               <>
