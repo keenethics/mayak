@@ -8,15 +8,13 @@ import { Heading, Paragraph } from '@components/Typography';
 import { useMediaQuery } from '@hooks';
 import { screens } from '@/app/styles/tailwind/ui';
 
+const icons = [
+  { match: 'instagram', icon: <Instagram /> },
+  { match: 'facebook', icon: <Facebook /> },
+];
+
 function MobileModal({ link }) {
-  // refactor this icon to use 'let' and two if's to make it more readable
-  let icon = null;
-  if (link.includes('instagram')) {
-    icon = <Instagram />;
-  }
-  if (link.includes('facebook')) {
-    icon = <Facebook />;
-  }
+  const icon = icons.find(({ match }) => link.includes(match))?.icon;
 
   return (
     <a className="lg:hidden" href={link} target="_blank" rel="noopener noreferrer">
