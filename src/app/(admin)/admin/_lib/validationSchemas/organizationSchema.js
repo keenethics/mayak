@@ -3,6 +3,7 @@ import {
   createValidationSchema,
   specialistCore,
   zCreateAddressSchema,
+  zCreateTherapyCutSchema,
   zEditAddressSchema,
   zInteger,
   zString,
@@ -27,13 +28,17 @@ const createDefaultProps = z.object({
 });
 
 const activeOrganizationSchema = restCreateProps.extend({
-  therapies: zStringArray,
+  therapiesCuts: zCreateTherapyCutSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   type: zStringArray.default([]),
   description: zString,
   isActive: z.literal(true),
 });
 
 const draftOrganizationSchema = restCreateProps.partial().extend({
+  therapiesCuts: zCreateTherapyCutSchema.array().nullish(),
+  addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
 

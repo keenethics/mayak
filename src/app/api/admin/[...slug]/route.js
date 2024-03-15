@@ -26,7 +26,7 @@ const MODEL_INCLUDES = {
     },
   },
   [RESOURCES.organization]: {
-    therapies: { select: { id: true, type: true, title: true } },
+    therapiesCuts: { select: { id: true, therapy: { select: { id: true, title: true, type: true } }, requests: true } },
     type: { select: { id: true, name: true } },
     addresses: {
       select: {
@@ -118,7 +118,7 @@ const handler = auth(
     // console.log({
     //   method: json.method,
     //   model: modelName,
-    //   data: JSON.stringify(modelName === 'specialist' ? result : '{}'),
+    //   data: JSON.stringify(modelName === 'specialist' || modelName === 'organization' ? result : '{}'),
     // });
     return NextResponse.json(result);
   }),

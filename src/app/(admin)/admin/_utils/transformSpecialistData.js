@@ -1,9 +1,9 @@
 import { toConnectList, transformAddresses, transformCreateTherapiesCuts } from '@admin/_utils/common';
 
-export const transformOrganizationData = data => ({
+export const transformData = data => ({
   ...data,
-  type: {
-    connect: data.type?.length ? toConnectList(data.specializations) : undefined,
+  specializations: {
+    connect: data.specializations?.length ? toConnectList(data.specializations) : undefined,
   },
   addresses: {
     create: data.addresses?.length ? transformAddresses(data.addresses) : undefined,

@@ -10,41 +10,43 @@ import {
 } from 'react-admin';
 import { RESOURCES } from '@admin/_lib/consts';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { useCallback } from 'react';
 
 export function TherapiesCutsSelect() {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
   const therapiesCuts = useWatch({ name: 'therapiesCuts' });
   const { setValue } = useFormContext();
 
-  if (therapiesLoading) return null;
+  const therapiesChoices =
+    therapiesList?.map(therapy => ({
+      id: therapy.id,
+      name: therapy.title,
+      disabled: therapiesCuts ? therapiesCuts.some(therapyCut => therapyCut.therapyId === therapy.id) : false,
+    })) ?? [];
 
-  const therapiesChoices = therapiesList.map(therapy => ({
-    id: therapy.id,
-    name: therapy.title,
-    disabled: therapiesCuts ? therapiesCuts.some(therapyCut => therapyCut.therapyId === therapy.id) : false,
-  }));
+  const resetRequests = useCallback(
+    e => {
+      if (therapiesCuts) {
+        const index = Number(e.target.name.split('.')[1]); // therapiesCuts.[index].therapyId
+        const newId = e.target.value;
+        therapiesCuts[index] = { therapyId: newId, requests: [] };
+        setValue('therapiesCuts', therapiesCuts);
+      }
+    },
+    [setValue, therapiesCuts],
+  );
 
-  const resetRequests = e => {
-    if (therapiesCuts) {
-      const index = Number(e.target.name.split('.')[1]); // therapiesCuts.[index].therapyId
-      const newId = e.target.value;
-      therapiesCuts[index] = { therapyId: newId, requests: [] };
-      setValue('therapiesCuts', therapiesCuts);
-    }
-  };
-
-  const therapyRequestById = id => therapiesList.find(therapy => therapy.id === id)?.requests ?? [];
+  const getTherapyRequests = useCallback(
+    therapyId => therapiesList.find(therapy => therapy.id === therapyId)?.requests ?? [],
+    [therapiesList],
+  );
 
   return (
     <ArrayInput source="therapiesCuts" isLoading={therapiesLoading} label="Типи терапій">
       <SimpleFormIterator fullWidth disableReordering={true}>
         <FormDataConsumer>
-          {({
-            scopedFormData, // The data for this item of the ArrayInput
-            getSource, // A function to get the valid source inside an ArrayInput
-          }) => {
+          {({ scopedFormData, getSource }) => {
             if (!scopedFormData) return null;
-            const therapyRequests = therapyRequestById(scopedFormData.therapyId);
             return (
               <>
                 <SelectInput
@@ -60,7 +62,7 @@ export function TherapiesCutsSelect() {
                   label="Запити які лікуються типом терапії"
                   fullWidth
                   source={getSource('requests')}
-                  choices={therapyRequests}
+                  choices={getTherapyRequests(scopedFormData.therapyId)}
                 />
               </>
             );
