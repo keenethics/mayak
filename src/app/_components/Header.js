@@ -2,9 +2,7 @@
 
 import { useCallback, useState } from 'react';
 import Link from 'next/link';
-import Logo from '@icons/logo.svg';
-import BurgerIcon from '@icons/burger.svg';
-import CloseIcon from '@icons/headerCloseIcon.svg';
+import { BurgerIcon, Logo, HeaderCloseIcon } from '@icons';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
 import { useBodyScrollLock } from '@hooks';
@@ -92,7 +90,7 @@ export function Header() {
                 className="h-[36px] w-[66px] lg:h-[74px] lg:w-[129px]"
               />
             </Link>
-            <CloseIcon onClick={toggleMenu} className="transition-all" />
+            <HeaderCloseIcon onClick={toggleMenu} className="transition-all" />
           </div>
           <div className="flex grow flex-col bg-other-white p-4">
             <div className="flex flex-col items-center">
