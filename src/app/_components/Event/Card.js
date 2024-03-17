@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import CalendarIcon from '@icons/calendarFilled.svg';
 import PriceIcon from '@icons/priceFilled.svg';
@@ -9,6 +10,7 @@ import { cn } from '@/utils/cn';
 import { parseDate } from '@/utils/parseDate';
 import { Label } from '../Label';
 import { OverflownText } from '../OverflownText';
+import { EventLinkModal } from '../EventLinkModal';
 
 function ListItem({ icon, text, textColor, fontWeight }) {
   return (
@@ -20,7 +22,9 @@ function ListItem({ icon, text, textColor, fontWeight }) {
 }
 
 function transformData(event) {
-  const { title, organizerName, tags, priceType, eventDate, format, address, price, locationLink } = event;
+  const { title, organizerName, tags, priceType, eventDate, format, address, price, locationLink, additionalLink } =
+    event;
+
   const { day, month, time } = parseDate(eventDate);
   const date = `${month}, ${day} `;
   const locationText = format === 'ONLINE' ? 'Онлайн' : address;
@@ -38,11 +42,14 @@ function transformData(event) {
     default:
       break;
   }
-  return { title, organizerName, tags, priceText, locationText, date, time, locationLink };
+  return { title, organizerName, tags, priceText, locationText, date, time, locationLink, additionalLink };
 }
 
 export function EventCard({ event }) {
-  const { title, organizerName, tags, priceText, locationText, date, time, locationLink } = transformData(event);
+  const [isFeedbackOpen, setFeedbackOpen] = useState(false);
+  const { title, organizerName, tags, priceText, locationText, date, time, locationLink, additionalLink } =
+    transformData(event);
+
   const addressElement = (
     <OverflownText
       className={cn('w-56 truncate text-p3 font-medium text-gray-700', { 'hover:underline': locationLink })}
@@ -50,12 +57,16 @@ export function EventCard({ event }) {
     />
   );
 
+  function toggleFeedback() {
+    setFeedbackOpen(prevState => !prevState);
+  }
+
   const tagsElements = tags?.map(tag => (
     <Label key={tag.name} className="bg-primary-100" textClassName="text-primary-600" text={tag.name} />
   ));
   return (
     <div className="flex w-max flex-col gap-4 rounded-3xl border-2 border-gray-200 bg-other-white p-4">
-      <div className="flex w-[259px] flex-col items-start gap-1">
+      <div className="flex w-[259px] cursor-pointer flex-col items-start gap-1" onClick={toggleFeedback}>
         <OverflownText className="w-[259px] truncate text-p1 font-bold text-gray-700 underline" text={title} />
         <OverflownText className="w-[259px] truncate text-p3 font-bold text-primary-600" text={organizerName} />
       </div>
@@ -76,6 +87,8 @@ export function EventCard({ event }) {
           )}
         </li>
       </ul>
+
+      <EventLinkModal isOpen={isFeedbackOpen} onClose={toggleFeedback} link={additionalLink.link} />
     </div>
   );
 }

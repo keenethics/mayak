@@ -1,142 +1,169 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/navigation';
-import { CheckMark } from '@icons/index';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+import ky from 'ky';
+import CheckMark from '@icons/check-mark.svg';
+import Search from '@icons/search.svg';
 import { cn } from '@/utils/cn';
 import { PillButton } from '../PillButton';
 import { NoInfoToShow } from '../NoInfoToShow';
+import { buttonColorVariant } from '../PillButton/style';
 import { EventCard } from './Card';
 
-export function EventFilter({ events }) {
-  const router = useRouter();
-
-  const [dates, setDates] = useState([]);
-  const [filteredDates, setFilteredDates] = useState([]);
+export function EventFilter() {
   const [months, setMonths] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeMonth, setActiveMonth] = useState(months[0]);
+  const [activeMonthNumber, setActiveMonthNumber] = useState('');
+  const [hoveredIndexes, setHoveredIndexes] = useState(new Array(months.length));
 
-  const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
+  const { ref, inView } = useInView();
+
+  const allEvents = async ({ take, lastCursor, month }) => {
+    const queryParams = new URLSearchParams({ take, lastCursor, month }).toString();
+    return await ky(`/api/event?${queryParams}`).json();
+  };
+
+  // fetch data and pass url params
+  const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } = useInfiniteQuery({
+    queryFn: ({ month = activeMonthNumber, pageParam = '' }) => allEvents({ month, take: 3, lastCursor: pageParam }),
+    queryKey: ['event', activeMonthNumber],
+    getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
+  });
+
+  // console.log('data on page', data);
+  // console.log('activeMonth', activeMonth.index);
 
   const monthsAhead = 5;
   const monthNames = [
-    'січень',
-    'лютий',
-    'березень',
-    'квітень',
-    'травень',
-    'червень',
-    'липень',
-    'серпень',
-    'вересень',
-    'жовтень',
-    'листопад',
-    'грудень',
+    { index: 0, name: 'січень' },
+    { index: 1, name: 'лютий' },
+    { index: 2, name: 'березень' },
+    { index: 3, name: 'квітень' },
+    { index: 4, name: 'травень' },
+    { index: 5, name: 'червень' },
+    { index: 6, name: 'липень' },
+    { index: 7, name: 'серпень' },
+    { index: 8, name: 'вересень' },
+    { index: 9, name: 'жовтень' },
+    { index: 10, name: 'листопад' },
+    { index: 11, name: 'грудень' },
   ];
 
-  // Get 6 basic month starting from today
+  // Get 6 basic month names for filters, starting from current month
   useEffect(() => {
     const getNextMonths = () => {
       const nextMonths = [];
-      // no-plusplus rule for eslint
       for (let i = 0; i <= monthsAhead; i += 1) {
         const nextMonthIndex = (currentMonth + i - 1) % 12;
         const nextMonthName = monthNames[nextMonthIndex];
+        setActiveMonthNumber(monthNames[i] === currentMonth ? monthNames[i] : '');
         nextMonths.push(nextMonthName);
       }
       return nextMonths;
     };
-
     const nextMonths = getNextMonths();
     setMonths(nextMonths);
     // eslint-disable-next-line
   }, [currentMonth]);
 
-  // Filter out dates for this year and not before today
   useEffect(() => {
-    const filteredData = events
-      .filter(item => {
-        const eventYear = item.eventDate.getFullYear();
-        return eventYear <= currentYear;
-      })
-      .toSorted((a, b) => a.eventDate - b.eventDate)
-      .filter(date => date.isActive && date.eventDate >= new Date());
+    // if the last element is in view and there is a next page, fetch the next page
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, inView, fetchNextPage, data]);
 
-    setDates(filteredData);
-    // eslint-disable-next-line
-  }, []);
+  if (error) return <div className="mt-10">{('An error has occurred: ', error.message)}</div>;
 
-  // Get the month from the query parameters or use the first month from array and fetch data
-  useEffect(() => {
-    router.push(
-      `/events?month=${months[0]}`,
+  // // Filter data based on selected month
+  const handleFilter = newMonth => {
+    setActiveIndex(newMonth.index);
+    setActiveMonth(newMonth);
+    setActiveMonthNumber(newMonth.index + 1);
+  };
 
-      undefined,
-      { shallow: true },
-    );
-    const filtered = dates.filter(
-      date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === months[0],
-    );
-    setFilteredDates(filtered);
-  }, [router, months, dates]);
+  const handleMouseEnter = index => {
+    const newHoveredIndexes = [...hoveredIndexes];
+    newHoveredIndexes[index] = true;
+    setHoveredIndexes(newHoveredIndexes);
+  };
 
-  // Filter data based on selected month
-  const handleFilter = useCallback(
-    (index, month) => {
-      const filtered = dates.filter(
-        date => new Date(date.eventDate).toLocaleString('uk-UA', { month: 'long' }) === month,
-      );
-      setFilteredDates(filtered);
-      setActiveIndex(index);
-
-      if (currentMonth === month) {
-        router.push(`/events?month=${months[0]}`, undefined, { shallow: true });
-      } else {
-        router.push(
-          `/events?month=${month}`,
-
-          undefined,
-          { shallow: true },
-        );
-      }
-
-      // router.push(`/events?month=${month}`);
-    },
-    [router, dates, months, currentMonth],
-  );
+  const handleMouseLeave = index => {
+    const newHoveredIndexes = [...hoveredIndexes];
+    newHoveredIndexes[index] = false;
+    setHoveredIndexes(newHoveredIndexes);
+  };
 
   return (
-    <div className="mx-auto flex w-full flex-col items-start justify-start gap-6 self-stretch lg:w-[900px]">
-      <div className="flex flex-row flex-wrap items-start justify-start gap-3">
-        {months.map((month, index) => (
-          <PillButton
-            variant="eventFilter"
-            colorVariant="semiorange"
-            className={cn(activeIndex === index && 'border-secondary-300 bg-secondary-300 text-gray-900')}
-            key={month}
-            onClick={() => {
-              handleFilter(index, month);
-            }}
-            icon={activeIndex === index && <CheckMark className="h-4 w-4" />}
-          >
-            {month.charAt(0).toUpperCase() + month.slice(1)}
-          </PillButton>
-        ))}
-      </div>
-      {filteredDates.length === 0 && <NoInfoToShow text="подій" />}
-      <ul
-        className="grid w-full
-           gap-6 self-stretch sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-      >
-        {filteredDates
-          .filter(date => date.eventDate >= new Date())
-          .map((date, index) => (
-            <EventCard key={index} event={date} />
+    <>
+      <div className="mx-auto flex w-full flex-col items-start justify-start gap-6 self-stretch lg:w-[900px]">
+        <div className="flex flex-row flex-wrap items-start justify-start gap-3">
+          {months.map(month => (
+            <PillButton
+              variant="eventFilter"
+              colorVariant="semiorange"
+              // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
+              className={cn(
+                activeIndex === month.index && 'active' && buttonColorVariant.eventFilter.semiorange.active,
+              )}
+              // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
+              // active={activeIndex === index && buttonColorVariant.eventFilter.semiorange.active}
+              active={activeIndex === month.index ? `${buttonColorVariant.eventFilter.semiorange.active}` : ''}
+              key={month.index}
+              onMouseEnter={() => handleMouseEnter(month.index)}
+              onMouseLeave={() => handleMouseLeave(month.index)}
+              onFocus={() => handleMouseEnter(month.index)}
+              onBlur={() => handleMouseLeave(month.index)}
+              onMouseDown={() => handleMouseEnter(month.index)}
+              onMouseUp={() => handleMouseLeave(month.index)}
+              onClick={() => {
+                handleFilter(month);
+              }}
+              icon={[
+                activeIndex === month.index && (
+                  <CheckMark key={`checkmark+${month.index}`} className={cn('h-4 w-4 transition-all')} />
+                ),
+
+                hoveredIndexes[month.index] &&
+                  activeIndex !== month.index &&
+                  (buttonColorVariant.eventFilter.semiorange.hover ||
+                    buttonColorVariant.eventFilter.semiorange.focused) && (
+                    <Search key={`searchicon+${month.index}`} className="h-4 w-4 transition-all" />
+                  ),
+              ]}
+            >
+              {month.name.charAt(0).toUpperCase() + month.name.slice(1)}
+            </PillButton>
           ))}
-      </ul>
-    </div>
+        </div>
+
+        <ul
+          className="grid w-full
+           gap-6 self-stretch sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {isSuccess &&
+            data?.pages.map(page =>
+              page.data.map((event, index) => {
+                if (page.data.length === index + 1)
+                  return (
+                    <div ref={ref} key={event.id}>
+                      <EventCard event={event} />
+                    </div>
+                  );
+
+                return <EventCard key={event.id} event={event} />;
+              }),
+            )}
+        </ul>
+      </div>
+      {(isLoading || isFetchingNextPage) && <p className="mb-4">Loading...</p>}
+      {data?.pages.length === 0 && <NoInfoToShow text="подій" />}
+    </>
   );
 }
 

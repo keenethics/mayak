@@ -148,7 +148,8 @@ function randomEvent({ tags, link }) {
     priceType,
     price,
     format,
-    eventDate: Math.random() > 0.5 ? faker.date.future() : faker.date.past(),
+    // eventDate: Math.random() > 0.5 ? faker.date.future() : faker.date.past(),
+    eventDate: faker.date.future({ from: new Date(), to: '2024-09-31' }),
     isActive: faker.datatype.boolean(),
     additionalLink: {
       connect: link,
@@ -250,7 +251,7 @@ async function main() {
       });
     });
   }
-  for (let i = 0; i < 10; i += 1) {
+  for (let i = 0; i <= 300; i += 1) {
     // eslint-disable-next-line no-await-in-loop
     await prisma.event.create({
       data: randomEvent({ tags, link }),

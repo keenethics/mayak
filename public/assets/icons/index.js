@@ -20,6 +20,7 @@ import BlueLinkedin from './specialist-linkedin.svg';
 import BlueViber from './specialist-viber.svg';
 import BlueTelegram from './specialist-telegram.svg';
 import CheckMark from './check-mark.svg';
+import Search from './search.svg';
 
 export {
   Site,
@@ -44,4 +45,5 @@ export {
   BlueViber,
   BlueTelegram,
   CheckMark,
+  Search,
 };

@@ -45,9 +45,9 @@ export const buttonColorVariant = {
   eventFilter: {
     semiorange: {
       regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-gray-900 not-italic font-medium',
-      hover: 'hover:bg-secondary-300 hover:border-secondary-300 text-gray-900',
-      focused: 'focus:bg-secondary-300 focus:text-gray-900 focus:active:border-gray-300',
-      active: 'active:bg-secondary-300 active:text-gray-900 active:border-gray-300 font-semibold',
+      hover: 'hover:bg-other-white hover:border-gray-700 text-gray-900',
+      focused: 'focus:bg-secondary-100 focus:text-secondary-400 focus:border-secondary-300 focus:outline-none',
+      active: 'active:bg-secondary-300 active:text-gray-900 active:border-secondary-300 font-semibold',
       disabled,
     },
   },
@@ -75,14 +75,14 @@ export const buttonType = {
   eventFilter: {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle flex-row text-p4 h-8 rounded-3xl',
-      layoutStyle: `flex justify-center align-middle items-center py-[6px] px-3
+      layoutStyle: `flex justify-center align-middle items-center py-1.5 px-3
       gap-1 self-stretch h-8 `,
     },
     regular: {
       buttonStyle:
-        'transition-all inline-flex justify-center align-middle flex-col h-8 flex-shrink-0 text-p4  rounded-3xl',
+        'transition-all inline-flex justify-center align-middle flex-col h-8 flex-shrink-0 text-p4 rounded-3xl',
       layoutStyle: `flex justify-center align-middle
-      gap-1 self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[6px] px-3 h-8`,
+      gap-1 self-stretch flex-grow flex-shrink-0 flex-basis-0 py-1.5 px-3 h-8`,
     },
   },
   filled: {
