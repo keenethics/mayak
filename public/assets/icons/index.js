@@ -19,6 +19,9 @@ import BlueYoutube from './specialist-youtube.svg';
 import BlueLinkedin from './specialist-linkedin.svg';
 import BlueViber from './specialist-viber.svg';
 import BlueTelegram from './specialist-telegram.svg';
+import ArrowIconDown from './arrowDown.svg';
+import ArrowIconUp from './arrowUp.svg';
+import Ellipse from './ellipse.svg';
 
 export {
   Site,
@@ -42,4 +45,7 @@ export {
   BlueLinkedin,
   BlueViber,
   BlueTelegram,
+  ArrowIconDown,
+  Ellipse,
+  ArrowIconUp,
 };

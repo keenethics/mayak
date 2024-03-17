@@ -1,8 +1,6 @@
 'use client';
 
-import ArrowIconDown from '@icons/arrowDown.svg';
-import ArrowIconUp from '@icons/arrowUp.svg';
-import Ellipse from '@icons/ellipse.svg';
+import { ArrowIconDown, ArrowIconUp, Ellipse } from '@icons/index';
 import PropTypes from 'prop-types';
 import { cn } from '@/utils/cn';
 

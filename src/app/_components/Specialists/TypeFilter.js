@@ -12,49 +12,47 @@ function TypeList({ setCount, defaultValue }) {
   const { data: therapies, isLoading } = useListTherapies();
   const [selectedType, setSelectedType] = useState(defaultValue);
 
-  const { addParam, deleteParam } = useSetParam('type');
+  const { replace, remove } = useSetParam('type');
 
   const onChange = type => {
     setSelectedType(type);
     setCount(1);
-    addParam(type);
+    replace(type);
   };
 
-  if (!isLoading && !therapies) return null;
+  if (!isLoading && !therapies?.length) return null;
 
   if (isLoading) return <CircularProgress />;
 
-  if (therapies) {
-    return (
-      <>
-        <ul>
-          {therapies.map(therapy => {
-            const { type, title } = therapy;
-            return (
-              <li key={type} className="w-[280px] md:w-[300px]">
-                <CheckBox
-                  name="type"
-                  value={type}
-                  key={type}
-                  type="radio"
-                  checked={selectedType === type}
-                  onChange={() => onChange(type)}
-                  text={title}
-                />
-              </li>
-            );
-          })}
-        </ul>
-        <ClearFilterButton
-          clear={() => {
-            setSelectedType(null);
-            setCount(0);
-            deleteParam();
-          }}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <ul>
+        {therapies.map(therapy => {
+          const { type, title } = therapy;
+          return (
+            <li key={type} className="w-[280px] md:w-[300px]">
+              <CheckBox
+                name="type"
+                value={type}
+                key={type}
+                type="radio"
+                checked={selectedType === type}
+                onChange={() => onChange(type)}
+                text={title}
+              />
+            </li>
+          );
+        })}
+      </ul>
+      <ClearFilterButton
+        clear={() => {
+          setSelectedType(null);
+          setCount(0);
+          remove();
+        }}
+      />
+    </>
+  );
 }
 
 export function TypeFilter() {

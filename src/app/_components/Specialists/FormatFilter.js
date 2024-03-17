@@ -13,27 +13,16 @@ const online = 'ONLINE';
 function FormatList({ setCount, defaultValue }) {
   const [selectedFormat, setSelectedFormat] = useState(defaultValue);
 
-  const { addParam, deleteParam } = useSetParam('format');
-
+  const { remove, replace } = useSetParam('format');
   const onChange = format => {
     setSelectedFormat(format);
     setCount(1);
-    addParam(format);
+    replace(format);
   };
 
   return (
     <>
       <ul>
-        <li className="w-[280px] md:w-[300px]">
-          <CheckBox
-            name={offline}
-            value={offline}
-            checked={selectedFormat === offline}
-            type="radio"
-            onChange={() => onChange(offline)}
-            text="Офлайн"
-          />
-        </li>
         <li className="w-[280px] md:w-[300px]">
           <CheckBox
             name={online}
@@ -44,12 +33,22 @@ function FormatList({ setCount, defaultValue }) {
             text="Онлайн"
           />
         </li>
+        <li className="w-[280px] md:w-[300px]">
+          <CheckBox
+            name={offline}
+            value={offline}
+            checked={selectedFormat === offline}
+            type="radio"
+            onChange={() => onChange(offline)}
+            text="Офлайн"
+          />
+        </li>
       </ul>
       <ClearFilterButton
         clear={() => {
           setSelectedFormat(null);
           setCount(0);
-          deleteParam();
+          remove();
         }}
       />
     </>

@@ -12,54 +12,52 @@ function DistrictList({ setCount, defaultValue }) {
   const { data: districts, isLoading } = useListDistrict();
   const [selectedDistricts, setSelectedDistricts] = useState(defaultValue);
 
-  const { addParam, deleteParam } = useSetParam('district');
+  const { add, remove } = useSetParam('district');
 
   const onChange = district => {
     if (selectedDistricts.includes(district)) {
       setSelectedDistricts(selectedDistricts.filter(selDistrict => selDistrict !== district));
       setCount(count => count - 1);
-      deleteParam(district);
+      remove(district);
     } else {
       setSelectedDistricts([...selectedDistricts, district]);
       setCount(count => count + 1);
-      addParam(district);
+      add(district);
     }
   };
 
   if (isLoading) return <CircularProgress />;
 
-  if (!isLoading && !districts) return null;
+  if (!isLoading && !districts?.length) return null;
 
-  if (districts) {
-    return (
-      <>
-        <ul>
-          {districts.map(district => {
-            const { id, name } = district;
-            return (
-              <li key={id} className="w-[280px] md:w-[300px]">
-                <CheckBox
-                  name={id}
-                  value={id}
-                  key={id}
-                  checked={selectedDistricts.includes(id)}
-                  onChange={() => onChange(id)}
-                  text={name}
-                />
-              </li>
-            );
-          })}
-        </ul>
-        <ClearFilterButton
-          clear={() => {
-            setSelectedDistricts([]);
-            setCount(0);
-            deleteParam();
-          }}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <ul>
+        {districts.map(district => {
+          const { id, name } = district;
+          return (
+            <li key={id} className="w-[280px] md:w-[300px]">
+              <CheckBox
+                name={id}
+                value={id}
+                key={id}
+                checked={selectedDistricts.includes(id)}
+                onChange={() => onChange(id)}
+                text={name}
+              />
+            </li>
+          );
+        })}
+      </ul>
+      <ClearFilterButton
+        clear={() => {
+          setSelectedDistricts([]);
+          setCount(0);
+          remove();
+        }}
+      />
+    </>
+  );
 }
 
 export function DistrictFilter() {

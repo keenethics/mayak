@@ -7,6 +7,20 @@ import { useListEntries } from '@hooks';
 import { CircularProgress } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 
+function getProperEnding(count) {
+  const lastDigit = count % 10;
+  if (count === 11 || count === 12 || count === 13) {
+    return 'результатів';
+  }
+  if (lastDigit === 2 || lastDigit === 3 || lastDigit === 4) {
+    return 'результати';
+  }
+  if (lastDigit === 1) {
+    return 'результат';
+  }
+  return 'результатів';
+}
+
 export function SpecialistList({ className }) {
   const searchParams = useSearchParams();
   const { data, isLoading } = useListEntries(searchParams.toString());
@@ -17,26 +31,27 @@ export function SpecialistList({ className }) {
         <CircularProgress size={50} />
       </div>
     );
-  if (!isLoading && !data) return null;
-  if (data) {
-    const { data: specialists, totalCount } = data;
-    return (
-      <>
-        <ul className={className}>
-          <p className="hidden font-bold uppercase text-primary-600 md:block">{`Знайдено: ${totalCount} результатів`}</p>
-          {specialists.map(specialist => (
-            <li id={specialist.id} key={specialist.id}>
-              {specialist.gender ? (
-                <CardSpecialist className={cardStyle} specialist={specialist} />
-              ) : (
-                <CardOrganization className={cardStyle} organization={specialist} />
-              )}
-            </li>
-          ))}
-        </ul>
-      </>
-    );
-  }
+
+  if (!isLoading && !data?.data?.length) return null;
+
+  const { data: entries, totalCount } = data;
+
+  return (
+    <>
+      <ul className={className}>
+        <p className="hidden font-bold uppercase text-primary-600 md:block">{`Знайдено: ${totalCount} ${getProperEnding(totalCount)}`}</p>
+        {entries.map(entry => (
+          <li id={entry.id} key={entry.id}>
+            {entry.gender ? (
+              <CardSpecialist className={cardStyle} specialist={entry} />
+            ) : (
+              <CardOrganization className={cardStyle} organization={entry} />
+            )}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 SpecialistList.propTypes = {
