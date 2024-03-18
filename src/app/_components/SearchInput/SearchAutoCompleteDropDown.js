@@ -2,13 +2,14 @@ import { CircularProgress } from '@mui/material';
 import { OverlayContainer } from './OverlayContainer';
 import { OverlayList } from './OverlayList';
 import { useSearchContext } from './SearchContext';
+import { SEARCH_MIN_QUERY_LENGTH } from './config';
 
 export function SearchAutoCompleteDropDown() {
   const { query, autoCompleteItems, isAutoCompleteOpen, isAutoCompleteLoading } = useSearchContext();
 
   return (
     <OverlayContainer isOpen={isAutoCompleteOpen} className="left-0 top-[58px] z-[4] lg:top-[44px]">
-      {query?.length > 0 ? (
+      {query?.length >= SEARCH_MIN_QUERY_LENGTH ? (
         <>
           {isAutoCompleteLoading && (
             <div className="flex w-full items-center justify-center py-2">

@@ -4,14 +4,17 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSearchParams } from 'next/navigation';
 import { useSearchSync } from '@/app/_hooks/api/useSearchSync';
-import { getSearchTypeConfig } from './config';
+import { useDebounce } from '@/app/_hooks/useDebounce';
+import { SEARCH_DEBOUNCE_TIME_MS, SEARCH_MIN_QUERY_LENGTH, getSearchTypeConfig } from './config';
 
 const SearchContext = createContext();
+
 export function SearchProvider({ children }) {
   const searchParams = useSearchParams();
   const queryParam = searchParams.get('query');
   const searchTypeParam = searchParams.get('searchType');
   const [query, setQuery] = useState(queryParam || '');
+  const debouncedQuery = useDebounce(query, SEARCH_DEBOUNCE_TIME_MS);
   const [searchType, setSearchType] = useState(searchTypeParam || '');
 
   const currentConfig = getSearchTypeConfig(searchType);
@@ -19,11 +22,11 @@ export function SearchProvider({ children }) {
   const [isSelectTypeOpen, setIsSelectTypeOpen] = useState(false);
   const [isAutoCompleteOpen, setIsAutoCompleteOpen] = useState(false);
 
-  const {
-    data: autoCompleteItems,
-    refetch: syncAutoCompleteItems,
-    isLoading: isAutoCompleteLoading,
-  } = useSearchSync(query, currentConfig.searchType);
+  const { data: autoCompleteItems, isLoading: isAutoCompleteLoading } = useSearchSync(
+    debouncedQuery,
+    currentConfig.searchType,
+    SEARCH_MIN_QUERY_LENGTH,
+  );
 
   useEffect(() => {
     setQuery(queryParam || '');
@@ -35,8 +38,7 @@ export function SearchProvider({ children }) {
 
   useEffect(() => {
     setIsAutoCompleteOpen(query !== '');
-    syncAutoCompleteItems();
-  }, [query, syncAutoCompleteItems]);
+  }, [query]);
 
   return (
     <SearchContext.Provider
@@ -52,7 +54,6 @@ export function SearchProvider({ children }) {
         setSearchType,
         setIsSelectTypeOpen,
         setIsAutoCompleteOpen,
-        syncAutoCompleteItems,
       }}
     >
       {children}

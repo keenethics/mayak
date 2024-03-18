@@ -1,4 +1,8 @@
 const DEFAULT_SEARCH_TYPE = 'request';
+
+export const SEARCH_DEBOUNCE_TIME_MS = 600;
+export const SEARCH_MIN_QUERY_LENGTH = 3;
+
 export const searchInputTypeConfigs = [
   {
     id: 1,
