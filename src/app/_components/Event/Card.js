@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { CalendarIcon, PriceIcon, LocationIcon, TimeIcon } from '@icons/calendarFilled.svg';
+import { CalendarIcon, PriceIcon, LocationIcon, TimeIcon } from '@icons';
 import { cn } from '@/utils/cn';
 import { parseDate } from '@/utils/parseDate';
 import { Label } from '../Label';

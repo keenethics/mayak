@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -209,7 +208,3 @@ export function EventFilter() {
     </>
   );
 }
-
-EventFilter.propTypes = {
-  events: PropTypes.array,
-};

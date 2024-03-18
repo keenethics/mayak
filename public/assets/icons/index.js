@@ -27,3 +27,8 @@ export { default as Instagram } from '@icons/instagram.svg';
 export { default as HeaderCloseIcon } from '@icons/headerCloseIcon.svg';
 export { default as CheckMark } from '@icons/check-mark.svg';
 export { default as Search } from '@icons/search.svg';
+export { default as Logo } from '@icons/logo.svg';
+export { default as CalendarIcon } from '@icons/calendarFilled.svg';
+export { default as PriceIcon } from '@icons/priceFilled.svg';
+export { default as LocationIcon } from '@icons/locationFilled.svg';
+export { default as TimeIcon } from '@icons/timeFilled.svg';
