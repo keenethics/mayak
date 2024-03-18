@@ -1,4 +1,4 @@
-import { toConnectList, transformAddresses, transformCreateTherapiesCuts } from '@admin/_utils/common';
+import { toConnectList, transformAddresses, transformTherapiesCuts } from '@admin/_utils/common';
 
 export const transformOrganizationData = data => ({
   ...data,
@@ -9,6 +9,6 @@ export const transformOrganizationData = data => ({
     create: data.addresses?.length ? transformAddresses(data.addresses) : undefined,
   },
   therapiesCuts: {
-    create: data.therapiesCuts?.length ? transformCreateTherapiesCuts(data.therapiesCuts) : undefined,
+    create: data.therapiesCuts?.length ? transformTherapiesCuts({ cuts: data.therapiesCuts, cutsIds: [] }) : undefined,
   },
 });

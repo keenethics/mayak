@@ -6,7 +6,6 @@ import {
   singlePrimaryAddressRefine,
   specialistCore,
   zCreateAddressSchema,
-  zCreateTherapyCutSchema,
   zEditAddressSchema,
   zEditTherapyCutSchema,
   zInteger,
@@ -43,14 +42,14 @@ const createDefaultProps = z.object({
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
-  therapiesCuts: zCreateTherapyCutSchema.array().min(1, {
+  therapiesCuts: zEditTherapyCutSchema.array().min(1, {
     message: 'Необхідно обрати хоча б один тип терапії',
   }),
   isActive: z.literal(true),
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
-  therapiesCuts: zCreateTherapyCutSchema.array().nullish(),
+  therapiesCuts: zEditTherapyCutSchema.array().nullish(),
   addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });

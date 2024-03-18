@@ -30,7 +30,7 @@ export function transformAddresses(addresses) {
   );
 }
 
-const transformTherapiesCuts = ({ cuts, cutsIds }) => {
+export const transformTherapiesCuts = ({ cuts, cutsIds }) => {
   const cutsToUpdate = [];
   const cutsToCreate = [];
   const cutsToDelete = toConnectList(cutsIds.filter(cutId => !cuts.some(cut => cut.id === cutId)));
