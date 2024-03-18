@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { CircularProgress } from '@mui/material';
 import ky from 'ky';
 import CheckMark from '@icons/check-mark.svg';
 import Search from '@icons/search.svg';
@@ -20,38 +22,52 @@ export function EventFilter() {
   const [activeMonthNumber, setActiveMonthNumber] = useState('');
   const [hoveredIndexes, setHoveredIndexes] = useState(new Array(months.length));
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const newParams = new URLSearchParams(searchParams);
+
   const currentMonth = new Date().getMonth() + 1;
+
   const { ref, inView } = useInView();
 
-  const allEvents = async ({ take, lastCursor, month }) => {
-    const queryParams = new URLSearchParams({ take, lastCursor, month }).toString();
-    return await ky(`/api/event?${queryParams}`).json();
-  };
+  function useSetParam(param) {
+    const addParam = value => {
+      if (searchParams.get(param) && param.month !== 'month') {
+        newParams.delete(param);
+      }
+      newParams.append(param, value);
+      router.push(`?${newParams.toString()}`);
+    };
+    const deleteParam = value => {
+      if (value) {
+        newParams.delete(param, value);
+      } else {
+        newParams.delete(param);
+      }
+      router.push(`?${newParams.toString()}`);
+    };
+    return { addParam, deleteParam };
+  }
 
-  // fetch data and pass url params
-  const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } = useInfiniteQuery({
-    queryFn: ({ month = activeMonthNumber, pageParam = '' }) => allEvents({ month, take: 3, lastCursor: pageParam }),
-    queryKey: ['event', activeMonthNumber],
-    getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
-  });
+  const { addParam, deleteParam } = useSetParam('month');
 
   // console.log('data on page', data);
   // console.log('activeMonth', activeMonth.index);
 
   const monthsAhead = 5;
   const monthNames = [
-    { index: 0, name: 'січень' },
-    { index: 1, name: 'лютий' },
-    { index: 2, name: 'березень' },
-    { index: 3, name: 'квітень' },
-    { index: 4, name: 'травень' },
-    { index: 5, name: 'червень' },
-    { index: 6, name: 'липень' },
-    { index: 7, name: 'серпень' },
-    { index: 8, name: 'вересень' },
-    { index: 9, name: 'жовтень' },
-    { index: 10, name: 'листопад' },
-    { index: 11, name: 'грудень' },
+    { index: 0, name: 'січень', en: 'january' },
+    { index: 1, name: 'лютий', en: 'february' },
+    { index: 2, name: 'березень', en: 'march' },
+    { index: 3, name: 'квітень', en: 'april' },
+    { index: 4, name: 'травень', en: 'may' },
+    { index: 5, name: 'червень', en: 'june' },
+    { index: 6, name: 'липень', en: 'july' },
+    { index: 7, name: 'серпень', en: 'august' },
+    { index: 8, name: 'вересень', en: 'september' },
+    { index: 9, name: 'жовтень', en: 'october' },
+    { index: 10, name: 'листопад', en: 'november' },
+    { index: 11, name: 'грудень', en: 'december' },
   ];
 
   // Get 6 basic month names for filters, starting from current month
@@ -71,6 +87,29 @@ export function EventFilter() {
     // eslint-disable-next-line
   }, [currentMonth]);
 
+  const allEvents = async ({ month, take, lastCursor }) => {
+    const queryParams = new URLSearchParams({ take, lastCursor, month }).toString();
+    return await ky(`/api/event?${queryParams}`).json();
+  };
+
+  // fetch data and pass url params
+  const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } = useInfiniteQuery({
+    queryFn: ({ month = activeMonthNumber, pageParam = '' }) => allEvents({ month, take: 3, lastCursor: pageParam }),
+    queryKey: ['event', activeMonthNumber],
+    getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
+  });
+
+  // Get data on first render
+  useEffect(() => {
+    setActiveMonthNumber(currentMonth);
+    setActiveIndex(0);
+    setActiveMonth(months[0]);
+    deleteParam();
+    addParam(currentMonth);
+    allEvents({ month: currentMonth, take: '', lastCursor: '' });
+    // eslint-disable-next-line
+  }, [currentMonth]);
+
   useEffect(() => {
     // if the last element is in view and there is a next page, fetch the next page
     if (inView && hasNextPage) {
@@ -84,7 +123,11 @@ export function EventFilter() {
   const handleFilter = newMonth => {
     setActiveIndex(newMonth.index);
     setActiveMonth(newMonth);
-    setActiveMonthNumber(newMonth.index + 1);
+    const calcMonth = parseInt(newMonth.index + 1, 10);
+    setActiveMonthNumber(calcMonth);
+    deleteParam();
+    addParam(calcMonth);
+    allEvents({ month: calcMonth, take: '', lastCursor: '' });
   };
 
   const handleMouseEnter = index => {
@@ -109,7 +152,7 @@ export function EventFilter() {
               colorVariant="semiorange"
               // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
               className={cn(
-                activeIndex === month.index && 'active' && buttonColorVariant.eventFilter.semiorange.active,
+                activeIndex === month.index && activeMonth && buttonColorVariant.eventFilter.semiorange.active,
               )}
               // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
               // active={activeIndex === index && buttonColorVariant.eventFilter.semiorange.active}
@@ -161,7 +204,7 @@ export function EventFilter() {
             )}
         </ul>
       </div>
-      {(isLoading || isFetchingNextPage) && <p className="mb-4">Loading...</p>}
+      {(isLoading || isFetchingNextPage) && <CircularProgress />}
       {data?.pages.length === 0 && <NoInfoToShow text="подій" />}
     </>
   );

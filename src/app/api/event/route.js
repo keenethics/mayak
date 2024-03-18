@@ -11,19 +11,16 @@ export async function GET(req) {
     const queryMonth = url.searchParams.get('month');
 
     const filteredQueryMonth = parseInt(queryMonth < 10 ? `0${queryMonth}` : queryMonth, 10);
-    const startOfMonth = new Date(currentYear, filteredQueryMonth - 1, 1);
+    const startOfNextMonth = new Date(currentYear, filteredQueryMonth - 1, 1);
     const endOfMonth = new Date(currentYear, filteredQueryMonth, 0);
-    // const startNextMonth = new Date(currentYear, filteredQueryMonth + 1, 1);
     const endOfNextMonth = new Date(currentYear, filteredQueryMonth, 0);
-
-    // console.log('end cur mon', endOfMonth, 'startNextMonth', startNextMonth, 'endOfNextMonth', endOfNextMonth);
 
     const result = await prisma.event.findMany({
       include: { tags: true, additionalLink: true },
       where: {
         isActive: true,
         eventDate: {
-          gte: filteredQueryMonth === today.getMonth() + 1 ? today : startOfMonth,
+          gte: filteredQueryMonth === today.getMonth() + 1 ? today : startOfNextMonth,
           lte: filteredQueryMonth === today.getMonth() + 1 ? endOfMonth : endOfNextMonth,
         },
       },
