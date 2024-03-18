@@ -29,3 +29,6 @@ export { default as BurgerIcon } from '@icons/burger.svg';
 export { default as Instagram } from '@icons/instagram.svg';
 export { default as HeaderCloseIcon } from '@icons/headerCloseIcon.svg';
 export { default as Logo } from '@icons/logo.svg';
+export { default as ArrowIconDown } from '@icons/arrowDown.svg';
+export { default as ArrowIconUp } from '@icons/arrowDown.svg';
+export { default as Ellipse } from '@icons/ellipse.svg';

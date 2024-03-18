@@ -79,7 +79,6 @@ async function handleSearch(entityFilter, query, searchType) {
 
   return NextResponse.json({
     totalCount,
-    totalQueried: searchEntries.length,
     data,
   });
 }
