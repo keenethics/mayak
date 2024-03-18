@@ -72,6 +72,7 @@ export function transformServiceProvider(instance, modelName) {
     ...address,
     districtId: address.district.id,
   }));
+  instance.addressesIds = instance.addresses.map(address => address.id);
 }
 /* eslint-enable no-param-reassign */
 

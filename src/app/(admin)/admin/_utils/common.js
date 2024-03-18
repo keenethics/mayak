@@ -18,13 +18,13 @@ export const transformCreateTherapiesCuts = cuts =>
     requests: { connect: toConnectList(cut.requests) },
   }));
 
-export function transformAddresses(addresses) {
+export function transformAddresses({ addresses, type = 'create' }) {
   return (
     addresses
       ?.filter(address => !address.id)
       .map(({ district, districtId, ...rest }) => ({
         ...rest,
-        district: { connect: { id: district?.id ? district.id : districtId } },
+        district: { connect: { id: type === 'create' ? district : districtId } },
         districtId: undefined,
       })) ?? []
   );
@@ -62,7 +62,7 @@ export const transformTherapiesCuts = ({ cuts, cutsIds }) => {
 export const transformCreateData = ({ addresses, therapiesCuts, ...rest }) => ({
   ...rest,
   addresses: {
-    create: addresses?.length ? transformAddresses(addresses) : undefined,
+    create: addresses?.length ? transformAddresses({ addresses, type: 'create' }) : undefined,
   },
   therapiesCuts: transformTherapiesCuts({ cuts: therapiesCuts, cutsIds: [] }),
 });
@@ -79,7 +79,7 @@ export const transformEditData = ({
     addresses?.filter(address => address.id),
     address => address.id,
   );
-  const addressesToCreate = transformAddresses(addresses);
+  const addressesToCreate = transformAddresses({ addresses, type: 'edit' });
 
   const unselectedAddresses =
     addressesIds?.filter(addressId => !addressesToConnect.some(address => address.id === addressId)) ?? [];

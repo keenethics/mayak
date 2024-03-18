@@ -43,6 +43,7 @@ const activeOrganizationSchema = restCreateProps.extend({
 
 const draftOrganizationSchema = restCreateProps.partial().extend({
   therapiesCuts: zEditTherapyCutSchema.array().nullish(),
+  type: zStringArray.nullish().default([]),
   addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
