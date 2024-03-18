@@ -102,18 +102,19 @@ export function EventFilter() {
 
   // Get data on first render or on url open
   useEffect(() => {
-    if (searchParams === '') {
+    const monthFromQuery = searchParams.get('month');
+    if (monthFromQuery === undefined || null) {
       setActiveMonthNumber(currentMonth);
       setActiveIndex(0);
       setActiveMonth(months[0]);
+      deleteParam();
       addParam(currentMonth);
       allEvents({ month: currentMonth, take: '', lastCursor: '' });
     } else {
-      const monthFromQuery = searchParams.get('month');
       setActiveMonthNumber(monthFromQuery);
       // check later if active index is changing
       setActiveIndex(monthFromQuery - 1 === activeMonthNumber && activeMonthNumber);
-
+      // console.log(activeIndex);
       setActiveMonth(months.filter(item => item.index === monthFromQuery));
       allEvents({ month: monthFromQuery, take: '', lastCursor: '' });
     }
@@ -162,7 +163,9 @@ export function EventFilter() {
               variant="eventFilter"
               colorVariant="semiorange"
               // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
-              className={cn(activeIndex === month.index && buttonColorVariant.eventFilter.semiorange.active)}
+              className={cn(
+                activeIndex === month.index && activeMonth && buttonColorVariant.eventFilter.semiorange.active,
+              )}
               // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
               // active={activeIndex === index && buttonColorVariant.eventFilter.semiorange.active}
               active="true"
@@ -185,8 +188,8 @@ export function EventFilter() {
                   activeIndex !== month.index &&
                   (buttonColorVariant.eventFilter.semiorange.hover ||
                     buttonColorVariant.eventFilter.semiorange.focused) && (
-                    <Search key={`searchicon+${month.index}`} className="h-4 w-4 transition-all" />
-                  ),
+                  <Search key={`searchicon+${month.index}`} className="h-4 w-4 transition-all" />
+                ),
               ]}
             >
               {month.name.charAt(0).toUpperCase() + month.name.slice(1)}
