@@ -5,7 +5,38 @@ import { prisma } from '@/lib/db';
 import { BadRequestException } from '@/lib/errors/BadRequestException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
 
-async function handleSearch(whereFilter) {
+function buildFilter(entityFilter, query, searchType) {
+  const defaultFilter = { OR: [{ specialist: entityFilter }, { organization: entityFilter }] };
+  // use default filter when query is not set
+  if (!query) {
+    return defaultFilter;
+  }
+  switch (searchType) {
+    case 'request':
+      // TODO: after requests are implemented
+      return {};
+    case 'specialist':
+      return {
+        sortString: {
+          contains: query,
+          mode: 'insensitive',
+        },
+        specialist: entityFilter,
+      };
+    case 'organization':
+      return {
+        sortString: {
+          contains: query,
+          mode: 'insensitive',
+        },
+        organization: entityFilter,
+      };
+    default:
+      return defaultFilter;
+  }
+}
+
+async function handleSearch(entityFilter, query, searchType) {
   const sharedInclude = {
     therapies: { select: { title: true } },
     addresses: {
@@ -17,11 +48,9 @@ async function handleSearch(whereFilter) {
     },
   };
 
-  const totalCount = await prisma.searchEntry.count({
-    where: {
-      OR: [{ organization: whereFilter }, { specialist: whereFilter }],
-    },
-  });
+  const filter = buildFilter(entityFilter, query, searchType);
+
+  const totalCount = await prisma.searchEntry.count({ where: filter });
 
   const searchEntries = await prisma.searchEntry.findMany({
     include: {
@@ -38,9 +67,7 @@ async function handleSearch(whereFilter) {
         },
       },
     },
-    where: {
-      OR: [{ organization: whereFilter }, { specialist: whereFilter }],
-    },
+    where: filter,
     orderBy: {
       sortString: 'asc',
     },
@@ -57,24 +84,19 @@ async function handleSearch(whereFilter) {
   });
 }
 
-async function handleSearchSync(searchType, query, whereFilter) {
+async function handleSearchSync(entityFilter, query, searchType) {
   let mappedSyncItems = [];
   if (searchType === 'request') {
     // TODO: when the requests are implemented
   } else if (searchType === 'organization' || searchType === 'specialist') {
     const isOrganization = searchType === 'organization';
+    const include = {
+      select: { id: true },
+    };
     const syncItems = await prisma.searchEntry.findMany({
-      include: isOrganization ? { organization: { select: { id: true } } } : { specialist: { select: { id: true } } },
-      where: {
-        sortString: {
-          contains: query,
-          mode: 'insensitive',
-        },
-        ...(isOrganization ? { organization: whereFilter } : { specialist: whereFilter }),
-      },
-      orderBy: {
-        sortString: 'asc',
-      },
+      include: isOrganization ? { organization: include } : { specialist: include },
+      where: buildFilter(entityFilter, query, searchType),
+      orderBy: { sortString: 'asc' },
     });
     mappedSyncItems = syncItems.map(el => ({
       id: isOrganization ? el.organization.id : el.specialist.id,
@@ -120,7 +142,7 @@ export const handler = withErrorHandler(async req => {
       district: typeof params.district === 'string' ? [params.district] : params.district,
     }),
   );
-  const whereFilter = {
+  const entityFilter = {
     AND: {
       isActive: true,
       therapies: type && {
@@ -140,9 +162,9 @@ export const handler = withErrorHandler(async req => {
   };
 
   if (searchSync) {
-    return handleSearchSync(searchType, query, whereFilter);
+    return handleSearchSync(entityFilter, query, searchType);
   }
-  return handleSearch(whereFilter);
+  return handleSearch(entityFilter, query, searchType);
 });
 
 export { handler as GET };

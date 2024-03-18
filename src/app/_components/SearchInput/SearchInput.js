@@ -9,7 +9,7 @@ import { SearchAutoCompleteDropDown } from './SearchAutoCompleteDropDown';
 import { SearchInputField } from './SearchInputField';
 
 export function SearchInput() {
-  const { query, isSelectTypeOpen, setQuery, setIsSelectTypeOpen } = useSearchContext();
+  const { query, isSelectTypeOpen, setQuery, setIsSelectTypeOpen, submitSearch } = useSearchContext();
 
   return (
     <div className="flex w-full flex-col gap-4 lg:flex-row">
@@ -34,7 +34,7 @@ export function SearchInput() {
           <SearchAutoCompleteDropDown />
         </div>
       </div>
-      <PillButton variant="filled" colorVariant="blue" className="px-6 py-3">
+      <PillButton variant="filled" colorVariant="blue" className="px-6 py-3" onClick={submitSearch}>
         Знайти
       </PillButton>
     </div>

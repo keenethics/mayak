@@ -2,8 +2,9 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSearchParams } from 'next/navigation';
-import { useSearchSync } from '@/app/_hooks/api/useSearchSync';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
+import { searchSyncKey, useSearchSync } from '@/app/_hooks/api/useSearchSync';
 import { useDebounce } from '@/app/_hooks/useDebounce';
 import { SEARCH_DEBOUNCE_TIME_MS, SEARCH_MIN_QUERY_LENGTH, getSearchTypeConfig } from './config';
 
@@ -27,6 +28,15 @@ export function SearchProvider({ children }) {
     currentConfig.searchType,
     SEARCH_MIN_QUERY_LENGTH,
   );
+
+  const queryClient = useQueryClient();
+
+  const router = useRouter();
+
+  function submitSearch() {
+    queryClient.cancelQueries({ queryKey: searchSyncKey });
+    router.push(`/specialist?searchType=${searchType}&query=${query}`);
+  }
 
   useEffect(() => {
     setQuery(queryParam || '');
@@ -55,6 +65,7 @@ export function SearchProvider({ children }) {
         setSearchType,
         setIsSelectTypeOpen,
         setIsAutoCompleteOpen,
+        submitSearch,
       }}
     >
       {children}

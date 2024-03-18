@@ -1,11 +1,19 @@
 import { useEffect, useRef } from 'react';
 import { useFocus } from '@/app/_hooks/useFocus';
+import { useKeyPress } from '@/app/_hooks/useKeyPress';
 import { useSearchContext } from './SearchContext';
+import { SEARCH_MIN_QUERY_LENGTH } from './config';
 
 export function SearchInputField() {
-  const { currentConfig, query, setQuery, setIsAutoCompleteOpen } = useSearchContext();
+  const { currentConfig, query, setQuery, setIsAutoCompleteOpen, submitSearch } = useSearchContext();
   const inputRef = useRef(null);
   const inputFocused = useFocus(inputRef);
+
+  useKeyPress('Enter', () => {
+    if (inputFocused && query?.length >= SEARCH_MIN_QUERY_LENGTH) {
+      submitSearch();
+    }
+  });
 
   useEffect(() => {
     setIsAutoCompleteOpen(inputFocused);
