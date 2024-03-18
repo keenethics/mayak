@@ -64,31 +64,20 @@ const therapies = [
 ];
 
 async function createIfNotExist(model, data, filter) {
-  const existing = await model.findMany();
-  const filteredToCreate = filter(existing, data);
-  await model.createMany({ data: filteredToCreate });
+  // eslint-disable-next-line no-restricted-syntax
+  for (const it of data) {
+    // eslint-disable-next-line no-await-in-loop
+    await model.upsert({ where: filter(it), create: it, update: {} });
+  }
 }
 
 async function main() {
-  // do not create therapies that already exist to not break existing data
-  await createIfNotExist(prisma.therapy, therapies, (existings, actuals) =>
-    actuals.filter(actual => !existings.some(existing => existing.type === actual.type)),
-  );
-
-  // do not create districts that already exist to not break existing data
-  await createIfNotExist(prisma.district, districts, (existings, actuals) =>
-    actuals.filter(actual => !existings.some(existing => existing.name === actual.name)),
-  );
-
-  // do not create specializations that already exist to not break existing data
-  await createIfNotExist(prisma.specialization, specializations, (existings, actuals) =>
-    actuals.filter(actual => !existings.some(existing => existing.name === actual.name)),
-  );
-
-  // do not create org types that already exist to not break existing data
-  await createIfNotExist(prisma.organizationType, organizationTypes, (existings, actuals) =>
-    actuals.filter(actual => !existings.some(existing => existing.name === actual.name)),
-  );
+  await createIfNotExist(prisma.therapy, therapies, therapy => ({ type: therapy.type }));
+  await createIfNotExist(prisma.district, districts, district => ({ name: district.name }));
+  await createIfNotExist(prisma.specialization, specializations, specialization => ({ name: specialization.name }));
+  await createIfNotExist(prisma.organizationType, organizationTypes, organizationType => ({
+    name: organizationType.name,
+  }));
 }
 
 main().then(
