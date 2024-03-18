@@ -7,8 +7,9 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-import 'swiper/css';
 import { PillButton } from '@/app/_components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'swiper/css';
 
 export function DistrictList({ list, className }) {
   const [selected, setSelected] = useState(0);
@@ -27,7 +28,7 @@ export function DistrictList({ list, className }) {
             <Link
               href={`/specialist?district=${id}`}
               className={isSelected ? 'pointer-events-none cursor-none' : ''}
-              tabindex={-1}
+              tabIndex={-1}
             >
               <PillButton
                 variant="transparent"
