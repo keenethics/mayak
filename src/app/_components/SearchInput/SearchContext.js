@@ -1,33 +1,42 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import PropTypes from 'prop-types';
 import { createContext, useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useSearchParams } from 'next/navigation';
+import { useSearchSync } from '@/app/_hooks/api/useSearchSync';
 import { getSearchTypeConfig } from './config';
 
 const SearchContext = createContext();
-
 export function SearchProvider({ children }) {
   const searchParams = useSearchParams();
   const queryParam = searchParams.get('query');
   const searchTypeParam = searchParams.get('searchType');
   const [query, setQuery] = useState(queryParam || '');
-  const [searchType, setSearchType] = useState(searchTypeParam);
+  const [searchType, setSearchType] = useState(searchTypeParam || '');
+
   const currentConfig = getSearchTypeConfig(searchType);
+
   const [isSelectTypeOpen, setIsSelectTypeOpen] = useState(false);
   const [isAutoCompleteOpen, setIsAutoCompleteOpen] = useState(false);
-  const [autoCompleteItems, setAutoCompleteItems] = useState([]);
 
-  async function syncAutoCompleteItems() {
-    const baseQueryString = `searchSync=true&searchType=${currentConfig.searchType}&query=${query}`;
-    const res = await fetch(`/api/search?${baseQueryString}`);
-    const data = await res.json();
-    setAutoCompleteItems(data.data);
-  }
+  const {
+    data: autoCompleteItems,
+    refetch: syncAutoCompleteItems,
+    isLoading: isAutoCompleteLoading,
+  } = useSearchSync(query, currentConfig.searchType);
+
+  useEffect(() => {
+    setQuery(queryParam || '');
+  }, [queryParam]);
+
+  useEffect(() => {
+    setSearchType(searchTypeParam || '');
+  }, [searchTypeParam]);
 
   useEffect(() => {
     setIsAutoCompleteOpen(query !== '');
-  }, [query]);
+    syncAutoCompleteItems();
+  }, [query, syncAutoCompleteItems]);
 
   return (
     <SearchContext.Provider
@@ -38,6 +47,7 @@ export function SearchProvider({ children }) {
         isSelectTypeOpen,
         isAutoCompleteOpen,
         autoCompleteItems,
+        isAutoCompleteLoading,
         setQuery,
         setSearchType,
         setIsSelectTypeOpen,
