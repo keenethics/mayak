@@ -3,7 +3,7 @@ CREATE TABLE "psychology_method" (
     "id" UUID NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "title" VARCHAR(128) NOT NULL,
-    "description" TEXT NOT NULL,
+    "description" TEXT,
 
     CONSTRAINT "psychology_method_pkey" PRIMARY KEY ("id")
 );
@@ -13,7 +13,7 @@ CREATE TABLE "psychotherapy_method" (
     "id" UUID NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "title" VARCHAR(128) NOT NULL,
-    "description" TEXT NOT NULL,
+    "description" TEXT,
 
     CONSTRAINT "psychotherapy_method_pkey" PRIMARY KEY ("id")
 );
@@ -29,12 +29,6 @@ CREATE TABLE "_PsychotherapyMethodToSpecialist" (
     "A" UUID NOT NULL,
     "B" UUID NOT NULL
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "psychology_method_title_key" ON "psychology_method"("title");
-
--- CreateIndex
-CREATE UNIQUE INDEX "psychotherapy_method_title_key" ON "psychotherapy_method"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_PsychologyMethodToSpecialist_AB_unique" ON "_PsychologyMethodToSpecialist"("A", "B");

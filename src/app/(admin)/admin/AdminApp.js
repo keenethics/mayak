@@ -13,6 +13,7 @@ import {
   OrganizationsList,
   OrganizationEdit,
 } from '@admin/components/ServiceProvider/Organization';
+import { MethodsList, MethodsShow, MethodsEdit, MethodsCreate } from '@admin/components/Methods';
 
 import {
   SpecialistCreate,
@@ -99,6 +100,22 @@ export default function AdminPage() {
         list={ListGuesser}
         show={ShowGuesser}
         edit={EditGuesser}
+      />
+      <Resource
+        name={RESOURCES.psychotherapyMethod}
+        list={MethodsList}
+        edit={MethodsEdit}
+        create={MethodsCreate}
+        show={MethodsShow}
+        options={{ label: 'Напрями і методи психотерапевтів' }}
+      />
+      <Resource
+        name={RESOURCES.psychologyMethod}
+        list={MethodsList}
+        edit={MethodsEdit}
+        create={MethodsCreate}
+        show={MethodsShow}
+        options={{ label: 'Напрями і методи психологів' }}
       />
     </Admin>
   );
