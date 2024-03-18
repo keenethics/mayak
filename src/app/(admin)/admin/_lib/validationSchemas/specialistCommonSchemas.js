@@ -93,6 +93,17 @@ export const zCreateTherapyCutSchema = z.object({
   }),
 });
 
+export const zEditTherapyCutSchema = z.object({
+  id: zString.nullish(),
+  therapy: z.object({
+    id: zString,
+    title: zString,
+  }),
+  requestsIds: zString.array().min(1, {
+    message: 'Необхідно обрати хоча б один запит',
+  }),
+});
+
 export const createValidationSchema = (schemaUnion, defaultProperties) =>
   z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {
     const { formatOfWork, isActive, addresses } = schema;

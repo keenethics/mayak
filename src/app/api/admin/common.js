@@ -63,7 +63,7 @@ export function transformServiceProvider(instance, modelName) {
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
-  // instance.therapiesCutsIds = instance.therapiesCuts.map(cut => cut.id);
+  instance.therapiesCutsIds = instance.therapiesCuts.map(cut => cut.id);
   instance.therapiesCuts = instance?.therapiesCuts?.map(cut => ({
     ...cut,
     requestsIds: cut.requests.map(request => request.id),
