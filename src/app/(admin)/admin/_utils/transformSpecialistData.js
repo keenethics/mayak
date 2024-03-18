@@ -8,7 +8,7 @@ export const transformData = data => ({
   addresses: {
     create: data.addresses?.length ? transformAddresses(data.addresses) : undefined,
   },
-  therapiesCuts: {
-    create: data.therapiesCuts?.length ? transformTherapiesCuts({ cuts: data.therapiesCuts, cutsIds: [] }) : undefined,
-  },
+  therapiesCuts: data.therapiesCuts?.length
+    ? transformTherapiesCuts({ cuts: data.therapiesCuts, cutsIds: [] })
+    : undefined,
 });

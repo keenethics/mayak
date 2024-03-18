@@ -86,12 +86,6 @@ export const singlePrimaryAddressRefine = addresses => {
 };
 
 // ---- THERAPY CUT SECTION ----
-export const zCreateTherapyCutSchema = z.object({
-  therapyId: zString,
-  requests: zString.array().min(1, {
-    message: 'Необхідно обрати хоча б один запит',
-  }),
-});
 
 export const zEditTherapyCutSchema = z.object({
   id: zString.nullish(),

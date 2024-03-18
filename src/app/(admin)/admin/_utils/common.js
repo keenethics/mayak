@@ -52,7 +52,11 @@ export const transformTherapiesCuts = ({ cuts, cutsIds }) => {
     }
   });
 
-  return { update: cutsToUpdate, deleteMany: cutsToDelete, create: cutsToCreate };
+  return {
+    update: cutsToUpdate.length ? cutsToUpdate : undefined,
+    deleteMany: cutsToDelete,
+    create: cutsToCreate,
+  };
 };
 
 export const transformEditData = ({
