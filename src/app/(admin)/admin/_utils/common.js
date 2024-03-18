@@ -18,6 +18,9 @@ export const transformCreateTherapiesCuts = cuts =>
     requests: { connect: toConnectList(cut.requests) },
   }));
 
+// export const transformEditTherapiesCuts = cuts =>
+//   cuts.map(cut => ({ id: cut.id, requests: { connect: toConnectList(cut.requestsIds) } }));
+
 export function transformAddresses(addresses) {
   return (
     addresses
@@ -30,8 +33,7 @@ export function transformAddresses(addresses) {
   );
 }
 
-export const transformEditData = ({ therapiesIds, addresses, addressesIds, formatOfWork, ...rest }) => {
-  const therapiesToConnect = toConnectList(therapiesIds);
+export const transformEditData = ({ addresses, addressesIds, formatOfWork, ...rest }) => {
   const addressesToConnect = toConnectList(
     addresses?.filter(address => address.id),
     address => address.id,
@@ -48,10 +50,6 @@ export const transformEditData = ({ therapiesIds, addresses, addressesIds, forma
     formatOfWork,
     therapiesIds: undefined,
     addressesIds: undefined,
-    therapies: {
-      set: [],
-      connect: therapiesToConnect,
-    },
     addresses: {
       connect: addressesToConnect,
       create: addressesToCreate,

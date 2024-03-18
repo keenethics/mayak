@@ -3,6 +3,7 @@
 import {
   ArrayInput,
   AutocompleteArrayInput,
+  AutocompleteInput,
   FormDataConsumer,
   ReferenceArrayInput,
   ReferenceInput,
@@ -16,58 +17,84 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 
-function TherapiesCutForm({ getSource, resetRequests, choices, requests, loading, type, readOnly = false }) {
+function TherapiesCutFormEdit({ getSource, therapiesCuts, loading }) {
+  const { setValue } = useFormContext();
+  if (!therapiesCuts) return null;
+
+  const selectedTherapies = therapiesCuts.map(cut => cut.therapy && cut.therapy.id).filter(Boolean);
+
   return (
     <>
-      {type === 'create' && (
-        <>
-          <SelectInput
-            isLoading={loading}
-            label="Тип терапії"
-            source={getSource('therapyId')}
-            fullWidth
-            choices={choices}
-            onChange={resetRequests}
-          />
-          <AutocompleteArrayInput
-            isLoading={loading}
-            label="Запити які лікуються типом терапії"
-            fullWidth
-            source={getSource('requests')}
-            choices={requests}
-          />
-        </>
-      )}
-      {type === 'edit' && (
-        <>
-          <ReferenceInput source={getSource('therapyId')} reference="Therapy">
-            <SelectInput
-              InputProps={{
-                readOnly,
-              }}
-              label="Тип терапії"
-              optionText="title"
-              optionValue="id"
-              validate={required()}
-              fullWidth
-            />
-          </ReferenceInput>
-          <ReferenceArrayInput source={getSource('requestsIds')} reference="Request">
-            <AutocompleteArrayInput
-              isLoading={loading}
-              label="Запити які лікуються типом терапії"
-              fullWidth
-              optionText="name"
-              optionValue="id"
-            />
-          </ReferenceArrayInput>
-        </>
-      )}
+      <ReferenceInput
+        source={getSource('therapy.id')}
+        filter={{ id: { notIn: selectedTherapies } }}
+        reference="Therapy"
+        validate={required()}
+        fullWidth
+      >
+        <AutocompleteInput
+          isLoading={loading}
+          optionText="title"
+          optionValue="id"
+          onChange={(_, record) => {
+            const curTherapyData = getSource('therapy.id');
+            const index = Number(curTherapyData.split('.')[1]); // therapiesCuts.[index].therapyId
+            const newCuts = therapiesCuts.map((cut, i) => {
+              if (i !== index) {
+                return cut;
+              }
+
+              return { ...cut, therapy: record, requests: [], requestsIds: [] };
+            });
+            // therapiesCuts[index] = { ...cut, therapy: record, requests: [], requestsIds: [] };
+            setValue('therapiesCuts', newCuts);
+          }}
+          validate={required()}
+          fullWidth
+        />
+      </ReferenceInput>
+      <ReferenceArrayInput source={getSource('requestsIds')} reference="Request">
+        <AutocompleteArrayInput
+          isLoading={loading}
+          label="Запити які лікуються типом терапії"
+          fullWidth
+          optionText="name"
+          optionValue="id"
+        />
+      </ReferenceArrayInput>
     </>
   );
 }
 
-TherapiesCutForm.propTypes = {
+TherapiesCutFormEdit.propTypes = {
+  getSource: PropTypes.func,
+  therapiesCuts: PropTypes.array,
+  loading: PropTypes.bool,
+};
+
+function TherapiesCutFormCreate({ getSource, resetRequests, choices, requests, loading }) {
+  return (
+    <>
+      <SelectInput
+        isLoading={loading}
+        label="Тип терапії"
+        source={getSource('therapyId')}
+        fullWidth
+        choices={choices}
+        onChange={resetRequests}
+      />
+      <AutocompleteArrayInput
+        isLoading={loading}
+        label="Запити які лікуються типом терапії"
+        fullWidth
+        source={getSource('requests')}
+        choices={requests}
+      />
+    </>
+  );
+}
+
+TherapiesCutFormCreate.propTypes = {
   getSource: PropTypes.func,
   resetRequests: PropTypes.func,
   choices: PropTypes.array,
@@ -96,7 +123,7 @@ export function TherapiesCutsSelect({ type = 'create' }) {
       if (therapiesCuts) {
         const index = Number(e.target.name.split('.')[1]); // therapiesCuts.[index].therapyId
         const newId = e.target.value;
-        therapiesCuts[index] = { therapyId: newId, requests: [] };
+        therapiesCuts[index] = { therapyId: newId, requests: [], requestsIds: [] };
         setValue('therapiesCuts', therapiesCuts);
       }
     },
@@ -112,17 +139,34 @@ export function TherapiesCutsSelect({ type = 'create' }) {
     <ArrayInput source="therapiesCuts" isLoading={therapiesLoading} label="Типи терапій">
       <SimpleFormIterator fullWidth disableReordering={true}>
         <FormDataConsumer>
-          {({ scopedFormData, getSource }) => {
-            if (!scopedFormData) return null;
+          {({ scopedFormData, formData, getSource }) => {
+            if (!scopedFormData || !formData) return null;
+            // console.log({ formData });
             return (
-              <TherapiesCutForm
-                getSource={getSource}
-                choices={therapiesChoices}
-                resetRequests={resetRequests}
-                loading={therapiesLoading}
-                requests={getTherapyRequests(scopedFormData.therapyId)}
-                type={type}
-              />
+              <>
+                {type === 'create' && (
+                  <TherapiesCutFormCreate
+                    getSource={getSource}
+                    choices={therapiesChoices}
+                    therapiesCuts={therapiesCuts}
+                    resetRequests={resetRequests}
+                    loading={therapiesLoading}
+                    requests={getTherapyRequests(scopedFormData.therapyId)}
+                    type={type}
+                  />
+                )}
+                {type === 'edit' && (
+                  <TherapiesCutFormEdit
+                    getSource={getSource}
+                    choices={therapiesChoices}
+                    therapiesCuts={therapiesCuts}
+                    resetRequests={resetRequests}
+                    loading={therapiesLoading}
+                    requests={getTherapyRequests(scopedFormData.therapyId)}
+                    type={type}
+                  />
+                )}
+              </>
             );
           }}
         </FormDataConsumer>
