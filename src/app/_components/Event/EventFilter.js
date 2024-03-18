@@ -35,7 +35,6 @@ export function EventFilter() {
       if (searchParams.get(param) && param.month === 'month') {
         newParams.delete(param);
       }
-
       newParams.append(param, value);
       router.push(`${pathname}?${newParams.toString()}`);
     };
@@ -51,9 +50,6 @@ export function EventFilter() {
   }
 
   const { addParam, deleteParam } = useSetParam('month');
-
-  // console.log('data on page', data);
-  // console.log('activeMonth', activeMonth.index);
 
   const monthsAhead = 5;
   const monthNames = [
@@ -103,20 +99,20 @@ export function EventFilter() {
   // Get data on first render or on url open
   useEffect(() => {
     const monthFromQuery = searchParams.get('month');
-    if (monthFromQuery === undefined || null) {
-      setActiveMonthNumber(currentMonth);
-      setActiveIndex(0);
-      setActiveMonth(months[0]);
-      deleteParam();
-      addParam(currentMonth);
-      allEvents({ month: currentMonth, take: '', lastCursor: '' });
-    } else {
+    if (monthFromQuery && monthFromQuery !== currentMonth) {
+      // If the month is defined in the query and is not equal to the current month
       setActiveMonthNumber(monthFromQuery);
-      // check later if active index is changing
       setActiveIndex(monthFromQuery - 1 === activeMonthNumber && activeMonthNumber);
-      // console.log(activeIndex);
-      setActiveMonth(months.filter(item => item.index === monthFromQuery));
+      setActiveMonth(months.filter(item => item.index === parseInt(monthFromQuery, 10)));
       allEvents({ month: monthFromQuery, take: '', lastCursor: '' });
+    } else {
+      // If the month is not defined in the query or is equal to the current month
+      setActiveMonth(months[0]);
+      setActiveMonthNumber(currentMonth);
+      setActiveIndex(monthFromQuery - 1 === currentMonth && currentMonth);
+      deleteParam();
+      addParam(currentMonth.toString());
+      allEvents({ month: currentMonth, take: '', lastCursor: '' });
     }
 
     // eslint-disable-next-line
@@ -162,22 +158,21 @@ export function EventFilter() {
             <PillButton
               variant="eventFilter"
               colorVariant="semiorange"
-              // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
               className={cn(
                 activeIndex === month.index && activeMonth && buttonColorVariant.eventFilter.semiorange.active,
+                'group',
               )}
-              // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
-              // active={activeIndex === index && buttonColorVariant.eventFilter.semiorange.active}
-              active="true"
+              active={buttonColorVariant.eventFilter.semiorange.active}
               key={month.index}
               onMouseEnter={() => handleMouseEnter(month.index)}
               onMouseLeave={() => handleMouseLeave(month.index)}
               onFocus={() => handleMouseEnter(month.index)}
               onBlur={() => handleMouseLeave(month.index)}
-              onMouseDown={() => handleMouseEnter(month.index)}
-              onMouseUp={() => handleMouseLeave(month.index)}
+              // onMouseDown={() => handleMouseEnter(month.index)}
+              // onMouseUp={() => handleMouseLeave(month.index)}
               onClick={() => {
                 handleFilter(month);
+                handleMouseLeave(month.index);
               }}
               icon={[
                 activeIndex === month.index && (
@@ -188,7 +183,7 @@ export function EventFilter() {
                   activeIndex !== month.index &&
                   (buttonColorVariant.eventFilter.semiorange.hover ||
                     buttonColorVariant.eventFilter.semiorange.focused) && (
-                  <Search key={`searchicon+${month.index}`} className="h-4 w-4 transition-all" />
+                  <Search key={`searchicon+${month.index}`} className=" h-4 w-4 transition-all" />
                 ),
               ]}
             >
@@ -217,7 +212,8 @@ export function EventFilter() {
         </ul>
       </div>
       {(isLoading || isFetchingNextPage) && <CircularProgress />}
-      {data?.pages.length === 0 && <NoInfoToShow text="подій" />}
+
+      {isSuccess && data?.pages.length === 0 && <NoInfoToShow text="подій" />}
     </>
   );
 }
