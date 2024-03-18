@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { CircularProgress } from '@mui/material';
 import ky from 'ky';
 import CheckMark from '@icons/check-mark.svg';
@@ -23,6 +23,7 @@ export function EventFilter() {
 
   const searchParams = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
   const newParams = new URLSearchParams(searchParams);
 
   const currentMonth = new Date().getMonth() + 1;
@@ -31,11 +32,12 @@ export function EventFilter() {
 
   function useSetParam(param) {
     const addParam = value => {
-      if (searchParams.get(param) && param.month !== 'month') {
+      if (searchParams.get(param) && param.month === 'month') {
         newParams.delete(param);
       }
+
       newParams.append(param, value);
-      router.push(`?${newParams.toString()}`);
+      router.push(`${pathname}?${newParams.toString()}`);
     };
     const deleteParam = value => {
       if (value) {
@@ -43,7 +45,7 @@ export function EventFilter() {
       } else {
         newParams.delete(param);
       }
-      router.push(`?${newParams.toString()}`);
+      router.push(`${pathname}?${newParams.toString()}`);
     };
     return { addParam, deleteParam };
   }
@@ -98,16 +100,26 @@ export function EventFilter() {
     getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
   });
 
-  // Get data on first render
+  // Get data on first render or on url open
   useEffect(() => {
-    setActiveMonthNumber(currentMonth);
-    setActiveIndex(0);
-    setActiveMonth(months[0]);
-    deleteParam();
-    addParam(currentMonth);
-    allEvents({ month: currentMonth, take: '', lastCursor: '' });
+    if (searchParams === '') {
+      setActiveMonthNumber(currentMonth);
+      setActiveIndex(0);
+      setActiveMonth(months[0]);
+      addParam(currentMonth);
+      allEvents({ month: currentMonth, take: '', lastCursor: '' });
+    } else {
+      const monthFromQuery = searchParams.get('month');
+      setActiveMonthNumber(monthFromQuery);
+      // check later if active index is changing
+      setActiveIndex(monthFromQuery - 1 === activeMonthNumber && activeMonthNumber);
+
+      setActiveMonth(months.filter(item => item.index === monthFromQuery));
+      allEvents({ month: monthFromQuery, take: '', lastCursor: '' });
+    }
+
     // eslint-disable-next-line
-  }, [currentMonth]);
+  }, [currentMonth, searchParams]);
 
   useEffect(() => {
     // if the last element is in view and there is a next page, fetch the next page
@@ -150,12 +162,10 @@ export function EventFilter() {
               variant="eventFilter"
               colorVariant="semiorange"
               // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
-              className={cn(
-                activeIndex === month.index && activeMonth && buttonColorVariant.eventFilter.semiorange.active,
-              )}
+              className={cn(activeIndex === month.index && buttonColorVariant.eventFilter.semiorange.active)}
               // className={cn(activeIndex === index && buttonColorVariant.eventFilter.semiorange.active)}
               // active={activeIndex === index && buttonColorVariant.eventFilter.semiorange.active}
-              active={activeIndex === month.index ? `${buttonColorVariant.eventFilter.semiorange.active}` : ''}
+              active="true"
               key={month.index}
               onMouseEnter={() => handleMouseEnter(month.index)}
               onMouseLeave={() => handleMouseLeave(month.index)}
@@ -175,8 +185,8 @@ export function EventFilter() {
                   activeIndex !== month.index &&
                   (buttonColorVariant.eventFilter.semiorange.hover ||
                     buttonColorVariant.eventFilter.semiorange.focused) && (
-                  <Search key={`searchicon+${month.index}`} className="h-4 w-4 transition-all" />
-                ),
+                    <Search key={`searchicon+${month.index}`} className="h-4 w-4 transition-all" />
+                  ),
               ]}
             >
               {month.name.charAt(0).toUpperCase() + month.name.slice(1)}

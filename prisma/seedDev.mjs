@@ -251,7 +251,7 @@ async function main() {
       });
     });
   }
-  for (let i = 0; i <= 300; i += 1) {
+  for (let i = 0; i <= 100; i += 1) {
     // eslint-disable-next-line no-await-in-loop
     await prisma.event.create({
       data: randomEvent({ tags, link }),
