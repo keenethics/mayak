@@ -7,6 +7,7 @@ import {
   zCreateAddressSchema,
   zCreateTherapyCutSchema,
   zEditAddressSchema,
+  zEditTherapyCutSchema,
   zInteger,
   zString,
   zStringArray,
@@ -60,6 +61,7 @@ const restEditProps = zOrganizationSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
+  therapiesCutsIds: z.string().array().nullish(),
 });
 
 const editDefaultProps = z.object({
@@ -67,13 +69,16 @@ const editDefaultProps = z.object({
 });
 
 const activeOrganizationEditSchema = restEditProps.extend({
-  therapiesIds: zStringArray,
+  therapiesCuts: zEditTherapyCutSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   organizationTypesIds: zStringArray.default([]),
   description: zString,
   isActive: z.literal(true),
 });
 
 const draftOrganizationEditSchema = restEditProps.partial().extend({
+  therapiesCuts: zEditTherapyCutSchema.array().nullish(),
   isActive: z.literal(false),
 });
 

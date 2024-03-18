@@ -36,6 +36,7 @@ function TherapiesCutFormEdit({ getSource, therapiesCuts, loading }) {
           isLoading={loading}
           optionText="title"
           optionValue="id"
+          label="Тип терапії"
           onChange={(_, record) => {
             const curTherapyData = getSource('therapy.id');
             const index = Number(curTherapyData.split('.')[1]); // therapiesCuts.[index].therapyId
