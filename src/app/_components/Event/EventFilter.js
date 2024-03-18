@@ -175,8 +175,8 @@ export function EventFilter() {
                   activeIndex !== month.index &&
                   (buttonColorVariant.eventFilter.semiorange.hover ||
                     buttonColorVariant.eventFilter.semiorange.focused) && (
-                    <Search key={`searchicon+${month.index}`} className="h-4 w-4 transition-all" />
-                  ),
+                  <Search key={`searchicon+${month.index}`} className="h-4 w-4 transition-all" />
+                ),
               ]}
             >
               {month.name.charAt(0).toUpperCase() + month.name.slice(1)}
