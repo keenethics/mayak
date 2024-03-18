@@ -17,11 +17,13 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 
-function TherapiesCutFormEdit({ getSource, therapiesCuts, loading }) {
+function TherapiesCutFormEdit({ getSource, requests, therapiesCuts, loading }) {
   const { setValue } = useFormContext();
   if (!therapiesCuts) return null;
 
   const selectedTherapies = therapiesCuts.map(cut => cut.therapy && cut.therapy.id).filter(Boolean);
+
+  const requestsIds = requests.map(request => request.id);
 
   return (
     <>
@@ -47,14 +49,18 @@ function TherapiesCutFormEdit({ getSource, therapiesCuts, loading }) {
 
               return { ...cut, therapy: record, requests: [], requestsIds: [] };
             });
-            // therapiesCuts[index] = { ...cut, therapy: record, requests: [], requestsIds: [] };
             setValue('therapiesCuts', newCuts);
           }}
           validate={required()}
           fullWidth
         />
       </ReferenceInput>
-      <ReferenceArrayInput source={getSource('requestsIds')} reference="Request">
+      <ReferenceArrayInput
+        source={getSource('requestsIds')}
+        reference="Request"
+        filter={{ id: { in: requestsIds } }}
+        sort={{ field: 'name', order: 'ASC' }}
+      >
         <AutocompleteArrayInput
           isLoading={loading}
           label="Запити які лікуються типом терапії"
@@ -69,6 +75,7 @@ function TherapiesCutFormEdit({ getSource, therapiesCuts, loading }) {
 
 TherapiesCutFormEdit.propTypes = {
   getSource: PropTypes.func,
+  requests: PropTypes.array,
   therapiesCuts: PropTypes.array,
   loading: PropTypes.bool,
 };
@@ -132,7 +139,7 @@ export function TherapiesCutsSelect({ type = 'create' }) {
   );
 
   const getTherapyRequests = useCallback(
-    therapyId => therapiesList.find(therapy => therapy.id === therapyId)?.requests ?? [],
+    therapyId => therapiesList?.find(therapy => therapy.id === therapyId)?.requests ?? [],
     [therapiesList],
   );
 
@@ -142,7 +149,7 @@ export function TherapiesCutsSelect({ type = 'create' }) {
         <FormDataConsumer>
           {({ scopedFormData, formData, getSource }) => {
             if (!scopedFormData || !formData) return null;
-            // console.log({ formData });
+            // console.log({ scopedFormData, formData });
             return (
               <>
                 {type === 'create' && (
@@ -152,7 +159,7 @@ export function TherapiesCutsSelect({ type = 'create' }) {
                     therapiesCuts={therapiesCuts}
                     resetRequests={resetRequests}
                     loading={therapiesLoading}
-                    requests={getTherapyRequests(scopedFormData.therapyId)}
+                    requests={getTherapyRequests(scopedFormData.therapy?.id)}
                     type={type}
                   />
                 )}
@@ -163,7 +170,7 @@ export function TherapiesCutsSelect({ type = 'create' }) {
                     therapiesCuts={therapiesCuts}
                     resetRequests={resetRequests}
                     loading={therapiesLoading}
-                    requests={getTherapyRequests(scopedFormData.therapyId)}
+                    requests={getTherapyRequests(scopedFormData.therapy?.id)}
                     type={type}
                   />
                 )}

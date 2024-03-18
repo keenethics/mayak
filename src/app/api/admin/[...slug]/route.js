@@ -19,7 +19,7 @@ const handler = auth(
       transformServiceProvider(instance, modelName);
     };
 
-    // console.log({ modelName, data: JSON.stringify(json.params.data) });
+    // console.log({ modelName, data: JSON.stringify(json) });
     const result = await defaultHandler(json, prisma, {
       getList: {
         debug: false,
