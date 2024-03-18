@@ -18,9 +18,6 @@ export const transformCreateTherapiesCuts = cuts =>
     requests: { connect: toConnectList(cut.requests) },
   }));
 
-// export const transformEditTherapiesCuts = cuts =>
-//   cuts.map(cut => ({ id: cut.id, requests: { connect: toConnectList(cut.requestsIds) } }));
-
 export function transformAddresses(addresses) {
   return (
     addresses
@@ -35,21 +32,18 @@ export function transformAddresses(addresses) {
 
 const transformTherapiesCuts = ({ cuts, cutsIds }) => {
   const cutsToUpdate = [];
-  const cutsToDelete = [];
   const cutsToCreate = [];
+  const cutsToDelete = toConnectList(cutsIds.filter(cutId => !cuts.some(cut => cut.id === cutId)));
+
   cuts.forEach(cut => {
     if (cut.id) {
-      if (cutsIds.includes(cut.id)) {
-        cutsToUpdate.push({
-          where: { id: cut.id },
-          data: {
-            therapy: { connect: { id: cut.therapy.id } },
-            requests: { set: [], connect: toConnectList(cut.requestsIds) },
-          },
-        });
-      } else {
-        cutsToDelete.push({ id: cut.id });
-      }
+      cutsToUpdate.push({
+        where: { id: cut.id },
+        data: {
+          therapy: { connect: { id: cut.therapy.id } },
+          requests: { set: [], connect: toConnectList(cut.requestsIds) },
+        },
+      });
     } else {
       cutsToCreate.push({
         therapy: { connect: { id: cut.therapy.id } },
