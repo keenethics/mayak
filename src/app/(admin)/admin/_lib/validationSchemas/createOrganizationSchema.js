@@ -49,9 +49,16 @@ const RestSchema = z.object({
       z.object({
         fullAddress: string('Повна адреса').min(1).max(128).zod.nullish(),
         district: string('Район').min(1).max(64).zod.nullish(),
+        isPrimary: z.boolean(),
       }),
     )
-    .nullish(),
+    .refine(
+      addresses => {
+        if (!addresses.length) return true;
+        return addresses.filter(el => el.isPrimary).length === 1;
+      },
+      { message: 'Необхідно вказати одну головну адресу' },
+    ),
   isFreeReception: z.boolean({
     required_error: "Безкоштовний прийом - обов'язкове поле",
     invalid_type_error: "Оберіть 'Так' чи 'Ні' для активного спеціаліста",
