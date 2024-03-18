@@ -92,7 +92,7 @@ export default function AdminPage() {
         edit={EditGuesser}
       />
       <Resource
-        name={RESOURCES.clientCategories}
+        name={RESOURCES.clientCategory}
         options={{ label: 'Категорії клієнтів' }}
         create={CreateCategory}
         list={ListGuesser}

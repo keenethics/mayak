@@ -31,58 +31,60 @@ enum EventPriceFormat {
 }
 
 model Specialist {
-  id                String           @id @default(uuid()) @db.Uuid
-  createdAt         DateTime         @default(now())
-  firstName         String           @db.VarChar(64)
-  lastName          String           @db.VarChar(64)
-  surname           String?          @db.VarChar(64)
-  specializations   Specialization[]
-  gender            Gender?
-  yearsOfExperience Int?             @db.SmallInt
-  formatOfWork      FormatOfWork?
-  addresses         Address[]
-  therapies         Therapy[]
-  isFreeReception   Boolean?
-  description       String?          @db.Text
-  phone             String?          @db.VarChar(15)
-  email             String?          @db.VarChar(320)
-  website           String?          @db.Text
-  isActive          Boolean          @default(false)
-  instagram         String?          @db.Text
-  facebook          String?          @db.Text
-  youtube           String?          @db.Text
-  linkedin          String?          @db.Text
-  tiktok            String?          @db.Text
-  viber             String?          @db.Text
-  telegram          String?          @db.Text
-  searchEntry       SearchEntry?
+  id                            String                          @id @default(uuid()) @db.Uuid
+  createdAt                     DateTime                        @default(now())
+  firstName                     String                          @db.VarChar(64)
+  lastName                      String                          @db.VarChar(64)
+  surname                       String?                         @db.VarChar(64)
+  specializations               Specialization[]
+  gender                        Gender?
+  yearsOfExperience             Int?                            @db.SmallInt
+  formatOfWork                  FormatOfWork?
+  addresses                     Address[]
+  therapies                     Therapy[]
+  isFreeReception               Boolean?
+  description                   String?                         @db.Text
+  phone                         String?                         @db.VarChar(15)
+  email                         String?                         @db.VarChar(320)
+  website                       String?                         @db.Text
+  isActive                      Boolean                         @default(false)
+  instagram                     String?                         @db.Text
+  facebook                      String?                         @db.Text
+  youtube                       String?                         @db.Text
+  linkedin                      String?                         @db.Text
+  tiktok                        String?                         @db.Text
+  viber                         String?                         @db.Text
+  telegram                      String?                         @db.Text
+  searchEntry                   SearchEntry?
+  clientCategoriesOnSpecialists ClientCategoriesOnSpecialists[]
 
   @@map("specialist")
 }
 
 model Organization {
-  id              String             @id @default(uuid()) @db.Uuid
-  createdAt       DateTime           @default(now())
-  name            String             @db.VarChar(128)
-  type            OrganizationType[]
-  yearsOnMarket   Int?               @db.SmallInt
-  formatOfWork    FormatOfWork?
-  addresses       Address[]
-  therapies       Therapy[]
-  isFreeReception Boolean?
-  description     String?            @db.Text
-  phone           String?            @db.VarChar(15)
-  email           String?            @db.VarChar(320)
-  website         String?            @db.Text
-  isActive        Boolean            @default(false)
-  instagram       String?            @db.Text
-  facebook        String?            @db.Text
-  youtube         String?            @db.Text
-  linkedin        String?            @db.Text
-  tiktok          String?            @db.Text
-  viber           String?            @db.Text
-  telegram        String?            @db.Text
-  searchEntry     SearchEntry?
+  id                              String                            @id @default(uuid()) @db.Uuid
+  createdAt                       DateTime                          @default(now())
+  name                            String                            @db.VarChar(128)
+  type                            OrganizationType[]
+  yearsOnMarket                   Int?                              @db.SmallInt
+  formatOfWork                    FormatOfWork?
+  addresses                       Address[]
+  therapies                       Therapy[]
+  isFreeReception                 Boolean?
+  description                     String?                           @db.Text
+  phone                           String?                           @db.VarChar(15)
+  email                           String?                           @db.VarChar(320)
+  website                         String?                           @db.Text
+  isActive                        Boolean                           @default(false)
+  instagram                       String?                           @db.Text
+  facebook                        String?                           @db.Text
+  youtube                         String?                           @db.Text
+  linkedin                        String?                           @db.Text
+  tiktok                          String?                           @db.Text
+  viber                           String?                           @db.Text
+  telegram                        String?                           @db.Text
+  searchEntry                     SearchEntry?
+  clientCategoriesOnOrganizations ClientCategoriesOnOrganizations[]
 
   @@map("organization")
 }
@@ -218,12 +220,36 @@ model Faq {
   @@map("faq")
 }
 
-model ClientCategories {
-  id        String   @id @default(uuid()) @db.Uuid
-  createdAt DateTime @default(now())
-  title     String   @unique @db.VarChar(64)
-  // organizations Organization[]
-  // specialists Specialist[]
+model ClientCategory {
+  id            String                            @id @default(uuid()) @db.Uuid
+  createdAt     DateTime                          @default(now())
+  title         String                            @unique @db.VarChar(64)
+  specialists   ClientCategoriesOnSpecialists[]
+  organizations ClientCategoriesOnOrganizations[]
 
-  @@map("client_categories")
+  @@map("client_category")
+}
+
+model ClientCategoriesOnSpecialists {
+  specialist   Specialist @relation(fields: [specialistId], references: [id])
+  specialistId String     @db.Uuid
+
+  clientCategory   ClientCategory @relation(fields: [clientCategoryId], references: [id])
+  clientCategoryId String         @db.Uuid
+
+  isWorkingWith Boolean
+
+  @@id([specialistId, clientCategoryId])
+}
+
+model ClientCategoriesOnOrganizations {
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @db.Uuid
+
+  clientCategory   ClientCategory @relation(fields: [clientCategoryId], references: [id])
+  clientCategoryId String         @db.Uuid
+
+  isWorkingWith Boolean
+
+  @@id([organizationId, clientCategoryId])
 }

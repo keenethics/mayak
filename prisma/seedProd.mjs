@@ -72,12 +72,12 @@ async function main() {
     'ВІЛ - інфіковані',
   ].map(title => ({ title }));
 
-  const existingCategories = await prisma.clientCategories.findMany();
+  const existingCategories = await prisma.clientCategory.findMany();
   const catagoriesToCreate = clientCategoriesName.filter(
     category => !existingCategories.find(existing => existing.title === category.title),
   );
 
-  await prisma.clientCategories.createMany({
+  await prisma.clientCategory.createMany({
     data: catagoriesToCreate,
   });
 }
