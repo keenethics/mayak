@@ -45,6 +45,7 @@ export function SearchProvider({ children }) {
       value={{
         currentConfig,
         query,
+        debouncedQuery,
         searchType,
         isSelectTypeOpen,
         isAutoCompleteOpen,
