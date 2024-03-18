@@ -1,41 +1,47 @@
 'use client';
 
-import { PillButton } from '@components';
 import { Tick } from '@icons/index';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { cn } from '@utils/cn';
 import { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import { PillButton } from '@/app/_components';
 
 export function DistrictList({ list, className }) {
   const [selected, setSelected] = useState(0);
-
   const handleClick = index => {
     setSelected(index);
   };
 
   return (
-    <ul className={cn('mt-4 flex gap-4', className)}>
+    <Swiper slidesPerView="auto" spaceBetween={15} wrapperClass={className}>
       {list.map(({ id, name }, index) => {
         const isSelected = index === selected;
         const hasIcon = isSelected ? <Tick /> : null;
 
         return (
-          <li key={id} onClick={() => handleClick(index)}>
-            <Link href={`?district=${name}`} className={isSelected ? 'pointer-events-none cursor-none' : ''}>
+          <SwiperSlide key={id} onClick={() => handleClick(index)} className="fit-co">
+            <Link
+              href={`/specialist?district=${id}`}
+              className={isSelected ? 'pointer-events-none cursor-none' : ''}
+              tabIndex={-1}
+            >
               <PillButton
                 variant="transparent"
                 colorVariant="orange"
                 icon={hasIcon}
                 className={isSelected ? 'border-secondary-300 bg-secondary-300 font-semibold' : ''}
+                aria-label={`Click to see specialists related to the district with id ${id}`}
               >
                 {name}
               </PillButton>
             </Link>
-          </li>
+          </SwiperSlide>
         );
       })}
-    </ul>
+    </Swiper>
   );
 }
 
