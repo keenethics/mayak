@@ -2,16 +2,15 @@ import { useWatch } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { BooleanInput, required } from 'react-admin';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
-import { FORM_TYPES } from '@admin/_lib/consts';
 import { TherapiesCutsSelect } from './TherapiesCutsSelect';
 
-export function ServicesForm({ label, type = FORM_TYPES.create }) {
+export function ServicesForm({ label }) {
   const isActive = useWatch({ name: 'isActive' });
   const unnecessaryForDraft = isActive && required();
 
   return (
     <FormFieldWrapper title={label}>
-      <TherapiesCutsSelect type={type} />
+      <TherapiesCutsSelect />
       <BooleanInput
         name="isFreeReception"
         source="isFreeReception"
@@ -25,6 +24,5 @@ export function ServicesForm({ label, type = FORM_TYPES.create }) {
 
 ServicesForm.propTypes = {
   label: PropTypes.string,
-  type: PropTypes.oneOf(Object.values(FORM_TYPES)),
   validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 };

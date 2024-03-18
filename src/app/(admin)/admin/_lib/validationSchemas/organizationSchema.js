@@ -78,6 +78,7 @@ const activeOrganizationEditSchema = restEditProps.extend({
 
 const draftOrganizationEditSchema = restEditProps.partial().extend({
   therapiesCuts: zEditTherapyCutSchema.array().nullish(),
+  organizationTypesIds: zStringArray.nullish(),
   formatOfWork: zString.nullish(),
   isActive: z.literal(false),
 });

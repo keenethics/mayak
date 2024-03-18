@@ -29,7 +29,7 @@ export function OrganizationCreate() {
         <GeneralInfoEditOrg type="create" />
         <DetailsEditOrg />
         <AddressesForm label="Адреси надання послуг" />
-        <ServicesForm type="create" label="Послуги" />
+        <ServicesForm label="Послуги" />
         <DescriptionEdit validate={required()} />
         <ContactsList />
         <SocialLinks />

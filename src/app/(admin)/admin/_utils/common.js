@@ -22,9 +22,9 @@ export function transformAddresses(addresses) {
   return (
     addresses
       ?.filter(address => !address.id)
-      .map(address => ({
-        ...address,
-        district: { connect: { id: address.district } },
+      .map(({ district, districtId, ...rest }) => ({
+        ...rest,
+        district: { connect: { id: district?.id ? district.id : districtId } },
         districtId: undefined,
       })) ?? []
   );
@@ -54,10 +54,18 @@ export const transformTherapiesCuts = ({ cuts, cutsIds }) => {
 
   return {
     update: cutsToUpdate.length ? cutsToUpdate : undefined,
-    deleteMany: cutsToDelete,
-    create: cutsToCreate,
+    deleteMany: cutsToDelete.length ? cutsToDelete : undefined,
+    create: cutsToCreate.length ? cutsToCreate : undefined,
   };
 };
+
+export const transformCreateData = ({ addresses, therapiesCuts, ...rest }) => ({
+  ...rest,
+  addresses: {
+    create: addresses?.length ? transformAddresses(addresses) : undefined,
+  },
+  therapiesCuts: transformTherapiesCuts({ cuts: therapiesCuts, cutsIds: [] }),
+});
 
 export const transformEditData = ({
   addresses,

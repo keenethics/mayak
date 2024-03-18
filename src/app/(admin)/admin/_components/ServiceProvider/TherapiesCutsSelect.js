@@ -92,8 +92,8 @@ export function TherapiesCutsSelect() {
     <ArrayInput source="therapiesCuts" isLoading={therapiesLoading} label="Типи терапій">
       <SimpleFormIterator fullWidth disableReordering={true}>
         <FormDataConsumer>
-          {({ scopedFormData, formData, getSource }) => {
-            if (!scopedFormData || !formData) return null;
+          {({ scopedFormData, getSource }) => {
+            if (!scopedFormData) return null;
             return (
               <TherapiesCutsForm
                 getSource={getSource}

@@ -11,7 +11,7 @@ import { AddressesForm } from '@admin/components/ServiceProvider/AddressesForm';
 import { useRedirectToList } from '@admin/components/ServiceProvider/hooks';
 import { ContactsList } from '@admin/components/ContactsList';
 import { SocialLinks } from '@admin/components/ServiceProvider/SocialLinks';
-import { transformData } from '@/app/(admin)/admin/_utils/transformSpecialistData';
+import { transformSpecialistData } from '@/app/(admin)/admin/_utils/transformSpecialistData';
 import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
 import { DetailsEditSpec } from './DetailsEditSpec';
 
@@ -24,14 +24,14 @@ export function SpecialistCreate() {
   return (
     <Create
       title="Додавання нового спеціаліста"
-      transform={transformData}
+      transform={transformSpecialistData}
       mutationOptions={{ onSuccess: handleSuccess, onError: handleError }}
     >
       <SimpleForm resolver={zodResolver(specialistCreateValidationSchema)}>
         <GeneralInfoEditSpec />
         <DetailsEditSpec />
         <AddressesForm label="Адреси надання послуг" />
-        <ServicesForm label="Послуги" type="create" />
+        <ServicesForm label="Послуги" />
 
         <TextInput name="description" source="description" label="Опис" fullWidth multiline />
         <ContactsList />

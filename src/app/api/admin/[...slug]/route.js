@@ -18,7 +18,6 @@ const handler = auth(
     const getOneTransform = instance => {
       transformServiceProvider(instance, modelName);
     };
-
     const result = await defaultHandler(json, prisma, {
       getList: {
         debug: false,
