@@ -79,13 +79,15 @@ export function EventFilter() {
       setActiveIndex(monthFromQuery - 1);
       setActiveMonth(months.filter(item => item.index === parseInt(monthFromQuery, 10)));
       allEvents({ month: monthFromQuery, take: '', lastCursor: '' });
+    } else if (!monthFromQuery || monthFromQuery === undefined) {
+      setActiveMonth(months[0]);
+      setActiveMonthNumber(currentMonth);
+      setActiveIndex(currentMonth - 1);
+      deleteParam();
+      addParam(currentMonth.toString());
+      allEvents({ month: currentMonth, take: '', lastCursor: '' });
     }
-    setActiveMonth(months[0]);
-    setActiveMonthNumber(currentMonth);
-    setActiveIndex(currentMonth - 1);
-    deleteParam();
-    addParam(currentMonth.toString());
-    allEvents({ month: currentMonth, take: '', lastCursor: '' });
+
     // eslint-disable-next-line
   }, [currentMonth]);
 
