@@ -16,10 +16,10 @@ export function SocialLinks({ className }) {
   const { errors } = useFormState();
 
   const isSelectedLinkNumWithinAllowedRange = selectedSocialLinkNum <= MAX_NUM_SELECTED_SOCIAL_LINKS;
-  const errorMessage = errors?.socialLink ? errors?.socialLink.root.message : '';
+  const socialLinkErrorMessage = errors?.socialLink ? errors?.socialLink.root.message : '';
 
   const displayError = !isSelectedLinkNumWithinAllowedRange && (
-    <p className="my-1 text-c3 tracking-wide text-system-error">{errorMessage}</p>
+    <p className="my-1 text-c3 tracking-wide text-system-error">{socialLinkErrorMessage}</p>
   );
 
   return (
