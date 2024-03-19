@@ -4,6 +4,8 @@ export function transformOrganizationData(data) {
   let typesObject = {};
   let therapiesObject = {};
 
+  const { socialLink, ...rest } = data;
+
   if (data?.addresses?.length > 0) {
     addressesObject = {
       create: data.addresses.map(address => ({
@@ -30,7 +32,8 @@ export function transformOrganizationData(data) {
   }
 
   return {
-    ...data,
+    ...rest,
+    ...socialLink,
     addresses: addressesObject,
     type: typesObject,
     therapies: therapiesObject,
