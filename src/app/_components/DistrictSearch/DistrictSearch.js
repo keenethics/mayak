@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { cn } from '@utils/cn';
-import { Heading } from '@/app/_components';
+import { Heading } from '@components';
 import { getDistrictsList } from '@/app/_components/DistrictSearch/actions';
 import { List } from '@/app/_components/DistrictSearch/List';
 

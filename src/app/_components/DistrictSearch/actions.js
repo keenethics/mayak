@@ -2,4 +2,4 @@
 
 import { prisma } from '@/lib/db';
 
-export const getDistrictsList = () => prisma.district.findMany();
+export const getDistrictsList = async () => await prisma.district.findMany();
