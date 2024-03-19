@@ -21,21 +21,21 @@ export const buttonColorVariant = {
   },
   outlined: {
     blue: {
-      regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-primary-500',
+      regular: 'bg-transparent border border-solid border-gray-700 text-primary-500',
       hover: 'hover:bg-primary-200',
       focused: 'focus:outline-none focus:bg-primary-200 focus:text-primary-600 focus:border-primary-600',
       active: 'active:bg-primary-200 active:text-primary-600 active:border-gray-700',
       disabled,
     },
     orange: {
-      regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-secondary-400',
+      regular: 'bg-transparent border border-solid border-gray-700 text-secondary-400',
       hover: 'hover:bg-secondary-300',
       focused: 'focus:outline-none focus:bg-secondary-300 focus:text-secondary-500 focus:border-secondary-500',
       active: 'active:bg-secondary-300 active:text-secondary-500 active:border-gray-700',
       disabled,
     },
     white: {
-      regular: 'bg-transparent border-[1px] border-solid border-other-white text-other-white',
+      regular: 'bg-transparent border border-solid border-other-white text-other-white',
       hover: 'hover:bg-gray-100 hover:text-primary-500',
       focused: 'focus:bg-gray-100 focus:text-primary-600 focus:border-gray-100',
       active: 'active:bg-other-white active:text-primary-600 active:border-other-white',
@@ -44,7 +44,7 @@ export const buttonColorVariant = {
   },
   transparent: {
     orange: {
-      regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-p4 text-gray-900 font-normal',
+      regular: 'bg-transparent border border-solid border-gray-700 text-p4 text-gray-900 font-normal',
       hover: 'hover:bg-secondary-300',
       focused: 'focus:outline-none focus:bg-secondary-300 focus:border-secondary-300',
       active: 'active:bg-secondary-300 active:border-secondary-300',

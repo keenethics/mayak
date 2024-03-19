@@ -14,3 +14,4 @@ export * from './TherapiesSection';
 export * from './Therapies';
 export * from './CardSpecialist';
 export * from './DistrictSearch';
+export * from './Slider';
