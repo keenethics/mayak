@@ -9,11 +9,12 @@ import { ModalCloseButton } from './ModalCloseButton';
 export const Modal = ({
   isOpen,
   onClose,
-  isBlurBackground = true,
-  isCloseButton = true,
   title,
   children,
   className,
+  isBlurBackground = true,
+  isCloseButton = true,
+  layout = true,
 }) => {
   const blurBackground = <div className="fixed left-0 top-0 z-10 h-full w-full backdrop-blur-sm" />;
 
@@ -45,17 +46,19 @@ export const Modal = ({
             onClick={onClose}
           >
             <motion.div
-              className={cn('rounded-xl bg-other-white px-4 py-[18px] shadow-custom-2 md:p-6', className)}
+              className={cn(layout && 'rounded-xl bg-other-white px-4 py-[18px] shadow-custom-2 md:p-6', className)}
               onClick={e => {
                 e.stopPropagation();
               }}
               {...motionData}
             >
-              <div className="flex items-center justify-center text-center">
-                <p className="w-full pl-2 pr-2 text-p2 md:pl-6 md:pr-6">{title}</p>
+              {isCloseButton && (
+                <div className="flex items-center justify-center text-center">
+                  <p className="w-full pl-2 pr-2 text-p2 md:pl-6 md:pr-6">{title}</p>
 
-                {isCloseButton && <ModalCloseButton onClose={onClose} />}
-              </div>
+                  <ModalCloseButton onClose={onClose} />
+                </div>
+              )}
               {children}
             </motion.div>
           </div>
@@ -68,6 +71,7 @@ export const Modal = ({
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  layout: PropTypes.bool,
   isBlurBackground: PropTypes.bool,
   isCloseButton: PropTypes.bool,
   children: PropTypes.node,
