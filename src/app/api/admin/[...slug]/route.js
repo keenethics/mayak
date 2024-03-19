@@ -1,44 +1,53 @@
 import { defaultHandler } from 'ra-data-simple-prisma';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { MODEL_INCLUDES, searchInputFilters, transformServiceProvider, withErrorHandlerAndAuth } from '../common';
+import { auth } from '@/lib/auth';
+import { withErrorHandler } from '@/lib/errors/errorHandler';
+import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
+import { MODEL_INCLUDES, searchInputFilters, transformServiceProvider } from '../common';
 
-const handler = withErrorHandlerAndAuth(async req => {
-  const json = await req.json();
+const handler = auth(
+  withErrorHandler(async req => {
+    if (!req.auth) throw new NotAuthorizedException();
 
-  const modelName = json.resource.toLowerCase();
-  const isServiceProvider = modelName === 'specialist' || modelName === 'organization';
+    const json = await req.json();
 
-  const getOneTransform = instance => {
-    transformServiceProvider(instance, modelName);
-  };
+    const modelName = json.resource.charAt(0).toLowerCase() + json.resource.slice(1);
+    const isServiceProvider = modelName === 'specialist' || modelName === 'organization';
 
-  const result = await defaultHandler(json, prisma, {
-    getList: {
-      debug: false,
-      where: searchInputFilters(modelName, json.params?.filter?.q),
-      include: MODEL_INCLUDES[modelName],
-    },
-    getOne: {
-      debug: false,
-      include: MODEL_INCLUDES[modelName],
-      transform: isServiceProvider ? getOneTransform : undefined,
-    },
-    update: {
-      debug: false,
-      allowJsonUpdate: {
-        tags: true,
-        additionalLink: true,
-        addresses: true,
-        districts: true,
-        specializations: true,
-        therapies: true,
-        type: true,
+    const getOneTransform = instance => {
+      transformServiceProvider(instance, modelName);
+    };
+    const result = await defaultHandler(json, prisma, {
+      getList: {
+        debug: false,
+        where: searchInputFilters(modelName, json.params?.filter?.q),
+        include: MODEL_INCLUDES[modelName],
       },
-      include: MODEL_INCLUDES[modelName],
-    },
-  });
-  return NextResponse.json(result);
-});
+      getOne: {
+        debug: false,
+        include: MODEL_INCLUDES[modelName],
+        transform: isServiceProvider ? getOneTransform : undefined,
+      },
+      update: {
+        debug: false,
+        allowJsonUpdate: {
+          tags: true,
+          additionalLink: true,
+          addresses: true,
+          districts: true,
+          specializations: true,
+          therapies: true,
+          therapiesCuts: true,
+          requests: true,
+          type: true,
+        },
+        include: MODEL_INCLUDES[modelName],
+      },
+    });
+
+    return NextResponse.json(result);
+  }),
+);
 
 export { handler as GET, handler as POST };

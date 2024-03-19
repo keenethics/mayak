@@ -12,25 +12,74 @@ export function toConnectList(list, cb) {
   return list?.map(id => ({ id: cb?.(id) ?? id })) ?? [];
 }
 
-function transformAddresses(addresses) {
+export const transformCreateTherapiesCuts = cuts =>
+  cuts.map(cut => ({
+    therapy: { connect: { id: cut.therapyId } },
+    requests: { connect: toConnectList(cut.requests) },
+  }));
+
+export function transformAddresses({ addresses, type = 'create' }) {
   return (
     addresses
       ?.filter(address => !address.id)
-      .map(address => ({
-        ...address,
-        district: { connect: { id: address.districtId } },
+      .map(({ district, districtId, ...rest }) => ({
+        ...rest,
+        district: { connect: { id: type === 'create' ? district : districtId } },
         districtId: undefined,
       })) ?? []
   );
 }
 
-export const transformEditData = ({ therapiesIds, addresses, addressesIds, formatOfWork, ...rest }) => {
-  const therapiesToConnect = toConnectList(therapiesIds);
+export const transformTherapiesCuts = ({ cuts, cutsIds }) => {
+  const cutsToUpdate = [];
+  const cutsToCreate = [];
+  const cutsToDelete = toConnectList(cutsIds.filter(cutId => !cuts.some(cut => cut.id === cutId)));
+
+  cuts.forEach(cut => {
+    if (cut.id) {
+      cutsToUpdate.push({
+        where: { id: cut.id },
+        data: {
+          therapy: { connect: { id: cut.therapy.id } },
+          requests: { set: [], connect: toConnectList(cut.requestsIds) },
+        },
+      });
+    } else {
+      cutsToCreate.push({
+        therapy: { connect: { id: cut.therapy.id } },
+        requests: { connect: toConnectList(cut.requestsIds) },
+      });
+    }
+  });
+
+  return {
+    update: cutsToUpdate.length ? cutsToUpdate : undefined,
+    deleteMany: cutsToDelete.length ? cutsToDelete : undefined,
+    create: cutsToCreate.length ? cutsToCreate : undefined,
+  };
+};
+
+export const transformCreateData = ({ addresses, therapiesCuts, ...rest }) => ({
+  ...rest,
+  addresses: {
+    create: addresses?.length ? transformAddresses({ addresses, type: 'create' }) : undefined,
+  },
+  therapiesCuts: transformTherapiesCuts({ cuts: therapiesCuts, cutsIds: [] }),
+});
+
+export const transformEditData = ({
+  addresses,
+  addressesIds,
+  therapiesCuts,
+  therapiesCutsIds,
+  formatOfWork,
+  ...rest
+}) => {
   const addressesToConnect = toConnectList(
     addresses?.filter(address => address.id),
     address => address.id,
   );
-  const addressesToCreate = transformAddresses(addresses);
+  const addressesToCreate = transformAddresses({ addresses, type: 'edit' });
 
   const unselectedAddresses =
     addressesIds?.filter(addressId => !addressesToConnect.some(address => address.id === addressId)) ?? [];
@@ -40,16 +89,13 @@ export const transformEditData = ({ therapiesIds, addresses, addressesIds, forma
   return {
     ...rest,
     formatOfWork,
-    therapiesIds: undefined,
+    therapiesCutsIds: undefined,
     addressesIds: undefined,
-    therapies: {
-      set: [],
-      connect: therapiesToConnect,
-    },
     addresses: {
       connect: addressesToConnect,
       create: addressesToCreate,
       deleteMany: addressesToDelete,
     },
+    therapiesCuts: transformTherapiesCuts({ cuts: therapiesCuts, cutsIds: therapiesCutsIds }),
   };
 };

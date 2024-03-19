@@ -1,38 +1,11 @@
-// this function transforms form data to proper prisma creation object
-export function transformOrganizationData(data) {
-  let addressesObject = {};
-  let typesObject = {};
-  let therapiesObject = {};
+import { toConnectList, transformCreateData } from '@admin/_utils/common';
 
-  if (data?.addresses?.length > 0) {
-    addressesObject = {
-      create: data.addresses.map(address => ({
-        ...address,
-        district: { connect: { id: address.district } },
-      })),
-    };
-  }
-
-  if (data?.type?.length > 0) {
-    typesObject = {
-      connect: data.type.map(type => ({
-        id: type,
-      })),
-    };
-  }
-
-  if (data?.therapies?.length > 0) {
-    therapiesObject = {
-      connect: data.therapies.map(therapy => ({
-        id: therapy,
-      })),
-    };
-  }
-
+export const transformOrganizationData = ({ type, ...rest }) => {
+  const base = transformCreateData(rest);
   return {
-    ...data,
-    addresses: addressesObject,
-    type: typesObject,
-    therapies: therapiesObject,
+    ...base,
+    type: {
+      connect: type?.length ? toConnectList(type) : undefined,
+    },
   };
-}
+};

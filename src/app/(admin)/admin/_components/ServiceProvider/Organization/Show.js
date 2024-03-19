@@ -34,10 +34,15 @@ export function OrganizationShow() {
             <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
-        <ArrayField label="Типи терапії" source="therapies">
-          <SingleFieldList linkType={false}>
-            <ChipField source="title" size="small" />
-          </SingleFieldList>
+        <ArrayField label="Типи терапій" source="therapiesCuts">
+          <Datagrid bulkActionButtons={false}>
+            <TextField label="Тип" source="therapy.title" />
+            <ArrayField label="Запити" source="requests">
+              <SingleFieldList linkType={false} className="p-3">
+                <ChipField source="name" size="small" />
+              </SingleFieldList>
+            </ArrayField>
+          </Datagrid>
         </ArrayField>
         <BooleanField label="Безкоштовний прийом" source="isFreeReception" />
         <BooleanField label="Активна/неактивна" source="isActive" />

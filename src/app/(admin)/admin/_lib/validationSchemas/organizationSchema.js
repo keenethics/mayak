@@ -6,6 +6,7 @@ import {
   specialistCore,
   zCreateAddressSchema,
   zEditAddressSchema,
+  zEditTherapyCutSchema,
   zInteger,
   zString,
   zStringArray,
@@ -32,13 +33,18 @@ const createDefaultProps = z.object({
 });
 
 const activeOrganizationSchema = restCreateProps.extend({
-  therapies: zStringArray,
+  therapiesCuts: zEditTherapyCutSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   type: zStringArray.default([]),
   description: zString,
   isActive: z.literal(true),
 });
 
 const draftOrganizationSchema = restCreateProps.partial().extend({
+  therapiesCuts: zEditTherapyCutSchema.array().nullish(),
+  type: zStringArray.nullish().default([]),
+  addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
 
@@ -55,6 +61,7 @@ const restEditProps = zOrganizationSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
+  therapiesCutsIds: z.string().array().nullish(),
 });
 
 const editDefaultProps = z.object({
@@ -62,13 +69,18 @@ const editDefaultProps = z.object({
 });
 
 const activeOrganizationEditSchema = restEditProps.extend({
-  therapiesIds: zStringArray,
+  therapiesCuts: zEditTherapyCutSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   organizationTypesIds: zStringArray.default([]),
   description: zString,
   isActive: z.literal(true),
 });
 
 const draftOrganizationEditSchema = restEditProps.partial().extend({
+  therapiesCuts: zEditTherapyCutSchema.array().nullish(),
+  organizationTypesIds: zStringArray.nullish(),
+  formatOfWork: zString.nullish(),
   isActive: z.literal(false),
 });
 

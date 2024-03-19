@@ -57,6 +57,8 @@ export const specialistCore = z.object({
   telegram: zUrl.nullish(),
 });
 
+// ---- ADDRESS SECTION ----
+
 export const zEditAddressSchema = z.object({
   id: z.string().nullish(),
   fullAddress: zStringWithMax,
@@ -82,6 +84,19 @@ export const singlePrimaryAddressRefine = addresses => {
   if (!addresses.length) return true;
   return addresses.filter(el => el.isPrimary).length === 1;
 };
+
+// ---- THERAPY CUT SECTION ----
+
+export const zEditTherapyCutSchema = z.object({
+  id: zString.nullish(),
+  therapy: z.object({
+    id: zString,
+    title: zString,
+  }),
+  requestsIds: zString.array().min(1, {
+    message: 'Необхідно обрати хоча б один запит',
+  }),
+});
 
 export const createValidationSchema = (schemaUnion, defaultProperties) =>
   z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {

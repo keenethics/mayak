@@ -1,68 +1,42 @@
 import { PrismaClient } from '@prisma/client';
+import { districts, organizationTypes, specializations, therapies } from './data.mjs';
 
 const prisma = new PrismaClient();
 
+async function translateTherapies(therapiesToTranslate) {
+  const tranlated = [];
+  for (let i = 0; i < therapiesToTranslate.length; i += 1) {
+    const therapy = therapiesToTranslate[i];
+
+    const requestsToConnect = therapy.requests.map(requestName => ({ name: requestName }));
+    // eslint-disable-next-line no-await-in-loop
+    await prisma.request.createMany({
+      data: requestsToConnect,
+      skipDuplicates: true,
+    });
+
+    tranlated.push({ ...therapy, requests: { connect: requestsToConnect } });
+  }
+
+  return tranlated;
+}
+
+async function createIfNotExist(model, data, filter) {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const it of data) {
+    // eslint-disable-next-line no-await-in-loop
+    await model.upsert({ where: filter(it), create: it, update: {} });
+  }
+}
+
 async function main() {
-  const therapies = [
-    {
-      isActive: true,
-      type: 'individual',
-      title: 'Індивідуальна',
-      description: 'для тебе',
-      imagePath: '/assets/images/therapy_individual.svg',
-      priority: 6,
-    },
-    {
-      isActive: true,
-      type: 'kids',
-      title: 'Для дітей і підлітків',
-      description: 'для найрідніших',
-      imagePath: '/assets/images/therapy_kids.svg',
-      priority: 5,
-    },
-    {
-      isActive: true,
-      type: 'family',
-      title: 'Сімейна',
-      description: 'для всієї родини',
-      imagePath: '/assets/images/therapy_family.svg',
-      priority: 4,
-    },
-    {
-      isActive: true,
-      type: 'group',
-      title: 'Групова',
-      description: 'для людей з однаковими потребами',
-      imagePath: '/assets/images/therapy_group.svg',
-      priority: 3,
-    },
-    {
-      isActive: true,
-      type: 'pair',
-      title: 'Для пар',
-      description: 'для тебе і партнера',
-      imagePath: '/assets/images/therapy_pair.svg',
-      priority: 2,
-    },
-    {
-      isActive: true,
-      type: 'business',
-      title: 'Для бізнесу',
-      description: 'для співробітників',
-      imagePath: '/assets/images/therapy_business.svg',
-      priority: 1,
-    },
-  ];
-
-  // do not create therapies that already exist to not break existing data
-  const existingTherapies = await prisma.therapy.findMany();
-  const therapiesToCreate = therapies.filter(
-    therapy => !existingTherapies.find(existing => existing.type === therapy.type),
-  );
-
-  await prisma.therapy.createMany({
-    data: therapiesToCreate,
-  });
+  const translatedTherapies = await translateTherapies(therapies);
+  await createIfNotExist(prisma.therapy, translatedTherapies, therapy => ({ type: therapy.type }));
+  await createIfNotExist(prisma.district, districts, district => ({ name: district.name }));
+  await createIfNotExist(prisma.specialization, specializations, specialization => ({ name: specialization.name }));
+  await createIfNotExist(prisma.organizationType, organizationTypes, organizationType => ({
+    name: organizationType.name,
+  }));
 }
 
 main().then(
