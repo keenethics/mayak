@@ -12,6 +12,7 @@ const typography = {
   c2: ['0.625rem', '0.938rem'], // FS=10px LH=15px
   c3: ['0.75rem', '1.125rem'], // FS=12px LH=18px
   c4: ['0.625rem', '1.25rem'], // FS=10px LH=20px
+  c5: ['0.75rem', '0.75rem'],
   cardsm: ['0.75rem', '1.25rem'], // FS=12px LH=20px
 };
 
