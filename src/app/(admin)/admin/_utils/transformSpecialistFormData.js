@@ -6,15 +6,16 @@ const transformAddresses = placesArray =>
     district: { connect: { id: place.district } },
   }));
 
-export const transformData = data => ({
-  ...data,
+export const transformData = ({ socialLink, specializations, addresses, therapies, ...rest }) => ({
+  ...rest,
+  ...socialLink,
   specializations: {
-    connect: data.specializations?.length ? mapIdArrayToIdObjects(data.specializations) : undefined,
+    connect: specializations?.length ? mapIdArrayToIdObjects(specializations) : undefined,
   },
   addresses: {
-    create: data.addresses?.length ? transformAddresses(data.addresses) : undefined,
+    create: addresses?.length ? transformAddresses(addresses) : undefined,
   },
   therapies: {
-    connect: data.therapies?.length ? mapIdArrayToIdObjects(data.therapies) : undefined,
+    connect: therapies?.length ? mapIdArrayToIdObjects(therapies) : undefined,
   },
 });
