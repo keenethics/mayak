@@ -1,5 +1,5 @@
 import { Heading, Caption } from '@/app/_components/Typography';
-import { EventFilter } from '@/app/_components/Event/EventFilter';
+import { EventSection } from '@/app/_components/Event/EventSection';
 import { env } from '@/lib/env';
 
 export const metadata = {
@@ -21,7 +21,7 @@ export default async function Page() {
         <Caption type="c2" className="text-p4 font-bold uppercase text-primary-600">
           найближчі місяці
         </Caption>
-        <EventFilter />
+        <EventSection />
       </div>
     </div>
   );

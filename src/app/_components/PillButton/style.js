@@ -83,7 +83,7 @@ export const buttonType = {
   },
   eventFilter: {
     icon: {
-      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-row text-p4 flex-shrink-0  ',
+      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-row text-p4 flex-shrink-0',
       layoutStyle: `flex justify-center align-middle items-center py-1.5 px-3 gap-1 self-stretch h-8`,
     },
     regular: {
