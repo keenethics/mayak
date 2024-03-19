@@ -24,6 +24,21 @@ function uniqueObjectsWithId(instances) {
     .map(id => ({ id }));
 }
 
+function randomAddress(districts, isPrimary) {
+  const randomNameOfClinic = `Клініка ${faker.company.name()}`;
+  const randomDistricts = faker.helpers.arrayElement(districts).id; // returns random object from districts array
+  return {
+    nameOfClinic: randomNameOfClinic,
+    fullAddress: getFullAddress(),
+    district: {
+      connect: {
+        id: randomDistricts,
+      },
+    },
+    isPrimary,
+  };
+}
+
 function randomTherapyCutArray({ therapies }) {
   const uniqueTherapiesIdsArray = uniqueObjectsWithId(therapies);
 
@@ -43,21 +58,6 @@ function randomTherapyCutArray({ therapies }) {
   }));
 }
 
-function randomAddress({ districts, isPrimary }) {
-  const randomNameOfClinic = `Клініка ${faker.company.name()}`;
-  const randomDistricts = faker.helpers.arrayElement(districts).id; // returns random object from districts array
-  return {
-    nameOfClinic: randomNameOfClinic,
-    fullAddress: getFullAddress(),
-    district: {
-      connect: {
-        id: randomDistricts,
-      },
-    },
-    isPrimary,
-  };
-}
-
 function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
@@ -66,7 +66,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
     addresses = {
       create: Array(faker.number.int({ min: 1, max: 3 }))
         .fill('')
-        .map((_, i) => randomAddress({ districts, isPrimary: i === 0 })),
+        .map((_, i) => randomAddress(districts, i === 0)),
     };
   }
 
@@ -82,11 +82,11 @@ function randomSpecialist({ districts, specializations, therapies }) {
     gender,
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
     // take one of these
+    formatOfWork,
+    addresses,
     therapiesCuts: {
       create: randomTherapyCutArray({ therapies }),
     },
-    formatOfWork,
-    addresses,
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
     phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
@@ -110,7 +110,7 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     addresses = {
       create: Array(faker.number.int({ min: 1, max: 3 }))
         .fill('')
-        .map((_, i) => randomAddress({ districts, isPrimary: i === 0 })),
+        .map((_, i) => randomAddress(districts, i === 0)),
     };
   }
   const phoneRegexp = '+380[0-9]{9}';
@@ -184,40 +184,20 @@ async function main() {
   await prisma.$transaction(async trx => {
     await trx.address.deleteMany();
     await trx.specialist.deleteMany();
-    await trx.specialization.deleteMany();
-    await trx.district.deleteMany();
     await trx.event.deleteMany();
     await trx.eventLink.deleteMany();
     await trx.eventTag.deleteMany();
     await trx.faq.deleteMany();
     await trx.organization.deleteMany();
-    await trx.organizationType.deleteMany();
     await trx.searchEntry.deleteMany();
   });
 
-  const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
-  const specializationNames = [
-    'Психологічний консультант',
-    'Психотерапевт',
-    'Психіатр',
-    'Сексолог',
-    'Соціальний працівник',
-  ];
-  const organizationTypeNames = ['Психологічний центр', 'Соціальна служба', 'Лікарня'];
   const faqs = Array.from({ length: 15 }).map((_, i) => ({
     isActive: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
     priority: i + 10,
   }));
-
-  await prisma.district.createMany({
-    data: districtNames.map(name => ({ name })),
-  });
-
-  await prisma.specialization.createMany({
-    data: specializationNames.map(name => ({ name })),
-  });
 
   const eventTags = ['Tag1', 'Tag2', 'Tag3'];
 
@@ -233,12 +213,7 @@ async function main() {
     data: faqs,
   });
 
-  await prisma.organizationType.createMany({
-    data: organizationTypeNames.map(name => ({ name })),
-  });
-
   const therapies = await prisma.therapy.findMany({ select: { id: true, requests: true } });
-
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });
@@ -257,7 +232,6 @@ async function main() {
       const specialist = await trx.specialist.create({
         data: specialistData,
       });
-
       await trx.searchEntry.create({
         data: {
           sortString: getSpecialistFullName(specialist),
@@ -283,7 +257,6 @@ async function main() {
       const organization = await trx.organization.create({
         data: organizationData,
       });
-
       await trx.searchEntry.create({
         data: {
           sortString: organization.name,

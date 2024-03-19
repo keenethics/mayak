@@ -16,6 +16,7 @@ export function TextInputField({
   required = false,
   variant = variants.default,
   absolute = true,
+  additionalContainerStyle = '',
 }) {
   const id = `textinput_${name}`;
   const absoluteError = absolute ? 'absolute top-[45px] duration-150 ease-out transform' : '';
@@ -30,6 +31,7 @@ export function TextInputField({
           variant.inputContainer.style,
           variant.inputContainer.focusWithin,
           error && variant.inputContainer.error,
+          additionalContainerStyle,
         )}
       >
         <input
@@ -66,6 +68,7 @@ TextInputField.propTypes = {
   error: PropTypes.string,
   required: PropTypes.bool,
   absolute: PropTypes.bool,
+  additionalContainerStyle: PropTypes.string,
   variant: PropTypes.shape({
     mainContainer: PropTypes.shape({
       base: PropTypes.string.isRequired,

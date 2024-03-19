@@ -2,6 +2,7 @@
 
 import PropTypes from 'prop-types';
 import TickIcon from '@icons/tickIcon.svg';
+import RadionIcon from '@icons/radio.svg';
 import { cn } from '@utils/cn';
 import { variants } from './styles';
 
@@ -14,16 +15,18 @@ export function CheckBox({
   disabled = false,
   checked = false,
   children = null,
+  type = 'checkbox',
   variant = variants.default,
 }) {
-  const id = `checkbox_${name}_${value}`;
+  const id = `${type}_${name}_${value}`;
+
   return (
     <div className={cn(variant.container.base)}>
       <input
         id={id}
         name={name}
         className={cn(
-          variant.checkBox.base,
+          { [variant.checkBox.base]: type === 'checkbox', [variant.checkBox.radioBase]: type === 'radio' },
           variant.checkBox.hover,
           variant.checkBox.focus,
           variant.checkBox.focusRing,
@@ -34,13 +37,13 @@ export function CheckBox({
         )}
         value={value}
         onChange={onChange}
-        type="checkbox"
+        type={type}
         checked={checked}
         disabled={disabled}
       />
       <label
         className={cn(
-          variant.labelBefore.base,
+          { [variant.labelBefore.base]: type === 'checkbox', [variant.labelBefore.radioBase]: type === 'radio' },
           variant.labelBefore.layout,
           variant.labelBefore.peerFocus,
           variant.labelBefore.peerChecked,
@@ -48,8 +51,13 @@ export function CheckBox({
         )}
         htmlFor={id}
       >
-        {checked && (
+        {checked && type === 'checkbox' && (
           <TickIcon className={cn(variant.tick.position, variant.tick.base, disabled && variant.tick.disabled)} />
+        )}
+        {checked && type === 'radio' && (
+          <RadionIcon
+            className={cn(variant.tick.radioPosition, variant.tick.base, disabled && variant.tick.disabled)}
+          />
         )}
         {text && (
           <div className={cn(variant.textContainer.base, variant.textContainer.position)}>
@@ -73,6 +81,7 @@ CheckBox.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   text: PropTypes.string,
+  type: PropTypes.string,
   subText: PropTypes.string,
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
