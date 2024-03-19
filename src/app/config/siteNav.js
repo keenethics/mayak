@@ -1,6 +1,5 @@
 import React from 'react';
-import Instagram from '@icons/instagram.svg';
-import Facebook from '@icons/facebook.svg';
+import { Facebook, Instagram } from '@icons';
 
 const siteNav = {
   mainNav: [
