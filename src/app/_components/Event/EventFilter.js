@@ -3,16 +3,17 @@
 import { useState, useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { CircularProgress } from '@mui/material';
-import ky from 'ky';
 import CheckMark from '@icons/check-mark.svg';
 import Search from '@icons/search.svg';
+import { allEvents, useEventSetParam } from '@hooks';
 import { cn } from '@/utils/cn';
 import { PillButton } from '../PillButton';
-import { NoInfoToShow } from '../NoInfoToShow';
 import { buttonColorVariant } from '../PillButton/style';
+import { NoInfoToShow } from '../NoInfoToShow';
 import { EventCard } from './Card';
+import { monthsAhead, monthNames } from './config';
 
 export function EventFilter() {
   const [months, setMonths] = useState([]);
@@ -21,51 +22,28 @@ export function EventFilter() {
   const [activeMonthNumber, setActiveMonthNumber] = useState('');
   const [hoveredIndexes, setHoveredIndexes] = useState(new Array(months.length));
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-  const newParams = new URLSearchParams(searchParams);
-
   const currentMonth = new Date().getMonth() + 1;
+
+  const searchParams = useSearchParams();
+  const { addParam, deleteParam } = useEventSetParam('month');
 
   const { ref, inView } = useInView();
 
-  function useSetParam(param) {
-    const addParam = value => {
-      if (searchParams.get(param) && param.month === 'month') {
-        newParams.delete(param);
-      }
-      newParams.append(param, value);
-      router.push(`${pathname}?${newParams.toString()}`);
-    };
-    const deleteParam = value => {
-      if (value) {
-        newParams.delete(param, value);
-      } else {
-        newParams.delete(param);
-      }
-      router.push(`${pathname}?${newParams.toString()}`);
-    };
-    return { addParam, deleteParam };
+  const { semiorange } = buttonColorVariant.eventFilter;
+
+  const activeButtonStyles = cn({
+    'pointer-events-none border-secondary-300 bg-secondary-300 font-semibold text-gray-900': semiorange.active,
+  });
+
+  function selectButtonIcon(index) {
+    if (activeIndex === index && semiorange.active) {
+      return <CheckMark key={`checkmark+${index}`} className="h-4 w-4 transition-all" />;
+    }
+    if (hoveredIndexes[index] && activeIndex !== index && (semiorange.hover || semiorange.focused)) {
+      return <Search key={`searchicon+${index}`} className="h-4 w-4 transition-all " />;
+    }
+    return null;
   }
-
-  const { addParam, deleteParam } = useSetParam('month');
-
-  const monthsAhead = 5;
-  const monthNames = [
-    { index: 0, name: 'січень', en: 'january' },
-    { index: 1, name: 'лютий', en: 'february' },
-    { index: 2, name: 'березень', en: 'march' },
-    { index: 3, name: 'квітень', en: 'april' },
-    { index: 4, name: 'травень', en: 'may' },
-    { index: 5, name: 'червень', en: 'june' },
-    { index: 6, name: 'липень', en: 'july' },
-    { index: 7, name: 'серпень', en: 'august' },
-    { index: 8, name: 'вересень', en: 'september' },
-    { index: 9, name: 'жовтень', en: 'october' },
-    { index: 10, name: 'листопад', en: 'november' },
-    { index: 11, name: 'грудень', en: 'december' },
-  ];
 
   // Get 6 basic month names for filters, starting from current month
   useEffect(() => {
@@ -84,14 +62,9 @@ export function EventFilter() {
     // eslint-disable-next-line
   }, [currentMonth]);
 
-  const allEvents = async ({ month, take, lastCursor }) => {
-    const queryParams = new URLSearchParams({ take, lastCursor, month }).toString();
-    return await ky(`/api/event?${queryParams}`).json();
-  };
-
-  // fetch data and pass url params
+  // Fetch data and pass url params
   const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } = useInfiniteQuery({
-    queryFn: ({ month = activeMonthNumber, pageParam = '' }) => allEvents({ month, take: 3, lastCursor: pageParam }),
+    queryFn: ({ month = activeMonthNumber, pageParam = '' }) => allEvents({ month, take: 6, lastCursor: pageParam }),
     queryKey: ['event', activeMonthNumber],
     getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
   });
@@ -99,33 +72,30 @@ export function EventFilter() {
   // Get data on first render or on url open
   useEffect(() => {
     const monthFromQuery = searchParams.get('month');
+
     if (monthFromQuery && monthFromQuery !== currentMonth) {
       // If the month is defined in the query and is not equal to the current month
       setActiveMonthNumber(monthFromQuery);
-      setActiveIndex(monthFromQuery - 1 === activeMonthNumber && activeMonthNumber);
+      setActiveIndex(monthFromQuery - 1);
       setActiveMonth(months.filter(item => item.index === parseInt(monthFromQuery, 10)));
       allEvents({ month: monthFromQuery, take: '', lastCursor: '' });
-    } else {
-      // If the month is not defined in the query or is equal to the current month
-      setActiveMonth(months[0]);
-      setActiveMonthNumber(currentMonth);
-      setActiveIndex(monthFromQuery - 1 === currentMonth && currentMonth);
-      deleteParam();
-      addParam(currentMonth.toString());
-      allEvents({ month: currentMonth, take: '', lastCursor: '' });
     }
-
+    setActiveMonth(months[0]);
+    setActiveMonthNumber(currentMonth);
+    setActiveIndex(currentMonth - 1);
+    deleteParam();
+    addParam(currentMonth.toString());
+    allEvents({ month: currentMonth, take: '', lastCursor: '' });
     // eslint-disable-next-line
-  }, [currentMonth, searchParams]);
+  }, [currentMonth]);
 
   useEffect(() => {
     // if the last element is in view and there is a next page, fetch the next page
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [hasNextPage, inView, fetchNextPage, data]);
-
-  if (error) return <div className="mt-10">{('An error has occurred: ', error.message)}</div>;
+    // eslint-disable-next-line
+  }, [hasNextPage, inView]);
 
   // // Filter data based on selected month
   const handleFilter = newMonth => {
@@ -150,6 +120,8 @@ export function EventFilter() {
     setHoveredIndexes(newHoveredIndexes);
   };
 
+  if (error) return <div className="mt-10">{('An error has occurred: ', error.message)}</div>;
+
   return (
     <>
       <div className="mx-auto flex w-full flex-col items-start justify-start gap-6 self-stretch lg:w-[900px]">
@@ -158,44 +130,29 @@ export function EventFilter() {
             <PillButton
               variant="eventFilter"
               colorVariant="semiorange"
-              className={cn(
-                activeIndex === month.index && activeMonth && buttonColorVariant.eventFilter.semiorange.active,
-                'group',
-              )}
-              active={buttonColorVariant.eventFilter.semiorange.active}
+              className={cn(activeIndex === month.index && activeButtonStyles, 'group w-fit')}
               key={month.index}
+              activemonth={activeMonth}
               onMouseEnter={() => handleMouseEnter(month.index)}
               onMouseLeave={() => handleMouseLeave(month.index)}
-              onFocus={() => handleMouseEnter(month.index)}
+              onFocus={() => {
+                handleMouseEnter(month.index);
+              }}
               onBlur={() => handleMouseLeave(month.index)}
-              // onMouseDown={() => handleMouseEnter(month.index)}
-              // onMouseUp={() => handleMouseLeave(month.index)}
+              onMouseDown={() => handleMouseEnter(month.index)}
+              onMouseUp={() => handleMouseLeave(month.index)}
               onClick={() => {
                 handleFilter(month);
                 handleMouseLeave(month.index);
               }}
-              icon={[
-                activeIndex === month.index && (
-                  <CheckMark key={`checkmark+${month.index}`} className={cn('h-4 w-4 transition-all')} />
-                ),
-
-                hoveredIndexes[month.index] &&
-                  activeIndex !== month.index &&
-                  (buttonColorVariant.eventFilter.semiorange.hover ||
-                    buttonColorVariant.eventFilter.semiorange.focused) && (
-                  <Search key={`searchicon+${month.index}`} className=" h-4 w-4 transition-all" />
-                ),
-              ]}
+              icon={selectButtonIcon(month.index)}
             >
               {month.name.charAt(0).toUpperCase() + month.name.slice(1)}
             </PillButton>
           ))}
         </div>
 
-        <ul
-          className="grid w-full
-           gap-6 self-stretch sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-        >
+        <ul className="grid w-full gap-4 self-stretch sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {isSuccess &&
             data?.pages.map(page =>
               page.data.map((event, index) => {
@@ -211,9 +168,10 @@ export function EventFilter() {
             )}
         </ul>
       </div>
+
       {(isLoading || isFetchingNextPage) && <CircularProgress />}
 
-      {isSuccess && data?.pages.length === 0 && <NoInfoToShow text="подій" />}
+      {isSuccess && data?.pages.length === 1 && <NoInfoToShow text="подій" />}
     </>
   );
 }

@@ -13,12 +13,12 @@ export const revalidate = REVALIDATION_TIME;
 
 export default async function Page() {
   return (
-    <div className="flex flex-col items-center justify-center self-stretch px-[16px] py-[24px] md:px-[40px] md:py-[30px] lg:px-[80px] lg:pb-[80px] lg:pt-[64px]">
+    <div className="no-scrollbar flex h-full flex-col items-center justify-center self-stretch overflow-scroll px-[16px] py-[24px] md:px-[40px] md:py-[30px] lg:px-[80px] lg:pb-[80px] lg:pt-[64px]">
       <div className="mx-auto flex w-full flex-col items-start justify-start gap-[24px] self-stretch lg:w-[900px]">
         <Heading type="h3" className="text-h3 font-bold text-primary-800">
           Події
         </Heading>
-        <Caption type="c2" className="font-bold uppercase text-primary-600">
+        <Caption type="c2" className="text-p4 font-bold uppercase text-primary-600">
           найближчі місяці
         </Caption>
         <EventFilter />

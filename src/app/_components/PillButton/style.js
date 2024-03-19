@@ -78,9 +78,9 @@ export const buttonType = {
       layoutStyle: `flex justify-center align-middle items-center py-1.5 px-3 gap-1 self-stretch h-8`,
     },
     regular: {
-      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col h-8 flex-shrink-0 text-p4',
+      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-row flex-shrink-0 text-p4',
       layoutStyle: `flex justify-center align-middle
-      gap-1 self-stretch flex-grow flex-shrink-0 flex-basis-0 py-1.5 px-3 h-8`,
+      gap-1 self-stretch flex-shrink-0 flex-basis-0 py-1.5 px-3 h-8`,
     },
   },
   filled: {

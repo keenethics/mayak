@@ -24,7 +24,7 @@ export async function GET(req) {
           lte: filteredQueryMonth === today.getMonth() + 1 ? endOfMonth : endOfNextMonth,
         },
       },
-      take: take ? parseInt(take, 10) : 3,
+      take: take ? parseInt(take, 10) : 6,
 
       ...(lastCursor && {
         skip: 1,
@@ -54,7 +54,7 @@ export async function GET(req) {
     const cursor = lastPostInResults.id;
 
     const nextPage = await prisma.event.findMany({
-      take: take ? parseInt(take, 10) : 3,
+      take: take ? parseInt(take, 10) : 6,
       skip: 1,
       cursor: {
         id: cursor,
