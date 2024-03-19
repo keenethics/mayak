@@ -2,6 +2,7 @@ import { RESOURCES } from '@admin/_lib/consts';
 import { auth } from '@/lib/auth';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
+import { weekDaysTranslation } from '@/lib/consts';
 
 export const MODEL_SEARCH_FIELDS = {
   [RESOURCES.event]: ['title', 'organizerName'],
@@ -20,6 +21,12 @@ export const MODEL_INCLUDES = {
         fullAddress: true,
         district: { select: { id: true, name: true } },
         isPrimary: true,
+      },
+    },
+    workTime: {
+      select: {
+        weekDay: true,
+        time: true,
       },
     },
   },
@@ -42,6 +49,16 @@ export const MODEL_INCLUDES = {
   },
 };
 
+const sorter = {
+  MON: 1,
+  TUE: 2,
+  WED: 3,
+  THU: 4,
+  FRI: 5,
+  SAT: 6,
+  SUN: 7,
+};
+
 export function searchInputFilters(modelName, filter) {
   if (!filter) return {};
   const filters = MODEL_SEARCH_FIELDS[modelName].map(field => ({ [field]: { contains: filter, mode: 'insensitive' } }));
@@ -58,6 +75,14 @@ export function transformServiceProvider(instance, modelName) {
     // eslint-disable-next-line no-param-reassign
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
+  // eslint-disable-next-line no-param-reassign
+  instance.workTime = instance.workTime
+    .sort((a, b) => sorter[a.weekDay] - sorter[b.weekDay])
+    .map(entry => ({
+      time: !entry?.time ? 'вихідний' : entry.time,
+      weekDay: weekDaysTranslation[entry.weekDay],
+    }));
+
   // eslint-disable-next-line no-param-reassign
   instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
   // eslint-disable-next-line no-param-reassign

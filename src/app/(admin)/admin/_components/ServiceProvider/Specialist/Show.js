@@ -10,6 +10,7 @@ import {
   SingleFieldList,
   TextField,
 } from 'react-admin';
+import { WorkTime } from '../WorkTime';
 
 export function SpecialistShow() {
   return (
@@ -35,6 +36,7 @@ export function SpecialistShow() {
             <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
+        <WorkTime />
         <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
             <ChipField source="title" size="small" />
