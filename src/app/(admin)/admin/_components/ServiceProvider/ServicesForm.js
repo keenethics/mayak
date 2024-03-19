@@ -2,7 +2,7 @@ import { useWatch } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { BooleanInput, required } from 'react-admin';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
-import { TherapiesCutsSelect } from './TherapiesCutsSelect';
+import { SupportFocusesSelect } from './SupportFocusesSelect';
 
 export function ServicesForm({ label }) {
   const isActive = useWatch({ name: 'isActive' });
@@ -10,7 +10,7 @@ export function ServicesForm({ label }) {
 
   return (
     <FormFieldWrapper title={label}>
-      <TherapiesCutsSelect />
+      <SupportFocusesSelect />
       <BooleanInput
         name="isFreeReception"
         source="isFreeReception"

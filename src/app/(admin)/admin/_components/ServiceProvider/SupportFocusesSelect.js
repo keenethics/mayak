@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { therapyPropType } from '@admin/_lib/specialistPropTypes';
 
-function TherapiesCutsForm({ getSource, therapiesCuts, selectedTherapies, requestsIds, loading }) {
+function TherapiesCutsForm({ getSource, supportFocuses, selectedTherapies, requestsIds, loading }) {
   const { setValue } = useFormContext();
 
   const therapySource = getSource('therapy.id');
@@ -25,16 +25,16 @@ function TherapiesCutsForm({ getSource, therapiesCuts, selectedTherapies, reques
 
   const resetRequests = useCallback(
     (_, record) => {
-      const newCuts = therapiesCuts.map((cut, i) => {
+      const newCuts = supportFocuses.map((focus, i) => {
         if (i !== therapyIndex) {
-          return cut;
+          return focus;
         }
 
-        return { ...cut, therapy: record, requestsIds: [] };
+        return { ...focus, therapy: record, requestsIds: [] };
       });
-      setValue('therapiesCuts', newCuts);
+      setValue('supportFocuses', newCuts);
     },
-    [setValue, therapiesCuts, therapyIndex],
+    [setValue, supportFocuses, therapyIndex],
   );
 
   return (
@@ -76,18 +76,18 @@ function TherapiesCutsForm({ getSource, therapiesCuts, selectedTherapies, reques
 
 TherapiesCutsForm.propTypes = {
   getSource: PropTypes.func,
-  therapiesCuts: therapyPropType,
+  supportFocuses: therapyPropType,
   selectedTherapies: PropTypes.arrayOf(PropTypes.string),
   requestsIds: PropTypes.arrayOf(PropTypes.string),
   loading: PropTypes.bool,
 };
 
-export function TherapiesCutsSelect() {
+export function SupportFocusesSelect() {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
 
-  const therapiesCuts = useWatch({ name: 'therapiesCuts' });
+  const supportFocuses = useWatch({ name: 'supportFocuses' });
 
-  const selectedTherapiesIds = therapiesCuts?.map(cut => cut.therapy && cut.therapy.id).filter(Boolean) ?? [];
+  const selectedTherapiesIds = supportFocuses?.map(focus => focus.therapy && focus.therapy.id).filter(Boolean) ?? [];
 
   const therapyRequestsIds = useCallback(
     therapyId => therapiesList.find(therapy => therapy.id === therapyId)?.requests.map(request => request.id) || [],
@@ -95,7 +95,7 @@ export function TherapiesCutsSelect() {
   );
 
   return (
-    <ArrayInput source="therapiesCuts" isLoading={therapiesLoading} label="Типи терапій">
+    <ArrayInput source="supportFocuses" isLoading={therapiesLoading} label="Типи терапій">
       <SimpleFormIterator fullWidth disableReordering={true}>
         <FormDataConsumer>
           {({ scopedFormData, getSource }) => {
@@ -103,7 +103,7 @@ export function TherapiesCutsSelect() {
             return (
               <TherapiesCutsForm
                 getSource={getSource}
-                therapiesCuts={therapiesCuts}
+                supportFocuses={supportFocuses}
                 selectedTherapies={selectedTherapiesIds}
                 requestsIds={therapyRequestsIds(scopedFormData?.therapy?.id || '')}
                 loading={therapiesLoading}
