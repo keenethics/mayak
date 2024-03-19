@@ -4,9 +4,8 @@ import { Tick } from '@icons';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { SwiperSlide } from 'swiper/react';
 import { PillButton } from '@components/PillButton';
-import { Slider } from '@components/Slider';
+import { Slide, Slider } from '@components/Slider';
 import { clsx } from 'clsx/lite';
 
 export function DistrictList({ list, className }) {
@@ -16,7 +15,7 @@ export function DistrictList({ list, className }) {
   };
 
   return (
-    <Slider className={className}>
+    <Slider slidesPerView="auto" spaceBetween={15} className={className}>
       {list.map(({ id, name }, index) => {
         const isSelected = index === selected;
         const hasIcon = isSelected ? <Tick /> : null;
@@ -24,7 +23,7 @@ export function DistrictList({ list, className }) {
         const linkStyle = clsx(isSelected && 'pointer-events-none cursor-none');
 
         return (
-          <SwiperSlide key={id} onClick={() => handleClick(index)}>
+          <Slide key={id} onClick={() => handleClick(index)}>
             <Link href={`/specialist?district=${id}`} className={linkStyle} tabIndex={-1}>
               <PillButton
                 variant="transparent"
@@ -36,7 +35,7 @@ export function DistrictList({ list, className }) {
                 {name}
               </PillButton>
             </Link>
-          </SwiperSlide>
+          </Slide>
         );
       })}
     </Slider>
