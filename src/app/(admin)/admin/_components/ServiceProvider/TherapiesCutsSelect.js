@@ -22,6 +22,21 @@ function TherapiesCutsForm({ getSource, therapiesCuts, selectedTherapies, reques
 
   const therapySource = getSource('therapy.id');
   const therapyIndex = Number(therapySource.split('.')[1]);
+
+  const resetRequests = useCallback(
+    (_, record) => {
+      const newCuts = therapiesCuts.map((cut, i) => {
+        if (i !== therapyIndex) {
+          return cut;
+        }
+
+        return { ...cut, therapy: record, requestsIds: [] };
+      });
+      setValue('therapiesCuts', newCuts);
+    },
+    [setValue, therapiesCuts, therapyIndex],
+  );
+
   return (
     <>
       <ReferenceInput
@@ -37,16 +52,7 @@ function TherapiesCutsForm({ getSource, therapiesCuts, selectedTherapies, reques
           optionValue="id"
           label="Тип терапії"
           validate={required()}
-          onChange={(_, record) => {
-            const newCuts = therapiesCuts.map((cut, i) => {
-              if (i !== therapyIndex) {
-                return cut;
-              }
-
-              return { ...cut, therapy: record, requestsIds: [] };
-            });
-            setValue('therapiesCuts', newCuts);
-          }}
+          onChange={resetRequests}
           fullWidth
         />
       </ReferenceInput>
