@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CircularProgress } from '@mui/material';
 import { cn } from '@/utils/cn';
-import { useOverflowChildren } from '@/app/_hooks/useOverflowChildren';
+import { useOverflowChildren } from '@/app/_hooks';
 
 export function OverlayList({ listItems, className, isLoading, onItemsOverflow = () => {} }) {
   const itemsListRef = useRef(null);

@@ -6,7 +6,14 @@ import { useSearchContext } from './SearchContext';
 import { SEARCH_MIN_QUERY_LENGTH } from './config';
 
 export function SearchAutoCompleteDropDown() {
-  const { debouncedQuery, autoCompleteItems, isAutoCompleteOpen, isAutoCompleteLoading } = useSearchContext();
+  const {
+    submitSearch,
+    debouncedQuery,
+    autoCompleteItems,
+    isAutoCompleteOpen,
+    isAutoCompleteLoading,
+    navigateToAutoCompleteItem,
+  } = useSearchContext();
   const [listOverflown, setListOverflown] = useState(false);
   const onItemsOverflow = useCallback(state => {
     setListOverflown(state);
@@ -24,11 +31,20 @@ export function SearchAutoCompleteDropDown() {
           {!isAutoCompleteLoading && (
             <>
               <OverlayList
-                listItems={autoCompleteItems?.map(item => ({ ...item, onClick: () => {} }))}
+                listItems={autoCompleteItems?.map(item => ({
+                  ...item,
+                  onClick: () => navigateToAutoCompleteItem(item.id),
+                }))}
                 onItemsOverflow={onItemsOverflow}
               />
               {listOverflown && (
-                <button className="rounded-full bg-primary-200 p-2 pl-8 font-bold text-primary-800 hover:bg-primary-300">
+                <button
+                  className="rounded-full bg-primary-200 p-2 pl-8 font-bold text-primary-800 hover:bg-primary-300"
+                  onClick={() => {
+                    submitSearch();
+                    window.blur();
+                  }}
+                >
                   Показати всі результати
                 </button>
               )}

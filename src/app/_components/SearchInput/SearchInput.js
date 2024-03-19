@@ -34,7 +34,7 @@ export function SearchInput() {
           <SearchAutoCompleteDropDown />
         </div>
       </div>
-      <PillButton variant="filled" colorVariant="blue" className="px-6 py-3" onClick={submitSearch}>
+      <PillButton variant="filled" colorVariant="blue" onClick={submitSearch}>
         Знайти
       </PillButton>
     </div>

@@ -4,8 +4,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
-import { searchSyncKey, useSearchSync } from '@/app/_hooks/api/useSearchSync';
-import { useDebounce } from '@/app/_hooks/useDebounce';
+import { searchSyncKey, useSearchSync, useDebounce } from '@/app/_hooks';
 import { SEARCH_DEBOUNCE_TIME_MS, SEARCH_MIN_QUERY_LENGTH, getSearchTypeConfig } from './config';
 
 const SearchContext = createContext();
@@ -15,14 +14,12 @@ export function SearchProvider({ children }) {
   const queryParam = searchParams.get('query');
   const searchTypeParam = searchParams.get('searchType');
   const [query, setQuery] = useState(queryParam || '');
-  const debouncedQuery = useDebounce(query, SEARCH_DEBOUNCE_TIME_MS);
   const [searchType, setSearchType] = useState(searchTypeParam || '');
-
-  const currentConfig = getSearchTypeConfig(searchType);
-
   const [isSelectTypeOpen, setIsSelectTypeOpen] = useState(false);
   const [isAutoCompleteOpen, setIsAutoCompleteOpen] = useState(false);
+  const currentConfig = getSearchTypeConfig(searchType);
 
+  const debouncedQuery = useDebounce(query, SEARCH_DEBOUNCE_TIME_MS);
   const { data: autoCompleteItems, isLoading: isAutoCompleteLoading } = useSearchSync(
     debouncedQuery,
     currentConfig.searchType,
@@ -30,12 +27,20 @@ export function SearchProvider({ children }) {
   );
 
   const queryClient = useQueryClient();
-
   const router = useRouter();
 
   function submitSearch() {
     queryClient.cancelQueries({ queryKey: searchSyncKey });
-    router.push(`/specialist?searchType=${searchType}&query=${query}`);
+    router.push(`/specialist?searchType=${currentConfig.searchType}&query=${query}`);
+  }
+
+  function navigateToAutoCompleteItem(id) {
+    queryClient.cancelQueries({ queryKey: searchSyncKey });
+    if (currentConfig.searchType === 'request') {
+      // TODO: when requests are implemented
+    } else if (currentConfig.searchType === 'specialist' || currentConfig.searchType === 'organization') {
+      router.push(`/specialist/${id}`);
+    }
   }
 
   useEffect(() => {
@@ -66,6 +71,7 @@ export function SearchProvider({ children }) {
         setIsSelectTypeOpen,
         setIsAutoCompleteOpen,
         submitSearch,
+        navigateToAutoCompleteItem,
       }}
     >
       {children}

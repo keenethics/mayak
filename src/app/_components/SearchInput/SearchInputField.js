@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useFocus } from '@/app/_hooks/useFocus';
-import { useKeyPress } from '@/app/_hooks/useKeyPress';
+import { useFocus, useKeyPress } from '@/app/_hooks';
 import { useSearchContext } from './SearchContext';
 import { SEARCH_MIN_QUERY_LENGTH } from './config';
 
@@ -12,6 +11,7 @@ export function SearchInputField() {
   useKeyPress('Enter', () => {
     if (inputFocused && query?.length >= SEARCH_MIN_QUERY_LENGTH) {
       submitSearch();
+      inputRef.current.blur();
     }
   });
 
