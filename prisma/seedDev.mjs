@@ -41,13 +41,12 @@ function randomAddress(districts, isPrimary) {
 
 function generateSocialMediaLinks() {
   const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
-  const subsetLength = Math.floor(Math.random() * 5) + 1;
-  const shuffledList = socialMediaList.sort(() => Math.random() - 0.5);
 
-  return shuffledList.slice(0, subsetLength).reduce((obj, cur) => ({
-    ...obj,
-    [cur]: faker.internet.url(),
-  }), {});
+  return Object.fromEntries(socialMediaList
+    .sort(() => Math.random() - 0.5)
+    .slice(0, Math.floor(Math.random() * 5) + 1)
+    .map(network => [network, faker.internet.url()])
+  );
 }
 
 function randomSpecialist({ districts, specializations, therapies }) {
