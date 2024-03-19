@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { cn } from '@utils/cn';
-import { specialistSocialsPropType } from '@/app/_components/CardSpecialist/prop-types';
+import { specialistSocialsPropType } from '@components/CardSpecialist/prop-types';
 
 export function SocialsList({ socials, className }) {
   const socialsFiltered = socials.filter(social => !!social.href);

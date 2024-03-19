@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IDCard } from '@icons/index';
 import { cn } from '@utils/cn';
-import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
-import { TherapyPrices } from './TherapyPrices';
+import { AddressesList } from '@components/CardSpecialist/AddressesList';
+import { TherapyPrices } from '@components/CardSpecialist/TherapyPrices';
 
 export function DetailsList({ details, className }) {
   const { addresses, description, therapyPrices } = details;

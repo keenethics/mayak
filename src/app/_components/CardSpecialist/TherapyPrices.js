@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Price } from '@icons/index';
+import { therapyPricePropType } from '@components/CardSpecialist/prop-types';
 import { cn } from '@/utils/cn';
-import { therapyPricePropType } from './prop-types';
 
 export function TherapyPrices({ therapyPrices, className }) {
   return (
