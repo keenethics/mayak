@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import FooterImg from '@icons/whiteLogo.svg';
+import { WhiteLogo } from '@icons';
 import { cn } from '@utils/cn';
 import siteNav from '@config/siteNav';
-import { PillButton, SocialLink } from '@components';
+import { PillButton } from '@components/PillButton';
+import { SocialLink } from '@components/Links';
 
 export function Footer() {
   const { links } = siteNav;
@@ -20,7 +21,7 @@ export function Footer() {
     <footer className="text-white relative flex w-full flex-col overflow-hidden bg-primary-800 p-4 lg:px-20 lg:py-12">
       <div className={cn(flexColCenter, flexBetweenMd, 'gap-4')}>
         <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink, 'transition-all')}>
-          <FooterImg
+          <WhiteLogo
             alt="Footer logo image"
             aria-label="Footer logo image"
             priority="true"

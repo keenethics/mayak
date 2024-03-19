@@ -104,31 +104,31 @@ export const SpecialistFormFields = {
   instagram: {
     name: 'instagram',
     type: 'url',
-    label: 'Інстаграм',
+    label: 'Instagram',
     isRequired: false,
   },
   facebook: {
     name: 'facebook',
     type: 'url',
-    label: 'Фейсбук',
+    label: 'Facebook',
     isRequired: false,
   },
   youtube: {
     name: 'youtube',
     type: 'url',
-    label: 'Ютуб',
+    label: 'Youtube',
     isRequired: false,
   },
   linkedin: {
     name: 'linkedin',
     type: 'url',
-    label: 'Лінкедін',
+    label: 'LinkedIn',
     isRequired: false,
   },
   tiktok: {
     name: 'tiktok',
     type: 'url',
-    label: 'Тікток',
+    label: 'Tiktok',
     isRequired: false,
   },
   viber: {
@@ -151,4 +151,5 @@ export const SpecialistFormSections = {
   addresses: 'Місце надання послуг',
   services: 'Послуги',
   contacts: 'Контактні дані',
+  socialLinks: 'Соціальні мережі',
 };

@@ -1,47 +1,32 @@
-import Site from './site.svg';
-import Clock from './clock.svg';
-import HospitalSVG from './hospital.svg';
-import HospitalLogo from './hospitalIMG.svg';
-import IDCard from './id-card.svg';
-import Mail from './mail.svg';
-import MedAttention from './medical-attention.svg';
-import MedCare from './medical-care.svg';
-import OnlineMeeting from './online-meeting.svg';
-import Phone from './phone.svg';
-import Price from './price.svg';
-import Female from './female.svg';
-import Male from './male.svg';
-import Dot from './card-dot.svg';
-import BlueFb from './specialist-facebook.svg';
-import BlueInsta from './specialist-instagram.svg';
-import BlueTikTok from './specialist-tiktok.svg';
-import BlueYoutube from './specialist-youtube.svg';
-import BlueLinkedin from './specialist-linkedin.svg';
-import BlueViber from './specialist-viber.svg';
-import BlueTelegram from './specialist-telegram.svg';
-import Tick from './tickIcon.svg';
-
-export {
-  Site,
-  Clock,
-  HospitalSVG,
-  HospitalLogo,
-  IDCard,
-  Mail,
-  MedAttention,
-  MedCare,
-  OnlineMeeting,
-  Phone,
-  Price,
-  Female,
-  Male,
-  Dot,
-  BlueFb,
-  BlueInsta,
-  BlueTikTok,
-  BlueYoutube,
-  BlueLinkedin,
-  BlueViber,
-  BlueTelegram,
-  Tick,
-};
+export { default as Site } from '@icons/site.svg';
+export { default as Clock } from '@icons/clock.svg';
+export { default as HospitalSVG } from '@icons/hospital.svg';
+export { default as HospitalLogo } from '@icons/hospitalIMG.svg';
+export { default as IDCard } from '@icons/id-card.svg';
+export { default as Mail } from '@icons/mail.svg';
+export { default as MedAttention } from '@icons/medical-attention.svg';
+export { default as MedCare } from '@icons/medical-care.svg';
+export { default as OnlineMeeting } from '@icons/online-meeting.svg';
+export { default as Phone } from '@icons/phone.svg';
+export { default as Price } from '@icons/price.svg';
+export { default as Female } from '@icons/female.svg';
+export { default as Male } from '@icons/male.svg';
+export { default as Dot } from '@icons/card-dot.svg';
+export { default as BlueFb } from '@icons/specialist-facebook.svg';
+export { default as BlueInsta } from '@icons/specialist-instagram.svg';
+export { default as BlueTikTok } from '@icons/specialist-tiktok.svg';
+export { default as BlueYoutube } from '@icons/specialist-youtube.svg';
+export { default as BlueLinkedin } from '@icons/specialist-linkedin.svg';
+export { default as BlueViber } from '@icons/specialist-viber.svg';
+export { default as BlueTelegram } from '@icons/specialist-telegram.svg';
+export { default as Facebook } from '@icons/facebook.svg';
+export { default as WhiteLogo } from '@icons/whiteLogo.svg';
+export { default as CloseIcon } from '@icons/closeIcon.svg';
+export { default as BurgerIcon } from '@icons/burger.svg';
+export { default as Instagram } from '@icons/instagram.svg';
+export { default as HeaderCloseIcon } from '@icons/headerCloseIcon.svg';
+export { default as Logo } from '@icons/logo.svg';
+export { default as ArrowIconDown } from '@icons/arrowDown.svg';
+export { default as ArrowIconUp } from '@icons/arrowDown.svg';
+export { default as Ellipse } from '@icons/ellipse.svg';
+export { default as Tick } from '@icons/tickIcon.svg';

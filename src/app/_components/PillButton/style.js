@@ -19,6 +19,15 @@ export const buttonColorVariant = {
       disabled,
     },
   },
+  text: {
+    blue: {
+      regular: 'bg-transparent text-primary-500',
+      hover: 'hover:bg-primary-200',
+      focused: 'focus:text-primary-600 focus:bg-primary-200 focus:outline-none',
+      active: 'active:text-primary-600 active:bg-transparent',
+      disabled,
+    },
+  },
   outlined: {
     blue: {
       regular: 'bg-transparent border border-solid border-gray-700 text-primary-500',
@@ -42,6 +51,12 @@ export const buttonColorVariant = {
       disabled,
     },
   },
+  close: {
+    grey: {
+      regular: 'text-[transparent]',
+      hover: 'hover:text-other-white',
+    },
+  },
   transparent: {
     orange: {
       regular: 'bg-transparent border border-solid border-gray-700 text-p4 text-gray-900 font-normal',
@@ -51,19 +66,13 @@ export const buttonColorVariant = {
       disabled,
     },
   },
-  close: {
-    grey: {
-      regular: 'text-[transparent]',
-      hover: 'hover:text-other-white',
-    },
-  },
 };
 
 export const buttonType = {
   outlined: {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col text-p4',
-      layoutStyle: `flex justify-center align-middle 
+      layoutStyle: `flex justify-center align-middle
       gap-[8px] self-stretch h-[2.5rem] pt-[10px] pr-[24px] pb-[10px] pl-[16px]`,
     },
     regular: {
@@ -72,19 +81,13 @@ export const buttonType = {
       gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[10px] px-[24px]`,
     },
   },
-  transparent: {
-    icon: {
-      buttonStyle: 'transition-all inline-flex justify-center items-center flex-col flex-shrink-0 text-p4',
-      layoutStyle: `flex justify-center items-center
-      gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-1.5 px-3`,
-    },
+  text: {
     regular: {
-      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col flex-shrink-0 text-p4',
-      layoutStyle: `flex justify-center align-middle
-      gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-1.5 px-3`,
+      buttonStyle: 'transition-all inline-flex justify-center items-center h-10 flex-shrink-0 text-p4 gap-2 w-max',
+      layoutStyle: 'flex items-center justify-center px-2.5 py-3 self-stretch',
     },
   },
-  filledBold: {
+  filled: {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle text-p3',
       layoutStyle: 'flex justify-center align-middle gap-[8px] pt-[12px] pr-[24px] pb-[12px] pl-[16px]',
@@ -106,8 +109,20 @@ export const buttonType = {
   },
   close: {
     icon: {
-      buttonStyle: `flex justify-center align-middle w-[1rem] h-[1rem]  
+      buttonStyle: `flex justify-center align-middle w-[1rem] h-[1rem]
       flex-shrink-0`,
+    },
+  },
+  transparent: {
+    icon: {
+      buttonStyle: 'transition-all inline-flex justify-center items-center flex-col flex-shrink-0 text-p4',
+      layoutStyle: `flex justify-center items-center
+      gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-1.5 px-3`,
+    },
+    regular: {
+      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col flex-shrink-0 text-p4',
+      layoutStyle: `flex justify-center align-middle
+      gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-1.5 px-3`,
     },
   },
 };

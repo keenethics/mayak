@@ -5,7 +5,8 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { SwiperSlide } from 'swiper/react';
-import { PillButton, Slider } from '@components';
+import { PillButton } from '@components/PillButton';
+import { Slider } from '@components/Slider';
 import { clsx } from 'clsx/lite';
 
 export function List({ list, className }) {

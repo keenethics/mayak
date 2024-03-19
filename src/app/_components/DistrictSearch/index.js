@@ -1,1 +1,1 @@
-export * from './DistrictSearch';
+export * from './component';

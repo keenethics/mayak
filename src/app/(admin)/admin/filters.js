@@ -2,12 +2,12 @@ import { SearchInput, DateTimeInput, SelectInput, NullableBooleanInput } from 'r
 
 export const specialistsFilters = [
   <SearchInput placeholder="Пошук" key="search" source="q" alwaysOn />,
-  <DateTimeInput label="Було додано від" key="fromDate" source={'createdAt_gte'} alwaysOn />,
-  <DateTimeInput label="Було додано до" key="toDate" source={'createdAt_lte'} alwaysOn />,
+  <DateTimeInput label="Було додано від" key="fromDate" source="createdAt_gte" alwaysOn />,
+  <DateTimeInput label="Було додано до" key="toDate" source="createdAt_lte" alwaysOn />,
   <SelectInput
     label="Формат послуг"
     key="formatOfWork"
-    source={'formatOfWork_enum'}
+    source="formatOfWork_enum"
     choices={[
       { id: null, name: 'Усі' },
       { id: 'BOTH', name: 'Офлайн + онлайн' },
@@ -19,7 +19,7 @@ export const specialistsFilters = [
   <NullableBooleanInput
     key="active"
     label="Статус"
-    source={'isActive'}
+    source="isActive"
     nullLabel="Усі"
     falseLabel="Неактивний"
     trueLabel="Активний"
