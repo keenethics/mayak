@@ -64,7 +64,7 @@ const restEditProps = zSpecialistSchema.extend({
   therapyPrices: z.array(
     z.object({
       id: z.string(),
-      price: z.number().nullish(),
+      price: z.number(),
       therapy: z.object({
         id: z.string(),
       }),

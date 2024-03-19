@@ -13,16 +13,14 @@ export function toConnectList(list, cb) {
 }
 
 export function transformTherapyPrices(therapies, therapyPrices) {
-  const result = [];
-  therapies?.forEach(el => {
-    if (therapyPrices[el] !== null) {
-      result.push({
+  return (
+    therapies
+      ?.filter(el => therapyPrices[el] !== null)
+      .map(el => ({
         therapy: { connect: { id: el } },
         price: therapyPrices[el],
-      });
-    }
-  });
-  return result;
+      })) ?? []
+  );
 }
 
 function transformAddresses(addresses) {
