@@ -126,7 +126,7 @@ export function EventFilter() {
 
   return (
     <>
-      <div className="mx-auto flex w-full flex-col items-start justify-start gap-6 self-stretch lg:w-[900px]">
+      <div className="lg:w-max-[900px] mx-auto flex w-full flex-col items-start justify-start gap-6 self-stretch">
         <div className="flex flex-row flex-wrap items-start justify-start gap-3">
           {months.map(month => (
             <PillButton
