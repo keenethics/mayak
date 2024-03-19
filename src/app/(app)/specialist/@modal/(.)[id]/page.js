@@ -1,10 +1,15 @@
 import React from 'react';
-import { CardSpecialistExtended } from '@/app/_components/CardSpecialist';
-import { getSpecialistById } from '@/app/(app)/specialist/utils';
+import { CardSpecialistExtended, CardOrganizationExtended } from '@/app/_components/CardSpecialist';
+import { getOrganizationById, getSpecialistById } from '@/app/(app)/specialist/utils';
 
 export default async function Page({ params }) {
   const { id } = params;
   const specialist = await getSpecialistById({ id });
+  const organization = await getOrganizationById({ id });
 
-  return <CardSpecialistExtended specialist={specialist} />;
+  return specialist ? (
+    <CardSpecialistExtended specialist={specialist} />
+  ) : (
+    <CardOrganizationExtended organization={organization} />
+  );
 }

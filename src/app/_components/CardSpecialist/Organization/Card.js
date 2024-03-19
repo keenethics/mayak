@@ -16,6 +16,8 @@ import { CardButton } from '@components/CardSpecialist/CardButton';
 import { organizationPropType } from '@components/CardSpecialist/prop-types';
 
 export function CardOrganization({ organization, className, extended = false }) {
+  if (!organization) throw new Error('Organization is not found');
+
   const {
     id,
     name,
@@ -86,7 +88,11 @@ export function CardOrganization({ organization, className, extended = false }) 
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <Link href="#" scroll={false} className="mt-auto hidden self-end justify-self-end md:inline-block">
+            <Link
+              href={`/specialist/${id}`}
+              scroll={false}
+              className="mt-auto hidden self-end justify-self-end md:inline-block"
+            >
               <CardButton />
             </Link>
           </>
