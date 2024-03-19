@@ -4,12 +4,20 @@ import { CircularProgress } from '@mui/material';
 import { cn } from '@/utils/cn';
 import { useOverflowChildren } from '@/app/_hooks';
 
-export function OverlayList({ listItems, className, isLoading, onItemsOverflow = () => {} }) {
+const listItemSizeInRem = 2.5;
+
+export function OverlayList({ listItems, className, isLoading, onItemsOverflow = () => {}, maxItemCount }) {
   const itemsListRef = useRef(null);
   const overflown = useOverflowChildren(itemsListRef);
+
   useEffect(() => {
     onItemsOverflow(overflown);
   }, [overflown, onItemsOverflow]);
+
+  useEffect(() => {
+    itemsListRef.current.style.maxHeight = maxItemCount ? `${maxItemCount * listItemSizeInRem}rem` : 'none';
+  }, [maxItemCount]);
+
   return (
     <>
       {isLoading && (
@@ -18,7 +26,10 @@ export function OverlayList({ listItems, className, isLoading, onItemsOverflow =
         </div>
       )}
       {listItems && (
-        <ul ref={itemsListRef} className={cn('overlay-scrollbar max-h-[150px] overflow-auto', className)}>
+        <ul
+          ref={itemsListRef}
+          className={cn('overlay-scrollbar overflow-auto', overflown && 'mr-[2px] *:mr-[6px]', className)}
+        >
           {listItems.map(item => (
             <li
               className="rounded-full p-2 pl-8 hover:bg-gray-200 hover:font-bold hover:text-primary-800"
@@ -45,4 +56,5 @@ OverlayList.propTypes = {
   className: PropTypes.string,
   isLoading: PropTypes.bool,
   onItemsOverflow: PropTypes.func,
+  maxItemCount: PropTypes.number,
 };

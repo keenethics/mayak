@@ -31,6 +31,7 @@ export function SearchAutoCompleteDropDown() {
           {!isAutoCompleteLoading && (
             <>
               <OverlayList
+                maxItemCount={5}
                 listItems={autoCompleteItems?.map(item => ({
                   ...item,
                   onClick: () => navigateToAutoCompleteItem(item.id),
