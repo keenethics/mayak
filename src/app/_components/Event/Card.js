@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CalendarIcon, PriceIcon, LocationIcon, TimeIcon } from '@icons';
+import { Label } from '@components/Label';
+import { OverflownText } from '@components/OverflownText';
+import { EventLinkModal } from '@components/EventLinkModal';
 import { cn } from '@/utils/cn';
 import { parseDate } from '@/utils/parseDate';
-import { Label } from '../Label';
-import { OverflownText } from '../OverflownText';
-import { EventLinkModal } from '../EventLinkModal';
 
 function ListItem({ icon, text, textColor, fontWeight }) {
   return (
@@ -43,7 +43,7 @@ function transformData(event) {
 }
 
 export function EventCard({ event }) {
-  const [isFeedbackOpen, setFeedbackOpen] = useState(false);
+  const [isModalOpenOpen, setIsModalOpen] = useState(false);
   const { title, organizerName, tags, priceText, locationText, date, time, locationLink, additionalLink } =
     transformData(event);
 
@@ -54,8 +54,8 @@ export function EventCard({ event }) {
     />
   );
 
-  function toggleFeedback() {
-    setFeedbackOpen(prevState => !prevState);
+  function toggleModal() {
+    setIsModalOpen(prevState => !prevState);
   }
 
   const tagsElements = tags?.map(tag => (
@@ -63,7 +63,7 @@ export function EventCard({ event }) {
   ));
   return (
     <div className="flex w-full flex-col gap-4 self-stretch rounded-3xl border-2 border-gray-200 bg-other-white p-4">
-      <div className="flex w-[259px] cursor-pointer flex-col items-start gap-1" onClick={toggleFeedback}>
+      <div className="flex w-[259px] cursor-pointer flex-col items-start gap-1" onClick={toggleModal}>
         <OverflownText className="w-[259px] truncate text-p1 font-bold text-gray-700 underline" text={title} />
         <OverflownText className="w-[259px] truncate text-p3 font-bold text-primary-600" text={organizerName} />
       </div>
@@ -85,7 +85,7 @@ export function EventCard({ event }) {
         </li>
       </ul>
 
-      <EventLinkModal isOpen={isFeedbackOpen} onClose={toggleFeedback} link={additionalLink.link} />
+      <EventLinkModal isOpen={isModalOpenOpen} onClose={toggleModal} link={additionalLink.link} />
     </div>
   );
 }

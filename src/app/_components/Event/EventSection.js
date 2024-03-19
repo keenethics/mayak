@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { CircularProgress } from '@mui/material';
 import CheckMark from '@icons/check-mark.svg';
 import Search from '@icons/search.svg';
-import { allEvents, useEventSetParam } from '@hooks';
+import { allEvents, useSetParam } from '@hooks';
 import { EventCard } from '@components/Event/Card';
 import { PillButton } from '@components/PillButton';
 import { buttonColorVariant } from '@components/PillButton/style';
@@ -40,7 +40,7 @@ export function EventSection() {
   const [activeMonth, setActiveMonth] = useState(parseInt(filteredMonths[0].index + 1, 10));
 
   const searchParams = useSearchParams();
-  const { addParam, deleteParam } = useEventSetParam('month');
+  const { add: addParam, remove: removeParam } = useSetParam('month');
 
   const { ref, inView } = useInView();
 
@@ -82,11 +82,11 @@ export function EventSection() {
     if (monthFromQuery && monthFromQuery !== currentMonth) {
       // If the month is defined in the query and is not equal to the current month
       setActiveMonth(monthFromQuery);
-      deleteParam();
+      removeParam();
       addParam(monthFromQuery);
     } else if (!monthFromQuery || monthFromQuery === undefined) {
       setActiveMonth(currentMonth);
-      deleteParam();
+      removeParam();
       addParam(currentMonth);
     }
     // eslint-disable-next-line
@@ -103,7 +103,7 @@ export function EventSection() {
   // Filter data based on selected month
   const handleFilter = newMonth => {
     setActiveMonth(newMonth);
-    deleteParam();
+    removeParam();
     addParam(newMonth.toString());
   };
 
