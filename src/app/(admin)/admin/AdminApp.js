@@ -69,13 +69,6 @@ export default function AdminPage() {
         options={{ label: 'Райони' }}
       />
       <Resource
-        name={RESOURCES.specialization}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-        options={{ label: 'Спеціалізації' }}
-      />
-      <Resource
         name={RESOURCES.address}
         list={ListGuesser}
         edit={EditGuesser}
@@ -102,20 +95,12 @@ export default function AdminPage() {
         edit={EditGuesser}
       />
       <Resource
-        name={RESOURCES.psychotherapyMethod}
+        name={RESOURCES.method}
         list={MethodsList}
+        show={MethodsShow}
         edit={MethodsEdit}
         create={MethodsCreate}
-        show={MethodsShow}
-        options={{ label: 'Напрями і методи психотерапевтів' }}
-      />
-      <Resource
-        name={RESOURCES.psychologyMethod}
-        list={MethodsList}
-        edit={MethodsEdit}
-        create={MethodsCreate}
-        show={MethodsShow}
-        options={{ label: 'Напрями і методи психологів' }}
+        options={{ label: 'Напрями і методи терапії' }}
       />
     </Admin>
   );

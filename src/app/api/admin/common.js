@@ -40,6 +40,9 @@ export const MODEL_INCLUDES = {
     additionalLink: { select: { label: true, link: true } },
     tags: { select: { name: true } },
   },
+  [RESOURCES.method]: {
+    specialization: { select: { name: true } },
+  },
 };
 
 export function searchInputFilters(modelName, filter) {

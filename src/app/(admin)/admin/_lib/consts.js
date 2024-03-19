@@ -10,8 +10,7 @@ export const RESOURCES = {
   eventTag: 'eventTag',
   faq: 'faq',
   organizationType: 'organizationType',
-  psychologyMethod: 'psychologyMethod',
-  psychotherapyMethod: 'psychotherapyMethod',
+  method: 'method',
 };
 
 export const FORM_TYPES = {

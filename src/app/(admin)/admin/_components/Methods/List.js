@@ -1,13 +1,14 @@
 import React from 'react';
-import { Datagrid, DeleteWithConfirmButton, EditButton, List, TextField } from 'react-admin';
+import { Datagrid, TextField, List, EditButton, DeleteWithConfirmButton } from 'react-admin';
 
 export function MethodsList() {
   return (
     <List>
-      <Datagrid rowClick="show" bulkActionButtons={false}>
+      <Datagrid rowClick="show" bulkActionButtons={false} sort={{ field: 'specialization.name' }}>
+        <TextField source="specialization.name" label="Спеціалізація" />
         <TextField source="title" label="Назва" />
         <TextField source="description" label="Опис" />
-        <EditButton label="Редагувати" />
+        <EditButton />
         <DeleteWithConfirmButton
           confirmContent="Ви впевнені?"
           confirmTitle="Дані будуть видалені із бази."

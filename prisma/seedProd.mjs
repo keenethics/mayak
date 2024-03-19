@@ -6,13 +6,13 @@ const districts = ['Личаківський', 'Шевченківський', '
   name => ({ name }),
 );
 
-const specializations = ['Психолог', 'Психотерапевт', 'Психіатр', 'Сексолог', 'Соціальний працівник'].map(name => ({
+const specializations = ['Психіатр', 'Сексолог', 'Соціальний працівник'].map(name => ({
   name,
 }));
 
 const organizationTypes = ['Психологічний центр', 'Соціальна служба', 'Лікарня'].map(name => ({ name }));
 
-const psychologyMethods = [
+const psychotherapyMethods = [
   {
     title: 'Арт-терапія',
     description:
@@ -132,7 +132,8 @@ const psychologyMethods = [
       'BSFT - акцент на вирішенні конкретних проблем, актуалізації ресурсів. Фокус завжди спрямований на мету, а не на проблеми довкола',
   },
 ];
-const psychotherapyMethods = [
+
+const psychologyMethods = [
   {
     title: 'Клінічна психологія',
     description:
@@ -198,6 +199,32 @@ const psychotherapyMethods = [
     description: 'Фахівець, який спеціалізується на виявленні та корекції психологічних недоліків.',
   },
 ];
+specializations.push(
+  {
+    name: 'Психолог',
+    methods: {
+      connectOrCreate: psychologyMethods.map(method => {
+        const { title, description } = method;
+        return {
+          where: { title },
+          create: { title, description },
+        };
+      }),
+    },
+  },
+  {
+    name: 'Психотерапевт',
+    methods: {
+      connectOrCreate: psychotherapyMethods.map(method => {
+        const { title, description } = method;
+        return {
+          where: { title },
+          create: { title, description },
+        };
+      }),
+    },
+  },
+);
 const therapies = [
   {
     isActive: true,
