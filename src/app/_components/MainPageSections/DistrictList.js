@@ -1,6 +1,6 @@
 'use client';
 
-import { Tick } from '@icons/index';
+import { Tick } from '@icons';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ import { PillButton } from '@components/PillButton';
 import { Slider } from '@components/Slider';
 import { clsx } from 'clsx/lite';
 
-export function List({ list, className }) {
+export function DistrictList({ list, className }) {
   const [selected, setSelected] = useState(0);
   const handleClick = index => {
     setSelected(index);
@@ -43,7 +43,7 @@ export function List({ list, className }) {
   );
 }
 
-List.propTypes = {
+DistrictList.propTypes = {
   list: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { cn } from '@utils/cn';
 import { Heading } from '@components/Typography';
-import { List } from '@/app/_components/DistrictSearch/List';
+import { DistrictList } from '@components/MainPageSections/DistrictList';
 import { prisma } from '@/lib/db';
 
-export async function DistrictSearch({ className }) {
+export async function DistrictSearchSection({ className }) {
   const districtsList = await prisma.district.findMany();
   const optionsList = districtsList
     .sort((a, b) => a.name.localeCompare(b.name))
@@ -15,11 +15,11 @@ export async function DistrictSearch({ className }) {
       <Heading type="h3" className="text-p4 font-bold uppercase text-primary-600">
         Райони міста Львова
       </Heading>
-      <List list={optionsList} className="mt-4 w-full" />
+      <DistrictList list={optionsList} className="mt-4 w-full" />
     </section>
   );
 }
 
-DistrictSearch.propTypes = {
+DistrictSearchSection.propTypes = {
   className: PropTypes.string,
 };
