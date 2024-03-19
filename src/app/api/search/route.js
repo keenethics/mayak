@@ -86,7 +86,18 @@ async function handleSearch(entityFilter, query, searchType) {
 async function handleSearchSync(entityFilter, query, searchType) {
   let mappedSyncItems = [];
   if (searchType === 'request') {
-    // TODO: when the requests are implemented
+    const syncItems = await prisma.request.findMany({
+      where: {
+        name: {
+          contains: query,
+          mode: 'insensitive',
+        },
+      },
+    });
+    mappedSyncItems = syncItems.map(el => ({
+      id: el.id,
+      title: el.name,
+    }));
   } else if (searchType === 'organization' || searchType === 'specialist') {
     const isOrganization = searchType === 'organization';
     const include = {

@@ -33,11 +33,15 @@ export function SearchProvider({ children }) {
     queryClient.cancelQueries({ queryKey: searchSyncKey });
     router.push(`/specialist?searchType=${currentConfig.searchType}&query=${query}`);
   }
-
   function navigateToAutoCompleteItem(id) {
     queryClient.cancelQueries({ queryKey: searchSyncKey });
     if (currentConfig.searchType === 'request') {
-      // TODO: when requests are implemented
+      const currentQuery = router.query;
+      const newQuery = {
+        ...currentQuery,
+        request: id,
+      };
+      router.push(`/specialist?${new URLSearchParams(newQuery).toString()}`);
     } else if (currentConfig.searchType === 'specialist' || currentConfig.searchType === 'organization') {
       router.push(`/specialist/${id}`);
     }

@@ -4,7 +4,7 @@ import { districts, organizationTypes, specializations, therapies } from './data
 const prisma = new PrismaClient();
 
 async function translateTherapies(therapiesToTranslate) {
-  const tranlated = [];
+  const translated = [];
   for (let i = 0; i < therapiesToTranslate.length; i += 1) {
     const therapy = therapiesToTranslate[i];
 
@@ -15,10 +15,10 @@ async function translateTherapies(therapiesToTranslate) {
       skipDuplicates: true,
     });
 
-    tranlated.push({ ...therapy, requests: { connect: requestsToConnect } });
+    translated.push({ ...therapy, requests: { connect: requestsToConnect } });
   }
 
-  return tranlated;
+  return translated;
 }
 
 async function createIfNotExist(model, data, filter) {
