@@ -5,11 +5,10 @@ import { getOrganizationById, getSpecialistById } from '@/app/(app)/specialist/u
 export default async function Page({ params }) {
   const { id } = params;
   const specialist = await getSpecialistById({ id });
-  const organization = await getOrganizationById({ id });
 
-  return specialist ? (
-    <CardSpecialistExtended specialist={specialist} />
-  ) : (
-    <CardOrganizationExtended organization={organization} />
-  );
+  if (specialist) {
+    return <CardSpecialistExtended specialist={specialist} />;
+  }
+  const organization = await getOrganizationById({ id });
+  return <CardOrganizationExtended organization={organization} />;
 }
