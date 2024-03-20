@@ -33,10 +33,13 @@ const monthNames = [
   { index: 11, name: 'грудень', en: 'december' },
 ];
 
-const calcPureMonthIndex = parseInt(currentMonth - 1, 10);
+const calcPureMonthIndex = (currentMonth - 1) % monthNames.length;
+
 const firstMonth = monthNames.slice(calcPureMonthIndex, calcPureMonthIndex + 1);
 const restMonth = monthNames.slice(calcPureMonthIndex + 1, calcPureMonthIndex + 6);
 const filteredMonths = firstMonth.concat(restMonth);
+
+const fakeArray = [1, 2, 3, 4, 5, 6];
 
 const { semiorange } = buttonColorVariant.eventFilter;
 const activeButtonStyles = cn({
@@ -55,7 +58,7 @@ export function EventSection() {
 
   // Fetch data and pass url params
   const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } = useInfiniteQuery({
-    queryFn: ({ month = activeMonth, pageParam = '' }) => allEvents({ month, take: 3, lastCursor: pageParam }),
+    queryFn: ({ month = activeMonth, pageParam = '' }) => allEvents({ month, take: 6, lastCursor: pageParam }),
     queryKey: ['event', activeMonth],
     getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
   });
@@ -110,26 +113,28 @@ export function EventSection() {
         </div>
 
         <ul className="grid w-full gap-4 self-stretch sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {isLoading && new Array(3).fill('').map(el => <SkeletonCard key={el.index} />)}
-          {isSuccess &&
-            data?.pages.map(page =>
-              page.data.map((event, index) => {
-                if (page.data.length === index + 1)
-                  return (
-                    <div ref={ref} key={event.id}>
-                      <EventCard event={event} />
-                    </div>
-                  );
+          {isLoading && fakeArray.map(el => <SkeletonCard key={el} />)}
+          <>
+            {isSuccess &&
+              data.pages.map(page =>
+                page.data.map((event, index) => {
+                  if (page.data.length === index + 1)
+                    return (
+                      <div ref={ref} key={event.id}>
+                        <EventCard event={event} />
+                      </div>
+                    );
 
-                return <EventCard key={event.id} event={event} />;
-              }),
-            )}
+                  return <EventCard key={event.id} event={event} />;
+                }),
+              )}
+          </>
         </ul>
       </div>
 
       {(isLoading || isFetchingNextPage) && <CircularProgress />}
 
-      {isSuccess && data?.pages.length === 1 && <NoInfoToShow text="подій" />}
+      {isSuccess && !hasNextPage && data.pages.length === 1 && <NoInfoToShow text="подій" />}
 
       {error && <div className="mt-10">{('An error has occurred: ', error.message)}</div>}
     </>
