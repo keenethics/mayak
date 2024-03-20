@@ -37,11 +37,12 @@ export function SearchProvider({ children }) {
     queryClient.cancelQueries({ queryKey: searchSyncKey });
     if (currentConfig.searchType === 'request') {
       const currentQuery = router.query;
-      const newQuery = {
+      const newSearchParams = new URLSearchParams({
         ...currentQuery,
         request: id,
-      };
-      router.push(`/specialist?${new URLSearchParams(newQuery).toString()}`);
+      });
+      newSearchParams.delete('query');
+      router.push(`/specialist?${newSearchParams.toString()}`);
     } else if (currentConfig.searchType === 'specialist' || currentConfig.searchType === 'organization') {
       router.push(`/specialist/${id}`);
     }

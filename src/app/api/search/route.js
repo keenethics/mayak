@@ -7,14 +7,28 @@ import { withErrorHandler } from '@/lib/errors/errorHandler';
 
 function buildFilter(entityFilter, query, searchType) {
   const defaultFilter = { OR: [{ specialist: entityFilter }, { organization: entityFilter }] };
-  // use default filter when query is not set
+
   if (!query) {
     return defaultFilter;
   }
+
   switch (searchType) {
     case 'request':
-      // TODO: after requests are implemented
-      return {};
+      Object.assign(entityFilter, {
+        therapiesCuts: {
+          some: {
+            requests: {
+              some: {
+                name: {
+                  contains: query,
+                  mode: 'insensitive',
+                },
+              },
+            },
+          },
+        },
+      });
+      return defaultFilter;
     case 'specialist':
       return {
         sortString: {
@@ -132,10 +146,12 @@ export const handler = withErrorHandler(async req => {
     searchType,
     query,
     format,
+    request,
     district: districts,
   } = getSearchParamsFromRequest(
     req,
     {
+      request: undefined,
       format: undefined,
       type: undefined,
       // take: 10,
@@ -158,6 +174,15 @@ export const handler = withErrorHandler(async req => {
       therapies: type && {
         some: {
           type,
+        },
+      },
+      therapiesCuts: request && {
+        some: {
+          requests: {
+            some: {
+              id: request,
+            },
+          },
         },
       },
       OR: format && [{ formatOfWork: FormatOfWork.BOTH }, { formatOfWork: format }],

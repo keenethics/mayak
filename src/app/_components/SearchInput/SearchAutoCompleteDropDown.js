@@ -18,7 +18,7 @@ export function SearchAutoCompleteDropDown() {
   const onItemsOverflow = useCallback(state => {
     setListOverflown(state);
   }, []);
-
+  
   return (
     <OverlayContainer isOpen={isAutoCompleteOpen} className="left-0 top-[58px] z-[4] lg:top-[44px]">
       {debouncedQuery?.length >= SEARCH_MIN_QUERY_LENGTH ? (
