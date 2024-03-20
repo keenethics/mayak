@@ -8,7 +8,8 @@ Wrong:
 
 ```javascript
 const Header = (props) => {
-  return ...
+  return
+...
 };
 
 ```
@@ -17,7 +18,8 @@ Right:
 
 ```javascript
 function Header(props) {
-  return ...
+  return
+...
 }
 
 ```
@@ -28,7 +30,8 @@ Wrong:
 
 ```javascript
 const utility = () => {
-  return ...
+  return
+...
 };
 
 // some more code ...
@@ -40,7 +43,8 @@ Right:
 
 ```javascript
 export const utility = () => {
-  return ...
+  return
+...
 };
 ```
 
@@ -70,7 +74,7 @@ _components
     ├───Create.js // File with SpecialistCreate component
     ├───Edit.js // File with SpecialistEdit component
     ├───Show.js // File with SpecialistShow component
-    ├───DistrictList.js // File with SpecialistList component
+    ├───List.js // File with SpecialistList component
     └───index.js
 ```
 

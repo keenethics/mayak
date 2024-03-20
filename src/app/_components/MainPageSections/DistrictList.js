@@ -18,7 +18,7 @@ export function DistrictList({ list, className }) {
     <Slider slidesPerView="auto" spaceBetween={15} className={className}>
       {list.map(({ id, name }, index) => {
         const isSelected = index === selected;
-        const hasIcon = isSelected ? <Tick /> : null;
+        const icon = isSelected ? <Tick /> : null;
         const pillButtonStyle = clsx(isSelected && 'border-secondary-300 bg-secondary-300 font-semibold');
         const linkStyle = clsx(isSelected && 'pointer-events-none cursor-none');
 
@@ -28,7 +28,7 @@ export function DistrictList({ list, className }) {
               <PillButton
                 variant="transparent"
                 colorVariant="orange"
-                icon={hasIcon}
+                icon={icon}
                 className={pillButtonStyle}
                 aria-label={`Click to see specialists related to the district with id ${id}`}
               >
