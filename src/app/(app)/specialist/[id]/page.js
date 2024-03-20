@@ -6,10 +6,20 @@ export async function generateMetadata({ params }) {
   try {
     const { id } = params;
     const specialist = await getSpecialistById({ id });
-    const organization = await getOrganizationById({ id });
+    let name;
+    let description;
 
-    const name = specialist ? `${specialist.lastName} ${specialist.firstName}` : organization.name;
-    const description = specialist ? specialist.description : organization.description;
+    if (specialist) {
+      name = `${specialist.lastName} ${specialist.firstName}`;
+      description = specialist.description;
+      return { name, description };
+    }
+    const organization = await getOrganizationById({ id });
+    if (organization) {
+      name = organization.name;
+      description = organization.description;
+      return { name, description };
+    }
 
     return {
       name,
@@ -26,12 +36,11 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { id } = params;
   const cardStyle = 'mx-auto my-6 max-w-[900px] px-4 md:my-10 lg:px-0';
-  const specialist = await getSpecialistById({ id });
-  const organization = !specialist && (await getOrganizationById({ id }));
 
-  return specialist ? (
-    <CardSpecialist specialist={specialist} extended className={cardStyle} />
-  ) : (
-    <CardOrganization organization={organization} extended className={cardStyle} />
-  );
+  const specialist = await getSpecialistById({ id });
+  if (specialist) {
+    return <CardSpecialist specialist={specialist} extended className={cardStyle} />;
+  }
+  const organization = await getOrganizationById({ id });
+  return <CardOrganization organization={organization} extended className={cardStyle} />;
 }

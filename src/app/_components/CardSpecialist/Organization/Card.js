@@ -16,8 +16,6 @@ import { CardButton } from '@components/CardSpecialist/CardButton';
 import { organizationPropType } from '@components/CardSpecialist/prop-types';
 
 export function CardOrganization({ organization, className, extended = false }) {
-  if (!organization) throw new Error('Organization is not found');
-
   const {
     id,
     name,
