@@ -149,6 +149,7 @@ model Address {
   specialists   Specialist[]
   organizations Organization[]
   isPrimary     Boolean        @default(false)
+  location      Float[]
 
   @@map("address")
 }
