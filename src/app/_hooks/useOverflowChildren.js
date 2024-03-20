@@ -15,10 +15,10 @@ export function useOverflowChildren(ref) {
         const containerRect = node.getBoundingClientRect();
 
         return (
-          childRect.top < containerRect.top ||
-          childRect.left < containerRect.left ||
-          childRect.bottom > containerRect.bottom ||
-          childRect.right > containerRect.right
+          childRect.top < Math.floor(containerRect.top) ||
+          childRect.left < Math.floor(containerRect.left) ||
+          childRect.bottom > Math.ceil(containerRect.bottom) ||
+          childRect.right > Math.ceil(containerRect.right)
         );
       });
 

@@ -6,7 +6,7 @@ import { useOverflowChildren } from '@/app/_hooks';
 
 const listItemSizeInRem = 2.5;
 
-export function OverlayList({ listItems, className, isLoading, onItemsOverflow = () => {}, maxItemCount }) {
+export function OverlayList({ listItems, className, isLoading, maxItemCount, onItemsOverflow = () => {} }) {
   const itemsListRef = useRef(null);
   const overflown = useOverflowChildren(itemsListRef);
 
