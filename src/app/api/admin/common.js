@@ -25,6 +25,7 @@ export const MODEL_INCLUDES = {
   },
   [RESOURCES.organization]: {
     therapies: { select: { id: true, type: true, title: true } },
+    expertSpecializations: { select: { id: true, name: true } },
     type: { select: { id: true, name: true } },
     addresses: {
       select: {
@@ -54,6 +55,8 @@ export function transformServiceProvider(instance, modelName) {
   if (modelName === RESOURCES.organization) {
     // eslint-disable-next-line no-param-reassign
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
+    // eslint-disable-next-line no-param-reassign
+    instance.expertSpecializationIds = instance.expertSpecializations.map(({ id }) => id);
   } else {
     // eslint-disable-next-line no-param-reassign
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);

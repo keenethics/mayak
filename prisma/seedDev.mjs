@@ -84,7 +84,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
   };
 }
 
-function randomOrganization({ therapies, districts, organizationTypes }) {
+function randomOrganization({ therapies, districts, organizationTypes, expertSpecializations }) {
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
   if (formatOfWork !== 'ONLINE') {
@@ -97,7 +97,12 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
   const phoneRegexp = '+380[0-9]{9}';
   return {
     name: faker.company.name(),
+    expertSpecializations: {
+      connect: uniqueObjectsWithId(expertSpecializations),
+    },
     yearsOnMarket: nullable(faker.number.int({ min: 1, max: 30 })),
+    ownershipType: faker.helpers.arrayElement(['PRIVATE', 'GOVERNMENT']),
+    isInclusiveSpace: faker.datatype.boolean(),
     formatOfWork,
     type: {
       connect: uniqueObjectsWithId(organizationTypes),
@@ -232,22 +237,26 @@ async function main() {
     });
   }
   for (let i = 0; i < 10; i += 1) {
-    const organizationData = randomOrganization({ therapies, districts, organizationTypes });
+    const organizationData = randomOrganization({
+      therapies,
+      districts,
+      organizationTypes,
+      expertSpecializations: specializations,
+    });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.$transaction(async trx => {
-      const organization = await trx.organization.create({
-        data: organizationData,
-      });
-      await trx.searchEntry.create({
-        data: {
-          sortString: organization.name,
-          organization: {
-            connect: {
-              id: organization.id,
-            },
+    const organization = await prisma.organization.create({
+      data: organizationData,
+    });
+    // eslint-disable-next-line no-await-in-loop
+    await prisma.searchEntry.create({
+      data: {
+        sortString: organization.name,
+        organization: {
+          connect: {
+            id: organization.id,
           },
         },
-      });
+      },
     });
   }
 }

@@ -1,3 +1,5 @@
+const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
+
 // this function transforms form data to proper prisma creation object
 export function transformOrganizationData(data) {
   let addressesObject = {};
@@ -31,6 +33,9 @@ export function transformOrganizationData(data) {
 
   return {
     ...data,
+    expertSpecializations: {
+      connect: data.expertSpecializations?.length ? mapIdArrayToIdObjects(data.expertSpecializations) : undefined,
+    },
     addresses: addressesObject,
     type: typesObject,
     therapies: therapiesObject,
