@@ -13,6 +13,7 @@ import { PillButton } from '@components/PillButton';
 import { buttonColorVariant } from '@components/PillButton/style';
 import { NoInfoToShow } from '@components/NoInfoToShow';
 import { cn } from '@/utils/cn';
+import { capitalizeFirstLetter } from '@/utils/common';
 
 const currentMonth = new Date().getMonth() + 1;
 
@@ -36,37 +37,20 @@ const firstMonth = monthNames.slice(calcPureMonthIndex, calcPureMonthIndex + 1);
 const restMonth = monthNames.slice(calcPureMonthIndex + 1, calcPureMonthIndex + 6);
 const filteredMonths = firstMonth.concat(restMonth);
 
-export function EventSection() {
-  const [activeMonth, setActiveMonth] = useState(parseInt(filteredMonths[0].index + 1, 10));
+const { semiorange } = buttonColorVariant.eventFilter;
+const activeButtonStyles = cn({
+  'pointer-events-none border-secondary-300 bg-secondary-300 font-semibold text-gray-900': semiorange.active,
+});
+const commonIconStyle = 'h-4 w-4 transition-all';
 
+export function EventSection() {
   const searchParams = useSearchParams();
-  const { add: addParam, remove: removeParam } = useSetParam('month');
+  const monthFromQuery = searchParams.get('month');
+  const { replace: replaceParam } = useSetParam('month');
+
+  const [activeMonth, setActiveMonth] = useState(monthFromQuery || filteredMonths[0].index + 1);
 
   const { ref, inView } = useInView();
-
-  const { semiorange } = buttonColorVariant.eventFilter;
-
-  const activeButtonStyles = cn({
-    'pointer-events-none border-secondary-300 bg-secondary-300 font-semibold text-gray-900': semiorange.active,
-  });
-
-  function selectButtonIcon(index) {
-    if (activeMonth - 1 === index) {
-      return (
-        <CheckMark
-          key={`checkmark+${index}`}
-          className={cn(`block h-4 w-4 transition-all group-hover:hidden group-focus:hidden`)}
-        />
-      );
-    }
-
-    return (
-      <Search
-        key={`searchicon+${index}`}
-        className="hidden h-4 w-4 transition-all group-hover:block group-focus:block"
-      />
-    );
-  }
 
   // Fetch data and pass url params
   const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } = useInfiniteQuery({
@@ -74,23 +58,6 @@ export function EventSection() {
     queryKey: ['event', activeMonth],
     getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
   });
-
-  // Get data on first render or on url open
-  useEffect(() => {
-    const monthFromQuery = searchParams.get('month');
-
-    if (monthFromQuery && monthFromQuery !== currentMonth) {
-      // If the month is defined in the query and is not equal to the current month
-      setActiveMonth(monthFromQuery);
-      removeParam();
-      addParam(monthFromQuery);
-    } else if (!monthFromQuery || monthFromQuery === undefined) {
-      setActiveMonth(currentMonth);
-      removeParam();
-      addParam(currentMonth);
-    }
-    // eslint-disable-next-line
-  }, [currentMonth]);
 
   useEffect(() => {
     // if the last element is in view and there is a next page, fetch the next page
@@ -103,8 +70,7 @@ export function EventSection() {
   // Filter data based on selected month
   const handleFilter = newMonth => {
     setActiveMonth(newMonth);
-    removeParam();
-    addParam(newMonth.toString());
+    replaceParam(newMonth.toString());
   };
 
   return (
@@ -120,9 +86,21 @@ export function EventSection() {
               onClick={() => {
                 handleFilter(month.index + 1);
               }}
-              icon={selectButtonIcon(month.index)}
+              icon={[
+                activeMonth - 1 === month.index && (
+                  <CheckMark
+                    key={`checkmark+${month.index}`}
+                    className={cn('block group-hover:hidden group-focus:hidden', commonIconStyle)}
+                  />
+                ),
+
+                <Search
+                  key={`searchicon+${month.index}`}
+                  className={cn('hidden group-hover:block group-focus:block', commonIconStyle)}
+                />,
+              ]}
             >
-              {month.name.charAt(0).toUpperCase() + month.name.slice(1)}
+              {capitalizeFirstLetter(month.name)}
             </PillButton>
           ))}
         </div>
