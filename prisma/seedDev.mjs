@@ -38,6 +38,18 @@ function randomAddress(districts, isPrimary) {
     isPrimary,
   };
 }
+
+function generateSocialMediaLinks() {
+  const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
+
+  return Object.fromEntries(
+    socialMediaList
+      .sort(() => Math.random() - 0.5)
+      .slice(0, Math.floor(Math.random() * 5) + 1)
+      .map(network => [network, faker.internet.url()]),
+  );
+}
+
 function randomTherapyPrices(selectedTherapies) {
   const therapyPrices = [];
   selectedTherapies.forEach(el => {
@@ -52,6 +64,7 @@ function randomTherapyPrices(selectedTherapies) {
   });
   return therapyPrices;
 }
+
 function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
@@ -65,6 +78,9 @@ function randomSpecialist({ districts, specializations, therapies }) {
   }
   const specialistTherapies = uniqueObjectsWithId(therapies);
   const phoneRegexp = '+380[0-9]{9}';
+
+  const socialMediaLinks = generateSocialMediaLinks();
+
   return {
     specializations: {
       connect: uniqueObjectsWithId(specializations),
@@ -90,13 +106,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
-    instagram: nullable(faker.internet.url()),
-    facebook: nullable(faker.internet.url()),
-    youtube: nullable(faker.internet.url()),
-    linkedin: nullable(faker.internet.url()),
-    tiktok: nullable(faker.internet.url()),
-    // viber: nullable(faker.internet.url()),
-    // telegram: nullable(faker.internet.url()),
+    ...socialMediaLinks,
   };
 }
 
@@ -111,6 +121,8 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     };
   }
   const phoneRegexp = '+380[0-9]{9}';
+  const socialMediaLinks = generateSocialMediaLinks();
+
   return {
     name: faker.company.name(),
     yearsOnMarket: nullable(faker.number.int({ min: 1, max: 30 })),
@@ -128,13 +140,7 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
-    instagram: nullable(faker.internet.url()),
-    facebook: nullable(faker.internet.url()),
-    youtube: nullable(faker.internet.url()),
-    linkedin: nullable(faker.internet.url()),
-    tiktok: nullable(faker.internet.url()),
-    // viber: nullable(faker.internet.url()),
-    // telegram: nullable(faker.internet.url()),
+    ...socialMediaLinks,
   };
 }
 

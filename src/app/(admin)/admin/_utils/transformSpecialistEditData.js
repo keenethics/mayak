@@ -2,6 +2,7 @@ import { toConnectList, transformEditData, transformTherapyPrices } from './comm
 
 export function transformSpecialistEditData({
   specializationsIds,
+  socialLink,
   therapyPricesEdit,
   therapyPrices,
   therapiesIds,
@@ -15,6 +16,7 @@ export function transformSpecialistEditData({
 
   return {
     ...base,
+    ...socialLink,
     therapyPrices: {
       create: newTherapiesPrices,
       deleteMany: currentTherapyPrices,

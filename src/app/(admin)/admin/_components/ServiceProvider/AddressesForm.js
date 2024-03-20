@@ -1,15 +1,15 @@
 import {
-  SelectInput,
-  TextInput,
   ArrayInput,
-  SimpleFormIterator,
+  BooleanField,
+  BooleanInput,
   FormDataConsumer,
-  useGetList,
+  Labeled,
   ReferenceInput,
   required,
-  BooleanInput,
-  BooleanField,
-  Labeled,
+  SelectInput,
+  SimpleFormIterator,
+  TextInput,
+  useGetList,
 } from 'react-admin';
 import { FormatOfWork } from '@prisma/client';
 import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
@@ -90,11 +90,11 @@ HelperText.propTypes = {
   children: PropTypes.node,
 };
 
-export function AddressesForm({ type = FORM_TYPES.create, label }) {
+export function AddressesForm({ type = FORM_TYPES.create, label, className }) {
   const { data: districts, isLoading } = useGetList(RESOURCES.district);
   if (isLoading) return <Loading />;
   return (
-    <FormFieldWrapper title={label} className="mt-3">
+    <FormFieldWrapper title={label} className={className}>
       <FormDataConsumer>
         {({ formData }) => {
           if (!formData) return null;
@@ -132,4 +132,5 @@ export function AddressesForm({ type = FORM_TYPES.create, label }) {
 AddressesForm.propTypes = {
   type: PropTypes.oneOf(Object.values(FORM_TYPES)),
   label: PropTypes.string,
+  className: PropTypes.string,
 };

@@ -6,7 +6,7 @@ import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 import { ServicesFormCreate } from './ServicesFormCreate';
 import { ServicesFormEdit } from './ServicesFormEdit';
 
-export function ServicesForm({ label, type = FORM_TYPES.create }) {
+export function ServicesForm({ label, type = FORM_TYPES.create, className }) {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
 
   const therapiesChoices = therapiesList?.map(({ id, title }) => ({ id, name: title }));
@@ -14,7 +14,7 @@ export function ServicesForm({ label, type = FORM_TYPES.create }) {
   const unnecessaryForDraft = isActive && required();
 
   return (
-    <FormFieldWrapper title={label}>
+    <FormFieldWrapper title={label} className={className}>
       {type === FORM_TYPES.create ? (
         <ServicesFormCreate
           therapiesLoading={therapiesLoading}
@@ -28,7 +28,7 @@ export function ServicesForm({ label, type = FORM_TYPES.create }) {
         name="isFreeReception"
         source="isFreeReception"
         label="Безкоштовний прийом"
-        className="w-full"
+        className="mt-8 w-full"
         validate={unnecessaryForDraft}
       />
     </FormFieldWrapper>
@@ -37,6 +37,7 @@ export function ServicesForm({ label, type = FORM_TYPES.create }) {
 
 ServicesForm.propTypes = {
   label: PropTypes.string,
+  className: PropTypes.string,
   type: PropTypes.oneOf(Object.values(FORM_TYPES)),
   validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 };
