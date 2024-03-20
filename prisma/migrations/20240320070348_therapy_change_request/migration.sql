@@ -1,12 +1,12 @@
 -- CreateTable
-CREATE TABLE "therapy_cut" (
+CREATE TABLE "support_focus" (
     "id" UUID NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "specialistId" UUID,
     "organizationId" UUID,
     "therapyId" UUID NOT NULL,
 
-    CONSTRAINT "therapy_cut_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "support_focus_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -46,19 +46,19 @@ CREATE UNIQUE INDEX "_RequestToTherapy_AB_unique" ON "_RequestToTherapy"("A", "B
 CREATE INDEX "_RequestToTherapy_B_index" ON "_RequestToTherapy"("B");
 
 -- AddForeignKey
-ALTER TABLE "therapy_cut" ADD CONSTRAINT "therapy_cut_specialistId_fkey" FOREIGN KEY ("specialistId") REFERENCES "specialist"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "support_focus" ADD CONSTRAINT "support_focus_specialistId_fkey" FOREIGN KEY ("specialistId") REFERENCES "specialist"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "therapy_cut" ADD CONSTRAINT "therapy_cut_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "organization"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "support_focus" ADD CONSTRAINT "support_focus_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "organization"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "therapy_cut" ADD CONSTRAINT "therapy_cut_therapyId_fkey" FOREIGN KEY ("therapyId") REFERENCES "therapy"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "support_focus" ADD CONSTRAINT "support_focus_therapyId_fkey" FOREIGN KEY ("therapyId") REFERENCES "therapy"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_RequestToSupportFocus" ADD CONSTRAINT "_RequestToSupportFocus_A_fkey" FOREIGN KEY ("A") REFERENCES "request"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_RequestToSupportFocus" ADD CONSTRAINT "_RequestToSupportFocus_B_fkey" FOREIGN KEY ("B") REFERENCES "therapy_cut"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_RequestToSupportFocus" ADD CONSTRAINT "_RequestToSupportFocus_B_fkey" FOREIGN KEY ("B") REFERENCES "support_focus"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_RequestToTherapy" ADD CONSTRAINT "_RequestToTherapy_A_fkey" FOREIGN KEY ("A") REFERENCES "request"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -102,7 +102,7 @@ model SupportFocus {
   therapyId      String        @db.Uuid
   requests       Request[]
 
-  @@map("therapy_cut")
+  @@map("support_focus")
 }
 
 model SearchEntry {
