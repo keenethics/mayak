@@ -7,8 +7,8 @@ export function useSearchSync(query, searchType, minQueryLength = 1) {
   const hookProps = useQuery({
     queryKey: [searchSyncKey, query, searchType],
     queryFn: () => {
-      const baseQueryString = `searchSync=true&searchType=${searchType}&query=${query}`;
-      return ky(`/api/search?${baseQueryString}`).json();
+      const baseQueryString = `searchType=${searchType}&query=${query}`;
+      return ky(`/api/search/sync?${baseQueryString}`).json();
     },
     enabled: query.length >= minQueryLength,
   });
