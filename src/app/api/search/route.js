@@ -34,6 +34,7 @@ export async function GET(req) {
           type,
         },
       },
+      isActive: true,
       OR: format && [{ formatOfWork: FormatOfWork.BOTH }, { formatOfWork: format }],
       addresses: districts && {
         some: {
@@ -104,7 +105,6 @@ export async function GET(req) {
 
   return NextResponse.json({
     totalCount,
-    totalQueried: searchEntries.length,
     data,
   });
 }

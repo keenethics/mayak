@@ -150,6 +150,7 @@ model Address {
   districtId    String         @db.Uuid
   specialists   Specialist[]
   organizations Organization[]
+  isPrimary     Boolean        @default(false)
 
   @@map("address")
 }

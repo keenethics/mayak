@@ -13,6 +13,11 @@ export const RESOURCES = {
   clientCategory: 'clientCategory',
 };
 
+export const FORM_TYPES = {
+  create: 'create',
+  edit: 'edit',
+};
+
 export const SUCCESS_NOTIFICATIONS = {
   created: 'Created successfully',
   updated: 'Updated successfully',
@@ -21,3 +26,5 @@ export const SUCCESS_NOTIFICATIONS = {
 
 export const PHONE = 'phone';
 export const EMAIL = 'email';
+
+export const MAX_NUM_SELECTED_SOCIAL_LINKS = 5;

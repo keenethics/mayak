@@ -12,8 +12,6 @@ import {
 } from 'react-admin';
 
 export function SpecialistShow() {
-
-
   return (
     <Show>
       <SimpleShowLayout>
