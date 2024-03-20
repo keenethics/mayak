@@ -75,6 +75,7 @@ export function CardOrganization({ organization, className, extended = false }) 
             <DetailsList
               className="mt-4 border-t border-dashed border-t-gray-200 pt-4"
               details={{ addresses, description }}
+              text="клініку"
             />
             <ContactsList
               truncate={!extended}

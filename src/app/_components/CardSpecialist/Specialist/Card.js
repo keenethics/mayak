@@ -77,6 +77,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
             <DetailsList
               className="border-t border-dashed border-t-gray-200 pt-4"
               details={{ addresses, description }}
+              text="спеціаліста"
             />
             <ContactsList
               truncate={!extended}
