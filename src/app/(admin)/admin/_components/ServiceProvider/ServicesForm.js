@@ -4,14 +4,14 @@ import {
   AutocompleteArrayInput,
   BooleanInput,
   ReferenceArrayInput,
-  SelectArrayInput,
   required,
+  SelectArrayInput,
   useGetList,
 } from 'react-admin';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
 
-export function ServicesForm({ label, type = FORM_TYPES.create }) {
+export function ServicesForm({ label, type = FORM_TYPES.create, className }) {
   const { data: therapiesList, isLoading: therapiesLoading } = useGetList(RESOURCES.therapy);
 
   const therapiesChoices = therapiesList?.map(({ id, title }) => ({ id, name: title }));
@@ -20,7 +20,7 @@ export function ServicesForm({ label, type = FORM_TYPES.create }) {
   const unnecessaryForDraft = isActive && required();
 
   return (
-    <FormFieldWrapper title={label}>
+    <FormFieldWrapper title={label} className={className}>
       {type === FORM_TYPES.create ? (
         <SelectArrayInput
           name="therapies"
@@ -49,6 +49,7 @@ export function ServicesForm({ label, type = FORM_TYPES.create }) {
 
 ServicesForm.propTypes = {
   label: PropTypes.string,
+  className: PropTypes.string,
   type: PropTypes.oneOf(Object.values(FORM_TYPES)),
   validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 };

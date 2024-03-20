@@ -6,6 +6,8 @@ export function transformOrganizationData(data) {
   let typesObject = {};
   let therapiesObject = {};
 
+  const { socialLink, ...rest } = data;
+
   if (data?.addresses?.length > 0) {
     addressesObject = {
       create: data.addresses.map(address => ({
@@ -32,9 +34,10 @@ export function transformOrganizationData(data) {
   }
 
   return {
-    ...data,
+    ...rest,
+    ...socialLink,
     expertSpecializations: {
-      connect: data.expertSpecializations?.length ? mapIdArrayToIdObjects(data.expertSpecializations) : undefined,
+      connect: rest.expertSpecializations?.length ? mapIdArrayToIdObjects(rest.expertSpecializations) : undefined,
     },
     addresses: addressesObject,
     type: typesObject,

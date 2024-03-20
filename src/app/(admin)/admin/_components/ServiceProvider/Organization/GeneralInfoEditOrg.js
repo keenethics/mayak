@@ -32,4 +32,5 @@ export function GeneralInfoEditOrg({ type = FORM_TYPES.create }) {
 
 GeneralInfoEditOrg.propTypes = {
   type: PropTypes.oneOf(Object.values(FORM_TYPES)),
+  className: PropTypes.string,
 };
