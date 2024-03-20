@@ -25,16 +25,13 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { id } = params;
+  const cardStyle = 'mx-auto my-6 max-w-[900px] px-4 md:my-10 lg:px-0';
   const specialist = await getSpecialistById({ id });
-  const organization = await getOrganizationById({ id });
+  const organization = !specialist && (await getOrganizationById({ id }));
 
   return specialist ? (
-    <CardSpecialist specialist={specialist} extended className="mx-auto my-6 max-w-[900px] px-4 md:my-10 lg:px-0" />
+    <CardSpecialist specialist={specialist} extended className={cardStyle} />
   ) : (
-    <CardOrganization
-      organization={organization}
-      extended
-      className="mx-auto my-6 max-w-[900px] px-4 md:my-10 lg:px-0"
-    />
+    <CardOrganization organization={organization} extended className={cardStyle} />
   );
 }
