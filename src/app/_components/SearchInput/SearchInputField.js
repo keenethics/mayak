@@ -4,7 +4,7 @@ import { useSearchContext } from './SearchContext';
 import { SEARCH_MIN_QUERY_LENGTH } from './config';
 
 export function SearchInputField() {
-  const { currentConfig, query, setQuery, setIsAutoCompleteOpen, submitSearch } = useSearchContext();
+  const { currentConfig, query, setQuery, setIsAutoCompleteOpen, setIsInputFocused, submitSearch } = useSearchContext();
   const inputRef = useRef(null);
   const inputFocused = useFocus(inputRef);
 
@@ -16,8 +16,11 @@ export function SearchInputField() {
   });
 
   useEffect(() => {
-    setIsAutoCompleteOpen(inputFocused);
-  }, [inputFocused, setIsAutoCompleteOpen]);
+    setIsInputFocused(inputFocused);
+    if (inputFocused) {
+      setIsAutoCompleteOpen(true);
+    }
+  }, [inputFocused, setIsInputFocused, setIsAutoCompleteOpen]);
 
   return (
     <input

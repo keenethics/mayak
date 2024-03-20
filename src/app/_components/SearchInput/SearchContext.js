@@ -17,6 +17,7 @@ export function SearchProvider({ children }) {
   const [searchType, setSearchType] = useState(searchTypeParam || '');
   const [isSelectTypeOpen, setIsSelectTypeOpen] = useState(false);
   const [isAutoCompleteOpen, setIsAutoCompleteOpen] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const currentConfig = getSearchTypeConfig(searchType);
 
   const debouncedQuery = useDebounce(query, SEARCH_DEBOUNCE_TIME_MS);
@@ -30,10 +31,12 @@ export function SearchProvider({ children }) {
   const router = useRouter();
 
   function submitSearch() {
+    setIsAutoCompleteOpen(false);
     queryClient.cancelQueries({ queryKey: searchSyncKey });
     router.push(`/specialist?searchType=${currentConfig.searchType}&query=${query}`);
   }
   function navigateToAutoCompleteItem(id) {
+    setIsAutoCompleteOpen(false);
     queryClient.cancelQueries({ queryKey: searchSyncKey });
     if (currentConfig.searchType === 'request') {
       const currentQuery = router.query;
@@ -69,12 +72,14 @@ export function SearchProvider({ children }) {
         searchType,
         isSelectTypeOpen,
         isAutoCompleteOpen,
+        isInputFocused,
         autoCompleteItems,
         isAutoCompleteLoading,
         setQuery,
         setSearchType,
         setIsSelectTypeOpen,
         setIsAutoCompleteOpen,
+        setIsInputFocused,
         submitSearch,
         navigateToAutoCompleteItem,
       }}

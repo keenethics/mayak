@@ -23,7 +23,7 @@ export default function Page() {
         </SearchProvider>
         <Filters />
       </div>
-      <SpecialistList className="mt-[-2.5rem] md:mt-[22px]" />
+      <SpecialistList className="mt-[-1.5rem] md:mt-[22px]" />
     </div>
   );
 }

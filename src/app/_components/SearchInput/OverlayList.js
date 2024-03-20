@@ -18,6 +18,16 @@ export function OverlayList({ listItems, className, isLoading, maxItemCount, onI
     itemsListRef.current.style.maxHeight = maxItemCount ? `${maxItemCount * listItemSizeInRem}rem` : 'none';
   }, [maxItemCount]);
 
+  const items = listItems.map(item => (
+    <li
+      key={item.id}
+      className="rounded-full p-2 pl-8 hover:bg-gray-200 hover:font-bold hover:text-primary-800"
+      onClick={item.onClick}
+    >
+      {item.title}
+    </li>
+  ));
+
   return (
     <>
       {isLoading && (
@@ -30,15 +40,7 @@ export function OverlayList({ listItems, className, isLoading, maxItemCount, onI
           ref={itemsListRef}
           className={cn('overlay-scrollbar overflow-auto', overflown && 'mr-[2px] *:mr-[6px]', className)}
         >
-          {listItems.map(item => (
-            <li
-              className="rounded-full p-2 pl-8 hover:bg-gray-200 hover:font-bold hover:text-primary-800"
-              key={item.id}
-              onClick={item.onClick}
-            >
-              {item.title}
-            </li>
-          ))}
+          {items}
         </ul>
       )}
     </>
