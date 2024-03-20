@@ -10,7 +10,7 @@ export const TextInputList = ({ list, className }) => (
         name={name}
         type={type}
         label={label}
-        validate={isRequired && required()}
+        validate={[isRequired && required()]}
         className={className}
         {...inputProps}
       />

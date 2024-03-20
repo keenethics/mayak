@@ -59,8 +59,9 @@ export const transformTherapiesCuts = ({ cuts, cutsIds }) => {
   };
 };
 
-export const transformCreateData = ({ addresses, therapiesCuts, ...rest }) => ({
+export const transformCreateData = ({ addresses, socialLink, therapiesCuts, ...rest }) => ({
   ...rest,
+  ...socialLink,
   addresses: {
     create: addresses?.length ? transformAddresses({ addresses, type: 'create' }) : undefined,
   },
@@ -73,6 +74,7 @@ export const transformEditData = ({
   therapiesCuts,
   therapiesCutsIds,
   formatOfWork,
+  socialLink,
   ...rest
 }) => {
   const addressesToConnect = toConnectList(
@@ -88,6 +90,7 @@ export const transformEditData = ({
 
   return {
     ...rest,
+    ...socialLink,
     formatOfWork,
     therapiesCutsIds: undefined,
     addressesIds: undefined,
