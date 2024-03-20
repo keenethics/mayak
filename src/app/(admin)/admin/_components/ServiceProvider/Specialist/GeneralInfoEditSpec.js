@@ -7,20 +7,30 @@ import { FaAngleDown } from 'react-icons/fa';
 import { useWatch } from 'react-hook-form';
 import { SpecializationsSelect } from './SpecializationsSelect';
 
+const PSYCHOTHERAPIST = 'психотерапевт';
+const PSYCHOLOGIST = 'психолог';
+
 export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
   const specializationsNameToWatch = type === FORM_TYPES.create ? 'specializations' : 'specializationsIds';
-  const specializationsIdList = useWatch({ name: specializationsNameToWatch });
+  const selectedSpecializationsIdList = useWatch({ name: specializationsNameToWatch });
 
-  const { data: specializations } = useGetList(RESOURCES.specialization);
+  const { data: specializationsData } = useGetList(RESOURCES.specialization);
+  const { data: methodsData } = useGetList(RESOURCES.method);
 
-  const specializationsWithMethodsList = specializationsIdList
-    ? specializations?.filter(
-      ({ id, name }) =>
-        specializationsIdList?.includes(id) &&
-          (name.toLowerCase() === 'психолог' || name.toLowerCase() === 'психотерапевт'),
-    )
+  const specializationsWithMethodsList = selectedSpecializationsIdList
+    ? specializationsData
+      ?.filter(
+        ({ id, name }) =>
+          selectedSpecializationsIdList?.includes(id) &&
+            (name.toLowerCase() === PSYCHOLOGIST || name.toLowerCase() === PSYCHOTHERAPIST),
+      )
+      .map(s => ({
+        ...s,
+        specializationMethods: methodsData
+          .filter(m => m.specialization.name.toLowerCase() === s.name.toLowerCase())
+          .map(({ id, title }) => ({ id, name: title })),
+      }))
     : [];
-  specializationsIdList?.filter(({ id }) => specializations.find(s => s.id === id));
 
   return (
     <FormFieldWrapper title="Основна інформація">
@@ -38,14 +48,9 @@ export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
             <AccordionSummary expandIcon={<FaAngleDown />}>Методи і напрямки для {label}a</AccordionSummary>
             <AccordionDetails>
               <CheckboxGroupInput
-                source="method"
-                name="spezialization.method"
-                choices={[
-                  { id: 'u001', name: 'Арт-терапія' },
-                  { id: 'u002', name: 'Гештальт терапія' },
-                  { id: 'u003', name: 'Десенсибілізація та репроцесуалізація рухом очей (EMDR)' },
-                  { id: 'u004', name: 'Діалектично-поведінкова терапія' },
-                ]}
+                source="specializationMethods"
+                name="specializationMethods"
+                choices={specialization.specializationMethods}
                 row={false}
                 label={false}
               />

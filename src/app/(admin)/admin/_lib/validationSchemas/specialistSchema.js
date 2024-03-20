@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { Gender } from '@prisma/client';
 import {
-  MESSAGES,
   createValidationSchema,
+  MESSAGES,
   singlePrimaryAddressRefine,
   specialistCore,
   zCreateAddressSchema,
@@ -38,6 +38,7 @@ const createDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializations: zStringArray,
+  specializationMethods: zString.array().default([]),
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
