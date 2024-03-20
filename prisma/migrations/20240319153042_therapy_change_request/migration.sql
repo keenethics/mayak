@@ -19,7 +19,7 @@ CREATE TABLE "request" (
 );
 
 -- CreateTable
-CREATE TABLE "_RequestToTherapyCut" (
+CREATE TABLE "_RequestToSupportFocus" (
     "A" UUID NOT NULL,
     "B" UUID NOT NULL
 );
@@ -34,10 +34,10 @@ CREATE TABLE "_RequestToTherapy" (
 CREATE UNIQUE INDEX "request_name_key" ON "request"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_RequestToTherapyCut_AB_unique" ON "_RequestToTherapyCut"("A", "B");
+CREATE UNIQUE INDEX "_RequestToSupportFocus_AB_unique" ON "_RequestToSupportFocus"("A", "B");
 
 -- CreateIndex
-CREATE INDEX "_RequestToTherapyCut_B_index" ON "_RequestToTherapyCut"("B");
+CREATE INDEX "_RequestToSupportFocus_B_index" ON "_RequestToSupportFocus"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_RequestToTherapy_AB_unique" ON "_RequestToTherapy"("A", "B");
@@ -55,10 +55,10 @@ ALTER TABLE "therapy_cut" ADD CONSTRAINT "therapy_cut_organizationId_fkey" FOREI
 ALTER TABLE "therapy_cut" ADD CONSTRAINT "therapy_cut_therapyId_fkey" FOREIGN KEY ("therapyId") REFERENCES "therapy"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_RequestToTherapyCut" ADD CONSTRAINT "_RequestToTherapyCut_A_fkey" FOREIGN KEY ("A") REFERENCES "request"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_RequestToSupportFocus" ADD CONSTRAINT "_RequestToSupportFocus_A_fkey" FOREIGN KEY ("A") REFERENCES "request"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_RequestToTherapyCut" ADD CONSTRAINT "_RequestToTherapyCut_B_fkey" FOREIGN KEY ("B") REFERENCES "therapy_cut"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_RequestToSupportFocus" ADD CONSTRAINT "_RequestToSupportFocus_B_fkey" FOREIGN KEY ("B") REFERENCES "therapy_cut"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_RequestToTherapy" ADD CONSTRAINT "_RequestToTherapy_A_fkey" FOREIGN KEY ("A") REFERENCES "request"("id") ON DELETE CASCADE ON UPDATE CASCADE;

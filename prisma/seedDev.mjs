@@ -51,7 +51,7 @@ function generateSocialMediaLinks() {
   );
 }
 
-function randomTherapyCutArray({ therapies }) {
+function randomSupportFocusArray({ therapies }) {
   const uniqueTherapiesIdsArray = uniqueObjectsWithId(therapies);
 
   const uniqueTherapiesArray = uniqueTherapiesIdsArray.map(({ id: therapyId }) =>
@@ -99,8 +99,8 @@ function randomSpecialist({ districts, specializations, therapies }) {
     // take one of these
     formatOfWork,
     addresses,
-    therapiesCuts: {
-      create: randomTherapyCutArray({ therapies }),
+    supportFocuses: {
+      create: randomSupportFocusArray({ therapies }),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
@@ -133,8 +133,8 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
       connect: uniqueObjectsWithId(organizationTypes),
     },
     addresses,
-    therapiesCuts: {
-      create: randomTherapyCutArray({ therapies }),
+    supportFocuses: {
+      create: randomSupportFocusArray({ therapies }),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),

@@ -38,7 +38,7 @@ const handler = auth(
           districts: true,
           specializations: true,
           therapies: true,
-          therapiesCuts: true,
+          supportFocuses: true,
           requests: true,
           type: true,
         },

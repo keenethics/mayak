@@ -11,7 +11,9 @@ export const MODEL_SEARCH_FIELDS = {
 
 export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
-    therapiesCuts: { select: { id: true, therapy: { select: { id: true, title: true, type: true } }, requests: true } },
+    supportFocuses: {
+      select: { id: true, therapy: { select: { id: true, title: true, type: true } }, requests: true },
+    },
     specializations: { select: { id: true, name: true } },
     addresses: {
       select: {
@@ -24,7 +26,9 @@ export const MODEL_INCLUDES = {
     },
   },
   [RESOURCES.organization]: {
-    therapiesCuts: { select: { id: true, therapy: { select: { id: true, title: true, type: true } }, requests: true } },
+    supportFocuses: {
+      select: { id: true, therapy: { select: { id: true, title: true, type: true } }, requests: true },
+    },
     type: { select: { id: true, name: true } },
     addresses: {
       select: {
@@ -63,10 +67,10 @@ export function transformServiceProvider(instance, modelName) {
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
-  instance.therapiesCutsIds = instance.therapiesCuts.map(cut => cut.id);
-  instance.therapiesCuts = instance?.therapiesCuts?.map(cut => ({
-    ...cut,
-    requestsIds: cut.requests.map(request => request.id),
+  instance.supportFocusesIds = instance.supportFocuses.map(focus => focus.id);
+  instance.supportFocuses = instance?.supportFocuses?.map(focus => ({
+    ...focus,
+    requestsIds: focus.requests.map(request => request.id),
   }));
   instance.addresses = instance?.addresses?.map(address => ({
     ...address,

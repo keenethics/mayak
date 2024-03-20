@@ -35,7 +35,7 @@ export function SpecialistShow() {
             <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
-        <ArrayField label="Типи терапій" source="therapiesCuts">
+        <ArrayField label="Типи терапій" source="supportFocuses">
           <Datagrid bulkActionButtons={false}>
             <TextField label="Тип" source="therapy.title" />
             <ArrayField label="Запити" source="requests">

@@ -15,7 +15,7 @@ function buildFilter(entityFilter, query, searchType) {
   switch (searchType) {
     case 'request':
       Object.assign(entityFilter, {
-        therapiesCuts: {
+        supportFocuses: {
           some: {
             requests: {
               some: {
@@ -176,7 +176,7 @@ export const handler = withErrorHandler(async req => {
           type,
         },
       },
-      therapiesCuts: request && {
+      supportFocuses: request && {
         some: {
           requests: {
             some: {

@@ -12,10 +12,10 @@ export function toConnectList(list, cb) {
   return list?.map(id => ({ id: cb?.(id) ?? id })) ?? [];
 }
 
-export const transformCreateTherapiesCuts = cuts =>
-  cuts.map(cut => ({
-    therapy: { connect: { id: cut.therapyId } },
-    requests: { connect: toConnectList(cut.requests) },
+export const transformCreateTherapiesCuts = focuses =>
+  focuses.map(focus => ({
+    therapy: { connect: { id: focus.therapyId } },
+    requests: { connect: toConnectList(focus.requests) },
   }));
 
 export function transformAddresses({ addresses, type = 'create' }) {
@@ -30,49 +30,49 @@ export function transformAddresses({ addresses, type = 'create' }) {
   );
 }
 
-export const transformTherapiesCuts = ({ cuts, cutsIds }) => {
-  const cutsToUpdate = [];
-  const cutsToCreate = [];
-  const cutsToDelete = toConnectList(cutsIds.filter(cutId => !cuts.some(cut => cut.id === cutId)));
+export const transformSupportFocuses = ({ focuses, focusesIds }) => {
+  const focusesToUpdate = [];
+  const focusesToCreate = [];
+  const focusesToDelete = toConnectList(focusesIds.filter(cutId => !focuses.some(focus => focus.id === cutId)));
 
-  cuts.forEach(cut => {
-    if (cut.id) {
-      cutsToUpdate.push({
-        where: { id: cut.id },
+  focuses.forEach(focus => {
+    if (focus.id) {
+      focusesToUpdate.push({
+        where: { id: focus.id },
         data: {
-          therapy: { connect: { id: cut.therapy.id } },
-          requests: { set: [], connect: toConnectList(cut.requestsIds) },
+          therapy: { connect: { id: focus.therapy.id } },
+          requests: { set: [], connect: toConnectList(focus.requestsIds) },
         },
       });
     } else {
-      cutsToCreate.push({
-        therapy: { connect: { id: cut.therapy.id } },
-        requests: { connect: toConnectList(cut.requestsIds) },
+      focusesToCreate.push({
+        therapy: { connect: { id: focus.therapy.id } },
+        requests: { connect: toConnectList(focus.requestsIds) },
       });
     }
   });
 
   return {
-    update: cutsToUpdate.length ? cutsToUpdate : undefined,
-    deleteMany: cutsToDelete.length ? cutsToDelete : undefined,
-    create: cutsToCreate.length ? cutsToCreate : undefined,
+    update: focusesToUpdate.length ? focusesToUpdate : undefined,
+    deleteMany: focusesToDelete.length ? focusesToDelete : undefined,
+    create: focusesToCreate.length ? focusesToCreate : undefined,
   };
 };
 
-export const transformCreateData = ({ addresses, socialLink, therapiesCuts, ...rest }) => ({
+export const transformCreateData = ({ addresses, socialLink, supportFocuses, ...rest }) => ({
   ...rest,
   ...socialLink,
   addresses: {
     create: addresses?.length ? transformAddresses({ addresses, type: 'create' }) : undefined,
   },
-  therapiesCuts: transformTherapiesCuts({ cuts: therapiesCuts, cutsIds: [] }),
+  supportFocuses: transformSupportFocuses({ focuses: supportFocuses, focusesIds: [] }),
 });
 
 export const transformEditData = ({
   addresses,
   addressesIds,
-  therapiesCuts,
-  therapiesCutsIds,
+  supportFocuses,
+  supportFocusesIds,
   formatOfWork,
   socialLink,
   ...rest
@@ -92,13 +92,13 @@ export const transformEditData = ({
     ...rest,
     ...socialLink,
     formatOfWork,
-    therapiesCutsIds: undefined,
+    supportFocusesIds: undefined,
     addressesIds: undefined,
     addresses: {
       connect: addressesToConnect,
       create: addressesToCreate,
       deleteMany: addressesToDelete,
     },
-    therapiesCuts: transformTherapiesCuts({ cuts: therapiesCuts, cutsIds: therapiesCutsIds }),
+    supportFocuses: transformSupportFocuses({ focuses: supportFocuses, focusesIds: supportFocusesIds }),
   };
 };
