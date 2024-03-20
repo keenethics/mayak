@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { useSearchParams } from 'next/navigation';
@@ -10,6 +10,7 @@ import Search from '@icons/search.svg';
 import { allEvents, useSetParam } from '@hooks';
 import { EventCard } from '@components/Event/Card';
 import { PillButton } from '@components/PillButton';
+import { SkeletonCard } from '@components/Event/SkeletonCard';
 import { buttonColorVariant } from '@components/PillButton/style';
 import { NoInfoToShow } from '@components/NoInfoToShow';
 import { cn } from '@/utils/cn';
@@ -54,7 +55,7 @@ export function EventSection() {
 
   // Fetch data and pass url params
   const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } = useInfiniteQuery({
-    queryFn: ({ month = activeMonth, pageParam = '' }) => allEvents({ month, take: 6, lastCursor: pageParam }),
+    queryFn: ({ month = activeMonth, pageParam = '' }) => allEvents({ month, take: 3, lastCursor: pageParam }),
     queryKey: ['event', activeMonth],
     getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
   });
@@ -68,10 +69,13 @@ export function EventSection() {
   }, [hasNextPage, inView]);
 
   // Filter data based on selected month
-  const handleFilter = newMonth => {
-    setActiveMonth(newMonth);
-    replaceParam(newMonth.toString());
-  };
+  const handleFilter = useCallback(
+    newMonth => {
+      setActiveMonth(newMonth);
+      replaceParam(newMonth.toString());
+    },
+    [replaceParam],
+  );
 
   return (
     <>
@@ -106,6 +110,7 @@ export function EventSection() {
         </div>
 
         <ul className="grid w-full gap-4 self-stretch sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {isLoading && new Array(3).fill('').map(el => <SkeletonCard key={el.index} />)}
           {isSuccess &&
             data?.pages.map(page =>
               page.data.map((event, index) => {
