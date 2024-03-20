@@ -20,6 +20,12 @@ export const MODEL_INCLUDES = {
         district: { select: { name: true } },
       },
     },
+    clientCategoriesOnSpecialists: {
+      select: {
+        isWorkingWith: true,
+        clientCategory: { select: { title: true } },
+      },
+    },
   },
   [RESOURCES.organization]: {
     therapies: { select: { id: true, type: true, title: true } },

@@ -12,9 +12,16 @@ import {
 } from 'react-admin';
 
 export function SpecialistShow() {
+
+
   return (
     <Show>
       <SimpleShowLayout>
+        <ArrayField label="Categories" source="clientCategoriesOnSpecialists">
+          <SingleFieldList linkType={false}>
+            <ChipField source="clientCategory.title" size="small" />
+          </SingleFieldList>
+        </ArrayField>
         <ArrayField label="Спеціалізації" source="specializations">
           <SingleFieldList linkType={false}>
             <ChipField source="name" size="small" />
