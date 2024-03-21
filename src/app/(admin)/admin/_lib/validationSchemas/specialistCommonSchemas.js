@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { FormatOfWork } from '@prisma/client';
+import { MAX_NUM_SELECTED_SOCIAL_LINKS } from '@admin/_lib/consts';
 import { isSpecifiedWorkTime } from '@admin/_utils/common';
 import { PHONE_REGEX, weekDaysTranslation } from '@/lib/consts';
 
@@ -93,14 +94,26 @@ export const specialistCore = z.object({
   email: zString.email().nullish(),
   addressesIds: zString.array().nullish(),
   website: zString.url({ message: MESSAGES.unacceptableValue }).nullish(),
-  instagram: zUrl.nullish(),
-  facebook: zUrl.nullish(),
-  youtube: zUrl.nullish(),
-  linkedin: zUrl.nullish(),
-  tiktok: zUrl.nullish(),
-  viber: zUrl.nullish(),
-  telegram: zUrl.nullish(),
-  workTime: zWorkTimeSchema,
+  socialLink: z
+    .object({
+      instagram: zUrl.nullish(),
+      facebook: zUrl.nullish(),
+      youtube: zUrl.nullish(),
+      linkedin: zUrl.nullish(),
+      tiktok: zUrl.nullish(),
+      viber: zUrl.nullish(),
+      telegram: zUrl.nullish(),
+    })
+    .refine(
+      links => {
+        const numLinks = Object.values(links).filter(link => link)?.length;
+        return numLinks <= MAX_NUM_SELECTED_SOCIAL_LINKS;
+      },
+      {
+        message: `Максимальна кількість вказаних соціальних мереж 
+        не повинна перевищувати ${MAX_NUM_SELECTED_SOCIAL_LINKS}`,
+      },
+    ),
 });
 
 export const zEditAddressSchema = z.object({
@@ -114,7 +127,10 @@ export const zEditAddressSchema = z.object({
       name: z.string(),
     })
     .nullish(),
-  isPrimary: z.boolean(),
+  isPrimary: z
+    .boolean()
+    .nullish()
+    .transform(arg => (arg === null ? false : arg)),
 });
 
 export const zCreateAddressSchema = z.object({
@@ -131,7 +147,31 @@ export const singlePrimaryAddressRefine = addresses => {
 
 export const createValidationSchema = (schemaUnion, defaultProperties) =>
   z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {
-    const { formatOfWork, isActive, addresses } = schema;
+    const { formatOfWork, isActive, addresses, therapyPricesCreate, therapyPricesEdit, therapies, therapiesIds } =
+      schema;
+
+    function mapInvalidTherapyPrices(id, type) {
+      id?.forEach(el => {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Ціна повинна бути цілим числом не менше 0',
+          path: [`${type === 'create' ? 'therapyPricesCreate' : 'therapyPricesEdit'}.${el}`],
+        });
+      });
+    }
+
+    if (therapyPricesCreate) {
+      mapInvalidTherapyPrices(
+        therapies?.filter(el => !zInteger.safeParse(therapyPricesCreate[el]).success),
+        'create',
+      );
+    }
+    if (therapyPricesEdit) {
+      mapInvalidTherapyPrices(
+        therapiesIds?.filter(el => !zInteger.safeParse(therapyPricesEdit[el]).success),
+        'edit',
+      );
+    }
 
     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
       ctx.addIssue({
@@ -147,6 +187,5 @@ export const createValidationSchema = (schemaUnion, defaultProperties) =>
         addresses: [],
       };
     }
-
     return schema;
   });

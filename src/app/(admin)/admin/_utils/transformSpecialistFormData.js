@@ -1,6 +1,4 @@
-import { transformWorkTimeCreate } from './common';
-
-const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
+import { toConnectList, transformTherapyPrices, transformWorkTimeCreate } from './common';
 
 const transformAddresses = placesArray =>
   placesArray.map(place => ({
@@ -8,18 +6,32 @@ const transformAddresses = placesArray =>
     district: { connect: { id: place.district } },
   }));
 
-export const transformData = data => ({
-  ...data,
+export const transformData = ({
+  socialLink,
+  specializations,
+  addresses,
+  therapies,
+  therapyPricesCreate,
+  workTime,
+  ...rest
+}) => ({
+  ...rest,
+  ...socialLink,
   specializations: {
-    connect: data.specializations?.length ? mapIdArrayToIdObjects(data.specializations) : undefined,
+    connect: specializations?.length ? toConnectList(specializations) : undefined,
   },
   addresses: {
-    create: data.addresses?.length ? transformAddresses(data.addresses) : undefined,
+    create: addresses?.length ? transformAddresses(addresses) : undefined,
   },
   therapies: {
-    connect: data.therapies?.length ? mapIdArrayToIdObjects(data.therapies) : undefined,
+    connect: therapies?.length ? toConnectList(therapies) : undefined,
   },
+  therapyPrices: {
+    create:
+      therapies?.length && therapyPricesCreate ? transformTherapyPrices(therapies, therapyPricesCreate) : undefined,
+  },
+  therapyPricesCreate: undefined,
   workTime: {
-    connectOrCreate: data.workTime?.length ? transformWorkTimeCreate(data.workTime) : undefined,
+    connectOrCreate: workTime?.length ? transformWorkTimeCreate(workTime) : undefined,
   },
 });

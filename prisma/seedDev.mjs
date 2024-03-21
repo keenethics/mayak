@@ -23,7 +23,7 @@ function uniqueObjectsWithId(instances) {
   return faker.helpers
     .uniqueArray(
       instances.map(s => s.id),
-      faker.number.int({ min: 1, max: instances.length }),
+      faker.number.int({ min: 1, max: 3 }),
     )
     .map(id => ({ id }));
 }
@@ -41,6 +41,32 @@ function randomAddress(districts, isPrimary) {
     },
     isPrimary,
   };
+}
+
+function generateSocialMediaLinks() {
+  const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
+
+  return Object.fromEntries(
+    socialMediaList
+      .sort(() => Math.random() - 0.5)
+      .slice(0, Math.floor(Math.random() * 5) + 1)
+      .map(network => [network, faker.internet.url()]),
+  );
+}
+
+function randomTherapyPrices(selectedTherapies) {
+  const therapyPrices = [];
+  selectedTherapies.forEach(el => {
+    if (Math.random() > 0.5) {
+      therapyPrices.push({
+        price: faker.number.int({ min: 0, max: 20 }) * 100,
+        therapy: {
+          connect: el,
+        },
+      });
+    }
+  });
+  return therapyPrices;
 }
 
 function randomWorkTime() {
@@ -74,8 +100,11 @@ function randomSpecialist({ districts, specializations, therapies }) {
         .map((_, i) => randomAddress(districts, i === 0)),
     };
   }
-
+  const specialistTherapies = uniqueObjectsWithId(therapies);
   const phoneRegexp = '+380[0-9]{9}';
+
+  const socialMediaLinks = generateSocialMediaLinks();
+
   return {
     specializations: {
       connect: uniqueObjectsWithId(specializations),
@@ -91,7 +120,10 @@ function randomSpecialist({ districts, specializations, therapies }) {
     formatOfWork,
     addresses,
     therapies: {
-      connect: uniqueObjectsWithId(therapies),
+      connect: specialistTherapies,
+    },
+    therapyPrices: {
+      create: randomTherapyPrices(specialistTherapies),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
@@ -99,13 +131,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
-    instagram: nullable(faker.internet.url()),
-    facebook: nullable(faker.internet.url()),
-    youtube: nullable(faker.internet.url()),
-    linkedin: nullable(faker.internet.url()),
-    tiktok: nullable(faker.internet.url()),
-    // viber: nullable(faker.internet.url()),
-    // telegram: nullable(faker.internet.url()),
+    ...socialMediaLinks,
   };
 }
 
@@ -120,6 +146,8 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     };
   }
   const phoneRegexp = '+380[0-9]{9}';
+  const socialMediaLinks = generateSocialMediaLinks();
+
   return {
     name: faker.company.name(),
     yearsOnMarket: nullable(faker.number.int({ min: 1, max: 30 })),
@@ -138,13 +166,7 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     email: nullable(faker.internet.email()),
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
-    instagram: nullable(faker.internet.url()),
-    facebook: nullable(faker.internet.url()),
-    youtube: nullable(faker.internet.url()),
-    linkedin: nullable(faker.internet.url()),
-    tiktok: nullable(faker.internet.url()),
-    // viber: nullable(faker.internet.url()),
-    // telegram: nullable(faker.internet.url()),
+    ...socialMediaLinks,
   };
 }
 
@@ -191,41 +213,21 @@ async function main() {
   await prisma.$transaction(async trx => {
     await trx.address.deleteMany();
     await trx.specialist.deleteMany();
-    await trx.specialization.deleteMany();
-    await trx.district.deleteMany();
     await trx.event.deleteMany();
     await trx.eventLink.deleteMany();
     await trx.eventTag.deleteMany();
     await trx.faq.deleteMany();
     await trx.organization.deleteMany();
-    await trx.organizationType.deleteMany();
     await trx.searchEntry.deleteMany();
     await trx.workTime.deleteMany();
   });
 
-  const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];
-  const specializationNames = [
-    'Психологічний консультант',
-    'Психотерапевт',
-    'Психіатр',
-    'Сексолог',
-    'Соціальний працівник',
-  ];
-  const organizationTypeNames = ['Психологічний центр', 'Соціальна служба', 'Лікарня'];
   const faqs = Array.from({ length: 15 }).map((_, i) => ({
     isActive: faker.datatype.boolean(),
     question: faker.lorem.sentence(),
     answer: faker.lorem.paragraph(),
     priority: i + 10,
   }));
-
-  await prisma.district.createMany({
-    data: districtNames.map(name => ({ name })),
-  });
-
-  await prisma.specialization.createMany({
-    data: specializationNames.map(name => ({ name })),
-  });
 
   const eventTags = ['Tag1', 'Tag2', 'Tag3'];
 
@@ -239,10 +241,6 @@ async function main() {
 
   await prisma.faq.createMany({
     data: faqs,
-  });
-
-  await prisma.organizationType.createMany({
-    data: organizationTypeNames.map(name => ({ name })),
   });
 
   const therapies = await prisma.therapy.findMany({ select: { id: true } });

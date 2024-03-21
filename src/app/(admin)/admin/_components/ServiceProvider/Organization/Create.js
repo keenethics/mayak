@@ -1,6 +1,6 @@
 import { transformOrganizationData } from '@admin/_utils/transformOrganizationData';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Create, SimpleForm, required } from 'react-admin';
+import { Create, required, SimpleForm } from 'react-admin';
 import { organizationCreateValidationSchema } from '@admin/_lib/validationSchemas/organizationSchema';
 import { RESOURCES, SUCCESS_NOTIFICATIONS } from '@admin/_lib/consts';
 import { WorkTimeForm } from '@admin/components/ServiceProvider/WorkTimeForm';
@@ -35,7 +35,7 @@ export function OrganizationCreate() {
         <DescriptionEdit validate={required()} />
         <ContactsList />
         <SocialLinks />
-        <ActivationForm label="Активувати/деактивувати організацію" className="mt-3" />
+        <ActivationForm label="Активувати/деактивувати організацію" />
       </SimpleForm>
     </Create>
   );
