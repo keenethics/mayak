@@ -62,11 +62,12 @@ export function EventCard({ event }) {
     <Label key={tag.name} className="bg-primary-100" textClassName="text-primary-600" text={tag.name} />
   ));
   return (
-    <div className="flex w-full flex-col gap-4 self-stretch rounded-3xl border-2 border-gray-200 bg-other-white p-4">
+    <div className="flex h-[310px] w-full flex-grow flex-col gap-4 self-stretch rounded-3xl border-2 border-gray-200 bg-other-white p-4">
       <div className="flex w-[259px] cursor-pointer flex-col items-start gap-1" onClick={toggleModal}>
         <OverflownText className="w-[259px] truncate text-p1 font-bold text-gray-700 underline" text={title} />
         <OverflownText className="w-[259px] truncate text-p3 font-bold text-primary-600" text={organizerName} />
       </div>
+      {tagsElements.length === 0 && <div className="flex h-[25px] w-64 items-start gap-4 overflow-hidden" />}
       <div className="flex w-64 items-start gap-4 overflow-hidden">{tagsElements}</div>
       <hr className="border border-dashed border-gray-300" />
       <ul className="flex w-[259px] flex-col gap-4">
@@ -85,7 +86,7 @@ export function EventCard({ event }) {
         </li>
       </ul>
 
-      <EventLinkModal isOpen={isModalOpenOpen} onClose={toggleModal} link={additionalLink.link} />
+      <EventLinkModal isOpen={isModalOpenOpen} onClose={toggleModal} link={additionalLink?.link} />
     </div>
   );
 }
