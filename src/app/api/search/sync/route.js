@@ -2,14 +2,14 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { BadRequestException } from '@/lib/errors/BadRequestException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
-import { getSearchFilterQueryParams, createSearchEntryFilter, createEntityFilter } from '../common';
+import { getSearchParamsFromRequest } from '@/utils/getSearchParamsFromRequest';
+import { createSearchSyncFilter } from '../helpers';
 
 export const handler = withErrorHandler(async req => {
-  const queryParams = getSearchFilterQueryParams(req);
+  const queryParams = getSearchParamsFromRequest(req, { searchType: 'request', query: undefined });
   const { searchType, query } = queryParams;
 
-  const entityFilter = createEntityFilter(queryParams);
-  const searchEntryFilter = createSearchEntryFilter(entityFilter, query, searchType);
+  const searchSyncFilter = createSearchSyncFilter(query, searchType);
 
   const searchTypeFindAndMap = {
     request: {
@@ -30,7 +30,7 @@ export const handler = withErrorHandler(async req => {
     organization: {
       find: () =>
         prisma.searchEntry.findMany({
-          where: searchEntryFilter,
+          where: searchSyncFilter,
           orderBy: { sortString: 'asc' },
         }),
       map: el => ({
@@ -41,7 +41,7 @@ export const handler = withErrorHandler(async req => {
     specialist: {
       find: () =>
         prisma.searchEntry.findMany({
-          where: searchEntryFilter,
+          where: searchSyncFilter,
           orderBy: { sortString: 'asc' },
         }),
       map: el => ({

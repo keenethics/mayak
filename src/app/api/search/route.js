@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
-import { createSearchEntryFilter, createEntityFilter, getSearchFilterQueryParams } from './common';
+import { createSearchEntryFilter, createEntityFilter, getSearchFilterQueryParams } from './helpers';
 
 export const handler = withErrorHandler(async req => {
   const queryParams = getSearchFilterQueryParams(req);

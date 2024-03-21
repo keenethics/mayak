@@ -46,6 +46,10 @@ export function createSearchEntryFilter(entityFilter, query, searchType) {
   }
 }
 
+export function createSearchSyncFilter(query, searchType) {
+  return createSearchEntryFilter({}, query, searchType);
+}
+
 export function createEntityFilter({ type, request, format, districts }) {
   return {
     AND: {
