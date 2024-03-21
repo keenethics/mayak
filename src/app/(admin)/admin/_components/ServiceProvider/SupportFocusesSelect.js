@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { therapyPropType } from '@admin/_lib/specialistPropTypes';
 
-function TherapiesCutsForm({ getSource, supportFocuses, selectedTherapies, requestsIds, loading }) {
+function SupportFocusesForm({ getSource, supportFocuses, selectedTherapies, requestsIds, loading }) {
   const { setValue } = useFormContext();
 
   const therapySource = getSource('therapy.id');
@@ -61,6 +61,7 @@ function TherapiesCutsForm({ getSource, supportFocuses, selectedTherapies, reque
         reference="Request"
         filter={{ id: { in: requestsIds } }}
         sort={{ field: 'name', order: 'ASC' }}
+        perPage={1000}
       >
         <AutocompleteArrayInput
           isLoading={loading}
@@ -74,7 +75,7 @@ function TherapiesCutsForm({ getSource, supportFocuses, selectedTherapies, reque
   );
 }
 
-TherapiesCutsForm.propTypes = {
+SupportFocusesForm.propTypes = {
   getSource: PropTypes.func,
   supportFocuses: therapyPropType,
   selectedTherapies: PropTypes.arrayOf(PropTypes.string),
@@ -101,7 +102,7 @@ export function SupportFocusesSelect() {
           {({ scopedFormData, getSource }) => {
             if (!scopedFormData) return null;
             return (
-              <TherapiesCutsForm
+              <SupportFocusesForm
                 getSource={getSource}
                 supportFocuses={supportFocuses}
                 selectedTherapies={selectedTherapiesIds}
