@@ -1,7 +1,8 @@
 import { toConnectList, transformEditData } from './common';
 
-export function transformSpecialistEditData({ specializationsIds, socialLink, ...rest }) {
+export function transformSpecialistEditData({ specializationsIds, specializationMethodsIds, socialLink, ...rest }) {
   const specializationsToConnect = toConnectList(specializationsIds);
+  const specializationMethodsToConnect = toConnectList(specializationMethodsIds);
   const base = transformEditData(rest);
 
   return {
@@ -10,6 +11,10 @@ export function transformSpecialistEditData({ specializationsIds, socialLink, ..
     specializations: {
       set: [],
       connect: specializationsToConnect,
+    },
+    specializationMethods: {
+      set: [],
+      connect: specializationMethodsToConnect,
     },
     specializationsIds: undefined,
   };

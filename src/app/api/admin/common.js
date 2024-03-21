@@ -67,6 +67,8 @@ export function transformServiceProvider(instance, modelName) {
   // eslint-disable-next-line no-param-reassign
   instance.addressesIds = instance.addresses.map(address => address.id);
   // eslint-disable-next-line no-param-reassign
+  instance.specializationMethodsIds = instance.specializationMethods.map(method => method.id);
+  // eslint-disable-next-line no-param-reassign
   instance.addresses = instance?.addresses?.map(address => ({
     ...address,
     districtId: address.district.id,
