@@ -54,7 +54,6 @@ export function SpecialistShow() {
             />
           </Datagrid>
         </ArrayField>
-
         <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
             <ChipField source="title" size="small" />

@@ -11,7 +11,7 @@ import {
   zString,
   zStringArray,
   zStringWithMax,
-} from './specialistCommonSchemas';
+} from './serviceProviderCommonSchemas';
 
 // ------------------ COMMON SECTION ---------------------
 
@@ -81,4 +81,9 @@ const specialistSchemaEditUnion = z.discriminatedUnion('isActive', [
   draftSpecialistEditSchema,
 ]);
 
-export const specialistEditValidationSchema = createValidationSchema(specialistSchemaEditUnion, editDefaultProps);
+export const specialistEditValidationSchema = createValidationSchema(specialistSchemaEditUnion, editDefaultProps).catch(
+  err => {
+    console.error(err);
+    return err;
+  },
+);

@@ -6,5 +6,5 @@
 
 */
 -- AlterTable
-ALTER TABLE "address" ADD COLUMN     "latitude" REAL NOT NULL,
-ADD COLUMN     "longitude" REAL NOT NULL;
+ALTER TABLE "address" ADD COLUMN     "latitude" DOUBLE PRECISION NOT NULL,
+ADD COLUMN     "longitude" DOUBLE PRECISION NOT NULL;

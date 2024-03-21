@@ -10,7 +10,7 @@ import {
   zString,
   zStringArray,
   zStringWithMax,
-} from './specialistCommonSchemas';
+} from './serviceProviderCommonSchemas';
 
 // ------------------ COMMON SECTION ---------------------
 

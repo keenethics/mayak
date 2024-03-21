@@ -149,8 +149,8 @@ model Address {
   specialists   Specialist[]
   organizations Organization[]
   isPrimary     Boolean        @default(false)
-  longitude     Float          @db.Real
-  latitude      Float          @db.Real
+  longitude     Float          @db.DoublePrecision
+  latitude      Float          @db.DoublePrecision
 
   @@map("address")
 }
