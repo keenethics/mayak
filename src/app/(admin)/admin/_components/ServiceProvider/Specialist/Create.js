@@ -12,6 +12,7 @@ import { AddressesForm } from '@admin/components/ServiceProvider/AddressesForm';
 import { useRedirectToList } from '@admin/components/ServiceProvider/hooks';
 import { ContactsList } from '@admin/components/ContactsList';
 import { SocialLinks } from '@admin/components/ServiceProvider/SocialLinks';
+import { WorkTimeForm } from '@admin/components/ServiceProvider/WorkTimeForm';
 import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
 import { DetailsEditSpec } from './DetailsEditSpec';
 
@@ -31,6 +32,7 @@ export function SpecialistCreate() {
         <GeneralInfoEditSpec />
         <DetailsEditSpec />
         <AddressesForm label="Адреси надання послуг" />
+        <WorkTimeForm />
         <ServicesForm label="Послуги" />
         <TextInput name="description" source="description" label="Опис" fullWidth multiline />
         <ContactsList />

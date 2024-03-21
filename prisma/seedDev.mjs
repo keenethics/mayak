@@ -47,13 +47,17 @@ function randomWorkTime() {
   const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   let time;
   let workTimeData;
+  let isDayOff;
   return {
     connectOrCreate: weekdays.map(weekDay => {
-      time = nullable(`0${faker.number.int({ min: 7, max: 9 })}:00 - ${faker.number.int({ min: 17, max: 20 })}:00`);
-      workTimeData = { weekDay, time };
+      isDayOff = faker.datatype.boolean();
+      time = !isDayOff
+        ? `0${faker.number.int({ min: 7, max: 9 })}:00 - ${faker.number.int({ min: 17, max: 20 })}:00`
+        : '';
+      workTimeData = { isDayOff, weekDay, time };
       return {
         create: workTimeData,
-        where: { weekDay_time: workTimeData },
+        where: { weekDay_time_isDayOff: workTimeData },
       };
     }),
   };
@@ -196,6 +200,7 @@ async function main() {
     await trx.organization.deleteMany();
     await trx.organizationType.deleteMany();
     await trx.searchEntry.deleteMany();
+    await trx.workTime.deleteMany();
   });
 
   const districtNames = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'];

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { FormatOfWork } from '@prisma/client';
-import { PHONE_REGEX } from '@/lib/consts';
+import { isSpecifiedWorkTime } from '@admin/_utils/common';
+import { PHONE_REGEX, weekDaysTranslation } from '@/lib/consts';
 
 // ------------------ COMMON SECTION ---------------------
 export const MESSAGES = {
@@ -34,6 +35,50 @@ export const zInteger = z
 
 export const zUrl = zString.url({ message: MESSAGES.unacceptableValue });
 
+export const zWorkTimeSchema = z
+  .array(
+    z
+      .object({
+        weekDay: z.enum(Object.values(weekDaysTranslation)),
+        time: z
+          .string()
+          .refine(val => !val || /\d{2}:\d{2}\s-\s\d{2}:\d{2}/.test(val), {
+            message: 'Введіть час у форматі ХХ:ХХ - ХХ:ХХ',
+          })
+          .nullish(),
+        isDayOff: z.boolean().nullish(),
+      })
+      .superRefine((data, ctx) => {
+        const { time, isDayOff } = data;
+        if (time && isDayOff) {
+          ctx.addIssue({
+            code: 'custom',
+            message: 'Приберіть час роботи, якщо це вихідний',
+            path: ['time'],
+          });
+        }
+      }),
+  )
+  .superRefine((workTime, ctx) => {
+    const specified = isSpecifiedWorkTime(workTime);
+    if (specified) {
+      workTime.forEach((day, index) => {
+        if (!day.isDayOff && !day.time) {
+          ctx.addIssue({
+            code: 'custom',
+            message: 'Додайте час роботи, якщо це не вихідний',
+            path: [index, 'time'],
+          });
+          ctx.addIssue({
+            code: 'custom',
+            message: `Додайте час роботи або вихідний для кожного дня
+            (чи приберіть усі дані якщо графік роботи не зазначено)`,
+          });
+        }
+      });
+    }
+  });
+
 export const specialistCore = z.object({
   isActive: z.boolean().optional(),
   formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
@@ -55,6 +100,7 @@ export const specialistCore = z.object({
   tiktok: zUrl.nullish(),
   viber: zUrl.nullish(),
   telegram: zUrl.nullish(),
+  workTime: zWorkTimeSchema,
 });
 
 export const zEditAddressSchema = z.object({

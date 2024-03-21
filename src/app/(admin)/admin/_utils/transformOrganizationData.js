@@ -1,3 +1,4 @@
+import { transformWorkTimeCreate } from './common';
 // this function transforms form data to proper prisma creation object
 export function transformOrganizationData(data) {
   let addressesObject = {};
@@ -34,5 +35,6 @@ export function transformOrganizationData(data) {
     addresses: addressesObject,
     type: typesObject,
     therapies: therapiesObject,
+    workTime: { connectOrCreate: data?.workTime?.length ? transformWorkTimeCreate(data.workTime) : undefined },
   };
 }

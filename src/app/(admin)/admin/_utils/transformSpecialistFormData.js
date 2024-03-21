@@ -1,3 +1,5 @@
+import { transformWorkTimeCreate } from './common';
+
 const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
 
 const transformAddresses = placesArray =>
@@ -16,5 +18,8 @@ export const transformData = data => ({
   },
   therapies: {
     connect: data.therapies?.length ? mapIdArrayToIdObjects(data.therapies) : undefined,
+  },
+  workTime: {
+    connectOrCreate: data.workTime?.length ? transformWorkTimeCreate(data.workTime) : undefined,
   },
 });

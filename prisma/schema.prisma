@@ -234,11 +234,12 @@ model Faq {
 model WorkTime {
   id            String         @id @default(uuid()) @db.Uuid
   createdAt     DateTime       @default(now())
-  time          String?        @db.VarChar(13)
+  time          String         @db.VarChar(13)
+  isDayOff      Boolean        @default(false)
   weekDay       WeekDay
   specialists   Specialist[]
   organizations Organization[]
 
-  @@unique([weekDay, time])
+  @@unique([weekDay, time, isDayOff])
   @@map("work_time")
 }
