@@ -13,6 +13,7 @@ export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
     therapies: { select: { id: true, type: true, title: true } },
     specializations: { select: { id: true, name: true } },
+    specializationMethods: { select: { id: true, title: true } },
     addresses: {
       select: {
         id: true,
