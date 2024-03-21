@@ -217,20 +217,15 @@ async function main() {
     // for instead of Promise.all to avoid overloading the database pool
     const specialistData = randomSpecialist({ districts, specializations, therapies });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.$transaction(async trx => {
-      const specialist = await trx.specialist.create({
-        data: specialistData,
-      });
-      await trx.searchEntry.create({
-        data: {
-          sortString: getSpecialistFullName(specialist),
-          specialist: {
-            connect: {
-              id: specialist.id,
-            },
+    await prisma.specialist.create({
+      data: {
+        ...specialistData,
+        searchEntry: {
+          create: {
+            sortString: getSpecialistFullName(specialistData),
           },
         },
-      });
+      },
     });
   }
   for (let i = 0; i < 10; i += 1) {
@@ -247,18 +242,14 @@ async function main() {
       expertSpecializations: specializations,
     });
     // eslint-disable-next-line no-await-in-loop
-    const organization = await prisma.organization.create({
-      data: organizationData,
-    });
-    // eslint-disable-next-line no-await-in-loop
-    await prisma.searchEntry.create({
+    await prisma.organization.create({
       data: {
-        sortString: organization.name,
-        organization: {
-          connect: {
-            id: organization.id,
+        ...organizationData,
+        searchEntry: {
+          create: {
+            sortString: organizationData.name,
           },
-        },
+        }
       },
     });
   }
