@@ -66,7 +66,11 @@ const editDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializationsIds: zStringArray,
-  specializationMethodsIds: zString.array(),
+  // specializationMethods: z.string().array(),
+  specializationMethodsIds: z.object({
+    psychologist: z.string().array().nullish(),
+    psychotherapist: z.string().array().nullish(),
+  }),
 });
 
 const activeSpecialistEditSchema = restEditProps.extend({

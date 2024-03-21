@@ -13,7 +13,7 @@ export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
     therapies: { select: { id: true, type: true, title: true } },
     specializations: { select: { id: true, name: true } },
-    specializationMethods: { select: { id: true, title: true } },
+    specializationMethods: { select: { id: true, title: true, specialization: true } },
     addresses: {
       select: {
         id: true,
@@ -66,8 +66,25 @@ export function transformServiceProvider(instance, modelName) {
   instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
   // eslint-disable-next-line no-param-reassign
   instance.addressesIds = instance.addresses.map(address => address.id);
+
+  const specializationMethodsMapped = instance.specializationMethods.map(method => ({
+    id: method.id,
+    specialization: method.specialization.name.toLowerCase() === 'психолог' ? 'psychologist' : 'psychotherapist',
+  }));
+
+  const psychologistMethods = specializationMethodsMapped
+    .filter(method => method.specialization === 'psychologist')
+    .map(m => m.id);
+  const psychotherapistMethods = specializationMethodsMapped
+    .filter(method => method.specialization === 'psychotherapist')
+    .map(m => m.id);
+
   // eslint-disable-next-line no-param-reassign
-  instance.specializationMethodsIds = instance.specializationMethods.map(method => method.id);
+  instance.specializationMethodsIds = {
+    psychologist: psychologistMethods.length ? psychologistMethods : [],
+    psychotherapist: psychotherapistMethods.length ? psychotherapistMethods : [],
+  };
+
   // eslint-disable-next-line no-param-reassign
   instance.addresses = instance?.addresses?.map(address => ({
     ...address,

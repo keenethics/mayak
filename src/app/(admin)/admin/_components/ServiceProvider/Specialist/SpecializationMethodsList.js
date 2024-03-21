@@ -30,23 +30,35 @@ export function SpecializationMethodsList({ specializationsIdList, type, classNa
     <ul className={className}>
       {specializationsWithMethodsList?.map(specialization => {
         const label = specialization.name.toLowerCase();
+        const name = specialization.name.toLowerCase() === 'психолог' ? 'psychologist' : 'psychotherapist';
 
         return (
-          <li key={specialization.id}>
-            <Accordion className="mb-6">
+          <li key={specialization.id} className="mb-6">
+            <Accordion>
               <AccordionSummary expandIcon={<FaAngleDown />}>Методи і напрямки для {label}a</AccordionSummary>
               <AccordionDetails>
                 {type === 'create' ? (
                   <CheckboxGroupInput
                     source="specializationMethods"
                     name="specializationMethods"
+                    optionText="name"
                     choices={specialization.specializationMethods}
                     row={false}
                     label={false}
                   />
                 ) : (
-                  <ReferenceArrayInput source="specializationMethodsIds" reference="Method">
-                    <CheckboxGroupInput optionText="title" row={false} label={false} />
+                  <ReferenceArrayInput
+                    source={`specializationMethodsIds[${name}]`}
+                    reference="Method"
+                    filter={{ specializationId: specialization.id }}
+                    perPage={100}
+                  >
+                    <CheckboxGroupInput
+                      optionText="title"
+                      name={`specializationMethodsIds[${name}]`}
+                      row={false}
+                      label={false}
+                    />
                   </ReferenceArrayInput>
                 )}
               </AccordionDetails>
