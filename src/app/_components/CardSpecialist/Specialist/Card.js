@@ -93,7 +93,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
             <Link
-              href={`/specialist/${id}`}
+              href={`/specialist/${id}?type=specialist`}
               scroll={false}
               className="mt-auto hidden self-end justify-self-end md:inline-block"
             >
