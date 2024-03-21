@@ -9,6 +9,12 @@ const relatedInstanceCore = {
 
 export const districtPropType = PropTypes.shape(relatedInstanceCore);
 
+export const clientCategoryType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  createdAt: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+});
+
 export const therapyPropType = PropTypes.shape(relatedInstanceCore);
 
 export const specializationPropType = PropTypes.shape(relatedInstanceCore);
@@ -46,6 +52,7 @@ export const specialistPropType = PropTypes.shape({
   viber: PropTypes.string,
   telegram: PropTypes.string,
   createdAt: PropTypes.instanceOf(Date),
+  clientCategory: clientCategoryType,
 });
 
 export const organizationPropType = PropTypes.shape({

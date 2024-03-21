@@ -117,10 +117,13 @@ export function AddressesForm({ type = FORM_TYPES.create, label, className }) {
                     <FormDataConsumer>
                       {({ scopedFormData, getSource }) => {
                         if (!scopedFormData) return null;
-                        return scopedFormData.id ? (
-                          <AddressForm getSource={getSource} readOnly type={type} districts={districts} />
-                        ) : (
-                          <AddressForm getSource={getSource} type={type} districts={districts} />
+                        return (
+                          <AddressForm
+                            getSource={getSource}
+                            readOnly={!!scopedFormData.id}
+                            type={type}
+                            districts={districts}
+                          />
                         );
                       }}
                     </FormDataConsumer>

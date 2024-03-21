@@ -15,10 +15,11 @@ export function SpecialistShow() {
   return (
     <Show>
       <SimpleShowLayout>
-        <ArrayField label="Categories" source="clientCategoriesOnSpecialists">
-          <SingleFieldList linkType={false}>
-            <ChipField source="clientCategory.title" size="small" />
-          </SingleFieldList>
+        <ArrayField label="Категорії клієнтів" source="clientCategoriesOnSpecialists">
+          <Datagrid bulkActionButtons={false}>
+            <TextField label="Категорія" source="clientCategory.title" />
+            <BooleanField label="Чи працює з нею?" source="isWorkingWith" />
+          </Datagrid>
         </ArrayField>
         <ArrayField label="Спеціалізації" source="specializations">
           <SingleFieldList linkType={false}>

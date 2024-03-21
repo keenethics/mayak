@@ -5,7 +5,6 @@ import { MODEL_INCLUDES, searchInputFilters, transformServiceProvider, withError
 
 const handler = withErrorHandlerAndAuth(async req => {
   const json = await req.json();
-
   const modelName = json.resource.toLowerCase();
   const isServiceProvider = modelName === 'specialist' || modelName === 'organization';
 
@@ -33,6 +32,7 @@ const handler = withErrorHandlerAndAuth(async req => {
         districts: true,
         specializations: true,
         therapies: true,
+        clientCategories: true,
         type: true,
       },
       include: MODEL_INCLUDES[modelName],

@@ -41,11 +41,26 @@ const createDefaultProps = z.object({
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
+  clientCategories: z
+    .object({
+      clientCategory: zString,
+      isWorkingWith: z.boolean(),
+    })
+    .array()
+    .default([]),
   therapies: zStringArray,
   isActive: z.literal(true),
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
+  clientCategories: z
+    .object({
+      clientCategory: zString,
+      isWorkingWith: z.boolean(),
+    })
+    .array()
+    .nullish()
+    .default([]),
   isActive: z.literal(false),
 });
 

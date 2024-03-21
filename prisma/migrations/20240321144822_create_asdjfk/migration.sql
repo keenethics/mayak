@@ -29,7 +29,7 @@ CREATE TABLE "ClientCategoriesOnOrganizations" (
 CREATE UNIQUE INDEX "client_category_title_key" ON "client_category"("title");
 
 -- AddForeignKey
-ALTER TABLE "ClientCategoriesOnSpecialists" ADD CONSTRAINT "ClientCategoriesOnSpecialists_specialistId_fkey" FOREIGN KEY ("specialistId") REFERENCES "specialist"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ClientCategoriesOnSpecialists" ADD CONSTRAINT "ClientCategoriesOnSpecialists_specialistId_fkey" FOREIGN KEY ("specialistId") REFERENCES "specialist"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ClientCategoriesOnSpecialists" ADD CONSTRAINT "ClientCategoriesOnSpecialists_clientCategoryId_fkey" FOREIGN KEY ("clientCategoryId") REFERENCES "client_category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

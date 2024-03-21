@@ -7,6 +7,7 @@ import { ServicesForm } from '@admin/components/ServiceProvider/ServicesForm';
 import { AddressesForm } from '@admin/components/ServiceProvider/AddressesForm';
 import { ContactsList } from '@admin/components/ContactsList';
 import { SocialLinks } from '@admin/components/ServiceProvider/SocialLinks';
+import { ClientCategoriesEditForm } from '../ClientCategoriesEditForm';
 import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
 import { DetailsEditSpec } from './DetailsEditSpec';
 
@@ -17,6 +18,7 @@ export function SpecialistEdit() {
         <GeneralInfoEditSpec type="edit" />
         <DetailsEditSpec />
         <AddressesForm type="edit" label="Адреси надання послуг" />
+        <ClientCategoriesEditForm label="Редагувати категорії клієнтів із якими працює \ не працює" />
         <ServicesForm type="edit" label="Послуги" />
         <TextInput name="description" source="description" label="Опис" fullWidth multiline />
         <ContactsList />

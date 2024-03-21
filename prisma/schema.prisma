@@ -232,7 +232,7 @@ model ClientCategory {
 }
 
 model ClientCategoriesOnSpecialists {
-  specialist   Specialist @relation(fields: [specialistId], references: [id])
+  specialist   Specialist @relation(fields: [specialistId], references: [id], onDelete: Cascade)
   specialistId String     @db.Uuid
 
   clientCategory   ClientCategory @relation(fields: [clientCategoryId], references: [id])

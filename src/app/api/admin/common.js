@@ -25,7 +25,7 @@ export const MODEL_INCLUDES = {
     clientCategoriesOnSpecialists: {
       select: {
         isWorkingWith: true,
-        clientCategory: { select: { title: true } },
+        clientCategory: { select: { id: true, title: true } },
       },
     },
   },
@@ -39,6 +39,12 @@ export const MODEL_INCLUDES = {
         fullAddress: true,
         district: { select: { id: true, name: true } },
         isPrimary: true,
+      },
+      clientCategoriesOnOrganizations: {
+        select: {
+          isWorkingWith: true,
+          clientCategory: { select: { title: true } },
+        },
       },
     },
   },
