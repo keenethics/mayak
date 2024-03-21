@@ -40,7 +40,8 @@ function randomAddress(districts, isPrimary) {
         id: randomDistricts,
       },
     },
-    location: [randomLat, randomLng],
+    latitude: randomLat,
+    longitude: randomLng,
     isPrimary,
   };
 }

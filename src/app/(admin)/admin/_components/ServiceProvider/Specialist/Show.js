@@ -12,6 +12,10 @@ import {
   TextField,
 } from 'react-admin';
 
+// function AddressesMap() {
+//   const record = useRecordContext();
+// }
+
 export function SpecialistShow() {
   return (
     <Show>
@@ -41,7 +45,7 @@ export function SpecialistShow() {
                   className="text-primary-500"
                   target="_blank"
                   rel="noreferrer"
-                  href={`https://www.google.com/maps/search/?api=1&query=${record.location[0]},${record.location[1]}`}
+                  href={`https://www.google.com/maps/search/?api=1&query=${record.latitude},${record.longitude}`}
                 >
                   Локація на Google карті
                 </a>
@@ -50,6 +54,7 @@ export function SpecialistShow() {
             />
           </Datagrid>
         </ArrayField>
+
         <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
             <ChipField source="title" size="small" />
