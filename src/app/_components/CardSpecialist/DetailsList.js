@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IDCard } from '@icons/index';
 import { cn } from '@utils/cn';
-import { AddressesList } from '@/app/_components/CardSpecialist/AddressesList';
+import { AddressesList } from '@components/CardSpecialist/AddressesList';
+import { TherapyPrices } from '@components/CardSpecialist/TherapyPrices';
 
 export function DetailsList({ details, className, text }) {
-  const { addresses, description } = details;
+  const { addresses, description, therapyPrices } = details;
   const hasAddresses = addresses.length > 0;
 
   return (
     <div className={cn('flex flex-col gap-4', className)}>
       {hasAddresses && <AddressesList addresses={addresses} showIcon />}
+      <TherapyPrices therapyPrices={therapyPrices} className="hidden lg:flex" />
       <ul>
         {description && (
           <li className="flex gap-3 md:gap-4">
@@ -24,6 +26,7 @@ export function DetailsList({ details, className, text }) {
           </li>
         )}
       </ul>
+      <TherapyPrices therapyPrices={therapyPrices} className="lg:hidden" />
     </div>
   );
 }
@@ -39,6 +42,14 @@ DetailsList.propTypes = {
       }),
     ),
     description: PropTypes.string,
+    therapyPrices: PropTypes.arrayOf(
+      PropTypes.shape({
+        price: PropTypes.number.isRequired,
+        therapy: PropTypes.shape({
+          title: PropTypes.string.isRequired,
+        }).isRequired,
+      }),
+    ),
   }),
   className: PropTypes.node,
   text: PropTypes.string,

@@ -28,6 +28,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     yearsOfExperience,
     isFreeReception,
     formatOfWork,
+    therapyPrices,
     addresses,
     phone,
     email,
@@ -41,7 +42,6 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     viber,
     telegram,
   } = specialist;
-
   const specializationsList = specializations.map(s => s.name);
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
@@ -76,7 +76,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           <>
             <DetailsList
               className="border-t border-dashed border-t-gray-200 pt-4"
-              details={{ addresses, description }}
+              details={{ addresses, description, therapyPrices }}
               text="спеціаліста"
             />
             <ContactsList
