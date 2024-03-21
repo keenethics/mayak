@@ -22,6 +22,7 @@ export function CardOrganization({ organization, className, extended = false }) 
     type,
     yearsOnMarket,
     formatOfWork,
+    // therapyPrices,
     addresses,
     isFreeReception,
     description,
@@ -72,7 +73,11 @@ export function CardOrganization({ organization, className, extended = false }) 
           <>
             <DetailsList
               className="mt-4 border-t border-dashed border-t-gray-200 pt-4"
-              details={{ addresses, description }}
+              details={{
+                addresses,
+                description,
+                // therapyPrices
+              }}
               text="клініку"
             />
             <ContactsList
