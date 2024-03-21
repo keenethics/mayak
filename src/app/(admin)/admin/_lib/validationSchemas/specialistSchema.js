@@ -46,6 +46,7 @@ const activeSpecialistSchema = restCreateProps.extend({
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
+  therapies: zStringArray.nullish(),
   isActive: z.literal(false),
 });
 
@@ -73,6 +74,7 @@ const activeSpecialistEditSchema = restEditProps.extend({
 });
 
 const draftSpecialistEditSchema = restEditProps.partial().extend({
+  therapiesIds: zStringArray.nullish(),
   isActive: z.literal(false),
 });
 
@@ -81,9 +83,4 @@ const specialistSchemaEditUnion = z.discriminatedUnion('isActive', [
   draftSpecialistEditSchema,
 ]);
 
-export const specialistEditValidationSchema = createValidationSchema(specialistSchemaEditUnion, editDefaultProps).catch(
-  err => {
-    console.error(err);
-    return err;
-  },
-);
+export const specialistEditValidationSchema = createValidationSchema(specialistSchemaEditUnion, editDefaultProps);
