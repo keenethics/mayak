@@ -18,7 +18,11 @@ export function DistrictList({ list, className }) {
     <Slider slidesPerView="auto" spaceBetween={15} className={className}>
       {list.map(({ id, name }, index) => {
         const isSelected = index === selected;
-        const icon = isSelected ? <Tick /> : null;
+        const icon = isSelected ? (
+          <span className="text-gray-900">
+            <Tick />
+          </span>
+        ) : null;
         const pillButtonStyle = clsx(isSelected && 'border-secondary-300 bg-secondary-300 font-semibold');
         const linkStyle = clsx(isSelected && 'pointer-events-none cursor-none');
 
