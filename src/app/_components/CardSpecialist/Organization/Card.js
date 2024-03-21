@@ -14,12 +14,14 @@ import { DetailsList } from '@components/CardSpecialist/DetailsList';
 import { AddressesList } from '@components/CardSpecialist/AddressesList';
 import { CardButton } from '@components/CardSpecialist/CardButton';
 import { organizationPropType } from '@components/CardSpecialist/prop-types';
+import { OrganizationChipLists } from './OrganizationChipLists';
 
 export function CardOrganization({ organization, className, extended = false }) {
   const {
     id,
     name,
     type,
+    expertSpecializations,
     yearsOnMarket,
     formatOfWork,
     addresses,
@@ -68,6 +70,10 @@ export function CardOrganization({ organization, className, extended = false }) 
           </div>
         </header>
         <BadgeList labels={labelsList} />
+        <OrganizationChipLists
+          className="border-t border-dashed border-t-gray-200 pt-4"
+          expertSpecializations={expertSpecializations}
+        />
         {extended ? (
           <>
             <DetailsList

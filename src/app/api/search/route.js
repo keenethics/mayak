@@ -1,4 +1,4 @@
-import { FormatOfWork } from '@prisma/client';
+import { FormatOfWork, PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { getSearchParamsFromRequest } from '@/utils/getSearchParamsFromRequest';
 import { prisma } from '@/lib/db';
@@ -68,8 +68,8 @@ export async function GET(req) {
       ],
     },
   });
-
-  const searchEntries = await prisma.searchEntry.findMany({
+  const prismaN = new PrismaClient();
+  const searchEntries = await prismaN.searchEntry.findMany({
     include: {
       specialist: {
         include: {
@@ -81,6 +81,9 @@ export async function GET(req) {
         include: {
           ...sharedInclude,
           type: { select: { name: true } },
+          expertSpecializations: {
+            select: { name: true },
+          },
         },
       },
     },
