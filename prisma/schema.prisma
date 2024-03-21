@@ -70,6 +70,7 @@ model Organization {
   formatOfWork    FormatOfWork?
   addresses       Address[]
   therapies       Therapy[]
+  therapyPrices   TherapyPrice[]
   isFreeReception Boolean?
   description     String?            @db.Text
   phone           String?            @db.VarChar(15)
@@ -141,12 +142,13 @@ model Therapy {
 }
 
 model TherapyPrice {
-  id          String       @id @default(uuid()) @db.Uuid
-  createdAt   DateTime     @default(now())
-  therapy     Therapy      @relation(fields: [therapyId], references: [id])
-  therapyId   String       @db.Uuid
-  price       Int
-  specialists Specialist[]
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  therapy       Therapy        @relation(fields: [therapyId], references: [id])
+  therapyId     String         @db.Uuid
+  price         Int
+  specialists   Specialist[]
+  organizations Organization[]
 
   @@map("therapy_price")
 }

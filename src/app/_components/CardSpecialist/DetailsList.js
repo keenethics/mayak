@@ -5,7 +5,7 @@ import { cn } from '@utils/cn';
 import { AddressesList } from '@components/CardSpecialist/AddressesList';
 import { TherapyPrices } from '@components/CardSpecialist/TherapyPrices';
 
-export function DetailsList({ details, className }) {
+export function DetailsList({ details, className, text }) {
   const { addresses, description, therapyPrices } = details;
   const hasAddresses = addresses.length > 0;
 
@@ -20,7 +20,7 @@ export function DetailsList({ details, className }) {
               <IDCard />
             </span>
             <div className="text-p4 lg:text-p3">
-              <h3 className="font-bold text-gray-700">Про спеціаліста</h3>
+              <h3 className="font-bold text-gray-700">Про {text}</h3>
               <p>{description}</p>
             </div>
           </li>
@@ -52,4 +52,5 @@ DetailsList.propTypes = {
     ),
   }),
   className: PropTypes.node,
+  text: PropTypes.string,
 };

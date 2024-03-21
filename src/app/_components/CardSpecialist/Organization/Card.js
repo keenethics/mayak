@@ -22,6 +22,7 @@ export function CardOrganization({ organization, className, extended = false }) 
     type,
     yearsOnMarket,
     formatOfWork,
+    therapyPrices,
     addresses,
     isFreeReception,
     description,
@@ -72,7 +73,12 @@ export function CardOrganization({ organization, className, extended = false }) 
           <>
             <DetailsList
               className="mt-4 border-t border-dashed border-t-gray-200 pt-4"
-              details={{ addresses, description }}
+              details={{
+                addresses,
+                description,
+                therapyPrices,
+              }}
+              text="клініку"
             />
             <ContactsList
               truncate={!extended}
@@ -86,7 +92,11 @@ export function CardOrganization({ organization, className, extended = false }) 
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <Link href="#" scroll={false} className="mt-auto hidden self-end justify-self-end md:inline-block">
+            <Link
+              href={`/specialist/${id}?type=organization`}
+              scroll={false}
+              className="mt-auto hidden self-end justify-self-end md:inline-block"
+            >
               <CardButton />
             </Link>
           </>
