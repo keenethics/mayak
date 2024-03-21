@@ -1,5 +1,4 @@
 import { TherapiesSection, FAQSection } from '@components/MainPageSections';
-import React from 'react';
 import { env } from '@/lib/env';
 import { prisma } from '@/lib/db';
 // Page metadata should contain

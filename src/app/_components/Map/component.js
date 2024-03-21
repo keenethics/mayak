@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 export function Map({ points, center, zoom }) {
-  const Window = dynamic(() => import('./MapWindow'), {
+  const Window = dynamic(() => import('./window'), {
     loading: () => <p>A map is loading</p>,
     ssr: false,
   });
