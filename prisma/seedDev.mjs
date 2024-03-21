@@ -43,11 +43,27 @@ function randomAddress(districts, isPrimary) {
 function generateSocialMediaLinks() {
   const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
 
-  return Object.fromEntries(socialMediaList
-    .sort(() => Math.random() - 0.5)
-    .slice(0, Math.floor(Math.random() * 5) + 1)
-    .map(network => [network, faker.internet.url()])
+  return Object.fromEntries(
+    socialMediaList
+      .sort(() => Math.random() - 0.5)
+      .slice(0, Math.floor(Math.random() * 5) + 1)
+      .map(network => [network, faker.internet.url()]),
   );
+}
+
+function randomTherapyPrices(selectedTherapies) {
+  const therapyPrices = [];
+  selectedTherapies.forEach(el => {
+    if (Math.random() > 0.5) {
+      therapyPrices.push({
+        price: faker.number.int({ min: 0, max: 20 }) * 100,
+        therapy: {
+          connect: el,
+        },
+      });
+    }
+  });
+  return therapyPrices;
 }
 
 function randomSpecialist({ districts, specializations, therapies }) {
@@ -61,7 +77,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
         .map((_, i) => randomAddress(districts, i === 0)),
     };
   }
-
+  const specialistTherapies = uniqueObjectsWithId(therapies);
   const phoneRegexp = '+380[0-9]{9}';
 
   const socialMediaLinks = generateSocialMediaLinks();
@@ -80,7 +96,10 @@ function randomSpecialist({ districts, specializations, therapies }) {
     formatOfWork,
     addresses,
     therapies: {
-      connect: uniqueObjectsWithId(therapies),
+      connect: specialistTherapies,
+    },
+    therapyPrices: {
+      create: randomTherapyPrices(specialistTherapies),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
