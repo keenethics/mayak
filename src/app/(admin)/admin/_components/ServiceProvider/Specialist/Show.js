@@ -12,10 +12,6 @@ import {
   TextField,
 } from 'react-admin';
 
-// function AddressesMap() {
-//   const record = useRecordContext();
-// }
-
 export function SpecialistShow() {
   return (
     <Show>

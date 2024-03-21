@@ -13,11 +13,9 @@ export default function MapWindow({ points, center, zoom }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {points.map(point => (
-        <Marker position={point} key={point.toString()}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
+      {points.map(({ title, latitude, longitude }) => (
+        <Marker position={[latitude, longitude]} key={title}>
+          {title && <Popup>{title}</Popup>}
         </Marker>
       ))}
     </MapContainer>
@@ -25,7 +23,13 @@ export default function MapWindow({ points, center, zoom }) {
 }
 
 MapWindow.propTypes = {
-  points: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  points: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      latitude: PropTypes.number.isRequired, // float
+      longitude: PropTypes.number.isRequired, // float
+    }),
+  ).isRequired,
   center: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
 };
