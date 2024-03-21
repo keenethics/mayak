@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { useSearchParams } from 'next/navigation';
-import { CircularProgress } from '@mui/material';
 import CheckMark from '@icons/check-mark.svg';
 import Search from '@icons/search.svg';
 import { allEvents, useSetParam } from '@hooks';
@@ -14,7 +13,7 @@ import { SkeletonCard } from '@components/Event/SkeletonCard';
 import { buttonColorVariant } from '@components/PillButton/style';
 import { NoInfoToShow } from '@components/NoInfoToShow';
 import { cn } from '@/utils/cn';
-import { capitalizeFirstLetter } from '@/utils/common';
+import { capitalize } from '@/utils/common';
 
 const currentMonth = new Date().getMonth() + 1;
 
@@ -33,13 +32,13 @@ const monthNames = [
   { index: 11, name: 'грудень', en: 'december' },
 ];
 
-const calcPureMonthIndex = (currentMonth - 1) % monthNames.length;
+const startMonthIndex = currentMonth - 1;
+const endIndex = (startMonthIndex + 6) % monthNames.length;
 
-const firstMonth = monthNames.slice(calcPureMonthIndex, calcPureMonthIndex + 1);
-const restMonth = monthNames.slice(calcPureMonthIndex + 1, calcPureMonthIndex + 6);
-const filteredMonths = firstMonth.concat(restMonth);
-
-const fakeArray = [1, 2, 3, 4, 5, 6];
+const filteredMonths =
+  startMonthIndex > endIndex
+    ? monthNames.slice(startMonthIndex).concat(monthNames.slice(0, endIndex))
+    : monthNames.slice(startMonthIndex, endIndex);
 
 const { semiorange } = buttonColorVariant.eventFilter;
 const activeButtonStyles = cn({
@@ -107,13 +106,13 @@ export function EventSection() {
                 />,
               ]}
             >
-              {capitalizeFirstLetter(month.name)}
+              {capitalize(month.name)}
             </PillButton>
           ))}
         </div>
 
         <ul className="grid w-full gap-4 self-stretch sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {isLoading && fakeArray.map(el => <SkeletonCard key={el} />)}
+          {isLoading && new Array(6).fill(9).map((el, index) => <SkeletonCard el={el} key={index} />)}
           <>
             {isSuccess &&
               data.pages.map(page =>
@@ -132,9 +131,7 @@ export function EventSection() {
         </ul>
       </div>
 
-      {(isLoading || isFetchingNextPage) && <CircularProgress />}
-
-      {isSuccess && !hasNextPage && data.pages.length === 1 && <NoInfoToShow text="подій" />}
+      {isSuccess && !isFetchingNextPage && !hasNextPage && data.pages.length === 1 && <NoInfoToShow text="подій" />}
 
       {error && <div className="mt-10">{('An error has occurred: ', error.message)}</div>}
     </>
