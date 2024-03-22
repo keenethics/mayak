@@ -1,10 +1,8 @@
-'use client';
-
 import PropTypes from 'prop-types';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Swiper } from 'swiper/react';
 
-import 'swiper/css';
-
+// eslint-disable-next-line import/no-extraneous-dependencies
 export { SwiperSlide as Slide } from 'swiper/react';
 
 export function Slider({ children, className, ...swiperProps }) {

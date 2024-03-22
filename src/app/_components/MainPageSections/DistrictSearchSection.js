@@ -15,7 +15,7 @@ export async function DistrictSearchSection({ className }) {
       <Heading type="h3" className="text-p4 font-bold uppercase text-primary-600">
         Райони міста Львова
       </Heading>
-      <DistrictList list={optionsList} className="mt-4 w-full" />
+      <DistrictList list={optionsList} className="mt-4" />
     </section>
   );
 }

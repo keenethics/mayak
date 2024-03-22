@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { PillButton } from '@components/PillButton';
 import { Slide, Slider } from '@components/Slider';
 import { clsx } from 'clsx/lite';
+import { cn } from '@utils/cn';
 
 export function DistrictList({ list, className }) {
   const [selected, setSelected] = useState(0);
@@ -15,7 +16,7 @@ export function DistrictList({ list, className }) {
   };
 
   return (
-    <Slider slidesPerView="auto" spaceBetween={15} className={className}>
+    <Slider slidesPerView="auto" className={cn('flex', className)}>
       {list.map(({ id, name }, index) => {
         const isSelected = index === selected;
         const icon = isSelected ? (
@@ -27,7 +28,7 @@ export function DistrictList({ list, className }) {
         const linkStyle = clsx(isSelected && 'pointer-events-none cursor-none');
 
         return (
-          <Slide key={id} onClick={() => handleClick(index)}>
+          <Slide key={id} onClick={() => handleClick(index)} className="mr-4 last:mr-0">
             <Link href={`/specialist?district=${id}`} className={linkStyle} tabIndex={-1}>
               <PillButton
                 variant="transparent"
