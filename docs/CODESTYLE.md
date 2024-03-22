@@ -8,7 +8,8 @@ Wrong:
 
 ```javascript
 const Header = (props) => {
-  return ...
+  return
+...
 };
 
 ```
@@ -17,7 +18,8 @@ Right:
 
 ```javascript
 function Header(props) {
-  return ...
+  return
+...
 }
 
 ```
@@ -28,7 +30,8 @@ Wrong:
 
 ```javascript
 const utility = () => {
-  return ...
+  return
+...
 };
 
 // some more code ...
@@ -40,15 +43,18 @@ Right:
 
 ```javascript
 export const utility = () => {
-  return ...
+  return
+...
 };
 ```
 
 ## Admin component folders/files conventions
 
 - Start folder names with capital letters. For ex: `Organization` instead of `organization`.
-- Filenames for files with feature components for specific model are `Create.js`, `Edit.js`, `List.js`, `Show.js`.
-- These files should contain components with name consisting of the **model name** and **feature name**, for ex: `FaqList` or `EventCreate`. Here is example of using them in `AdminApp.js` in a resource.
+- Filenames for files with feature components for specific model
+  are `Create.js`, `Edit.js`, `DistrictList.js`, `Show.js`.
+- These files should contain components with name consisting of the **model name** and **feature name**, for
+  ex: `FaqList` or `EventCreate`. Here is example of using them in `AdminApp.js` in a resource.
 
 ```jsx
 <Resource
@@ -76,9 +82,10 @@ _components
 
 ```js
 export * from './Create';
-export * from './List';
+export * from './DistrictList';
 export * from './Edit';
 export * from './Show';
 ```
 
-Other components related to admin panel, but not related to a specific model (or can be reused across multiple models), should be saved in the `admin/_components`
+Other components related to admin panel, but not related to a specific model (or can be reused across multiple models),
+should be saved in the `admin/_components`
