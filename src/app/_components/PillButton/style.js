@@ -51,6 +51,15 @@ export const buttonColorVariant = {
       disabled,
     },
   },
+  eventFilter: {
+    semiorange: {
+      regular: 'bg-transparent border-[1px] border-solid border-gray-700 text-gray-900 not-italic font-medium',
+      hover: 'hover:bg-other-white hover:border-gray-700 text-gray-900',
+      focused: 'focus:bg-secondary-100 focus:text-secondary-400 focus:border-secondary-300 focus:outline-none',
+      active: 'active:bg-secondary-300 active:text-gray-900 active:border-secondary-300 font-semibold',
+      disabled,
+    },
+  },
   close: {
     grey: {
       regular: 'text-[transparent]',
@@ -72,13 +81,24 @@ export const buttonType = {
   outlined: {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col text-p4',
-      layoutStyle: `flex justify-center align-middle
+      layoutStyle: `flex justify-center align-middle items-center
       gap-[8px] self-stretch h-[2.5rem] pt-[10px] pr-[24px] pb-[10px] pl-[16px]`,
     },
     regular: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col h-[2.5rem] flex-shrink-0 text-p4',
       layoutStyle: `flex justify-center align-middle
       gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[10px] px-[24px]`,
+    },
+  },
+  eventFilter: {
+    icon: {
+      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-row text-p4 flex-shrink-0',
+      layoutStyle: `flex justify-center align-middle items-center py-1.5 px-3 gap-1 self-stretch h-8`,
+    },
+    regular: {
+      buttonStyle: 'transition-all inline-flex justify-center align-middle flex-row flex-shrink-0 text-p4',
+      layoutStyle: `flex justify-center align-middle
+      gap-1 self-stretch flex-shrink-0 flex-basis-0 py-1.5 px-3 h-8`,
     },
   },
   text: {

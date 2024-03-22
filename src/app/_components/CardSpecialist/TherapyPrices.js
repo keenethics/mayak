@@ -14,7 +14,7 @@ export function TherapyPrices({ therapyPrices, className }) {
           <span className="lg:hidden">Прайс</span>
           <span className="hidden lg:inline">Прайс на тип терапії</span>
         </h3>
-        {therapyPrices.length ? (
+        {therapyPrices?.length ? (
           <ul className="flex flex-wrap text-p4 lg:text-p3">
             {therapyPrices.map(therapyPrice => (
               <li key={therapyPrice.id} className="whitespace-nowrap text-system-info lg:font-bold">
