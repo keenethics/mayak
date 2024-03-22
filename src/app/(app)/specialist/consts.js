@@ -14,6 +14,7 @@ export const specialistInclude = {
       },
     },
   },
+  workTime: true,
   addresses: {
     include: {
       district: true,
@@ -33,4 +34,5 @@ export const organizationInclude = {
       district: true,
     },
   },
+  workTime: true,
 };

@@ -81,7 +81,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               placeholder={`Прізвище та ім'я`}
               error={validationErrors.name}
               required
-              additionalContainerStyle='bg-other-white'
+              additionalContainerStyle="bg-other-white"
             />
             <TextInputField
               value={phone}
@@ -90,7 +90,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               placeholder="Номер телефону"
               error={validationErrors.phone}
               required
-              additionalContainerStyle='bg-other-white'
+              additionalContainerStyle="bg-other-white"
             />
             <CheckBox
               onChange={() => setCallMe(prev => !prev)}
@@ -106,7 +106,7 @@ export function Feedback({ isFeedbackOpen, onClose }) {
               onChange={e => setEmail(e.target.value)}
               placeholder="Електронна пошта"
               error={validationErrors.email}
-              additionalContainerStyle='bg-other-white'
+              additionalContainerStyle="bg-other-white"
             />
             <TextArea
               value={message}

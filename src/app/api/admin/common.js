@@ -1,18 +1,8 @@
-import { RESOURCES } from '@admin/_lib/consts';
+import { RESOURCES , WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
 import { auth } from '@/lib/auth';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
-import { weekDaysTranslation } from '@/lib/consts';
-
-const sorter = {
-  MON: 1,
-  TUE: 2,
-  WED: 3,
-  THU: 4,
-  FRI: 5,
-  SAT: 6,
-  SUN: 7,
-};
+import { transformWorkTime } from '@/utils/common';
 
 export const MODEL_SEARCH_FIELDS = {
   [RESOURCES.event]: ['title', 'organizerName'],
@@ -72,15 +62,6 @@ export function searchInputFilters(modelName, filter) {
   return { OR: filters };
 }
 
-const transformWorkTime = time =>
-  time
-    .sort((a, b) => sorter[a.weekDay] - sorter[b.weekDay])
-    .map(entry => ({
-      isDayOff: entry.isDayOff,
-      time: entry.time,
-      weekDay: weekDaysTranslation[entry.weekDay],
-    }));
-
 export function transformServiceProvider(instance, modelName) {
   // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
   // React Admin issues
@@ -94,7 +75,7 @@ export function transformServiceProvider(instance, modelName) {
 
   if (instance?.workTime?.length) {
     // eslint-disable-next-line no-param-reassign
-    instance.workTime = transformWorkTime(instance.workTime);
+    instance.workTime = transformWorkTime(instance.workTime, WEEKDAYS_TRANSLATION);
   }
 
   // eslint-disable-next-line no-param-reassign

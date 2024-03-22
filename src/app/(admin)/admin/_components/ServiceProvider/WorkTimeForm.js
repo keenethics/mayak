@@ -1,6 +1,6 @@
 import { ArrayInput, NullableBooleanInput, SimpleFormIterator, TextInput, useRecordContext } from 'react-admin';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
-import { weekDaysTranslation } from '@/lib/consts';
+import { WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
 
 export function WorkTimeForm() {
   // we need to have fields for worktime in edit form
@@ -8,7 +8,7 @@ export function WorkTimeForm() {
   // need to mutate record
   const record = useRecordContext();
   if (record?.workTime?.length === 0) {
-    record.workTime = Object.values(weekDaysTranslation).map(weekDay => ({
+    record.workTime = Object.values(WEEKDAYS_TRANSLATION).map(weekDay => ({
       weekDay,
       time: null,
       isDayOff: null,
@@ -20,7 +20,7 @@ export function WorkTimeForm() {
       <ArrayInput
         source="workTime"
         label={false}
-        defaultValue={Object.values(weekDaysTranslation).map(weekDay => ({
+        defaultValue={Object.values(WEEKDAYS_TRANSLATION).map(weekDay => ({
           weekDay,
         }))}
       >

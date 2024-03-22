@@ -54,6 +54,13 @@ export async function GET(req) {
         district: { select: { id: true, name: true } },
       },
     },
+    workTime: {
+      select: {
+        weekDay: true,
+        time: true,
+        isDayOff: true,
+      },
+    },
   };
 
   const totalCount = await prisma.searchEntry.count({

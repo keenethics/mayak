@@ -1,5 +1,5 @@
 import { FormatOfWork } from '@prisma/client';
-import { weekDaysTranslation } from '@/lib/consts';
+import { WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
 
 export const capitalizeFirstLetter = inputString => inputString.charAt(0).toUpperCase() + inputString.slice(1);
 
@@ -28,13 +28,13 @@ export function isSpecifiedWorkTime(workTime) {
   return workTime.some(day => day.isDayOff === false || day.isDayOff || day.time);
 }
 
-export function transformWorkTimeCreate(workTime) {
+export function transformWorkTime(workTime) {
   const specified = isSpecifiedWorkTime(workTime);
-  if (!specified) return {};
+  if (!specified) return [];
   return workTime.map(day => {
     const { weekDay, time, isDayOff } = day;
     const workTimeObj = {
-      weekDay: Object.keys(weekDaysTranslation).find(key => weekDaysTranslation[key] === weekDay),
+      weekDay: Object.keys(WEEKDAYS_TRANSLATION).find(key => WEEKDAYS_TRANSLATION[key] === weekDay),
       isDayOff: !!isDayOff, // convert to false if it's null/undefined
       time: time || '',
     };
@@ -69,7 +69,6 @@ export const transformEditData = ({ therapiesIds, addresses, addressesIds, forma
     addressesIds?.filter(addressId => !addressesToConnect.some(address => address.id === addressId)) ?? [];
   // if formatOfWork is ONLINE, we need to delete all connected addresses
   const addressesToDelete = formatOfWork !== FormatOfWork.ONLINE ? toConnectList(unselectedAddresses) : {};
-
   return {
     ...rest,
     formatOfWork,
@@ -82,7 +81,7 @@ export const transformEditData = ({ therapiesIds, addresses, addressesIds, forma
     therapyPricesEdit: undefined,
     workTime: {
       set: [],
-      connectOrCreate: transformWorkTimeCreate(workTime),
+      connectOrCreate: transformWorkTime(workTime),
     },
     addresses: {
       connect: addressesToConnect,

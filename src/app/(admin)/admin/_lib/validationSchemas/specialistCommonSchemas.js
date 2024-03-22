@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { FormatOfWork } from '@prisma/client';
-import { MAX_NUM_SELECTED_SOCIAL_LINKS } from '@admin/_lib/consts';
+import { MAX_NUM_SELECTED_SOCIAL_LINKS , WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
 import { isSpecifiedWorkTime } from '@admin/_utils/common';
-import { PHONE_REGEX, weekDaysTranslation } from '@/lib/consts';
+import { PHONE_REGEX } from '@/lib/consts';
 
 // ------------------ COMMON SECTION ---------------------
 export const MESSAGES = {
@@ -40,7 +40,7 @@ export const zWorkTimeSchema = z
   .array(
     z
       .object({
-        weekDay: z.enum(Object.values(weekDaysTranslation)),
+        weekDay: z.enum(Object.values(WEEKDAYS_TRANSLATION)),
         time: z
           .string()
           .refine(val => !val || /\d{2}:\d{2}\s-\s\d{2}:\d{2}/.test(val), {
@@ -94,6 +94,7 @@ export const specialistCore = z.object({
   email: zString.email().nullish(),
   addressesIds: zString.array().nullish(),
   website: zString.url({ message: MESSAGES.unacceptableValue }).nullish(),
+  workTime: zWorkTimeSchema,
   socialLink: z
     .object({
       instagram: zUrl.nullish(),

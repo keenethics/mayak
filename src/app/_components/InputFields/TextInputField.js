@@ -35,7 +35,7 @@ export function TextInputField({
         )}
       >
         <input
-          className={cn(variant.input.base, variant.input.focus, variant.input.style, error && variant.input.error,)}
+          className={cn(variant.input.base, variant.input.focus, variant.input.style, error && variant.input.error)}
           id={id}
           type={type}
           name={name}

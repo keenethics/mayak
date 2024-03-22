@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { FormatOfWork } from '@prisma/client';
 import { string } from '@/lib/validationSchemas/utils';
 import { PHONE_REGEX } from '@/lib/consts';
+import { zWorkTimeSchema } from './specialistCommonSchemas';
 
 const DefaultSchema = z.object({
   name: string('Назва').min(1).max(128).zod,
@@ -63,6 +64,7 @@ const RestSchema = z.object({
     required_error: "Безкоштовний прийом - обов'язкове поле",
     invalid_type_error: "Оберіть 'Так' чи 'Ні' для активного спеціаліста",
   }),
+  workTime: zWorkTimeSchema,
   isActive: z.boolean(),
 });
 

@@ -13,6 +13,7 @@ import { SocialsList } from '@components/CardSpecialist/SocialsList';
 import { DetailsList } from '@components/CardSpecialist/DetailsList';
 import { AddressesList } from '@components/CardSpecialist/AddressesList';
 import { CardButton } from '@components/CardSpecialist/CardButton';
+import { WorkTime } from '@components/CardSpecialist/WorkTime';
 import { organizationPropType } from '@components/CardSpecialist/prop-types';
 
 export function CardOrganization({ organization, className, extended = false }) {
@@ -23,6 +24,7 @@ export function CardOrganization({ organization, className, extended = false }) 
     yearsOnMarket,
     formatOfWork,
     addresses,
+    workTime,
     isFreeReception,
     description,
     phone,
@@ -54,6 +56,7 @@ export function CardOrganization({ organization, className, extended = false }) 
           <SocialsList socials={socials} className="absolute bottom-4" />
         </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-4" />
+        {!!workTime?.length && <WorkTime workTime={workTime} />}
       </div>
       <div className="flex w-full max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
@@ -80,6 +83,7 @@ export function CardOrganization({ organization, className, extended = false }) 
               contacts={contactsList}
               className="mt-3 border-t border-dashed border-t-gray-200 pt-3 md:hidden"
             />
+            {!!workTime?.length && <WorkTime workTime={workTime} />}
           </>
         ) : (
           <>

@@ -32,3 +32,22 @@ export const formatPhoneNumber = phoneNumber => {
 
   return `${countryCode} (${areaCode}) ${firstPart} ${secondPart}`;
 };
+
+const weekDaySorter = {
+  MON: 1,
+  TUE: 2,
+  WED: 3,
+  THU: 4,
+  FRI: 5,
+  SAT: 6,
+  SUN: 7,
+};
+
+export const transformWorkTime = (time, translation) =>
+  time
+    .sort((a, b) => weekDaySorter[a.weekDay] - weekDaySorter[b.weekDay])
+    .map(entry => ({
+      isDayOff: entry.isDayOff,
+      time: entry.time,
+      weekDay: translation[entry.weekDay],
+    }));

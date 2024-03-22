@@ -1,4 +1,4 @@
-import { toConnectList, transformTherapyPrices, transformWorkTimeCreate } from './common';
+import { toConnectList, transformTherapyPrices, transformWorkTime } from './common';
 
 const transformAddresses = placesArray =>
   placesArray.map(place => ({
@@ -32,6 +32,6 @@ export const transformData = ({
   },
   therapyPricesCreate: undefined,
   workTime: {
-    connectOrCreate: workTime?.length ? transformWorkTimeCreate(workTime) : undefined,
+    connectOrCreate: workTime?.length ? transformWorkTime(workTime) : undefined,
   },
 });
