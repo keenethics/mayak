@@ -15,12 +15,14 @@ import { AddressesList } from '@components/CardSpecialist/AddressesList';
 import { CardButton } from '@components/CardSpecialist/CardButton';
 import { organizationPropType } from '@components/CardSpecialist/prop-types';
 import { OrganizationChipLists } from './OrganizationChipLists';
+import { OwnershipTypeTile } from './OwnershipTypeTile';
 
 export function CardOrganization({ organization, className, extended = false }) {
   const {
     id,
     name,
     type,
+    ownershipType,
     isInclusiveSpace,
     expertSpecializations,
     yearsOnMarket,
@@ -62,12 +64,15 @@ export function CardOrganization({ organization, className, extended = false }) 
       <div className="flex w-full max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
           <ProfileImage className="md:hidden" />
-          <div className="max-w-full overflow-hidden">
-            <SpecializationsPanel
-              specialistId={id}
-              specializations={type.map(t => t.name)}
-              extendedCardOpened={extended}
-            />
+          <div className="w-full overflow-hidden">
+            <div className="flex w-full justify-between gap-4">
+              <SpecializationsPanel
+                specialistId={id}
+                specializations={type.map(t => t.name)}
+                extendedCardOpened={extended}
+              />
+              <OwnershipTypeTile ownershipType={ownershipType} />
+            </div>
             <SpecialistTitle id={id} truncate={!extended} name={name} className="mt-1.5" />
           </div>
         </header>
