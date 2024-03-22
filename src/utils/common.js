@@ -32,3 +32,5 @@ export const formatPhoneNumber = phoneNumber => {
 
   return `${countryCode} (${areaCode}) ${firstPart} ${secondPart}`;
 };
+
+export const capitalize = inputString => inputString.charAt(0).toUpperCase() + inputString.slice(1);
