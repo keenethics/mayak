@@ -1,9 +1,12 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Show as ShowHint, Window as HintWindow } from '@components/Hint';
 import { cn } from '@/utils/cn';
 import presets from '@/app/styles/tailwind';
 
-export function ChipList({ className, items, wrap }) {
+export function ChipList({ id, className, items, wrap }) {
   const chipListRef = useRef(null);
   const [truncateAt, setTruncateAt] = useState(null);
 
@@ -54,7 +57,23 @@ export function ChipList({ className, items, wrap }) {
           {items.slice(0, truncateAt).map(el => (
             <ChipListItem key={el.id} name={el.name} color={el.color} textColor={el.textColor} icon={el.icon} />
           ))}
-          <ChipListItem name={`${truncatedCount}+`} color="rgba(0,0,0,0)" textColor={presets.theme.colors.gray[900]} />
+
+          <ShowHint id={id} opens={id}>
+            <div className="relative">
+              <ChipListItem
+                name={`${truncatedCount}+`}
+                color="rgba(0,0,0,0)"
+                textColor={presets.theme.colors.gray[900]}
+              />
+            </div>
+          </ShowHint>
+          <HintWindow
+            id={id}
+            name={id}
+            className={cn('absolute left-[-170px] z-[200] flex w-[200px] select-text flex-col text-gray-900')}
+          >
+            <p>{items.map(el => el.name).join('; ')}</p>
+          </HintWindow>
         </>
       )}
     </ul>
@@ -91,6 +110,7 @@ const chipListPropType = {
 };
 
 ChipList.propTypes = {
+  id: PropTypes.string,
   className: PropTypes.string,
   wrap: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.shape(chipListPropType)).isRequired,
