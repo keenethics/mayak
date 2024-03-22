@@ -7,7 +7,7 @@ env:
 on:
   push:
     branches:
-      - deploy-logs
+      - dev
 jobs:
   Dev-Deploy:
     runs-on: ubuntu-latest
