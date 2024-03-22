@@ -6,13 +6,14 @@ import { CardOrganization, CardSpecialist } from '@components/CardSpecialist';
 import { useListEntries } from '@hooks';
 import { CircularProgress } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
+import _ from 'lodash';
 
 function getProperEnding(count) {
   const lastDigit = count % 10;
-  if (count === 11 || count === 12 || count === 13 || count === 14) {
+  if (_.range(11, 15).includes(count)) {
     return 'результатів';
   }
-  if (lastDigit === 2 || lastDigit === 3 || lastDigit === 4) {
+  if (_.range(2, 5).includes(lastDigit)) {
     return 'результати';
   }
   if (lastDigit === 1) {
