@@ -103,6 +103,7 @@ model Specialization {
   createdAt   DateTime     @default(now())
   name        String       @unique @db.VarChar(128)
   specialists Specialist[]
+  methods     Method[]
 
   @@map("specialization")
 }
@@ -231,4 +232,15 @@ model Faq {
   priority  Int?     @db.SmallInt
 
   @@map("faq")
+}
+
+model Method {
+  id               String         @id @default(uuid()) @db.Uuid
+  createdAt        DateTime       @default(now())
+  title            String         @unique @db.VarChar(128)
+  description      String?        @db.Text
+  specializationId String         @db.Uuid
+  specialization   Specialization @relation(fields: [specializationId], references: [id])
+
+  @@map("method")
 }
