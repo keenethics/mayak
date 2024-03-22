@@ -42,6 +42,7 @@ model Specialist {
   formatOfWork                  FormatOfWork?
   addresses                     Address[]
   therapies                     Therapy[]
+  therapyPrices                 TherapyPrice[]
   isFreeReception               Boolean?
   description                   String?                         @db.Text
   phone                         String?                         @db.VarChar(15)
@@ -103,6 +104,7 @@ model Specialization {
   createdAt   DateTime     @default(now())
   name        String       @unique @db.VarChar(128)
   specialists Specialist[]
+  methods     Method[]
 
   @@map("specialization")
 }
@@ -126,19 +128,30 @@ model OrganizationType {
 }
 
 model Therapy {
-  id          String   @id @default(uuid()) @db.Uuid
-  createdAt   DateTime @default(now())
-  type        String   @unique @db.VarChar(64)
-  title       String   @db.VarChar(128)
-  description String   @db.VarChar(255)
-  imagePath   String   @db.VarChar(255)
-  isActive    Boolean  @default(false)
-  priority    Int      @default(0) @db.SmallInt
-
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  type          String         @unique @db.VarChar(64)
+  title         String         @db.VarChar(128)
+  description   String         @db.VarChar(255)
+  imagePath     String         @db.VarChar(255)
+  isActive      Boolean        @default(false)
+  priority      Int            @default(0) @db.SmallInt
   specialists   Specialist[]
   organizations Organization[]
+  therapyPrices TherapyPrice[]
 
   @@map("therapy")
+}
+
+model TherapyPrice {
+  id          String       @id @default(uuid()) @db.Uuid
+  createdAt   DateTime     @default(now())
+  therapy     Therapy      @relation(fields: [therapyId], references: [id])
+  therapyId   String       @db.Uuid
+  price       Int
+  specialists Specialist[]
+
+  @@map("therapy_price")
 }
 
 model Address {
@@ -253,4 +266,15 @@ model ClientCategoriesOnOrganizations {
   isWorkingWith Boolean
 
   @@id([organizationId, clientCategoryId])
+}
+
+model Method {
+  id               String         @id @default(uuid()) @db.Uuid
+  createdAt        DateTime       @default(now())
+  title            String         @unique @db.VarChar(128)
+  description      String?        @db.Text
+  specializationId String         @db.Uuid
+  specialization   Specialization @relation(fields: [specializationId], references: [id])
+
+  @@map("method")
 }

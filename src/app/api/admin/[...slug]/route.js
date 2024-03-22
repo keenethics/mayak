@@ -33,6 +33,7 @@ const handler = withErrorHandlerAndAuth(async req => {
         specializations: true,
         therapies: true,
         clientCategories: true,
+        therapyPrices: true,
         type: true,
       },
       include: MODEL_INCLUDES[modelName],

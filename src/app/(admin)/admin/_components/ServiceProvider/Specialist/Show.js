@@ -4,6 +4,7 @@ import {
   ChipField,
   Datagrid,
   DateField,
+  FunctionField,
   NumberField,
   Show,
   SimpleShowLayout,
@@ -41,11 +42,25 @@ export function SpecialistShow() {
             <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
-        <ArrayField label="Типи терапії" source="therapies">
-          <SingleFieldList linkType={false}>
-            <ChipField source="title" size="small" />
-          </SingleFieldList>
-        </ArrayField>
+        <FunctionField
+          label="Типи терапії"
+          render={({ therapies, therapyPrices }) => (
+            <div className="flex max-w-[600px] flex-col *:border-b-[1px]">
+              <div className="flex justify-between p-3">
+                <p>Тип терапії</p> <p>Ціна</p>
+              </div>
+              {therapies?.map(therapy => {
+                const therapyPrice = therapyPrices?.find(el => el.therapy.id === therapy.id);
+                return (
+                  <div key={therapy.id} className="flex justify-between px-3 py-2">
+                    <p>{therapy.title}</p>{' '}
+                    <p>{therapyPrice ? `Ціна від ${therapyPrice.price} грн / год` : 'Не зазначено'}</p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        />
         <BooleanField label="Безкоштовний прийом" source="isFreeReception" />
         <BooleanField label="Активний/Неактивний" source="isActive" />
         <TextField label="Опис" source="description" />

@@ -32,6 +32,8 @@ const restCreateProps = zSpecialistSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
+  therapies: zStringArray,
+  therapyPricesCreate: z.record(z.string(), z.any()).nullish(),
 });
 
 const createDefaultProps = z.object({
@@ -74,6 +76,17 @@ const restEditProps = zSpecialistSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
+  therapiesIds: zStringArray,
+  therapyPrices: z.array(
+    z.object({
+      id: z.string(),
+      price: z.number(),
+      therapy: z.object({
+        id: z.string(),
+      }),
+    }),
+  ),
+  therapyPricesEdit: z.record(z.string(), z.any()),
 });
 
 const editDefaultProps = z.object({
@@ -83,7 +96,6 @@ const editDefaultProps = z.object({
 });
 
 const activeSpecialistEditSchema = restEditProps.extend({
-  therapiesIds: zStringArray,
   isActive: z.literal(true),
 });
 

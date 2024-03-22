@@ -13,6 +13,7 @@ import {
   OrganizationsList,
   OrganizationEdit,
 } from '@admin/components/ServiceProvider/Organization';
+import { MethodsList, MethodsShow, MethodsEdit, MethodsCreate } from '@admin/components/Methods';
 
 import {
   SpecialistCreate,
@@ -69,13 +70,6 @@ export default function AdminPage() {
         options={{ label: 'Райони' }}
       />
       <Resource
-        name={RESOURCES.specialization}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-        options={{ label: 'Спеціалізації' }}
-      />
-      <Resource
         name={RESOURCES.address}
         list={ListGuesser}
         edit={EditGuesser}
@@ -107,6 +101,14 @@ export default function AdminPage() {
         create={CreateCategory}
         list={ListGuesser}
         show={ShowGuesser}
+      />
+      <Resource
+        name={RESOURCES.method}
+        list={MethodsList}
+        show={MethodsShow}
+        edit={MethodsEdit}
+        create={MethodsCreate}
+        options={{ label: 'Напрями і методи терапії' }}
       />
     </Admin>
   );

@@ -14,3 +14,7 @@
     scrollbar-width: none; /* Firefox */
   }
 }
+
+.swiper-slide {
+  width: auto !important;
+}

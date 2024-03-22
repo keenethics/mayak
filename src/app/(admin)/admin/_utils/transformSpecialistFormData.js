@@ -1,4 +1,4 @@
-const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
+import { toConnectList, transformTherapyPrices } from './common';
 
 const transformAddresses = placesArray =>
   placesArray.map(place => ({
@@ -12,22 +12,32 @@ const transformClientCategories = arr =>
     clientCategory: { connect: { id: it.clientCategory } },
   }));
 
-export const transformData = data => {
-  const { socialLink, specializations, addresses, therapies, clientCategories, ...rest } = data;
-  return {
-    ...rest,
-    ...socialLink,
-    specializations: {
-      connect: specializations?.length ? mapIdArrayToIdObjects(specializations) : undefined,
-    },
-    clientCategoriesOnSpecialists: {
-      create: clientCategories?.length ? transformClientCategories(clientCategories) : undefined,
-    },
-    addresses: {
-      create: addresses?.length ? transformAddresses(addresses) : undefined,
-    },
-    therapies: {
-      connect: therapies?.length ? mapIdArrayToIdObjects(therapies) : undefined,
-    },
-  };
-};
+export const transformData = ({
+  clientCategories,
+  socialLink,
+  specializations,
+  addresses,
+  therapies,
+  therapyPricesCreate,
+  ...rest
+}) => ({
+  ...rest,
+  ...socialLink,
+  specializations: {
+    connect: specializations?.length ? toConnectList(specializations) : undefined,
+  },
+  clientCategoriesOnSpecialists: {
+    create: clientCategories?.length ? transformClientCategories(clientCategories) : undefined,
+  },
+  addresses: {
+    create: addresses?.length ? transformAddresses(addresses) : undefined,
+  },
+  therapies: {
+    connect: therapies?.length ? toConnectList(therapies) : undefined,
+  },
+  therapyPrices: {
+    create:
+      therapies?.length && therapyPricesCreate ? transformTherapyPrices(therapies, therapyPricesCreate) : undefined,
+  },
+  therapyPricesCreate: undefined,
+});

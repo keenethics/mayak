@@ -16,6 +16,7 @@ function nullable(value) {
 
 // returns array of unique objects with id field
 function uniqueObjectsWithId(instances) {
+  if (instances.length === 0) return [];
   return faker.helpers
     .uniqueArray(
       instances.map(s => s.id),
@@ -50,6 +51,21 @@ function generateSocialMediaLinks() {
   );
 }
 
+function randomTherapyPrices(selectedTherapies) {
+  const therapyPrices = [];
+  selectedTherapies.forEach(el => {
+    if (Math.random() > 0.5) {
+      therapyPrices.push({
+        price: faker.number.int({ min: 0, max: 20 }) * 100,
+        therapy: {
+          connect: el,
+        },
+      });
+    }
+  });
+  return therapyPrices;
+}
+
 function randomSpecialist({ districts, specializations, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
@@ -61,7 +77,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
         .map((_, i) => randomAddress(districts, i === 0)),
     };
   }
-
+  const specialistTherapies = uniqueObjectsWithId(therapies);
   const phoneRegexp = '+380[0-9]{9}';
 
   const socialMediaLinks = generateSocialMediaLinks();
@@ -80,7 +96,10 @@ function randomSpecialist({ districts, specializations, therapies }) {
     formatOfWork,
     addresses,
     therapies: {
-      connect: uniqueObjectsWithId(therapies),
+      connect: specialistTherapies,
+    },
+    therapyPrices: {
+      create: randomTherapyPrices(specialistTherapies),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
@@ -230,7 +249,7 @@ async function main() {
       });
     });
   }
-  for (let i = 0; i < 10; i += 1) {
+  for (let i = 0; i <= 100; i += 1) {
     // eslint-disable-next-line no-await-in-loop
     await prisma.event.create({
       data: randomEvent({ tags, link }),
