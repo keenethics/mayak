@@ -28,7 +28,7 @@ export function DistrictList({ list, className }) {
         const linkStyle = clsx(isSelected && 'pointer-events-none cursor-none');
 
         return (
-          <Slide key={id} onClick={() => handleClick(index)} className="mr-4 last:mr-0">
+          <Slide key={id} onClick={() => handleClick(index)} className="mr-3.5 last:mr-0">
             <Link href={`/specialist?district=${id}`} className={linkStyle} tabIndex={-1}>
               <PillButton
                 variant="transparent"
