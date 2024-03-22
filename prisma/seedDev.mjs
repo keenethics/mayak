@@ -66,7 +66,7 @@ function randomTherapyPrices(selectedTherapies) {
   return therapyPrices;
 }
 
-function randomSpecialist({ districts, specializations, therapies }) {
+function randomSpecialist({ districts, specializations, therapies, specializationMethods }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
@@ -79,12 +79,18 @@ function randomSpecialist({ districts, specializations, therapies }) {
   }
   const specialistTherapies = uniqueObjectsWithId(therapies);
   const phoneRegexp = '+380[0-9]{9}';
-
   const socialMediaLinks = generateSocialMediaLinks();
+  const specializationsIds = uniqueObjectsWithId(specializations);
+  const specializationMethodsIds = uniqueObjectsWithId(
+    specializationMethods.filter(method => specializationsIds.find(s => s.id === method.specializationId)),
+  );
 
   return {
     specializations: {
-      connect: uniqueObjectsWithId(specializations),
+      connect: specializationsIds,
+    },
+    specializationMethods: {
+      connect: specializationMethodsIds,
     },
     // take name of corresponding gender
     firstName: faker.person.firstName(gender.toLowerCase()),
@@ -221,6 +227,7 @@ async function main() {
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });
+  const specializationMethods = await prisma.method.findMany();
   const districts = await prisma.district.findMany({ select: { id: true } });
 
   const tags = await prisma.eventTag.findMany({ select: { id: true } });
@@ -230,7 +237,7 @@ async function main() {
   // createMany does not support records with relations
   for (let i = 0; i < 10; i += 1) {
     // for instead of Promise.all to avoid overloading the database pool
-    const specialistData = randomSpecialist({ districts, specializations, therapies });
+    const specialistData = randomSpecialist({ districts, specializations, therapies, specializationMethods });
     // eslint-disable-next-line no-await-in-loop
     await prisma.$transaction(async trx => {
       const specialist = await trx.specialist.create({
