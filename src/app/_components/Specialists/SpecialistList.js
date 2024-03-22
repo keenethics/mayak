@@ -9,7 +9,7 @@ import { useSearchParams } from 'next/navigation';
 
 function getProperEnding(count) {
   const lastDigit = count % 10;
-  if (count === 11 || count === 12 || count === 13) {
+  if (count === 11 || count === 12 || count === 13 || count === 14) {
     return 'результатів';
   }
   if (lastDigit === 2 || lastDigit === 3 || lastDigit === 4) {
