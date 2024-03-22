@@ -32,6 +32,7 @@ const handler = withErrorHandlerAndAuth(async req => {
         addresses: true,
         districts: true,
         specializations: true,
+        specializationMethods: true,
         therapies: true,
         therapyPrices: true,
         type: true,

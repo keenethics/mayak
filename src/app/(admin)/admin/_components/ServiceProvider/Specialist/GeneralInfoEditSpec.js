@@ -1,26 +1,14 @@
-import { CheckboxGroupInput, required, TextInput, useGetList } from 'react-admin';
+import { required, TextInput } from 'react-admin';
 import PropTypes from 'prop-types';
-import { FORM_TYPES, RESOURCES } from '@admin/_lib/consts';
+import { FORM_TYPES } from '@admin/_lib/consts';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import { FaAngleDown } from 'react-icons/fa';
 import { useWatch } from 'react-hook-form';
-import { SpecializationsSelect } from './SpecializationsSelect';
+import { SpecializationsSelect } from '@admin/components/ServiceProvider/Specialist/SpecializationsSelect';
+import { SpecializationMethodsList } from '@admin/components/ServiceProvider/Specialist/SpecializationMethodsList';
 
 export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
   const specializationsNameToWatch = type === FORM_TYPES.create ? 'specializations' : 'specializationsIds';
-  const specializationsIdList = useWatch({ name: specializationsNameToWatch });
-
-  const { data: specializations } = useGetList(RESOURCES.specialization);
-
-  const specializationsWithMethodsList = specializationsIdList
-    ? specializations?.filter(
-      ({ id, name }) =>
-        specializationsIdList?.includes(id) &&
-          (name.toLowerCase() === 'психолог' || name.toLowerCase() === 'психотерапевт'),
-    )
-    : [];
-  specializationsIdList?.filter(({ id }) => specializations.find(s => s.id === id));
+  const selectedSpecializationsIdList = useWatch({ name: specializationsNameToWatch });
 
   return (
     <FormFieldWrapper title="Основна інформація">
@@ -30,29 +18,7 @@ export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
         <TextInput key="surname" name="surname" type="text" label="По-батькові" />
       </div>
       <SpecializationsSelect type={type} label="Спеціалізації" fullWidth />
-      {specializationsWithMethodsList?.map(specialization => {
-        const label = specialization.name.toLowerCase();
-
-        return (
-          <Accordion className="mb-6" key={specialization.id}>
-            <AccordionSummary expandIcon={<FaAngleDown />}>Методи і напрямки для {label}a</AccordionSummary>
-            <AccordionDetails>
-              <CheckboxGroupInput
-                source="method"
-                name="spezialization.method"
-                choices={[
-                  { id: 'u001', name: 'Арт-терапія' },
-                  { id: 'u002', name: 'Гештальт терапія' },
-                  { id: 'u003', name: 'Десенсибілізація та репроцесуалізація рухом очей (EMDR)' },
-                  { id: 'u004', name: 'Діалектично-поведінкова терапія' },
-                ]}
-                row={false}
-                label={false}
-              />
-            </AccordionDetails>
-          </Accordion>
-        );
-      })}
+      <SpecializationMethodsList type={type} specializationsIdList={selectedSpecializationsIdList} />
     </FormFieldWrapper>
   );
 }

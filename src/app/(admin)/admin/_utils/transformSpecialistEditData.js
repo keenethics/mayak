@@ -2,6 +2,7 @@ import { toConnectList, transformEditData, transformTherapyPrices } from './comm
 
 export function transformSpecialistEditData({
   specializationsIds,
+  specializationMethodsIds,
   socialLink,
   therapyPricesEdit,
   therapyPrices,
@@ -9,6 +10,8 @@ export function transformSpecialistEditData({
   ...rest
 }) {
   const specializationsToConnect = toConnectList(specializationsIds);
+  const specializationMethodsToConnect = toConnectList([].concat(...Object.values(specializationMethodsIds)));
+
   const base = transformEditData({ ...rest, therapiesIds, therapyPrices });
 
   const newTherapiesPrices = transformTherapyPrices(therapiesIds, therapyPricesEdit);
@@ -24,6 +27,10 @@ export function transformSpecialistEditData({
     specializations: {
       set: [],
       connect: specializationsToConnect,
+    },
+    specializationMethods: {
+      set: [],
+      connect: specializationMethodsToConnect,
     },
     specializationsIds: undefined,
   };
