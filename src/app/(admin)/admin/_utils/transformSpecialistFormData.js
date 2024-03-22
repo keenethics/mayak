@@ -1,4 +1,4 @@
-const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
+import { toConnectList, transformTherapyPrices } from './common';
 
 const transformAddresses = placesArray =>
   placesArray.map(place => ({
@@ -6,16 +6,21 @@ const transformAddresses = placesArray =>
     district: { connect: { id: place.district } },
   }));
 
-export const transformData = ({ socialLink, specializations, addresses, therapies, ...rest }) => ({
+export const transformData = ({ socialLink, specializations, addresses, therapies, therapyPricesCreate, ...rest }) => ({
   ...rest,
   ...socialLink,
   specializations: {
-    connect: specializations?.length ? mapIdArrayToIdObjects(specializations) : undefined,
+    connect: specializations?.length ? toConnectList(specializations) : undefined,
   },
   addresses: {
     create: addresses?.length ? transformAddresses(addresses) : undefined,
   },
   therapies: {
-    connect: therapies?.length ? mapIdArrayToIdObjects(therapies) : undefined,
+    connect: therapies?.length ? toConnectList(therapies) : undefined,
   },
+  therapyPrices: {
+    create:
+      therapies?.length && therapyPricesCreate ? transformTherapyPrices(therapies, therapyPricesCreate) : undefined,
+  },
+  therapyPricesCreate: undefined,
 });
