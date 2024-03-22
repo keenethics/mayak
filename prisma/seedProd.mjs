@@ -131,6 +131,9 @@ const psychotherapyMethods = [
     description:
       'BSFT - акцент на вирішенні конкретних проблем, актуалізації ресурсів. Фокус завжди спрямований на мету, а не на проблеми довкола',
   },
+  {
+    title: 'Інші',
+  },
 ];
 
 const psychologyMethods = [
@@ -197,6 +200,9 @@ const psychologyMethods = [
   {
     title: 'Корекційна психологія',
     description: 'Фахівець, який спеціалізується на виявленні та корекції психологічних недоліків.',
+  },
+  {
+    title: 'Інше',
   },
 ];
 specializations.push(

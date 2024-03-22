@@ -8,7 +8,7 @@ export function MethodsList() {
         <TextField source="specialization.name" label="Спеціалізація" />
         <TextField source="title" label="Назва" />
         <TextField source="description" label="Опис" />
-        <EditButton />
+        <EditButton label="Редагувати" />
         <DeleteWithConfirmButton
           confirmContent="Ви впевнені?"
           confirmTitle="Дані будуть видалені із бази."

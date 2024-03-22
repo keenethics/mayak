@@ -7,6 +7,9 @@ import {
   required,
   useDataProvider,
   useRecordContext,
+  DeleteWithConfirmButton,
+  SaveButton,
+  Toolbar,
 } from 'react-admin';
 import { RESOURCES } from '@admin/_lib/consts';
 
@@ -54,10 +57,23 @@ export function MethodsCreate() {
   );
 }
 
+function CustomToolbar() {
+  return (
+    <Toolbar className="flex justify-between">
+      <SaveButton />
+      <DeleteWithConfirmButton
+        confirmContent="Ви впевнені?"
+        confirmTitle="Дані будуть видалені із бази."
+        confirmColor="warning"
+        label="Видалити"
+      />
+    </Toolbar>
+  );
+}
 export function MethodsEdit() {
   return (
     <Edit redirect="list">
-      <SimpleForm>
+      <SimpleForm toolbar={<CustomToolbar />}>
         <FormBase />
       </SimpleForm>
     </Edit>
