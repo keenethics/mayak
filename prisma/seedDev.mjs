@@ -66,12 +66,17 @@ function randomSpecialist({ districts, specializations, therapies, specializatio
 
   const socialMediaLinks = generateSocialMediaLinks();
 
+  const specializationsIds = uniqueObjectsWithId(specializations);
+  const specializationMethodsIds = uniqueObjectsWithId(
+    specializationMethods.filter(method => specializationsIds.find(s => s.id === method.specializationId)),
+  );
+
   return {
     specializations: {
-      connect: uniqueObjectsWithId(specializations),
+      connect: specializationsIds,
     },
     specializationMethods: {
-      connect: uniqueObjectsWithId(specializationMethods),
+      connect: specializationMethodsIds,
     },
     // take name of corresponding gender
     firstName: faker.person.firstName(gender.toLowerCase()),
@@ -205,9 +210,7 @@ async function main() {
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });
-  const specializationMethods = await prisma.method.findMany({
-    select: { id: true },
-  });
+  const specializationMethods = await prisma.method.findMany();
   const districts = await prisma.district.findMany({ select: { id: true } });
 
   const tags = await prisma.eventTag.findMany({ select: { id: true } });
