@@ -21,6 +21,7 @@ export function CardOrganization({ organization, className, extended = false }) 
     id,
     name,
     type,
+    isInclusiveSpace,
     expertSpecializations,
     yearsOnMarket,
     formatOfWork,
@@ -45,6 +46,7 @@ export function CardOrganization({ organization, className, extended = false }) 
     yearsOfExperience: yearsOnMarket,
     isFreeReception,
     formatOfWork,
+    isInclusiveSpace,
     specialistType: 'organization',
   });
   const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
