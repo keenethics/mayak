@@ -35,3 +35,4 @@ export { default as TimeIcon } from '@icons/timeFilled.svg';
 export { default as ArrowIconDown } from '@icons/arrowDown.svg';
 export { default as ArrowIconUp } from '@icons/arrowDown.svg';
 export { default as Ellipse } from '@icons/ellipse.svg';
+export { default as Tick } from '@icons/tickIcon.svg';
