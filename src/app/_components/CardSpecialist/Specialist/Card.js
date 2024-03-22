@@ -50,7 +50,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
 
   return (
-    <CardWrapper className={className} id={id}>
+    <CardWrapper className={className} id={id} type="specialist">
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
         <ProfileImage gender={gender} className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
           <SocialsList socials={socials} className="absolute bottom-4" />

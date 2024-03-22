@@ -49,7 +49,7 @@ export function CardOrganization({ organization, className, extended = false }) 
   const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
 
   return (
-    <CardWrapper className={className} id={id}>
+    <CardWrapper className={className} id={id} type="organization">
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
         <ProfileImage className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
           <SocialsList socials={socials} className="absolute bottom-4" />
