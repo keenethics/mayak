@@ -8,8 +8,8 @@ import { AddressesForm } from '@admin/components/ServiceProvider/AddressesForm';
 import { ContactsList } from '@admin/components/ContactsList';
 import { SocialLinks } from '@admin/components/ServiceProvider/SocialLinks';
 import { PSYCHOLOGIST, PSYCHOTHERAPIST, RESOURCES } from '@admin/_lib/consts';
-import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
-import { DetailsEditSpec } from './DetailsEditSpec';
+import { GeneralInfoEditSpec } from '@admin/components/ServiceProvider/Specialist/GeneralInfoEditSpec';
+import { DetailsEditSpec } from '@admin/components/ServiceProvider/Specialist/DetailsEditSpec';
 
 export function SpecialistEdit() {
   const { data: specializationsData } = useGetList(RESOURCES.specialization);
@@ -28,7 +28,7 @@ export function SpecialistEdit() {
       : [];
 
     return transformSpecialistEditData({
-      rest,
+      ...rest,
       specializationsIds,
       specializationMethodsIds: {
         psychologist: psychologistMethodsList,

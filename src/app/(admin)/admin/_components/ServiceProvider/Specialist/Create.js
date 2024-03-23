@@ -12,8 +12,8 @@ import { AddressesForm } from '@admin/components/ServiceProvider/AddressesForm';
 import { useRedirectToList } from '@admin/components/ServiceProvider/hooks';
 import { ContactsList } from '@admin/components/ContactsList';
 import { SocialLinks } from '@admin/components/ServiceProvider/SocialLinks';
-import { GeneralInfoEditSpec } from './GeneralInfoEditSpec';
-import { DetailsEditSpec } from './DetailsEditSpec';
+import { GeneralInfoEditSpec } from '@admin/components/ServiceProvider/Specialist/GeneralInfoEditSpec';
+import { DetailsEditSpec } from '@admin/components/ServiceProvider/Specialist/DetailsEditSpec';
 
 export function SpecialistCreate() {
   const { handleError, handleSuccess } = useRedirectToList({
