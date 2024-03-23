@@ -18,9 +18,9 @@ export function SearchInputField() {
   useEffect(() => {
     setIsInputFocused(inputFocused);
     if (inputFocused) {
-      setIsAutoCompleteOpen(true);
+      setIsAutoCompleteOpen(query?.length >= 1);
     }
-  }, [inputFocused, setIsInputFocused, setIsAutoCompleteOpen]);
+  }, [query, inputFocused, setIsInputFocused, setIsAutoCompleteOpen]);
 
   return (
     <input

@@ -21,7 +21,7 @@ export function OverlayList({ listItems, className, isLoading, maxItemCount, onI
   const items = listItems.map(item => (
     <li
       key={item.id}
-      className="rounded-full p-2 pl-8 hover:bg-gray-200 hover:font-bold hover:text-primary-800"
+      className="cursor-pointer rounded-full p-2 pl-8 hover:bg-gray-200 hover:font-bold hover:text-primary-800"
       onClick={item.onClick}
     >
       {item.title}

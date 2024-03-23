@@ -9,8 +9,9 @@ export function createSearchEntryFilter(entityFilter, query, searchType) {
   }
 
   switch (searchType) {
-    case 'request':
+    case 'request': {
       Object.assign(entityFilter, {
+        ...entityFilter,
         supportFocuses: {
           some: {
             requests: {
@@ -25,6 +26,8 @@ export function createSearchEntryFilter(entityFilter, query, searchType) {
         },
       });
       return defaultFilter;
+    }
+
     case 'specialist':
       return {
         sortString: {
@@ -47,34 +50,34 @@ export function createSearchEntryFilter(entityFilter, query, searchType) {
 }
 
 export function createSearchSyncFilter(query, searchType) {
-  return createSearchEntryFilter({}, query, searchType);
+  return createSearchEntryFilter({ isActive: true }, query, searchType);
 }
 
-export function createEntityFilter({ type, request, format, districts }) {
+export function createEntityFilter({ type, requests, format, districts }) {
   return {
-    AND: {
-      isActive: true,
-      therapies: type && {
-        some: {
-          type,
-        },
+    isActive: true,
+    therapies: type && {
+      some: {
+        type,
       },
-      supportFocuses: request && {
-        some: {
-          requests: {
-            some: {
+    },
+    supportFocuses: requests && {
+      some: {
+        requests: {
+          some: {
+            OR: requests.map(request => ({
               id: request,
-            },
+            })),
           },
         },
       },
-      OR: format && [{ formatOfWork: FormatOfWork.BOTH }, { formatOfWork: format }],
-      addresses: districts && {
-        some: {
-          OR: districts.map(id => ({
-            districtId: id,
-          })),
-        },
+    },
+    OR: format && [{ formatOfWork: FormatOfWork.BOTH }, { formatOfWork: format }],
+    addresses: districts && {
+      some: {
+        OR: districts.map(id => ({
+          districtId: id,
+        })),
       },
     },
   };

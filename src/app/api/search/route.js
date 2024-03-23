@@ -17,7 +17,6 @@ export const handler = withErrorHandler(async req => {
   const searchEntryFilter = createSearchEntryFilter(entityFilter, query, searchType);
 
   const totalCount = await prisma.searchEntry.count({ where: searchEntryFilter });
-
   const sharedInclude = {
     therapies: { select: { title: true } },
     addresses: {

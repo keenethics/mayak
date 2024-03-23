@@ -63,7 +63,7 @@ export function DistrictFilter() {
   const districtsInUrl = useSearchParams().getAll('district');
 
   return (
-    <FilterBase filterText="Райони" count={districtsInUrl.length}>
+    <FilterBase filterText="Райони" count={districtsInUrl?.length || 0}>
       <DistrictList />
     </FilterBase>
   );

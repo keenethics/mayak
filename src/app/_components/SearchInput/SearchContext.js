@@ -53,10 +53,6 @@ export function SearchProvider({ children }) {
     setSearchType(searchTypeParam || '');
   }, [searchTypeParam]);
 
-  useEffect(() => {
-    setIsAutoCompleteOpen(query !== '');
-  }, [query]);
-
   return (
     <SearchContext.Provider
       value={{
