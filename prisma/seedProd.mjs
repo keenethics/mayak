@@ -202,7 +202,7 @@ const psychologyMethods = [
     description: 'Фахівець, який спеціалізується на виявленні та корекції психологічних недоліків.',
   },
   {
-    title: 'Інше',
+    title: 'Інші',
   },
 ];
 specializations.push(

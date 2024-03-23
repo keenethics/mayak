@@ -78,7 +78,6 @@ const editDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializationsIds: zStringArray,
-  // specializationMethods: z.string().array(),
   specializationMethodsIds: z.object({
     psychologist: z.string().array().nullish(),
     psychotherapist: z.string().array().nullish(),
