@@ -95,9 +95,10 @@ export function SupportFocusesSelect() {
     [therapiesList],
   );
 
+  const selectedAllTerapies = supportFocuses?.length === therapiesList?.length;
   return (
     <ArrayInput source="supportFocuses" isLoading={therapiesLoading} label="Типи терапій">
-      <SimpleFormIterator fullWidth disableReordering={true}>
+      <SimpleFormIterator fullWidth disableReordering={true} disableAdd={selectedAllTerapies}>
         <FormDataConsumer>
           {({ scopedFormData, getSource }) => {
             if (!scopedFormData) return null;
