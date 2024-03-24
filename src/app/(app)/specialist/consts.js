@@ -28,6 +28,15 @@ export const organizationInclude = {
     },
   },
   therapies: true,
+  therapyPrices: {
+    include: {
+      therapy: {
+        select: {
+          title: true,
+        },
+      },
+    },
+  },
   addresses: {
     include: {
       district: true,

@@ -47,8 +47,8 @@ export function SpecialistShow() {
                 const therapyPrice = therapyPrices?.find(el => el.therapy.id === therapy.id);
                 return (
                   <div key={therapy.id} className="flex justify-between px-3 py-2">
-                    <p>{therapy.title}</p>{' '}
-                    <p>{therapyPrice ? `Ціна від ${therapyPrice.price} грн / год` : 'Не зазначено'}</p>
+                    <p>{therapy.title}</p>
+                    <p>{therapyPrice ? `Ціна від ${therapyPrice.price} грн / год.` : 'Не зазначено'}</p>
                   </div>
                 );
               })}

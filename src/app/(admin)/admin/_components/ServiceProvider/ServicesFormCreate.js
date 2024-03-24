@@ -9,10 +9,6 @@ export function ServicesFormCreate({ therapiesLoading, therapiesChoices, unneces
       {({ formData }) => {
         const chosenCreateTherapies = therapiesChoices?.filter(el => formData.therapies?.indexOf(el.id) !== -1);
 
-        // used to display the therapy prices only on specialist forms
-        // TODO: remove once unnecessary
-        const isOrganization = 'name' in formData && !('lastName' in formData);
-
         return (
           <>
             <SelectArrayInput
@@ -24,21 +20,20 @@ export function ServicesFormCreate({ therapiesLoading, therapiesChoices, unneces
               validate={unnecessaryForDraft}
               className="w-full"
             />
-            {!isOrganization && (
-              <Accordion disabled={!formData.therapies || formData.therapies.length === 0}>
-                <AccordionSummary expandIcon={<FaAngleDown />}>Ціни на терапії</AccordionSummary>
-                <AccordionDetails>
-                  {chosenCreateTherapies?.map(el => (
-                    <NumberInput
-                      fullWidth
-                      key={el.id}
-                      source={`therapyPricesCreate.${el.id}`}
-                      label={`Ціна для ${el.name} від Х грн.год`}
-                    />
-                  ))}
-                </AccordionDetails>
-              </Accordion>
-            )}
+
+            <Accordion disabled={!formData.therapies || formData.therapies.length === 0}>
+              <AccordionSummary expandIcon={<FaAngleDown />}>Ціни на терапії</AccordionSummary>
+              <AccordionDetails>
+                {chosenCreateTherapies?.map(el => (
+                  <NumberInput
+                    fullWidth
+                    key={el.id}
+                    source={`therapyPricesCreate.${el.id}`}
+                    label={`Ціна для ${el.name} від Х грн / год.`}
+                  />
+                ))}
+              </AccordionDetails>
+            </Accordion>
           </>
         );
       }}

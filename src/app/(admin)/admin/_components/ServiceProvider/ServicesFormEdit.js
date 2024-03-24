@@ -9,10 +9,6 @@ export function ServicesFormEdit({ therapiesChoices, unnecessaryForDraft }) {
       {({ formData }) => {
         const chosenEditTherapies = therapiesChoices?.filter(el => formData.therapiesIds?.indexOf(el.id) !== -1);
 
-        // used to display the therapy prices only on specialist forms
-        // TODO: remove once unnecessary
-        const isOrganization = 'name' in formData && !('lastName' in formData);
-
         return (
           <>
             <ReferenceArrayInput source="therapiesIds" reference="Therapy">
@@ -23,24 +19,23 @@ export function ServicesFormEdit({ therapiesChoices, unnecessaryForDraft }) {
                 validate={unnecessaryForDraft}
               />
             </ReferenceArrayInput>
-            {!isOrganization && (
-              <Accordion disabled={!formData.therapiesIds || formData.therapiesIds.length === 0}>
-                <AccordionSummary expandIcon={<FaAngleDown />}>Ціни на терапії</AccordionSummary>
-                <AccordionDetails>
-                  {chosenEditTherapies?.map(el => (
-                    <NumberInput
-                      fullWidth
-                      key={el.id}
-                      defaultValue={
-                        formData.therapyPrices?.find(therapyPrice => therapyPrice.therapy.id === el.id)?.price
-                      }
-                      source={`therapyPricesEdit.${el.id}`}
-                      label={`Ціна для ${el.name} від Х грн.год`}
-                    />
-                  ))}
-                </AccordionDetails>
-              </Accordion>
-            )}
+
+            <Accordion disabled={!formData.therapiesIds || formData.therapiesIds.length === 0}>
+              <AccordionSummary expandIcon={<FaAngleDown />}>Ціни на терапії</AccordionSummary>
+              <AccordionDetails>
+                {chosenEditTherapies?.map(el => (
+                  <NumberInput
+                    fullWidth
+                    key={el.id}
+                    defaultValue={
+                      formData.therapyPrices?.find(therapyPrice => therapyPrice.therapy.id === el.id)?.price
+                    }
+                    source={`therapyPricesEdit.${el.id}`}
+                    label={`Ціна для ${el.name} від Х грн / год.`}
+                  />
+                ))}
+              </AccordionDetails>
+            </Accordion>
           </>
         );
       }}
