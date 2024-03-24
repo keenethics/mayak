@@ -33,6 +33,8 @@ export const MODEL_INCLUDES = {
         isPrimary: true,
       },
     },
+    clientsWorkingWith: { select: { id: true, name: true } },
+    clientsNotWorkingWith: { select: { id: true, name: true } },
   },
   [RESOURCES.organization]: {
     therapies: { select: { id: true, type: true, title: true } },
@@ -74,6 +76,10 @@ export function transformServiceProvider(instance, modelName) {
   }
   // eslint-disable-next-line no-param-reassign
   instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
+  // eslint-disable-next-line no-param-reassign
+  instance.clientsWorkingWithIds = instance.clientsWorkingWith.map(({ id }) => id);
+  // eslint-disable-next-line no-param-reassign
+  instance.clientsNotWorkingWithIds = instance.clientsNotWorkingWith.map(({ id }) => id);
   // eslint-disable-next-line no-param-reassign
   instance.addressesIds = instance.addresses.map(address => address.id);
   // eslint-disable-next-line no-param-reassign

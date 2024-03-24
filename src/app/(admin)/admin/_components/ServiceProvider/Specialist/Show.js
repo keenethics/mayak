@@ -21,6 +21,16 @@ export function SpecialistShow() {
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
+        <ArrayField label="Працює з наступними клієнтами" source="clientsWorkingWith">
+          <SingleFieldList linkType={false}>
+            <ChipField source="name" size="small" />
+          </SingleFieldList>
+        </ArrayField>
+        <ArrayField label="Не працює з наступними клієнтами" source="clientsNotWorkingWith">
+          <SingleFieldList linkType={false}>
+            <ChipField source="name" size="small" />
+          </SingleFieldList>
+        </ArrayField>
         <TextField label="Ім'я" source="firstName" />
         <TextField label="Прізвище" source="lastName" />
         <TextField label="По-батькові" source="surname" />

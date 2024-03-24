@@ -1,8 +1,11 @@
-import { TextInput, required } from 'react-admin';
+'use client';
+
+import { required, TextInput } from 'react-admin';
 import PropTypes from 'prop-types';
 import { FORM_TYPES } from '@admin/_lib/consts';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
-import { SpecializationsSelect } from './SpecializationsSelect';
+import { SpecializationsSelect } from '@admin/components/ServiceProvider/Specialist/SpecializationsSelect';
+import { ClientCategoriesSelect } from '@admin/components/ServiceProvider/ClientCategoriesSelect';
 
 export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
   return (
@@ -13,6 +16,7 @@ export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
         <TextInput key="surname" name="surname" type="text" label="По-батькові" />
       </div>
       <SpecializationsSelect type={type} label="Спеціалізації" fullWidth />
+      <ClientCategoriesSelect type={type} />
     </FormFieldWrapper>
   );
 }

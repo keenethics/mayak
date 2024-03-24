@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { Gender } from '@prisma/client';
 import {
-  MESSAGES,
   createValidationSchema,
+  MESSAGES,
   singlePrimaryAddressRefine,
   specialistCore,
   zCreateAddressSchema,
@@ -34,6 +34,8 @@ const restCreateProps = zSpecialistSchema.extend({
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
   therapies: zStringArray,
   therapyPricesCreate: z.record(z.string(), z.any()).nullish(),
+  // clientsWorkingWith: z.string().array().default([]),
+  // clientsNotWorkingWith: z.string().array().default([]),
 });
 
 const createDefaultProps = z.object({
@@ -71,6 +73,8 @@ const restEditProps = zSpecialistSchema.extend({
     }),
   ),
   therapyPricesEdit: z.record(z.string(), z.any()),
+  clientsWorkingWithIds: z.string().array().default([]),
+  clientsNotWorkingWithIds: z.string().array().default([]),
 });
 
 const editDefaultProps = z.object({

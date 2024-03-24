@@ -66,7 +66,15 @@ function randomTherapyPrices(selectedTherapies) {
   return therapyPrices;
 }
 
-function randomSpecialist({ districts, specializations, therapies }) {
+function setClientCategories(categories) {
+  const categoriesIds = categories.map(c => ({ id: c.id })).sort(() => Math.random() - 0.5);
+  return ({
+    clientsWorkingWith: [categoriesIds[0]],
+    clientsNotWorkingWith: [categoriesIds[1]],
+  });
+}
+
+function randomSpecialist({ districts, specializations, therapies, clientCategories }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
@@ -81,6 +89,10 @@ function randomSpecialist({ districts, specializations, therapies }) {
   const phoneRegexp = '+380[0-9]{9}';
 
   const socialMediaLinks = generateSocialMediaLinks();
+
+  const { clientsWorkingWith, clientsNotWorkingWith } = setClientCategories(clientCategories);
+
+
 
   return {
     specializations: {
@@ -108,6 +120,12 @@ function randomSpecialist({ districts, specializations, therapies }) {
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
     ...socialMediaLinks,
+    clientsWorkingWith: {
+      connect: clientsWorkingWith,
+    },
+    clientsNotWorkingWith: {
+      connect: clientsNotWorkingWith,
+    },
   };
 }
 
@@ -221,6 +239,11 @@ async function main() {
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });
+
+  const clientCategories = await prisma.clientCategory.findMany({
+    select: { id: true },
+  });
+
   const districts = await prisma.district.findMany({ select: { id: true } });
 
   const tags = await prisma.eventTag.findMany({ select: { id: true } });
@@ -230,7 +253,7 @@ async function main() {
   // createMany does not support records with relations
   for (let i = 0; i < 10; i += 1) {
     // for instead of Promise.all to avoid overloading the database pool
-    const specialistData = randomSpecialist({ districts, specializations, therapies });
+    const specialistData = randomSpecialist({ districts, specializations, therapies, clientCategories });
     // eslint-disable-next-line no-await-in-loop
     await prisma.$transaction(async trx => {
       const specialist = await trx.specialist.create({

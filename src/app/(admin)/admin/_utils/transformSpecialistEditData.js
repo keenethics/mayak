@@ -6,6 +6,7 @@ export function transformSpecialistEditData({
   therapyPricesEdit,
   therapyPrices,
   therapiesIds,
+  clients,
   ...rest
 }) {
   const specializationsToConnect = toConnectList(specializationsIds);
@@ -13,6 +14,9 @@ export function transformSpecialistEditData({
 
   const newTherapiesPrices = transformTherapyPrices(therapiesIds, therapyPricesEdit);
   const currentTherapyPrices = toConnectList(therapyPrices, el => el.id);
+
+  const clientsWorkingWith = toConnectList(clients.workingWith);
+  const clientsNotWorkingWith = toConnectList(clients.notWorkingWith);
 
   return {
     ...base,
@@ -26,5 +30,15 @@ export function transformSpecialistEditData({
       connect: specializationsToConnect,
     },
     specializationsIds: undefined,
+    clientsWorkingWith: {
+      set: [],
+      connect: clientsWorkingWith,
+    },
+    clientsWorkingWithIds: undefined,
+    clientsNotWorkingWith: {
+      set: [],
+      connect: clientsNotWorkingWith,
+    },
+    clientsNotWorkingWithIds: undefined,
   };
 }

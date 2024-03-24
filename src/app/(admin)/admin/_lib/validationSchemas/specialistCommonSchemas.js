@@ -69,6 +69,18 @@ export const specialistCore = z.object({
         не повинна перевищувати ${MAX_NUM_SELECTED_SOCIAL_LINKS}`,
       },
     ),
+  clients: z
+    .object({
+      workingWith: z.string().array().default([]),
+      notWorkingWith: z.string().array().default([]),
+    })
+    .refine(
+      clients => {
+        const hasDuplicates = clients.workingWith.some(item => clients.notWorkingWith.includes(item));
+        return !hasDuplicates;
+      },
+      { message: 'Категорія клієнта може бути вибрана лише один раз. Перевірте, чи не дублюються поля.' },
+    ),
 });
 
 export const zEditAddressSchema = z.object({
@@ -121,6 +133,7 @@ export const createValidationSchema = (schemaUnion, defaultProperties) =>
         'create',
       );
     }
+
     if (therapyPricesEdit) {
       mapInvalidTherapyPrices(
         therapiesIds?.filter(el => !zInteger.safeParse(therapyPricesEdit[el]).success),
@@ -142,5 +155,6 @@ export const createValidationSchema = (schemaUnion, defaultProperties) =>
         addresses: [],
       };
     }
+
     return schema;
   });

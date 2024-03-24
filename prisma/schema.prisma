@@ -31,32 +31,34 @@ enum EventPriceFormat {
 }
 
 model Specialist {
-  id                String           @id @default(uuid()) @db.Uuid
-  createdAt         DateTime         @default(now())
-  firstName         String           @db.VarChar(64)
-  lastName          String           @db.VarChar(64)
-  surname           String?          @db.VarChar(64)
-  specializations   Specialization[]
-  gender            Gender?
-  yearsOfExperience Int?             @db.SmallInt
-  formatOfWork      FormatOfWork?
-  addresses         Address[]
-  therapies         Therapy[]
-  therapyPrices     TherapyPrice[]
-  isFreeReception   Boolean?
-  description       String?          @db.Text
-  phone             String?          @db.VarChar(15)
-  email             String?          @db.VarChar(320)
-  website           String?          @db.Text
-  isActive          Boolean          @default(false)
-  instagram         String?          @db.Text
-  facebook          String?          @db.Text
-  youtube           String?          @db.Text
-  linkedin          String?          @db.Text
-  tiktok            String?          @db.Text
-  viber             String?          @db.Text
-  telegram          String?          @db.Text
-  searchEntry       SearchEntry?
+  id                    String           @id @default(uuid()) @db.Uuid
+  createdAt             DateTime         @default(now())
+  firstName             String           @db.VarChar(64)
+  lastName              String           @db.VarChar(64)
+  surname               String?          @db.VarChar(64)
+  specializations       Specialization[]
+  clientsWorkingWith    ClientCategory[] @relation(name: "SpecialistToClientCategoryWorkingWith")
+  clientsNotWorkingWith ClientCategory[] @relation(name: "SpecialistToClientCategoryNotWorkingWith")
+  gender                Gender?
+  yearsOfExperience     Int?             @db.SmallInt
+  formatOfWork          FormatOfWork?
+  addresses             Address[]
+  therapies             Therapy[]
+  therapyPrices         TherapyPrice[]
+  isFreeReception       Boolean?
+  description           String?          @db.Text
+  phone                 String?          @db.VarChar(15)
+  email                 String?          @db.VarChar(320)
+  website               String?          @db.Text
+  isActive              Boolean          @default(false)
+  instagram             String?          @db.Text
+  facebook              String?          @db.Text
+  youtube               String?          @db.Text
+  linkedin              String?          @db.Text
+  tiktok                String?          @db.Text
+  viber                 String?          @db.Text
+  telegram              String?          @db.Text
+  searchEntry           SearchEntry?
 
   @@map("specialist")
 }
@@ -241,4 +243,14 @@ model Method {
   specialization   Specialization @relation(fields: [specializationId], references: [id])
 
   @@map("method")
+}
+
+model ClientCategory {
+  id                        String       @id @default(uuid()) @db.Uuid
+  createdAt                 DateTime     @default(now())
+  name                      String       @unique @db.VarChar(64)
+  specialistsWorkingWith    Specialist[] @relation(name: "SpecialistToClientCategoryWorkingWith")
+  specialistsNotWorkingWith Specialist[] @relation(name: "SpecialistToClientCategoryNotWorkingWith")
+
+  @@map("client_category")
 }
