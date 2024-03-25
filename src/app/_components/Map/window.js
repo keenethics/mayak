@@ -8,16 +8,18 @@ import { mapPropTypes } from './prop-types';
 
 export default function MapWindow({ points, center, zoom }) {
   return (
-    <MapContainer center={center} zoom={zoom} scrollWheelZoom={false} style={{ height: '100%' }}>
+    <MapContainer center={center} zoom={zoom} scrollWheelZoom={false} className="h-full w-full">
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {points.map(({ title, latitude, longitude }) => (
-        <Marker position={[latitude, longitude]} key={title}>
-          {title && <Popup>{title}</Popup>}
-        </Marker>
-      ))}
+      {points
+        .filter(point => point.title)
+        .map(({ title, latitude, longitude }) => (
+          <Marker position={[latitude, longitude]} key={title}>
+            {title && <Popup>{title}</Popup>}
+          </Marker>
+        ))}
     </MapContainer>
   );
 }
