@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/db';
-import { specialistInclude } from '@/app/(app)/specialist/consts';
+import { organizationInclude, specialistInclude } from '@/app/(app)/specialist/consts';
 
 export const getSpecialistById = async ({ id }) =>
   prisma.specialist.findUnique({
@@ -24,4 +24,12 @@ export const sortSpecialistsByName = specialistList =>
     const next = b.lastName ? b.lastName : b.name;
 
     return cur.localeCompare(next);
+  });
+
+export const getOrganizationById = async ({ id }) =>
+  prisma.organization.findUnique({
+    where: {
+      id,
+    },
+    include: organizationInclude,
   });
