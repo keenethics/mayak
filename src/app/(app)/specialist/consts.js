@@ -5,6 +5,15 @@ export const specialistInclude = {
     },
   },
   therapies: true,
+  therapyPrices: {
+    include: {
+      therapy: {
+        select: {
+          title: true,
+        },
+      },
+    },
+  },
   addresses: {
     include: {
       district: true,

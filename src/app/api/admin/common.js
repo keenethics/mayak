@@ -12,6 +12,17 @@ export const MODEL_SEARCH_FIELDS = {
 export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
     therapies: { select: { id: true, type: true, title: true } },
+    therapyPrices: {
+      select: {
+        id: true,
+        price: true,
+        therapy: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    },
     specializations: { select: { id: true, name: true } },
     addresses: {
       select: {
@@ -43,6 +54,9 @@ export const MODEL_INCLUDES = {
   [RESOURCES.event]: {
     additionalLink: { select: { label: true, link: true } },
     tags: { select: { name: true } },
+  },
+  [RESOURCES.method]: {
+    specialization: { select: { name: true } },
   },
 };
 
