@@ -21,7 +21,7 @@ export function transformOrganizationEditData({
       create: newTherapiesPrices,
       deleteMany: currentTherapyPrices,
     },
-    organizationTypes: {
+    type: {
       set: [],
       connect: organizationTypesToConnect,
     },

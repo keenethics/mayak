@@ -17,7 +17,7 @@ export const transformOrganizationData = ({
 }) => ({
   ...rest,
   ...socialLink,
-  organizationTypesIds: { connect: organizationTypesIds?.map(el => ({ id: el })) },
+  type: { connect: organizationTypesIds?.map(el => ({ id: el })) },
 
   addresses: {
     create: addresses?.length ? transformAddresses(addresses) : undefined,

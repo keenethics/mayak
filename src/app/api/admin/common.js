@@ -37,6 +37,7 @@ export const MODEL_INCLUDES = {
   [RESOURCES.organization]: {
     therapies: { select: { id: true, type: true, title: true } },
     type: { select: { id: true, name: true } },
+    therapyPrices: { select: { id: true, price: true, therapy: { select: { id: true } } } },
     addresses: {
       select: {
         id: true,
