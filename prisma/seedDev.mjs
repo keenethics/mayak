@@ -82,7 +82,9 @@ function randomSpecialist({ districts, specializations, therapies, specializatio
   const socialMediaLinks = generateSocialMediaLinks();
   const specializationsIds = uniqueObjectsWithId(specializations);
   const specializationMethodsIds = uniqueObjectsWithId(
-    specializationMethods.filter(method => specializationsIds.find(s => s.id === method.specializationId)),
+    specializationMethods.filter(({ specializationId }) =>
+      specializationsIds.some(({ id }) => id === specializationId),
+    ),
   );
 
   return {
