@@ -15,4 +15,5 @@ export * from './CardModalWrapper';
 export * from './config';
 export * from './CardButton';
 export * from './TherapiesList';
+export * from './TherapyPrices';
 export * from './SpecializationsPanel';

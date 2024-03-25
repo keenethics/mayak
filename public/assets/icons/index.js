@@ -29,4 +29,5 @@ export { default as Logo } from '@icons/logo.svg';
 export { default as ArrowIconDown } from '@icons/arrowDown.svg';
 export { default as ArrowIconUp } from '@icons/arrowDown.svg';
 export { default as Ellipse } from '@icons/ellipse.svg';
+export { default as Tick } from '@icons/tickIcon.svg';
 export { default as InclusiveSpace } from '@icons/inclusiveSpace.svg';

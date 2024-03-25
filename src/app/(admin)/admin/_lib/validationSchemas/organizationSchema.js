@@ -32,6 +32,8 @@ const createDefaultProps = z.object({
 });
 
 const activeOrganizationSchema = restCreateProps.extend({
+  ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']),
+  isInclusiveSpace: z.boolean(),
   expertSpecializations: zStringArray,
   therapies: zStringArray,
   type: zStringArray.default([]),

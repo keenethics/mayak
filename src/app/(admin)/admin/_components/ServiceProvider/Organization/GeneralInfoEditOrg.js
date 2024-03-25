@@ -19,7 +19,7 @@ export function GeneralInfoEditOrg({ type = FORM_TYPES.create }) {
       </div>
       <OrganizationTypesSelect label="Типи організації" type={type} validate={unnecessaryForDraft} />
       <OwnershipTypeSelect label="Форма власності" validate={unnecessaryForDraft} />
-      <BooleanInput label="Інклюзивний Простір" source="isInclusiveSpace" validate={unnecessaryForDraft} />
+      <BooleanInput label="Інклюзивний простір" source="isInclusiveSpace" validate={unnecessaryForDraft} />
       <SpecializationsSelect
         source={{ create: 'expertSpecializations', update: 'expertSpecializationIds' }}
         type={type}

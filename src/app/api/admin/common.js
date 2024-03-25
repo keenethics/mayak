@@ -12,6 +12,17 @@ export const MODEL_SEARCH_FIELDS = {
 export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
     therapies: { select: { id: true, type: true, title: true } },
+    therapyPrices: {
+      select: {
+        id: true,
+        price: true,
+        therapy: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    },
     specializations: { select: { id: true, name: true } },
     addresses: {
       select: {
@@ -52,24 +63,20 @@ export function searchInputFilters(modelName, filter) {
 export function transformServiceProvider(instance, modelName) {
   // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
   // React Admin issues
+  /* eslint-disable no-param-reassign */
   if (modelName === RESOURCES.organization) {
-    // eslint-disable-next-line no-param-reassign
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
-    // eslint-disable-next-line no-param-reassign
     instance.expertSpecializationIds = instance.expertSpecializations.map(({ id }) => id);
   } else {
-    // eslint-disable-next-line no-param-reassign
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
-  // eslint-disable-next-line no-param-reassign
   instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
-  // eslint-disable-next-line no-param-reassign
   instance.addressesIds = instance.addresses.map(address => address.id);
-  // eslint-disable-next-line no-param-reassign
   instance.addresses = instance?.addresses?.map(address => ({
     ...address,
     districtId: address.district.id,
   }));
+  /* eslint-enable no-param-reassign */
 }
 
 export function withErrorHandlerAndAuth(handler) {

@@ -42,11 +42,27 @@ function randomAddress(districts, isPrimary) {
 function generateSocialMediaLinks() {
   const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
 
-  return Object.fromEntries(socialMediaList
-    .sort(() => Math.random() - 0.5)
-    .slice(0, Math.floor(Math.random() * 5) + 1)
-    .map(network => [network, faker.internet.url()])
+  return Object.fromEntries(
+    socialMediaList
+      .sort(() => Math.random() - 0.5)
+      .slice(0, Math.floor(Math.random() * 5) + 1)
+      .map(network => [network, faker.internet.url()]),
   );
+}
+
+function randomTherapyPrices(selectedTherapies) {
+  const therapyPrices = [];
+  selectedTherapies.forEach(el => {
+    if (Math.random() > 0.5) {
+      therapyPrices.push({
+        price: faker.number.int({ min: 0, max: 20 }) * 100,
+        therapy: {
+          connect: el,
+        },
+      });
+    }
+  });
+  return therapyPrices;
 }
 
 function randomSpecialist({ districts, specializations, therapies }) {
@@ -60,7 +76,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
         .map((_, i) => randomAddress(districts, i === 0)),
     };
   }
-
+  const specialistTherapies = uniqueObjectsWithId(therapies);
   const phoneRegexp = '+380[0-9]{9}';
 
   const socialMediaLinks = generateSocialMediaLinks();
@@ -79,7 +95,10 @@ function randomSpecialist({ districts, specializations, therapies }) {
     formatOfWork,
     addresses,
     therapies: {
-      connect: uniqueObjectsWithId(therapies),
+      connect: specialistTherapies,
+    },
+    therapyPrices: {
+      create: randomTherapyPrices(specialistTherapies),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
@@ -217,20 +236,15 @@ async function main() {
     // for instead of Promise.all to avoid overloading the database pool
     const specialistData = randomSpecialist({ districts, specializations, therapies });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.$transaction(async trx => {
-      const specialist = await trx.specialist.create({
-        data: specialistData,
-      });
-      await trx.searchEntry.create({
-        data: {
-          sortString: getSpecialistFullName(specialist),
-          specialist: {
-            connect: {
-              id: specialist.id,
-            },
+    await prisma.specialist.create({
+      data: {
+        ...specialistData,
+        searchEntry: {
+          create: {
+            sortString: getSpecialistFullName(specialistData),
           },
         },
-      });
+      },
     });
   }
   for (let i = 0; i < 10; i += 1) {
@@ -247,16 +261,12 @@ async function main() {
       expertSpecializations: specializations,
     });
     // eslint-disable-next-line no-await-in-loop
-    const organization = await prisma.organization.create({
-      data: organizationData,
-    });
-    // eslint-disable-next-line no-await-in-loop
-    await prisma.searchEntry.create({
+    await prisma.organization.create({
       data: {
-        sortString: organization.name,
-        organization: {
-          connect: {
-            id: organization.id,
+        ...organizationData,
+        searchEntry: {
+          create: {
+            sortString: organizationData.name,
           },
         },
       },
