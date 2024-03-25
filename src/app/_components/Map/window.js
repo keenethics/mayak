@@ -6,9 +6,9 @@ import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import { mapPropTypes } from './prop-types';
 
-export default function MapWindow({ points, center, zoom }) {
+export default function MapWindow({ points, center, zoom, className }) {
   return (
-    <MapContainer center={center} zoom={zoom} scrollWheelZoom={false} className="h-full w-full">
+    <MapContainer center={center} zoom={zoom} scrollWheelZoom={false} className={className}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
