@@ -71,16 +71,13 @@ function randomTherapyPrices(selectedTherapies) {
 
 function randomWorkTime() {
   const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-  let time;
-  let workTimeData;
-  let isDayOff;
   return {
     connectOrCreate: weekdays.map(weekDay => {
-      isDayOff = faker.datatype.boolean();
-      time = !isDayOff
+      const isDayOff = faker.datatype.boolean();
+      const time = !isDayOff
         ? `0${faker.number.int({ min: 7, max: 9 })}:00 - ${faker.number.int({ min: 17, max: 20 })}:00`
         : '';
-      workTimeData = { isDayOff, weekDay, time };
+      const workTimeData = { isDayOff, weekDay, time };
       return {
         create: workTimeData,
         where: { weekDay_time_isDayOff: workTimeData },

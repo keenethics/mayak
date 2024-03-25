@@ -29,8 +29,7 @@ export function isSpecifiedWorkTime(workTime) {
 }
 
 export function transformWorkTime(workTime) {
-  const specified = isSpecifiedWorkTime(workTime);
-  if (!specified) return [];
+  if (!isSpecifiedWorkTime(workTime)) return [];
   return workTime.map(day => {
     const { weekDay, time, isDayOff } = day;
     const workTimeObj = {
