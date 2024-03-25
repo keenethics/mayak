@@ -8,47 +8,55 @@ import presets from '@/app/styles/tailwind';
 
 export function ChipList({ id, className, items, wrap }) {
   const chipListRef = useRef(null);
+  const [maxChipWidth, setMaxChipWidth] = useState(0);
   const [truncateAt, setTruncateAt] = useState(null);
-
   const truncatedCount = items.length - truncateAt;
 
   useEffect(() => {
     const node = chipListRef.current;
+    const children = Array.from(node.children);
+    let maxChildWidth = 0;
+    children.forEach(el => {
+      maxChildWidth = Math.max(maxChildWidth, el.getBoundingClientRect().width);
+    });
+    setMaxChipWidth(maxChildWidth);
+  }, [items]);
 
+  useEffect(() => {
+    const node = chipListRef.current;
     const resizeHandler = () => {
       // don't truncate if wrapping is allowed
       if (wrap) {
         setTruncateAt(null);
         return;
       }
+      if (truncateAt === null) {
+        setTruncateAt(0);
+        return;
+      }
 
       const nodeRect = node.getBoundingClientRect();
       const children = Array.from(node.children);
+      const child = children[Math.min(items.length - 1, truncateAt)];
+      const childRect = child.getBoundingClientRect();
 
-      let i = 0;
-      let overflowIndex = -1;
-
-      while (i < children.length) {
-        const childRect = children[i].getBoundingClientRect();
-        if (childRect.right > nodeRect.right) {
-          overflowIndex = i;
-          break;
-        }
-        i += 1;
+      if (childRect.right < nodeRect.right - (maxChipWidth + 36)) {
+        setTruncateAt(state => Math.min(state + 1, items.length));
+      } else if (childRect.right > nodeRect.right) {
+        setTruncateAt(state => Math.max(state - 1, 0));
       }
-      setTruncateAt(overflowIndex === -1 ? null : overflowIndex - 1);
     };
 
     resizeHandler();
-    node.addEventListener('resize', resizeHandler);
+    window.addEventListener('resize', resizeHandler);
     return () => {
-      node.removeEventListener('resize', resizeHandler);
+      window.removeEventListener('resize', resizeHandler);
     };
-  }, [wrap]);
+  }, [wrap, truncateAt, items.length, maxChipWidth]);
 
   return (
     <ul ref={chipListRef} className={cn('flex w-full gap-2', wrap && 'flex-wrap', className)}>
-      {truncateAt === null ? (
+      {truncateAt >= items.length || truncateAt === null ? (
         items.map(el => (
           <ChipListItem key={el.id} name={el.name} color={el.color} textColor={el.textColor} icon={el.icon} />
         ))
