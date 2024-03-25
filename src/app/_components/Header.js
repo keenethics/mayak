@@ -45,7 +45,7 @@ export function Header() {
           'fixed top-0 z-10 w-full border-b-[1px] border-b-gray-300 bg-primary-100 px-4 py-4 lg:static lg:px-20',
         )}
       >
-        <Link href="/" aria-label="Reload main page on logo click" className={cn(basicLink)}>
+        <Link href="/" aria-label="Reload main page on logo click" className={basicLink}>
           <Logo
             alt="Mayak logo"
             aria-label="Mayak logo"

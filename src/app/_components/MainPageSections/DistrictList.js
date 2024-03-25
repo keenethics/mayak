@@ -6,13 +6,9 @@ import Link from 'next/link';
 import { Search, CheckMark } from '@icons';
 import { PillButton } from '@components/PillButton';
 import { Slide, Slider } from '@components/Slider';
-import { buttonColorVariant } from '@components/PillButton/style';
 import { cn } from '@utils/cn';
 
-const { semiorange } = buttonColorVariant.eventFilter;
-const activeButtonStyles = cn({
-  'pointer-events-none border-secondary-300 bg-secondary-300 font-semibold text-gray-900': semiorange.active,
-});
+const activeButtonStyles = 'pointer-events-none border-secondary-300 bg-secondary-300 font-semibold text-gray-900';
 const commonIconStyle = 'h-4 w-4 transition-all';
 
 export function DistrictList({ list, className }) {

@@ -40,15 +40,17 @@ export function SpecialistList({ className }) {
       <div className="mt-4 flex flex-col gap-4 lg:mt-8 lg:gap-8">
         <div className="gap-2 text-p4 font-bold uppercase">
           <p className=" text-system-error">Результатів не Знайдено.</p>
+          {/* TODO: uncomment and add condition for data if searched via searchbar */}
+          {/* <p className=" text-primary-600">Перевірте правильність написання запиту</p> */}
         </div>
-        <NoInfoToShow text="інформації" />
+        <NoInfoToShow text="збігів" />
       </div>
     );
 
   const { data: entries, totalCount } = data;
 
   return (
-    <>
+    <section>
       <ul className={className}>
         <p className="hidden font-bold uppercase text-primary-600 md:block">{`Знайдено: ${totalCount} ${getProperEnding(totalCount)}`}</p>
         {entries.map(entry => (
@@ -61,7 +63,7 @@ export function SpecialistList({ className }) {
           </li>
         ))}
       </ul>
-    </>
+    </section>
   );
 }
 
