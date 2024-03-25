@@ -4,7 +4,7 @@ import { withErrorHandler } from '@/lib/errors/errorHandler';
 export const GET = withErrorHandler(async req => {
   const today = new Date();
   const currentYear = today.getFullYear();
-  const currentMonth = parseInt(today.getMonth() + 1, 10);
+  const currentMonth = today.getMonth() + 1;
 
   const url = new URL(req.url);
   const take = url.searchParams.get('take');
