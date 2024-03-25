@@ -205,32 +205,7 @@ const psychologyMethods = [
     title: 'Інше',
   },
 ];
-// specializations.push(
-//   {
-//     name: 'Психолог',
-//     methods: {
-//       connectOrCreate: psychologyMethods.map(method => {
-//         const { title, description } = method;
-//         return {
-//           where: { title },
-//           create: { title, description },
-//         };
-//       }),
-//     },
-//   },
-//   {
-//     name: 'Психотерапевт',
-//     methods: {
-//       connectOrCreate: psychotherapyMethods.map(method => {
-//         const { title, description } = method;
-//         return {
-//           where: { title },
-//           create: { title, description },
-//         };
-//       }),
-//     },
-//   },
-// );
+
 const therapies = [
   {
     isActive: true,
