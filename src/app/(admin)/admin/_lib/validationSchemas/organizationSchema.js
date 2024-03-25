@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import {
-  MESSAGES,
   createValidationSchema,
+  MESSAGES,
   singlePrimaryAddressRefine,
   specialistCore,
   zCreateAddressSchema,
@@ -66,6 +66,8 @@ const activeOrganizationEditSchema = restEditProps.extend({
   organizationTypesIds: zStringArray.default([]),
   description: zString,
   isActive: z.literal(true),
+  clientsWorkingWithIds: z.string().array().default([]),
+  clientsNotWorkingWithIds: z.string().array().default([]),
 });
 
 const draftOrganizationEditSchema = restEditProps.partial().extend({

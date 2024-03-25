@@ -1,13 +1,13 @@
-// import { toConnectList } from './common';
+import { toConnectList } from './common';
 
 // this function transforms form data to proper prisma creation object
-export function transformOrganizationData(data) {
+export function transformOrganizationData({ clients, ...data }) {
   let addressesObject = {};
   let typesObject = {};
   let therapiesObject = {};
 
   const { socialLink, ...rest } = data;
-  // const { workingWith: clientsWorkingWith, notWorkingWith: clientsNotWorkingWith } = data.clients;
+  const { workingWith: clientsWorkingWith, notWorkingWith: clientsNotWorkingWith } = clients;
 
   if (data?.addresses?.length > 0) {
     addressesObject = {
@@ -41,12 +41,10 @@ export function transformOrganizationData(data) {
     type: typesObject,
     therapies: therapiesObject,
     clientsWorkingWith: {
-      // connect: clientsWorkingWith?.length ? toConnectList(clientsWorkingWith) : undefined,
-      connect: undefined,
+      connect: clientsWorkingWith?.length ? toConnectList(clientsWorkingWith) : undefined,
     },
     clientsNotWorkingWith: {
-      // connect: clientsNotWorkingWith?.length ? toConnectList(clientsNotWorkingWith) : undefined,
-      connect: undefined,
+      connect: clientsNotWorkingWith?.length ? toConnectList(clientsNotWorkingWith) : undefined,
     },
   };
 }
