@@ -7,6 +7,7 @@ import { useListEntries } from '@hooks';
 import { CircularProgress } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import _ from 'lodash';
+import { NoInfoToShow } from '../NoInfoToShow';
 
 function getProperEnding(count) {
   const lastDigit = count % 10;
@@ -26,6 +27,7 @@ export function SpecialistList({ className }) {
   const searchParams = useSearchParams();
   const { data, isLoading } = useListEntries(searchParams.toString());
   const cardStyle = 'my-6 max-w-[900px] rounded-3xl border-2 border-gray-200 px-4 py-5 md:my-10 md:p-10 lg:mx-auto';
+
   if (isLoading)
     return (
       <div className="mx-auto w-max">
@@ -33,7 +35,15 @@ export function SpecialistList({ className }) {
       </div>
     );
 
-  if (!isLoading && !data?.data?.length) return null;
+  if (!isLoading && !data?.data?.length)
+    return (
+      <div className="mt-4 flex flex-col gap-4 lg:mt-8 lg:gap-8">
+        <div className="gap-2 text-p4 font-bold uppercase">
+          <p className=" text-system-error">Результатів не Знайдено.</p>
+        </div>
+        <NoInfoToShow text="інформації" />
+      </div>
+    );
 
   const { data: entries, totalCount } = data;
 
