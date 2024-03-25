@@ -3,7 +3,7 @@ import {
   MESSAGES,
   createValidationSchema,
   singlePrimaryAddressRefine,
-  specialistCore,
+  serviceProviderCore,
   zCreateAddressSchema,
   zEditAddressSchema,
   zInteger,
@@ -14,7 +14,7 @@ import {
 
 // ------------------ COMMON SECTION ---------------------
 
-const zOrganizationSchema = specialistCore.extend({
+const zOrganizationSchema = serviceProviderCore.extend({
   yearsOnMarket: zInteger,
 });
 
@@ -32,6 +32,9 @@ const createDefaultProps = z.object({
 });
 
 const activeOrganizationSchema = restCreateProps.extend({
+  ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']),
+  isInclusiveSpace: z.boolean(),
+  expertSpecializations: zStringArray,
   therapies: zStringArray,
   type: zStringArray.default([]),
   description: zString,
@@ -40,6 +43,7 @@ const activeOrganizationSchema = restCreateProps.extend({
 
 const draftOrganizationSchema = restCreateProps.partial().extend({
   isActive: z.literal(false),
+  expertSpecializations: zStringArray.nullish(),
 });
 
 export const organizationSchemaUnion = z.discriminatedUnion('isActive', [
@@ -64,12 +68,14 @@ const editDefaultProps = z.object({
 const activeOrganizationEditSchema = restEditProps.extend({
   therapiesIds: zStringArray,
   organizationTypesIds: zStringArray.default([]),
+  expertSpecializationIds: zStringArray.default([]),
   description: zString,
   isActive: z.literal(true),
 });
 
 const draftOrganizationEditSchema = restEditProps.partial().extend({
   isActive: z.literal(false),
+  expertSpecializationIds: zStringArray.nullish(),
 });
 
 const organizationSchemaEditUnion = z.discriminatedUnion('isActive', [

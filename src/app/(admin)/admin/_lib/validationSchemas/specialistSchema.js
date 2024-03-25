@@ -4,7 +4,7 @@ import {
   MESSAGES,
   createValidationSchema,
   singlePrimaryAddressRefine,
-  specialistCore,
+  serviceProviderCore,
   zCreateAddressSchema,
   zEditAddressSchema,
   zInteger,
@@ -15,7 +15,7 @@ import {
 
 // ------------------ COMMON SECTION ---------------------
 
-const zSpecialistSchema = specialistCore.extend({
+const zSpecialistSchema = serviceProviderCore.extend({
   surname: zStringWithMax.nullish(),
   gender: zString.refine(val => Object.values(Gender).includes(val), {
     message: MESSAGES.unacceptableValue,

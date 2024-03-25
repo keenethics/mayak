@@ -17,6 +17,11 @@ export function OrganizationShow() {
   return (
     <Show>
       <SimpleShowLayout>
+        <ArrayField label="Спеціалізації спеціалістів" source="expertSpecializations">
+          <SingleFieldList linkType={false}>
+            <ChipField source="name" size="small" />
+          </SingleFieldList>
+        </ArrayField>
         <ArrayField label="Тип організації" source="type">
           <SingleFieldList linkType={false}>
             <ChipField source="name" size="small" />
