@@ -68,10 +68,10 @@ function randomTherapyPrices(selectedTherapies) {
 
 function setClientCategories(categories) {
   const categoriesIds = categories.map(c => ({ id: c.id })).sort(() => Math.random() - 0.5);
-  return ({
+  return {
     clientsWorkingWith: [categoriesIds[0]],
     clientsNotWorkingWith: [categoriesIds[1]],
-  });
+  };
 }
 
 function randomSpecialist({ districts, specializations, therapies, clientCategories }) {
@@ -91,8 +91,6 @@ function randomSpecialist({ districts, specializations, therapies, clientCategor
   const socialMediaLinks = generateSocialMediaLinks();
 
   const { clientsWorkingWith, clientsNotWorkingWith } = setClientCategories(clientCategories);
-
-
 
   return {
     specializations: {
@@ -129,7 +127,7 @@ function randomSpecialist({ districts, specializations, therapies, clientCategor
   };
 }
 
-function randomOrganization({ therapies, districts, organizationTypes }) {
+function randomOrganization({ therapies, districts, organizationTypes, clientCategories }) {
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
   if (formatOfWork !== 'ONLINE') {
@@ -141,6 +139,8 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
   }
   const phoneRegexp = '+380[0-9]{9}';
   const socialMediaLinks = generateSocialMediaLinks();
+
+  const { clientsWorkingWith, clientsNotWorkingWith } = setClientCategories(clientCategories);
 
   return {
     name: faker.company.name(),
@@ -160,6 +160,12 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     website: nullable(faker.internet.url()),
     description: faker.lorem.paragraph(),
     ...socialMediaLinks,
+    clientsWorkingWith: {
+      connect: clientsWorkingWith,
+    },
+    clientsNotWorkingWith: {
+      connect: clientsNotWorkingWith,
+    },
   };
 }
 
@@ -278,7 +284,7 @@ async function main() {
     });
   }
   for (let i = 0; i < 10; i += 1) {
-    const organizationData = randomOrganization({ therapies, districts, organizationTypes });
+    const organizationData = randomOrganization({ therapies, districts, organizationTypes, clientCategories });
     // eslint-disable-next-line no-await-in-loop
     await prisma.$transaction(async trx => {
       const organization = await trx.organization.create({

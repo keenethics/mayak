@@ -48,6 +48,8 @@ export const MODEL_INCLUDES = {
         isPrimary: true,
       },
     },
+    clientsWorkingWith: { select: { id: true, name: true } },
+    clientsNotWorkingWith: { select: { id: true, name: true } },
   },
   [RESOURCES.event]: {
     additionalLink: { select: { label: true, link: true } },
