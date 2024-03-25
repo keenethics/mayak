@@ -7,7 +7,7 @@ export function AddressesList({ addresses, className, showIcon = false }) {
   return (
     <ul className={cn('flex flex-col gap-4 border-dashed border-t-gray-200', className)}>
       {addresses?.map(({ id, nameOfClinic, fullAddress, district }) => (
-        <li key={id} className="flex gap-4">
+        <li key={`${id}`} className="flex gap-4">
           {showIcon && (
             <span className="text-gray-500">
               <HospitalSVG />
