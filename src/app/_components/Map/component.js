@@ -1,6 +1,11 @@
 import dynamic from 'next/dynamic';
-import PropTypes from 'prop-types';
+import { mapPropTypes } from './prop-types';
 
+/**
+ * Component that renders a map with points.
+ * It's required to wrap component to div with defined height and width.
+ * Example: <div style={{ height: '300px', width: '100%' }}><Map points={points} center={center} zoom={zoom} /></div>
+ */
 export function Map({ points, center, zoom }) {
   const Window = dynamic(() => import('./window'), {
     loading: () => <p>A map is loading</p>,
@@ -10,8 +15,4 @@ export function Map({ points, center, zoom }) {
   return <Window points={points} center={center} zoom={zoom} />;
 }
 
-Map.propTypes = {
-  points: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
-  center: PropTypes.arrayOf(PropTypes.number).isRequired,
-  zoom: PropTypes.number.isRequired,
-};
+Map.propTypes = mapPropTypes;

@@ -22,6 +22,5 @@ export function CoordinateInput({ label, source, readOnly = false }) {
 CoordinateInput.propTypes = {
   label: PropTypes.string,
   source: PropTypes.string,
-  step: PropTypes.number,
   readOnly: PropTypes.bool,
 };

@@ -4,7 +4,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import PropTypes from 'prop-types';
+import { mapPropTypes } from './prop-types';
 
 export default function MapWindow({ points, center, zoom }) {
   return (
@@ -22,14 +22,4 @@ export default function MapWindow({ points, center, zoom }) {
   );
 }
 
-MapWindow.propTypes = {
-  points: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      latitude: PropTypes.number.isRequired, // float
-      longitude: PropTypes.number.isRequired, // float
-    }),
-  ).isRequired,
-  center: PropTypes.arrayOf(PropTypes.number).isRequired,
-  zoom: PropTypes.number.isRequired,
-};
+MapWindow.propTypes = mapPropTypes;
