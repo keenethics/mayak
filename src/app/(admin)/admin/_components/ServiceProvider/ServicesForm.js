@@ -15,7 +15,7 @@ export function ServicesForm({ label }) {
         name="isFreeReception"
         source="isFreeReception"
         label="Безкоштовний прийом"
-        className="w-full"
+        className="mt-8 w-full"
         validate={unnecessaryForDraft}
       />
     </FormFieldWrapper>

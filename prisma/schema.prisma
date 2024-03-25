@@ -98,6 +98,7 @@ model SupportFocus {
   specialistId   String?       @db.Uuid
   organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String?       @db.Uuid
+  price          Int?          @db.Integer
   therapy        Therapy       @relation(fields: [therapyId], references: [id], onDelete: Cascade)
   therapyId      String        @db.Uuid
   requests       Request[]
@@ -119,6 +120,7 @@ model Specialization {
   createdAt   DateTime     @default(now())
   name        String       @unique @db.VarChar(128)
   specialists Specialist[]
+  methods     Method[]
 
   @@map("specialization")
 }
@@ -247,4 +249,15 @@ model Faq {
   priority  Int?     @db.SmallInt
 
   @@map("faq")
+}
+
+model Method {
+  id               String         @id @default(uuid()) @db.Uuid
+  createdAt        DateTime       @default(now())
+  title            String         @unique @db.VarChar(128)
+  description      String?        @db.Text
+  specializationId String         @db.Uuid
+  specialization   Specialization @relation(fields: [specializationId], references: [id])
+
+  @@map("method")
 }

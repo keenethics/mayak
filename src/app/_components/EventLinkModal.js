@@ -14,7 +14,7 @@ const icons = [
 ];
 
 function MobileModal({ link }) {
-  const icon = icons.find(({ match }) => link.includes(match))?.icon;
+  const icon = icons.find(({ match }) => link?.includes(match))?.icon;
 
   return (
     <a className="lg:hidden" href={link} target="_blank" rel="noopener noreferrer">
@@ -77,11 +77,11 @@ export function EventLinkModal({ isOpen, onClose, link }) {
 }
 
 MobileModal.propTypes = {
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
 };
 
 EventLinkModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
 };

@@ -10,6 +10,7 @@ export const RESOURCES = {
   eventTag: 'eventTag',
   faq: 'faq',
   organizationType: 'organizationType',
+  method: 'method',
 };
 
 export const FORM_TYPES = {
@@ -25,3 +26,5 @@ export const SUCCESS_NOTIFICATIONS = {
 
 export const PHONE = 'phone';
 export const EMAIL = 'email';
+
+export const MAX_NUM_SELECTED_SOCIAL_LINKS = 5;

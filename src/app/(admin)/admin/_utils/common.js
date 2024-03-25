@@ -12,12 +12,6 @@ export function toConnectList(list, cb) {
   return list?.map(id => ({ id: cb?.(id) ?? id })) ?? [];
 }
 
-export const transformCreateTherapiesCuts = focuses =>
-  focuses.map(focus => ({
-    therapy: { connect: { id: focus.therapyId } },
-    requests: { connect: toConnectList(focus.requests) },
-  }));
-
 export function transformAddresses({ addresses, type = 'create' }) {
   return (
     addresses
@@ -40,12 +34,14 @@ export const transformSupportFocuses = ({ focuses, focusesIds }) => {
       focusesToUpdate.push({
         where: { id: focus.id },
         data: {
+          price: focus.price,
           therapy: { connect: { id: focus.therapy.id } },
           requests: { set: [], connect: toConnectList(focus.requestsIds) },
         },
       });
     } else {
       focusesToCreate.push({
+        price: focus.price,
         therapy: { connect: { id: focus.therapy.id } },
         requests: { connect: toConnectList(focus.requestsIds) },
       });
@@ -59,8 +55,9 @@ export const transformSupportFocuses = ({ focuses, focusesIds }) => {
   };
 };
 
-export const transformCreateData = ({ addresses, supportFocuses, ...rest }) => ({
+export const transformCreateData = ({ addresses, supportFocuses, socialLink, ...rest }) => ({
   ...rest,
+  ...socialLink,
   addresses: {
     create: addresses?.length ? transformAddresses({ addresses, type: 'create' }) : undefined,
   },
@@ -73,6 +70,7 @@ export const transformEditData = ({
   supportFocuses,
   supportFocusesIds,
   formatOfWork,
+  socialLink,
   ...rest
 }) => {
   const addressesToConnect = toConnectList(
@@ -88,6 +86,7 @@ export const transformEditData = ({
 
   return {
     ...rest,
+    ...socialLink,
     formatOfWork,
     supportFocusesIds: undefined,
     addressesIds: undefined,

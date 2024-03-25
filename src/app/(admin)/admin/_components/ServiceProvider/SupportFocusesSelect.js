@@ -5,6 +5,7 @@ import {
   AutocompleteArrayInput,
   AutocompleteInput,
   FormDataConsumer,
+  NumberInput,
   ReferenceArrayInput,
   ReferenceInput,
   SimpleFormIterator,
@@ -56,6 +57,24 @@ function SupportFocusesForm({ getSource, supportFocuses, selectedTherapies, requ
           fullWidth
         />
       </ReferenceInput>
+      <NumberInput
+        fullWidth
+        source={getSource('price')}
+        label={`Ціна для ${selectedTherapies[therapyIndex]} від Х грн.год`}
+      />
+      {/* <Accordion disabled={!formData.therapies || formData.therapies.length === 0}>
+        <AccordionSummary expandIcon={<FaAngleDown />}>Ціни на терапії</AccordionSummary>
+        <AccordionDetails>
+          {chosenCreateTherapies?.map(el => (
+            <NumberInput
+              fullWidth
+              key={el.id}
+              source={`therapyPricesCreate.${el.id}`}
+              label={`Ціна для ${el.name} від Х грн.год`}
+            />
+          ))}
+        </AccordionDetails>
+      </Accordion> */}
       <ReferenceArrayInput
         source={getSource('requestsIds')}
         reference="Request"

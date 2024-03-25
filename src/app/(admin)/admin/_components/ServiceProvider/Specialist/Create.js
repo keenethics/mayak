@@ -36,7 +36,7 @@ export function SpecialistCreate() {
         <TextInput name="description" source="description" label="Опис" fullWidth multiline />
         <ContactsList />
         <SocialLinks />
-        <ActivationForm label="Активувати/деактивувати спеціаліста" className="mt-3" />
+        <ActivationForm label="Активувати/деактивувати спеціаліста" />
       </SimpleForm>
     </Create>
   );

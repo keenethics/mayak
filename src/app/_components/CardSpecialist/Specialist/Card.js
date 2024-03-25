@@ -28,6 +28,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     yearsOfExperience,
     isFreeReception,
     formatOfWork,
+    therapyPrices,
     addresses,
     phone,
     email,
@@ -41,7 +42,6 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     viber,
     telegram,
   } = specialist;
-
   const specializationsList = specializations.map(s => s.name);
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
@@ -50,7 +50,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
 
   return (
-    <CardWrapper className={className} id={id}>
+    <CardWrapper className={className} id={id} type="specialist">
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
         <ProfileImage gender={gender} className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
           <SocialsList socials={socials} className="absolute bottom-4" />
@@ -60,7 +60,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
       <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
           <ProfileImage gender={gender} className="md:hidden">
-            <SocialsList socials={socials} className="absolute bottom-4" />
+            <SocialsList socials={socials} className="absolute bottom-4 hidden md:inline-block" />
           </ProfileImage>
           <div className="max-w-full overflow-hidden">
             <SpecializationsPanel
@@ -76,14 +76,16 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           <>
             <DetailsList
               className="border-t border-dashed border-t-gray-200 pt-4"
-              details={{ addresses, description }}
+              details={{ addresses, description, therapyPrices }}
+              text="спеціаліста"
             />
             <ContactsList
               truncate={!extended}
               specialistId={id}
               contacts={contactsList}
-              className="mt-3 border-t border-dashed border-t-gray-200 pt-3 md:hidden"
+              className="border-t border-dashed border-t-gray-200 pt-3 md:hidden"
             />
+            <SocialsList socials={socials} className="border-t border-dashed border-t-gray-200 pt-3 md:hidden" />
           </>
         ) : (
           <>
@@ -91,7 +93,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
             <Link
-              href={`/specialist/${id}`}
+              href={`/specialist/${id}?type=specialist`}
               scroll={false}
               className="mt-auto hidden self-end justify-self-end md:inline-block"
             >

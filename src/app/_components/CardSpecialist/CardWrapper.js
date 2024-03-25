@@ -7,7 +7,7 @@ import { useHintContext } from '@components/Hint';
 import { cn } from '@utils/cn';
 import { screens } from '@/app/styles/tailwind/ui';
 
-export function CardWrapper({ children, className, id }) {
+export function CardWrapper({ children, className, id, type }) {
   const router = useRouter();
   const matches = useMediaQuery(`(max-width: ${screens.md})`);
   const params = useSearchParams();
@@ -16,7 +16,7 @@ export function CardWrapper({ children, className, id }) {
   const isExtendedCardOpened = !!params.get('id');
 
   const handleClick = () => {
-    router.push(`/specialist/${id}`, { scroll: false });
+    router.push(`/specialist/${id}?type=${type}`, { scroll: false });
     toggle();
   };
 
@@ -40,4 +40,5 @@ CardWrapper.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   id: PropTypes.string,
+  type: PropTypes.string,
 };

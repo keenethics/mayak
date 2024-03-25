@@ -7,7 +7,7 @@ import {
   specialistCore,
   zCreateAddressSchema,
   zEditAddressSchema,
-  zEditTherapyCutSchema,
+  zSupportFocusSchema,
   zInteger,
   zString,
   zStringArray,
@@ -42,14 +42,14 @@ const createDefaultProps = z.object({
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
-  supportFocuses: zEditTherapyCutSchema.array().min(1, {
+  supportFocuses: zSupportFocusSchema.array().min(1, {
     message: 'Необхідно обрати хоча б один тип терапії',
   }),
   isActive: z.literal(true),
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
-  supportFocuses: zEditTherapyCutSchema.array().nullish(),
+  supportFocuses: zSupportFocusSchema.array().nullish(),
   addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
@@ -74,14 +74,14 @@ const editDefaultProps = z.object({
 });
 
 const activeSpecialistEditSchema = restEditProps.extend({
-  supportFocuses: zEditTherapyCutSchema.array().min(1, {
+  supportFocuses: zSupportFocusSchema.array().min(1, {
     message: 'Необхідно обрати хоча б один тип терапії',
   }),
   isActive: z.literal(true),
 });
 
 const draftSpecialistEditSchema = restEditProps.partial().extend({
-  supportFocuses: zEditTherapyCutSchema.array().nullish(),
+  supportFocuses: zSupportFocusSchema.array().nullish(),
   addresses: zEditAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });

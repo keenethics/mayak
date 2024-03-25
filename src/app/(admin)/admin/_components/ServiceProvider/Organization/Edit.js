@@ -23,7 +23,7 @@ export function OrganizationEdit() {
         <DescriptionEdit validate={required()} />
         <ContactsList />
         <SocialLinks />
-        <ActivationForm label="Активувати/деактивувати організацію" className="mt-3" />
+        <ActivationForm label="Активувати/деактивувати організацію" />
       </SimpleForm>
     </Edit>
   );
