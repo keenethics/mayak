@@ -10,6 +10,7 @@ export const RESOURCES = {
   eventTag: 'eventTag',
   faq: 'faq',
   organizationType: 'organizationType',
+  method: 'method',
 };
 
 export const FORM_TYPES = {
