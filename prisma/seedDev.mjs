@@ -16,6 +16,7 @@ function nullable(value) {
 
 // returns array of unique objects with id field
 function uniqueObjectsWithId(instances) {
+  if (instances.length === 0) return [];
   return faker.helpers
     .uniqueArray(
       instances.map(s => s.id),
@@ -247,7 +248,7 @@ async function main() {
       },
     });
   }
-  for (let i = 0; i < 10; i += 1) {
+  for (let i = 0; i <= 100; i += 1) {
     // eslint-disable-next-line no-await-in-loop
     await prisma.event.create({
       data: randomEvent({ tags, link }),
