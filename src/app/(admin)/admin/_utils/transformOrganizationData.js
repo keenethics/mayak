@@ -9,15 +9,15 @@ const transformAddresses = placesArray =>
 // this function transforms form data to proper prisma creation object
 export const transformOrganizationData = ({
   socialLink,
+  organizationTypesIds,
   addresses,
   therapies,
   therapyPricesCreate,
-  type,
   ...rest
 }) => ({
   ...rest,
   ...socialLink,
-  type: { connect: type?.map(el => ({ id: el })) },
+  organizationTypesIds: { connect: organizationTypesIds?.map(el => ({ id: el })) },
 
   addresses: {
     create: addresses?.length ? transformAddresses(addresses) : undefined,

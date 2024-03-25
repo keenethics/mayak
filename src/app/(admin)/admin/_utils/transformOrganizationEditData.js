@@ -6,7 +6,6 @@ export function transformOrganizationEditData({
   therapyPricesEdit,
   therapyPrices,
   therapiesIds,
-  type,
   ...rest
 }) {
   const organizationTypesToConnect = toConnectList(organizationTypesIds);
@@ -22,7 +21,7 @@ export function transformOrganizationEditData({
       create: newTherapiesPrices,
       deleteMany: currentTherapyPrices,
     },
-    type: {
+    organizationTypes: {
       set: [],
       connect: organizationTypesToConnect,
     },
