@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { FormatOfWork } from '@prisma/client';
-import { MAX_NUM_SELECTED_SOCIAL_LINKS , WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
+import { MAX_NUM_SELECTED_SOCIAL_LINKS, WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
 import { isSpecifiedWorkTime } from '@admin/_utils/common';
 import { PHONE_REGEX } from '@/lib/consts';
 
@@ -61,23 +61,21 @@ export const zWorkTimeSchema = z
       }),
   )
   .superRefine((workTime, ctx) => {
-    const specified = isSpecifiedWorkTime(workTime);
-    if (specified) {
-      workTime.forEach((day, index) => {
-        if (!day.isDayOff && !day.time) {
-          ctx.addIssue({
-            code: 'custom',
-            message: 'Додайте час роботи, якщо це не вихідний',
-            path: [index, 'time'],
-          });
-          ctx.addIssue({
-            code: 'custom',
-            message: `Додайте час роботи або вихідний для кожного дня
+    if (!isSpecifiedWorkTime(workTime)) return;
+    workTime.forEach((day, index) => {
+      if (!day.isDayOff && !day.time) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Додайте час роботи, якщо це не вихідний',
+          path: [index, 'time'],
+        });
+        ctx.addIssue({
+          code: 'custom',
+          message: `Додайте час роботи або вихідний для кожного дня
             (чи приберіть усі дані якщо графік роботи не зазначено)`,
-          });
-        }
-      });
-    }
+        });
+      }
+    });
   });
 
 export const specialistCore = z.object({
