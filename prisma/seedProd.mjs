@@ -6,7 +6,7 @@ const districts = ['Личаківський', 'Шевченківський', '
   name => ({ name }),
 );
 
-const specializations = ['Психіатр', 'Сексолог', 'Соціальний працівник'].map(name => ({
+const specializations = ['Психотерапевт', 'Психолог', 'Психіатр', 'Сексолог', 'Соціальний працівник'].map(name => ({
   name,
 }));
 
@@ -205,32 +205,32 @@ const psychologyMethods = [
     title: 'Інше',
   },
 ];
-specializations.push(
-  {
-    name: 'Психолог',
-    methods: {
-      connectOrCreate: psychologyMethods.map(method => {
-        const { title, description } = method;
-        return {
-          where: { title },
-          create: { title, description },
-        };
-      }),
-    },
-  },
-  {
-    name: 'Психотерапевт',
-    methods: {
-      connectOrCreate: psychotherapyMethods.map(method => {
-        const { title, description } = method;
-        return {
-          where: { title },
-          create: { title, description },
-        };
-      }),
-    },
-  },
-);
+// specializations.push(
+//   {
+//     name: 'Психолог',
+//     methods: {
+//       connectOrCreate: psychologyMethods.map(method => {
+//         const { title, description } = method;
+//         return {
+//           where: { title },
+//           create: { title, description },
+//         };
+//       }),
+//     },
+//   },
+//   {
+//     name: 'Психотерапевт',
+//     methods: {
+//       connectOrCreate: psychotherapyMethods.map(method => {
+//         const { title, description } = method;
+//         return {
+//           where: { title },
+//           create: { title, description },
+//         };
+//       }),
+//     },
+//   },
+// );
 const therapies = [
   {
     isActive: true,
@@ -297,6 +297,13 @@ async function main() {
   await createIfNotExist(prisma.organizationType, organizationTypes, organizationType => ({
     name: organizationType.name,
   }));
+  await createIfNotExist(
+    prisma.method,
+    psychotherapyMethods
+      .map(method => ({ ...method, specialization: { connect: { name: 'Психотерапевт' } } }))
+      .concat(psychologyMethods.map(method => ({ ...method, specialization: { connect: { name: 'Психолог' } } }))),
+    method => ({ title: method.title }),
+  );
 }
 
 main().then(
