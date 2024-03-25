@@ -53,7 +53,6 @@ export const specialistPropType = PropTypes.shape({
   tiktok: PropTypes.string,
   viber: PropTypes.string,
   telegram: PropTypes.string,
-  createdAt: PropTypes.instanceOf(Date),
 });
 
 export const organizationPropType = PropTypes.shape({
@@ -77,7 +76,6 @@ export const organizationPropType = PropTypes.shape({
   linkedin: PropTypes.string,
   viber: PropTypes.string,
   telegram: PropTypes.string,
-  createdAt: PropTypes.instanceOf(Date),
 });
 
 export const specialistContactPropType = PropTypes.shape({
