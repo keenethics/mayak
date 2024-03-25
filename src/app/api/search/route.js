@@ -52,6 +52,7 @@ export async function GET(req) {
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { id: true, name: true } },
+        isPrimary: true,
       },
     },
   };
