@@ -43,7 +43,6 @@ function SpecializationList({ setCount, defaultValue }) {
                 name={id}
                 value={id}
                 key={id}
-                type="checkbox"
                 checked={selectedSpecializations.includes(id)}
                 onChange={() => onChange(id)}
                 text={name}

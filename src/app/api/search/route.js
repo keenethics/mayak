@@ -16,6 +16,7 @@ export async function GET(req) {
     {
       format: undefined,
       type: undefined,
+      specialization: undefined,
       // take: 10,
       // skip: 0,
       district: undefined,

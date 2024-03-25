@@ -1,4 +1,4 @@
-import { DistrictFilter, FormatFilter, TypeFilter, SpecializationFilter } from '@components/Specialists';
+import { DistrictFilter, FormatFilter, TypeFilter, SpecializationFilter, PriceFilter } from '@components/Specialists';
 
 export function Filters() {
   return (
@@ -7,6 +7,7 @@ export function Filters() {
         <TypeFilter />
         <SpecializationFilter />
         <DistrictFilter />
+        <PriceFilter />
         <FormatFilter />
       </div>
     </div>
