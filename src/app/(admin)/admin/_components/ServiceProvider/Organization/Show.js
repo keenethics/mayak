@@ -35,11 +35,11 @@ export function OrganizationShow() {
             <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
-        {/* <ArrayField label="Типи терапії" source="therapies">
+        <ArrayField label="Типи терапії" source="therapies">
           <SingleFieldList linkType={false}>
             <ChipField source="title" size="small" />
           </SingleFieldList>
-        </ArrayField> */}
+        </ArrayField>
         <FunctionField
           label="Типи терапії"
           render={({ therapies, therapyPrices }) => (
@@ -51,7 +51,7 @@ export function OrganizationShow() {
                 const therapyPrice = therapyPrices?.find(el => el.therapy.id === therapy.id);
                 return (
                   <div key={therapy.id} className="flex justify-between px-3 py-2">
-                    <p>{therapy.title}</p>{' '}
+                    <p>{therapy.title}</p>
                     <p>{therapyPrice ? `Ціна від ${therapyPrice.price} грн / год.` : 'Не зазначено'}</p>
                   </div>
                 );

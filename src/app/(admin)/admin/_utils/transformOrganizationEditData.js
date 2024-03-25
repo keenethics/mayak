@@ -6,10 +6,11 @@ export function transformOrganizationEditData({
   therapyPricesEdit,
   therapyPrices,
   therapiesIds,
+  type,
   ...rest
 }) {
   const organizationTypesToConnect = toConnectList(organizationTypesIds);
-  const base = transformEditData(...rest, therapiesIds, therapyPrices);
+  const base = transformEditData({ ...rest, therapiesIds, therapyPrices });
 
   const newTherapiesPrices = transformTherapyPrices(therapiesIds, therapyPricesEdit);
   const currentTherapyPrices = toConnectList(therapyPrices, el => el.id);
@@ -25,5 +26,6 @@ export function transformOrganizationEditData({
       set: [],
       connect: organizationTypesToConnect,
     },
+    organizationTypesIds: undefined,
   };
 }

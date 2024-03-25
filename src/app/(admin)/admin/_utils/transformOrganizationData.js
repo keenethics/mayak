@@ -5,8 +5,8 @@ const transformAddresses = placesArray =>
     ...place,
     district: { connect: { id: place.district } },
   }));
-// this function transforms form data to proper prisma creation object
 
+// this function transforms form data to proper prisma creation object
 export const transformOrganizationData = ({
   socialLink,
   addresses,
@@ -17,7 +17,6 @@ export const transformOrganizationData = ({
 }) => ({
   ...rest,
   ...socialLink,
-
   type: { connect: type?.map(el => ({ id: el })) },
 
   addresses: {
