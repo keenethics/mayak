@@ -12,7 +12,7 @@ export const GET = withErrorHandler(async req => {
   const queryMonth = url.searchParams.get('month');
 
   const filteredQueryMonth = parseInt(queryMonth, 10);
-  const startOfNextMonth = new Date(currentYear, filteredQueryMonth - 1, 0 + 1);
+  const startOfNextMonth = new Date(currentYear, filteredQueryMonth - 1, 1);
   const endOfMonth = new Date(currentYear, filteredQueryMonth, 1);
   const endOfNextMonth = new Date(currentYear, filteredQueryMonth, 1);
 
