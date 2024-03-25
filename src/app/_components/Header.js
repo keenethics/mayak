@@ -34,7 +34,7 @@ export function Header() {
 
   useBodyScrollLock(isMenuOpen, 'y');
   return (
-    <>
+    <header>
       {/* this element is used to fill the space under navbar on mobile screens */}
       <div className="border-t-[1px] p-4 lg:hidden">
         <div className="h-9" />
@@ -132,6 +132,6 @@ export function Header() {
       </nav>
 
       <Feedback isFeedbackOpen={isFeedbackOpen} onClose={toggleFeedback} />
-    </>
+    </header>
   );
 }
