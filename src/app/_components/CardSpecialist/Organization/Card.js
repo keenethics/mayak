@@ -58,7 +58,9 @@ export function CardOrganization({ organization, className, extended = false }) 
       </div>
       <div className="flex w-full max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
-          <ProfileImage className="md:hidden" />
+          <ProfileImage className="md:hidden">
+            <SocialsList socials={socials} className="absolute bottom-4 hidden md:inline-block" />
+          </ProfileImage>
           <div className="max-w-full overflow-hidden">
             <SpecializationsPanel
               specialistId={id}
@@ -86,6 +88,7 @@ export function CardOrganization({ organization, className, extended = false }) 
               contacts={contactsList}
               className="mt-3 border-t border-dashed border-t-gray-200 pt-3 md:hidden"
             />
+            <SocialsList socials={socials} className="border-t border-dashed border-t-gray-200 pt-3 md:hidden" />
           </>
         ) : (
           <>
