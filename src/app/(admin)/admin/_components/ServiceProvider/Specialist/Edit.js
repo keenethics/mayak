@@ -13,15 +13,11 @@ import { DetailsEditSpec } from './DetailsEditSpec';
 export function SpecialistEdit() {
   return (
     <Edit title="Редагувати дані спеціаліста" transform={transformSpecialistEditData} mutationMode="pessimistic">
-      <SimpleForm
-        mode="all"
-        reValidateMode="onChange"
-        resolver={zodResolver(specialistEditValidationSchema)}
-      >
+      <SimpleForm mode="all" reValidateMode="onChange" resolver={zodResolver(specialistEditValidationSchema)}>
         <GeneralInfoEditSpec type="edit" />
         <DetailsEditSpec />
         <AddressesForm type="edit" label="Адреси надання послуг" />
-        <ServicesForm type="edit" label="Послуги" />
+        <ServicesForm label="Послуги" />
         <TextInput name="description" source="description" label="Опис" fullWidth multiline />
         <ContactsList />
         <SocialLinks />
