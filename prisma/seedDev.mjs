@@ -140,6 +140,9 @@ function randomOrganization({ therapies, districts, organizationTypes, expertSpe
     therapies: {
       connect: uniqueObjectsWithId(therapies),
     },
+    therapyPrices: {
+      create: randomTherapyPrices(therapies),
+    },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
     phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
