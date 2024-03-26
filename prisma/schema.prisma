@@ -81,6 +81,7 @@ model Organization {
   formatOfWork    FormatOfWork?
   addresses       Address[]
   therapies       Therapy[]
+  therapyPrices   TherapyPrice[]
   workTime        WorkTime[]
   isFreeReception Boolean?
   description     String?            @db.Text
@@ -154,12 +155,14 @@ model Therapy {
 }
 
 model TherapyPrice {
-  id          String       @id @default(uuid()) @db.Uuid
-  createdAt   DateTime     @default(now())
-  therapy     Therapy      @relation(fields: [therapyId], references: [id])
-  therapyId   String       @db.Uuid
-  price       Int
-  specialists Specialist[]
+  id             String        @id @default(uuid()) @db.Uuid
+  createdAt      DateTime      @default(now())
+  therapy        Therapy       @relation(fields: [therapyId], references: [id])
+  therapyId      String        @db.Uuid
+  price          Int
+  specialists    Specialist[]
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?       @db.Uuid
 
   @@map("therapy_price")
 }

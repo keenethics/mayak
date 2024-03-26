@@ -157,6 +157,9 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     therapies: {
       connect: uniqueObjectsWithId(therapies),
     },
+    therapyPrices: {
+      create: randomTherapyPrices(therapies),
+    },
     workTime: randomUndefined(randomWorkTime()),
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),

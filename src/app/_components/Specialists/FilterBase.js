@@ -23,8 +23,15 @@ export function FilterBase({ count, children, filterText }) {
   });
 
   return (
-    <div className={cn(`relative`)}>
-      <FilterChip opened={opened} text={filterText} count={count} onClick={() => setOpened(!opened)} />
+    <div className="relative">
+      <FilterChip
+        opened={opened}
+        text={filterText}
+        count={count}
+        onClick={() => {
+          setOpened(!opened);
+        }}
+      />
       <div
         ref={dropdownRef}
         className={cn(`z-10 -mr-[255px] hidden w-max flex-col rounded-3xl border bg-other-white px-2 py-1`, {
