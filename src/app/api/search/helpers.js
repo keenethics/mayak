@@ -56,18 +56,18 @@ export function createSearchSyncFilter(query, searchType) {
 export function createEntityFilter({ type, requests, format, districts }) {
   return {
     isActive: true,
-    therapies: type && {
+    supportFocuses: (requests || type) && {
       some: {
-        type,
-      },
-    },
-    supportFocuses: requests && {
-      some: {
-        requests: {
-          some: {
-            OR: requests.map(request => ({
-              id: request,
-            })),
+        AND: {
+          therapy: type && {
+            type,
+          },
+          requests: requests && {
+            some: {
+              OR: requests.map(request => ({
+                id: request,
+              })),
+            },
           },
         },
       },

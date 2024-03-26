@@ -5,6 +5,7 @@ import {
   AutocompleteArrayInput,
   AutocompleteInput,
   FormDataConsumer,
+  NumberInput,
   ReferenceArrayInput,
   ReferenceInput,
   SimpleFormIterator,
@@ -56,6 +57,7 @@ function SupportFocusesForm({ getSource, supportFocuses, selectedTherapies, requ
           fullWidth
         />
       </ReferenceInput>
+      <NumberInput fullWidth source={getSource('price')} label="Ціна для терапії від Х грн.год" />
       <ReferenceArrayInput
         source={getSource('requestsIds')}
         reference="Request"
@@ -95,9 +97,10 @@ export function SupportFocusesSelect() {
     [therapiesList],
   );
 
+  const selectedAllTerapies = supportFocuses?.length === therapiesList?.length;
   return (
     <ArrayInput source="supportFocuses" isLoading={therapiesLoading} label="Типи терапій">
-      <SimpleFormIterator fullWidth disableReordering={true}>
+      <SimpleFormIterator fullWidth disableReordering={true} disableAdd={selectedAllTerapies}>
         <FormDataConsumer>
           {({ scopedFormData, getSource }) => {
             if (!scopedFormData) return null;

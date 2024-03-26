@@ -1,7 +1,41 @@
 import { PrismaClient } from '@prisma/client';
-import { districts, organizationTypes, specializations, therapies } from './data.mjs';
+import {
+  districts,
+  organizationTypes,
+  psychologyMethods,
+  psychotherapyMethods,
+  specializations,
+  therapies,
+} from './data.mjs';
 
 const prisma = new PrismaClient();
+
+specializations.push(
+  {
+    name: 'Психолог',
+    methods: {
+      connectOrCreate: psychologyMethods.map(method => {
+        const { title, description } = method;
+        return {
+          where: { title },
+          create: { title, description },
+        };
+      }),
+    },
+  },
+  {
+    name: 'Психотерапевт',
+    methods: {
+      connectOrCreate: psychotherapyMethods.map(method => {
+        const { title, description } = method;
+        return {
+          where: { title },
+          create: { title, description },
+        };
+      }),
+    },
+  },
+);
 
 async function translateTherapies(therapiesToTranslate) {
   const translated = [];

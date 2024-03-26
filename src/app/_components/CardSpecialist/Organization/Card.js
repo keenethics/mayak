@@ -23,6 +23,7 @@ export function CardOrganization({ organization, className, extended = false }) 
     yearsOnMarket,
     formatOfWork,
     addresses,
+    supportFocuses,
     isFreeReception,
     description,
     phone,
@@ -48,7 +49,7 @@ export function CardOrganization({ organization, className, extended = false }) 
   const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
 
   return (
-    <CardWrapper className={className} id={id}>
+    <CardWrapper className={className} id={id} type="organization">
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
         <ProfileImage className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
           <SocialsList socials={socials} className="absolute bottom-4" />
@@ -57,7 +58,9 @@ export function CardOrganization({ organization, className, extended = false }) 
       </div>
       <div className="flex w-full max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
-          <ProfileImage className="md:hidden" />
+          <ProfileImage className="md:hidden">
+            <SocialsList socials={socials} className="absolute bottom-4 hidden md:inline-block" />
+          </ProfileImage>
           <div className="max-w-full overflow-hidden">
             <SpecializationsPanel
               specialistId={id}
@@ -72,7 +75,12 @@ export function CardOrganization({ organization, className, extended = false }) 
           <>
             <DetailsList
               className="mt-4 border-t border-dashed border-t-gray-200 pt-4"
-              details={{ addresses, description }}
+              details={{
+                addresses,
+                description,
+                supportFocuses,
+              }}
+              text="клініку"
             />
             <ContactsList
               truncate={!extended}
@@ -80,13 +88,18 @@ export function CardOrganization({ organization, className, extended = false }) 
               contacts={contactsList}
               className="mt-3 border-t border-dashed border-t-gray-200 pt-3 md:hidden"
             />
+            <SocialsList socials={socials} className="border-t border-dashed border-t-gray-200 pt-3 md:hidden" />
           </>
         ) : (
           <>
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
-            <Link href="#" scroll={false} className="mt-auto hidden self-end justify-self-end md:inline-block">
+            <Link
+              href={`/specialist/${id}?type=organization`}
+              scroll={false}
+              className="mt-auto hidden self-end justify-self-end md:inline-block"
+            >
               <CardButton />
             </Link>
           </>

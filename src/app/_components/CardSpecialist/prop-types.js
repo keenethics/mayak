@@ -3,13 +3,20 @@ import { FormatOfWork } from '@prisma/client';
 
 const relatedInstanceCore = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string,
   createdAt: PropTypes.instanceOf(Date),
 };
 
 export const districtPropType = PropTypes.shape(relatedInstanceCore);
 
 export const therapyPropType = PropTypes.shape(relatedInstanceCore);
+
+export const supportFocusesPropType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  price: PropTypes.number,
+  therapy: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }),
+});
 
 export const specializationPropType = PropTypes.shape(relatedInstanceCore);
 
@@ -31,7 +38,7 @@ export const specialistPropType = PropTypes.shape({
   yearsOfExperience: PropTypes.number,
   formatOfWork: PropTypes.oneOf(Object.values(FormatOfWork)),
   addresses: PropTypes.arrayOf(addressPropType),
-  therapies: PropTypes.arrayOf(therapyPropType),
+  supportFocuses: PropTypes.arrayOf(supportFocusesPropType),
   isFreeReception: PropTypes.bool,
   description: PropTypes.string,
   phone: PropTypes.string,
@@ -55,7 +62,7 @@ export const organizationPropType = PropTypes.shape({
   yearsOnMarket: PropTypes.number,
   formatOfWork: PropTypes.oneOf(Object.values(FormatOfWork)),
   addresses: PropTypes.arrayOf(addressPropType),
-  therapies: PropTypes.arrayOf(therapyPropType),
+  supportFocuses: PropTypes.arrayOf(supportFocusesPropType),
   isFreeReception: PropTypes.bool,
   description: PropTypes.string,
   phone: PropTypes.string,

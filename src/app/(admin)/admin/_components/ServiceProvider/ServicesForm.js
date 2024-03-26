@@ -4,18 +4,18 @@ import { BooleanInput, required } from 'react-admin';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
 import { SupportFocusesSelect } from './SupportFocusesSelect';
 
-export function ServicesForm({ label, className }) {
+export function ServicesForm({ label }) {
   const isActive = useWatch({ name: 'isActive' });
   const unnecessaryForDraft = isActive && required();
 
   return (
-    <FormFieldWrapper title={label} className={className}>
+    <FormFieldWrapper title={label}>
       <SupportFocusesSelect />
       <BooleanInput
         name="isFreeReception"
         source="isFreeReception"
         label="Безкоштовний прийом"
-        className="w-full"
+        className="mt-8 w-full"
         validate={unnecessaryForDraft}
       />
     </FormFieldWrapper>
@@ -24,6 +24,5 @@ export function ServicesForm({ label, className }) {
 
 ServicesForm.propTypes = {
   label: PropTypes.string,
-  className: PropTypes.string,
   validate: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 };

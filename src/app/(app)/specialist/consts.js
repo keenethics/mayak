@@ -4,7 +4,11 @@ export const specialistInclude = {
       name: 'asc',
     },
   },
-  therapies: true,
+  supportFocuses: {
+    include: {
+      therapy: true,
+    },
+  },
   addresses: {
     include: {
       district: true,
@@ -18,7 +22,11 @@ export const organizationInclude = {
       name: 'asc',
     },
   },
-  therapies: true,
+  supportFocuses: {
+    include: {
+      therapy: true,
+    },
+  },
   addresses: {
     include: {
       district: true,

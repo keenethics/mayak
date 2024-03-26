@@ -59,6 +59,7 @@ function randomSupportFocusArray({ therapies }) {
   );
 
   return uniqueTherapiesArray.map(therapy => ({
+    price: Math.random() > 0.5 ? faker.number.int({ min: 0, max: 20 }) * 100 : null,
     therapy: {
       connect: {
         id: therapy.id,
@@ -240,7 +241,7 @@ async function main() {
       },
     });
   }
-  for (let i = 0; i < 10; i += 1) {
+  for (let i = 0; i <= 100; i += 1) {
     // eslint-disable-next-line no-await-in-loop
     await prisma.event.create({
       data: randomEvent({ tags, link }),

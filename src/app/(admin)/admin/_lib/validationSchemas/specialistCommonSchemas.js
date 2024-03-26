@@ -30,7 +30,9 @@ export const zInteger = z
     required_error: MESSAGES.requiredField,
     invalid_type_error: MESSAGES.unacceptableValue,
   })
-  .nonnegative()
+  .nonnegative({
+    message: 'Число має бути не менше 0',
+  })
   .nullish();
 
 export const zUrl = zString.url({ message: MESSAGES.unacceptableValue });
@@ -84,7 +86,10 @@ export const zEditAddressSchema = z.object({
       name: z.string(),
     })
     .nullish(),
-  isPrimary: z.boolean(),
+  isPrimary: z
+    .boolean()
+    .nullish()
+    .transform(arg => (arg === null ? false : arg)),
 });
 
 export const zCreateAddressSchema = z.object({
@@ -99,10 +104,11 @@ export const singlePrimaryAddressRefine = addresses => {
   return addresses.filter(el => el.isPrimary).length === 1;
 };
 
-// ---- THERAPY CUT SECTION ----
+// ---- SUPPORT FOCUS SECTION ----
 
-export const zEditTherapyCutSchema = z.object({
+export const zSupportFocusSchema = z.object({
   id: zString.nullish(),
+  price: zInteger.nullish(),
   therapy: z.object({
     id: zString,
     title: zString,
@@ -130,6 +136,5 @@ export const createValidationSchema = (schemaUnion, defaultProperties) =>
         addresses: [],
       };
     }
-
     return schema;
   });

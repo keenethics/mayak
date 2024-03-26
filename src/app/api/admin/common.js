@@ -12,7 +12,12 @@ export const MODEL_SEARCH_FIELDS = {
 export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
     supportFocuses: {
-      select: { id: true, therapy: { select: { id: true, title: true, type: true } }, requests: true },
+      select: {
+        id: true,
+        price: true,
+        therapy: { select: { id: true, title: true, type: true } },
+        requests: true,
+      },
     },
     specializations: { select: { id: true, name: true } },
     addresses: {
@@ -27,7 +32,12 @@ export const MODEL_INCLUDES = {
   },
   [RESOURCES.organization]: {
     supportFocuses: {
-      select: { id: true, therapy: { select: { id: true, title: true, type: true } }, requests: true },
+      select: {
+        id: true,
+        price: true,
+        therapy: { select: { id: true, title: true, type: true } },
+        requests: true,
+      },
     },
     type: { select: { id: true, name: true } },
     addresses: {
@@ -49,6 +59,9 @@ export const MODEL_INCLUDES = {
     _count: {
       select: { requests: true },
     },
+  },
+  [RESOURCES.method]: {
+    specialization: { select: { name: true } },
   },
 };
 

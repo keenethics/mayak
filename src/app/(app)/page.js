@@ -1,4 +1,4 @@
-import { TherapiesSection, FAQSection, SearchSection } from '@components/MainPageSections';
+import { DistrictSearchSection, FAQSection, SearchSection, TherapiesSection } from '@components/MainPageSections';
 import { prisma } from '@/lib/db';
 import { env } from '@/lib/env';
 
@@ -38,6 +38,7 @@ export default async function Page() {
   return (
     <>
       <SearchSection />
+      <DistrictSearchSection className="my-8" />
       <TherapiesSection therapies={activeTherapies} />
       <section>TBD goal section</section>
       <FAQSection faqs={activeFAQs} />

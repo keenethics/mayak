@@ -18,9 +18,17 @@ export const handler = withErrorHandler(async req => {
 
   const totalCount = await prisma.searchEntry.count({ where: searchEntryFilter });
   const sharedInclude = {
-    therapies: { select: { title: true } },
+    supportFocuses: {
+      select: {
+        id: true,
+        price: true,
+        therapy: true,
+        requests: true,
+      },
+    },
     addresses: {
       select: {
+        id: true,
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { id: true, name: true } },

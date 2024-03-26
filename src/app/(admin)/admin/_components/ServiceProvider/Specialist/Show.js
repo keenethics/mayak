@@ -38,6 +38,7 @@ export function SpecialistShow() {
         <ArrayField label="Типи терапій" source="supportFocuses">
           <Datagrid bulkActionButtons={false}>
             <TextField label="Тип" source="therapy.title" />
+            <TextField label="Ціна" source="price" />
             <ArrayField label="Запити" source="requests">
               <SingleFieldList linkType={false} className="p-3">
                 <ChipField source="name" size="small" />
