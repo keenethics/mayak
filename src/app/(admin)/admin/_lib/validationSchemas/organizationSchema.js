@@ -6,6 +6,7 @@ import {
   serviceProviderCore,
   zCreateAddressSchema,
   zEditAddressSchema,
+  zSupportFocusSchema,
   zInteger,
   zString,
   zStringArray,
@@ -36,12 +37,18 @@ const activeOrganizationSchema = restCreateProps.extend({
   isInclusiveSpace: z.boolean(),
   expertSpecializations: zStringArray,
   therapies: zStringArray,
+  supportFocuses: zSupportFocusSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   type: zStringArray.default([]),
   description: zString,
   isActive: z.literal(true),
 });
 
 const draftOrganizationSchema = restCreateProps.partial().extend({
+  supportFocuses: zSupportFocusSchema.array().nullish(),
+  type: zStringArray.nullish().default([]),
+  addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
   ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']).nullish(),
   isInclusiveSpace: z.boolean(),
@@ -61,6 +68,7 @@ const restEditProps = zOrganizationSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
+  supportFocusesIds: z.string().array().nullish(),
 });
 
 const editDefaultProps = z.object({
@@ -68,7 +76,9 @@ const editDefaultProps = z.object({
 });
 
 const activeOrganizationEditSchema = restEditProps.extend({
-  therapiesIds: zStringArray,
+  supportFocuses: zSupportFocusSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   organizationTypesIds: zStringArray.default([]),
   expertSpecializationIds: zStringArray.default([]),
   ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']),
@@ -78,6 +88,9 @@ const activeOrganizationEditSchema = restEditProps.extend({
 });
 
 const draftOrganizationEditSchema = restEditProps.partial().extend({
+  supportFocuses: zSupportFocusSchema.array().nullish(),
+  organizationTypesIds: zStringArray.nullish(),
+  formatOfWork: zString.nullish(),
   isActive: z.literal(false),
   expertSpecializationIds: zStringArray.nullish(),
   ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']).nullish(),

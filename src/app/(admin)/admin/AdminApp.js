@@ -6,13 +6,14 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate, EventEdit, EventList, EventShow } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
-import { TherapyCreate, TherapyEdit, TherapyList } from '@admin/components/Therapy';
+import { TherapyCreate, TherapyEdit, TherapyList, TherapyShow } from '@admin/components/Therapy';
 import {
   OrganizationCreate,
   OrganizationShow,
   OrganizationsList,
   OrganizationEdit,
 } from '@admin/components/ServiceProvider/Organization';
+import { MethodsList, MethodsShow, MethodsEdit, MethodsCreate } from '@admin/components/Methods';
 
 import {
   SpecialistCreate,
@@ -50,7 +51,7 @@ export default function AdminPage() {
         list={TherapyList}
         edit={TherapyEdit}
         create={TherapyCreate}
-        show={ShowGuesser}
+        show={TherapyShow}
       />
       <Resource
         name={RESOURCES.event}
@@ -66,13 +67,6 @@ export default function AdminPage() {
         edit={EditGuesser}
         show={ShowGuesser}
         options={{ label: 'Райони' }}
-      />
-      <Resource
-        name={RESOURCES.specialization}
-        list={ListGuesser}
-        edit={EditGuesser}
-        show={ShowGuesser}
-        options={{ label: 'Спеціалізації' }}
       />
       <Resource
         name={RESOURCES.address}
@@ -99,6 +93,14 @@ export default function AdminPage() {
         list={ListGuesser}
         show={ShowGuesser}
         edit={EditGuesser}
+      />
+      <Resource
+        name={RESOURCES.method}
+        list={MethodsList}
+        show={MethodsShow}
+        edit={MethodsEdit}
+        create={MethodsCreate}
+        options={{ label: 'Напрями і методи терапії' }}
       />
     </Admin>
   );

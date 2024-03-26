@@ -1,67 +1,42 @@
 import { PrismaClient } from '@prisma/client';
+import {
+  districts,
+  organizationTypes,
+  psychologyMethods,
+  psychotherapyMethods,
+  requests,
+  specializations,
+  therapies,
+} from './data.mjs';
 
 const prisma = new PrismaClient();
 
-const districts = ['Личаківський', 'Шевченківський', 'Франківський', 'Залізничний', 'Галицький', 'Сихівський'].map(
-  name => ({ name }),
+specializations.push(
+  {
+    name: 'Психолог',
+    methods: {
+      connectOrCreate: psychologyMethods.map(method => {
+        const { title, description } = method;
+        return {
+          where: { title },
+          create: { title, description },
+        };
+      }),
+    },
+  },
+  {
+    name: 'Психотерапевт',
+    methods: {
+      connectOrCreate: psychotherapyMethods.map(method => {
+        const { title, description } = method;
+        return {
+          where: { title },
+          create: { title, description },
+        };
+      }),
+    },
+  },
 );
-
-const specializations = ['Психолог', 'Психотерапевт', 'Психіатр', 'Сексолог', 'Соціальний працівник'].map(name => ({
-  name,
-}));
-
-const organizationTypes = ['Психологічний центр', 'Соціальна служба', 'Лікарня'].map(name => ({ name }));
-
-const therapies = [
-  {
-    isActive: true,
-    type: 'individual',
-    title: 'Індивідуальна',
-    description: 'для тебе',
-    imagePath: '/assets/images/therapy_individual.svg',
-    priority: 6,
-  },
-  {
-    isActive: true,
-    type: 'kids',
-    title: 'Для дітей і підлітків',
-    description: 'для найрідніших',
-    imagePath: '/assets/images/therapy_kids.svg',
-    priority: 5,
-  },
-  {
-    isActive: true,
-    type: 'family',
-    title: 'Сімейна',
-    description: 'для всієї родини',
-    imagePath: '/assets/images/therapy_family.svg',
-    priority: 4,
-  },
-  {
-    isActive: true,
-    type: 'group',
-    title: 'Групова',
-    description: 'для людей з однаковими потребами',
-    imagePath: '/assets/images/therapy_group.svg',
-    priority: 3,
-  },
-  {
-    isActive: true,
-    type: 'pair',
-    title: 'Для пар',
-    description: 'для тебе і партнера',
-    imagePath: '/assets/images/therapy_pair.svg',
-    priority: 2,
-  },
-  {
-    isActive: true,
-    type: 'business',
-    title: 'Для бізнесу',
-    description: 'для співробітників',
-    imagePath: '/assets/images/therapy_business.svg',
-    priority: 1,
-  },
-];
 
 async function createIfNotExist(model, data, filter) {
   // eslint-disable-next-line no-restricted-syntax
@@ -72,12 +47,20 @@ async function createIfNotExist(model, data, filter) {
 }
 
 async function main() {
-  await createIfNotExist(prisma.therapy, therapies, therapy => ({ type: therapy.type }));
-  await createIfNotExist(prisma.district, districts, district => ({ name: district.name }));
-  await createIfNotExist(prisma.specialization, specializations, specialization => ({ name: specialization.name }));
-  await createIfNotExist(prisma.organizationType, organizationTypes, organizationType => ({
-    name: organizationType.name,
-  }));
+  await createIfNotExist(prisma.district, districts, ({ name }) => ({ name }));
+  await createIfNotExist(prisma.request, requests, ({ name }) => ({ name }));
+  await createIfNotExist(prisma.specialization, specializations, ({ name }) => ({ name }));
+  await createIfNotExist(prisma.organizationType, organizationTypes, ({ name }) => ({ name }));
+  await createIfNotExist(
+    prisma.method,
+    psychotherapyMethods
+      .map(method => ({ ...method, specialization: { connect: { name: 'Психотерапевт' } } }))
+      .concat(psychologyMethods.map(method => ({ ...method, specialization: { connect: { name: 'Психолог' } } }))),
+    method => ({ title: method.title }),
+  );
+
+  // depends on 'requests', they should be created before therapies
+  await createIfNotExist(prisma.therapy, therapies, ({ type }) => ({ type }));
 }
 
 main().then(
