@@ -58,18 +58,18 @@ export function ChipList({ id, className, items, wrap }) {
     <ul ref={chipListRef} className={cn('flex w-full gap-2', wrap && 'flex-wrap', className)}>
       {truncateAt >= items.length || truncateAt === null ? (
         items.map(el => (
-          <ChipListItem key={el.id} name={el.name} color={el.color} textColor={el.textColor} icon={el.icon} />
+          <ChipListItem key={el.id} title={el.text} color={el.color} textColor={el.textColor} icon={el.icon} />
         ))
       ) : (
         <>
           {items.slice(0, truncateAt).map(el => (
-            <ChipListItem key={el.id} name={el.name} color={el.color} textColor={el.textColor} icon={el.icon} />
+            <ChipListItem key={el.id} title={el.text} color={el.color} textColor={el.textColor} icon={el.icon} />
           ))}
 
           <ShowHint id={id} opens={id}>
             <div className="relative">
               <ChipListItem
-                name={`${truncatedCount}+`}
+                title={`${truncatedCount}+`}
                 color="rgba(0,0,0,0)"
                 textColor={presets.theme.colors.gray[900]}
               />
@@ -88,7 +88,7 @@ export function ChipList({ id, className, items, wrap }) {
   );
 }
 
-function ChipListItem({ name, icon, color, textColor }) {
+function ChipListItem({ text, icon, color, textColor }) {
   return (
     <div
       className="flex items-center gap-1 rounded-full bg-primary-300 px-3 py-1 text-c3 font-medium"
@@ -103,7 +103,7 @@ function ChipListItem({ name, icon, color, textColor }) {
           color: textColor,
         }}
       >
-        {name}
+        {text}
       </span>
     </div>
   );
@@ -111,7 +111,7 @@ function ChipListItem({ name, icon, color, textColor }) {
 
 const chipListPropType = {
   id: PropTypes.any,
-  name: PropTypes.string,
+  text: PropTypes.string,
   color: PropTypes.string,
   textColor: PropTypes.string,
   icon: PropTypes.node,
