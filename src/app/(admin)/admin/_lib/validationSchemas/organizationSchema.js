@@ -43,6 +43,8 @@ const activeOrganizationSchema = restCreateProps.extend({
 
 const draftOrganizationSchema = restCreateProps.partial().extend({
   isActive: z.literal(false),
+  ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']).nullish(),
+  isInclusiveSpace: z.boolean(),
   expertSpecializations: zStringArray.nullish(),
 });
 
@@ -69,6 +71,8 @@ const activeOrganizationEditSchema = restEditProps.extend({
   therapiesIds: zStringArray,
   organizationTypesIds: zStringArray.default([]),
   expertSpecializationIds: zStringArray.default([]),
+  ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']),
+  isInclusiveSpace: z.boolean(),
   description: zString,
   isActive: z.literal(true),
 });
@@ -76,6 +80,8 @@ const activeOrganizationEditSchema = restEditProps.extend({
 const draftOrganizationEditSchema = restEditProps.partial().extend({
   isActive: z.literal(false),
   expertSpecializationIds: zStringArray.nullish(),
+  ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']).nullish(),
+  isInclusiveSpace: z.boolean(),
 });
 
 const organizationSchemaEditUnion = z.discriminatedUnion('isActive', [
