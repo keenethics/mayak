@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { Price } from '@icons/index';
-import { therapyPricePropType } from '@components/CardSpecialist/prop-types';
+import { supportFocusesPropType } from '@components/CardSpecialist/prop-types';
 import { cn } from '@/utils/cn';
 
-export function TherapyPrices({ therapyPrices, className }) {
+export function TherapyPrices({ supportFocuses, className }) {
+  const therapyPrices = supportFocuses?.filter(el => el.price !== null);
+
   return (
     <div className={cn('flex flex-row gap-3 md:gap-4', className)}>
       <span className="text-gray-500 lg:mt-[3px]">
@@ -32,6 +34,6 @@ export function TherapyPrices({ therapyPrices, className }) {
 }
 
 TherapyPrices.propTypes = {
-  therapyPrices: PropTypes.arrayOf(therapyPricePropType),
+  supportFocuses: PropTypes.arrayOf(supportFocusesPropType),
   className: PropTypes.string,
 };

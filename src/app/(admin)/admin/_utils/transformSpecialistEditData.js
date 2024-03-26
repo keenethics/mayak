@@ -1,7 +1,8 @@
-import { toConnectList, transformEditData, transformTherapyPrices } from './common';
+import { toConnectList, transformEditData } from './common';
 
 export function transformSpecialistEditData({
   specializationsIds,
+  specializationMethodsIds,
   socialLink,
   therapyPricesEdit,
   therapyPrices,
@@ -9,22 +10,22 @@ export function transformSpecialistEditData({
   ...rest
 }) {
   const specializationsToConnect = toConnectList(specializationsIds);
-  const base = transformEditData({ ...rest, therapiesIds, therapyPrices });
+  const specializationMethodsToConnect = toConnectList([].concat(...Object.values(specializationMethodsIds)));
 
-  const newTherapiesPrices = transformTherapyPrices(therapiesIds, therapyPricesEdit);
-  const currentTherapyPrices = toConnectList(therapyPrices, el => el.id);
+  const base = transformEditData({ ...rest, therapiesIds, therapyPrices });
 
   return {
     ...base,
     ...socialLink,
-    therapyPrices: {
-      create: newTherapiesPrices,
-      deleteMany: currentTherapyPrices,
-    },
     specializations: {
       set: [],
       connect: specializationsToConnect,
     },
+    specializationMethods: {
+      set: [],
+      connect: specializationMethodsToConnect,
+    },
+    specializationMethodsIds: undefined,
     specializationsIds: undefined,
   };
 }
