@@ -71,6 +71,13 @@ async function main() {
   await createIfNotExist(prisma.organizationType, organizationTypes, organizationType => ({
     name: organizationType.name,
   }));
+  await createIfNotExist(
+    prisma.method,
+    psychotherapyMethods
+      .map(method => ({ ...method, specialization: { connect: { name: 'Психотерапевт' } } }))
+      .concat(psychologyMethods.map(method => ({ ...method, specialization: { connect: { name: 'Психолог' } } }))),
+    method => ({ title: method.title }),
+  );
 }
 
 main().then(
