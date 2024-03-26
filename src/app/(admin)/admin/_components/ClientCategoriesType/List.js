@@ -9,7 +9,7 @@ export function ClientCategoryList() {
         <EditButton label="Редагувати" />
         <DeleteWithConfirmButton
           confirmContent="Ви впевнені?"
-          confirmTitle="Дані будуть видалені із бази."
+          confirmTitle="Дана категорія клієнтів буде вилена із усіх спеціалістів\організацій у яких була зазначена."
           confirmColor="warning"
           label="Видалити"
         />
