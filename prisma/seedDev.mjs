@@ -20,7 +20,7 @@ function uniqueObjectsWithId(instances) {
   return faker.helpers
     .uniqueArray(
       instances.map(s => s.id),
-      faker.number.int({ min: 1, max: 3 }),
+      faker.number.int({ min: 1, max: instances.length }),
     )
     .map(id => ({ id }));
 }
@@ -40,6 +40,26 @@ function randomAddress(districts, isPrimary) {
   };
 }
 
+function randomSupportFocusArray({ therapies }) {
+  const uniqueTherapiesIdsArray = uniqueObjectsWithId(therapies);
+
+  const uniqueTherapiesArray = uniqueTherapiesIdsArray.map(({ id: therapyId }) =>
+    therapies.find(therapy => therapy.id === therapyId),
+  );
+
+  return uniqueTherapiesArray.map(therapy => ({
+    price: Math.random() > 0.5 ? faker.number.int({ min: 0, max: 20 }) * 100 : null,
+    therapy: {
+      connect: {
+        id: therapy.id,
+      },
+    },
+    requests: {
+      connect: uniqueObjectsWithId(therapy.requests),
+    },
+  }));
+}
+
 function generateSocialMediaLinks() {
   const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
 
@@ -49,21 +69,6 @@ function generateSocialMediaLinks() {
       .slice(0, Math.floor(Math.random() * 5) + 1)
       .map(network => [network, faker.internet.url()]),
   );
-}
-
-function randomTherapyPrices(selectedTherapies) {
-  const therapyPrices = [];
-  selectedTherapies.forEach(el => {
-    if (Math.random() > 0.5) {
-      therapyPrices.push({
-        price: faker.number.int({ min: 0, max: 20 }) * 100,
-        therapy: {
-          connect: el,
-        },
-      });
-    }
-  });
-  return therapyPrices;
 }
 
 function setClientCategories(categories) {
@@ -85,7 +90,7 @@ function randomSpecialist({ districts, specializations, therapies, clientCategor
         .map((_, i) => randomAddress(districts, i === 0)),
     };
   }
-  const specialistTherapies = uniqueObjectsWithId(therapies);
+
   const phoneRegexp = '+380[0-9]{9}';
 
   const socialMediaLinks = generateSocialMediaLinks();
@@ -105,11 +110,8 @@ function randomSpecialist({ districts, specializations, therapies, clientCategor
     // take one of these
     formatOfWork,
     addresses,
-    therapies: {
-      connect: specialistTherapies,
-    },
-    therapyPrices: {
-      create: randomTherapyPrices(specialistTherapies),
+    supportFocuses: {
+      create: randomSupportFocusArray({ therapies }),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
@@ -150,8 +152,8 @@ function randomOrganization({ therapies, districts, organizationTypes, clientCat
       connect: uniqueObjectsWithId(organizationTypes),
     },
     addresses,
-    therapies: {
-      connect: uniqueObjectsWithId(therapies),
+    supportFocuses: {
+      create: randomSupportFocusArray({ therapies }),
     },
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
@@ -241,7 +243,7 @@ async function main() {
     data: faqs,
   });
 
-  const therapies = await prisma.therapy.findMany({ select: { id: true } });
+  const therapies = await prisma.therapy.findMany({ select: { id: true, requests: true } });
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });

@@ -7,6 +7,7 @@ import {
   specialistCore,
   zCreateAddressSchema,
   zEditAddressSchema,
+  zSupportFocusSchema,
   zInteger,
   zString,
   zStringArray,
@@ -32,9 +33,8 @@ const restCreateProps = zSpecialistSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
-  therapies: zStringArray,
-  therapyPricesCreate: z.record(z.string(), z.any()).nullish(),
-  // clientsWorkingWith: z.string().array().default([]),
+
+  // clientsWorkingWith: z.string().array().default([]),  //TODO check it for sure
   // clientsNotWorkingWith: z.string().array().default([]),
 });
 
@@ -45,10 +45,15 @@ const createDefaultProps = z.object({
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
+  supportFocuses: zSupportFocusSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   isActive: z.literal(true),
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
+  supportFocuses: zSupportFocusSchema.array().nullish(),
+  addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
 
@@ -62,19 +67,7 @@ const restEditProps = zSpecialistSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
-  therapiesIds: zStringArray,
-  therapyPrices: z.array(
-    z.object({
-      id: z.string(),
-      price: z.number(),
-      therapy: z.object({
-        id: z.string(),
-      }),
-    }),
-  ),
-  therapyPricesEdit: z.record(z.string(), z.any()),
-  clientsWorkingWithIds: z.string().array().default([]),
-  clientsNotWorkingWithIds: z.string().array().default([]),
+  supportFocusesIds: z.string().array().nullish(),
 });
 
 const editDefaultProps = z.object({
@@ -84,10 +77,15 @@ const editDefaultProps = z.object({
 });
 
 const activeSpecialistEditSchema = restEditProps.extend({
+  supportFocuses: zSupportFocusSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   isActive: z.literal(true),
 });
 
 const draftSpecialistEditSchema = restEditProps.partial().extend({
+  supportFocuses: zSupportFocusSchema.array().nullish(),
+  addresses: zEditAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
 

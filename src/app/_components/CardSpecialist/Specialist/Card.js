@@ -17,7 +17,6 @@ import { specialistPropType } from '@components/CardSpecialist/prop-types';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   if (!specialist) throw new Error('Specialist is not found');
-
   const {
     id,
     gender,
@@ -28,8 +27,8 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     yearsOfExperience,
     isFreeReception,
     formatOfWork,
-    therapyPrices,
     addresses,
+    supportFocuses,
     phone,
     email,
     website,
@@ -50,7 +49,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
 
   return (
-    <CardWrapper className={className} id={id}>
+    <CardWrapper className={className} id={id} type="specialist">
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
         <ProfileImage gender={gender} className="relative sm:w-[70px] md:max-w-[200px] lg:w-[200px]">
           <SocialsList socials={socials} className="absolute bottom-4" />
@@ -76,7 +75,8 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           <>
             <DetailsList
               className="border-t border-dashed border-t-gray-200 pt-4"
-              details={{ addresses, description, therapyPrices }}
+              details={{ addresses, description, supportFocuses }}
+              text="спеціаліста"
             />
             <ContactsList
               truncate={!extended}
@@ -92,7 +92,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
             <Link
-              href={`/specialist/${id}`}
+              href={`/specialist/${id}?type=specialist`}
               scroll={false}
               className="mt-auto hidden self-end justify-self-end md:inline-block"
             >

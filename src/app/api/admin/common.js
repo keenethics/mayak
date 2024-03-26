@@ -11,16 +11,12 @@ export const MODEL_SEARCH_FIELDS = {
 
 export const MODEL_INCLUDES = {
   [RESOURCES.specialist]: {
-    therapies: { select: { id: true, type: true, title: true } },
-    therapyPrices: {
+    supportFocuses: {
       select: {
         id: true,
         price: true,
-        therapy: {
-          select: {
-            id: true,
-          },
-        },
+        therapy: { select: { id: true, title: true, type: true } },
+        requests: true,
       },
     },
     specializations: { select: { id: true, name: true } },
@@ -37,7 +33,14 @@ export const MODEL_INCLUDES = {
     clientsNotWorkingWith: { select: { id: true, name: true } },
   },
   [RESOURCES.organization]: {
-    therapies: { select: { id: true, type: true, title: true } },
+    supportFocuses: {
+      select: {
+        id: true,
+        price: true,
+        therapy: { select: { id: true, title: true, type: true } },
+        requests: true,
+      },
+    },
     type: { select: { id: true, name: true } },
     addresses: {
       select: {
@@ -55,6 +58,12 @@ export const MODEL_INCLUDES = {
     additionalLink: { select: { label: true, link: true } },
     tags: { select: { name: true } },
   },
+  [RESOURCES.therapy]: {
+    requests: { select: { id: true, name: true } },
+    _count: {
+      select: { requests: true },
+    },
+  },
   [RESOURCES.method]: {
     specialization: { select: { name: true } },
   },
@@ -66,30 +75,32 @@ export function searchInputFilters(modelName, filter) {
   return { OR: filters };
 }
 
+/* eslint-disable no-param-reassign */
 export function transformServiceProvider(instance, modelName) {
   // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
   // React Admin issues
   if (modelName === RESOURCES.organization) {
-    // eslint-disable-next-line no-param-reassign
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
   } else {
-    // eslint-disable-next-line no-param-reassign
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
-  // eslint-disable-next-line no-param-reassign
-  instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
-  // eslint-disable-next-line no-param-reassign
+
   instance.clientsWorkingWithIds = instance.clientsWorkingWith.map(({ id }) => id);
-  // eslint-disable-next-line no-param-reassign
+
   instance.clientsNotWorkingWithIds = instance.clientsNotWorkingWith.map(({ id }) => id);
-  // eslint-disable-next-line no-param-reassign
-  instance.addressesIds = instance.addresses.map(address => address.id);
-  // eslint-disable-next-line no-param-reassign
+  instance.supportFocusesIds = instance.supportFocuses.map(focus => focus.id);
+  instance.supportFocuses = instance?.supportFocuses?.map(focus => ({
+    ...focus,
+    requestsIds: focus.requests.map(request => request.id),
+  }));
+
   instance.addresses = instance?.addresses?.map(address => ({
     ...address,
     districtId: address.district.id,
   }));
+  instance.addressesIds = instance.addresses.map(address => address.id);
 }
+/* eslint-enable no-param-reassign */
 
 export function withErrorHandlerAndAuth(handler) {
   return auth(

@@ -6,7 +6,7 @@ import { MODEL_INCLUDES, searchInputFilters, transformServiceProvider, withError
 const handler = withErrorHandlerAndAuth(async req => {
   const json = await req.json();
 
-  const modelName = json.resource.toLowerCase();
+  const modelName = json.resource.charAt(0).toLowerCase() + json.resource.slice(1);
   const isServiceProvider = modelName === 'specialist' || modelName === 'organization';
 
   const getOneTransform = instance => {
@@ -33,7 +33,8 @@ const handler = withErrorHandlerAndAuth(async req => {
         districts: true,
         specializations: true,
         therapies: true,
-        therapyPrices: true,
+        supportFocuses: true,
+        requests: true,
         type: true,
         clientsWorkingWith: true,
         clientsNotWorkingWith: true,
@@ -41,6 +42,7 @@ const handler = withErrorHandlerAndAuth(async req => {
       include: MODEL_INCLUDES[modelName],
     },
   });
+
   return NextResponse.json(result);
 });
 

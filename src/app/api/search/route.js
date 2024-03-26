@@ -29,9 +29,11 @@ export async function GET(req) {
   );
   const whereFilter = {
     AND: {
-      therapies: type && {
+      supportFocuses: type && {
         some: {
-          type,
+          therapy: {
+            type,
+          },
         },
       },
       isActive: true,
@@ -45,15 +47,26 @@ export async function GET(req) {
       },
     },
   };
+
   const sharedInclude = {
-    therapies: { select: { title: true } },
+    supportFocuses: {
+      select: {
+        id: true,
+        price: true,
+        therapy: true,
+        requests: true,
+      },
+    },
     addresses: {
       select: {
+        id: true,
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { id: true, name: true } },
       },
     },
+    clientsWorkingWith: true,
+    clientsNotWorkingWith: true,
   };
 
   const totalCount = await prisma.searchEntry.count({
