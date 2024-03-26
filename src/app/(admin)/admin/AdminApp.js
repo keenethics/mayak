@@ -6,7 +6,7 @@ import { dataProvider } from 'ra-data-simple-prisma';
 import { RESOURCES } from '@admin/_lib/consts';
 import { EventCreate, EventEdit, EventList, EventShow } from '@admin/components/Event';
 import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
-import { TherapyCreate, TherapyEdit, TherapyList } from '@admin/components/Therapy';
+import { TherapyCreate, TherapyEdit, TherapyList, TherapyShow } from '@admin/components/Therapy';
 import {
   OrganizationCreate,
   OrganizationShow,
@@ -51,7 +51,7 @@ export default function AdminPage() {
         list={TherapyList}
         edit={TherapyEdit}
         create={TherapyCreate}
-        show={ShowGuesser}
+        show={TherapyShow}
       />
       <Resource
         name={RESOURCES.event}

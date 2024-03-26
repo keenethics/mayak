@@ -27,7 +27,8 @@ export function OrganizationShow() {
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
-        <TextField label="Назва" source="name" />
+        <BooleanField label="Інклюзівний простір" source="isInclusiveSpace" />
+        <TextField label="Тип власності" source="ownershipType" />
         <DateField label="Дата додавання в сервіс" showTime source="createdAt" />
         <NumberField label="Роки на ринку" source="yearsOnMarket" />
         <TextField label="Формат послуг" source="formatOfWork" />
@@ -39,10 +40,16 @@ export function OrganizationShow() {
             <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
-        <ArrayField label="Типи терапії" source="therapies">
-          <SingleFieldList linkType={false}>
-            <ChipField source="title" size="small" />
-          </SingleFieldList>
+        <ArrayField label="Типи терапій" source="supportFocuses">
+          <Datagrid bulkActionButtons={false}>
+            <TextField label="Тип" source="therapy.title" />
+            <TextField label="Ціна" source="price" />
+            <ArrayField label="Запити" source="requests">
+              <SingleFieldList linkType={false} className="p-3">
+                <ChipField source="name" size="small" />
+              </SingleFieldList>
+            </ArrayField>
+          </Datagrid>
         </ArrayField>
         <BooleanField label="Безкоштовний прийом" source="isFreeReception" />
         <BooleanField label="Активна/неактивна" source="isActive" />

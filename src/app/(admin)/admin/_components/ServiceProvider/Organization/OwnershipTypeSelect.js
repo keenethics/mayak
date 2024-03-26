@@ -6,7 +6,9 @@ import { FormTranslations } from '@admin/_lib/translations';
 
 export function OwnershipTypeSelect({ label, ...props }) {
   const choices = getChoicesList(Object.values(OwnershipType), FormTranslations.ownershipType);
-  return <SelectInput name="ownershipType" source="ownershipType" label={label} choices={choices} fullWidth {...props} />;
+  return (
+    <SelectInput name="ownershipType" source="ownershipType" label={label} choices={choices} fullWidth {...props} />
+  );
 }
 
 OwnershipTypeSelect.propTypes = {
