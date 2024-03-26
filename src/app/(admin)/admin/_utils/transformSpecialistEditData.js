@@ -25,6 +25,7 @@ export function transformSpecialistEditData({
       set: [],
       connect: specializationMethodsToConnect,
     },
+    specializationMethodsIds: undefined,
     specializationsIds: undefined,
   };
 }
