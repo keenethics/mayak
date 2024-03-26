@@ -3,22 +3,17 @@ import { Map } from '@components/Map';
 import { CardSpecialist } from '@components/CardSpecialist/Specialist/Card';
 import { CardModalWrapper } from '@components/CardSpecialist/CardModalWrapper';
 import { specialistPropType } from '@components/CardSpecialist/prop-types';
+import { addressesToPoints } from '@/utils/common';
 
 export function CardSpecialistExtended({ specialist, className }) {
-  const addressesPoints = specialist.addresses.map(({ fullAddress, latitude, longitude }) => ({
-    title: fullAddress,
-    latitude,
-    longitude,
-  }));
-  const center = [addressesPoints[0].latitude, addressesPoints[1].longitude];
+  const points = addressesToPoints(specialist.addresses);
+  const center = [points[0].latitude, points[1].longitude];
 
   return (
     <CardModalWrapper className="mt-[40px] w-full max-w-[1080px] lg:mt-0 lg:w-[1080px]" key={specialist.id}>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3 lg:gap-6">
         <CardSpecialist specialist={specialist} className={className} extended />
-        <div className="h-[198px] w-full md:h-[232px]">
-          <Map points={addressesPoints} center={center} zoom={13} />
-        </div>
+        <Map points={points} center={center} zoom={13} className="h-[198px] w-full lg:h-[232px]" />
       </div>
     </CardModalWrapper>
   );
