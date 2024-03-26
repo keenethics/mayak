@@ -6,7 +6,7 @@ const districts = ['Личаківський', 'Шевченківський', '
   name => ({ name }),
 );
 
-const specializations = ['Психотерапевт', 'Психолог', 'Психіатр', 'Сексолог', 'Соціальний працівник'].map(name => ({
+const specializations = ['Психіатр', 'Сексолог', 'Соціальний працівник'].map(name => ({
   name,
 }));
 
@@ -85,12 +85,12 @@ const psychotherapyMethods = [
   {
     title: 'Психодинамічний підхід',
     description:
-      'Его, несвідоме, Фройд - це про психодинамічний підхід. Розв\'язання внутрішніх конфліктів, виявлення несвідомих патернів поведінки та її мотивів для особистісного зростання',
+      "Его, несвідоме, Фройд - це про психодинамічний підхід. Розв'язання внутрішніх конфліктів, виявлення несвідомих патернів поведінки та її мотивів для особистісного зростання",
   },
   {
     title: 'Психодраматична терапія (= Психодрама)',
     description:
-      'Психодраматична терапія використовує театралізацію та рольову гру для для вираження та розв\'язання психічних конфліктів та проблем.',
+      "Психодраматична терапія використовує театралізацію та рольову гру для для вираження та розв'язання психічних конфліктів та проблем.",
   },
   {
     title: 'Символдрама / Кататимно-імагінативна психотерапія',
@@ -165,12 +165,12 @@ const psychologyMethods = [
   {
     title: 'Військова психологія',
     description:
-      'Фахівець з надання допомоги військовослужбовцям та їх сім\'ям, вирішує психологічні проблеми, підвищує психологічну стійкість та адаптацію у військовому середовищі.',
+      "Фахівець з надання допомоги військовослужбовцям та їх сім'ям, вирішує психологічні проблеми, підвищує психологічну стійкість та адаптацію у військовому середовищі.",
   },
   {
     title: 'Сімейна психологія',
     description:
-      'Фахівець з розв\'язання конфліктів, покращення взаємин та комунікації в родині, надає підтримку у сімейних труднощах та кризах.',
+      "Фахівець з розв'язання конфліктів, покращення взаємин та комунікації в родині, надає підтримку у сімейних труднощах та кризах.",
   },
   {
     title: 'Шкільна психологія',
@@ -205,7 +205,32 @@ const psychologyMethods = [
     title: 'Інше',
   },
 ];
-
+specializations.push(
+  {
+    name: 'Психолог',
+    methods: {
+      connectOrCreate: psychologyMethods.map(method => {
+        const { title, description } = method;
+        return {
+          where: { title },
+          create: { title, description },
+        };
+      }),
+    },
+  },
+  {
+    name: 'Психотерапевт',
+    methods: {
+      connectOrCreate: psychotherapyMethods.map(method => {
+        const { title, description } = method;
+        return {
+          where: { title },
+          create: { title, description },
+        };
+      }),
+    },
+  },
+);
 const therapies = [
   {
     isActive: true,
@@ -272,13 +297,6 @@ async function main() {
   await createIfNotExist(prisma.organizationType, organizationTypes, organizationType => ({
     name: organizationType.name,
   }));
-  await createIfNotExist(
-    prisma.method,
-    psychotherapyMethods
-      .map(method => ({ ...method, specialization: { connect: { name: 'Психотерапевт' } } }))
-      .concat(psychologyMethods.map(method => ({ ...method, specialization: { connect: { name: 'Психолог' } } }))),
-    method => ({ title: method.title }),
-  );
 }
 
 main().then(

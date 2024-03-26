@@ -10,9 +10,9 @@ export const districtPropType = PropTypes.shape(relatedInstanceCore);
 
 export const therapyPropType = PropTypes.shape(relatedInstanceCore);
 
-export const therapyPricePropType = PropTypes.shape({
+export const supportFocusesPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.number,
   therapy: PropTypes.shape({
     title: PropTypes.string.isRequired,
   }),
@@ -38,8 +38,7 @@ export const specialistPropType = PropTypes.shape({
   yearsOfExperience: PropTypes.number,
   formatOfWork: PropTypes.oneOf(Object.values(FormatOfWork)),
   addresses: PropTypes.arrayOf(addressPropType),
-  therapies: PropTypes.arrayOf(therapyPropType),
-  therapyPrices: PropTypes.arrayOf(therapyPricePropType),
+  supportFocuses: PropTypes.arrayOf(supportFocusesPropType),
   isFreeReception: PropTypes.bool,
   description: PropTypes.string,
   phone: PropTypes.string,
@@ -63,7 +62,7 @@ export const organizationPropType = PropTypes.shape({
   yearsOnMarket: PropTypes.number,
   formatOfWork: PropTypes.oneOf(Object.values(FormatOfWork)),
   addresses: PropTypes.arrayOf(addressPropType),
-  therapies: PropTypes.arrayOf(therapyPropType),
+  supportFocuses: PropTypes.arrayOf(supportFocusesPropType),
   isFreeReception: PropTypes.bool,
   description: PropTypes.string,
   phone: PropTypes.string,
