@@ -2,7 +2,7 @@ import { TextInput, required } from 'react-admin';
 import PropTypes from 'prop-types';
 import { FORM_TYPES } from '@admin/_lib/consts';
 import { FormFieldWrapper } from '@admin/components/FormFieldWrapper';
-import { SpecializationsSelect } from './SpecializationsSelect';
+import { SpecializationsSelect } from '../SpecializationsSelect';
 
 export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
   return (
@@ -12,7 +12,12 @@ export function GeneralInfoEditSpec({ type = FORM_TYPES.create }) {
         <TextInput key="lastName" name="lastName" type="text" label="Прізвище" validate={required()} />
         <TextInput key="surname" name="surname" type="text" label="По-батькові" />
       </div>
-      <SpecializationsSelect type={type} label="Спеціалізації" fullWidth />
+      <SpecializationsSelect
+        source={{ create: 'specializations', update: 'specializationsIds' }}
+        type={type}
+        label="Спеціалізації"
+        fullWidth
+      />
     </FormFieldWrapper>
   );
 }

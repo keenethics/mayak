@@ -37,7 +37,7 @@ export const zInteger = z
 
 export const zUrl = zString.url({ message: MESSAGES.unacceptableValue });
 
-export const specialistCore = z.object({
+export const serviceProviderCore = z.object({
   isActive: z.boolean().optional(),
   formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
     message: MESSAGES.unacceptableValue,

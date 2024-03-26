@@ -31,6 +31,8 @@ export const MODEL_INCLUDES = {
     },
   },
   [RESOURCES.organization]: {
+    therapies: { select: { id: true, type: true, title: true } },
+    expertSpecializations: { select: { id: true, name: true } },
     supportFocuses: {
       select: {
         id: true,
@@ -75,11 +77,15 @@ export function searchInputFilters(modelName, filter) {
 export function transformServiceProvider(instance, modelName) {
   // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
   // React Admin issues
+  /* eslint-disable no-param-reassign */
   if (modelName === RESOURCES.organization) {
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
+    instance.expertSpecializationIds = instance.expertSpecializations.map(({ id }) => id);
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
+  instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
+  instance.addressesIds = instance.addresses.map(address => address.id);
   instance.supportFocusesIds = instance.supportFocuses.map(focus => focus.id);
   instance.supportFocuses = instance?.supportFocuses?.map(focus => ({
     ...focus,
@@ -90,8 +96,8 @@ export function transformServiceProvider(instance, modelName) {
     districtId: address.district.id,
   }));
   instance.addressesIds = instance.addresses.map(address => address.id);
+  /* eslint-enable no-param-reassign */
 }
-/* eslint-enable no-param-reassign */
 
 export function withErrorHandlerAndAuth(handler) {
   return auth(
