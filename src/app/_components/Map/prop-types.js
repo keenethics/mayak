@@ -10,4 +10,5 @@ export const mapPropTypes = {
   ).isRequired,
   center: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
+  className: PropTypes.string,
 };
