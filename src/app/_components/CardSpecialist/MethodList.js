@@ -25,7 +25,7 @@ function makeCaption(specializations) {
 function Method({ id, title, description }) {
   return (
     <div className="grid h-[24px] w-fit place-items-center rounded-3xl bg-primary-100">
-      <span className="text-c3 w-full px-3 py-1 font-medium text-primary-600" data-tooltip-id={`method_tooltip_${id}`}>
+      <span className="w-full px-3 py-1 text-c3 font-medium text-primary-600" data-tooltip-id={`method_tooltip_${id}`}>
         {title}
       </span>
       <Tooltip
@@ -64,13 +64,13 @@ export function MethodList({ methods = [], specializations = [] }) {
         renderTruncator={({ hiddenItemsCount }) => {
           if (hiddenItemsCount > 0) {
             return (
-              <span className="text-c3 cursor-pointer text-gray-900" onClick={() => setExpanded(true)}>
+              <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(true)}>
                 +{hiddenItemsCount}
               </span>
             );
           }
           return (
-            <span className="text-c3 cursor-pointer text-gray-900" onClick={() => setExpanded(false)}>
+            <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(false)}>
               Приховати
             </span>
           );
