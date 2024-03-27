@@ -64,7 +64,10 @@ export function PriceFilter() {
   const [count, setCount] = useState(priceInUrl.length);
   return (
     <FilterBase filterText="Ціна" count={count}>
-      <PricesList setCount={setCount} defaultValue={priceInUrl} />
+      <PricesList
+        setCount={setCount}
+        defaultValue={Object.keys(priceVariants).filter(key => priceInUrl.includes(priceVariants[key]))}
+      />
     </FilterBase>
   );
 }

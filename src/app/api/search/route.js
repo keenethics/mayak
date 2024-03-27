@@ -3,26 +3,22 @@ import { NextResponse } from 'next/server';
 import { getSearchParamsFromRequest } from '@/utils/getSearchParamsFromRequest';
 import { prisma } from '@/lib/db';
 
+function parseDynamicPriceRange(price) {
+  const match = price.match(/from(\d+)to(\d+)/);
+  if (!match) return null;
+  const gteFilter = { price: { gte: parseInt(match[1], 10) } };
+  const ltFilter = { price: { lt: parseInt(match[2], 10) } };
+  return { AND: [gteFilter, ltFilter] };
+}
+
 function getPriceFilter(prices) {
-  const pricesFilter = [];
-  prices.forEach(price => {
-    if (price === 'free') {
-      pricesFilter.push({ price: { equals: 0 } });
-    }
-    if (price === 'below500') {
-      pricesFilter.push({ AND: [{ price: { gt: 0 } }, { price: { lt: 500 } }] });
-    }
-    if (price === 'from500to1000') {
-      pricesFilter.push({ AND: [{ price: { gte: 500 } }, { price: { lt: 1000 } }] });
-    }
-    if (price === 'from1000to1500') {
-      pricesFilter.push({ AND: [{ price: { gte: 1000 } }, { price: { lt: 1500 } }] });
-    }
-    if (price === 'above1500') {
-      pricesFilter.push({ price: { gte: 1500 } });
-    }
-  });
-  return pricesFilter;
+  const priceConditions = {
+    free: { price: { equals: 0 } },
+    below500: { AND: [{ price: { gt: 0 } }, { price: { lt: 500 } }] },
+    above1500: { price: { gte: 1500 } },
+  };
+
+  return prices.map(price => priceConditions[price] || parseDynamicPriceRange(price));
 }
 
 export async function GET(req) {
@@ -56,6 +52,7 @@ export async function GET(req) {
     }),
   );
   const priceFilter = price && getPriceFilter(price);
+
   const specializationIds = specializations && {
     some: { OR: specializations.map(id => ({ id })) },
   };
