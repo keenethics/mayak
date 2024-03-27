@@ -41,7 +41,7 @@ export function SearchProvider({ children }) {
     if (currentConfig.searchType === 'request') {
       router.push(`/specialist?request=${id}`);
     } else if (currentConfig.searchType === 'specialist' || currentConfig.searchType === 'organization') {
-      router.push(`/specialist/${id}`);
+      router.push(`/specialist/${id}?type=${currentConfig.searchType}`);
     }
   }
 

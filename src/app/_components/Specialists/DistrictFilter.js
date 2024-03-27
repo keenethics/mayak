@@ -42,7 +42,7 @@ function DistrictList() {
                 name={id}
                 value={id}
                 key={id}
-                checked={selectedDistricts.includes(id)}
+                checked={selectedDistricts?.includes(id)}
                 onChange={() => onChange(id)}
                 text={name}
               />
