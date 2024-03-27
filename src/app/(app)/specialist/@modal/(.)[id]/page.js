@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardSpecialistExtended, CardOrganizationExtended } from '@/app/_components/CardSpecialist';
+import { CardOrganizationExtended, CardSpecialistExtended } from '@components/CardSpecialist';
 import { getOrganizationById, getSpecialistById } from '@/app/(app)/specialist/utils';
 import NotFoundPage from '@/app/not-found';
 

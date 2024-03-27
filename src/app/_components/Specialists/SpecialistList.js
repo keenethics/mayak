@@ -7,6 +7,7 @@ import { useListEntries } from '@hooks';
 import { CircularProgress } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import _ from 'lodash';
+import { MapLink } from '@components/MapLink';
 
 function getProperEnding(count) {
   const lastDigit = count % 10;
@@ -39,6 +40,7 @@ export function SpecialistList({ className }) {
 
   return (
     <>
+      <MapLink buttonText="Показати карту" />
       <ul className={className}>
         <p className="hidden font-bold uppercase text-primary-600 md:block">{`Знайдено: ${totalCount} ${getProperEnding(totalCount)}`}</p>
         {entries.map(entry => (

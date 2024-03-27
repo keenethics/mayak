@@ -9,6 +9,13 @@ export const buttonColorVariant = {
       active: 'active:bg-primary-700',
       disabled,
     },
+    orange: {
+      regular: 'bg-secondary-400 text-other-white',
+      hover: 'hover:bg-secondary-300 hover:text-secondary-400',
+      focused: 'focus:outline-none focus:bg-secondary-500 focus:border-secondary-500 focus:text-other-white',
+      active: 'active:bg-secondary-600 active:border-gray-600 active:text-other-white',
+      disabled,
+    },
   },
   tonal: {
     lightblue: {
