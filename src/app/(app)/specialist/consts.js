@@ -9,6 +9,7 @@ export const specialistInclude = {
       therapy: true,
     },
   },
+  workTime: true,
   addresses: {
     include: {
       district: true,
@@ -33,4 +34,5 @@ export const organizationInclude = {
       district: true,
     },
   },
+  workTime: true,
 };
