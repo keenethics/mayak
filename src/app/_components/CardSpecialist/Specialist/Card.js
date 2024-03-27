@@ -14,6 +14,7 @@ import { SpecialistTitle } from '@components/CardSpecialist/SpecialistTitle';
 import { SpecializationsPanel } from '@components/CardSpecialist/SpecializationsPanel';
 import { getContactsList, getLabelsList, getSpecialistSocials } from '@components/CardSpecialist/config';
 import { specialistPropType } from '@components/CardSpecialist/prop-types';
+import { WorkTime } from '../WorkTime';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   if (!specialist) throw new Error('Specialist is not found');
@@ -30,6 +31,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     formatOfWork,
     addresses,
     supportFocuses,
+    workTime,
     phone,
     email,
     website,
@@ -43,12 +45,13 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     telegram,
   } = specialist;
   const specializationsList = specializations.map(s => s.name);
+  addresses.sort((a, b) => Number(b.isPrimary) - Number(a.isPrimary));
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork, specialistType: 'specialist' });
   const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
   const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
-
+  const workTimeElement = !!workTime?.length && <WorkTime workTime={workTime} />;
   return (
     <CardWrapper className={className} id={id} type="specialist">
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
@@ -56,6 +59,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           <SocialsList socials={socials} className="absolute bottom-4" />
         </ProfileImage>
         <ContactsList truncate={!extended} specialistId={id} contacts={contactsList} className="mt-4" />
+        {workTimeElement}
       </div>
       <div className="flex w-[100%] max-w-full flex-col gap-4 overflow-hidden md:ml-4">
         <header className="relative flex flex-row gap-2.5">
@@ -85,6 +89,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
               contacts={contactsList}
               className="border-t border-dashed border-t-gray-200 pt-3 md:hidden"
             />
+            <div className="flex md:hidden">{workTimeElement}</div>
             <SocialsList socials={socials} className="border-t border-dashed border-t-gray-200 pt-3 md:hidden" />
           </>
         ) : (

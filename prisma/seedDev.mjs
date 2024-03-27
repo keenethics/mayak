@@ -14,6 +14,10 @@ function nullable(value) {
   return Date.now() % 2 === 0 ? value : null;
 }
 
+function randomUndefined(value) {
+  return Date.now() % 2 === 0 ? value : undefined;
+}
+
 // returns array of unique objects with id field
 function uniqueObjectsWithId(instances) {
   if (instances.length === 0) return [];
@@ -71,6 +75,23 @@ function generateSocialMediaLinks() {
   );
 }
 
+function randomWorkTime() {
+  const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+  return {
+    connectOrCreate: weekdays.map(weekDay => {
+      const isDayOff = faker.datatype.boolean();
+      const time = !isDayOff
+        ? `0${faker.number.int({ min: 7, max: 9 })}:00 - ${faker.number.int({ min: 17, max: 20 })}:00`
+        : '';
+      const workTimeData = { isDayOff, weekDay, time };
+      return {
+        create: workTimeData,
+        where: { weekDay_time_isDayOff: workTimeData },
+      };
+    }),
+  };
+}
+
 function randomSpecialist({ districts, specializations, specializationMethods, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
@@ -106,6 +127,7 @@ function randomSpecialist({ districts, specializations, specializationMethods, t
     lastName: faker.person.lastName(),
     surname: nullable(faker.person.lastName()),
     gender,
+    workTime: randomUndefined(randomWorkTime()),
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
     // take one of these
     formatOfWork,
@@ -152,6 +174,7 @@ function randomOrganization({ therapies, districts, organizationTypes, expertSpe
     supportFocuses: {
       create: randomSupportFocusArray({ therapies }),
     },
+    workTime: randomUndefined(randomWorkTime()),
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
     phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
@@ -211,6 +234,7 @@ async function main() {
     await trx.faq.deleteMany();
     await trx.organization.deleteMany();
     await trx.searchEntry.deleteMany();
+    await trx.workTime.deleteMany();
   });
 
   const faqs = Array.from({ length: 15 }).map((_, i) => ({

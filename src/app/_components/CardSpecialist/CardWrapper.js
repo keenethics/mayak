@@ -25,7 +25,7 @@ export function CardWrapper({ children, className, id, type }) {
   return (
     <div
       className={cn(
-        'transition-all md:flex md:cursor-auto lg:mx-auto',
+        'transition-all md:flex md:cursor-auto',
         isExtendedCardOpened ? 'cursor-auto' : 'cursor-pointer',
         className,
       )}

@@ -9,7 +9,9 @@ import {
   SimpleShowLayout,
   SingleFieldList,
   TextField,
+  WrapperField,
 } from 'react-admin';
+import { WorkTimeShow } from '@admin/components/ServiceProvider/WorkTimeShow';
 
 export function SpecialistShow() {
   return (
@@ -40,6 +42,9 @@ export function SpecialistShow() {
             <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
+        <WrapperField label="Графік роботи">
+          <WorkTimeShow />
+        </WrapperField>
         <ArrayField label="Типи терапій" source="supportFocuses">
           <Datagrid bulkActionButtons={false}>
             <TextField label="Тип" source="therapy.title" />

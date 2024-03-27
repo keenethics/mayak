@@ -1,6 +1,6 @@
 import React from 'react';
-import { SpecialistList } from '@components/Specialists/SpecialistList';
 import { Filters } from '@components/Specialists/Filters';
+import { SpecialistList } from '@components/Specialists/SpecialistList';
 import { env } from '@/lib/env';
 
 export const metadata = {
@@ -14,9 +14,9 @@ export const revalidate = REVALIDATION_TIME;
 
 export default function Page() {
   return (
-    <div className="mx-auto mb-16 max-w-[900px] px-4 lg:px-0">
+    <div className="mx-auto mb-4 max-w-[1200px] px-4 lg:mb-8">
       <Filters />
-      <SpecialistList className="mt-5 md:mt-[22px]" />
+      <SpecialistList className="my-5 md:my-8" />
     </div>
   );
 }
