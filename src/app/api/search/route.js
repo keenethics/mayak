@@ -3,6 +3,28 @@ import { NextResponse } from 'next/server';
 import { getSearchParamsFromRequest } from '@/utils/getSearchParamsFromRequest';
 import { prisma } from '@/lib/db';
 
+function getPriceFilter(prices) {
+  const pricesFilter = [];
+  prices.forEach(price => {
+    if (price === 'free') {
+      pricesFilter.push({ price: { equals: 0 } });
+    }
+    if (price === 'below500') {
+      pricesFilter.push({ AND: [{ price: { gt: 0 } }, { price: { lt: 500 } }] });
+    }
+    if (price === 'from500to1000') {
+      pricesFilter.push({ AND: [{ price: { gte: 500 } }, { price: { lt: 1000 } }] });
+    }
+    if (price === 'from1000to1500') {
+      pricesFilter.push({ AND: [{ price: { gte: 1000 } }, { price: { lt: 1500 } }] });
+    }
+    if (price === 'above1500') {
+      pricesFilter.push({ price: { gte: 1500 } });
+    }
+  });
+  return pricesFilter;
+}
+
 export async function GET(req) {
   const {
     type,
@@ -12,6 +34,7 @@ export async function GET(req) {
     format,
     district: districts,
     specialization: specializations,
+    price,
   } = getSearchParamsFromRequest(
     req,
     {
@@ -21,6 +44,7 @@ export async function GET(req) {
       // take: 10,
       // skip: 0,
       district: undefined,
+      price: undefined,
     },
     params => ({
       ...params,
@@ -28,19 +52,20 @@ export async function GET(req) {
       skip: parseInt(params.skip, 10),
       district: typeof params.district === 'string' ? [params.district] : params.district,
       specialization: typeof params.specialization === 'string' ? [params.specialization] : params.specialization,
+      price: typeof params.price === 'string' ? [params.price] : params.price,
     }),
   );
-
+  const priceFilter = price && getPriceFilter(price);
   const specializationIds = specializations && {
     some: { OR: specializations.map(id => ({ id })) },
   };
-
   const sharedWhere = {
-    supportFocuses: type && {
+    supportFocuses: {
       some: {
-        therapy: {
+        therapy: type && {
           type,
         },
+        OR: priceFilter,
       },
     },
     isActive: true,
