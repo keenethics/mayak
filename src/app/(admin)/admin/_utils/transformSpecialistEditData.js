@@ -4,7 +4,6 @@ export function transformSpecialistEditData({
   specializationsIds,
   specializationMethodsIds,
   socialLink,
-  therapyPricesEdit,
   therapyPrices,
   therapiesIds,
   ...rest
