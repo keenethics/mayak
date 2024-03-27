@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { ClearSearchIcon, SearchIcon } from '@icons/index';
 import { PillButton } from '@components/PillButton';
 import { cn } from '@/utils/cn';
@@ -24,15 +24,17 @@ export function SearchInput() {
   const searchTypeDropDownRef = useRef(null);
   const autoCompleteRef = useRef(null);
 
-  useClickOutside(searchTypeDropDownRef, () => {
+  const handleClickOutsideSearchTypeDropDown = useCallback(() => {
     setIsSelectTypeOpen(false);
-  });
+  }, [setIsSelectTypeOpen]);
+  useClickOutside(searchTypeDropDownRef, handleClickOutsideSearchTypeDropDown);
 
-  useClickOutside(autoCompleteRef, () => {
+  const handleClickOutsideAutoComplete = useCallback(() => {
     if (!isInputFocused) {
       setIsAutoCompleteOpen(false);
     }
-  });
+  }, [setIsAutoCompleteOpen, isInputFocused]);
+  useClickOutside(autoCompleteRef, handleClickOutsideAutoComplete);
 
   return (
     <div className="flex w-full flex-col gap-4 lg:flex-row">

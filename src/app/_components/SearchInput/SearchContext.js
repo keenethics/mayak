@@ -1,11 +1,11 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { searchSyncKey, useSearchSync, useDebounce } from '@/app/_hooks';
-import { SEARCH_DEBOUNCE_TIME_MS, SEARCH_MIN_QUERY_LENGTH, getSearchTypeConfig } from './config';
+import { SEARCH_DEBOUNCE_TIME_MS, SEARCH_MIN_QUERY_LENGTH, getSearchTypeConfig, searchInputTypeEnum } from './config';
 
 const SearchContext = createContext();
 
@@ -18,12 +18,14 @@ export function SearchProvider({ children }) {
   const [isSelectTypeOpen, setIsSelectTypeOpen] = useState(false);
   const [isAutoCompleteOpen, setIsAutoCompleteOpen] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const currentConfig = getSearchTypeConfig(searchType);
+
+  const currentConfig = useMemo(() => getSearchTypeConfig(searchType), [searchType]);
+  const { searchType: currentSearchType } = currentConfig;
 
   const debouncedQuery = useDebounce(query, SEARCH_DEBOUNCE_TIME_MS);
   const { data: autoCompleteItems, isLoading: isAutoCompleteLoading } = useSearchSync(
     debouncedQuery,
-    currentConfig.searchType,
+    currentSearchType,
     SEARCH_MIN_QUERY_LENGTH,
   );
 
@@ -33,15 +35,18 @@ export function SearchProvider({ children }) {
   function submitSearch() {
     setIsAutoCompleteOpen(false);
     queryClient.cancelQueries({ queryKey: searchSyncKey });
-    router.push(`/specialist?searchType=${currentConfig.searchType}&query=${query}`);
+    router.push(`/specialist?searchType=${currentSearchType}&query=${query}`);
   }
   function navigateToAutoCompleteItem(id) {
     setIsAutoCompleteOpen(false);
     queryClient.cancelQueries({ queryKey: searchSyncKey });
-    if (currentConfig.searchType === 'request') {
+    if (currentSearchType === searchInputTypeEnum.REQUEST) {
       router.push(`/specialist?request=${id}`);
-    } else if (currentConfig.searchType === 'specialist' || currentConfig.searchType === 'organization') {
-      router.push(`/specialist/${id}?type=${currentConfig.searchType}`);
+    } else if (
+      currentSearchType === searchInputTypeEnum.SPECIALIST ||
+      currentSearchType === searchInputTypeEnum.ORGANIZATION
+    ) {
+      router.push(`/specialist/${id}?type=${currentSearchType}`);
     }
   }
 

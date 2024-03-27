@@ -44,17 +44,6 @@ function randomAddress(districts, isPrimary) {
   };
 }
 
-function generateSocialMediaLinks() {
-  const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
-
-  return Object.fromEntries(
-    socialMediaList
-      .sort(() => Math.random() - 0.5)
-      .slice(0, Math.floor(Math.random() * 5) + 1)
-      .map(network => [network, faker.internet.url()]),
-  );
-}
-
 function randomSupportFocusArray({ therapies }) {
   const uniqueTherapiesIdsArray = uniqueObjectsWithId(therapies);
 
