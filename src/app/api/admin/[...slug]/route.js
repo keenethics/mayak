@@ -6,13 +6,12 @@ import { MODEL_INCLUDES, searchInputFilters, transformServiceProvider, withError
 const handler = withErrorHandlerAndAuth(async req => {
   const json = await req.json();
 
-  const modelName = json.resource.toLowerCase();
+  const modelName = json.resource.charAt(0).toLowerCase() + json.resource.slice(1);
   const isServiceProvider = modelName === 'specialist' || modelName === 'organization';
 
   const getOneTransform = instance => {
     transformServiceProvider(instance, modelName);
   };
-
   const result = await defaultHandler(json, prisma, {
     getList: {
       debug: false,
@@ -32,14 +31,17 @@ const handler = withErrorHandlerAndAuth(async req => {
         addresses: true,
         districts: true,
         specializations: true,
+        specializationMethods: true,
         therapies: true,
-        therapyPrices: true,
+        supportFocuses: true,
+        requests: true,
         workTime: true,
         type: true,
       },
       include: MODEL_INCLUDES[modelName],
     },
   });
+
   return NextResponse.json(result);
 });
 

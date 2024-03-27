@@ -31,7 +31,9 @@ export const zInteger = z
     required_error: MESSAGES.requiredField,
     invalid_type_error: MESSAGES.unacceptableValue,
   })
-  .nonnegative()
+  .nonnegative({
+    message: 'Число має бути не менше 0',
+  })
   .nullish();
 
 export const zUrl = zString.url({ message: MESSAGES.unacceptableValue });
@@ -78,7 +80,7 @@ export const zWorkTimeSchema = z
     });
   });
 
-export const specialistCore = z.object({
+export const serviceProviderCore = z.object({
   isActive: z.boolean().optional(),
   formatOfWork: zString.refine(val => Object.values(FormatOfWork).includes(val), {
     message: MESSAGES.unacceptableValue,
@@ -115,6 +117,8 @@ export const specialistCore = z.object({
     ),
 });
 
+// ---- ADDRESS SECTION ----
+
 export const zEditAddressSchema = z.object({
   id: z.string().nullish(),
   fullAddress: zStringWithMax,
@@ -144,33 +148,23 @@ export const singlePrimaryAddressRefine = addresses => {
   return addresses.filter(el => el.isPrimary).length === 1;
 };
 
+// ---- SUPPORT FOCUS SECTION ----
+
+export const zSupportFocusSchema = z.object({
+  id: zString.nullish(),
+  price: zInteger.nullish(),
+  therapy: z.object({
+    id: zString,
+    title: zString,
+  }),
+  requestsIds: zString.array().min(1, {
+    message: 'Необхідно обрати хоча б один запит',
+  }),
+});
+
 export const createValidationSchema = (schemaUnion, defaultProperties) =>
   z.intersection(schemaUnion, defaultProperties).superRefine((schema, ctx) => {
-    const { formatOfWork, isActive, addresses, therapyPricesCreate, therapyPricesEdit, therapies, therapiesIds } =
-      schema;
-
-    function mapInvalidTherapyPrices(id, type) {
-      id?.forEach(el => {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'Ціна повинна бути цілим числом не менше 0',
-          path: [`${type === 'create' ? 'therapyPricesCreate' : 'therapyPricesEdit'}.${el}`],
-        });
-      });
-    }
-
-    if (therapyPricesCreate) {
-      mapInvalidTherapyPrices(
-        therapies?.filter(el => !zInteger.safeParse(therapyPricesCreate[el]).success),
-        'create',
-      );
-    }
-    if (therapyPricesEdit) {
-      mapInvalidTherapyPrices(
-        therapiesIds?.filter(el => !zInteger.safeParse(therapyPricesEdit[el]).success),
-        'edit',
-      );
-    }
+    const { formatOfWork, isActive, addresses } = schema;
 
     if (isActive && formatOfWork !== FormatOfWork.ONLINE && !addresses.length) {
       ctx.addIssue({

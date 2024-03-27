@@ -29,8 +29,8 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     yearsOfExperience,
     isFreeReception,
     formatOfWork,
-    therapyPrices,
     addresses,
+    supportFocuses,
     workTime,
     phone,
     email,
@@ -79,7 +79,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           <>
             <DetailsList
               className="border-t border-dashed border-t-gray-200 pt-4"
-              details={{ addresses, description, therapyPrices }}
+              details={{ addresses, description, supportFocuses }}
               text="спеціаліста"
             />
             <ContactsList

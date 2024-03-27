@@ -20,7 +20,7 @@ export function OrganizationEdit() {
         <DetailsEditOrg />
         <AddressesForm label="Адреси надання послуг" type="edit" />
         <WorkTimeForm />
-        <ServicesForm type="edit" label="Послуги" />
+        <ServicesForm label="Послуги" />
         <DescriptionEdit validate={required()} />
         <ContactsList />
         <SocialLinks />
