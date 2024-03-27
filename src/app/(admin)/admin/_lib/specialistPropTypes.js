@@ -9,7 +9,28 @@ const relatedInstanceCore = {
 
 export const districtPropType = PropTypes.shape(relatedInstanceCore);
 
-export const therapyPropType = PropTypes.shape(relatedInstanceCore);
+export const therapyPropType = PropTypes.shape({
+  ...relatedInstanceCore,
+  type: PropTypes.string,
+  title: PropTypes.string,
+  priority: PropTypes.number,
+  imagePath: PropTypes.string,
+  description: PropTypes.string,
+  isActive: PropTypes.bool,
+  createdAt: PropTypes.instanceOf(Date),
+});
+
+export const requestPropType = PropTypes.shape({
+  ...relatedInstanceCore,
+  therapies: PropTypes.arrayOf(therapyPropType),
+});
+
+export const therapiesCutPropType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  therapy: therapyPropType,
+  requests: PropTypes.arrayOf(requestPropType),
+  createdAt: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+});
 
 export const specializationPropType = PropTypes.shape(relatedInstanceCore);
 

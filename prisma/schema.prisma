@@ -30,63 +30,89 @@ enum EventPriceFormat {
   MIN_PRICE
 }
 
+enum OwnershipType {
+  PRIVATE
+  GOVERNMENT
+}
+
 model Specialist {
-  id                String           @id @default(uuid()) @db.Uuid
-  createdAt         DateTime         @default(now())
-  firstName         String           @db.VarChar(64)
-  lastName          String           @db.VarChar(64)
-  surname           String?          @db.VarChar(64)
-  specializations   Specialization[]
-  gender            Gender?
-  yearsOfExperience Int?             @db.SmallInt
-  formatOfWork      FormatOfWork?
-  addresses         Address[]
-  therapies         Therapy[]
-  therapyPrices     TherapyPrice[]
-  isFreeReception   Boolean?
-  description       String?          @db.Text
-  phone             String?          @db.VarChar(15)
-  email             String?          @db.VarChar(320)
-  website           String?          @db.Text
-  isActive          Boolean          @default(false)
-  instagram         String?          @db.Text
-  facebook          String?          @db.Text
-  youtube           String?          @db.Text
-  linkedin          String?          @db.Text
-  tiktok            String?          @db.Text
-  viber             String?          @db.Text
-  telegram          String?          @db.Text
-  searchEntry       SearchEntry?
+  id                    String           @id @default(uuid()) @db.Uuid
+  createdAt             DateTime         @default(now())
+  firstName             String           @db.VarChar(64)
+  lastName              String           @db.VarChar(64)
+  surname               String?          @db.VarChar(64)
+  specializations       Specialization[]
+  specializationMethods Method[]
+  gender                Gender?
+  yearsOfExperience     Int?             @db.SmallInt
+  formatOfWork          FormatOfWork?
+  addresses             Address[]
+  isFreeReception       Boolean?
+  description           String?          @db.Text
+  phone                 String?          @db.VarChar(15)
+  email                 String?          @db.VarChar(320)
+  website               String?          @db.Text
+  isActive              Boolean          @default(false)
+  instagram             String?          @db.Text
+  facebook              String?          @db.Text
+  youtube               String?          @db.Text
+  linkedin              String?          @db.Text
+  tiktok                String?          @db.Text
+  viber                 String?          @db.Text
+  telegram              String?          @db.Text
+  searchEntry           SearchEntry?
+  supportFocuses        SupportFocus[]
 
   @@map("specialist")
 }
 
 model Organization {
-  id              String             @id @default(uuid()) @db.Uuid
-  createdAt       DateTime           @default(now())
-  name            String             @db.VarChar(128)
-  type            OrganizationType[]
-  yearsOnMarket   Int?               @db.SmallInt
-  formatOfWork    FormatOfWork?
-  addresses       Address[]
-  therapies       Therapy[]
-  therapyPrices   TherapyPrice[]
-  isFreeReception Boolean?
-  description     String?            @db.Text
-  phone           String?            @db.VarChar(15)
-  email           String?            @db.VarChar(320)
-  website         String?            @db.Text
-  isActive        Boolean            @default(false)
-  instagram       String?            @db.Text
-  facebook        String?            @db.Text
-  youtube         String?            @db.Text
-  linkedin        String?            @db.Text
-  tiktok          String?            @db.Text
-  viber           String?            @db.Text
-  telegram        String?            @db.Text
-  searchEntry     SearchEntry?
+  id                    String             @id @default(uuid()) @db.Uuid
+  createdAt             DateTime           @default(now())
+  name                  String             @db.VarChar(128)
+  type                  OrganizationType[]
+  ownershipType         OwnershipType?
+  isInclusiveSpace      Boolean?
+  // this is light version of specialists relation to organization
+  expertSpecializations Specialization[]
+  yearsOnMarket         Int?               @db.SmallInt
+  formatOfWork          FormatOfWork?
+  addresses             Address[]
+  therapies             Therapy[]
+  isFreeReception       Boolean?
+  description           String?            @db.Text
+  phone                 String?            @db.VarChar(15)
+  email                 String?            @db.VarChar(320)
+  website               String?            @db.Text
+  isActive              Boolean            @default(false)
+  instagram             String?            @db.Text
+  facebook              String?            @db.Text
+  youtube               String?            @db.Text
+  linkedin              String?            @db.Text
+  tiktok                String?            @db.Text
+  viber                 String?            @db.Text
+  telegram              String?            @db.Text
+  searchEntry           SearchEntry?
+  supportFocuses        SupportFocus[]
 
   @@map("organization")
+}
+
+// Technical(not real instance) table to contain info about type of therapy
+// , subset of requests of therapy and specialists/organizations it belongs to
+model SupportFocus {
+  id             String        @id @default(uuid()) @db.Uuid
+  createdAt      DateTime      @default(now())
+  specialist     Specialist?   @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+  specialistId   String?       @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String?       @db.Uuid
+  price          Int?          @db.Integer
+  therapy        Therapy       @relation(fields: [therapyId], references: [id], onDelete: Cascade)
+  therapyId      String        @db.Uuid
+  requests       Request[]
+
+  @@map("support_focus")
 }
 
 model SearchEntry {
@@ -99,11 +125,12 @@ model SearchEntry {
 }
 
 model Specialization {
-  id          String       @id @default(uuid()) @db.Uuid
-  createdAt   DateTime     @default(now())
-  name        String       @unique @db.VarChar(128)
-  specialists Specialist[]
-  methods     Method[]
+  id           String         @id @default(uuid()) @db.Uuid
+  createdAt    DateTime       @default(now())
+  name         String         @unique @db.VarChar(128)
+  specialists  Specialist[]
+  Organization Organization[]
+  methods      Method[]
 
   @@map("specialization")
 }
@@ -127,32 +154,30 @@ model OrganizationType {
 }
 
 model Therapy {
-  id            String         @id @default(uuid()) @db.Uuid
-  createdAt     DateTime       @default(now())
-  type          String         @unique @db.VarChar(64)
-  title         String         @db.VarChar(128)
-  description   String         @db.VarChar(255)
-  imagePath     String         @db.VarChar(255)
-  isActive      Boolean        @default(false)
-  priority      Int            @default(0) @db.SmallInt
-  specialists   Specialist[]
-  organizations Organization[]
-  therapyPrices TherapyPrice[]
+  id          String   @id @default(uuid()) @db.Uuid
+  createdAt   DateTime @default(now())
+  type        String   @unique @db.VarChar(64)
+  title       String   @db.VarChar(128)
+  description String   @db.VarChar(255)
+  imagePath   String   @db.VarChar(255)
+  isActive    Boolean  @default(false)
+  priority    Int      @default(0) @db.SmallInt
+
+  supportFocuses SupportFocus[]
+  requests       Request[]
+  organizations  Organization[]
 
   @@map("therapy")
 }
 
-model TherapyPrice {
-  id             String        @id @default(uuid()) @db.Uuid
-  createdAt      DateTime      @default(now())
-  therapy        Therapy       @relation(fields: [therapyId], references: [id])
-  therapyId      String        @db.Uuid
-  price          Int
-  specialists    Specialist[]
-  Organization   Organization? @relation(fields: [organizationId], references: [id])
-  organizationId String?       @db.Uuid
+model Request {
+  id             String         @id @default(uuid()) @db.Uuid
+  createdAt      DateTime       @default(now())
+  name           String         @unique @db.VarChar(128)
+  supportFocuses SupportFocus[]
+  therapies      Therapy[]
 
-  @@map("therapy_price")
+  @@map("request")
 }
 
 model Address {
@@ -244,6 +269,7 @@ model Method {
   description      String?        @db.Text
   specializationId String         @db.Uuid
   specialization   Specialization @relation(fields: [specializationId], references: [id])
+  specialists      Specialist[]
 
   @@map("method")
 }
