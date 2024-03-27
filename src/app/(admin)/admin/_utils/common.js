@@ -83,7 +83,7 @@ export const transformCreateData = ({ addresses, supportFocuses, socialLink, wor
     create: addresses?.length ? transformAddresses({ addresses, type: 'create' }) : undefined,
   },
   supportFocuses: transformSupportFocuses({ focuses: supportFocuses, focusesIds: [] }),
-  workTime: { connectOrCreate: transformWorkTime(workTime) },
+  workTime: { connectOrCreate: workTime?.length ? transformWorkTime(workTime) : undefined },
 });
 
 export const transformEditData = ({

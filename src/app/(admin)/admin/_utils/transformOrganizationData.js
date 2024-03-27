@@ -1,4 +1,4 @@
-import { toConnectList, transformCreateData, transformWorkTime } from '@admin/_utils/common';
+import { toConnectList, transformCreateData } from '@admin/_utils/common';
 
 const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
 
@@ -14,6 +14,5 @@ export const transformOrganizationData = ({ type, ...rest }) => {
     type: {
       connect: type?.length ? toConnectList(type) : undefined,
     },
-    workTime: { connectOrCreate: rest?.workTime?.length ? transformWorkTime(rest.workTime) : undefined },
   };
 };
