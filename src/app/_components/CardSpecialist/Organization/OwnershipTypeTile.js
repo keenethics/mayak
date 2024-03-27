@@ -8,7 +8,7 @@ export function OwnershipTypeTile({ ownershipType }) {
   };
 
   return (
-    <div className="bg-gray-100 px-3 py-1 text-[0.875rem] font-medium leading-[1.125rem] text-gray-700 ">
+    <div className="w-fit rounded-[4px] bg-gray-100 p-1 text-[0.875rem] font-medium leading-[1.125rem] text-gray-700 lg:px-3">
       {translations[ownershipType]}
     </div>
   );

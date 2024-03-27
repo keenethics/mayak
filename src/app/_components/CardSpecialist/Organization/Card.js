@@ -42,7 +42,6 @@ export function CardOrganization({ organization, className, extended = false }) 
     viber,
     telegram,
   } = organization;
-
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({
@@ -68,15 +67,22 @@ export function CardOrganization({ organization, className, extended = false }) 
             <SocialsList socials={socials} className="absolute bottom-4 hidden md:inline-block" />
           </ProfileImage>
           <div className="w-full overflow-hidden">
-            <div className="flex w-full justify-between gap-4">
-              <SpecializationsPanel
-                specialistId={id}
-                specializations={type.map(t => t.name)}
-                extendedCardOpened={extended}
-              />
+            <div className="flex justify-between gap-4">
+              <div className="flex w-full justify-between gap-4">
+                <SpecializationsPanel
+                  specialistId={id}
+                  specializations={type.map(t => t.name)}
+                  extendedCardOpened={extended}
+                />
+              </div>
+              <div className="hidden md:block">
+                <OwnershipTypeTile ownershipType={ownershipType} />
+              </div>
+            </div>
+            <SpecialistTitle id={id} truncate={!extended} name={name} className="md:mt-1.5" />
+            <div className="md:hidden">
               <OwnershipTypeTile ownershipType={ownershipType} />
             </div>
-            <SpecialistTitle id={id} truncate={!extended} name={name} className="mt-1.5" />
           </div>
         </header>
         <BadgeList labels={labelsList} />
@@ -84,6 +90,7 @@ export function CardOrganization({ organization, className, extended = false }) 
           className="border-t border-dashed border-t-gray-200 pt-4"
           id={id}
           expertSpecializations={expertSpecializations}
+          extended={extended}
         />
         {extended ? (
           <>
