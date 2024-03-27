@@ -9,17 +9,17 @@ import { FaqCreate, FaqEdit, FaqList } from '@admin/components/Faq';
 import { TherapyCreate, TherapyEdit, TherapyList, TherapyShow } from '@admin/components/Therapy';
 import {
   OrganizationCreate,
+  OrganizationEdit,
   OrganizationShow,
   OrganizationsList,
-  OrganizationEdit,
 } from '@admin/components/ServiceProvider/Organization';
-import { MethodsList, MethodsShow, MethodsEdit, MethodsCreate } from '@admin/components/Methods';
+import { MethodsCreate, MethodsEdit, MethodsList, MethodsShow } from '@admin/components/Methods';
 
 import {
   SpecialistCreate,
+  SpecialistEdit,
   SpecialistShow,
   SpecialistsList,
-  SpecialistEdit,
 } from '@admin/components/ServiceProvider/Specialist';
 
 import { authProvider } from './authProvider';
@@ -69,16 +69,19 @@ export default function AdminPage() {
         options={{ label: 'Райони' }}
       />
       <Resource
+        name={RESOURCES.specialization}
+        list={ListGuesser}
+        edit={EditGuesser}
+        show={ShowGuesser}
+        options={{ label: 'Спеціалізації' }}
+      />
+      <Resource
         name={RESOURCES.address}
         list={ListGuesser}
         edit={EditGuesser}
         show={ShowGuesser}
         options={{ label: 'Адреси' }}
       />
-      <Resource name={RESOURCES.event} list={EventList} create={EventCreate} edit={EventEdit} show={EventShow} />
-      <Resource name={RESOURCES.district} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-      <Resource name={RESOURCES.specialization} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-      <Resource name={RESOURCES.address} list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
       <Resource
         name={RESOURCES.faq}
         options={{ label: 'FAQ' }}
@@ -100,7 +103,7 @@ export default function AdminPage() {
         show={MethodsShow}
         edit={MethodsEdit}
         create={MethodsCreate}
-        options={{ label: 'Напрями і методи терапії' }}
+        options={{ label: 'Методи терапії' }}
       />
     </Admin>
   );

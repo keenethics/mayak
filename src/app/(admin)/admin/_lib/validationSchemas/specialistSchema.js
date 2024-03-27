@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import { Gender } from '@prisma/client';
 import {
-  MESSAGES,
   createValidationSchema,
+  MESSAGES,
   singlePrimaryAddressRefine,
-  specialistCore,
+  serviceProviderCore,
   zCreateAddressSchema,
   zEditAddressSchema,
   zSupportFocusSchema,
@@ -16,7 +16,7 @@ import {
 
 // ------------------ COMMON SECTION ---------------------
 
-const zSpecialistSchema = specialistCore.extend({
+const zSpecialistSchema = serviceProviderCore.extend({
   surname: zStringWithMax.nullish(),
   gender: zString.refine(val => Object.values(Gender).includes(val), {
     message: MESSAGES.unacceptableValue,
@@ -39,6 +39,7 @@ const createDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializations: zStringArray,
+  specializationMethods: zString.array().default([]),
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
@@ -71,6 +72,10 @@ const editDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializationsIds: zStringArray,
+  specializationMethodsIds: z.object({
+    psychologist: z.string().array().nullish(),
+    psychotherapist: z.string().array().nullish(),
+  }),
 });
 
 const activeSpecialistEditSchema = restEditProps.extend({

@@ -14,6 +14,10 @@ function nullable(value) {
   return Date.now() % 2 === 0 ? value : null;
 }
 
+function randomUndefined(value) {
+  return Date.now() % 2 === 0 ? value : undefined;
+}
+
 // returns array of unique objects with id field
 function uniqueObjectsWithId(instances) {
   if (instances.length === 0) return [];
@@ -71,7 +75,35 @@ function randomSupportFocusArray({ therapies }) {
   }));
 }
 
-function randomSpecialist({ districts, specializations, therapies }) {
+function generateSocialMediaLinks() {
+  const socialMediaList = ['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok', 'viber', 'telegram'];
+
+  return Object.fromEntries(
+    socialMediaList
+      .sort(() => Math.random() - 0.5)
+      .slice(0, Math.floor(Math.random() * 5) + 1)
+      .map(network => [network, faker.internet.url()]),
+  );
+}
+
+function randomWorkTime() {
+  const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+  return {
+    connectOrCreate: weekdays.map(weekDay => {
+      const isDayOff = faker.datatype.boolean();
+      const time = !isDayOff
+        ? `0${faker.number.int({ min: 7, max: 9 })}:00 - ${faker.number.int({ min: 17, max: 20 })}:00`
+        : '';
+      const workTimeData = { isDayOff, weekDay, time };
+      return {
+        create: workTimeData,
+        where: { weekDay_time_isDayOff: workTimeData },
+      };
+    }),
+  };
+}
+
+function randomSpecialist({ districts, specializations, specializationMethods, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
@@ -87,15 +119,26 @@ function randomSpecialist({ districts, specializations, therapies }) {
 
   const socialMediaLinks = generateSocialMediaLinks();
 
+  const specializationsIds = uniqueObjectsWithId(specializations);
+  const specializationMethodsIds = uniqueObjectsWithId(
+    specializationMethods.filter(({ specializationId }) =>
+      specializationsIds.some(({ id }) => id === specializationId),
+    ),
+  );
+
   return {
     specializations: {
-      connect: uniqueObjectsWithId(specializations),
+      connect: specializationsIds,
+    },
+    specializationMethods: {
+      connect: specializationMethodsIds,
     },
     // take name of corresponding gender
     firstName: faker.person.firstName(gender.toLowerCase()),
     lastName: faker.person.lastName(),
     surname: nullable(faker.person.lastName()),
     gender,
+    workTime: randomUndefined(randomWorkTime()),
     yearsOfExperience: faker.number.int({ min: 1, max: 30 }),
     // take one of these
     formatOfWork,
@@ -113,7 +156,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
   };
 }
 
-function randomOrganization({ therapies, districts, organizationTypes }) {
+function randomOrganization({ therapies, districts, organizationTypes, expertSpecializations }) {
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
   if (formatOfWork !== 'ONLINE') {
@@ -128,7 +171,12 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
 
   return {
     name: faker.company.name(),
+    expertSpecializations: {
+      connect: uniqueObjectsWithId(expertSpecializations),
+    },
     yearsOnMarket: nullable(faker.number.int({ min: 1, max: 30 })),
+    ownershipType: faker.helpers.arrayElement(['PRIVATE', 'GOVERNMENT']),
+    isInclusiveSpace: faker.datatype.boolean(),
     formatOfWork,
     type: {
       connect: uniqueObjectsWithId(organizationTypes),
@@ -137,6 +185,7 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
     supportFocuses: {
       create: randomSupportFocusArray({ therapies }),
     },
+    workTime: randomUndefined(randomWorkTime()),
     isFreeReception: faker.datatype.boolean(),
     isActive: faker.datatype.boolean(),
     phone: nullable(faker.helpers.fromRegExp(phoneRegexp)),
@@ -196,6 +245,7 @@ async function main() {
     await trx.faq.deleteMany();
     await trx.organization.deleteMany();
     await trx.searchEntry.deleteMany();
+    await trx.workTime.deleteMany();
   });
 
   const faqs = Array.from({ length: 15 }).map((_, i) => ({
@@ -223,6 +273,7 @@ async function main() {
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });
+  const specializationMethods = await prisma.method.findMany();
   const districts = await prisma.district.findMany({ select: { id: true } });
 
   const tags = await prisma.eventTag.findMany({ select: { id: true } });
@@ -232,12 +283,16 @@ async function main() {
   // createMany does not support records with relations
   for (let i = 0; i < 10; i += 1) {
     // for instead of Promise.all to avoid overloading the database pool
-    const specialistData = randomSpecialist({ districts, specializations, therapies });
+    const specialistData = randomSpecialist({ districts, specializations, specializationMethods, therapies });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.searchEntry.create({
+    await prisma.specialist.create({
       data: {
-        sortString: getSpecialistFullName(specialistData),
-        specialist: { create: specialistData },
+        ...specialistData,
+        searchEntry: {
+          create: {
+            sortString: getSpecialistFullName(specialistData),
+          },
+        },
       },
     });
   }
@@ -248,12 +303,21 @@ async function main() {
     });
   }
   for (let i = 0; i < 10; i += 1) {
-    const organizationData = randomOrganization({ therapies, districts, organizationTypes });
+    const organizationData = randomOrganization({
+      therapies,
+      districts,
+      organizationTypes,
+      expertSpecializations: specializations,
+    });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.searchEntry.create({
+    await prisma.organization.create({
       data: {
-        sortString: organizationData.name,
-        organization: { create: organizationData },
+        ...organizationData,
+        searchEntry: {
+          create: {
+            sortString: organizationData.name,
+          },
+        },
       },
     });
   }

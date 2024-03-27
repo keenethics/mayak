@@ -4,6 +4,7 @@ import {
   organizationTypes,
   psychologyMethods,
   psychotherapyMethods,
+  requests,
   specializations,
   therapies,
 } from './data.mjs';
@@ -37,24 +38,6 @@ specializations.push(
   },
 );
 
-async function translateTherapies(therapiesToTranslate) {
-  const translated = [];
-  for (let i = 0; i < therapiesToTranslate.length; i += 1) {
-    const therapy = therapiesToTranslate[i];
-
-    const requestsToConnect = therapy.requests.map(requestName => ({ name: requestName }));
-    // eslint-disable-next-line no-await-in-loop
-    await prisma.request.createMany({
-      data: requestsToConnect,
-      skipDuplicates: true,
-    });
-
-    translated.push({ ...therapy, requests: { connect: requestsToConnect } });
-  }
-
-  return translated;
-}
-
 async function createIfNotExist(model, data, filter) {
   // eslint-disable-next-line no-restricted-syntax
   for (const it of data) {
@@ -64,13 +47,20 @@ async function createIfNotExist(model, data, filter) {
 }
 
 async function main() {
-  const translatedTherapies = await translateTherapies(therapies);
-  await createIfNotExist(prisma.therapy, translatedTherapies, therapy => ({ type: therapy.type }));
-  await createIfNotExist(prisma.district, districts, district => ({ name: district.name }));
-  await createIfNotExist(prisma.specialization, specializations, specialization => ({ name: specialization.name }));
-  await createIfNotExist(prisma.organizationType, organizationTypes, organizationType => ({
-    name: organizationType.name,
-  }));
+  await createIfNotExist(prisma.district, districts, ({ name }) => ({ name }));
+  await createIfNotExist(prisma.request, requests, ({ name }) => ({ name }));
+  await createIfNotExist(prisma.specialization, specializations, ({ name }) => ({ name }));
+  await createIfNotExist(prisma.organizationType, organizationTypes, ({ name }) => ({ name }));
+  await createIfNotExist(
+    prisma.method,
+    psychotherapyMethods
+      .map(method => ({ ...method, specialization: { connect: { name: 'Психотерапевт' } } }))
+      .concat(psychologyMethods.map(method => ({ ...method, specialization: { connect: { name: 'Психолог' } } }))),
+    method => ({ title: method.title }),
+  );
+
+  // depends on 'requests', they should be created before therapies
+  await createIfNotExist(prisma.therapy, therapies, ({ type }) => ({ type }));
 }
 
 main().then(

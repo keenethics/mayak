@@ -11,18 +11,26 @@ import {
   SimpleShowLayout,
   SingleFieldList,
   TextField,
+  WrapperField,
 } from 'react-admin';
+import { WorkTimeShow } from '@admin/components/ServiceProvider/WorkTimeShow';
 
 export function OrganizationShow() {
   return (
     <Show>
       <SimpleShowLayout>
+        <ArrayField label="Спеціалізації спеціалістів" source="expertSpecializations">
+          <SingleFieldList linkType={false}>
+            <ChipField source="name" size="small" />
+          </SingleFieldList>
+        </ArrayField>
         <ArrayField label="Тип організації" source="type">
           <SingleFieldList linkType={false}>
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
-        <TextField label="Назва" source="name" />
+        <BooleanField label="Інклюзівний простір" source="isInclusiveSpace" />
+        <TextField label="Тип власності" source="ownershipType" />
         <DateField label="Дата додавання в сервіс" showTime source="createdAt" />
         <NumberField label="Роки на ринку" source="yearsOnMarket" />
         <TextField label="Формат послуг" source="formatOfWork" />
@@ -34,6 +42,9 @@ export function OrganizationShow() {
             <BooleanField label="Головна адреса" source="isPrimary" />
           </Datagrid>
         </ArrayField>
+        <WrapperField label="Графік роботи">
+          <WorkTimeShow />
+        </WrapperField>
         <ArrayField label="Типи терапій" source="supportFocuses">
           <Datagrid bulkActionButtons={false}>
             <TextField label="Тип" source="therapy.title" />

@@ -32,6 +32,14 @@ export const handler = withErrorHandler(async req => {
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { id: true, name: true } },
+        isPrimary: true,
+      },
+    },
+    workTime: {
+      select: {
+        weekDay: true,
+        time: true,
+        isDayOff: true,
       },
     },
   };
@@ -41,13 +49,13 @@ export const handler = withErrorHandler(async req => {
       specialist: {
         include: {
           ...sharedInclude,
-          specializations: { select: { name: true } },
+          specializations: { select: { id: true, name: true } },
         },
       },
       organization: {
         include: {
           ...sharedInclude,
-          type: { select: { name: true } },
+          type: { select: { id: true, name: true } },
         },
       },
     },
