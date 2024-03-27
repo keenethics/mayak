@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ProfileImage } from '@components/CardSpecialist/ProfileImage';
 import { AddressesList } from '@components/CardSpecialist/AddressesList';
 import { BadgeList } from '@components/CardSpecialist/BadgeList';
+import { MethodList } from '@components/CardSpecialist/MethodList';
 import { CardButton } from '@components/CardSpecialist/CardButton';
 import { CardWrapper } from '@components/CardSpecialist/CardWrapper';
 import { ContactsList } from '@components/CardSpecialist/ContactsList';
@@ -25,6 +26,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     lastName,
     surname,
     specializations,
+    specializationMethods,
     yearsOfExperience,
     isFreeReception,
     formatOfWork,
@@ -72,6 +74,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           </div>
         </header>
         <BadgeList labels={labelsList} />
+        <MethodList methods={specializationMethods} />
         {extended ? (
           <>
             <DetailsList

@@ -14,6 +14,7 @@ export const specialistInclude = {
       district: true,
     },
   },
+  specializationMethods: { select: { id: true, title: true, description: true } },
 };
 
 export const organizationInclude = {
