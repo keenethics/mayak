@@ -10,7 +10,7 @@ const translations = {
   THU: 'чт',
   FRI: 'пт',
   SAT: 'сб',
-  SUN: 'вс',
+  SUN: 'нд',
 };
 export function WorkTime({ workTime }) {
   const transformedTime = transformWorkTime(workTime, translations);
