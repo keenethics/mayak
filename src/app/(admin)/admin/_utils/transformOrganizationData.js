@@ -1,33 +1,23 @@
-import { toConnectList, transformTherapyPrices } from './common';
+import { toConnectList, transformCreateData } from '@admin/_utils/common';
 
-const transformAddresses = placesArray =>
-  placesArray.map(place => ({
-    ...place,
-    district: { connect: { id: place.district } },
-  }));
+const mapIdArrayToIdObjects = idList => idList.map(id => ({ id }));
 
 // this function transforms form data to proper prisma creation object
-export const transformOrganizationData = ({
-  socialLink,
-  organizationTypesIds,
-  addresses,
-  therapies,
-  therapyPricesCreate,
-  ...rest
-}) => ({
-  ...rest,
-  ...socialLink,
-  type: { connect: organizationTypesIds?.map(el => ({ id: el })) },
+export const transformOrganizationData = ({ type, ...rest }) => {
+  const base = transformCreateData(rest);
 
-  addresses: {
-    create: addresses?.length ? transformAddresses(addresses) : undefined,
-  },
-  therapies: {
-    connect: therapies?.length ? toConnectList(therapies) : undefined,
-  },
-  therapyPrices: {
-    create:
-      therapies?.length && therapyPricesCreate ? transformTherapyPrices(therapies, therapyPricesCreate) : undefined,
-  },
-  therapyPricesCreate: undefined,
-});
+  return {
+    ...base,
+    expertSpecializations: {
+      connect: rest.expertSpecializations?.length ? mapIdArrayToIdObjects(rest.expertSpecializations) : undefined,
+    },
+    type: {
+      connect: type?.length ? toConnectList(type) : undefined,
+    },
+    therapies: {
+      connect: rest.therapies.map(therapy => ({
+        id: therapy,
+      })),
+    },
+  };
+};

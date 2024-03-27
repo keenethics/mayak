@@ -1,29 +1,28 @@
-import { toConnectList, transformEditData, transformTherapyPrices } from './common';
+import {
+  toConnectList,
+  transformEditData,
+  // transformTherapyPrices
+} from './common';
 
-export function transformOrganizationEditData({
-  organizationTypesIds,
-  socialLink,
-  therapyPricesEdit,
-  therapyPrices,
-  therapiesIds,
-  ...rest
-}) {
+export function transformOrganizationEditData({ expertSpecializationIds, organizationTypesIds, socialLink, ...rest }) {
   const organizationTypesToConnect = toConnectList(organizationTypesIds);
-  const base = transformEditData({ ...rest, therapiesIds, therapyPrices });
-
-  const newTherapiesPrices = transformTherapyPrices(therapiesIds, therapyPricesEdit);
-  const currentTherapyPrices = toConnectList(therapyPrices, el => el.id);
+  const expertSpecializationsToConnect = toConnectList(expertSpecializationIds);
+  const base = transformEditData(rest);
 
   return {
     ...base,
     ...socialLink,
-    therapyPrices: {
-      create: newTherapiesPrices,
-      deleteMany: currentTherapyPrices,
-    },
+    // therapyPrices: {
+    //   create: newTherapiesPrices,
+    //   deleteMany: currentTherapyPrices,
+    // },
     type: {
       set: [],
       connect: organizationTypesToConnect,
+    },
+    expertSpecializations: {
+      set: [],
+      connect: expertSpecializationsToConnect,
     },
     organizationTypesIds: undefined,
   };

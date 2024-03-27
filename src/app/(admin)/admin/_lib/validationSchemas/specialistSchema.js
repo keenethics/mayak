@@ -1,12 +1,13 @@
 import { z } from 'zod';
 import { Gender } from '@prisma/client';
 import {
-  MESSAGES,
   createValidationSchema,
+  MESSAGES,
   singlePrimaryAddressRefine,
-  specialistCore,
+  serviceProviderCore,
   zCreateAddressSchema,
   zEditAddressSchema,
+  zSupportFocusSchema,
   zInteger,
   zString,
   zStringArray,
@@ -15,7 +16,7 @@ import {
 
 // ------------------ COMMON SECTION ---------------------
 
-const zSpecialistSchema = specialistCore.extend({
+const zSpecialistSchema = serviceProviderCore.extend({
   surname: zStringWithMax.nullish(),
   gender: zString.refine(val => Object.values(Gender).includes(val), {
     message: MESSAGES.unacceptableValue,
@@ -32,21 +33,25 @@ const restCreateProps = zSpecialistSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
-  therapies: zStringArray,
-  therapyPricesCreate: z.record(z.string(), z.any()).nullish(),
 });
 
 const createDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializations: zStringArray,
+  specializationMethods: zString.array().default([]),
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
+  supportFocuses: zSupportFocusSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   isActive: z.literal(true),
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
+  supportFocuses: zSupportFocusSchema.array().nullish(),
+  addresses: zCreateAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
 
@@ -60,30 +65,29 @@ const restEditProps = zSpecialistSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
-  therapiesIds: zStringArray,
-  therapyPrices: z.array(
-    z.object({
-      id: z.string(),
-      price: z.number(),
-      therapy: z.object({
-        id: z.string(),
-      }),
-    }),
-  ),
-  therapyPricesEdit: z.record(z.string(), z.any()),
+  supportFocusesIds: z.string().array().nullish(),
 });
 
 const editDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
   specializationsIds: zStringArray,
+  specializationMethodsIds: z.object({
+    psychologist: z.string().array().nullish(),
+    psychotherapist: z.string().array().nullish(),
+  }),
 });
 
 const activeSpecialistEditSchema = restEditProps.extend({
+  supportFocuses: zSupportFocusSchema.array().min(1, {
+    message: 'Необхідно обрати хоча б один тип терапії',
+  }),
   isActive: z.literal(true),
 });
 
 const draftSpecialistEditSchema = restEditProps.partial().extend({
+  supportFocuses: zSupportFocusSchema.array().nullish(),
+  addresses: zEditAddressSchema.array().nullish(),
   isActive: z.literal(false),
 });
 

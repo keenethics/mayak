@@ -1,4 +1,3 @@
-import React from 'react';
 import { redirect } from 'next/navigation';
 import { CardSpecialistExtended, CardOrganizationExtended } from '@/app/_components/CardSpecialist';
 import { getOrganizationById, getSpecialistById } from '@/app/(app)/specialist/utils';
