@@ -6,6 +6,22 @@ import 'react-truncate-list/dist/styles.css';
 import { cn } from '@utils/cn';
 import { Caption, Paragraph } from '@components/Typography';
 
+function makeCaption(specializations) {
+  const hasPsychotherapist = specializations.includes('Психотерапевт');
+  const hasPsychologist = specializations.includes('Психолог');
+
+  if (hasPsychotherapist && !hasPsychologist) {
+    return 'Методи терапії';
+  }
+  if (!hasPsychotherapist && hasPsychologist) {
+    return 'Спеціалізація';
+  }
+  if (hasPsychotherapist && hasPsychologist) {
+    return 'Напрями і методи';
+  }
+  return '';
+}
+
 function Method({ id, title, description }) {
   return (
     <div className="grid h-[24px] w-fit place-items-center rounded-3xl bg-primary-100">
@@ -23,14 +39,25 @@ function Method({ id, title, description }) {
     </div>
   );
 }
-Method.propTypes = { id: PropTypes.string, title: PropTypes.string, description: PropTypes.string };
+Method.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};
 
-export function MethodList({ methods }) {
+export function MethodList({ methods = [], specializations = [] }) {
   const [expanded, setExpanded] = useState(false);
+  const caption = makeCaption(specializations);
+
+  // If neither "Психотерапевт" nor "Психолог" are included
+  // section should not render
+  if (!caption) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col gap-2 border-t pt-3">
-      <Caption className="text-p4 font-bold text-gray-600">Напрямки лікування</Caption>
+      <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>
       <TruncatedList
         alwaysShowTruncator
         className={cn('flex flex-wrap gap-[8px]', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
@@ -53,5 +80,6 @@ export function MethodList({ methods }) {
   );
 }
 MethodList.propTypes = {
+  specializations: PropTypes.arrayOf(PropTypes.string),
   methods: PropTypes.arrayOf(Method.propTypes),
 };

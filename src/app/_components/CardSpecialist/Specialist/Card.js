@@ -74,7 +74,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           </div>
         </header>
         <BadgeList labels={labelsList} />
-        <MethodList methods={specializationMethods} />
+        <MethodList specializations={specializationsList} methods={specializationMethods} />
         {extended ? (
           <>
             <DetailsList
