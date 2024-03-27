@@ -79,19 +79,21 @@ export async function GET(req) {
       ],
     },
   });
-
   const searchEntries = await prisma.searchEntry.findMany({
     include: {
       specialist: {
         include: {
           ...sharedInclude,
-          specializations: { select: { name: true } },
+          specializations: { select: { id: true, name: true } },
         },
       },
       organization: {
         include: {
           ...sharedInclude,
-          type: { select: { name: true } },
+          type: { select: { id: true, name: true } },
+          expertSpecializations: {
+            select: { id: true, name: true },
+          },
         },
       },
     },
