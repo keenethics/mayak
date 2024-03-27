@@ -75,21 +75,6 @@ function generateSocialMediaLinks() {
   );
 }
 
-function randomTherapyPrices(selectedTherapies) {
-  const therapyPrices = [];
-  selectedTherapies.forEach(el => {
-    if (Math.random() > 0.5) {
-      therapyPrices.push({
-        price: faker.number.int({ min: 0, max: 20 }) * 100,
-        therapy: {
-          connect: el,
-        },
-      });
-    }
-  });
-  return therapyPrices;
-}
-
 function randomWorkTime() {
   const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   return {

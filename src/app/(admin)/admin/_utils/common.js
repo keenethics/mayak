@@ -13,17 +13,6 @@ export function toConnectList(list, cb) {
   return list?.map(id => ({ id: cb?.(id) ?? id })) ?? [];
 }
 
-export function transformTherapyPrices(therapies, therapyPrices) {
-  return (
-    therapies
-      ?.filter(el => therapyPrices[el] !== null)
-      .map(el => ({
-        therapy: { connect: { id: el } },
-        price: therapyPrices[el],
-      })) ?? []
-  );
-}
-
 export function isSpecifiedWorkTime(workTime) {
   return workTime.some(day => day.isDayOff === false || day.isDayOff || day.time);
 }
