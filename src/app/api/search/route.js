@@ -29,9 +29,11 @@ export async function GET(req) {
   );
   const whereFilter = {
     AND: {
-      therapies: type && {
+      supportFocuses: type && {
         some: {
-          type,
+          therapy: {
+            type,
+          },
         },
       },
       isActive: true,
@@ -45,8 +47,16 @@ export async function GET(req) {
       },
     },
   };
+
   const sharedInclude = {
-    therapies: { select: { id: true, title: true } },
+    supportFocuses: {
+      select: {
+        id: true,
+        price: true,
+        therapy: true,
+        requests: true,
+      },
+    },
     addresses: {
       select: {
         id: true,
