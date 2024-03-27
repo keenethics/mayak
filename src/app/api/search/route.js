@@ -93,6 +93,7 @@ export async function GET(req) {
       specialist: {
         include: {
           ...sharedInclude,
+          specializationMethods: { select: { id: true, title: true, description: true } },
           specializations: { select: { id: true, name: true } },
         },
       },
