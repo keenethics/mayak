@@ -22,7 +22,6 @@ export function CardOrganization({ organization, className, extended = false }) 
     type,
     yearsOnMarket,
     formatOfWork,
-    therapyPrices,
     addresses,
     supportFocuses,
     isFreeReception,
@@ -79,7 +78,6 @@ export function CardOrganization({ organization, className, extended = false }) 
               details={{
                 addresses,
                 description,
-                therapyPrices,
                 supportFocuses,
               }}
               text="клініку"

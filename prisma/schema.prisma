@@ -165,9 +165,7 @@ model Therapy {
 
   supportFocuses SupportFocus[]
   requests       Request[]
-  // organizations  Organization[]
-  Organization   Organization?  @relation(fields: [organizationId], references: [id])
-  organizationId String?        @db.Uuid
+  organizations  Organization[]
 
   @@map("therapy")
 }

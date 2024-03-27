@@ -22,17 +22,6 @@ export const organizationInclude = {
       name: 'asc',
     },
   },
-
-  therapies: true,
-  // therapyPrices: {
-  //   include: {
-  //     therapy: {
-  //       select: {
-  //         title: true,
-  //       },
-  //     },
-  //   }
-  // },
   supportFocuses: {
     include: {
       therapy: true,
