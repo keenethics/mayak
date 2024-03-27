@@ -35,21 +35,20 @@ export const formatPhoneNumber = phoneNumber => {
 
 export const capitalize = inputString => inputString.charAt(0).toUpperCase() + inputString.slice(1);
 
-// `${nameOfClinic}, ${fullAddress}, ${district.name} район`
 export const addressesToPoints = addresses =>
   addresses?.map(({ fullAddress, nameOfClinic, district, latitude, longitude }) => ({
     title: (
       <>
         <p>
-          <strong>{`${nameOfClinic}`}</strong>
-          {`, ${fullAddress}, ${district.name} район`}
+          {nameOfClinic ? <strong>{`${nameOfClinic}, `}</strong> : null}
+          {`${fullAddress}, ${district.name} район`}
         </p>
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`}
           target="_blank"
           rel="noreferrer"
         >
-          На Google карті
+          На Google Maps
         </a>
       </>
     ),
