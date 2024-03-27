@@ -6,7 +6,7 @@ import { cn } from '@/utils/cn';
 export function OrganizationChipLists({ id, className, expertSpecializations, extended = false }) {
   const expertSpecializationsChipItems = expertSpecializations.map((el, i) => ({
     id: i,
-    name: el.name,
+    text: el.name,
     color: presets.theme.colors.secondary[100],
     textColor: presets.theme.colors.secondary[600],
   }));
