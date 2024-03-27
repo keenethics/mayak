@@ -1,7 +1,8 @@
-import { RESOURCES } from '@admin/_lib/consts';
+import { RESOURCES, WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
 import { auth } from '@/lib/auth';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
+import { transformWorkTime } from '@/utils/common';
 
 export const MODEL_SEARCH_FIELDS = {
   [RESOURCES.event]: ['title', 'organizerName'],
@@ -32,6 +33,7 @@ export const MODEL_INCLUDES = {
         isPrimary: true,
       },
     },
+    workTime: { select: { weekDay: true, time: true, isDayOff: true } },
   },
   [RESOURCES.organization]: {
     supportFocuses: {
@@ -54,6 +56,7 @@ export const MODEL_INCLUDES = {
         isPrimary: true,
       },
     },
+    workTime: { select: { weekDay: true, time: true, isDayOff: true } },
   },
   [RESOURCES.event]: {
     additionalLink: { select: { label: true, link: true } },
@@ -104,6 +107,11 @@ export function transformServiceProvider(instance, modelName) {
       psychologist: psychologistMethods.length ? psychologistMethods : [],
       psychotherapist: psychotherapistMethods.length ? psychotherapistMethods : [],
     };
+  }
+
+  if (instance?.workTime?.length) {
+    // eslint-disable-next-line no-param-reassign
+    instance.workTime = transformWorkTime(instance.workTime, WEEKDAYS_TRANSLATION);
   }
 
   instance.supportFocusesIds = instance.supportFocuses.map(focus => focus.id);

@@ -12,7 +12,9 @@ import {
   SimpleShowLayout,
   SingleFieldList,
   TextField,
+  WrapperField,
 } from 'react-admin';
+import { WorkTimeShow } from '@admin/components/ServiceProvider/WorkTimeShow';
 
 export function OrganizationShow() {
   return (
@@ -55,6 +57,9 @@ export function OrganizationShow() {
             />
           </Datagrid>
         </ArrayField>
+        <WrapperField label="Графік роботи">
+          <WorkTimeShow />
+        </WrapperField>
         <ArrayField label="Типи терапій" source="supportFocuses">
           <Datagrid bulkActionButtons={false}>
             <TextField label="Тип" source="therapy.title" />
