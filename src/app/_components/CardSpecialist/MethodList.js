@@ -69,7 +69,11 @@ export function MethodList({ methods = [], specializations = [] }) {
               </span>
             );
           }
-          return null;
+          return (
+            <span className="text-c3 cursor-pointer text-gray-900" onClick={() => setExpanded(false)}>
+              Приховати
+            </span>
+          );
         }}
       >
         {methods.map(({ id, ...rest }) => (
