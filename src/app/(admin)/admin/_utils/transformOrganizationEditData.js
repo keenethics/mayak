@@ -7,7 +7,6 @@ export function transformOrganizationEditData({ expertSpecializationIds, organiz
 
   return {
     ...base,
-    ...socialLink,
     type: {
       set: [],
       connect: organizationTypesToConnect,

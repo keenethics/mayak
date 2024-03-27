@@ -16,7 +16,6 @@ export function transformSpecialistEditData({
 
   return {
     ...base,
-    ...socialLink,
     specializations: {
       set: [],
       connect: specializationsToConnect,

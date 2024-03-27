@@ -1,53 +1,22 @@
-import { FormatOfWork } from '@prisma/client';
 import { NextResponse } from 'next/server';
-import { getSearchParamsFromRequest } from '@/utils/getSearchParamsFromRequest';
 import { prisma } from '@/lib/db';
+import { withErrorHandler } from '@/lib/errors/errorHandler';
+import { createSearchEntryFilter, createEntityFilter, getSearchFilterQueryParams } from './helpers';
 
-export async function GET(req) {
+export const handler = withErrorHandler(async req => {
+  const queryParams = getSearchFilterQueryParams(req);
   const {
-    type,
     // TODO: Uncomment pagination params take and skip when pagination is implemented on the frontend
     // take,
     // skip,
-    format,
-    district: districts,
-  } = getSearchParamsFromRequest(
-    req,
-    {
-      format: undefined,
-      type: undefined,
-      // take: 10,
-      // skip: 0,
-      district: undefined,
-    },
-    params => ({
-      ...params,
-      take: parseInt(params.take, 10),
-      skip: parseInt(params.skip, 10),
-      district: typeof params.district === 'string' ? [params.district] : params.district,
-    }),
-  );
-  const whereFilter = {
-    AND: {
-      supportFocuses: type && {
-        some: {
-          therapy: {
-            type,
-          },
-        },
-      },
-      isActive: true,
-      OR: format && [{ formatOfWork: FormatOfWork.BOTH }, { formatOfWork: format }],
-      addresses: districts && {
-        some: {
-          OR: districts.map(id => ({
-            districtId: id,
-          })),
-        },
-      },
-    },
-  };
+    searchType,
+    query,
+  } = queryParams;
 
+  const entityFilter = createEntityFilter(queryParams);
+  const searchEntryFilter = createSearchEntryFilter(entityFilter, query, searchType);
+
+  const totalCount = await prisma.searchEntry.count({ where: searchEntryFilter });
   const sharedInclude = {
     supportFocuses: {
       select: {
@@ -75,19 +44,6 @@ export async function GET(req) {
     },
   };
 
-  const totalCount = await prisma.searchEntry.count({
-    where: {
-      OR: [
-        {
-          organization: whereFilter,
-        },
-        {
-          specialist: whereFilter,
-        },
-      ],
-    },
-  });
-
   const searchEntries = await prisma.searchEntry.findMany({
     include: {
       specialist: {
@@ -104,16 +60,7 @@ export async function GET(req) {
         },
       },
     },
-    where: {
-      OR: [
-        {
-          organization: whereFilter,
-        },
-        {
-          specialist: whereFilter,
-        },
-      ],
-    },
+    where: searchEntryFilter,
     orderBy: {
       sortString: 'asc',
     },
@@ -127,4 +74,6 @@ export async function GET(req) {
     totalCount,
     data,
   });
-}
+});
+
+export { handler as GET };
