@@ -20,6 +20,7 @@ export const MODEL_INCLUDES = {
       },
     },
     specializations: { select: { id: true, name: true } },
+    specializationMethods: { select: { id: true, title: true, specialization: true } },
     addresses: {
       select: {
         id: true,
@@ -80,6 +81,27 @@ export function transformServiceProvider(instance, modelName) {
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
+
+  if (modelName === RESOURCES.specialist) {
+    const specializationMethodsMapped = instance.specializationMethods.map(method => ({
+      id: method.id,
+      specialization: method.specialization.name.toLowerCase() === 'психолог' ? 'psychologist' : 'psychotherapist',
+    }));
+
+    const psychologistMethods = specializationMethodsMapped
+      .filter(method => method.specialization === 'psychologist')
+      .map(m => m.id);
+    const psychotherapistMethods = specializationMethodsMapped
+      .filter(method => method.specialization === 'psychotherapist')
+      .map(m => m.id);
+
+    // eslint-disable-next-line no-param-reassign
+    instance.specializationMethodsIds = {
+      psychologist: psychologistMethods.length ? psychologistMethods : [],
+      psychotherapist: psychotherapistMethods.length ? psychotherapistMethods : [],
+    };
+  }
+
   instance.supportFocusesIds = instance.supportFocuses.map(focus => focus.id);
   instance.supportFocuses = instance?.supportFocuses?.map(focus => ({
     ...focus,
@@ -91,6 +113,7 @@ export function transformServiceProvider(instance, modelName) {
   }));
   instance.addressesIds = instance.addresses.map(address => address.id);
 }
+
 /* eslint-enable no-param-reassign */
 
 export function withErrorHandlerAndAuth(handler) {

@@ -71,7 +71,7 @@ function generateSocialMediaLinks() {
   );
 }
 
-function randomSpecialist({ districts, specializations, therapies }) {
+function randomSpecialist({ districts, specializations, specializationMethods, therapies }) {
   const gender = faker.helpers.arrayElement(['FEMALE', 'MALE']);
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
@@ -87,9 +87,19 @@ function randomSpecialist({ districts, specializations, therapies }) {
 
   const socialMediaLinks = generateSocialMediaLinks();
 
+  const specializationsIds = uniqueObjectsWithId(specializations);
+  const specializationMethodsIds = uniqueObjectsWithId(
+    specializationMethods.filter(({ specializationId }) =>
+      specializationsIds.some(({ id }) => id === specializationId),
+    ),
+  );
+
   return {
     specializations: {
-      connect: uniqueObjectsWithId(specializations),
+      connect: specializationsIds,
+    },
+    specializationMethods: {
+      connect: specializationMethodsIds,
     },
     // take name of corresponding gender
     firstName: faker.person.firstName(gender.toLowerCase()),
@@ -113,7 +123,7 @@ function randomSpecialist({ districts, specializations, therapies }) {
   };
 }
 
-function randomOrganization({ therapies, districts, organizationTypes }) {
+function randomOrganization({ therapies, districts, organizationTypes, expertSpecializations }) {
   let addresses;
   const formatOfWork = faker.helpers.arrayElement(['BOTH', 'ONLINE', 'OFFLINE']);
   if (formatOfWork !== 'ONLINE') {
@@ -128,7 +138,12 @@ function randomOrganization({ therapies, districts, organizationTypes }) {
 
   return {
     name: faker.company.name(),
+    expertSpecializations: {
+      connect: uniqueObjectsWithId(expertSpecializations),
+    },
     yearsOnMarket: nullable(faker.number.int({ min: 1, max: 30 })),
+    ownershipType: faker.helpers.arrayElement(['PRIVATE', 'GOVERNMENT']),
+    isInclusiveSpace: faker.datatype.boolean(),
     formatOfWork,
     type: {
       connect: uniqueObjectsWithId(organizationTypes),
@@ -223,6 +238,7 @@ async function main() {
   const specializations = await prisma.specialization.findMany({
     select: { id: true },
   });
+  const specializationMethods = await prisma.method.findMany();
   const districts = await prisma.district.findMany({ select: { id: true } });
 
   const tags = await prisma.eventTag.findMany({ select: { id: true } });
@@ -232,22 +248,17 @@ async function main() {
   // createMany does not support records with relations
   for (let i = 0; i < 10; i += 1) {
     // for instead of Promise.all to avoid overloading the database pool
-    const specialistData = randomSpecialist({ districts, specializations, therapies });
+    const specialistData = randomSpecialist({ districts, specializations, specializationMethods, therapies });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.$transaction(async trx => {
-      const specialist = await trx.specialist.create({
-        data: specialistData,
-      });
-      await trx.searchEntry.create({
-        data: {
-          sortString: getSpecialistFullName(specialist),
-          specialist: {
-            connect: {
-              id: specialist.id,
-            },
+    await prisma.specialist.create({
+      data: {
+        ...specialistData,
+        searchEntry: {
+          create: {
+            sortString: getSpecialistFullName(specialistData),
           },
         },
-      });
+      },
     });
   }
   for (let i = 0; i <= 100; i += 1) {
@@ -257,22 +268,22 @@ async function main() {
     });
   }
   for (let i = 0; i < 10; i += 1) {
-    const organizationData = randomOrganization({ therapies, districts, organizationTypes });
+    const organizationData = randomOrganization({
+      therapies,
+      districts,
+      organizationTypes,
+      expertSpecializations: specializations,
+    });
     // eslint-disable-next-line no-await-in-loop
-    await prisma.$transaction(async trx => {
-      const organization = await trx.organization.create({
-        data: organizationData,
-      });
-      await trx.searchEntry.create({
-        data: {
-          sortString: organization.name,
-          organization: {
-            connect: {
-              id: organization.id,
-            },
+    await prisma.organization.create({
+      data: {
+        ...organizationData,
+        searchEntry: {
+          create: {
+            sortString: organizationData.name,
           },
         },
-      });
+      },
     });
   }
 }

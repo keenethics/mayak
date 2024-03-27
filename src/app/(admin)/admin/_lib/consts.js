@@ -28,3 +28,6 @@ export const PHONE = 'phone';
 export const EMAIL = 'email';
 
 export const MAX_NUM_SELECTED_SOCIAL_LINKS = 5;
+
+export const PSYCHOTHERAPIST = 'Психотерапевт';
+export const PSYCHOLOGIST = 'Психолог';
