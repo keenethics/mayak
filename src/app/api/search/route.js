@@ -40,9 +40,11 @@ export async function GET(req) {
       OR: format && [{ formatOfWork: FormatOfWork.BOTH }, { formatOfWork: format }],
       addresses: districts && {
         some: {
-          OR: districts.map(id => ({
-            districtId: id,
-          })),
+          district: {
+            OR: districts.map(id => ({
+              id,
+            })),
+          },
         },
       },
     },
