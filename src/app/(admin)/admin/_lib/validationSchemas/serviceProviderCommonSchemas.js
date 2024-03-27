@@ -97,6 +97,7 @@ export const zEditAddressSchema = z.object({
     .boolean()
     .nullish()
     .transform(arg => (arg === null ? false : arg)),
+  ...zCoordinateSchema.shape,
 });
 
 export const zCreateAddressSchema = z.object({
