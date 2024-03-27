@@ -40,6 +40,7 @@ export function CardOrganization({ organization, className, extended = false }) 
     telegram,
   } = organization;
 
+  addresses.sort((a, b) => Number(b.isPrimary) - Number(a.isPrimary));
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({

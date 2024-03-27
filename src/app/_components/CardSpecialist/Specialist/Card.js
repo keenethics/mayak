@@ -45,6 +45,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     telegram,
   } = specialist;
   const specializationsList = specializations.map(s => s.name);
+  addresses.sort((a, b) => Number(b.isPrimary) - Number(a.isPrimary));
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
   const labelsList = getLabelsList({ yearsOfExperience, isFreeReception, formatOfWork, specialistType: 'specialist' });
