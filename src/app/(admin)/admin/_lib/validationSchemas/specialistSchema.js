@@ -33,9 +33,6 @@ const restCreateProps = zSpecialistSchema.extend({
     .array()
     .default([])
     .refine(singlePrimaryAddressRefine, { message: MESSAGES.singlePrimaryAddress }),
-
-  // clientsWorkingWith: z.string().array().default([]),  //TODO check it for sure
-  // clientsNotWorkingWith: z.string().array().default([]),
 });
 
 const createDefaultProps = z.object({

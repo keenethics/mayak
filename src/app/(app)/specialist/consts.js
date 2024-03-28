@@ -14,6 +14,13 @@ export const specialistInclude = {
       district: true,
     },
   },
+  //! this shit no work at all
+  // clientCategory: {
+  clientCategories: {
+    orderBy: {
+      name: 'asc',
+    },
+  },
 };
 
 export const organizationInclude = {
@@ -32,4 +39,10 @@ export const organizationInclude = {
       district: true,
     },
   },
+  //! this shit no work at all
+  // clientCategories: {
+  //   orderBy: {
+  //     name: 'asc',
+  //   },
+  // },
 };

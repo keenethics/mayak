@@ -14,9 +14,11 @@ import { SpecialistTitle } from '@components/CardSpecialist/SpecialistTitle';
 import { SpecializationsPanel } from '@components/CardSpecialist/SpecializationsPanel';
 import { getContactsList, getLabelsList, getSpecialistSocials } from '@components/CardSpecialist/config';
 import { specialistPropType } from '@components/CardSpecialist/prop-types';
+import { ClientCategoryList } from '../ClientCategoryList';
 
 export function CardSpecialist({ specialist, className, extended = false }) {
   if (!specialist) throw new Error('Specialist is not found');
+
   const {
     id,
     gender,
@@ -40,7 +42,10 @@ export function CardSpecialist({ specialist, className, extended = false }) {
     linkedin,
     viber,
     telegram,
+    clientsNotWorkingWith,
+    clientsWorkingWith,
   } = specialist;
+
   const specializationsList = specializations.map(s => s.name);
   const addressPrimary = addresses[0];
   const contactsList = getContactsList({ phone, email, website });
@@ -48,6 +53,12 @@ export function CardSpecialist({ specialist, className, extended = false }) {
   const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
   const name = surname ? `${lastName} ${firstName} ${surname}` : `${lastName} ${firstName}`;
 
+  const ClientCategoryWorkWithOrNot = (
+    <>
+      <ClientCategoryList isWorkWith clientCategories={clientsWorkingWith} />
+      <ClientCategoryList isWorkWith={false} clientCategories={clientsNotWorkingWith} />
+    </>
+  );
   return (
     <CardWrapper className={className} id={id} type="specialist">
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
@@ -73,10 +84,13 @@ export function CardSpecialist({ specialist, className, extended = false }) {
         <BadgeList labels={labelsList} />
         {extended ? (
           <>
+            {ClientCategoryWorkWithOrNot}
             <DetailsList
               className="border-t border-dashed border-t-gray-200 pt-4"
               details={{ addresses, description, supportFocuses }}
               text="спеціаліста"
+              clientsWorkingWith={clientsWorkingWith}
+              clientsNotWorkingWith={clientsNotWorkingWith}
             />
             <ContactsList
               truncate={!extended}
@@ -88,6 +102,7 @@ export function CardSpecialist({ specialist, className, extended = false }) {
           </>
         ) : (
           <>
+            {ClientCategoryWorkWithOrNot}
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}

@@ -14,6 +14,7 @@ import { DetailsList } from '@components/CardSpecialist/DetailsList';
 import { AddressesList } from '@components/CardSpecialist/AddressesList';
 import { CardButton } from '@components/CardSpecialist/CardButton';
 import { organizationPropType } from '@components/CardSpecialist/prop-types';
+import { ClientCategoryList } from '../ClientCategoryList';
 
 export function CardOrganization({ organization, className, extended = false }) {
   const {
@@ -36,6 +37,8 @@ export function CardOrganization({ organization, className, extended = false }) 
     linkedin,
     viber,
     telegram,
+    clientsWorkingWith,
+    clientsNotWorkingWith,
   } = organization;
 
   const addressPrimary = addresses[0];
@@ -48,6 +51,12 @@ export function CardOrganization({ organization, className, extended = false }) 
   });
   const socials = getSpecialistSocials({ instagram, facebook, tiktok, youtube, linkedin, viber, telegram });
 
+  const ClientCategoryWorkWithOrNot = (
+    <>
+      <ClientCategoryList isWorkWith clientCategories={clientsWorkingWith} />
+      <ClientCategoryList isWorkWith={false} clientCategories={clientsNotWorkingWith} />
+    </>
+  );
   return (
     <CardWrapper className={className} id={id} type="organization">
       <div className="hidden max-w-[150px] md:block lg:max-w-[200px]">
@@ -73,6 +82,7 @@ export function CardOrganization({ organization, className, extended = false }) 
         <BadgeList labels={labelsList} />
         {extended ? (
           <>
+            {ClientCategoryWorkWithOrNot}
             <DetailsList
               className="mt-4 border-t border-dashed border-t-gray-200 pt-4"
               details={{
@@ -92,6 +102,7 @@ export function CardOrganization({ organization, className, extended = false }) 
           </>
         ) : (
           <>
+            {ClientCategoryWorkWithOrNot}
             {addressPrimary && (
               <AddressesList className="border-t pt-3 md:border-b md:py-3" addresses={[addressPrimary]} />
             )}
