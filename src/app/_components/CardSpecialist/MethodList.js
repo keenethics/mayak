@@ -57,7 +57,7 @@ export function MethodList({ methods = [], specializations = [], showCaption = t
   }
 
   return (
-    <div className={cn('flex flex-col gap-2 border-t pt-3', className)}>
+    <div className={cn('flex flex-col gap-2 border-t border-dashed border-t-gray-200 pt-3', className)}>
       {showCaption && <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>}
       <TruncatedList
         alwaysShowTruncator

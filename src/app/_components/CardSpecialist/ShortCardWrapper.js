@@ -18,6 +18,7 @@ import {
 } from '@components/CardSpecialist';
 import Link from 'next/link';
 import { MethodList } from '@components/CardSpecialist/MethodList';
+import { cn } from '@utils/cn';
 
 export function ShortCardWrapper({ data, type, isHoveredOn, className }) {
   const isOrganization = type === 'organization';
@@ -81,15 +82,21 @@ export function ShortCardWrapper({ data, type, isHoveredOn, className }) {
               extendedCardOpened
               className="flex-wrap"
             />
-            <SpecialistTitle id={data.id} truncate={false} name={name} className="mt-2" />
+            <SpecialistTitle id={data.id} truncate name={name} className="mt-2" />
             {isBadgeList && <BadgeList labels={labelsList} className="mt-4 flex-wrap" />}
             {isHoveredOn && (
-              <MethodList
-                specializations={specializationsList}
-                methods={data.specializationMethods}
-                className="mt-5 max-w-[500px]"
-                showCaption={false}
-              />
+              <div
+                className={cn('border-1 mt-5 w-full border-t border-dashed border-t-gray-200', {
+                  hidden: !data.specializationMethods,
+                })}
+              >
+                <MethodList
+                  specializations={specializationsList}
+                  methods={data.specializationMethods}
+                  className="max-w-[500px] border-0"
+                  showCaption={false}
+                />
+              </div>
             )}
             {isHoveredOn && addressPrimary && (
               <AddressesList

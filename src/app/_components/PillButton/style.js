@@ -80,12 +80,12 @@ export const buttonType = {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col text-p4',
       layoutStyle: `flex justify-center align-middle items-center
-      gap-[8px] self-stretch h-[2.5rem] pt-[10px] pr-[24px] pb-[10px] pl-[16px]`,
+      gap-[8px] self-stretch h-[2.5rem] pt-2.5 pr-6 pb-2.5 pl-4`,
     },
     regular: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle flex-col h-[2.5rem] flex-shrink-0 text-p4',
       layoutStyle: `flex justify-center align-middle
-      gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-[10px] px-[24px]`,
+      gap-[8px] self-stretch flex-grow flex-shrink-0 flex-basis-0 py-2.5 px-6`,
     },
   },
   eventFilter: {
@@ -108,21 +108,21 @@ export const buttonType = {
   filled: {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle text-p3',
-      layoutStyle: 'flex justify-center align-middle gap-[8px] pt-[12px] pr-[24px] pb-[12px] pl-[16px]',
+      layoutStyle: 'flex justify-center align-middle gap-2 py-3 px-4',
     },
     regular: {
-      buttonStyle: 'transition-all inline-flex justify-center align-middle py-[12px] px-[0px] text-p3',
-      layoutStyle: 'flex justify-center align-middle gap-[8px] py-[0px] px-[24px] self-stretch',
+      buttonStyle: 'transition-all inline-flex justify-center align-middle py-3 px-0 text-p3',
+      layoutStyle: 'flex justify-center align-middle gap-2 py-0 px-6 self-stretch',
     },
   },
   tonal: {
     icon: {
       buttonStyle: 'transition-all inline-flex justify-center align-middle text-p3',
-      layoutStyle: 'flex justify-center align-middle gap-[8px] pt-[12px] pr-[24px] pb-[12px] pl-[16px]',
+      layoutStyle: 'flex justify-center align-middle gap-2 pt-3 pr-6 pb-3 pl-4',
     },
     regular: {
-      buttonStyle: 'transition-all inline-flex justify-center align-middle py-[12px] px-[0px] text-p3',
-      layoutStyle: 'flex justify-center align-middle gap-[8px] py-[0px] px-[24px] self-stretch',
+      buttonStyle: 'transition-all inline-flex justify-center align-middle py-3 px-0 text-p3',
+      layoutStyle: 'flex justify-center align-middle gap-2 py-0 px-6 self-stretch',
     },
   },
   close: {
