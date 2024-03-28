@@ -1,26 +1,23 @@
-export function getSearchParamsFromRequest(request, defaultValues = {}, transform = null) {
+export function getSearchParamsFromRequest(request, defaultValues = {}, transform = it => it) {
   if (!request?.url) return {};
   try {
-    const url = new URL(request.url);
     const searchParams = {};
+    const url = new URL(request.url);
+
     url.searchParams.forEach((val, key) => {
-      if (searchParams[key]) {
-        if (Array.isArray(searchParams[key])) {
-          searchParams[key].push(val);
-        } else {
-          const currValue = searchParams[key];
-          searchParams[key] = [currValue, val];
-        }
-      } else {
+      if (!searchParams[key]) {
         searchParams[key] = val;
+      } else {
+        if (!Array.isArray(searchParams[key])) {
+          searchParams[key] = [searchParams[key]];
+        }
+        searchParams[key].push(val);
       }
     });
-    Object.entries(defaultValues).forEach(entry => {
-      const [key, val] = entry;
-      if (searchParams[key] === undefined) searchParams[key] = val;
-    });
-    return transform ? transform(searchParams) : searchParams;
+
+    return transform({ ...defaultValues, ...searchParams });
   } catch (e) {
+    console.error(e);
     return {};
   }
 }
