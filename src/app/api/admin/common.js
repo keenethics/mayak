@@ -34,6 +34,12 @@ export const MODEL_INCLUDES = {
     workTime: { select: { weekDay: true, time: true, isDayOff: true } },
   },
   [RESOURCES.organization]: {
+    expertSpecializations: {
+      select: {
+        id: true,
+        name: true,
+      },
+    },
     supportFocuses: {
       select: {
         id: true,
@@ -81,6 +87,7 @@ export function transformServiceProvider(instance, modelName) {
   // React Admin issues
   if (modelName === RESOURCES.organization) {
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
+    instance.expertSpecializationIds = instance.expertSpecializations.map(({ id }) => id);
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
