@@ -105,8 +105,6 @@ model Organization {
   telegram              String?            @db.Text
   searchEntry           SearchEntry?
   supportFocuses        SupportFocus[]
-  Therapy               Therapy?           @relation(fields: [therapyId], references: [id])
-  therapyId             String?            @db.Uuid
 
   @@map("organization")
 }
@@ -178,7 +176,6 @@ model Therapy {
 
   supportFocuses SupportFocus[]
   requests       Request[]
-  organizations  Organization[]
 
   @@map("therapy")
 }
