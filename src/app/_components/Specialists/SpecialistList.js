@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import _ from 'lodash';
 import { Slide, Slider } from '@components/Slider';
 import { Pagination } from 'swiper/modules';
-import { motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 import { cn } from '@utils/cn';
 import { MapLink } from '@components/MapLink';
 import { ShortCardWrapper } from '@components/CardSpecialist/ShortCardWrapper';
@@ -103,28 +103,30 @@ export function SpecialistList({ className }) {
             </Slider>
           </div>
 
-          <ul className="hidden flex-col gap-4 overflow-scroll pr-5 lg:col-span-3 lg:row-start-1 lg:flex">
-            {entries.map(entry => {
-              const type = entry.gender ? 'specialist' : 'organization';
-              return (
-                <motion.li
-                  layout="position"
-                  transition={{ layout: { duration: 0.3, type: 'spring' } }}
-                  id={entry.id}
-                  key={entry.id}
-                  onMouseEnter={() => handleCardHover(entry.id)}
-                  onMouseLeave={handleCardLeave}
-                >
-                  <ShortCardWrapper
-                    data={entry}
-                    type={type}
-                    className={cardStyle}
-                    isHoveredOn={hoveredCardId === entry.id}
-                  />
-                </motion.li>
-              );
-            })}
-          </ul>
+          <LayoutGroup>
+            <motion.ul className="hidden flex-col gap-4 overflow-scroll pr-5 lg:col-span-3 lg:row-start-1 lg:flex">
+              {entries.map(entry => {
+                const type = entry.gender ? 'specialist' : 'organization';
+                return (
+                  <motion.li
+                    layout="position"
+                    transition={{ position: { duration: 0.75, type: 'spring' } }}
+                    id={entry.id}
+                    key={entry.id}
+                    onMouseEnter={() => handleCardHover(entry.id)}
+                    onMouseLeave={handleCardLeave}
+                  >
+                    <ShortCardWrapper
+                      data={entry}
+                      type={type}
+                      className={cardStyle}
+                      isHoveredOn={hoveredCardId === entry.id}
+                    />
+                  </motion.li>
+                );
+              })}
+            </motion.ul>
+          </LayoutGroup>
         </div>
       ) : (
         <ul className={cn('flex flex-col gap-6', className)}>

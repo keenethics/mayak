@@ -61,7 +61,7 @@ export function MethodList({ methods = [], specializations = [], showCaption = t
       {showCaption && <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>}
       <TruncatedList
         alwaysShowTruncator
-        className={cn('flex flex-wrap gap-[8px]', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
+        className={cn('flex max-w-[550px] flex-wrap gap-2', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
         renderTruncator={({ hiddenItemsCount }) => {
           const hasHiddenItems = hiddenItemsCount > 0;
 
