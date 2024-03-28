@@ -30,7 +30,7 @@ export function OrganizationShow() {
             <ChipField source="name" size="small" />
           </SingleFieldList>
         </ArrayField>
-        <BooleanField label="Інклюзівний простір" source="isInclusiveSpace" />
+        <BooleanField label="Інклюзивний простір" source="isInclusiveSpace" />
         <TextField label="Тип власності" source="ownershipType" />
         <DateField label="Дата додавання в сервіс" showTime source="createdAt" />
         <NumberField label="Роки на ринку" source="yearsOnMarket" />
