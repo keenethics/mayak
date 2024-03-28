@@ -46,7 +46,7 @@ Method.propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-export function MethodList({ methods = [], specializations = [], className, showCaption = true }) {
+export function MethodList({ methods = [], specializations = [] }) {
   const [expanded, setExpanded] = useState(false);
   const caption = makeCaption(specializations);
 
@@ -57,8 +57,8 @@ export function MethodList({ methods = [], specializations = [], className, show
   }
 
   return (
-    <div className={cn('flex flex-col gap-2 border-t border-dashed border-t-gray-200 pt-3', className)}>
-      {showCaption && <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>}
+    <div className="flex flex-col gap-2 border-t pt-3">
+      <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>
       <TruncatedList
         alwaysShowTruncator
         className={cn('flex flex-wrap gap-[8px]', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
@@ -83,6 +83,4 @@ export function MethodList({ methods = [], specializations = [], className, show
 MethodList.propTypes = {
   specializations: PropTypes.arrayOf(PropTypes.string),
   methods: PropTypes.arrayOf(Method.propTypes),
-  className: PropTypes.string,
-  showCaption: PropTypes.bool,
 };

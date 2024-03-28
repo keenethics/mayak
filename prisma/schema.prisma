@@ -89,7 +89,6 @@ model Organization {
   yearsOnMarket         Int?               @db.SmallInt
   formatOfWork          FormatOfWork?
   addresses             Address[]
-  therapies             Therapy[]
   workTime              WorkTime[]
   isFreeReception       Boolean?
   description           String?            @db.Text
@@ -177,7 +176,6 @@ model Therapy {
 
   supportFocuses SupportFocus[]
   requests       Request[]
-  organizations  Organization[]
 
   @@map("therapy")
 }
@@ -202,6 +200,8 @@ model Address {
   specialists   Specialist[]
   organizations Organization[]
   isPrimary     Boolean        @default(false)
+  longitude     Float          @db.DoublePrecision
+  latitude      Float          @db.DoublePrecision
 
   @@map("address")
 }
