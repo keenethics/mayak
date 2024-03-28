@@ -6,17 +6,16 @@ import { CardOrganization, CardSpecialist } from '@components/CardSpecialist';
 import { useListEntries } from '@hooks';
 import { useSearchParams } from 'next/navigation';
 import _ from 'lodash';
-import { Slider } from '@components/Slider';
-import { SwiperSlide } from 'swiper/react';
+import { Slide, Slider } from '@components/Slider';
 import { Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
-
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import { cn } from '@utils/cn';
 import { MapLink } from '@components/MapLink';
 import { ShortCardWrapper } from '@components/CardSpecialist/ShortCardWrapper';
 import Loading from '@/app/loading';
+
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 function getProperEnding(count) {
   const lastDigit = count % 10;
@@ -97,9 +96,9 @@ export function SpecialistList({ className }) {
               {entries.map(entry => {
                 const type = entry.gender ? 'specialist' : 'organization';
                 return (
-                  <SwiperSlide id={entry.id} key={entry.id} className="!h-auto">
+                  <Slide id={entry.id} key={entry.id} className="!h-auto">
                     <ShortCardWrapper data={entry} type={type} className={cardStyle} isHoveredOn={false} />
-                  </SwiperSlide>
+                  </Slide>
                 );
               })}
             </Slider>

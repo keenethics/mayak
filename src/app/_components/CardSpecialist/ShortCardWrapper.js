@@ -23,20 +23,15 @@ export function ShortCardWrapper({ data, type, isHoveredOn, className }) {
   const isOrganization = type === 'organization';
 
   const specializationsList = isOrganization ? data.type.map(t => t.name) : data.specializations.map(s => s.name);
-  // eslint-disable-next-line no-nested-ternary
   const { lastName, firstName, surname } = data;
-
   const name = isOrganization ? data.name : [lastName, firstName, surname].filter(Boolean).join(' ');
 
-  const getLabels = getLabelsList.bind(null, {
+  const labelsList = getLabelsList({
     yearsOfExperience: data.yearsOnMarket,
     isFreeReception: data.isFreeReception,
     formatOfWork: data.formatOfWork,
+    specialistType: isOrganization ? 'organization' : 'specialist',
   });
-
-  const labelsList = isOrganization
-    ? getLabels({ specialistType: 'organization' })
-    : getLabels({ specialistType: 'specialist' });
 
   const isBadgeList = !!labelsList.filter(label => !!label.content).length;
 
@@ -92,7 +87,7 @@ export function ShortCardWrapper({ data, type, isHoveredOn, className }) {
               <MethodList
                 specializations={specializationsList}
                 methods={data.specializationMethods}
-                className="mt-5"
+                className="mt-5 max-w-[500px]"
                 showCaption={false}
               />
             )}

@@ -63,16 +63,11 @@ export function MethodList({ methods = [], specializations = [], className, show
         alwaysShowTruncator
         className={cn('flex flex-wrap gap-[8px]', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
         renderTruncator={({ hiddenItemsCount }) => {
-          if (hiddenItemsCount > 0) {
-            return (
-              <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(true)}>
-                +{hiddenItemsCount}
-              </span>
-            );
-          }
+          const hasHiddenItems = hiddenItemsCount > 0;
+
           return (
-            <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(false)}>
-              Приховати
+            <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(hasHiddenItems)}>
+              {hasHiddenItems ? `+${hiddenItemsCount}` : 'Приховати'}
             </span>
           );
         }}
