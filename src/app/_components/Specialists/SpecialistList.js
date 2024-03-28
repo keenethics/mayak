@@ -31,8 +31,7 @@ export function SpecialistList({ className }) {
 
   const { ref, inView } = useInView();
 
-  const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } =
-    usePaginatedEntries(searchParams);
+  const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess } = usePaginatedEntries(searchParams);
   const totalCount = data?.pages?.length && data.pages[0].metaData?.totalCount;
 
   useEffect(() => {
@@ -86,7 +85,6 @@ export function SpecialistList({ className }) {
             )}
 
           {isLoading ||
-            (isLoading && isFetchingNextPage) ||
             (hasNextPage && (
               <div className="mx-auto flex flex-col" ref={ref}>
                 <p className={loadingTextStyles}>Завантажується</p>
