@@ -40,6 +40,7 @@ export const MODEL_INCLUDES = {
         requests: true,
       },
     },
+    expertSpecializations: { select: { id: true, name: true } },
     type: { select: { id: true, name: true } },
     addresses: {
       select: {
@@ -78,6 +79,9 @@ export function transformServiceProvider(instance, modelName) {
   // React Admin issues
   if (modelName === RESOURCES.organization) {
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
+    instance.expertSpecializationsIds = instance.expertSpecializations.map(
+      expertSpecialisation => expertSpecialisation.id,
+    );
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }

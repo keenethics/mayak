@@ -36,7 +36,6 @@ const activeOrganizationSchema = restCreateProps.extend({
   ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']),
   isInclusiveSpace: z.boolean(),
   expertSpecializations: zStringArray,
-  therapies: zStringArray,
   supportFocuses: zSupportFocusSchema.array().min(1, {
     message: 'Необхідно обрати хоча б один тип терапії',
   }),
