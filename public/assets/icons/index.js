@@ -37,3 +37,4 @@ export { default as ArrowIconUp } from '@icons/arrowDown.svg';
 export { default as Ellipse } from '@icons/ellipse.svg';
 export { default as Tick } from '@icons/tickIcon.svg';
 export { default as Map } from '@icons/map.svg';
+export { default as List } from '@icons/list.svg';

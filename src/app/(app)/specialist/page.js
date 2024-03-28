@@ -14,7 +14,7 @@ export const revalidate = REVALIDATION_TIME;
 
 export default function Page() {
   return (
-    <div className="mx-auto mb-4 max-w-[1200px] px-4 lg:mb-8">
+    <div className="mx-auto mb-4 max-w-max px-4 lg:mb-8">
       <Filters />
       <SpecialistList className="my-5 md:my-8" />
     </div>

@@ -25,12 +25,12 @@ function makeCaption(specializations) {
 function Method({ id, title, description }) {
   return (
     <div className="grid h-[24px] w-fit place-items-center rounded-3xl bg-primary-100">
-      <span className="text-c3 w-full px-3 py-1 font-medium text-primary-600" data-tooltip-id={`method_tooltip_${id}`}>
+      <span className="w-full px-3 py-1 text-c3 font-medium text-primary-600" data-tooltip-id={`method_tooltip_${id}`}>
         {title}
       </span>
       <Tooltip
         id={`method_tooltip_${id}`}
-        style={{ backgroundColor: '#FFF', color: '#080809', boxShadow: '0px 0px 7px 1px rgba(0,0,0,0.2)' }}
+        style={{ backgroundColor: '#fff', color: '#080809', boxShadow: '0px 0px 7px 1px rgba(0,0,0,0.2)' }}
         place="bottom"
         opacity={1}
       >
@@ -39,13 +39,14 @@ function Method({ id, title, description }) {
     </div>
   );
 }
+
 Method.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
 
-export function MethodList({ methods = [], specializations = [] }) {
+export function MethodList({ methods = [], specializations = [], className, showCaption = true }) {
   const [expanded, setExpanded] = useState(false);
   const caption = makeCaption(specializations);
 
@@ -56,21 +57,21 @@ export function MethodList({ methods = [], specializations = [] }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 border-t pt-3">
-      <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>
+    <div className={cn('flex flex-col gap-2 border-t border-dashed border-t-gray-200 pt-3', className)}>
+      {showCaption && <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>}
       <TruncatedList
         alwaysShowTruncator
         className={cn('flex flex-wrap gap-[8px]', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
         renderTruncator={({ hiddenItemsCount }) => {
           if (hiddenItemsCount > 0) {
             return (
-              <span className="text-c3 cursor-pointer text-gray-900" onClick={() => setExpanded(true)}>
+              <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(true)}>
                 +{hiddenItemsCount}
               </span>
             );
           }
           return (
-            <span className="text-c3 cursor-pointer text-gray-900" onClick={() => setExpanded(false)}>
+            <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(false)}>
               Приховати
             </span>
           );
@@ -83,7 +84,10 @@ export function MethodList({ methods = [], specializations = [] }) {
     </div>
   );
 }
+
 MethodList.propTypes = {
   specializations: PropTypes.arrayOf(PropTypes.string),
   methods: PropTypes.arrayOf(Method.propTypes),
+  className: PropTypes.string,
+  showCaption: PropTypes.bool,
 };

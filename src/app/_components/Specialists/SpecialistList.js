@@ -2,23 +2,20 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  CardOrganization,
-  CardOrganizationShort,
-  CardSpecialist,
-  CardSpecialistShort,
-} from '@components/CardSpecialist';
+import { CardOrganization, CardSpecialist } from '@components/CardSpecialist';
 import { useListEntries } from '@hooks';
 import { useSearchParams } from 'next/navigation';
 import _ from 'lodash';
 import { Slider } from '@components/Slider';
 import { SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import { motion } from 'framer-motion';
 
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { cn } from '@utils/cn';
 import { MapLink } from '@components/MapLink';
+import { ShortCardWrapper } from '@components/CardSpecialist/ShortCardWrapper';
 import Loading from '@/app/loading';
 
 function getProperEnding(count) {
@@ -51,7 +48,7 @@ export function SpecialistList({ className }) {
   const isMapMode = searchParams.get('mode') === 'map';
 
   const { data, isLoading } = useListEntries(searchParams.toString());
-  const cardStyle = 'max-w-[900px] rounded-3xl border-2 border-gray-200 px-4 py-5 lg:mx-auto !h-full';
+  const cardStyle = 'max-w-[900px] rounded-3xl border-2 border-gray-200 px-4 py-5 lg:mx-auto h-full';
   if (isLoading) return <Loading />;
 
   if (!isLoading && !data?.data?.length) return null;
@@ -66,7 +63,7 @@ export function SpecialistList({ className }) {
         <div className="mt-5 lg:grid lg:h-[750px] lg:grid-cols-5 lg:grid-rows-1 lg:gap-2">
           <div
             className={cn(
-              'relative grid h-[500px] place-content-center bg-primary-300 lg:col-span-2 lg:col-start-4 lg:h-full',
+              'relative grid h-[500px] place-content-center rounded-3xl bg-primary-300 lg:col-span-2 lg:col-start-4 lg:h-full',
               {
                 hidden: !isMapMode,
               },
@@ -86,52 +83,49 @@ export function SpecialistList({ className }) {
                   slidesPerView: 1,
                   spaceBetween: 24,
                 },
-                540: {
-                  slidesPerView: 1.4,
+                640: {
+                  slidesPerView: 1.25,
                   spaceBetween: 16,
                 },
                 768: {
-                  slidesPerView: 2.2,
+                  slidesPerView: 1.5,
                   spaceBetween: 14,
                 },
               }}
-              className="my-5"
+              className="mb-10 mt-5 md:mb-12"
             >
-              {entries.map(entry => (
-                <SwiperSlide id={entry.id} key={entry.id} className="!h-auto">
-                  {entry.gender ? (
-                    <CardSpecialistShort className={cardStyle} specialist={entry} />
-                  ) : (
-                    <CardOrganizationShort className={cardStyle} organization={entry} />
-                  )}
-                </SwiperSlide>
-              ))}
+              {entries.map(entry => {
+                const type = entry.gender ? 'specialist' : 'organization';
+                return (
+                  <SwiperSlide id={entry.id} key={entry.id} className="!h-auto">
+                    <ShortCardWrapper data={entry} type={type} className={cardStyle} isHoveredOn={false} />
+                  </SwiperSlide>
+                );
+              })}
             </Slider>
           </div>
 
           <ul className="hidden flex-col gap-4 overflow-scroll pr-5 lg:col-span-3 lg:row-start-1 lg:flex">
-            {entries.map(entry => (
-              <li
-                id={entry.id}
-                key={entry.id}
-                onMouseEnter={() => handleCardHover(entry.id)}
-                onMouseLeave={handleCardLeave}
-              >
-                {entry.gender ? (
-                  <CardSpecialistShort
+            {entries.map(entry => {
+              const type = entry.gender ? 'specialist' : 'organization';
+              return (
+                <motion.li
+                  layout="position"
+                  transition={{ layout: { duration: 0.3, type: 'spring' } }}
+                  id={entry.id}
+                  key={entry.id}
+                  onMouseEnter={() => handleCardHover(entry.id)}
+                  onMouseLeave={handleCardLeave}
+                >
+                  <ShortCardWrapper
+                    data={entry}
+                    type={type}
                     className={cardStyle}
-                    specialist={entry}
                     isHoveredOn={hoveredCardId === entry.id}
                   />
-                ) : (
-                  <CardOrganizationShort
-                    className={cardStyle}
-                    organization={entry}
-                    isHoveredOn={hoveredCardId === entry.id}
-                  />
-                )}
-              </li>
-            ))}
+                </motion.li>
+              );
+            })}
           </ul>
         </div>
       ) : (
