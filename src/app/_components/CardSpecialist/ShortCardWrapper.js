@@ -24,11 +24,9 @@ export function ShortCardWrapper({ data, type, isHoveredOn, className }) {
 
   const specializationsList = isOrganization ? data.type.map(t => t.name) : data.specializations.map(s => s.name);
   // eslint-disable-next-line no-nested-ternary
-  const name = isOrganization
-    ? data.name
-    : data.surname
-      ? `${data.lastName} ${data.firstName} ${data.surname}`
-      : `${data.lastName} ${data.firstName}`;
+  const { lastName, firstName, surname } = data;
+
+  const name = isOrganization ? data.name : [lastName, firstName, surname].filter(Boolean).join(' ');
 
   const getLabels = getLabelsList.bind(null, {
     yearsOfExperience: data.yearsOnMarket,
