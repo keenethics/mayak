@@ -30,7 +30,7 @@ function Method({ id, title, description }) {
       </span>
       <Tooltip
         id={`method_tooltip_${id}`}
-        style={{ backgroundColor: '#FFF', color: '#080809', boxShadow: '0px 0px 7px 1px rgba(0,0,0,0.2)' }}
+        style={{ backgroundColor: '#fff', color: '#080809', boxShadow: '0px 0px 7px 1px rgba(0,0,0,0.2)' }}
         place="bottom"
         opacity={1}
       >
@@ -39,13 +39,14 @@ function Method({ id, title, description }) {
     </div>
   );
 }
+
 Method.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
 
-export function MethodList({ methods = [], specializations = [] }) {
+export function MethodList({ methods = [], specializations = [], showCaption = true, className }) {
   const [expanded, setExpanded] = useState(false);
   const caption = makeCaption(specializations);
 
@@ -56,23 +57,24 @@ export function MethodList({ methods = [], specializations = [] }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 border-t pt-3">
-      <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>
+    <div className={cn('flex flex-col gap-2 border-t border-dashed border-t-gray-200 pt-3', className)}>
+      {showCaption && <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>}
       <TruncatedList
         alwaysShowTruncator
-        className={cn('flex flex-wrap gap-[8px]', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
+        className={cn('flex max-w-[550px] flex-wrap gap-2', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
         renderTruncator={({ hiddenItemsCount }) => {
-          if (hiddenItemsCount > 0) {
-            return (
-              <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(true)}>
-                +{hiddenItemsCount}
-              </span>
-            );
-          }
+          const hasHiddenItems = hiddenItemsCount > 0;
+
           return (
-            <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(false)}>
-              Приховати
-            </span>
+            <button
+              className="cursor-pointer text-c3 text-gray-900"
+              onClick={e => {
+                e.stopPropagation();
+                setExpanded(hasHiddenItems);
+              }}
+            >
+              {hasHiddenItems ? `+${hiddenItemsCount}` : 'Приховати'}
+            </button>
           );
         }}
       >
@@ -83,7 +85,10 @@ export function MethodList({ methods = [], specializations = [] }) {
     </div>
   );
 }
+
 MethodList.propTypes = {
   specializations: PropTypes.arrayOf(PropTypes.string),
   methods: PropTypes.arrayOf(Method.propTypes),
+  showCaption: PropTypes.bool,
+  className: PropTypes.string,
 };

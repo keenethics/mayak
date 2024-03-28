@@ -2,11 +2,11 @@
 
 import { useCallback, useState } from 'react';
 import Link from 'next/link';
-import { BurgerIcon, Logo, HeaderCloseIcon } from '@icons';
+import { BurgerIcon, HeaderCloseIcon, Logo } from '@icons';
 import siteNav from '@config/siteNav';
 import { cn } from '@utils/cn';
 import { useBodyScrollLock } from '@hooks';
-import { SocialLink, InnerLink } from '@components/Links';
+import { InnerLink, SocialLink } from '@components/Links';
 import { PillButton } from '@components/PillButton';
 import { Feedback } from '@components/Feedback';
 
@@ -34,7 +34,7 @@ export function Header() {
 
   useBodyScrollLock(isMenuOpen, 'y');
   return (
-    <header>
+    <header className="z-50">
       {/* this element is used to fill the space under navbar on mobile screens */}
       <div className="border-t-[1px] p-4 lg:hidden">
         <div className="h-9" />

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Search, CheckMark } from '@icons';
+import { CheckMark, Search } from '@icons';
 import { PillButton } from '@components/PillButton';
 import { Slide, Slider } from '@components/Slider';
 import { cn } from '@utils/cn';
@@ -23,7 +23,7 @@ export function DistrictList({ list, className }) {
         const isSelected = index === selected;
 
         return (
-          <Slide key={id} onClick={() => handleClick(index)} className="mr-3.5 last:mr-0">
+          <Slide key={id} onClick={() => handleClick(index)} className="mr-3.5 !w-auto last:mr-0">
             <Link
               href={`/specialist?district=${id}`}
               className={cn(isSelected && 'pointer-events-none cursor-none')}
