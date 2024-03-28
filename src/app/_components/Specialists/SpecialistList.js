@@ -56,7 +56,6 @@ export function SpecialistList({ className }) {
 
   return (
     <div className={cn('p-0', className)}>
-      <MapLink mapMode={!!isMapMode} className={cn({ hidden: isMapMode })} />
       <p className="text-p4 font-bold uppercase text-primary-600 md:text-p2">{`Знайдено: ${totalCount} ${getProperEnding(totalCount)}`}</p>
       {isMapMode ? (
         <div className="mt-5 lg:grid lg:h-[750px] lg:grid-cols-5 lg:grid-rows-1 lg:gap-2">
@@ -140,6 +139,10 @@ export function SpecialistList({ className }) {
           ))}
         </ul>
       )}
+      <MapLink
+        mapMode={!!isMapMode}
+        className={cn('sticky bottom-20 left-[50%] translate-x-[-50%]', { hidden: isMapMode })}
+      />
     </div>
   );
 }

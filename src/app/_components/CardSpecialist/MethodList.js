@@ -46,7 +46,7 @@ Method.propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-export function MethodList({ methods = [], specializations = [] }) {
+export function MethodList({ methods = [], specializations = [], showCaption = true, className }) {
   const [expanded, setExpanded] = useState(false);
   const caption = makeCaption(specializations);
 
@@ -57,8 +57,8 @@ export function MethodList({ methods = [], specializations = [] }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 border-t pt-3">
-      <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>
+    <div className={cn('flex flex-col gap-2 border-t pt-3', className)}>
+      {showCaption && <Caption className="text-p4 font-bold text-gray-600">{caption}</Caption>}
       <TruncatedList
         alwaysShowTruncator
         className={cn('flex flex-wrap gap-[8px]', expanded ? 'max-h-none' : 'max-h-14 md:max-h-6')}
@@ -66,7 +66,13 @@ export function MethodList({ methods = [], specializations = [] }) {
           const hasHiddenItems = hiddenItemsCount > 0;
 
           return (
-            <span className="cursor-pointer text-c3 text-gray-900" onClick={() => setExpanded(hasHiddenItems)}>
+            <span
+              className="cursor-pointer text-c3 text-gray-900"
+              onClick={e => {
+                e.stopPropagation();
+                setExpanded(hasHiddenItems);
+              }}
+            >
               {hasHiddenItems ? `+${hiddenItemsCount}` : 'Приховати'}
             </span>
           );
@@ -83,4 +89,6 @@ export function MethodList({ methods = [], specializations = [] }) {
 MethodList.propTypes = {
   specializations: PropTypes.arrayOf(PropTypes.string),
   methods: PropTypes.arrayOf(Method.propTypes),
+  showCaption: PropTypes.bool,
+  className: PropTypes.string,
 };

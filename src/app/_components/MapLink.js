@@ -16,7 +16,7 @@ export function MapLink({ mapMode = false, className }) {
         icon={icon}
         variant="filled"
         colorVariant="orange"
-        className={cn('fixed bottom-20 left-[50%] z-10 m-0 flex translate-x-[-50%] items-center', className)}
+        className={cn('z-10 flex items-center', className)}
       >
         {buttonText}
       </PillButton>
