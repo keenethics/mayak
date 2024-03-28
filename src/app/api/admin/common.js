@@ -1,7 +1,8 @@
-import { RESOURCES } from '@admin/_lib/consts';
+import { RESOURCES, WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
 import { auth } from '@/lib/auth';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
+import { transformWorkTime } from '@/utils/common';
 
 export const MODEL_SEARCH_FIELDS = {
   [RESOURCES.event]: ['title', 'organizerName'],
@@ -27,11 +28,20 @@ export const MODEL_INCLUDES = {
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { id: true, name: true } },
+        latitude: true,
+        longitude: true,
         isPrimary: true,
       },
     },
+    workTime: { select: { weekDay: true, time: true, isDayOff: true } },
   },
   [RESOURCES.organization]: {
+    expertSpecializations: {
+      select: {
+        id: true,
+        name: true,
+      },
+    },
     supportFocuses: {
       select: {
         id: true,
@@ -40,17 +50,19 @@ export const MODEL_INCLUDES = {
         requests: true,
       },
     },
-    expertSpecializations: { select: { id: true, name: true } },
     type: { select: { id: true, name: true } },
     addresses: {
       select: {
         id: true,
         nameOfClinic: true,
         fullAddress: true,
+        latitude: true,
+        longitude: true,
         district: { select: { id: true, name: true } },
         isPrimary: true,
       },
     },
+    workTime: { select: { weekDay: true, time: true, isDayOff: true } },
   },
   [RESOURCES.event]: {
     additionalLink: { select: { label: true, link: true } },
@@ -79,9 +91,7 @@ export function transformServiceProvider(instance, modelName) {
   // React Admin issues
   if (modelName === RESOURCES.organization) {
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
-    instance.expertSpecializationsIds = instance.expertSpecializations.map(
-      expertSpecialization => expertSpecialization.id,
-    );
+    instance.expertSpecializationIds = instance.expertSpecializations.map(({ id }) => id);
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
@@ -104,6 +114,11 @@ export function transformServiceProvider(instance, modelName) {
       psychologist: psychologistMethods.length ? psychologistMethods : [],
       psychotherapist: psychotherapistMethods.length ? psychotherapistMethods : [],
     };
+  }
+
+  if (instance?.workTime?.length) {
+    // eslint-disable-next-line no-param-reassign
+    instance.workTime = transformWorkTime(instance.workTime, WEEKDAYS_TRANSLATION);
   }
 
   instance.supportFocusesIds = instance.supportFocuses.map(focus => focus.id);

@@ -11,7 +11,7 @@ import {
   zString,
   zStringArray,
   zStringWithMax,
-} from './specialistCommonSchemas';
+} from './serviceProviderCommonSchemas';
 
 // ------------------ COMMON SECTION ---------------------
 
@@ -48,10 +48,10 @@ const draftOrganizationSchema = restCreateProps.partial().extend({
   supportFocuses: zSupportFocusSchema.array().nullish(),
   type: zStringArray.nullish().default([]),
   addresses: zCreateAddressSchema.array().nullish(),
-  isActive: z.literal(false),
   ownershipType: z.enum(['PRIVATE', 'GOVERNMENT']).nullish(),
   isInclusiveSpace: z.boolean(),
   expertSpecializations: zStringArray.nullish(),
+  isActive: z.literal(false),
 });
 
 export const organizationSchemaUnion = z.discriminatedUnion('isActive', [
