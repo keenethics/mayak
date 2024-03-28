@@ -6,6 +6,7 @@ import {
   ChipField,
   Datagrid,
   DateField,
+  FunctionField,
   NumberField,
   Show,
   SimpleShowLayout,
@@ -34,12 +35,26 @@ export function OrganizationShow() {
         <DateField label="Дата додавання в сервіс" showTime source="createdAt" />
         <NumberField label="Роки на ринку" source="yearsOnMarket" />
         <TextField label="Формат послуг" source="formatOfWork" />
-        <ArrayField label="Адреси" source="addresses">
+        <ArrayField label="Місця надання послуг" source="addresses">
           <Datagrid bulkActionButtons={false}>
             <TextField label="Повна адреса" source="fullAddress" />
             <TextField label="Назва кліники" source="nameOfClinic" />
             <TextField label="Район" source="district.name" />
             <BooleanField label="Головна адреса" source="isPrimary" />
+            <FunctionField
+              source="location"
+              render={record => (
+                <a
+                  className="text-primary-500"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`https://www.google.com/maps/search/?api=1&query=${record.latitude},${record.longitude}`}
+                >
+                  Локація на Google карті
+                </a>
+              )}
+              label="На карті"
+            />
           </Datagrid>
         </ArrayField>
         <WrapperField label="Графік роботи">
