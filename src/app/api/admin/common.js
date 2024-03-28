@@ -80,7 +80,7 @@ export function transformServiceProvider(instance, modelName) {
   if (modelName === RESOURCES.organization) {
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
     instance.expertSpecializationsIds = instance.expertSpecializations.map(
-      expertSpecialisation => expertSpecialisation.id,
+      expertSpecialization => expertSpecialization.id,
     );
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
