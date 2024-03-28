@@ -35,32 +35,44 @@ enum OwnershipType {
   GOVERNMENT
 }
 
+enum WeekDay {
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+  SUN
+}
+
 model Specialist {
-  id                String           @id @default(uuid()) @db.Uuid
-  createdAt         DateTime         @default(now())
-  firstName         String           @db.VarChar(64)
-  lastName          String           @db.VarChar(64)
-  surname           String?          @db.VarChar(64)
-  specializations   Specialization[]
-  gender            Gender?
-  yearsOfExperience Int?             @db.SmallInt
-  formatOfWork      FormatOfWork?
-  addresses         Address[]
-  isFreeReception   Boolean?
-  description       String?          @db.Text
-  phone             String?          @db.VarChar(15)
-  email             String?          @db.VarChar(320)
-  website           String?          @db.Text
-  isActive          Boolean          @default(false)
-  instagram         String?          @db.Text
-  facebook          String?          @db.Text
-  youtube           String?          @db.Text
-  linkedin          String?          @db.Text
-  tiktok            String?          @db.Text
-  viber             String?          @db.Text
-  telegram          String?          @db.Text
-  searchEntry       SearchEntry?
-  supportFocuses    SupportFocus[]
+  id                    String           @id @default(uuid()) @db.Uuid
+  createdAt             DateTime         @default(now())
+  firstName             String           @db.VarChar(64)
+  lastName              String           @db.VarChar(64)
+  surname               String?          @db.VarChar(64)
+  specializations       Specialization[]
+  specializationMethods Method[]
+  gender                Gender?
+  yearsOfExperience     Int?             @db.SmallInt
+  formatOfWork          FormatOfWork?
+  addresses             Address[]
+  workTime              WorkTime[]
+  isFreeReception       Boolean?
+  description           String?          @db.Text
+  phone                 String?          @db.VarChar(15)
+  email                 String?          @db.VarChar(320)
+  website               String?          @db.Text
+  isActive              Boolean          @default(false)
+  instagram             String?          @db.Text
+  facebook              String?          @db.Text
+  youtube               String?          @db.Text
+  linkedin              String?          @db.Text
+  tiktok                String?          @db.Text
+  viber                 String?          @db.Text
+  telegram              String?          @db.Text
+  searchEntry           SearchEntry?
+  supportFocuses        SupportFocus[]
 
   @@map("specialist")
 }
@@ -77,7 +89,7 @@ model Organization {
   yearsOnMarket         Int?               @db.SmallInt
   formatOfWork          FormatOfWork?
   addresses             Address[]
-  therapies             Therapy[]
+  workTime              WorkTime[]
   isFreeReception       Boolean?
   description           String?            @db.Text
   phone                 String?            @db.VarChar(15)
@@ -164,7 +176,6 @@ model Therapy {
 
   supportFocuses SupportFocus[]
   requests       Request[]
-  organizations  Organization[]
 
   @@map("therapy")
 }
@@ -189,6 +200,8 @@ model Address {
   specialists   Specialist[]
   organizations Organization[]
   isPrimary     Boolean        @default(false)
+  longitude     Float          @db.DoublePrecision
+  latitude      Float          @db.DoublePrecision
 
   @@map("address")
 }
@@ -266,6 +279,20 @@ model Method {
   description      String?        @db.Text
   specializationId String         @db.Uuid
   specialization   Specialization @relation(fields: [specializationId], references: [id])
+  specialists      Specialist[]
 
   @@map("method")
+}
+
+model WorkTime {
+  id            String         @id @default(uuid()) @db.Uuid
+  createdAt     DateTime       @default(now())
+  time          String         @db.VarChar(13)
+  isDayOff      Boolean        @default(false)
+  weekDay       WeekDay
+  specialists   Specialist[]
+  organizations Organization[]
+
+  @@unique([weekDay, time, isDayOff])
+  @@map("work_time")
 }

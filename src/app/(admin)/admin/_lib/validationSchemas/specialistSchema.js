@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { Gender } from '@prisma/client';
 import {
-  MESSAGES,
   createValidationSchema,
+  MESSAGES,
   singlePrimaryAddressRefine,
   serviceProviderCore,
   zCreateAddressSchema,
@@ -12,7 +12,7 @@ import {
   zString,
   zStringArray,
   zStringWithMax,
-} from './specialistCommonSchemas';
+} from './serviceProviderCommonSchemas';
 
 // ------------------ COMMON SECTION ---------------------
 
@@ -38,19 +38,22 @@ const restCreateProps = zSpecialistSchema.extend({
 const createDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
-  specializations: zStringArray,
 });
 
 const activeSpecialistSchema = restCreateProps.extend({
   supportFocuses: zSupportFocusSchema.array().min(1, {
     message: 'Необхідно обрати хоча б один тип терапії',
   }),
+  specializations: zStringArray,
+  specializationMethods: zString.array().default([]),
   isActive: z.literal(true),
 });
 
 const draftSpecialistSchema = restCreateProps.partial().extend({
   supportFocuses: zSupportFocusSchema.array().nullish(),
   addresses: zCreateAddressSchema.array().nullish(),
+  specializations: zStringArray.nullish(),
+  specializationMethods: zString.array().default([]).nullish(),
   isActive: z.literal(false),
 });
 
@@ -70,12 +73,16 @@ const restEditProps = zSpecialistSchema.extend({
 const editDefaultProps = z.object({
   lastName: zStringWithMax,
   firstName: zStringWithMax,
-  specializationsIds: zStringArray,
 });
 
 const activeSpecialistEditSchema = restEditProps.extend({
   supportFocuses: zSupportFocusSchema.array().min(1, {
     message: 'Необхідно обрати хоча б один тип терапії',
+  }),
+  specializationsIds: zStringArray,
+  specializationMethodsIds: z.object({
+    psychologist: z.string().array().nullish(),
+    psychotherapist: z.string().array().nullish(),
   }),
   isActive: z.literal(true),
 });
@@ -83,6 +90,13 @@ const activeSpecialistEditSchema = restEditProps.extend({
 const draftSpecialistEditSchema = restEditProps.partial().extend({
   supportFocuses: zSupportFocusSchema.array().nullish(),
   addresses: zEditAddressSchema.array().nullish(),
+  specializationsIds: zStringArray.nullish(),
+  specializationMethodsIds: z
+    .object({
+      psychologist: z.string().array().nullish(),
+      psychotherapist: z.string().array().nullish(),
+    })
+    .nullish(),
   isActive: z.literal(false),
 });
 

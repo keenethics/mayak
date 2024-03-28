@@ -1,7 +1,8 @@
-import { RESOURCES } from '@admin/_lib/consts';
+import { RESOURCES, WEEKDAYS_TRANSLATION } from '@admin/_lib/consts';
 import { auth } from '@/lib/auth';
 import { NotAuthorizedException } from '@/lib/errors/NotAuthorizedException';
 import { withErrorHandler } from '@/lib/errors/errorHandler';
+import { transformWorkTime } from '@/utils/common';
 
 export const MODEL_SEARCH_FIELDS = {
   [RESOURCES.event]: ['title', 'organizerName'],
@@ -20,19 +21,27 @@ export const MODEL_INCLUDES = {
       },
     },
     specializations: { select: { id: true, name: true } },
+    specializationMethods: { select: { id: true, title: true, specialization: true } },
     addresses: {
       select: {
         id: true,
         nameOfClinic: true,
         fullAddress: true,
         district: { select: { id: true, name: true } },
+        latitude: true,
+        longitude: true,
         isPrimary: true,
       },
     },
+    workTime: { select: { weekDay: true, time: true, isDayOff: true } },
   },
   [RESOURCES.organization]: {
-    therapies: { select: { id: true, type: true, title: true } },
-    expertSpecializations: { select: { id: true, name: true } },
+    expertSpecializations: {
+      select: {
+        id: true,
+        name: true,
+      },
+    },
     supportFocuses: {
       select: {
         id: true,
@@ -47,10 +56,13 @@ export const MODEL_INCLUDES = {
         id: true,
         nameOfClinic: true,
         fullAddress: true,
+        latitude: true,
+        longitude: true,
         district: { select: { id: true, name: true } },
         isPrimary: true,
       },
     },
+    workTime: { select: { weekDay: true, time: true, isDayOff: true } },
   },
   [RESOURCES.event]: {
     additionalLink: { select: { label: true, link: true } },
@@ -77,15 +89,38 @@ export function searchInputFilters(modelName, filter) {
 export function transformServiceProvider(instance, modelName) {
   // ReferenceInput doesn't see included fields if it returned as new object, so we need to transform current
   // React Admin issues
-  /* eslint-disable no-param-reassign */
   if (modelName === RESOURCES.organization) {
     instance.organizationTypesIds = instance.type.map(orgType => orgType.id);
     instance.expertSpecializationIds = instance.expertSpecializations.map(({ id }) => id);
   } else {
     instance.specializationsIds = instance.specializations.map(specialization => specialization.id);
   }
-  instance.therapiesIds = instance.therapies.map(therapy => therapy.id);
-  instance.addressesIds = instance.addresses.map(address => address.id);
+
+  if (modelName === RESOURCES.specialist) {
+    const specializationMethodsMapped = instance.specializationMethods.map(method => ({
+      id: method.id,
+      specialization: method.specialization.name.toLowerCase() === 'психолог' ? 'psychologist' : 'psychotherapist',
+    }));
+
+    const psychologistMethods = specializationMethodsMapped
+      .filter(method => method.specialization === 'psychologist')
+      .map(m => m.id);
+    const psychotherapistMethods = specializationMethodsMapped
+      .filter(method => method.specialization === 'psychotherapist')
+      .map(m => m.id);
+
+    // eslint-disable-next-line no-param-reassign
+    instance.specializationMethodsIds = {
+      psychologist: psychologistMethods.length ? psychologistMethods : [],
+      psychotherapist: psychotherapistMethods.length ? psychotherapistMethods : [],
+    };
+  }
+
+  if (instance?.workTime?.length) {
+    // eslint-disable-next-line no-param-reassign
+    instance.workTime = transformWorkTime(instance.workTime, WEEKDAYS_TRANSLATION);
+  }
+
   instance.supportFocusesIds = instance.supportFocuses.map(focus => focus.id);
   instance.supportFocuses = instance?.supportFocuses?.map(focus => ({
     ...focus,
@@ -96,8 +131,9 @@ export function transformServiceProvider(instance, modelName) {
     districtId: address.district.id,
   }));
   instance.addressesIds = instance.addresses.map(address => address.id);
-  /* eslint-enable no-param-reassign */
 }
+
+/* eslint-enable no-param-reassign */
 
 export function withErrorHandlerAndAuth(handler) {
   return auth(
