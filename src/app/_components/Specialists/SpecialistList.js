@@ -2,13 +2,12 @@
 
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import ky from 'ky';
 import { CardOrganization, CardSpecialist } from '@components/CardSpecialist';
 import { CircularProgress } from '@mui/material';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { useSearchParams } from 'next/navigation';
 import _ from 'lodash';
+import { usePaginatedEntries } from '@/app/_hooks';
 import { NoInfoToShow } from '../NoInfoToShow';
 
 function getProperEnding(count) {
@@ -32,16 +31,9 @@ export function SpecialistList({ className }) {
 
   const { ref, inView } = useInView();
 
-  const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } = useInfiniteQuery({
-    queryFn: ({ pageParam = '' }) => {
-      const params = Array.from(searchParams.entries())
-        .map(([key, value]) => ({ [key]: value }))
-        .reduce((acc, curr) => ({ ...acc, ...curr }), {});
-      return ky(`/api/search`, { searchParams: { ...params, lastCursor: pageParam } }).json();
-    },
-    getNextPageParam: lastPage => lastPage?.metaData.lastCursor,
-  });
-  const totalCount = data?.pages?.length && data.pages[0].metaData.totalCount;
+  const { data, error, isLoading, hasNextPage, fetchNextPage, isSuccess, isFetchingNextPage } =
+    usePaginatedEntries(searchParams);
+  const totalCount = data?.pages?.length && data.pages[0].metaData?.totalCount;
 
   useEffect(() => {
     // if the last element is in view and there is a next page, fetch the next page
@@ -81,8 +73,8 @@ export function SpecialistList({ className }) {
         )}
         <>
           {isSuccess &&
-            data.pages.map(page =>
-              page.data.map(entry => (
+            data.pages?.map(page =>
+              page.data?.map(entry => (
                 <li id={entry.id} key={entry.id}>
                   {entry.specialist ? (
                     <CardSpecialist className={cardStyle} specialist={entry.specialist} />
