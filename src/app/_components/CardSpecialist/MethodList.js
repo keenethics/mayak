@@ -66,7 +66,7 @@ export function MethodList({ methods = [], specializations = [], showCaption = t
           const hasHiddenItems = hiddenItemsCount > 0;
 
           return (
-            <span
+            <button
               className="cursor-pointer text-c3 text-gray-900"
               onClick={e => {
                 e.stopPropagation();
@@ -74,7 +74,7 @@ export function MethodList({ methods = [], specializations = [], showCaption = t
               }}
             >
               {hasHiddenItems ? `+${hiddenItemsCount}` : 'Приховати'}
-            </span>
+            </button>
           );
         }}
       >
