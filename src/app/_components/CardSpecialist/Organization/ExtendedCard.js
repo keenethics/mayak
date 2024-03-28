@@ -11,14 +11,14 @@ export function CardOrganizationExtended({ organization, className }) {
     <CardModalWrapper className="mt-10 w-full max-w-[1080px] lg:mt-0 lg:w-[1080px]" key={organization?.id}>
       <div className="flex flex-col gap-3 lg:gap-6">
         <CardOrganization organization={organization} className={className} extended />
-        {points && points.length > 0 && (
+        {points?.length ? (
           <Map
             points={points}
             center={[points[0].latitude, points[0].longitude]}
             zoom={13}
             className="h-[198px] w-full lg:h-[232px]"
           />
-        )}
+        ) : null}
       </div>
     </CardModalWrapper>
   );

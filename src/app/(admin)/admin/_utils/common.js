@@ -50,7 +50,7 @@ export const transformSupportFocuses = ({ focuses, focusesIds }) => {
   const focusesToCreate = [];
 
   const focusesToDelete = toConnectList(
-    focusesIds.filter(cutId => !focuses?.some(focus => focus.id === cutId)) ?? true,
+    focusesIds.filter(cutId => !focuses?.some(focus => focus.id === cutId) ?? true),
   );
 
   focuses?.forEach(focus => {
